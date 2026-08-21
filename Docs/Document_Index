@@ -3,4 +3,6 @@
 - `Docs/Master_Spec`(仕様・設計の正本)
 - `Docs/AGWS_Design_Analysis`(AGWSリポジトリ公開面デザインの解析。`adlaire.com` は公開確認先)
 - `Docs/Change_History`(Adlaire-Design専用の変更履歴)
-- `Tools/check/check-adlaire-design.sh`(Adlaire-Design専用の構成検査)
+- `Tokens/colors.css`(ブランドカラーCSS変数)
+- `UI/adlaire.css`(ブランドカラー最小ユーティリティ)
+- `Tools/check/check-adlaire-design.sh`(Adlaire-Design専用の構成・CSS実装検査)
