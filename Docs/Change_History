@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.45
+
+- `Docs/Master_Spec` の版数を `rev.45` へ更新した。
+- `Tools/check/check-adlaire-design.sh` に、`Dist/`、Sass/SCSS/Less/Stylusなどのプリプロセッサソースを禁止する検査を追加した。
+- `Tools/check/check-adlaire-design.sh` に、READMEとMaster_Specが拡充優先順位、拡充仕様策定条件、ビルド、minify、bundle、CSSプリプロセッサを現状検討しない方針を記録していることの検査を追加した。
+- 再現性検査の策定仕様に、拡充優先順位と非検討方針の記録確認を追加した。
+
 ## rev.44
 
 - `Docs/Master_Spec` の版数を `rev.44` へ更新した。

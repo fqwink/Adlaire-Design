@@ -58,8 +58,43 @@ if find "$ADLAIRE_DESIGN_ROOT" \( -name 'package.json' -o -name 'package-lock.js
   exit 1
 fi
 
+if [ -e "$ADLAIRE_DESIGN_ROOT/Dist" ]; then
+  echo "Adlaire-Design must not create Dist/ while build, minify, and bundle are out of scope." >&2
+  exit 1
+fi
+
+if find "$ADLAIRE_DESIGN_ROOT" -path "$ADLAIRE_DESIGN_ROOT/.git" -prune -o \( -name '*.scss' -o -name '*.sass' -o -name '*.less' -o -name '*.styl' \) -print | grep . >/dev/null 2>&1; then
+  echo "Adlaire-Design must not use CSS preprocessor source files while direct CSS maintenance is the policy." >&2
+  exit 1
+fi
+
 if ! grep -F '# Adlaire-Design' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must identify the repository." >&2
+  exit 1
+fi
+
+if ! grep -F '今後の拡充は、公開面CSS機能、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must document the expansion priority policy." >&2
+  exit 1
+fi
+
+if ! grep -F 'ビルド、minify、bundle、Sass/SCSS等のCSSプリプロセッサは現状検討しない。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must document that build, minify, bundle, and CSS preprocessors are not under current consideration." >&2
+  exit 1
+fi
+
+if ! grep -F '## 11.11 今後の拡充優先順位' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+  echo "Docs/Master_Spec must define future expansion priorities." >&2
+  exit 1
+fi
+
+if ! grep -F '### 11.11.1 拡充仕様策定の共通条件' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+  echo "Docs/Master_Spec must define expansion planning conditions." >&2
+  exit 1
+fi
+
+if ! grep -F '上記の拡充においても、Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、CSS bundle生成、minify版生成、`Dist/` 作成は現状検討しない。' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+  echo "Docs/Master_Spec must keep build, minify, bundle, and preprocessor work out of current consideration." >&2
   exit 1
 fi
 
