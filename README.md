@@ -6,16 +6,16 @@ Adlaire-Designは、CSSフレームワーク・デザイントークン・ブラ
 
 ## 構成
 
-- `Docs/`: 仕様・設計、ドキュメント索引、変更履歴。
-- `UI/`: CSSフレームワーク本体。`UI/adlaire.css`、`UI/layout.css`、`UI/components.css` を管理する。
-- `Tokens/`: デザイントークン。`Tokens/colors.css`、`Tokens/surface.css` を管理する。
+- `Docs/`: 仕様・設計、リポジトリ索引、変更履歴。
+- `UI/`: CSSフレームワーク本体。`UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css` を管理する。
+- `Tokens/`: デザイントークン。`Tokens/colors.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` を管理する。
 - `Brand/`: ブランド資産。
 - `Tools/check/`: Adlaire-Design専用の検査シェル。
 - `LICENSE`: ライセンス本文。
 
 ## ドキュメント
 
-仕様・設計の正本は `Docs/Master_Spec` とする。
+仕様・設計の正本は `Docs/Master_Spec` とする。リポジトリ内の主要ファイルと管理対象は `Docs/Document_Index` を参照する。
 
 ## 方針
 

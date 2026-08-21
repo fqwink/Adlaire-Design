@@ -1,6 +1,6 @@
 # Adlaire Group Web Site AGWS 解析
 
-**Version:** rev.7
+**Version:** rev.18
 
 ---
 
@@ -198,3 +198,51 @@ AGWSリポジトリは、Adlaire Groupの公開面デザインの参照基準と
 特に、軽量な静的HTML、Architect CSS、JavaScript非依存、2カラム情報設計、青系の清潔な公開サイトトーンは、他の公開面へ展開する価値がある。
 
 一方で、AGWSのCSSをそのままAdlaire-Designの汎用CSSとして扱うのではなく、`architect.css` をフレームワーク候補、`style.css` を公開面テーマ候補として分けて整理する必要がある。
+
+---
+
+# 11. Adlaire-DesignによるAGWS完全再現の不足領域
+
+Adlaire-Designの第1段階・第2段階により、AGWSの公開面色、基本レイアウト、カード、見出し、パンくず、notice、タブ、タイムライン、ページトップリンクの土台は定義済みである。
+
+一方で、AGWSの現行表示をAdlaire-Design成果物だけで完全再現するには、以下の領域が不足している。
+
+- `architect.css` 由来のreset、base、typography、grid、button variants、card subparts、alert、spacing、text、background、display、flex utilities
+- サイトヘッダー、サイトタイトル、ヘッダーリンク、ナビゲーションボタン
+- 現行HTMLでは未使用でもCSSに残っているサイトタグライン
+- フッター
+- フォームUI、入力欄、チェック項目、送信ボタン
+- リニューアル告知
+- ニュース項目、ニュースバッジ、ニュース本文、maintenance badge
+- 組織情報行、ラベル、値、事業領域リスト
+- 沿革タイムライン内の年月、本文、マーカー
+- CSS onlyタブの入力、ラベル、表示パネル、checked状態、タブ用ID
+- サイドバー内のセクション、タイトル、リンクリスト、旧式リンクリスト、active表現
+- 連絡先情報ブロック、本文内リンク、法的情報ページ目次
+- 本文内リンク、連絡先リンク、プライバシーリンク
+- 準備中表示、小さな注釈、最終更新日、muted text、余白ユーティリティなどの補助表現
+- hover、focus、active、disabled、first-child、last-child、疑似要素などの状態表現
+- `1024px`、`768px`、`480px` のレスポンシブ調整
+- text-shadow、opacity、transform、transition、animation、backdrop-filterなどの視覚効果
+- alert、button variants、text/background utilitiesで使う状態色・中立色
+- 第3段階CSSの読み込み順、冒頭コメント、禁止記述、必須セレクタ、必須変数、検査シェルの判定条件
+- font smoothing、scroll behavior、box sizing、resize、outline、cursor、user-select、position、z-indexなど、クラス名だけでは表せないCSSプロパティ単位の基礎挙動
+- `rgba(...)` による影、半透明背景、白透明の重ね表現
+- `#fff`、`#333`、`#666`、`#777`、`#ddd` などの短縮HEX表記
+- `#top`、`#company`、法的情報アンカー、フォーム入力IDなど、HTML側のid属性値
+- `header`、`nav`、`main`、`section`、`article`、`aside`、`footer`、フォーム要素など、AGWS現行HTMLで使う要素名
+- `lang`、`charset`、`viewport`、`rel`、`href`、`target`、`aria-label`、`for`、`name`、`type`、`value`、`rows` など、AGWS現行HTMLで使う主要属性
+- 第3段階候補ファイルの冒頭コメント
+- `Tokens/status.css` と `Tokens/effects.css` のCSS変数名候補
+- `UI/compat-agws.css` の互換層としての責務、禁止記述、標準APIではない扱い
+- AGWS既存HTMLクラスをAdlaire-Design標準クラスへつなぐ互換層
+
+これらは、Adlaire-Design側の第3段階として `Tokens/status.css`、`Tokens/effects.css`、`UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css` に分けて仕様化する。
+
+2026-08-21時点で、上記の第3段階CSSはAdlaire-Design側に実装済みである。
+
+AGWS本体を更新するのは、Adlaire-Design側で第3段階の仕様と実装が完了した後とする。AGWS側の初回更新は、見た目を変えるためではなく、Adlaire-Design成果物で現行表示を再現できることを確認するための適用作業として扱う。
+
+2026-08-21時点で、AGWS現行HTMLの要素名、主要属性名、class属性値、id属性値、およびAGWS側CSSのclass selector、ID selector、attribute selector、pseudo selector、media query、keyframes、HEX値、RGBA値、プロパティ名は、`Docs/Master_Spec` のAGWS完全再現仕様に未記載の項目がない状態にしている。
+
+第3段階の実装に進む前の仕様不足として、トークン名、冒頭コメント、互換層の責務も `Docs/Master_Spec` に追記している。

@@ -8,6 +8,137 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.35
+
+- `Docs/Master_Spec` の版数を `rev.35` へ更新した。
+- `Docs/Document_Index` をドキュメントのみではなく、主要なリポジトリ管理対象を確認できる索引へ拡張した。
+- `README.md` のドキュメント説明に `Docs/Document_Index` の役割を追記した。
+- `Tools/check/check-adlaire-design.sh` に、`Docs/Document_Index` が主要管理対象を参照していることの検査を追加した。
+- `Docs/Master_Spec` に残っていた第3段階実装前の表現を、実装済み状態に合わせて更新した。
+- READMEと変更ルールの文言を、`Docs/Document_Index` のリポジトリ索引としての役割に合わせて更新した。
+- `AGENTS.md` の `Docs/Document_Index` 説明をリポジトリ索引へ更新した。
+- `.gitignore` をリポジトリ索引と索引検査の対象に追加した。
+
+## rev.34
+
+- `Docs/Master_Spec` の版数を `rev.34` へ更新した。
+- `Tokens/effects.css` にfocus ring、timeline marker ring、active tab shadow、timeline marker z-index、sticky z-indexの効果トークンを追加した。
+- `UI/components.css`、`UI/forms.css`、`UI/content.css` に残っていた角丸、影、z-indexの非ゼロ効果値直書きをCSS変数参照へ変更した。
+- `Tools/check/check-adlaire-design.sh` に、UI側CSSの非ゼロ `border-radius`、直接 `box-shadow`、直接 `z-index` の禁止検査を追加した。
+- 第3段階実装済みに合わせて、実装方針と互換層説明の文書整合性を修正した。
+- `Docs/Master_Spec` の第11.10節を、未実装時の不足仕様表現から実装済みのAGWS完全再現仕様表現へ更新した。
+- `Docs/Master_Spec` の第11.10.3節と不足確認結果の文言を、実装済みの再現対象として読める表現へ更新した。
+
+## rev.33
+
+- `Docs/Master_Spec` の版数を `rev.33` へ更新した。
+- `LICENSE` の表題をAdlaire-Design名義へ変更し、現行成果物から旧体系名を外した。
+- `UI/site.css`、`UI/forms.css`、`UI/content.css` に残っていた `transition: all` を対象プロパティ明示へ変更した。
+- `Tools/check/check-adlaire-design.sh` にライセンス表題検査と `transition: all` 禁止検査を追加した。
+- 第3段階検査方針に、UI側CSSのRGBA直接記述禁止、負の `letter-spacing` 禁止、`transition: all` 禁止、ライセンス名義確認を追記した。
+
+## rev.32
+
+- `Docs/Master_Spec` の版数を `rev.32` へ更新した。
+- `UI/components.css` が `Tokens/effects.css` の影トークンを参照するため、第2段階読み込み順に `Tokens/effects.css` を追加した。
+- 第2段階の実装対象表にも `Tokens/effects.css` を追加し、読み込み順との整合性を取った。
+- `Tokens/effects.css` に `--adlaire-transition-button` を追加し、`UI/forms.css` のボタンtransitionをトークン参照へ変更した。
+- `UI/site.css` と `UI/content.css` に残っていた負のletter-spacingを `0` へ変更した。
+- `Tools/check/check-adlaire-design.sh` に負のletter-spacing禁止検査を追加した。
+
+## rev.31
+
+- `Docs/Master_Spec` の版数を `rev.31` へ更新した。
+- 第3段階CSSとして `Tokens/status.css`、`Tokens/effects.css`、`UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css` を実装した。
+- `Tokens/effects.css` にタイトル影とfocus用半透明色のトークンを追加した。
+- `UI/components.css` の影表現を `Tokens/effects.css` のCSS変数参照へ変更した。
+- `Docs/Master_Spec` の第3段階対象ファイル、読み込み順、承認単位、トークン命名を実装済みの表現へ更新した。
+- `Docs/Document_Index` と `README.md` を第3段階CSSの実装済み構成に合わせて更新した。
+- `Tools/check/check-adlaire-design.sh` を第3段階CSSの必須ファイル、冒頭コメント、必須変数、必須クラス、禁止記述の検査に対応させた。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.18` へ更新し、第3段階CSSがAdlaire-Design側に実装済みであることを追記した。
+
+## rev.30
+
+- `Docs/Master_Spec` の版数を `rev.30` へ更新した。
+- 第3段階候補ファイルの冒頭コメントを固定した。
+- `Tokens/status.css` と `Tokens/effects.css` のCSS変数名候補、値、用途を追加した。
+- 第3段階トークンはCSS変数へ集約し、UI側CSSではHEX値およびRGBA値を直接記述しない方針を明記した。
+- `UI/compat-agws.css` の互換層としての責務、禁止記述、標準APIではない扱いを追加した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.17` へ更新し、第3段階実装前に不足していたトークン名、冒頭コメント、互換層方針を追記した。
+
+## rev.29
+
+- `Docs/Master_Spec` の版数を `rev.29` へ更新した。
+- AGWS現行HTMLの要素名、主要属性名、class属性値、id属性値、およびAGWS側CSSのclass selector、ID selector、attribute selector、pseudo selector、media query、keyframes、HEX値、RGBA値、プロパティ名を不足ゼロ確認範囲として明記した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.16` へ更新し、AGWS完全再現仕様に未記載項目がない状態にしたことを追記した。
+- 不足ゼロ確認はAGWS本体の実装変更を意味しないことを明記した。
+
+## rev.28
+
+- `Docs/Master_Spec` の版数を `rev.28` へ更新した。
+- AGWS現行HTMLの主要属性名・主要属性値の確認結果に基づき、`lang`、`charset`、`viewport`、`rel`、`href`、`target`、`aria-label`、`for`、`name`、`type`、`value`、`rows` などを第3段階の確認範囲へ追加した。
+- 第3段階の検査方針に、AGWS現行HTMLの主要属性名と主要属性値がAGWS完全再現仕様に含まれていることを追加した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.15` へ更新し、HTML属性に関する不足を追記した。
+
+## rev.27
+
+- `Docs/Master_Spec` の版数を `rev.27` へ更新した。
+- AGWS現行HTMLの要素名の確認結果に基づき、`header`、`nav`、`main`、`section`、`article`、`aside`、`footer`、フォーム要素などを第3段階の確認範囲へ追加した。
+- 第3段階の検査方針に、AGWS現行HTMLの要素名がAGWS完全再現仕様に含まれていることを追加した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.14` へ更新し、HTML要素名に関する不足を追記した。
+
+## rev.26
+
+- `Docs/Master_Spec` の版数を `rev.26` へ更新した。
+- AGWS現行HTMLのid属性値の確認結果に基づき、`#top`、`#company`、法的情報アンカー、フォーム入力IDを第3段階の確認範囲へ追加した。
+- 第3段階の検査方針に、AGWS現行HTMLのid属性値がAGWS完全再現仕様に含まれていることを追加した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.13` へ更新し、HTML側id属性値に関する不足を追記した。
+
+## rev.25
+
+- `Docs/Master_Spec` の版数を `rev.25` へ更新した。
+- AGWS側CSSのプロパティ単位の確認結果に基づき、font smoothing、scroll behavior、box sizing、resize、outline、cursor、user-select、position、z-indexなどを第3段階の確認範囲へ追加した。
+- `#fff`、`#333`、`#666`、`#777`、`#ddd` などの短縮HEX表記を状態色・中立色の確認範囲へ追加した。
+- `label[for="tab-all"]` などのタブ用attribute selectorと、疑似セレクタの具体一覧を追加した。
+- AGWS側CSSに出現するRGBA値を、影・半透明背景・重ね表現の確認範囲として追加した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.12` へ更新し、CSSプロパティ、RGBA、短縮HEXに関する不足を追記した。
+
+## rev.24
+
+- `Docs/Master_Spec` の版数を `rev.24` へ更新した。
+- AGWS側CSSのクラスセレクタ単位の確認結果に基づき、`.site-tagline`、個別のgrid class、spacing utility classの明記を補強した。
+- 第3段階候補ファイルに `Tokens/status.css` を追加し、alert、button variants、text/background utilitiesで使う状態色・中立色を扱う方針を追加した。
+- 第3段階のCSS読み込み順を候補として追加した。
+- 第3段階実装後に `Tools/check/check-adlaire-design.sh` へ追加する検査方針を定義した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.11` へ更新し、AGWS完全再現に必要な状態色・中立色、読み込み順、検査条件の不足を追記した。
+
+## rev.23
+
+- `Docs/Master_Spec` の版数を `rev.23` へ更新した。
+- AGWS側CSSのセレクタ単位の確認結果に基づき、第3段階の不足仕様を補強した。
+- 第3段階候補ファイルに `UI/base.css`、`UI/grid.css`、`UI/utilities.css` を追加した。
+- `architect.css` 由来のreset、base、typography、grid、button variants、card subparts、alert、spacing、text、background、display、flex utilitiesを不足仕様へ追加した。
+- `style.css` 由来のCSS onlyタブID、checked状態、hover、active、focus、disabled、疑似要素、疑似クラス、レスポンシブ調整、視覚効果を不足仕様へ追加した。
+- `Tokens/effects.css` の役割にtext-shadow、opacity、transform、animation、backdrop-filterを追加した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.10` へ更新し、AGWS完全再現の不足領域をCSSセレクタ単位で補強した。
+
+## rev.22
+
+- `Docs/Master_Spec` の版数を `rev.22` へ更新した。
+- AGWS現行HTMLクラスとの照合結果に基づき、第3段階の不足仕様を補強した。
+- リニューアル告知、タブ詳細、サイドバー詳細、リンク表現、フォーム詳細、沿革詳細、補助テキスト、既存クラス互換の不足クラスを追記した。
+- `Tokens/effects.css` の役割にtransitionを追加した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.9` へ更新し、AGWS完全再現の不足領域を補強した。
+
+## rev.21
+
+- `Docs/Master_Spec` の版数を `rev.21` へ更新した。
+- AGWSの現行表示をAdlaire-Design成果物だけで完全再現するために不足しているCSS領域を整理した。
+- 第3段階の候補ファイルとして `Tokens/effects.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` を定義した。
+- AGWSの代表クラスとAdlaire-Design側で扱う領域の対応表を追加した。
+- 第3段階の標準クラス候補、非対象、AGWS適用前の判定条件を定義した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.8` へ更新し、AGWS完全再現の不足領域を追記した。
+
 ## rev.20
 
 - `Docs/Master_Spec` の版数を `rev.20` へ更新した。
