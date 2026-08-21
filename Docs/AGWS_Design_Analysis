@@ -246,3 +246,19 @@ AGWS本体を更新するのは、Adlaire-Design側で第3段階の仕様と実�
 2026-08-21時点で、AGWS現行HTMLの要素名、主要属性名、class属性値、id属性値、およびAGWS側CSSのclass selector、ID selector、attribute selector、pseudo selector、media query、keyframes、HEX値、RGBA値、プロパティ名は、`Docs/Master_Spec` のAGWS完全再現仕様に未記載の項目がない状態にしている。
 
 第3段階の実装に進む前の仕様不足として、トークン名、冒頭コメント、互換層の責務も `Docs/Master_Spec` に追記している。
+
+---
+
+# 12. AGWSへのAdlaire-Design採用方針
+
+AGWSは、Adlaire-Designの公開面CSS成果物を採用する対象リポジトリとして扱う。
+
+採用は、AGWS現行表示を変えるためではなく、Adlaire-Designを公開面デザインの正本として運用できることを確認するために行う。初回採用では、既存HTML構造、JavaScript非依存、静的HTML/CSS構成、2カラム情報設計、パンくず、サイドバー、カード、CSS onlyタブ、タイムライン、法的情報目次を維持する。
+
+AGWS側の初回作業は、方針文書の更新と検証準備を優先する。CSS読み込みの実変更、`architect.css` と `style.css` の削除、HTML全面置換、他リポジトリへの統合は、初回方針PRの対象外とする。
+
+CSS採用に進む場合は、Adlaire-Designの読み込み順、`UI/compat-agws.css` の末尾適用、AGWS専用検査、Adlaire-Design専用検査、主要4ページの表示確認を満たしたうえで、別PRとして扱う。
+
+2026-08-21時点で、AGWS側のAdlaire-Design CSS適用候補は作成済みである。Docker配信確認では、主要4ページとAdlaire-Design CSSがHTTP 200で配信されることを確認しているため、AGWSは正式移行計画へ進める。
+
+正式移行後も、`architect.css` と `style.css` はロールバック用の既存CSSとして当面維持する。削除、統合、リネーム、minify、読み込み数削減は、正式移行とは別の後続PRで扱う。

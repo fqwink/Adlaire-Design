@@ -8,6 +8,24 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.40
+
+- `Docs/Master_Spec` の版数を `rev.40` へ更新した。
+- AGWS側のAdlaire-Design CSS適用候補PRが作成済みであり、正式移行計画へ進める状態であることを明記した。
+- `Docs/AGWS_Design_Analysis` に、Docker配信確認済み、正式移行へ進める判断、旧CSSの当面維持方針を追記した。
+
+## rev.39
+
+- `Docs/Master_Spec` の版数を `rev.39` へ更新した。
+- AGWSのDocker配信確認後に、Adlaire-Design CSS採用候補から正式移行へ進める計画を追加した。
+- 正式移行の実行順、移行で確定するもの、当面維持する旧CSS、後続PRへ分離する対象を定義した。
+
+## rev.38
+
+- `Docs/Master_Spec` の版数を `rev.38` へ更新した。
+- AGWSをAdlaire-Design公開面CSS成果物の採用対象リポジトリとして扱う方針を追加した。
+- AGWS初回採用の順序、維持するもの、行わないもの、CSS採用PRの分離方針を定義した。
+
 ## rev.37
 
 - `Docs/Master_Spec` の版数を `rev.37` へ更新した。
