@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.46
+**Version:** rev.47
 
 ---
 
@@ -223,7 +223,7 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 - `@import` は使用しない。CSSファイルの読み込み順は利用側で明示する。
 - 2026-08-21時点では、ビルド方針は採用しない。`Tokens/` と `UI/` 配下のCSSファイルを正本として直接管理し、生成元と生成物を分けない。
 - Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、minify生成、bundle生成は採用しない。
-- `Dist/` などの生成CSS用ディレクトリは作成しない。
+- `Dist/`、`dist/`、`Build/`、`build/` などの生成CSS用ディレクトリは作成しない。
 - 今後の拡充は、公開面で必要となるCSS機能、再現性検査、ドキュメント整備を優先する。ビルド、minify、bundleは現状検討しない。
 
 ## 11.3 実装対象ファイル
@@ -542,7 +542,9 @@ CSS変数は以下とする。
 - 独自プリプロセッサ
 - CSS bundle生成
 - minify版生成
-- `Dist/` などの生成CSS用ディレクトリ
+- `Dist/`、`dist/`、`Build/`、`build/` などの生成CSS用ディレクトリ
+- `*.min.css` や `*.bundle.css` などの生成CSSファイル
+- PostCSS、Vite、Webpack、Rollup、Tailwind CSSなどのビルド設定ファイル
 - 外部CSSフレームワークの導入
 - AGWSリポジトリCSSのそのままの移植
 - `adlaire.com` 既存画面の直接変更
@@ -1055,7 +1057,7 @@ Adlaire-Designの今後の拡充は、ビルド、minify、bundleではなく、
 - ビルド処理
 - minify版
 - bundle版
-- `Dist/` 作成
+- `Dist/`、`dist/`、`Build/`、`build/` 作成
 - 他リポジトリへの統合
 
 ### 11.11.2 公開面CSS機能の策定仕様
@@ -1101,6 +1103,7 @@ Adlaire-Designの今後の拡充は、ビルド、minify、bundleではなく、
 10. `Docs/Master_Spec`、`Docs/Document_Index`、`README.md` の整合確認
 11. 拡充優先順位、拡充仕様策定条件、ビルド、minify、bundle、CSSプリプロセッサを現状検討しない方針の記録確認
 12. `Docs/Master_Spec` の `Version` と `Docs/Change_History` の最新revが一致していることの確認
+13. 生成CSS用ディレクトリ、生成CSSファイル、CSSまたはフロントエンドビルド設定ファイルが存在しないことの確認
 
 検査はPOSIX shellで記述し、`Tools/check/check-adlaire-design.sh` に集約する。検査のためにNode.js/npm、外部CSSパーサ、外部CLIを追加しない。
 

@@ -58,13 +58,23 @@ if find "$ADLAIRE_DESIGN_ROOT" \( -name 'package.json' -o -name 'package-lock.js
   exit 1
 fi
 
-if [ -e "$ADLAIRE_DESIGN_ROOT/Dist" ]; then
-  echo "Adlaire-Design must not create Dist/ while build, minify, and bundle are out of scope." >&2
+if find "$ADLAIRE_DESIGN_ROOT" -path "$ADLAIRE_DESIGN_ROOT/.git" -prune -o \( -type d \( -name 'Dist' -o -name 'dist' -o -name 'Build' -o -name 'build' \) \) -print | grep . >/dev/null 2>&1; then
+  echo "Adlaire-Design must not create Dist/dist/Build/build directories while build, minify, and bundle are out of scope." >&2
   exit 1
 fi
 
 if find "$ADLAIRE_DESIGN_ROOT" -path "$ADLAIRE_DESIGN_ROOT/.git" -prune -o \( -name '*.scss' -o -name '*.sass' -o -name '*.less' -o -name '*.styl' \) -print | grep . >/dev/null 2>&1; then
   echo "Adlaire-Design must not use CSS preprocessor source files while direct CSS maintenance is the policy." >&2
+  exit 1
+fi
+
+if find "$ADLAIRE_DESIGN_ROOT" -path "$ADLAIRE_DESIGN_ROOT/.git" -prune -o \( -name '*.min.css' -o -name '*.bundle.css' \) -print | grep . >/dev/null 2>&1; then
+  echo "Adlaire-Design must not use generated minified or bundled CSS files." >&2
+  exit 1
+fi
+
+if find "$ADLAIRE_DESIGN_ROOT" -path "$ADLAIRE_DESIGN_ROOT/.git" -prune -o \( -name 'postcss.config.*' -o -name 'vite.config.*' -o -name 'webpack.config.*' -o -name 'rollup.config.*' -o -name 'tailwind.config.*' \) -print | grep . >/dev/null 2>&1; then
+  echo "Adlaire-Design must not use CSS or frontend build tool configuration files." >&2
   exit 1
 fi
 
