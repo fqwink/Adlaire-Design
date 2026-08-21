@@ -225,10 +225,15 @@ for token in \
   '--adlaire-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.1);' \
   '--adlaire-shadow-title: 2px 2px 4px rgba(0, 0, 0, 0.3);' \
   '--adlaire-shadow-focus-color: rgba(0, 102, 204, 0.1);' \
+  '--adlaire-shadow-focus-ring: 0 0 0 3px rgba(0, 102, 204, 0.1);' \
+  '--adlaire-shadow-marker-ring: 0 0 0 2px var(--adlaire-surface-accent);' \
+  '--adlaire-shadow-tab-active: 0 -2px 4px rgba(0, 102, 204, 0.1);' \
   '--adlaire-shadow-blue: 0 2px 8px rgba(0, 102, 204, 0.3);' \
   '--adlaire-transition-base: 0.3s ease;' \
   '--adlaire-transition-button: 0.2s ease-in-out;' \
   '--adlaire-animation-fade-in: fadeIn 0.3s ease-in;' \
+  '--adlaire-z-timeline-marker: 1;' \
+  '--adlaire-z-sticky: 100;' \
   '--adlaire-z-page-top: 1000;'; do
   if ! grep -F -- "$token" "$ADLAIRE_DESIGN_ROOT/Tokens/effects.css" >/dev/null 2>&1; then
     echo "Tokens/effects.css missing required token: $token" >&2
@@ -430,6 +435,24 @@ fi
 if grep -R -n 'transition: all' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-transition-all-matches 2>/dev/null; then
   echo "UI CSS files must not use transition: all:" >&2
   cat /tmp/adlaire-design-ui-transition-all-matches >&2
+  exit 1
+fi
+
+if grep -R -n -E 'border-radius: [1-9]' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-radius-matches 2>/dev/null; then
+  echo "UI CSS files must not contain direct nonzero border-radius values:" >&2
+  cat /tmp/adlaire-design-ui-radius-matches >&2
+  exit 1
+fi
+
+if grep -R -n -E 'box-shadow: [-0-9]' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-box-shadow-matches 2>/dev/null; then
+  echo "UI CSS files must not contain direct box-shadow values:" >&2
+  cat /tmp/adlaire-design-ui-box-shadow-matches >&2
+  exit 1
+fi
+
+if grep -R -n -E 'z-index: [0-9]' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-z-index-matches 2>/dev/null; then
+  echo "UI CSS files must not contain direct z-index values:" >&2
+  cat /tmp/adlaire-design-ui-z-index-matches >&2
   exit 1
 fi
 

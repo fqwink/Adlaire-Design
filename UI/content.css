@@ -249,13 +249,13 @@
   position: absolute;
   top: 8px;
   left: 0;
-  z-index: 1;
+  z-index: var(--adlaire-z-timeline-marker);
   width: 14px;
   height: 14px;
   background-color: var(--adlaire-surface-accent);
   border: 3px solid var(--adlaire-surface-card);
   border-radius: var(--adlaire-radius-round);
-  box-shadow: 0 0 0 2px var(--adlaire-surface-accent);
+  box-shadow: var(--adlaire-shadow-marker-ring);
 }
 
 .timeline-text {
@@ -307,7 +307,7 @@
   background-color: var(--adlaire-surface-card);
   border-color: var(--adlaire-surface-accent);
   border-bottom: 2px solid var(--adlaire-surface-card);
-  box-shadow: 0 -2px 4px var(--adlaire-shadow-focus-color);
+  box-shadow: var(--adlaire-shadow-tab-active);
   color: var(--adlaire-surface-accent);
   font-weight: 600;
 }
@@ -623,7 +623,7 @@
 .legal-toc-card {
   position: sticky;
   top: 20px;
-  z-index: 100;
+  z-index: var(--adlaire-z-sticky);
   background-color: var(--adlaire-surface-soft);
   border-left: 4px solid var(--adlaire-surface-accent);
   box-shadow: var(--adlaire-shadow-blue-soft);

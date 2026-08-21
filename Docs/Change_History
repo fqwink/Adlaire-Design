@@ -8,6 +8,16 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.34
+
+- `Docs/Master_Spec` の版数を `rev.34` へ更新した。
+- `Tokens/effects.css` にfocus ring、timeline marker ring、active tab shadow、timeline marker z-index、sticky z-indexの効果トークンを追加した。
+- `UI/components.css`、`UI/forms.css`、`UI/content.css` に残っていた角丸、影、z-indexの非ゼロ効果値直書きをCSS変数参照へ変更した。
+- `Tools/check/check-adlaire-design.sh` に、UI側CSSの非ゼロ `border-radius`、直接 `box-shadow`、直接 `z-index` の禁止検査を追加した。
+- 第3段階実装済みに合わせて、実装方針と互換層説明の文書整合性を修正した。
+- `Docs/Master_Spec` の第11.10節を、未実装時の不足仕様表現から実装済みのAGWS完全再現仕様表現へ更新した。
+- `Docs/Master_Spec` の第11.10.3節と不足確認結果の文言を、実装済みの再現対象として読める表現へ更新した。
+
 ## rev.33
 
 - `Docs/Master_Spec` の版数を `rev.33` へ更新した。

@@ -11,6 +11,9 @@
   --adlaire-shadow-header: 0 2px 10px rgba(0, 0, 0, 0.1);
   --adlaire-shadow-title: 2px 2px 4px rgba(0, 0, 0, 0.3);
   --adlaire-shadow-focus-color: rgba(0, 102, 204, 0.1);
+  --adlaire-shadow-focus-ring: 0 0 0 3px rgba(0, 102, 204, 0.1);
+  --adlaire-shadow-marker-ring: 0 0 0 2px var(--adlaire-surface-accent);
+  --adlaire-shadow-tab-active: 0 -2px 4px rgba(0, 102, 204, 0.1);
   --adlaire-shadow-blue-soft: 0 2px 8px rgba(0, 102, 204, 0.15);
   --adlaire-shadow-blue: 0 2px 8px rgba(0, 102, 204, 0.3);
   --adlaire-shadow-blue-strong: 0 4px 12px rgba(0, 102, 204, 0.4);
@@ -26,5 +29,7 @@
   --adlaire-transition-button: 0.2s ease-in-out;
   --adlaire-transition-base: 0.3s ease;
   --adlaire-animation-fade-in: fadeIn 0.3s ease-in;
+  --adlaire-z-timeline-marker: 1;
+  --adlaire-z-sticky: 100;
   --adlaire-z-page-top: 1000;
 }

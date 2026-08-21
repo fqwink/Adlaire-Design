@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.33
+**Version:** rev.34
 
 ---
 
@@ -210,7 +210,7 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 
 本章は、Adlaire-Design内で管理するCSSフレームワーク・デザイントークンの実装範囲、ファイル構成、命名、段階を定める。
 
-本章は実装前の仕様固定を目的とする。実際のCSSファイル作成、テーマ作成、公開面反映は、ユーザー承認後に個別作業として行う。
+本章は仕様固定と実装整合性の確認を目的とする。実際のCSSファイル作成、テーマ作成、公開面反映は、ユーザー承認後に個別作業として行う。
 
 ## 11.2 実装方針
 
@@ -219,7 +219,7 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 - 外部CSSフレームワークは採用しない。
 - HEX値は原則としてトークン定義に集約し、UI側のCSSはCSS変数を参照する。
 - AGWSリポジトリのCSSはそのまま扱わず、構造・役割・見た目を参考にしてAdlaire-Design内の仕様へ整理する。
-- 実装は、第1段階の色トークンと最小ユーティリティ、第2段階の公開面トークン・レイアウト・コンポーネントに分けて管理する。
+- 実装は、第1段階の色トークンと最小ユーティリティ、第2段階の公開面トークン・レイアウト・コンポーネント、第3段階のAGWS完全再現用CSSに分けて管理する。
 - `@import` は使用しない。CSSファイルの読み込み順は利用側で明示する。
 
 ## 11.3 実装対象ファイル
@@ -585,9 +585,9 @@ CSS変数は以下とする。
 | 第2段階 | `Tokens/surface.css`、`UI/layout.css`、`UI/components.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 | 第3段階 | `Tokens/status.css`、`Tokens/effects.css`、`UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 
-## 11.10 AGWS完全再現に向けた不足仕様
+## 11.10 AGWS完全再現仕様
 
-Adlaire-Designの第1段階・第2段階は、AGWSの公開面トーン、基本レイアウト、主要コンポーネントを抽出している。ただし、AGWSの現行表示をAdlaire-Design成果物だけで完全再現するには、サイト外枠、フォーム、ニュース、組織情報、既存クラス互換の仕様が不足している。
+Adlaire-Designの第1段階・第2段階は、AGWSの公開面トーン、基本レイアウト、主要コンポーネントを抽出している。第3段階では、AGWSの現行表示をAdlaire-Design成果物だけで再現するため、サイト外枠、フォーム、ニュース、組織情報、既存クラス互換を含むCSS仕様を実装済みである。
 
 AGWS完全再現は、AGWS本体を先に変更せず、Adlaire-Design側で必要なCSS仕様を満たした後に、AGWSを適用先として更新する。
 
@@ -611,13 +611,13 @@ AGWS完全再現は、AGWS本体を先に変更せず、Adlaire-Design側で必�
 | `UI/forms.css` | フォーム、入力、チェック、送信ボタン、フォームnotice | 実装済み |
 | `UI/content.css` | ニュース、組織情報、沿革、法的情報目次などの本文固有表現 | 実装済み |
 | `UI/utilities.css` | spacing、text、background、display、flexなどの汎用ユーティリティ | 実装済み |
-| `UI/compat-agws.css` | AGWS既存HTMLクラスとの互換層 | 実装済み |
+| `UI/compat-agws.css` | AGWS既存HTMLクラス・ID・属性との互換層 | 実装済み |
 
 `UI/compat-agws.css` は、AGWS本体のHTML変更量を最小化するための一時的な互換層として扱う。Adlaire-Designの標準クラス正本は `.adlaire-` 接頭辞のクラスとし、互換層はAGWS適用時に必要な範囲だけ使用する。
 
-### 11.10.3 不足している表示領域
+### 11.10.3 実装済みの再現対象領域
 
-AGWS完全再現に不足している主な表示領域は以下である。
+AGWS完全再現のために第3段階で実装した主な表示領域は以下である。
 
 | 領域 | AGWS側の代表クラス | Adlaire-Design側の扱い |
 | --- | --- | --- |
@@ -724,7 +724,7 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 
 ### 11.10.7 不足確認結果
 
-2026-08-21時点で、AGWS現行HTMLに出現するclass属性値は本節の不足仕様に含めている。
+2026-08-21時点で、AGWS現行HTMLに出現するclass属性値は本節のAGWS完全再現仕様に含めている。
 
 追加で、AGWS側CSSのセレクタ単位を確認した結果、HTMLクラス照合だけでは以下が不足しやすいことを確認した。
 
@@ -762,7 +762,7 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 
 ### 11.10.9 第3段階の検査方針
 
-第3段階実装後は、`Tools/check/check-adlaire-design.sh` に以下の検査を追加する。
+第3段階では、`Tools/check/check-adlaire-design.sh` で以下を検査する。
 
 - 第3段階候補ファイルが存在すること。
 - 第3段階候補ファイルの冒頭コメントが仕様どおりであること。
@@ -772,6 +772,7 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 - UI側CSSにHEX値を直接記述していないこと。
 - UI側CSSにRGBA値を直接記述していないこと。
 - UI側CSSに負の `letter-spacing` と `transition: all` が存在しないこと。
+- UI側CSSの角丸、影、z-indexの非ゼロ効果値が `Tokens/effects.css` のCSS変数を参照していること。
 - `LICENSE` がAdlaire-Design名義であること。
 - Node.js/npm依存物が存在しないこと。
 - AGWS現行HTMLのclass属性値が `Docs/Master_Spec` のAGWS完全再現仕様に含まれていること。
@@ -883,6 +884,9 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 | `--adlaire-shadow-header` | `0 2px 10px rgba(0, 0, 0, 0.1)` | site header |
 | `--adlaire-shadow-title` | `2px 2px 4px rgba(0, 0, 0, 0.3)` | site title text shadow |
 | `--adlaire-shadow-focus-color` | `rgba(0, 102, 204, 0.1)` | form focus and active tab shadow color |
+| `--adlaire-shadow-focus-ring` | `0 0 0 3px rgba(0, 102, 204, 0.1)` | form focus ring |
+| `--adlaire-shadow-marker-ring` | `0 0 0 2px var(--adlaire-surface-accent)` | timeline marker ring |
+| `--adlaire-shadow-tab-active` | `0 -2px 4px rgba(0, 102, 204, 0.1)` | active tab shadow |
 | `--adlaire-shadow-blue-soft` | `0 2px 8px rgba(0, 102, 204, 0.15)` | news hover |
 | `--adlaire-shadow-blue` | `0 2px 8px rgba(0, 102, 204, 0.3)` | primary button |
 | `--adlaire-shadow-blue-strong` | `0 4px 12px rgba(0, 102, 204, 0.4)` | page top |
@@ -898,9 +902,13 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 | `--adlaire-transition-button` | `0.2s ease-in-out` | button hover |
 | `--adlaire-transition-base` | `0.3s ease` | site hover |
 | `--adlaire-animation-fade-in` | `fadeIn 0.3s ease-in` | tab pane display |
+| `--adlaire-z-timeline-marker` | `1` | timeline marker stacking |
+| `--adlaire-z-sticky` | `100` | sticky legal toc |
 | `--adlaire-z-page-top` | `1000` | page top fixed link |
 
 第3段階トークンは、必要な値をCSS変数へ集約し、UI側CSSではHEX値およびRGBA値を直接記述しない。
+
+UI側CSSの角丸、影、z-indexの非ゼロ効果値は `Tokens/effects.css` のCSS変数を参照する。`0` や `none` のような無効化値は直接記述できる。
 
 UI側CSSのtransitionは対象プロパティを明示する。`transition: all` は、意図しないプロパティ変更や移行時の表示差分を生むため使用しない。
 

@@ -38,7 +38,7 @@
 .adlaire-form-control:focus,
 .form-control:focus {
   border-color: var(--adlaire-surface-accent);
-  box-shadow: 0 0 0 3px var(--adlaire-shadow-focus-color);
+  box-shadow: var(--adlaire-shadow-focus-ring);
   outline: 0;
 }
 
