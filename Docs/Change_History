@@ -8,6 +8,12 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.54
+
+- `Docs/Master_Spec` の版数を `rev.54` へ更新した。
+- WYSIWYG EditorのUIはAdlaire-Design採用確定であることを `Docs/Master_Spec`、`Docs/WYSIWYG_Editor_Specification`、`README.md` に明記した。
+- WYSIWYG Editorの読み込み順を、採用時の推奨ではなく採用確定後の固定順として記録した。
+
 ## rev.53
 
 - `Docs/Master_Spec` の版数を `rev.53` へ更新した。

@@ -2,7 +2,7 @@
 
 本ファイルは、Adlaire-Designに編入するWYSIWYG Editorの設計仕様である。
 
-添付された `WYSIWYG_Editor_Specification.md` は解析元として扱い、本仕様ではAdlaire-Designのリポジトリ方針に合わせて、採用範囲、非対象、ビルド方針、CSS管理範囲を再定義する。
+添付された `WYSIWYG_Editor_Specification.md` は解析元として扱い、本仕様ではAdlaire-Designのリポジトリ方針に合わせて、採用確定範囲、非対象、ビルド方針、CSS管理範囲を再定義する。
 
 ---
 
@@ -28,11 +28,11 @@ Adlaire-Designは、WYSIWYG EditorのTypeScriptコア、JSON保存処理、ド�
 
 ---
 
-## 3. WYSIWYG側の採用方針
+## 3. WYSIWYG側のAdlaire-Design採用確定
 
-WYSIWYG Editorは、UI/CSSフレームワークとしてAdlaire-Designを採用する。
+WYSIWYG EditorのUIは、UI/CSSフレームワークとしてAdlaire-Design採用確定とする。
 
-採用対象は以下とする。
+採用確定対象は以下とする。
 
 - エディター外枠
 - ヘッダー
@@ -113,7 +113,7 @@ WYSIWYG Editorのブロック表示は、Adlaire-Designの既存部品を優先�
 
 ## 7. CSS読み込み順
 
-WYSIWYG EditorでAdlaire-Designを採用する場合、読み込み順は以下を推奨する。
+WYSIWYG EditorでAdlaire-Designを採用する際の読み込み順は以下に固定する。
 
 1. `Tokens/colors.css`
 2. `Tokens/surface.css`
