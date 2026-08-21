@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.23
+**Version:** rev.24
 
 ---
 
@@ -567,6 +567,7 @@ AGWS完全再現は、AGWS本体を先に変更せず、Adlaire-Design側で必�
 
 | ファイル | 役割 | 状態 |
 | --- | --- | --- |
+| `Tokens/status.css` | alert、button variants、text/background utilitiesで使う状態色・中立色トークン | 仕様候補 |
 | `Tokens/effects.css` | 影、角丸、余白、グラデーション、text-shadow、opacity、transform、transition、animation、backdrop-filterなどの公開面補助トークン | 仕様候補 |
 | `UI/base.css` | reset、base、typography、body、linkなどの基礎スタイル | 仕様候補 |
 | `UI/grid.css` | container、row、columnなどのグリッド互換 | 仕様候補 |
@@ -585,8 +586,8 @@ AGWS完全再現に不足している主な表示領域は以下である。
 | 領域 | AGWS側の代表クラス | Adlaire-Design側の扱い |
 | --- | --- | --- |
 | 基礎スタイル | `*`、`*::before`、`*::after`、`html`、`body`、`h1`から`h6`、`p`、`a`、`a:hover` | `UI/base.css` |
-| グリッド互換 | `.container-fluid`、`.row`、`.col`、`.col-1`から`.col-12` | `UI/grid.css` |
-| サイトヘッダー | `.site-header`、`.site-title`、`.header-link`、`.site-nav`、`.nav-button` | `UI/site.css` |
+| グリッド互換 | `.container-fluid`、`.row`、`.col`、`.col-1`、`.col-2`、`.col-3`、`.col-4`、`.col-5`、`.col-6`、`.col-7`、`.col-8`、`.col-9`、`.col-10`、`.col-11`、`.col-12` | `UI/grid.css` |
+| サイトヘッダー | `.site-header`、`.site-title`、`.site-tagline`、`.header-link`、`.site-nav`、`.nav-button` | `UI/site.css` |
 | メイン余白 | `.main-content`、`.content-section` | `UI/site.css` または `UI/content.css` |
 | フッター | `.site-footer` | `UI/site.css` |
 | リニューアル告知 | `.renewal-notice`、`.renewal-title`、`.renewal-description` | `UI/content.css` |
@@ -595,14 +596,15 @@ AGWS完全再現に不足している主な表示領域は以下である。
 | 沿革詳細 | `.timeline`、`.timeline-item`、`.timeline-date`、`.timeline-content`、`.timeline-marker`、`.timeline-text` | `UI/content.css` |
 | フォーム | `.contact-form`、`.form-description`、`.form-notice`、`.form-group`、`.form-label`、`.form-control`、`textarea.form-control`、`select.form-control`、`.form-control:focus`、`.form-check`、`.form-check-input`、`.form-check-label`、`.required`、`.form-label.required::after`、`.btn`、`.btn-primary`、`.btn-secondary`、`.btn-outline-primary`、`.btn-lg`、`.btn-sm`、`.btn-block`、`.btn-submit`、`.btn-submit:hover`、`.btn-submit:disabled` | `UI/forms.css` |
 | カード詳細 | `.card`、`.card-header`、`.card-body`、`.card-footer`、`.card:hover` | `UI/content.css` または `UI/compat-agws.css` |
+| 状態色・中立色 | `#6c757d`、`#5a6268`、`#28a745`、`#dc3545`、`#ffc107`、`#17a2b8`、`#343a40`、`#777777`、`#999999`、`#cccccc`、`#dddddd`、`#f8f9fa`、`#f9f9f9`、`#0c5460`、`#d1ecf1`、`#bee5eb`、`#155724`、`#d4edda`、`#c3e6cb`、`#856404`、`#fff3cd`、`#ffeaa7`、`#721c24`、`#f8d7da`、`#f5c6cb` | `Tokens/status.css` |
 | アラート | `.alert`、`.alert-info`、`.alert-success`、`.alert-warning`、`.alert-danger` | `UI/content.css` |
 | 法的情報目次 | `.legal-toc-card`、`.legal-toc`、`.legal-toc-link` | `UI/content.css` |
-| タブ詳細 | `.tab-container`、`.tab-input`、`.tab-labels`、`.tab-label`、`.tab-label:hover`、`.tab-content`、`.tab-pane`、`#tab-all:checked`、`#tab-press:checked`、`#tab-maintenance:checked`、`#content-all`、`#content-press`、`#content-maintenance` | `UI/content.css` |
+| タブ詳細 | `.tab-container`、`.tab-input`、`.tab-labels`、`.tab-label`、`.tab-label:hover`、`.tab-content`、`.tab-pane`、`#tab-all:checked`、`#tab-press:checked`、`#tab-maintenance:checked`、`#content-all`、`#content-press`、`#content-maintenance`、`@keyframes fadeIn` | `UI/content.css` |
 | サイドバー詳細 | `.sidebar-section`、`.sidebar-section:hover`、`.sidebar-title`、`.sidebar-content`、`.sidebar-link-list`、`.sidebar-link`、`.sidebar-link:hover`、`.sidebar-link.active`、`.sidebar-links`、`.sidebar-links li`、`.sidebar-links li:before`、`.sidebar-links a`、`.sidebar-links a:hover`、`.active` | `UI/content.css` |
 | リンク表現 | `.contact-link`、`.privacy-link`、`.text-link` | `UI/content.css` |
 | 連絡先情報 | `.contact-info`、`.contact-item`、`.contact-item h3`、`.contact-item p`、`.contact-item a`、`.contact-item a:hover` | `UI/content.css` |
 | 補助テキスト | `.coming-soon`、`.coming-soon-small`、`.info-note`、`.last-updated`、`.text-muted`、`.mt-30` | `UI/content.css` または `UI/compat-agws.css` |
-| 汎用ユーティリティ | `.mt-0`から`.mt-5`、`.mb-0`から`.mb-5`、`.pt-0`から`.pt-5`、`.pb-0`から`.pb-5`、`.text-left`、`.text-center`、`.text-right`、`.text-primary`、`.text-secondary`、`.text-success`、`.text-danger`、`.text-warning`、`.text-info`、`.text-muted`、`.bg-primary`、`.bg-secondary`、`.bg-light`、`.bg-dark`、`.d-none`、`.d-block`、`.d-inline`、`.d-inline-block`、`.d-flex`、`.flex-row`、`.flex-column`、`.justify-content-start`、`.justify-content-end`、`.justify-content-center`、`.justify-content-between`、`.align-items-start`、`.align-items-end`、`.align-items-center` | `UI/utilities.css` |
+| 汎用ユーティリティ | `.mt-0`、`.mt-1`、`.mt-2`、`.mt-3`、`.mt-4`、`.mt-5`、`.mb-0`、`.mb-1`、`.mb-2`、`.mb-3`、`.mb-4`、`.mb-5`、`.pt-0`、`.pt-1`、`.pt-2`、`.pt-3`、`.pt-4`、`.pt-5`、`.pb-0`、`.pb-1`、`.pb-2`、`.pb-3`、`.pb-4`、`.pb-5`、`.text-left`、`.text-center`、`.text-right`、`.text-primary`、`.text-secondary`、`.text-success`、`.text-danger`、`.text-warning`、`.text-info`、`.text-muted`、`.bg-primary`、`.bg-secondary`、`.bg-light`、`.bg-dark`、`.d-none`、`.d-block`、`.d-inline`、`.d-inline-block`、`.d-flex`、`.flex-row`、`.flex-column`、`.justify-content-start`、`.justify-content-end`、`.justify-content-center`、`.justify-content-between`、`.align-items-start`、`.align-items-end`、`.align-items-center` | `UI/utilities.css` |
 | 疑似要素・状態 | `.timeline::before`、`.business-list li:last-child`、`.info-row:first-child`、`.info-row:last-child`、`.news-content p:last-child`、各hover、active、focus、disabled状態 | 各対象UIファイル |
 | レスポンシブ調整 | `@media (max-width: 1024px)`、`@media (max-width: 768px)`、`@media (max-width: 480px)` | `UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css` |
 | 既存クラス互換 | `.container`、`.content-wrapper`、`.main-area`、`.sidebar`、`.card`、`.section-title`、`.section-content`、`.breadcrumb`、`.breadcrumb-link`、`.breadcrumb-separator`、`.breadcrumb-current`、`.back-to-top`、`.back-to-top-icon` | `UI/compat-agws.css` |
@@ -690,8 +692,44 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 - `style.css` 由来のCSS onlyタブID、checked状態、hover、active、focus、disabled、疑似要素、疑似クラス。
 - `1024px`、`768px`、`480px` のレスポンシブ調整。
 - `text-shadow`、`opacity`、`transform`、`transition`、`animation`、`backdrop-filter` など、色以外の視覚効果。
+- `.site-tagline` のように現行HTMLでは未使用でもCSSに残っている表示要素。
+- alert、button variants、text/background utilitiesで使う状態色・中立色。
 
-したがって、第3段階では `UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` だけでなく、`UI/base.css`、`UI/grid.css`、`UI/utilities.css` を含めて仕様確定する必要がある。
+したがって、第3段階では `UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` だけでなく、`Tokens/status.css`、`UI/base.css`、`UI/grid.css`、`UI/utilities.css` を含めて仕様確定する必要がある。
+
+### 11.10.8 第3段階の読み込み順
+
+第3段階の読み込み順は以下を候補とする。
+
+1. `Tokens/colors.css`
+2. `Tokens/surface.css`
+3. `Tokens/status.css`
+4. `Tokens/effects.css`
+5. `UI/adlaire.css`
+6. `UI/base.css`
+7. `UI/grid.css`
+8. `UI/layout.css`
+9. `UI/components.css`
+10. `UI/site.css`
+11. `UI/forms.css`
+12. `UI/content.css`
+13. `UI/utilities.css`
+14. `UI/compat-agws.css`
+
+`UI/compat-agws.css` はAGWS既存クラスを最後に受けるため、読み込み順の末尾に置く。
+
+### 11.10.9 第3段階の検査方針
+
+第3段階実装後は、`Tools/check/check-adlaire-design.sh` に以下の検査を追加する。
+
+- 第3段階候補ファイルが存在すること。
+- 第3段階候補ファイルの冒頭コメントが仕様どおりであること。
+- `Tokens/status.css` と `Tokens/effects.css` の `:root` ブロックが1個であること。
+- 第3段階で必須とするCSS変数、標準クラス、互換クラス、tab用ID、keyframes、media queryが定義されていること。
+- 第3段階候補ファイルに `@charset`、`@import`、`!important` が存在しないこと。
+- UI側CSSにHEX値を直接記述していないこと。
+- Node.js/npm依存物が存在しないこと。
+- AGWS現行HTMLのclass属性値が `Docs/Master_Spec` のAGWS完全再現仕様に含まれていること。
 
 ---
 

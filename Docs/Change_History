@@ -8,6 +8,15 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.24
+
+- `Docs/Master_Spec` の版数を `rev.24` へ更新した。
+- AGWS側CSSのクラスセレクタ単位の確認結果に基づき、`.site-tagline`、個別のgrid class、spacing utility classの明記を補強した。
+- 第3段階候補ファイルに `Tokens/status.css` を追加し、alert、button variants、text/background utilitiesで使う状態色・中立色を扱う方針を追加した。
+- 第3段階のCSS読み込み順を候補として追加した。
+- 第3段階実装後に `Tools/check/check-adlaire-design.sh` へ追加する検査方針を定義した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.11` へ更新し、AGWS完全再現に必要な状態色・中立色、読み込み順、検査条件の不足を追記した。
+
 ## rev.23
 
 - `Docs/Master_Spec` の版数を `rev.23` へ更新した。
