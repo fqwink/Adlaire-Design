@@ -8,6 +8,12 @@
 
 ---
 
+## rev.2
+
+- Adlaire-Design専用の検査シェルを `Adlaire-Ecosystem` から `Tools/check/` へ移行した。
+- `Tools/check/check-adlaire-design.sh` を追加し、Docs集約、旧名称混入、Node.js/npm不使用をAdlaire-Design側で検査するようにした。
+- README、AGENTS、文書索引を新しい検査シェル配置へ更新した。
+
 ## rev.1
 
 - `Adlaire-Ecosystem-Design` を `Adlaire-Design` へ名称変更し、独立リポジトリとして初期化した。
