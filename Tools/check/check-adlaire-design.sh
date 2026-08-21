@@ -48,6 +48,72 @@ for path in UI Tokens Brand; do
   fi
 done
 
+find "$ADLAIRE_DESIGN_ROOT" -mindepth 1 -maxdepth 1 \
+  ! -name '.git' \
+  ! -name '.gitignore' \
+  ! -name 'AGENTS.md' \
+  ! -name 'Brand' \
+  ! -name 'Docs' \
+  ! -name 'LICENSE' \
+  ! -name 'README.md' \
+  ! -name 'Tokens' \
+  ! -name 'Tools' \
+  ! -name 'UI' \
+  -print >"$TMP_DIR/unexpected-top-level"
+
+if [ -s "$TMP_DIR/unexpected-top-level" ]; then
+  echo "Adlaire-Design top-level entries must stay within the approved repository structure:" >&2
+  cat "$TMP_DIR/unexpected-top-level" >&2
+  exit 1
+fi
+
+find "$ADLAIRE_DESIGN_ROOT/Docs" -type f \
+  ! -name 'Master_Spec' \
+  ! -name 'AGWS_Design_Analysis' \
+  ! -name 'Document_Index' \
+  ! -name 'Change_History' \
+  -print >"$TMP_DIR/unexpected-docs-files"
+
+if [ -s "$TMP_DIR/unexpected-docs-files" ]; then
+  echo "Docs/ must contain only approved source documents:" >&2
+  cat "$TMP_DIR/unexpected-docs-files" >&2
+  exit 1
+fi
+
+find "$ADLAIRE_DESIGN_ROOT/Tokens" "$ADLAIRE_DESIGN_ROOT/UI" -type f \
+  ! -name '.gitkeep' \
+  ! -name '*.css' \
+  -print >"$TMP_DIR/unexpected-css-area-files"
+
+if [ -s "$TMP_DIR/unexpected-css-area-files" ]; then
+  echo "Tokens/ and UI/ must contain only CSS source files or .gitkeep:" >&2
+  cat "$TMP_DIR/unexpected-css-area-files" >&2
+  exit 1
+fi
+
+find "$ADLAIRE_DESIGN_ROOT/Tools" -type f \
+  ! -path "$ADLAIRE_DESIGN_ROOT/Tools/check/check-adlaire-design.sh" \
+  -print >"$TMP_DIR/unexpected-tools-files"
+
+if [ -s "$TMP_DIR/unexpected-tools-files" ]; then
+  echo "Tools/ must contain only approved Adlaire-Design check tools:" >&2
+  cat "$TMP_DIR/unexpected-tools-files" >&2
+  exit 1
+fi
+
+if [ ! -x "$ADLAIRE_DESIGN_ROOT/Tools/check/check-adlaire-design.sh" ]; then
+  echo "Tools/check/check-adlaire-design.sh must be executable." >&2
+  exit 1
+fi
+
+find "$ADLAIRE_DESIGN_ROOT/Brand" -type f ! -name '.gitkeep' -print >"$TMP_DIR/unexpected-brand-files"
+
+if [ -s "$TMP_DIR/unexpected-brand-files" ]; then
+  echo "Brand/ must not contain brand assets until their asset specification is approved:" >&2
+  cat "$TMP_DIR/unexpected-brand-files" >&2
+  exit 1
+fi
+
 if [ -e "$ADLAIRE_DESIGN_ROOT/Documents" ]; then
   echo "Adlaire-Design must use Docs/, not Documents/." >&2
   exit 1

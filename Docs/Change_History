@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.49
+
+- `Docs/Master_Spec` の版数を `rev.49` へ更新した。
+- `Tools/check/check-adlaire-design.sh` に、承認済みトップレベル構造からの逸脱を禁止する検査を追加した。
+- `Tools/check/check-adlaire-design.sh` に、`Docs/`、`Tokens/`、`UI/`、`Tools/`、`Brand/` 配下の未承認ファイル配置を禁止する検査を追加した。
+- `Tools/check/check-adlaire-design.sh` に、`Tools/check/check-adlaire-design.sh` が実行可能であることの検査を追加した。
+- 再現性検査の策定仕様に、承認済みリポジトリ構造からの逸脱確認と検査シェル実行権限確認を追加した。
+
 ## rev.48
 
 - `Docs/Master_Spec` の版数を `rev.48` へ更新した。

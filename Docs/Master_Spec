@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.48
+**Version:** rev.49
 
 ---
 
@@ -1105,6 +1105,8 @@ Adlaire-Designの今後の拡充は、ビルド、minify、bundleではなく、
 12. `Docs/Master_Spec` の `Version` と `Docs/Change_History` の最新revが一致していることの確認
 13. 生成CSS用ディレクトリ、生成CSSファイル、CSSまたはフロントエンドビルド設定ファイルが存在しないことの確認
 14. `AGENTS.md` がCSSプリプロセッサ、ビルド、minify、bundleを追加しない運用方針を記録していることの確認
+15. トップレベル、`Docs/`、`Tokens/`、`UI/`、`Tools/`、`Brand/` が承認済みのリポジトリ構造から逸脱していないことの確認
+16. `Tools/check/check-adlaire-design.sh` が実行可能であることの確認
 
 検査はPOSIX shellで記述し、`Tools/check/check-adlaire-design.sh` に集約する。検査のためにNode.js/npm、外部CSSパーサ、外部CLIを追加しない。
 
