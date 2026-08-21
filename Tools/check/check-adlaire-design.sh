@@ -563,6 +563,12 @@ for class in \
   '.adlaire-timeline' \
   '.adlaire-timeline-item' \
   '.adlaire-page-top' \
+  '.adlaire-panel' \
+  '.adlaire-panel-header' \
+  '.adlaire-panel-body' \
+  '.adlaire-panel-footer' \
+  '.adlaire-well' \
+  '.adlaire-button-group' \
   '.adlaire-action-row' \
   '.adlaire-action-row-start' \
   '.adlaire-action-row-between' \
@@ -570,13 +576,32 @@ for class in \
   '.adlaire-empty-state' \
   '.adlaire-empty-state-title' \
   '.adlaire-empty-state-text' \
+  '.adlaire-feature-list' \
+  '.adlaire-feature-item' \
+  '.adlaire-check-list' \
+  '.adlaire-check-item' \
+  '.adlaire-definition-list' \
+  '.adlaire-definition-row' \
+  '.adlaire-definition-term' \
+  '.adlaire-definition-description' \
+  '.adlaire-key-value' \
+  '.adlaire-key-value-row' \
+  '.adlaire-key-value-key' \
+  '.adlaire-key-value-value' \
   '.adlaire-link-list' \
   '.adlaire-link-list-item' \
   '.adlaire-link-list-link' \
+  '.adlaire-related-links' \
   '.adlaire-media' \
   '.adlaire-media-figure' \
   '.adlaire-media-body' \
-  '.adlaire-media-title'; do
+  '.adlaire-media-title' \
+  '.adlaire-cta' \
+  '.adlaire-cta-title' \
+  '.adlaire-cta-text' \
+  '.adlaire-cta-actions' \
+  '.adlaire-caption' \
+  '.adlaire-helper-text'; do
   if ! grep -F -- "$class" "$ADLAIRE_DESIGN_ROOT/UI/components.css" >/dev/null 2>&1; then
     echo "UI/components.css missing required class: $class" >&2
     exit 1
