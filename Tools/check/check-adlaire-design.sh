@@ -619,10 +619,16 @@ for class in \
   '.adlaire-panel-footer' \
   '.adlaire-well' \
   '.adlaire-button-group' \
+  '.adlaire-toolbar' \
+  '.adlaire-toolbar-section' \
   '.adlaire-action-row' \
   '.adlaire-action-row-start' \
   '.adlaire-action-row-between' \
   '.adlaire-divider' \
+  '.adlaire-stack' \
+  '.adlaire-stack-sm' \
+  '.adlaire-stack-lg' \
+  '.adlaire-inline' \
   '.adlaire-empty-state' \
   '.adlaire-empty-state-title' \
   '.adlaire-empty-state-text' \
@@ -630,6 +636,12 @@ for class in \
   '.adlaire-feature-item' \
   '.adlaire-check-list' \
   '.adlaire-check-item' \
+  '.adlaire-chip-list' \
+  '.adlaire-chip' \
+  '.adlaire-chip-primary' \
+  '.adlaire-chip-muted' \
+  '.adlaire-status-pill' \
+  '.adlaire-status-dot' \
   '.adlaire-definition-list' \
   '.adlaire-definition-row' \
   '.adlaire-definition-term' \
@@ -642,6 +654,8 @@ for class in \
   '.adlaire-link-list-item' \
   '.adlaire-link-list-link' \
   '.adlaire-related-links' \
+  '.adlaire-surface-grid' \
+  '.adlaire-surface-item' \
   '.adlaire-media' \
   '.adlaire-media-figure' \
   '.adlaire-media-body' \

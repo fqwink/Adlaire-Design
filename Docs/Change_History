@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.57
+
+- `Docs/Master_Spec` の版数を `rev.57` へ更新した。
+- 汎用部品を改訂し、`UI/components.css` にtoolbar、toolbar section、stack、inline、chip、status pill、status dot、surface grid、surface itemを追加した。
+- 追加した汎用部品は既存トークンを参照する直接CSSとして実装し、新規トークン、CSSビルド、CSS minify、CSS bundleは追加しない方針を維持した。
+- `Docs/Master_Spec` の汎用部品仕様と実装済みクラス一覧を改訂後の部品群に合わせて更新した。
+- `Tools/check/check-adlaire-design.sh` に、改訂後の汎用部品クラスの必須検査を追加した。
+
 ## rev.56
 
 - `Docs/Master_Spec` の版数を `rev.56` へ更新した。
