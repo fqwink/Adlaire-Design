@@ -8,6 +8,15 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.21
+
+- `Docs/Master_Spec` の版数を `rev.21` へ更新した。
+- AGWSの現行表示をAdlaire-Design成果物だけで完全再現するために不足しているCSS領域を整理した。
+- 第3段階の候補ファイルとして `Tokens/effects.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` を定義した。
+- AGWSの代表クラスとAdlaire-Design側で扱う領域の対応表を追加した。
+- 第3段階の標準クラス候補、非対象、AGWS適用前の判定条件を定義した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.8` へ更新し、AGWS完全再現の不足領域を追記した。
+
 ## rev.20
 
 - `Docs/Master_Spec` の版数を `rev.20` へ更新した。

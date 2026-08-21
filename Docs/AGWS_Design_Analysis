@@ -1,6 +1,6 @@
 # Adlaire Group Web Site AGWS 解析
 
-**Version:** rev.7
+**Version:** rev.8
 
 ---
 
@@ -198,3 +198,25 @@ AGWSリポジトリは、Adlaire Groupの公開面デザインの参照基準と
 特に、軽量な静的HTML、Architect CSS、JavaScript非依存、2カラム情報設計、青系の清潔な公開サイトトーンは、他の公開面へ展開する価値がある。
 
 一方で、AGWSのCSSをそのままAdlaire-Designの汎用CSSとして扱うのではなく、`architect.css` をフレームワーク候補、`style.css` を公開面テーマ候補として分けて整理する必要がある。
+
+---
+
+# 11. Adlaire-DesignによるAGWS完全再現の不足領域
+
+Adlaire-Designの第1段階・第2段階により、AGWSの公開面色、基本レイアウト、カード、見出し、パンくず、notice、タブ、タイムライン、ページトップリンクの土台は定義済みである。
+
+一方で、AGWSの現行表示をAdlaire-Design成果物だけで完全再現するには、以下の領域が不足している。
+
+- サイトヘッダー、サイトタイトル、ヘッダーリンク、ナビゲーションボタン
+- フッター
+- フォームUI、入力欄、チェック項目、送信ボタン
+- ニュース項目、ニュースバッジ、ニュース本文
+- 組織情報行、ラベル、値、事業領域リスト
+- 沿革タイムライン内の年月、本文、マーカー
+- 法的情報ページ目次
+- 準備中表示、小さな注釈、最終更新日などの補助表現
+- AGWS既存HTMLクラスをAdlaire-Design標準クラスへつなぐ互換層
+
+これらは、Adlaire-Design側の第3段階として `Tokens/effects.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` に分けて仕様化する。
+
+AGWS本体を更新するのは、Adlaire-Design側で第3段階の仕様と実装が完了した後とする。AGWS側の初回更新は、見た目を変えるためではなく、Adlaire-Design成果物で現行表示を再現できることを確認するための適用作業として扱う。

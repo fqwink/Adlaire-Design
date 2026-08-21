@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.20
+**Version:** rev.21
 
 ---
 
@@ -548,6 +548,98 @@ CSS変数は以下とする。
 | --- | --- | --- |
 | 第1段階 | `Tokens/colors.css`、`UI/adlaire.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 | 第2段階 | `Tokens/surface.css`、`UI/layout.css`、`UI/components.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
+
+## 11.10 AGWS完全再現に向けた不足仕様
+
+Adlaire-Designの第1段階・第2段階は、AGWSの公開面トーン、基本レイアウト、主要コンポーネントを抽出している。ただし、AGWSの現行表示をAdlaire-Design成果物だけで完全再現するには、サイト外枠、フォーム、ニュース、組織情報、既存クラス互換の仕様が不足している。
+
+AGWS完全再現は、AGWS本体を先に変更せず、Adlaire-Design側で必要なCSS仕様を満たした後に、AGWSを適用先として更新する。
+
+### 11.10.1 第3段階の目的
+
+第3段階は、AGWSの現行HTML/CSSが提供している見た目と構成を、Adlaire-Design側のCSS成果物で再現できる状態にすることを目的とする。
+
+第3段階では、AGWSのCSSをそのまま移植しない。既存表示を基準に、Adlaire-Designの命名、責務分離、CSS変数参照へ整理する。
+
+### 11.10.2 第3段階の対象ファイル
+
+第3段階の候補ファイルは以下とする。
+
+| ファイル | 役割 | 状態 |
+| --- | --- | --- |
+| `Tokens/effects.css` | 影、角丸、余白、グラデーションなどの公開面補助トークン | 仕様候補 |
+| `UI/site.css` | サイトヘッダー、ナビゲーション、フッター、ページトップリンク | 仕様候補 |
+| `UI/forms.css` | フォーム、入力、チェック、送信ボタン、フォームnotice | 仕様候補 |
+| `UI/content.css` | ニュース、組織情報、沿革、法的情報目次などの本文固有表現 | 仕様候補 |
+| `UI/compat-agws.css` | AGWS既存HTMLクラスとの互換層 | 仕様候補 |
+
+`UI/compat-agws.css` は、AGWS本体のHTML変更量を最小化するための一時的な互換層として扱う。Adlaire-Designの標準クラス正本は `.adlaire-` 接頭辞のクラスとし、互換層はAGWS適用時に必要な範囲だけ使用する。
+
+### 11.10.3 不足している表示領域
+
+AGWS完全再現に不足している主な表示領域は以下である。
+
+| 領域 | AGWS側の代表クラス | Adlaire-Design側の扱い |
+| --- | --- | --- |
+| サイトヘッダー | `.site-header`、`.site-title`、`.header-link`、`.site-nav`、`.nav-button` | `UI/site.css` |
+| メイン余白 | `.main-content`、`.content-section` | `UI/site.css` または `UI/content.css` |
+| フッター | `.site-footer` | `UI/site.css` |
+| ニュース | `.news-item`、`.news-header`、`.news-date`、`.news-badge`、`.news-title`、`.news-content` | `UI/content.css` |
+| 組織情報 | `.organization-info`、`.info-row`、`.info-label`、`.info-value`、`.business-list` | `UI/content.css` |
+| 沿革詳細 | `.timeline-date`、`.timeline-content`、`.timeline-marker`、`.timeline-text` | `UI/content.css` |
+| フォーム | `.contact-form`、`.form-group`、`.form-label`、`.form-control`、`.form-check`、`.btn-submit` | `UI/forms.css` |
+| 法的情報目次 | `.legal-toc-card`、`.legal-toc`、`.legal-toc-link` | `UI/content.css` |
+| 補助テキスト | `.coming-soon`、`.coming-soon-small`、`.info-note`、`.last-updated` | `UI/content.css` |
+| 既存クラス互換 | `.container`、`.content-wrapper`、`.main-area`、`.sidebar`、`.card`、`.section-title`、`.breadcrumb`、`.back-to-top` | `UI/compat-agws.css` |
+
+### 11.10.4 第3段階の命名方針
+
+第3段階でAdlaire-Design側に新設する標準クラスは、原則として `.adlaire-` 接頭辞を使用する。
+
+候補例は以下とする。
+
+| 標準クラス候補 | 役割 |
+| --- | --- |
+| `.adlaire-site-header` | サイトヘッダー |
+| `.adlaire-site-title` | サイトタイトル |
+| `.adlaire-site-nav` | サイトナビゲーション |
+| `.adlaire-nav-button` | ナビゲーションボタン |
+| `.adlaire-site-footer` | サイトフッター |
+| `.adlaire-news-item` | ニュース項目 |
+| `.adlaire-news-badge` | ニュース種別バッジ |
+| `.adlaire-info-row` | 組織情報行 |
+| `.adlaire-info-label` | 組織情報ラベル |
+| `.adlaire-info-value` | 組織情報値 |
+| `.adlaire-form-group` | フォーム項目 |
+| `.adlaire-form-label` | フォームラベル |
+| `.adlaire-form-control` | 入力欄 |
+| `.adlaire-form-check` | チェック項目 |
+| `.adlaire-button-submit` | 送信ボタン |
+| `.adlaire-legal-toc` | 法的情報目次 |
+| `.adlaire-legal-toc-link` | 法的情報目次リンク |
+
+### 11.10.5 第3段階の非対象
+
+第3段階では以下を対象外とする。
+
+- AGWS本体HTMLの置換
+- AGWS本体CSSの削除
+- JavaScript実装
+- 多言語化
+- JSONデータ管理
+- ビルド処理
+- minify版
+- 画像・ロゴ作成
+
+### 11.10.6 AGWS適用前の判定条件
+
+AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
+
+- Adlaire-Design側で第3段階CSSの仕様が確定していること。
+- Adlaire-Design側で第3段階CSSが実装済みであること。
+- `Tools/check/check-adlaire-design.sh` が第3段階CSSを検査していること。
+- AGWS側では、見た目の変更を目的にせず、Adlaire-Design成果物で現行表示を再現することを目的にすること。
+- AGWS側の初回適用は、CSS読み込みと互換層利用を中心にし、HTML構造変更を最小限にすること。
 
 ---
 
