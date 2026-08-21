@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.50
+
+- `Docs/Master_Spec` の版数を `rev.50` へ更新した。
+- `UI/content.css` に、公開面本文部品として表、メタ情報、バッジ、注記のCSSを追加した。
+- 追加した本文部品は、既存トークンを参照する直接CSSとして実装し、ビルド、minify、bundle、新規トークン追加は行わない方針を維持した。
+- `Tools/check/check-adlaire-design.sh` に、追加した公開面本文部品クラスの必須検査を追加した。
+- 公開面本文部品の対象、標準クラス、互換別名、非対象を `Docs/Master_Spec` に仕様化した。
+
 ## rev.49
 
 - `Docs/Master_Spec` の版数を `rev.49` へ更新した。
