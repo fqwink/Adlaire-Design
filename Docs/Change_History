@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.59
+
+- `Docs/Master_Spec` の版数を `rev.59` へ更新した。
+- `Docs/Generic_Component_Catalog` の部品名、候補名、対象外項目を日本語中心の表記へ変更した。
+- 実装クラス名はCSS実装との対応を保つため `.adlaire-` クラス名のまま維持した。
+- `Tools/check/check-adlaire-design.sh` の汎用部品カタログ検査語を、日本語化後の主要項目に合わせて更新した。
+
 ## rev.58
 
 - `Docs/Master_Spec` の版数を `rev.58` へ更新した。

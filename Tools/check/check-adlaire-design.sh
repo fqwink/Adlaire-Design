@@ -300,14 +300,14 @@ for catalog_term in \
   '## 4. 優先B' \
   '## 5. 優先C' \
   '## 6. 原則対象外' \
-  'toolbar' \
-  'stack' \
-  'inline' \
-  'chip' \
-  'status pill' \
-  'status dot' \
-  'surface grid' \
-  'surface item'; do
+  'ツールバー' \
+  '縦積み' \
+  '横並び' \
+  'チップ' \
+  'ステータスラベル' \
+  'ステータス点' \
+  'サーフェスグリッド' \
+  'サーフェス項目'; do
   if ! grep -F -- "$catalog_term" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" >/dev/null 2>&1; then
     echo "Docs/Generic_Component_Catalog missing required catalog term: $catalog_term" >&2
     exit 1

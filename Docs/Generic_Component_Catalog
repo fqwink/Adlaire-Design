@@ -30,39 +30,39 @@
 
 ## 3. 優先A
 
-優先Aは、AGWSまたは今後の公開面で再利用性が高く、CSS onlyで成立し、仕様化済みまたは実装済みとして扱う候補である。
+優先Aは、AGWSまたは今後の公開面で再利用性が高く、CSSだけで成立し、仕様化済みまたは実装済みとして扱う候補である。
 
 | 分類 | 部品 | 実装先 | 状態 |
 | --- | --- | --- | --- |
-| 表示枠 | card | `UI/components.css` | 実装済み |
-| 表示枠 | panel | `UI/components.css` | 実装済み |
-| 表示枠 | well | `UI/components.css` | 実装済み |
-| 操作 | action row | `UI/components.css` | 実装済み |
-| 操作 | button group | `UI/components.css` | 実装済み |
-| 操作 | toolbar | `UI/components.css` | 実装済み |
-| 配置補助 | stack | `UI/components.css` | 実装済み |
-| 配置補助 | inline | `UI/components.css` | 実装済み |
-| 区切り | divider | `UI/components.css` | 実装済み |
-| 空状態 | empty state | `UI/components.css` | 実装済み |
-| リスト | link list | `UI/components.css` | 実装済み |
-| リスト | feature list | `UI/components.css` | 実装済み |
-| リスト | check list | `UI/components.css` | 実装済み |
-| リスト | definition list | `UI/components.css` | 実装済み |
-| 情報整理 | key-value summary | `UI/components.css` | 実装済み |
-| 情報整理 | metadata row | `UI/content.css` | 実装済み |
-| メディア | media object | `UI/components.css` | 実装済み |
-| 状態 | badge | `UI/content.css` | 実装済み |
-| 状態 | note | `UI/content.css` | 実装済み |
-| 状態 | alert | `UI/content.css` | 実装済み |
-| 状態 | chip | `UI/components.css` | 実装済み |
-| 状態 | status pill | `UI/components.css` | 実装済み |
-| 状態 | status dot | `UI/components.css` | 実装済み |
-| 導線 | related links | `UI/components.css` | 実装済み |
-| 導線 | CTA block | `UI/components.css` | 実装済み |
-| 面表示 | surface grid | `UI/components.css` | 実装済み |
-| 面表示 | surface item | `UI/components.css` | 実装済み |
-| 補助 | caption | `UI/components.css` | 実装済み |
-| 補助 | helper text | `UI/components.css` | 実装済み |
+| 表示枠 | カード | `UI/components.css` | 実装済み |
+| 表示枠 | パネル | `UI/components.css` | 実装済み |
+| 表示枠 | 補助枠 | `UI/components.css` | 実装済み |
+| 操作 | 操作行 | `UI/components.css` | 実装済み |
+| 操作 | ボタングループ | `UI/components.css` | 実装済み |
+| 操作 | ツールバー | `UI/components.css` | 実装済み |
+| 配置補助 | 縦積み | `UI/components.css` | 実装済み |
+| 配置補助 | 横並び | `UI/components.css` | 実装済み |
+| 区切り | 区切り線 | `UI/components.css` | 実装済み |
+| 空状態 | 空状態表示 | `UI/components.css` | 実装済み |
+| リスト | リンクリスト | `UI/components.css` | 実装済み |
+| リスト | 特徴リスト | `UI/components.css` | 実装済み |
+| リスト | チェックリスト | `UI/components.css` | 実装済み |
+| リスト | 定義リスト | `UI/components.css` | 実装済み |
+| 情報整理 | キー/値サマリー | `UI/components.css` | 実装済み |
+| 情報整理 | メタ情報行 | `UI/content.css` | 実装済み |
+| メディア | メディアオブジェクト | `UI/components.css` | 実装済み |
+| 状態 | バッジ | `UI/content.css` | 実装済み |
+| 状態 | 注記 | `UI/content.css` | 実装済み |
+| 状態 | アラート | `UI/content.css` | 実装済み |
+| 状態 | チップ | `UI/components.css` | 実装済み |
+| 状態 | ステータスラベル | `UI/components.css` | 実装済み |
+| 状態 | ステータス点 | `UI/components.css` | 実装済み |
+| 導線 | 関連リンク | `UI/components.css` | 実装済み |
+| 導線 | CTAブロック | `UI/components.css` | 実装済み |
+| 面表示 | サーフェスグリッド | `UI/components.css` | 実装済み |
+| 面表示 | サーフェス項目 | `UI/components.css` | 実装済み |
+| 補助 | キャプション | `UI/components.css` | 実装済み |
+| 補助 | 補助テキスト | `UI/components.css` | 実装済み |
 
 ### 3.1 実装済みクラス対応表
 
@@ -70,73 +70,73 @@
 
 | 部品 | 実装済みクラス |
 | --- | --- |
-| card | `.adlaire-card`、`.adlaire-card-header`、`.adlaire-card-body` |
-| panel | `.adlaire-panel`、`.adlaire-panel-header`、`.adlaire-panel-body`、`.adlaire-panel-footer` |
-| well | `.adlaire-well` |
-| action row | `.adlaire-action-row`、`.adlaire-action-row-start`、`.adlaire-action-row-between` |
-| button group | `.adlaire-button-group` |
-| toolbar | `.adlaire-toolbar`、`.adlaire-toolbar-section` |
-| stack | `.adlaire-stack`、`.adlaire-stack-sm`、`.adlaire-stack-lg` |
-| inline | `.adlaire-inline` |
-| divider | `.adlaire-divider` |
-| empty state | `.adlaire-empty-state`、`.adlaire-empty-state-title`、`.adlaire-empty-state-text` |
-| link list | `.adlaire-link-list`、`.adlaire-link-list-item`、`.adlaire-link-list-link` |
-| feature list | `.adlaire-feature-list`、`.adlaire-feature-item` |
-| check list | `.adlaire-check-list`、`.adlaire-check-item` |
-| definition list | `.adlaire-definition-list`、`.adlaire-definition-row`、`.adlaire-definition-term`、`.adlaire-definition-description` |
-| key-value summary | `.adlaire-key-value`、`.adlaire-key-value-row`、`.adlaire-key-value-key`、`.adlaire-key-value-value` |
-| metadata row | `.adlaire-meta-list`、`.adlaire-meta-row`、`.adlaire-meta-label`、`.adlaire-meta-value` |
-| media object | `.adlaire-media`、`.adlaire-media-figure`、`.adlaire-media-body`、`.adlaire-media-title` |
-| badge | `.adlaire-badge`、`.adlaire-badge-primary`、`.adlaire-badge-secondary`、`.adlaire-badge-success`、`.adlaire-badge-warning`、`.adlaire-badge-danger` |
-| note | `.adlaire-note`、`.adlaire-note-info`、`.adlaire-note-success`、`.adlaire-note-warning`、`.adlaire-note-danger` |
-| alert | `.adlaire-alert`、`.adlaire-alert-info`、`.adlaire-alert-success`、`.adlaire-alert-warning`、`.adlaire-alert-danger` |
-| chip | `.adlaire-chip-list`、`.adlaire-chip`、`.adlaire-chip-primary`、`.adlaire-chip-muted` |
-| status pill | `.adlaire-status-pill` |
-| status dot | `.adlaire-status-dot` |
-| related links | `.adlaire-related-links` |
-| CTA block | `.adlaire-cta`、`.adlaire-cta-title`、`.adlaire-cta-text`、`.adlaire-cta-actions` |
-| surface grid | `.adlaire-surface-grid` |
-| surface item | `.adlaire-surface-item` |
-| caption | `.adlaire-caption` |
-| helper text | `.adlaire-helper-text` |
+| カード | `.adlaire-card`、`.adlaire-card-header`、`.adlaire-card-body` |
+| パネル | `.adlaire-panel`、`.adlaire-panel-header`、`.adlaire-panel-body`、`.adlaire-panel-footer` |
+| 補助枠 | `.adlaire-well` |
+| 操作行 | `.adlaire-action-row`、`.adlaire-action-row-start`、`.adlaire-action-row-between` |
+| ボタングループ | `.adlaire-button-group` |
+| ツールバー | `.adlaire-toolbar`、`.adlaire-toolbar-section` |
+| 縦積み | `.adlaire-stack`、`.adlaire-stack-sm`、`.adlaire-stack-lg` |
+| 横並び | `.adlaire-inline` |
+| 区切り線 | `.adlaire-divider` |
+| 空状態表示 | `.adlaire-empty-state`、`.adlaire-empty-state-title`、`.adlaire-empty-state-text` |
+| リンクリスト | `.adlaire-link-list`、`.adlaire-link-list-item`、`.adlaire-link-list-link` |
+| 特徴リスト | `.adlaire-feature-list`、`.adlaire-feature-item` |
+| チェックリスト | `.adlaire-check-list`、`.adlaire-check-item` |
+| 定義リスト | `.adlaire-definition-list`、`.adlaire-definition-row`、`.adlaire-definition-term`、`.adlaire-definition-description` |
+| キー/値サマリー | `.adlaire-key-value`、`.adlaire-key-value-row`、`.adlaire-key-value-key`、`.adlaire-key-value-value` |
+| メタ情報行 | `.adlaire-meta-list`、`.adlaire-meta-row`、`.adlaire-meta-label`、`.adlaire-meta-value` |
+| メディアオブジェクト | `.adlaire-media`、`.adlaire-media-figure`、`.adlaire-media-body`、`.adlaire-media-title` |
+| バッジ | `.adlaire-badge`、`.adlaire-badge-primary`、`.adlaire-badge-secondary`、`.adlaire-badge-success`、`.adlaire-badge-warning`、`.adlaire-badge-danger` |
+| 注記 | `.adlaire-note`、`.adlaire-note-info`、`.adlaire-note-success`、`.adlaire-note-warning`、`.adlaire-note-danger` |
+| アラート | `.adlaire-alert`、`.adlaire-alert-info`、`.adlaire-alert-success`、`.adlaire-alert-warning`、`.adlaire-alert-danger` |
+| チップ | `.adlaire-chip-list`、`.adlaire-chip`、`.adlaire-chip-primary`、`.adlaire-chip-muted` |
+| ステータスラベル | `.adlaire-status-pill` |
+| ステータス点 | `.adlaire-status-dot` |
+| 関連リンク | `.adlaire-related-links` |
+| CTAブロック | `.adlaire-cta`、`.adlaire-cta-title`、`.adlaire-cta-text`、`.adlaire-cta-actions` |
+| サーフェスグリッド | `.adlaire-surface-grid` |
+| サーフェス項目 | `.adlaire-surface-item` |
+| キャプション | `.adlaire-caption` |
+| 補助テキスト | `.adlaire-helper-text` |
 
 ---
 
 ## 4. 優先B
 
-優先Bは、CSS onlyで成立しやすく、追加前に利用場面とクラス粒度を固める候補である。
+優先Bは、CSSだけで成立しやすく、追加前に利用場面とクラス粒度を固める候補である。
 
 | 分類 | 部品 | 想定実装先 | 状態 |
 | --- | --- | --- | --- |
-| 見出し群 | page heading | `UI/components.css` | 候補 |
-| 見出し群 | heading group | `UI/components.css` | 候補 |
-| 見出し群 | section lead | `UI/components.css` | 候補 |
-| 案内 | announcement bar | `UI/components.css` | 候補 |
-| 案内 | update notice | `UI/components.css` | 候補 |
-| 案内 | maintenance notice | `UI/components.css` | 候補 |
-| FAQ | FAQ list | `UI/content.css` | 候補 |
-| FAQ | FAQ item | `UI/content.css` | 候補 |
-| FAQ | details/summary styling | `UI/content.css` | 候補 |
-| 手順 | step list | `UI/components.css` | 候補 |
-| 手順 | process list | `UI/components.css` | 候補 |
-| 手順 | numbered flow | `UI/components.css` | 候補 |
-| 比較 | comparison block | `UI/content.css` | 候補 |
-| 比較 | pros/cons list | `UI/content.css` | 候補 |
-| 強調 | highlight box | `UI/components.css` | 候補 |
-| 強調 | summary box | `UI/components.css` | 候補 |
-| 強調 | stat block | `UI/components.css` | 候補 |
-| ナビ補助 | anchor nav | `UI/components.css` | 候補 |
-| ナビ補助 | subnav | `UI/components.css` | 候補 |
-| ナビ補助 | sibling nav | `UI/components.css` | 候補 |
-| カード派生 | card grid | `UI/components.css` | 候補 |
-| カード派生 | card media | `UI/components.css` | 候補 |
-| カード派生 | card actions | `UI/components.css` | 候補 |
-| リスト派生 | simple list | `UI/components.css` | 候補 |
-| リスト派生 | bordered list | `UI/components.css` | 候補 |
-| リスト派生 | compact list | `UI/components.css` | 候補 |
-| 連絡導線 | contact panel | `UI/components.css` | 候補 |
-| 連絡導線 | inquiry CTA | `UI/components.css` | 候補 |
-| 連絡導線 | external link row | `UI/components.css` | 候補 |
+| 見出し群 | ページ見出し | `UI/components.css` | 候補 |
+| 見出し群 | 見出しグループ | `UI/components.css` | 候補 |
+| 見出し群 | セクションリード | `UI/components.css` | 候補 |
+| 案内 | お知らせバー | `UI/components.css` | 候補 |
+| 案内 | 更新通知 | `UI/components.css` | 候補 |
+| 案内 | メンテナンス通知 | `UI/components.css` | 候補 |
+| FAQ | FAQリスト | `UI/content.css` | 候補 |
+| FAQ | FAQ項目 | `UI/content.css` | 候補 |
+| FAQ | 開閉要素の見た目 | `UI/content.css` | 候補 |
+| 手順 | 手順リスト | `UI/components.css` | 候補 |
+| 手順 | 工程リスト | `UI/components.css` | 候補 |
+| 手順 | 番号付きフロー | `UI/components.css` | 候補 |
+| 比較 | 比較ブロック | `UI/content.css` | 候補 |
+| 比較 | メリット/デメリットリスト | `UI/content.css` | 候補 |
+| 強調 | ハイライト枠 | `UI/components.css` | 候補 |
+| 強調 | 要約枠 | `UI/components.css` | 候補 |
+| 強調 | 数値表示ブロック | `UI/components.css` | 候補 |
+| ナビ補助 | アンカーナビ | `UI/components.css` | 候補 |
+| ナビ補助 | サブナビ | `UI/components.css` | 候補 |
+| ナビ補助 | 兄弟ページナビ | `UI/components.css` | 候補 |
+| カード派生 | カードグリッド | `UI/components.css` | 候補 |
+| カード派生 | メディア付きカード | `UI/components.css` | 候補 |
+| カード派生 | カード操作領域 | `UI/components.css` | 候補 |
+| リスト派生 | シンプルリスト | `UI/components.css` | 候補 |
+| リスト派生 | 枠線付きリスト | `UI/components.css` | 候補 |
+| リスト派生 | コンパクトリスト | `UI/components.css` | 候補 |
+| 連絡導線 | 連絡パネル | `UI/components.css` | 候補 |
+| 連絡導線 | 問い合わせCTA | `UI/components.css` | 候補 |
+| 連絡導線 | 外部リンク行 | `UI/components.css` | 候補 |
 
 ---
 
@@ -146,23 +146,23 @@
 
 | 分類 | 部品 | 想定実装先 | 状態 |
 | --- | --- | --- | --- |
-| 状態表示 | progress | `UI/components.css` | 保留 |
-| 状態表示 | step indicator | `UI/components.css` | 保留 |
-| 状態表示 | status timeline | `UI/content.css` | 保留 |
-| データ表示 | pagination | `UI/components.css` | 保留 |
-| データ表示 | tag list | `UI/components.css` | 保留 |
-| データ表示 | filter chips | `UI/components.css` | 保留 |
-| 補助表示 | tooltip style | `UI/components.css` | 保留 |
-| 補助表示 | popover style | `UI/components.css` | 保留 |
-| 視覚枠 | hero panel | `UI/components.css` | 保留 |
-| 視覚枠 | visual banner | `UI/components.css` | 保留 |
-| 視覚枠 | image frame | `UI/components.css` | 保留 |
-| ブランド表示 | logo list | `Brand/` または `UI/components.css` | 保留 |
-| ブランド表示 | partner list | `Brand/` または `UI/components.css` | 保留 |
-| ブランド表示 | icon tile | `Brand/` または `UI/components.css` | 保留 |
-| レイアウト複合 | split block | `UI/layout.css` または `UI/components.css` | 保留 |
-| レイアウト複合 | stacked feature | `UI/components.css` | 保留 |
-| レイアウト複合 | comparison grid | `UI/layout.css` または `UI/content.css` | 保留 |
+| 状態表示 | 進捗表示 | `UI/components.css` | 保留 |
+| 状態表示 | ステップ表示 | `UI/components.css` | 保留 |
+| 状態表示 | ステータスタイムライン | `UI/content.css` | 保留 |
+| データ表示 | ページネーション | `UI/components.css` | 保留 |
+| データ表示 | タグリスト | `UI/components.css` | 保留 |
+| データ表示 | 絞り込みチップ | `UI/components.css` | 保留 |
+| 補助表示 | ツールチップ風表示 | `UI/components.css` | 保留 |
+| 補助表示 | ポップオーバー風表示 | `UI/components.css` | 保留 |
+| 視覚枠 | ヒーローパネル | `UI/components.css` | 保留 |
+| 視覚枠 | ビジュアルバナー | `UI/components.css` | 保留 |
+| 視覚枠 | 画像フレーム | `UI/components.css` | 保留 |
+| ブランド表示 | ロゴリスト | `Brand/` または `UI/components.css` | 保留 |
+| ブランド表示 | パートナーリスト | `Brand/` または `UI/components.css` | 保留 |
+| ブランド表示 | アイコンタイル | `Brand/` または `UI/components.css` | 保留 |
+| レイアウト複合 | 分割ブロック | `UI/layout.css` または `UI/components.css` | 保留 |
+| レイアウト複合 | 積み上げ特徴表示 | `UI/components.css` | 保留 |
+| レイアウト複合 | 比較グリッド | `UI/layout.css` または `UI/content.css` | 保留 |
 
 ---
 
@@ -172,14 +172,14 @@
 
 | 部品 | 理由 |
 | --- | --- |
-| modal | JavaScript制御とアクセシビリティ設計が必要になりやすい |
-| drawer | JavaScript制御とフォーカス管理が必要になりやすい |
-| dropdown | 状態管理が必要になりやすい |
-| carousel | JavaScript、アクセシビリティ、画像管理の設計が必要になりやすい |
-| sortable table | JavaScriptまたはデータ制御が必要 |
-| search/filter UI | JavaScriptまたはJSONデータ管理に寄りやすい |
-| tooltip動作 | hover/focus制御とアクセシビリティ設計が必要 |
-| icon set | Brand資産仕様を先に固める必要がある |
+| モーダル | JavaScript制御とアクセシビリティ設計が必要になりやすい |
+| ドロワー | JavaScript制御とフォーカス管理が必要になりやすい |
+| ドロップダウン | 状態管理が必要になりやすい |
+| カルーセル | JavaScript、アクセシビリティ、画像管理の設計が必要になりやすい |
+| ソート可能テーブル | JavaScriptまたはデータ制御が必要 |
+| 検索/絞り込みUI | JavaScriptまたはJSONデータ管理に寄りやすい |
+| ツールチップ動作 | hover/focus制御とアクセシビリティ設計が必要 |
+| アイコンセット | Brand資産仕様を先に固める必要がある |
 
 ---
 
@@ -189,7 +189,7 @@
 
 - 2ページ以上で再利用できる見込みがある。
 - 既存の部品またはユーティリティの組み合わせだけでは用途が曖昧になる。
-- CSS onlyで成立する。
+- CSSだけで成立する。
 - 新規トークンを追加する場合は、複数部品で共有する理由がある。
 - クラス名は `.adlaire-` 接頭辞を使用する。
 - 実装後に `Tools/check/check-adlaire-design.sh` の検査対象へ追加する。
