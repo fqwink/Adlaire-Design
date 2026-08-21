@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.37
+
+- `Docs/Master_Spec` の版数を `rev.37` へ更新した。
+- `Tools/check/check-adlaire-design.sh` に、UI/Tokens内の `var(--adlaire-...)` 参照が定義済みCSS変数だけを参照していることの検査を追加した。
+- 隣接するAGWSリポジトリが存在する場合に、AGWS現行HTML/CSSのclass、id、media query、色値がAdlaire-Design側で捕捉されていることの検査を追加した。
+- `Docs/Master_Spec` の第3段階検査方針を、追加したバグ精査検査に合わせて更新した。
+
 ## rev.36
 
 - `Docs/Master_Spec` の版数を `rev.36` へ更新した。

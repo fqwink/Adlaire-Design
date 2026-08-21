@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.36
+**Version:** rev.37
 
 ---
 
@@ -773,6 +773,7 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 - UI側CSSにRGBA値を直接記述していないこと。
 - UI側CSSに負の `letter-spacing` と `transition: all` が存在しないこと。
 - UI側CSSの角丸、影、z-indexの非ゼロ効果値が `Tokens/effects.css` のCSS変数を参照していること。
+- UI側CSSとTokens内の `var(--adlaire-...)` 参照が、UIまたはTokens内で定義済みのCSS変数だけを参照していること。
 - `LICENSE` がAdlaire-Design名義であること。
 - Node.js/npm依存物が存在しないこと。
 - AGWS現行HTMLのclass属性値が `Docs/Master_Spec` のAGWS完全再現仕様に含まれていること。
@@ -780,6 +781,7 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 - AGWS現行HTMLの要素名が `Docs/Master_Spec` のAGWS完全再現仕様に含まれていること。
 - AGWS現行HTMLの主要属性名と主要属性値が `Docs/Master_Spec` のAGWS完全再現仕様に含まれていること。
 - AGWS側CSSに出現するclass selector、ID selector、attribute selector、pseudo selector、keyframes、media query、色値が本節のAGWS完全再現仕様に含まれていること。
+- AGWSリポジトリが隣接パスに存在する場合、AGWS現行HTML/CSSのclass、id、media query、色値がAdlaire-DesignのUI、Tokens、または `Docs/Master_Spec` で捕捉されていること。
 
 ### 11.10.10 第3段階のCSSプロパティ確認範囲
 
