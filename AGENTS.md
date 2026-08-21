@@ -14,6 +14,7 @@
 - `UI/`: CSSフレームワーク本体
 - `Tokens/`: デザイントークン
 - `Brand/`: ブランド資産
+- `Tools/check/`: Adlaire-Design専用の検査シェル
 - `LICENSE`: ライセンス本文
 
 ## 基本方針
@@ -21,5 +22,6 @@
 - 旧称は履歴上の名称としてのみ扱うこと。
 - 現行文書・現行READMEでは、リポジトリ名を `Adlaire-Design` に統一すること。
 - ドキュメントフォルダ名は `Docs/` とし、`Documents/` は作成しないこと。
+- Adlaire-Design専用の検査シェルは `Tools/check/` で管理すること。
 - Node.js/npm依存物(`package.json`、`package-lock.json`、`node_modules`)を追加しないこと。
 - 実際に使用する成果物(ビルド済みCSS等)は、承認された内容を `Adlaire-Ecosystem` 側へ統合すること。
