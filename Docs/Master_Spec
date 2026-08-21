@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.19
+**Version:** rev.20
 
 ---
 
@@ -73,7 +73,7 @@ AGWSの詳細解析は `Docs/AGWS_Design_Analysis` を参照する。
 
 - 外部CSSフレームワーク(Tailwind CSS、Bootstrapなど)は採用しない。本仕様書を正本とした内製の軽量CSSフレームワークとして設計する。
 - ユーティリティクラスは `.adlaire-bg-<role>`(背景色)、`.adlaire-text-<role>`(文字色)、`.adlaire-border-<role>`(境界線色)の命名規則に従い、第4章のCSS変数を参照する形で実装する(HEX値を直接埋め込まない)。
-- 内製CSSフレームワークは、画面やテーマごとに分散させず、共有スタイルシートとして一元管理する。具体的な格納場所は実装時に確定する。
+- 内製CSSフレームワークは、画面やテーマごとに分散させず、本仕様書で定める共有スタイルシートとして一元管理する。
 - CSSフレームワークとデザイントークンの実装範囲、ファイル構成、段階は第11章に定める。
 - 色以外の設計要素(余白、タイポグラフィなど)は、AGWSリポジトリの方向性を参照する。具体的な設計トークンとして管理する必要が生じた場合は、別途定義を新設する。
 
@@ -219,7 +219,7 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 - 外部CSSフレームワークは採用しない。
 - HEX値は原則としてトークン定義に集約し、UI側のCSSはCSS変数を参照する。
 - AGWSリポジトリのCSSはそのまま扱わず、構造・役割・見た目を参考にしてAdlaire-Design内の仕様へ整理する。
-- 最初の実装は色トークンと最小ユーティリティに限定し、公開面レイアウトやコンポーネントは後続段階で扱う。
+- 実装は、第1段階の色トークンと最小ユーティリティ、第2段階の公開面トークン・レイアウト・コンポーネントに分けて管理する。
 - `@import` は使用しない。CSSファイルの読み込み順は利用側で明示する。
 
 ## 11.3 実装対象ファイル
@@ -239,9 +239,9 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 
 | ファイル | 役割 | 状態 |
 | --- | --- | --- |
-| `Tokens/surface.css` | AGWS参照色、画面面色、テキスト色、notice色のCSS変数定義 | 仕様確定・未実装 |
-| `UI/layout.css` | 基本レイアウト | 仕様確定・未実装 |
-| `UI/components.css` | 公開面コンポーネント | 仕様確定・未実装 |
+| `Tokens/surface.css` | AGWS参照色、画面面色、テキスト色、notice色のCSS変数定義 | 実装済み |
+| `UI/layout.css` | 基本レイアウト | 実装済み |
+| `UI/components.css` | 公開面コンポーネント | 実装済み |
 
 ## 11.4 CSS読み込み順
 
@@ -250,7 +250,7 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 1. `Tokens/colors.css`
 2. `UI/adlaire.css`
 
-第2段階の読み込み順は以下を候補とする。
+第2段階の読み込み順は以下とする。
 
 1. `Tokens/colors.css`
 2. `Tokens/surface.css`
@@ -388,6 +388,9 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 - パンくずナビゲーション
 - サイドバー関連情報
 - notice表現
+- CSS onlyタブ
+- タイムライン
+- ページトップへ戻るリンク
 
 ### 11.6.1 `Tokens/surface.css`
 
@@ -487,7 +490,7 @@ CSS変数は以下とする。
 - JavaScriptに依存する状態管理は定義しない。
 - CSS onlyで成立しない挙動は対象外とする。
 
-第2段階のCSS変数名、クラス名、ブレークポイント、コンポーネント範囲は、本節を確定仕様とする。実装時は3ファイルをまとめて作成し、検査シェルも同じ承認単位で拡張する。
+第2段階のCSS変数名、クラス名、ブレークポイント、コンポーネント範囲は、本節を確定仕様とする。3ファイルはまとめて実装し、検査シェルも同じ承認単位で拡張している。
 
 ## 11.7 全体の非対象
 
@@ -521,6 +524,20 @@ CSS変数は以下とする。
 - `UI/adlaire.css` に `!important` が存在しないこと。
 - Node.js/npm依存物が存在しないこと。
 
+第2段階実装後の検査項目は以下とする。
+
+- `Tokens/surface.css` が存在すること。
+- `UI/layout.css` が存在すること。
+- `UI/components.css` が存在すること。
+- `Tokens/surface.css`、`UI/layout.css`、`UI/components.css` の冒頭コメントが仕様どおりであること。
+- `Tokens/surface.css` の `:root` ブロックが1個であること。
+- `Tokens/surface.css` が必要なCSS変数を定義していること。
+- `UI/layout.css` が必要なレイアウトクラスとブレークポイントを定義していること。
+- `UI/components.css` が必要なコンポーネントクラスを定義していること。
+- `Tokens/surface.css`、`UI/layout.css`、`UI/components.css` に `@charset` と `@import` が存在しないこと。
+- `UI/layout.css` と `UI/components.css` に `!important` が存在しないこと。
+- `UI/layout.css` と `UI/components.css` にHEX値を直接記述していないこと。
+
 検査シェルの責務は、構造検査、必須ファイル検査、禁止ファイル検査、必須変数・必須クラス検査、禁止記述検査までとする。CSSの完全なパーサ検証は行わない。
 
 ## 11.9 追加実装・変更時の承認単位
@@ -530,7 +547,7 @@ CSS変数は以下とする。
 | 段階 | 対象 | 状態 |
 | --- | --- | --- |
 | 第1段階 | `Tokens/colors.css`、`UI/adlaire.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
-| 第2段階 | `Tokens/surface.css`、`UI/layout.css`、`UI/components.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 仕様確定・未実装 |
+| 第2段階 | `Tokens/surface.css`、`UI/layout.css`、`UI/components.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 
 ---
 
