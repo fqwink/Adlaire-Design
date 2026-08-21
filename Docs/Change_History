@@ -8,6 +8,12 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.41
+
+- `Docs/Master_Spec` の版数を `rev.41` へ更新した。
+- 2026-08-21時点ではビルド方針を採用せず、`Tokens/` と `UI/` 配下のCSSファイルを正本として直接管理する現状維持方針を明記した。
+- Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、minify生成、bundle生成、`Dist/` 作成を非対象として明記した。
+
 ## rev.40
 
 - `Docs/Master_Spec` の版数を `rev.40` へ更新した。

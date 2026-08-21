@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.40
+**Version:** rev.41
 
 ---
 
@@ -221,6 +221,9 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 - AGWSリポジトリのCSSはそのまま扱わず、構造・役割・見た目を参考にしてAdlaire-Design内の仕様へ整理する。
 - 実装は、第1段階の色トークンと最小ユーティリティ、第2段階の公開面トークン・レイアウト・コンポーネント、第3段階のAGWS完全再現用CSSに分けて管理する。
 - `@import` は使用しない。CSSファイルの読み込み順は利用側で明示する。
+- 2026-08-21時点では、ビルド方針は採用しない。`Tokens/` と `UI/` 配下のCSSファイルを正本として直接管理し、生成元と生成物を分けない。
+- Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、minify生成、bundle生成は採用しない。
+- `Dist/` などの生成CSS用ディレクトリは作成しない。
 
 ## 11.3 実装対象ファイル
 
@@ -533,6 +536,12 @@ CSS変数は以下とする。
 
 - JavaScript実装
 - Node.js/npmによるビルド
+- Sass、SCSS、Less、Stylus、PostCSSなどのCSSプリプロセッサまたは変換器
+- Lightning CSSなどのCSS変換・最適化ツール
+- 独自プリプロセッサ
+- CSS bundle生成
+- minify版生成
+- `Dist/` などの生成CSS用ディレクトリ
 - 外部CSSフレームワークの導入
 - AGWSリポジトリCSSのそのままの移植
 - `adlaire.com` 既存画面の直接変更
