@@ -1,11 +1,6 @@
 # Adlaire-Design ドキュメント索引
 
-- `Docs/Brand_Color_Spec`(仕様・設計を統合管理)
-- `Docs/AGWS_Design_Analysis`(`adlaire.com`/AGWS公開面デザインの解析)
+- `Docs/Master_Spec`(仕様・設計の正本)
+- `Docs/AGWS_Design_Analysis`(AGWSリポジトリ公開面デザインの解析。`adlaire.com` は公開確認先)
 - `Docs/Change_History`(Adlaire-Design専用の変更履歴)
 - `Tools/check/check-adlaire-design.sh`(Adlaire-Design専用の構成検査)
-- 参照元: `Adlaire-Docs/Common_Documents/Development_Plan`
-- 参照元: `Adlaire-Docs/Common_Documents/Change_History`
-- 参照元: `Adlaire-Docs/Common_Documents/License_Policy`
-- 参照元: `Adlaire-Docs/Document_Charter`
-- ルート `Document_Charter`

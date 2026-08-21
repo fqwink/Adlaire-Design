@@ -9,7 +9,7 @@ for path in \
   README.md \
   LICENSE \
   Docs/Document_Index \
-  Docs/Brand_Color_Spec \
+  Docs/Master_Spec \
   Docs/AGWS_Design_Analysis \
   Docs/Change_History \
   UI \
@@ -43,8 +43,8 @@ if ! grep -F '# Adlaire-Design' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1
   exit 1
 fi
 
-if ! grep -F 'Docs/Brand_Color_Spec' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
-  echo "Adlaire-Design Document_Index must reference Docs/Brand_Color_Spec." >&2
+if ! grep -F 'Docs/Master_Spec' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
+  echo "Adlaire-Design Document_Index must reference Docs/Master_Spec." >&2
   exit 1
 fi
 
@@ -58,7 +58,9 @@ if ! grep -F 'Docs/Change_History' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/
   exit 1
 fi
 
-if grep -R -n 'Adlaire-Ecosystem-Design' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Brand_Color_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/AGWS_Design_Analysis" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
+OLD_REPOSITORY_NAME='Adlaire-''Eco''system-Design'
+
+if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/AGWS_Design_Analysis" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
   echo "current Adlaire-Design documents must not use the old repository name:" >&2
   cat /tmp/adlaire-design-old-name-matches >&2
   exit 1

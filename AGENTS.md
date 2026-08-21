@@ -4,9 +4,9 @@
 
 - すべての作業開始時に、必ずこの `AGENTS.md` を読むこと。
 - このリポジトリは `Adlaire-Design` の開発正本・仕様正本として扱うこと。
-- 仕様・設計の正本は `Docs/Brand_Color_Spec` とする。
+- 仕様・設計の正本は `Docs/Master_Spec` とする。
 - ドキュメント索引は `Docs/Document_Index`、変更履歴は `Docs/Change_History` とする。
-- Adlaire Ecosystem全体との境界は、`Adlaire-Docs/Document_Charter` および `Adlaire-Docs/Common_Documents/Adlaire_Ecosystem_Charter` を参照すること。
+- Adlaire-Designは、CSSフレームワーク・デザイントークン・ブランド資産を扱う独立リポジトリとして管理すること。
 
 ## リポジトリ構成
 
@@ -24,4 +24,4 @@
 - ドキュメントフォルダ名は `Docs/` とし、`Documents/` は作成しないこと。
 - Adlaire-Design専用の検査シェルは `Tools/check/` で管理すること。
 - Node.js/npm依存物(`package.json`、`package-lock.json`、`node_modules`)を追加しないこと。
-- 実際に使用する成果物(ビルド済みCSS等)は、承認された内容を `Adlaire-Ecosystem` 側へ統合すること。
+- Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理すること。
