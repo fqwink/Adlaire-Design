@@ -27,6 +27,8 @@ Adlaire-Designでは、WYSIWYG Editorの表示層、UI部品、プレビューHT
 
 Adlaire-Designは、WYSIWYG EditorのTypeScriptコア、ブロックデータ、Undo/Redo、JSON serialization、preview renderingを管理する。
 
+Markdown / MDXからWYSIWYG Editorのブロックデータへ変換するパーサー仕様では、個別承認された例外採用ライブラリを使用できる。
+
 Adlaire-Designは、WYSIWYG EditorのDOM依存編集UI、永続ストレージ連携、ドラッグ&ドロップのブラウザイベント、スラッシュコマンドのDOMメニュー、ビルド成果物生成を管理しない。
 
 ---
@@ -66,12 +68,14 @@ WYSIWYG Editor本体では、以下の工程を必須とする。
 
 WYSIWYG Editor本体のビルド方針は以下とする。
 
-- npmは完全禁止とする。
+- npm管理物は追加しない。
 - `package.json`、`package-lock.json`、`node_modules` は使用しない。
 - webpackはnpm前提のため採用しない。
 - Node.js前提のビルド体系は採用しない。
 - DenoまたはDeno互換の実行環境を前提にする。
 - ビルド依存は、npmを使わず、Denoで実行可能なものに限り個別承認で許容する。
+- Markdown / MDXパーサーは、パーサー用途に限定して例外採用ライブラリを許可する。
+- 例外採用ライブラリは、ライブラリ名、用途、実行環境、ライセンス、npm管理物を追加しないことを個別仕様に記録する。
 
 ---
 
@@ -87,6 +91,8 @@ Adlaire-Designでは以下を対象外とする。
 - JavaScriptのbundle、minify、compile
 - npm、webpack、Node.js前提の設定
 - `Dist/`、`dist/`、`Build/`、`build/` 作成
+
+ただし、Markdown / MDXパーサーに限り、個別承認した例外採用ライブラリは対象外から除外する。例外採用ライブラリを採用する場合でも、npm管理物、webpack設定、Node.js前提の設定、生成JavaScript、bundle、minify成果物は追加しない。
 
 ---
 
@@ -125,8 +131,22 @@ WYSIWYG Editorの実装コードは `WYSIWYG/Source/editor.ts` を正本とす�
 - Undo/Redo
 - JSON serialization
 - preview rendering
+- Markdown / MDX parsing
 
-実装コードは依存なしTypeScriptとし、npm、webpack、Node.js前提の設定、生成JavaScript、bundle、minify成果物を含めない。
+実装コードはTypeScriptを正本とする。Markdown / MDXパーサーに限り、個別承認された例外採用ライブラリを許可する。npm、webpack、Node.js前提の設定、生成JavaScript、bundle、minify成果物は含めない。
+
+### 7.1 Markdown / MDXパーサー例外採用方針
+
+Markdown / MDXパーサーは、WYSIWYG Editorの入力変換品質と保守性を優先し、例外採用ライブラリを使用できる。
+
+例外採用の条件は以下とする。
+
+- 用途をMarkdown / MDX parsingに限定する。
+- ライブラリ名、用途、実行環境、ライセンス、採用理由を仕様に記録する。
+- `package.json`、`package-lock.json`、`node_modules` を追加しない。
+- webpack、Node.js前提の設定、生成JavaScript、bundle、minify成果物を追加しない。
+- Deno互換またはブラウザ互換で利用できる形を優先する。
+- Adlaire-Design内に保存する正本は、仕様文書と必要最小限のTypeScriptソースに限定する。
 
 ---
 

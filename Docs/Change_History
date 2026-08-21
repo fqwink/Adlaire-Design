@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.61
+
+- `Docs/Master_Spec` の版数を `rev.61` へ更新した。
+- WYSIWYG EditorのMarkdown / MDXパーサー仕様について、個別承認された例外採用ライブラリの使用を許可する方針を追加した。
+- 例外採用ライブラリを許可する場合でも、npm管理物、webpack、Node.js前提の設定、生成JavaScript、bundle、minify成果物を追加しない境界を明記した。
+- `Docs/WYSIWYG_Editor_Specification`、`README.md`、`AGENTS.md`、`Docs/Document_Index` をMarkdown / MDXパーサー例外採用方針に合わせて更新した。
+- `Tools/check/check-adlaire-design.sh` に、Markdown / MDXパーサー例外採用方針の記録確認を追加した。
+
 ## rev.60
 
 - `Docs/Master_Spec` の版数を `rev.60` へ更新した。
