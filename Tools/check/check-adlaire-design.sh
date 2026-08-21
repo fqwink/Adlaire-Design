@@ -184,6 +184,11 @@ if ! grep -F 'CSSフレームワーク、デザイントークン、ブランド
   exit 1
 fi
 
+if ! grep -F 'WYSIWYG EditorのMarkdown / MDXパーサーは、仕様で個別承認された例外採用ライブラリを許可する。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design AGENTS.md must document the Markdown / MDX parser exception library policy." >&2
+  exit 1
+fi
+
 if ! grep -F 'Docs/Change_History' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must reference Docs/Change_History." >&2
   exit 1
@@ -196,6 +201,11 @@ fi
 
 if ! grep -F '今後の拡充は、公開面CSS機能、WYSIWYG Editor UI、WYSIWYG Editor実装コード、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must document the expansion priority policy." >&2
+  exit 1
+fi
+
+if ! grep -F 'WYSIWYG EditorのMarkdown / MDXパーサーは、個別承認された例外採用ライブラリを許可する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must document the Markdown / MDX parser exception library policy." >&2
   exit 1
 fi
 
@@ -216,6 +226,16 @@ fi
 
 if ! grep -F '上記の拡充においても、Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、CSS bundle生成、minify版生成、`Dist/` 作成は現状検討しない。' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
   echo "Docs/Master_Spec must keep build, minify, bundle, and preprocessor work out of current consideration." >&2
+  exit 1
+fi
+
+if ! grep -F 'WYSIWYG EditorのMarkdown / MDXパーサーは、例外採用ライブラリの使用を許可する。' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+  echo "Docs/Master_Spec must document the Markdown / MDX parser exception library policy." >&2
+  exit 1
+fi
+
+if ! grep -F 'Markdown / MDXパーサーは、パーサー用途に限定して例外採用ライブラリを許可する。' "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" >/dev/null 2>&1; then
+  echo "Docs/WYSIWYG_Editor_Specification must document the Markdown / MDX parser exception library policy." >&2
   exit 1
 fi
 

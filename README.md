@@ -20,7 +20,7 @@ Adlaire-Designは、CSSフレームワーク、デザイントークン、ブラ
 
 ## 方針
 
-Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理する。Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、WYSIWYG Editor実装コードの開発正本として独立して管理する。
+Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理する。Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、WYSIWYG Editor実装コードの開発正本として独立して管理する。WYSIWYG EditorのMarkdown / MDXパーサーは、個別承認された例外採用ライブラリを許可する。
 
 今後の拡充は、公開面CSS機能、WYSIWYG Editor UI、WYSIWYG Editor実装コード、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。CSSのビルド、minify、bundle、Sass/SCSS等のCSSプリプロセッサは現状検討しない。
 

@@ -29,3 +29,4 @@
 - `Tokens/` と `UI/` 配下のCSSファイルを正本として直接管理し、Sass/SCSS/Less/Stylus/PostCSS等のCSSプリプロセッサを追加しないこと。
 - CSSのビルド、minify、bundleは現状検討しないこと。`Dist/`、`dist/`、`Build/`、`build/`、`*.min.css`、`*.bundle.css`、CSSまたはnpm/webpack系フロントエンドビルド設定ファイルを追加しないこと。
 - WYSIWYG Editor実装コードは `WYSIWYG/` 配下で管理し、npm、webpack、Node.js前提の設定は追加しないこと。
+- WYSIWYG EditorのMarkdown / MDXパーサーは、仕様で個別承認された例外採用ライブラリを許可する。ただし、`package.json`、`package-lock.json`、`node_modules`、webpack設定、Node.js前提の設定、生成JavaScript、bundle、minify成果物は追加しないこと。

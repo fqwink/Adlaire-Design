@@ -12,7 +12,7 @@
 - `Brand/`(ブランド資産)
 - `WYSIWYG/`(WYSIWYG Editor実装コード)
 - `WYSIWYG/README.md`(WYSIWYG Editor実装コード管理方針)
-- `WYSIWYG/Source/editor.ts`(WYSIWYG Editor依存なしTypeScript実装)
+- `WYSIWYG/Source/editor.ts`(WYSIWYG Editor TypeScript実装。Markdown / MDXパーサーは例外採用ライブラリを許可)
 - `Tokens/colors.css`(ブランドカラーCSS変数)
 - `Tokens/surface.css`(公開面参照色CSS変数)
 - `Tokens/status.css`(状態色・中立色CSS変数)
