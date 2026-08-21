@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.30
+**Version:** rev.31
 
 ---
 
@@ -243,6 +243,22 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 | `UI/layout.css` | 基本レイアウト | 実装済み |
 | `UI/components.css` | 公開面コンポーネント | 実装済み |
 
+### 11.3.3 第3段階
+
+第3段階では、AGWSの現行表示をAdlaire-Design成果物だけで再現するための不足領域を実装する。
+
+| ファイル | 役割 | 状態 |
+| --- | --- | --- |
+| `Tokens/status.css` | 状態色・中立色トークン | 実装済み |
+| `Tokens/effects.css` | 影、角丸、半透明、transition、animation、z-indexなどの効果トークン | 実装済み |
+| `UI/base.css` | reset、base、typography、body、linkなどの基礎スタイル | 実装済み |
+| `UI/grid.css` | container、row、columnなどのグリッド互換 | 実装済み |
+| `UI/site.css` | サイトヘッダー、ナビゲーション、フッター、ページトップリンク | 実装済み |
+| `UI/forms.css` | フォーム、入力、チェック、送信ボタン、フォームnotice | 実装済み |
+| `UI/content.css` | ニュース、組織情報、沿革、法的情報目次などの本文固有表現 | 実装済み |
+| `UI/utilities.css` | spacing、text、background、display、flexなどの汎用ユーティリティ | 実装済み |
+| `UI/compat-agws.css` | AGWS既存HTMLクラス・ID・属性との互換層 | 実装済み |
+
 ## 11.4 CSS読み込み順
 
 第1段階の読み込み順は以下とする。
@@ -257,6 +273,23 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 3. `UI/adlaire.css`
 4. `UI/layout.css`
 5. `UI/components.css`
+
+第3段階の読み込み順は以下とする。
+
+1. `Tokens/colors.css`
+2. `Tokens/surface.css`
+3. `Tokens/status.css`
+4. `Tokens/effects.css`
+5. `UI/adlaire.css`
+6. `UI/base.css`
+7. `UI/grid.css`
+8. `UI/layout.css`
+9. `UI/components.css`
+10. `UI/site.css`
+11. `UI/forms.css`
+12. `UI/content.css`
+13. `UI/utilities.css`
+14. `UI/compat-agws.css`
 
 ## 11.5 第1段階の仕様
 
@@ -548,6 +581,7 @@ CSS変数は以下とする。
 | --- | --- | --- |
 | 第1段階 | `Tokens/colors.css`、`UI/adlaire.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 | 第2段階 | `Tokens/surface.css`、`UI/layout.css`、`UI/components.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
+| 第3段階 | `Tokens/status.css`、`Tokens/effects.css`、`UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 
 ## 11.10 AGWS完全再現に向けた不足仕様
 
@@ -563,19 +597,19 @@ AGWS完全再現は、AGWS本体を先に変更せず、Adlaire-Design側で必�
 
 ### 11.10.2 第3段階の対象ファイル
 
-第3段階の候補ファイルは以下とする。
+第3段階の対象ファイルは以下とする。
 
 | ファイル | 役割 | 状態 |
 | --- | --- | --- |
-| `Tokens/status.css` | alert、button variants、text/background utilitiesで使う状態色・中立色トークン | 仕様候補 |
-| `Tokens/effects.css` | 影、角丸、余白、グラデーション、text-shadow、opacity、transform、transition、animation、backdrop-filter、z-indexなどの公開面補助トークン | 仕様候補 |
-| `UI/base.css` | reset、base、typography、body、linkなどの基礎スタイル | 仕様候補 |
-| `UI/grid.css` | container、row、columnなどのグリッド互換 | 仕様候補 |
-| `UI/site.css` | サイトヘッダー、ナビゲーション、フッター、ページトップリンク | 仕様候補 |
-| `UI/forms.css` | フォーム、入力、チェック、送信ボタン、フォームnotice | 仕様候補 |
-| `UI/content.css` | ニュース、組織情報、沿革、法的情報目次などの本文固有表現 | 仕様候補 |
-| `UI/utilities.css` | spacing、text、background、display、flexなどの汎用ユーティリティ | 仕様候補 |
-| `UI/compat-agws.css` | AGWS既存HTMLクラスとの互換層 | 仕様候補 |
+| `Tokens/status.css` | alert、button variants、text/background utilitiesで使う状態色・中立色トークン | 実装済み |
+| `Tokens/effects.css` | 影、角丸、余白、グラデーション、text-shadow、opacity、transform、transition、animation、backdrop-filter、z-indexなどの公開面補助トークン | 実装済み |
+| `UI/base.css` | reset、base、typography、body、linkなどの基礎スタイル | 実装済み |
+| `UI/grid.css` | container、row、columnなどのグリッド互換 | 実装済み |
+| `UI/site.css` | サイトヘッダー、ナビゲーション、フッター、ページトップリンク | 実装済み |
+| `UI/forms.css` | フォーム、入力、チェック、送信ボタン、フォームnotice | 実装済み |
+| `UI/content.css` | ニュース、組織情報、沿革、法的情報目次などの本文固有表現 | 実装済み |
+| `UI/utilities.css` | spacing、text、background、display、flexなどの汎用ユーティリティ | 実装済み |
+| `UI/compat-agws.css` | AGWS既存HTMLクラスとの互換層 | 実装済み |
 
 `UI/compat-agws.css` は、AGWS本体のHTML変更量を最小化するための一時的な互換層として扱う。Adlaire-Designの標準クラス正本は `.adlaire-` 接頭辞のクラスとし、互換層はAGWS適用時に必要な範囲だけ使用する。
 
@@ -705,7 +739,7 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 
 ### 11.10.8 第3段階の読み込み順
 
-第3段階の読み込み順は以下を候補とする。
+第3段階の読み込み順は以下とする。
 
 1. `Tokens/colors.css`
 2. `Tokens/surface.css`
@@ -783,7 +817,7 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 
 ### 11.10.13 第3段階ファイルの冒頭コメント
 
-第3段階候補ファイルを実装する場合、各ファイルの冒頭コメントは以下に固定する。
+第3段階ファイルの冒頭コメントは以下に固定する。
 
 | ファイル | 冒頭コメント |
 | --- | --- |
@@ -797,9 +831,9 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 | `UI/utilities.css` | `/* Adlaire-Design utility classes */` |
 | `UI/compat-agws.css` | `/* Adlaire-Design AGWS compatibility */` |
 
-### 11.10.14 第3段階トークン命名候補
+### 11.10.14 第3段階トークン命名仕様
 
-`Tokens/status.css` は、以下のCSS変数を候補とする。
+`Tokens/status.css` は、以下のCSS変数を定義する。
 
 | CSS変数 | 値 | 用途 |
 | --- | --- | --- |
@@ -829,7 +863,7 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 | `--adlaire-alert-danger-bg` | `#f8d7da` | danger alert background |
 | `--adlaire-alert-danger-border` | `#f5c6cb` | danger alert border |
 
-`Tokens/effects.css` は、以下のCSS変数を候補とする。
+`Tokens/effects.css` は、以下のCSS変数を定義する。
 
 | CSS変数 | 値 | 用途 |
 | --- | --- | --- |
@@ -842,6 +876,8 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 | `--adlaire-shadow-button` | `0 2px 8px rgba(0, 0, 0, 0.15)` | framework button hover |
 | `--adlaire-shadow-nav` | `0 4px 8px rgba(0, 0, 0, 0.2)` | navigation hover |
 | `--adlaire-shadow-header` | `0 2px 10px rgba(0, 0, 0, 0.1)` | site header |
+| `--adlaire-shadow-title` | `2px 2px 4px rgba(0, 0, 0, 0.3)` | site title text shadow |
+| `--adlaire-shadow-focus-color` | `rgba(0, 102, 204, 0.1)` | form focus and active tab shadow color |
 | `--adlaire-shadow-blue-soft` | `0 2px 8px rgba(0, 102, 204, 0.15)` | news hover |
 | `--adlaire-shadow-blue` | `0 2px 8px rgba(0, 102, 204, 0.3)` | primary button |
 | `--adlaire-shadow-blue-strong` | `0 4px 12px rgba(0, 102, 204, 0.4)` | page top |

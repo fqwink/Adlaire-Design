@@ -8,6 +8,17 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.31
+
+- `Docs/Master_Spec` の版数を `rev.31` へ更新した。
+- 第3段階CSSとして `Tokens/status.css`、`Tokens/effects.css`、`UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css` を実装した。
+- `Tokens/effects.css` にタイトル影とfocus用半透明色のトークンを追加した。
+- `UI/components.css` の影表現を `Tokens/effects.css` のCSS変数参照へ変更した。
+- `Docs/Master_Spec` の第3段階対象ファイル、読み込み順、承認単位、トークン命名を実装済みの表現へ更新した。
+- `Docs/Document_Index` と `README.md` を第3段階CSSの実装済み構成に合わせて更新した。
+- `Tools/check/check-adlaire-design.sh` を第3段階CSSの必須ファイル、冒頭コメント、必須変数、必須クラス、禁止記述の検査に対応させた。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.18` へ更新し、第3段階CSSがAdlaire-Design側に実装済みであることを追記した。
+
 ## rev.30
 
 - `Docs/Master_Spec` の版数を `rev.30` へ更新した。
