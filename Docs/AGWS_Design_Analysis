@@ -258,3 +258,7 @@ AGWSは、Adlaire-Designの公開面CSS成果物を採用する対象リポジ�
 AGWS側の初回作業は、方針文書の更新と検証準備を優先する。CSS読み込みの実変更、`architect.css` と `style.css` の削除、HTML全面置換、他リポジトリへの統合は、初回方針PRの対象外とする。
 
 CSS採用に進む場合は、Adlaire-Designの読み込み順、`UI/compat-agws.css` の末尾適用、AGWS専用検査、Adlaire-Design専用検査、主要4ページの表示確認を満たしたうえで、別PRとして扱う。
+
+2026-08-21時点で、AGWS側のAdlaire-Design CSS適用候補は作成済みである。Docker配信確認では、主要4ページとAdlaire-Design CSSがHTTP 200で配信されることを確認しているため、AGWSは正式移行計画へ進める。
+
+正式移行後も、`architect.css` と `style.css` はロールバック用の既存CSSとして当面維持する。削除、統合、リネーム、minify、読み込み数削減は、正式移行とは別の後続PRで扱う。

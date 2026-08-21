@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.39
+**Version:** rev.40
 
 ---
 
@@ -966,15 +966,17 @@ AGWS初回採用で行わないものは以下である。
 
 AGWS側でAdlaire-Design CSSを採用するPRは、方針文書PRとは分ける。CSS採用PRでは、適用対象ファイル、CSS読み込み順、互換層の使用有無、ロールバック方法、検証結果を明記する。
 
+2026-08-21時点で、AGWS側のAdlaire-Design CSS適用候補PRは作成済みである。このPRは、正式移行へ進める判断後はAdlaire-Design CSS正式移行PRとして扱う。以後の扱いは、11.10.17に従う。
+
 ### 11.10.17 AGWS正式移行計画
 
-AGWSのDocker配信確認で主要ページとAdlaire-Design CSSの配信に問題がない場合、AGWSはAdlaire-Design CSS採用候補から正式移行へ進める。
+2026-08-21時点で、AGWSのDocker配信確認により、主要ページとAdlaire-Design CSSの配信に問題がないことを確認している。AGWSはAdlaire-Design CSS採用候補から正式移行へ進める。
 
 正式移行の実行順は以下とする。
 
 1. Adlaire-Design側のAGWS採用方針PRを先に確定する。
 2. AGWS側の採用方針PRを確定する。
-3. AGWS側のAdlaire-Design CSS適用候補PRを確定する。
+3. AGWS側のAdlaire-Design CSS正式移行PRを確定する。
 4. AGWSの既定CSS読み込みをAdlaire-Design CSS成果物へ移行済みとして扱う。
 5. 移行後に `Tools/check/check-agws.sh`、`Tools/check/check-adlaire-design.sh`、Docker配信HTTP確認を再実行する。
 6. `index.html`、`about.html`、`contact.html`、`legal.html` の主要表示を再確認する。
