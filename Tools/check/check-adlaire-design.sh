@@ -222,6 +222,7 @@ for token in \
   '--adlaire-shadow-focus-color: rgba(0, 102, 204, 0.1);' \
   '--adlaire-shadow-blue: 0 2px 8px rgba(0, 102, 204, 0.3);' \
   '--adlaire-transition-base: 0.3s ease;' \
+  '--adlaire-transition-button: 0.2s ease-in-out;' \
   '--adlaire-animation-fade-in: fadeIn 0.3s ease-in;' \
   '--adlaire-z-page-top: 1000;'; do
   if ! grep -F -- "$token" "$ADLAIRE_DESIGN_ROOT/Tokens/effects.css" >/dev/null 2>&1; then
@@ -412,6 +413,12 @@ fi
 if grep -R -n -E 'rgba?\(' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-rgba-matches 2>/dev/null; then
   echo "UI CSS files must not contain direct RGB/RGBA colors:" >&2
   cat /tmp/adlaire-design-ui-rgba-matches >&2
+  exit 1
+fi
+
+if grep -R -n 'letter-spacing: -' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-negative-letter-spacing-matches 2>/dev/null; then
+  echo "UI CSS files must not contain negative letter-spacing:" >&2
+  cat /tmp/adlaire-design-ui-negative-letter-spacing-matches >&2
   exit 1
 fi
 

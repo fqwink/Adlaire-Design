@@ -8,6 +8,15 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.32
+
+- `Docs/Master_Spec` の版数を `rev.32` へ更新した。
+- `UI/components.css` が `Tokens/effects.css` の影トークンを参照するため、第2段階読み込み順に `Tokens/effects.css` を追加した。
+- 第2段階の実装対象表にも `Tokens/effects.css` を追加し、読み込み順との整合性を取った。
+- `Tokens/effects.css` に `--adlaire-transition-button` を追加し、`UI/forms.css` のボタンtransitionをトークン参照へ変更した。
+- `UI/site.css` と `UI/content.css` に残っていた負のletter-spacingを `0` へ変更した。
+- `Tools/check/check-adlaire-design.sh` に負のletter-spacing禁止検査を追加した。
+
 ## rev.31
 
 - `Docs/Master_Spec` の版数を `rev.31` へ更新した。

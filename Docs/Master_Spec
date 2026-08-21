@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.31
+**Version:** rev.32
 
 ---
 
@@ -240,6 +240,7 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 | ファイル | 役割 | 状態 |
 | --- | --- | --- |
 | `Tokens/surface.css` | AGWS参照色、画面面色、テキスト色、notice色のCSS変数定義 | 実装済み |
+| `Tokens/effects.css` | `UI/components.css` が参照する影・角丸などの効果トークン | 実装済み |
 | `UI/layout.css` | 基本レイアウト | 実装済み |
 | `UI/components.css` | 公開面コンポーネント | 実装済み |
 
@@ -270,9 +271,10 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 
 1. `Tokens/colors.css`
 2. `Tokens/surface.css`
-3. `UI/adlaire.css`
-4. `UI/layout.css`
-5. `UI/components.css`
+3. `Tokens/effects.css`
+4. `UI/adlaire.css`
+5. `UI/layout.css`
+6. `UI/components.css`
 
 第3段階の読み込み順は以下とする。
 
@@ -890,6 +892,7 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 | `--adlaire-overlay-white-80` | `rgba(255, 255, 255, 0.8)` | translucent selected surfaces |
 | `--adlaire-overlay-white-90` | `rgba(255, 255, 255, 0.9)` | translucent active surfaces |
 | `--adlaire-transition-fast` | `0.15s ease-in-out` | form focus |
+| `--adlaire-transition-button` | `0.2s ease-in-out` | button hover |
 | `--adlaire-transition-base` | `0.3s ease` | site hover |
 | `--adlaire-animation-fade-in` | `fadeIn 0.3s ease-in` | tab pane display |
 | `--adlaire-z-page-top` | `1000` | page top fixed link |
