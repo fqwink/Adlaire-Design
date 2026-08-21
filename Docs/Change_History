@@ -8,6 +8,29 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.59
+
+- `Docs/Master_Spec` の版数を `rev.59` へ更新した。
+- `Docs/Generic_Component_Catalog` の部品名、候補名、対象外項目を日本語中心の表記へ変更した。
+- 実装クラス名はCSS実装との対応を保つため `.adlaire-` クラス名のまま維持した。
+- `Tools/check/check-adlaire-design.sh` の汎用部品カタログ検査語を、日本語化後の主要項目に合わせて更新した。
+
+## rev.58
+
+- `Docs/Master_Spec` の版数を `rev.58` へ更新した。
+- 履歴上の既存ドキュメント `Docs/Generic_Component_Catalog` を現行 `Docs/` 管理対象へ復帰した。
+- `Docs/Generic_Component_Catalog` を、汎用部品の分類、優先度、実装先、実装状態、非対象を一覧管理する補助正本として位置づけた。
+- `Docs/Master_Spec` と `Docs/Document_Index` に、汎用部品カタログの参照関係を追加した。
+- `Tools/check/check-adlaire-design.sh` に、`Docs/Generic_Component_Catalog` の存在、索引、主要項目の検査を追加した。
+
+## rev.57
+
+- `Docs/Master_Spec` の版数を `rev.57` へ更新した。
+- 汎用部品を改訂し、`UI/components.css` にtoolbar、toolbar section、stack、inline、chip、status pill、status dot、surface grid、surface itemを追加した。
+- 追加した汎用部品は既存トークンを参照する直接CSSとして実装し、新規トークン、CSSビルド、CSS minify、CSS bundleは追加しない方針を維持した。
+- `Docs/Master_Spec` の汎用部品仕様と実装済みクラス一覧を改訂後の部品群に合わせて更新した。
+- `Tools/check/check-adlaire-design.sh` に、改訂後の汎用部品クラスの必須検査を追加した。
+
 ## rev.56
 
 - `Docs/Master_Spec` の版数を `rev.56` へ更新した。

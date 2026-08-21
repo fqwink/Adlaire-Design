@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.56
+**Version:** rev.59
 
 ---
 
@@ -21,6 +21,8 @@ Adlaire Groupが管理するデザイン資産において、色の役割を統�
 AGWSの詳細解析は `Docs/AGWS_Design_Analysis` を参照する。
 
 WYSIWYG EditorのUIと実装コードはAdlaire-Design採用確定とし、編入仕様は `Docs/WYSIWYG_Editor_Specification` を参照する。Adlaire-Designでは、WYSIWYG Editorの表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSS、TypeScript実装コードを管理対象に含める。
+
+汎用部品の分類、優先度、実装先、実装状態は `Docs/Generic_Component_Catalog` で一覧管理する。仕様正本は本書とし、汎用部品カタログは本書の補助正本として扱う。
 
 本方針は、実装変更より先に本仕様書を正本として定義する。実際のCSS、テーマ、公開面への反映は、本仕様書の承認後に個別の実装計画として扱う。
 
@@ -541,10 +543,16 @@ CSS変数は以下とする。
 | `.adlaire-panel-footer` | 汎用パネル補助領域 |
 | `.adlaire-well` | 補助情報枠 |
 | `.adlaire-button-group` | ボタン群 |
+| `.adlaire-toolbar` | 汎用ツールバー |
+| `.adlaire-toolbar-section` | ツールバー内の操作グループ |
 | `.adlaire-action-row` | 操作要素の横並び領域 |
 | `.adlaire-action-row-start` | 左寄せ操作領域 |
 | `.adlaire-action-row-between` | 両端揃え操作領域 |
 | `.adlaire-divider` | 汎用区切り線 |
+| `.adlaire-stack` | 縦方向スタック |
+| `.adlaire-stack-sm` | 小さい間隔の縦方向スタック |
+| `.adlaire-stack-lg` | 大きい間隔の縦方向スタック |
+| `.adlaire-inline` | 折り返し可能なインライン配置 |
 | `.adlaire-empty-state` | 空状態表示 |
 | `.adlaire-empty-state-title` | 空状態見出し |
 | `.adlaire-empty-state-text` | 空状態本文 |
@@ -552,6 +560,12 @@ CSS変数は以下とする。
 | `.adlaire-feature-item` | 特徴リスト項目 |
 | `.adlaire-check-list` | チェックリスト |
 | `.adlaire-check-item` | チェックリスト項目 |
+| `.adlaire-chip-list` | チップ一覧 |
+| `.adlaire-chip` | 汎用チップ |
+| `.adlaire-chip-primary` | 主要チップ |
+| `.adlaire-chip-muted` | 補助チップ |
+| `.adlaire-status-pill` | ステータスピル |
+| `.adlaire-status-dot` | ステータス点 |
 | `.adlaire-definition-list` | 定義リスト |
 | `.adlaire-definition-row` | 定義リスト行 |
 | `.adlaire-definition-term` | 定義語 |
@@ -564,6 +578,8 @@ CSS変数は以下とする。
 | `.adlaire-link-list-item` | 汎用リンクリスト項目 |
 | `.adlaire-link-list-link` | 汎用リンクリストリンク |
 | `.adlaire-related-links` | 関連リンク枠 |
+| `.adlaire-surface-grid` | 面付き項目のレスポンシブグリッド |
+| `.adlaire-surface-item` | 面付き項目 |
 | `.adlaire-media` | メディアオブジェクト外枠 |
 | `.adlaire-media-figure` | メディアオブジェクト図版領域 |
 | `.adlaire-media-body` | メディアオブジェクト本文領域 |
@@ -793,10 +809,16 @@ AGWS完全再現のために第3段階で実装した主な表示領域は以下
 | `.adlaire-panel-footer` | 汎用パネル補助領域 |
 | `.adlaire-well` | 補助情報枠 |
 | `.adlaire-button-group` | ボタン群 |
+| `.adlaire-toolbar` | 汎用ツールバー |
+| `.adlaire-toolbar-section` | ツールバー内の操作グループ |
 | `.adlaire-action-row` | 操作要素の横並び領域 |
 | `.adlaire-action-row-start` | 左寄せ操作領域 |
 | `.adlaire-action-row-between` | 両端揃え操作領域 |
 | `.adlaire-divider` | 汎用区切り線 |
+| `.adlaire-stack` | 縦方向スタック |
+| `.adlaire-stack-sm` | 小さい間隔の縦方向スタック |
+| `.adlaire-stack-lg` | 大きい間隔の縦方向スタック |
+| `.adlaire-inline` | 折り返し可能なインライン配置 |
 | `.adlaire-empty-state` | 空状態表示 |
 | `.adlaire-empty-state-title` | 空状態見出し |
 | `.adlaire-empty-state-text` | 空状態本文 |
@@ -804,6 +826,12 @@ AGWS完全再現のために第3段階で実装した主な表示領域は以下
 | `.adlaire-feature-item` | 特徴リスト項目 |
 | `.adlaire-check-list` | チェックリスト |
 | `.adlaire-check-item` | チェックリスト項目 |
+| `.adlaire-chip-list` | チップ一覧 |
+| `.adlaire-chip` | 汎用チップ |
+| `.adlaire-chip-primary` | 主要チップ |
+| `.adlaire-chip-muted` | 補助チップ |
+| `.adlaire-status-pill` | ステータスピル |
+| `.adlaire-status-dot` | ステータス点 |
 | `.adlaire-definition-list` | 定義リスト |
 | `.adlaire-definition-row` | 定義リスト行 |
 | `.adlaire-definition-term` | 定義語 |
@@ -816,6 +844,8 @@ AGWS完全再現のために第3段階で実装した主な表示領域は以下
 | `.adlaire-link-list-item` | 汎用リンクリスト項目 |
 | `.adlaire-link-list-link` | 汎用リンクリストリンク |
 | `.adlaire-related-links` | 関連リンク枠 |
+| `.adlaire-surface-grid` | 面付き項目のレスポンシブグリッド |
+| `.adlaire-surface-item` | 面付き項目 |
 | `.adlaire-media` | メディアオブジェクト外枠 |
 | `.adlaire-media-figure` | メディアオブジェクト図版領域 |
 | `.adlaire-media-body` | メディアオブジェクト本文領域 |
@@ -1237,20 +1267,26 @@ WYSIWYG Editor実装コードの拡充では、ブロックデータ構造、編
 
 ### 11.11.2.2 汎用部品の実装仕様
 
-汎用部品の拡充として、操作行、区切り線、空状態、リンクリスト、メディアオブジェクトを `UI/components.css` に実装する。
+汎用部品の拡充として、操作行、ツールバー、配置補助、区切り線、空状態、チップ、ステータス、リンクリスト、サーフェスグリッド、メディアオブジェクトを `UI/components.css` に実装する。
+
+汎用部品の一覧管理は `Docs/Generic_Component_Catalog` で行い、実装済み、候補、保留、対象外を同じ表で管理する。
 
 追加対象は以下とする。
 
 | 部品 | クラス | 役割 |
 | --- | --- | --- |
 | 表示枠 | `.adlaire-panel`、`.adlaire-panel-header`、`.adlaire-panel-body`、`.adlaire-panel-footer`、`.adlaire-well` | カードより軽い汎用枠、補助情報枠を表示する |
-| 操作 | `.adlaire-button-group`、`.adlaire-action-row`、`.adlaire-action-row-start`、`.adlaire-action-row-between` | ボタン、リンク、補助操作などを横並びで配置する |
+| 操作 | `.adlaire-button-group`、`.adlaire-toolbar`、`.adlaire-toolbar-section`、`.adlaire-action-row`、`.adlaire-action-row-start`、`.adlaire-action-row-between` | ボタン、リンク、補助操作などを横並びで配置する |
+| 配置補助 | `.adlaire-stack`、`.adlaire-stack-sm`、`.adlaire-stack-lg`、`.adlaire-inline` | 縦方向またはインライン方向の反復配置を安定させる |
 | 区切り線 | `.adlaire-divider` | セクション間やカード内の視覚的な区切りを表示する |
 | 空状態 | `.adlaire-empty-state`、`.adlaire-empty-state-title`、`.adlaire-empty-state-text` | 一覧や検索結果が空の状態を静的に表示する |
+| チップ | `.adlaire-chip-list`、`.adlaire-chip`、`.adlaire-chip-primary`、`.adlaire-chip-muted` | タグ、短い分類、選択候補を表示する |
+| ステータス | `.adlaire-status-pill`、`.adlaire-status-dot` | 短い状態表示と状態点を表示する |
 | リスト | `.adlaire-feature-list`、`.adlaire-feature-item`、`.adlaire-check-list`、`.adlaire-check-item`、`.adlaire-definition-list`、`.adlaire-definition-row`、`.adlaire-definition-term`、`.adlaire-definition-description` | 特徴、チェック項目、定義情報を表示する |
 | サマリー | `.adlaire-key-value`、`.adlaire-key-value-row`、`.adlaire-key-value-key`、`.adlaire-key-value-value` | 主要情報をキー/値形式で表示する |
 | リンクリスト | `.adlaire-link-list`、`.adlaire-link-list-item`、`.adlaire-link-list-link` | 関連リンク、導線、一覧リンクを縦方向に表示する |
 | 関連リンク | `.adlaire-related-links` | 関連リンク群を独立した枠として表示する |
+| サーフェスグリッド | `.adlaire-surface-grid`、`.adlaire-surface-item` | 面付きの情報項目をレスポンシブなグリッドで表示する |
 | メディアオブジェクト | `.adlaire-media`、`.adlaire-media-figure`、`.adlaire-media-body`、`.adlaire-media-title` | 図版、アイコン、画像などと本文を横並びで表示する |
 | CTA | `.adlaire-cta`、`.adlaire-cta-title`、`.adlaire-cta-text`、`.adlaire-cta-actions` | 公開面の主要導線を強調表示する |
 | 補助テキスト | `.adlaire-caption`、`.adlaire-helper-text` | 図表キャプション、入力外の補助説明、注釈を表示する |
