@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.34
+**Version:** rev.35
 
 ---
 
@@ -246,7 +246,7 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 
 ### 11.3.3 第3段階
 
-第3段階では、AGWSの現行表示をAdlaire-Design成果物だけで再現するための不足領域を実装する。
+第3段階では、AGWSの現行表示をAdlaire-Design成果物だけで再現するための対象領域を実装済みである。
 
 | ファイル | 役割 | 状態 |
 | --- | --- | --- |
@@ -722,7 +722,7 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 - AGWS側では、見た目の変更を目的にせず、Adlaire-Design成果物で現行表示を再現することを目的にすること。
 - AGWS側の初回適用は、CSS読み込みと互換層利用を中心にし、HTML構造変更を最小限にすること。
 
-### 11.10.7 不足確認結果
+### 11.10.7 再現範囲確認結果
 
 2026-08-21時点で、AGWS現行HTMLに出現するclass属性値は本節のAGWS完全再現仕様に含めている。
 
@@ -737,7 +737,7 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 - CSSプロパティ単位では、`font-smoothing`、`scroll-behavior`、`box-sizing`、`resize`、`outline`、`cursor`、`user-select`、`position`、`z-index` などの基礎挙動。
 - `rgba(...)` で表現される影、半透明背景、白透明の重ね表現。
 
-したがって、第3段階では `UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` だけでなく、`Tokens/status.css`、`UI/base.css`、`UI/grid.css`、`UI/utilities.css` を含めて仕様確定する必要がある。
+したがって、第3段階では `UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` だけでなく、`Tokens/status.css`、`UI/base.css`、`UI/grid.css`、`UI/utilities.css` を含めて仕様確定済みである。
 
 ### 11.10.8 第3段階の読み込み順
 
@@ -801,7 +801,7 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 - 青影: `rgba(0, 102, 204, 0.1)`、`rgba(0, 102, 204, 0.15)`、`rgba(0, 102, 204, 0.3)`、`rgba(0, 102, 204, 0.4)`、`rgba(0, 102, 204, 0.5)`、`rgba(0, 102, 204, 0.6)`
 - 白透明: `rgba(255, 255, 255, 0.2)`、`rgba(255, 255, 255, 0.3)`、`rgba(255, 255, 255, 0.4)`、`rgba(255, 255, 255, 0.5)`、`rgba(255, 255, 255, 0.8)`、`rgba(255, 255, 255, 0.9)`
 
-### 11.10.12 不足ゼロ確認範囲
+### 11.10.12 未記載ゼロ確認範囲
 
 2026-08-21時点で、AGWS現行ファイルに対して以下の照合軸を確認し、`Docs/Master_Spec` のAGWS完全再現仕様に未記載の項目がない状態にしている。
 
@@ -932,4 +932,4 @@ UI側CSSのtransitionは対象プロパティを明示する。`transition: all`
 
 承認後、必要に応じて `Adlaire-Design/Docs/Master_Spec`(本書) と `Adlaire-Design/Docs/Change_History` を更新する。
 
-仕様変更時は、本書の `Version` を上げ、`Docs/Change_History` に同じrevの履歴を追加する。`Docs/Document_Index` は文書構成に変更がある場合のみ更新する。
+仕様変更時は、本書の `Version` を上げ、`Docs/Change_History` に同じrevの履歴を追加する。`Docs/Document_Index` は主要な管理対象または索引上の説明に変更がある場合のみ更新する。

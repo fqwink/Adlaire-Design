@@ -8,6 +8,17 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.35
+
+- `Docs/Master_Spec` の版数を `rev.35` へ更新した。
+- `Docs/Document_Index` をドキュメントのみではなく、主要なリポジトリ管理対象を確認できる索引へ拡張した。
+- `README.md` のドキュメント説明に `Docs/Document_Index` の役割を追記した。
+- `Tools/check/check-adlaire-design.sh` に、`Docs/Document_Index` が主要管理対象を参照していることの検査を追加した。
+- `Docs/Master_Spec` に残っていた第3段階実装前の表現を、実装済み状態に合わせて更新した。
+- READMEと変更ルールの文言を、`Docs/Document_Index` のリポジトリ索引としての役割に合わせて更新した。
+- `AGENTS.md` の `Docs/Document_Index` 説明をリポジトリ索引へ更新した。
+- `.gitignore` をリポジトリ索引と索引検査の対象に追加した。
+
 ## rev.34
 
 - `Docs/Master_Spec` の版数を `rev.34` へ更新した。

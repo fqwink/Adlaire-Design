@@ -6,6 +6,7 @@ ADLAIRE_DESIGN_ROOT=$(CDPATH= cd -- "$TOOL_DIR/../.." && pwd)
 
 for path in \
   AGENTS.md \
+  .gitignore \
   README.md \
   LICENSE \
   Docs/Document_Index \
@@ -62,20 +63,35 @@ if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/LICENSE")" != 'Adlaire-Design Source V
   exit 1
 fi
 
-if ! grep -F 'Docs/Master_Spec' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
-  echo "Adlaire-Design Document_Index must reference Docs/Master_Spec." >&2
-  exit 1
-fi
-
-if ! grep -F 'Docs/AGWS_Design_Analysis' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
-  echo "Adlaire-Design Document_Index must reference Docs/AGWS_Design_Analysis." >&2
-  exit 1
-fi
-
-if ! grep -F 'Docs/Change_History' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
-  echo "Adlaire-Design Document_Index must reference Docs/Change_History." >&2
-  exit 1
-fi
+for indexed_path in \
+  AGENTS.md \
+  .gitignore \
+  README.md \
+  LICENSE \
+  Docs/Master_Spec \
+  Docs/AGWS_Design_Analysis \
+  Docs/Change_History \
+  Brand/ \
+  Tokens/colors.css \
+  Tokens/surface.css \
+  Tokens/status.css \
+  Tokens/effects.css \
+  UI/adlaire.css \
+  UI/base.css \
+  UI/grid.css \
+  UI/layout.css \
+  UI/components.css \
+  UI/site.css \
+  UI/forms.css \
+  UI/content.css \
+  UI/utilities.css \
+  UI/compat-agws.css \
+  Tools/check/check-adlaire-design.sh; do
+  if ! grep -F -- "$indexed_path" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
+    echo "Adlaire-Design Document_Index must reference $indexed_path." >&2
+    exit 1
+  fi
+done
 
 OLD_REPOSITORY_NAME='Adlaire-''Eco''system-Design'
 

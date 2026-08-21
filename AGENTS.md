@@ -5,12 +5,12 @@
 - すべての作業開始時に、必ずこの `AGENTS.md` を読むこと。
 - このリポジトリは `Adlaire-Design` の開発正本・仕様正本として扱うこと。
 - 仕様・設計の正本は `Docs/Master_Spec` とする。
-- ドキュメント索引は `Docs/Document_Index`、変更履歴は `Docs/Change_History` とする。
+- リポジトリ索引は `Docs/Document_Index`、変更履歴は `Docs/Change_History` とする。
 - Adlaire-Designは、CSSフレームワーク・デザイントークン・ブランド資産を扱う独立リポジトリとして管理すること。
 
 ## リポジトリ構成
 
-- `Docs/`: 仕様・設計、ドキュメント索引、変更履歴
+- `Docs/`: 仕様・設計、リポジトリ索引、変更履歴
 - `UI/`: CSSフレームワーク本体
 - `Tokens/`: デザイントークン
 - `Brand/`: ブランド資産
