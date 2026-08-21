@@ -15,7 +15,7 @@ Adlaire-Designは、CSSフレームワーク・デザイントークン・ブラ
 
 ## ドキュメント
 
-仕様・設計の正本は `Docs/Master_Spec` とする。リポジトリ内の主要ファイルと管理対象は `Docs/Document_Index`、変更履歴は `Docs/Change_History` を参照する。
+仕様・設計の正本は `Docs/Master_Spec` とする。汎用部品候補は `Docs/Generic_Component_Catalog`、リポジトリ内の主要ファイルと管理対象は `Docs/Document_Index`、変更履歴は `Docs/Change_History` を参照する。
 
 ## 方針
 

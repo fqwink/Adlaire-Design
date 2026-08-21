@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.52
+**Version:** rev.53
 
 ---
 
@@ -19,6 +19,8 @@ Adlaire Groupが管理するデザイン資産において、色の役割を統�
 `adlaire.com` は、AGWSリポジトリに基づいて公開される実運用上の確認先として扱う。
 
 AGWSの詳細解析は `Docs/AGWS_Design_Analysis` を参照する。
+
+汎用部品候補、優先度、実装先、状態、非対象の一覧管理は `Docs/Generic_Component_Catalog` を参照する。
 
 本方針は、実装変更より先に本仕様書を正本として定義する。実際のCSS、テーマ、公開面への反映は、本仕様書の承認後に個別の実装計画として扱う。
 
@@ -1130,6 +1132,8 @@ Adlaire-Designの今後の拡充は、ビルド、minify、bundleではなく、
 
 ドキュメント整備では、追加CSS機能の目的、適用対象、非対象、承認単位、検査方法、利用側の読み込み順を `Docs/Master_Spec` に記録する。必要に応じて `Docs/AGWS_Design_Analysis`、`Docs/Document_Index`、`README.md` を更新する。
 
+汎用部品候補の一覧管理、優先度、実装先、状態、対象外理由は `Docs/Generic_Component_Catalog` に記録する。`Docs/Generic_Component_Catalog` は補助正本とし、最終的な仕様変更は `Docs/Master_Spec` に反映する。
+
 ブランド資産の整理では、ロゴ、画像、アイコン、OGPなどの必要性が明確になった場合に、`Brand/` 配下で管理する対象、形式、用途、検査方法を先に仕様化する。ブランド資産の追加は、CSS機能および検査の拡充とは別承認単位で扱う。
 
 上記の拡充においても、Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、CSS bundle生成、minify版生成、`Dist/` 作成は現状検討しない。
@@ -1273,6 +1277,7 @@ Adlaire-Designの今後の拡充は、ビルド、minify、bundleではなく、
 | `Docs/Change_History` | `Docs/Master_Spec` または管理対象を変更する場合 |
 | `Docs/Document_Index` | 主要ファイル、ディレクトリ、説明が増減する場合 |
 | `Docs/AGWS_Design_Analysis` | AGWS参照基準、再現範囲、正式移行判断に影響する場合 |
+| `Docs/Generic_Component_Catalog` | 汎用部品候補、優先度、実装先、状態、非対象を管理する場合 |
 | `README.md` | 利用者が最初に読む方針、構成、コマンド、非対象が変わる場合 |
 | `AGENTS.md` | 作業開始時ルール、リポジトリ運用ルールが変わる場合 |
 

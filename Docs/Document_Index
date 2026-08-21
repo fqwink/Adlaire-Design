@@ -6,6 +6,7 @@
 - `LICENSE`(ライセンス本文)
 - `Docs/Master_Spec`(仕様・設計の正本)
 - `Docs/AGWS_Design_Analysis`(AGWSリポジトリ公開面デザインの解析。`adlaire.com` は公開確認先)
+- `Docs/Generic_Component_Catalog`(汎用部品候補、優先度、実装先、状態、非対象の管理)
 - `Docs/Change_History`(Adlaire-Design専用の変更履歴)
 - `Brand/`(ブランド資産)
 - `Tokens/colors.css`(ブランドカラーCSS変数)
