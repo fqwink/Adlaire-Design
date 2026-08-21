@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.62
+**Version:** rev.63
 
 ---
 
@@ -736,7 +736,7 @@ AGWS完全再現のために第3段階で実装した主な表示領域は以下
 | 汎用ユーティリティ | `.mt-0`、`.mt-1`、`.mt-2`、`.mt-3`、`.mt-4`、`.mt-5`、`.mb-0`、`.mb-1`、`.mb-2`、`.mb-3`、`.mb-4`、`.mb-5`、`.pt-0`、`.pt-1`、`.pt-2`、`.pt-3`、`.pt-4`、`.pt-5`、`.pb-0`、`.pb-1`、`.pb-2`、`.pb-3`、`.pb-4`、`.pb-5`、`.text-left`、`.text-center`、`.text-right`、`.text-primary`、`.text-secondary`、`.text-success`、`.text-danger`、`.text-warning`、`.text-info`、`.text-muted`、`.bg-primary`、`.bg-secondary`、`.bg-light`、`.bg-dark`、`.d-none`、`.d-block`、`.d-inline`、`.d-inline-block`、`.d-flex`、`.flex-row`、`.flex-column`、`.justify-content-start`、`.justify-content-end`、`.justify-content-center`、`.justify-content-between`、`.align-items-start`、`.align-items-end`、`.align-items-center` | `UI/utilities.css` |
 | 疑似要素・状態 | `*::before`、`*::after`、`a:hover`、`.form-label.required::after`、`.adlaire-form-label.required::after`、`.form-control:focus`、`.adlaire-form-control:focus`、`.btn:hover`、`.adlaire-button:hover`、`.btn-primary:hover`、`.adlaire-button-primary:hover`、`.btn-secondary:hover`、`.adlaire-button-secondary:hover`、`.btn-outline-primary:hover`、`.adlaire-button-outline:hover`、`.header-link:hover`、`.nav-button:hover`、`.card:hover`、`.info-row:first-child`、`.info-row:last-child`、`.business-list li:last-child`、`.contact-link:hover`、`.adlaire-content-link:hover`、`.timeline::before`、`.timeline-item:last-child`、`.tab-label:hover`、`.adlaire-tab-label:hover`、`.news-item:hover`、`.adlaire-news-item:hover`、`.news-content p:last-child`、`.sidebar-section:hover`、`.sidebar-link-list li:last-child`、`.sidebar-link:hover`、`.sidebar-links a:hover`、`.adlaire-sidebar-links a:hover`、`.contact-item a:hover`、`.adlaire-contact-item a:hover`、`.breadcrumb-link:hover`、`.back-to-top:hover`、`.btn-submit:hover`、`.adlaire-button-submit:hover`、`.btn-submit:disabled`、`.adlaire-button-submit:disabled`、`.privacy-link:hover`、`.text-link:hover`、`.legal-toc-link:hover`、`.adlaire-legal-toc-link:hover`、checked、active、focus、disabled状態 | 各対象UIファイル |
 | レスポンシブ調整 | `@media (max-width: 1024px)`、`@media (max-width: 768px)`、`@media (max-width: 480px)` | `UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css` |
-| HTMLアンカーID | `#top`、`#company` | `UI/site.css` または `UI/content.css` |
+| HTMLアンカーID | `#top`、`#company`、`#operation` | `UI/site.css` または `UI/content.css` |
 | 既存クラス互換 | `.container`、`.content-wrapper`、`.main-area`、`.sidebar`、`.card`、`.section-title`、`.section-content`、`.breadcrumb`、`.breadcrumb-link`、`.breadcrumb-separator`、`.breadcrumb-current`、`.back-to-top`、`.back-to-top-icon` | `UI/compat-agws.css` |
 
 ### 11.10.4 第3段階の命名方針
@@ -1270,7 +1270,7 @@ WYSIWYG Editor実装コードの拡充では、ブロックデータ構造、編
 
 ### 11.11.2.2 汎用部品の実装仕様
 
-汎用部品の拡充として、操作行、ツールバー、配置補助、区切り線、空状態、チップ、ステータス、リンクリスト、サーフェスグリッド、メディアオブジェクトを `UI/components.css` に実装する。
+汎用部品の拡充として、操作行、ツールバー、配置補助、区切り線、空状態、エラーページ、チップ、ステータス、リンクリスト、サーフェスグリッド、メディアオブジェクトを `UI/components.css` に実装する。
 
 汎用部品の一覧管理は `Docs/Generic_Component_Catalog` で行い、実装済み、候補、保留、対象外を同じ表で管理する。
 
@@ -1283,6 +1283,7 @@ WYSIWYG Editor実装コードの拡充では、ブロックデータ構造、編
 | 配置補助 | `.adlaire-stack`、`.adlaire-stack-sm`、`.adlaire-stack-lg`、`.adlaire-inline` | 縦方向またはインライン方向の反復配置を安定させる |
 | 区切り線 | `.adlaire-divider` | セクション間やカード内の視覚的な区切りを表示する |
 | 空状態 | `.adlaire-empty-state`、`.adlaire-empty-state-title`、`.adlaire-empty-state-text` | 一覧や検索結果が空の状態を静的に表示する |
+| エラーページ | `.adlaire-error-page`、`.adlaire-error-page-400`、`.adlaire-error-page-401`、`.adlaire-error-page-403`、`.adlaire-error-page-404`、`.adlaire-error-page-500`、`.adlaire-error-page-510`、`.adlaire-error-page-server`、`.adlaire-error-page-inner`、`.adlaire-error-page-code`、`.adlaire-error-page-title`、`.adlaire-error-page-text`、`.adlaire-error-page-actions` | 400、401、403、404、500、510などの静的エラー画面を表示する |
 | チップ | `.adlaire-chip-list`、`.adlaire-chip`、`.adlaire-chip-primary`、`.adlaire-chip-muted` | タグ、短い分類、選択候補を表示する |
 | ステータス | `.adlaire-status-pill`、`.adlaire-status-dot` | 短い状態表示と状態点を表示する |
 | リスト | `.adlaire-feature-list`、`.adlaire-feature-item`、`.adlaire-check-list`、`.adlaire-check-item`、`.adlaire-definition-list`、`.adlaire-definition-row`、`.adlaire-definition-term`、`.adlaire-definition-description` | 特徴、チェック項目、定義情報を表示する |
@@ -1294,9 +1295,11 @@ WYSIWYG Editor実装コードの拡充では、ブロックデータ構造、編
 | CTA | `.adlaire-cta`、`.adlaire-cta-title`、`.adlaire-cta-text`、`.adlaire-cta-actions` | 公開面の主要導線を強調表示する |
 | 補助テキスト | `.adlaire-caption`、`.adlaire-helper-text` | 図表キャプション、入力外の補助説明、注釈を表示する |
 
-汎用部品は、本文固有の意味を持たず、公開面の複数ページで再利用できるものに限定する。見た目の値は既存の `Tokens/surface.css` と `Tokens/effects.css` のCSS変数を参照し、新規トークンは追加しない。
+汎用部品は、本文固有の意味を持たず、公開面の複数ページで再利用できるものに限定する。見た目の値は既存の `Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` のCSS変数を参照し、新規トークンは追加しない。
 
-JavaScriptなしで成立する優先B/Cの汎用部品として、見出し群、案内、手順、強調、ナビ補助、カード派生、リスト派生、連絡導線、進捗表示、ステップ表示、タグリスト、静的な補助表示、視覚枠、ブランド表示、レイアウト複合を `UI/components.css` に追加実装済みである。FAQ、比較、ステータスタイムライン、比較グリッドは本文文脈の部品として `UI/content.css` に追加実装済みである。追加実装済みクラスの詳細は、`Docs/Generic_Component_Catalog` の実装済みクラス対応表で管理する。進捗表示の幅はHTML側の静的指定で表現し、JavaScriptによる進捗計算や状態更新を前提にしない。
+JavaScriptなしで成立する優先B/Cの汎用部品として、見出し群、案内、エラーページ、手順、強調、ナビ補助、カード派生、リスト派生、連絡導線、進捗表示、ステップ表示、タグリスト、静的な補助表示、視覚枠、ブランド表示、レイアウト複合を `UI/components.css` に追加実装済みである。FAQ、比較、ステータスタイムライン、比較グリッドは本文文脈の部品として `UI/content.css` に追加実装済みである。追加実装済みクラスの詳細は、`Docs/Generic_Component_Catalog` の実装済みクラス対応表で管理する。進捗表示の幅はHTML側の静的指定で表現し、JavaScriptによる進捗計算や状態更新を前提にしない。
+
+エラーページ部品は、`.adlaire-error-page`、`.adlaire-error-page-inner`、`.adlaire-error-page-code`、`.adlaire-error-page-title`、`.adlaire-error-page-text`、`.adlaire-error-page-actions` で構成し、400、401、403、404、500、510などの静的エラー画面を表示する。ステータスコード別の表示には、`.adlaire-error-page-400`、`.adlaire-error-page-401`、`.adlaire-error-page-403`、`.adlaire-error-page-404`、`.adlaire-error-page-500`、`.adlaire-error-page-510` を併用する。500系のサーバーエラーページでは `.adlaire-error-page-server` も使用できる。エラー判定、リダイレクト、ログ送信、翻訳、動的メッセージ生成は対象外とする。
 
 本実装の非対象は以下とする。
 

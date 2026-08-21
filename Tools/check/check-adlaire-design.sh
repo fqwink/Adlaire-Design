@@ -341,7 +341,8 @@ for catalog_term in \
   'ステータスラベル' \
   'ステータス点' \
   'サーフェスグリッド' \
-  'サーフェス項目'; do
+  'サーフェス項目' \
+  'エラーページ'; do
   if ! grep -F -- "$catalog_term" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" >/dev/null 2>&1; then
     echo "Docs/Generic_Component_Catalog missing required catalog term: $catalog_term" >&2
     exit 1
@@ -833,6 +834,19 @@ for class in \
   '.adlaire-maintenance-screen-inner' \
   '.adlaire-maintenance-screen-title' \
   '.adlaire-maintenance-screen-text' \
+  '.adlaire-error-page' \
+  '.adlaire-error-page-400' \
+  '.adlaire-error-page-401' \
+  '.adlaire-error-page-403' \
+  '.adlaire-error-page-404' \
+  '.adlaire-error-page-500' \
+  '.adlaire-error-page-510' \
+  '.adlaire-error-page-server' \
+  '.adlaire-error-page-inner' \
+  '.adlaire-error-page-code' \
+  '.adlaire-error-page-title' \
+  '.adlaire-error-page-text' \
+  '.adlaire-error-page-actions' \
   '.adlaire-step-list' \
   '.adlaire-step-item' \
   '.adlaire-process-list' \
