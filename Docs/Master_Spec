@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.35
+**Version:** rev.36
 
 ---
 
@@ -889,6 +889,8 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 | `--adlaire-shadow-tab-active` | `0 -2px 4px rgba(0, 102, 204, 0.1)` | active tab shadow |
 | `--adlaire-shadow-blue-soft` | `0 2px 8px rgba(0, 102, 204, 0.15)` | news hover |
 | `--adlaire-shadow-blue` | `0 2px 8px rgba(0, 102, 204, 0.3)` | primary button |
+| `--adlaire-shadow-blue-nav-hover` | `0 4px 8px rgba(0, 102, 204, 0.3)` | legal toc hover |
+| `--adlaire-shadow-blue-sticky` | `0 4px 12px rgba(0, 102, 204, 0.15)` | sticky legal toc |
 | `--adlaire-shadow-blue-strong` | `0 4px 12px rgba(0, 102, 204, 0.4)` | page top |
 | `--adlaire-shadow-blue-hover` | `0 4px 12px rgba(0, 102, 204, 0.5)` | submit hover |
 | `--adlaire-shadow-blue-intense` | `0 6px 20px rgba(0, 102, 204, 0.6)` | page top hover |
@@ -919,6 +921,7 @@ UI側CSSのtransitionは対象プロパティを明示する。`transition: all`
 - AGWS既存class selector、ID selector、attribute selectorのうち、標準クラスだけでは現行表示を再現できないものを定義する。
 - 互換層のセレクタは、AGWS既存HTMLに存在する名前を維持する。
 - 互換層は、標準クラスと同じCSS変数を参照する。
+- `.container` はAGWS現行 `style.css` に合わせて左右20pxの余白を末尾で補正する。
 - 互換層でもHEX値、RGBA値、`@import`、`@charset`、`!important` は使用しない。
 - 互換層はAGWS初回適用のための移行補助であり、Adlaire-Designの標準APIとは扱わない。
 

@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.36
+
+- `Docs/Master_Spec` の版数を `rev.36` へ更新した。
+- AGWSの法的情報目次の影表現に合わせ、`Tokens/effects.css` に `--adlaire-shadow-blue-nav-hover` と `--adlaire-shadow-blue-sticky` を追加した。
+- `UI/content.css` の `.legal-toc-card` と `.legal-toc-link:hover` を、AGWS現行CSSに近い影トークン参照へ変更した。
+- `UI/compat-agws.css` にAGWS現行HTML向け `.container` の20px左右余白補正を追加した。
+- `Tools/check/check-adlaire-design.sh` に追加影トークンと `.container` 互換セレクタの検査を追加した。
+
 ## rev.35
 
 - `Docs/Master_Spec` の版数を `rev.35` へ更新した。

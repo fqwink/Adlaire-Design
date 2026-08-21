@@ -245,6 +245,8 @@ for token in \
   '--adlaire-shadow-marker-ring: 0 0 0 2px var(--adlaire-surface-accent);' \
   '--adlaire-shadow-tab-active: 0 -2px 4px rgba(0, 102, 204, 0.1);' \
   '--adlaire-shadow-blue: 0 2px 8px rgba(0, 102, 204, 0.3);' \
+  '--adlaire-shadow-blue-nav-hover: 0 4px 8px rgba(0, 102, 204, 0.3);' \
+  '--adlaire-shadow-blue-sticky: 0 4px 12px rgba(0, 102, 204, 0.15);' \
   '--adlaire-transition-base: 0.3s ease;' \
   '--adlaire-transition-button: 0.2s ease-in-out;' \
   '--adlaire-animation-fade-in: fadeIn 0.3s ease-in;' \
@@ -365,6 +367,7 @@ done
 for selector in \
   '#top' \
   '#contactForm' \
+  '.container' \
   '[aria-label]' \
   '[target="_blank"]'; do
   if ! grep -F -- "$selector" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/dev/null 2>&1; then
