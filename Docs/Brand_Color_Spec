@@ -1,0 +1,146 @@
+# Adlaire Group
+
+# ブランドカラー仕様書
+
+**Version:** rev.1
+
+---
+
+# 1. 目的
+
+本仕様書は、Adlaire Group(開発元: Adlaire Group DX事業セグメントグループ)が使用する統一ブランドカラー、およびそれをCSSカスタムプロパティ・ユーティリティクラスとして実装するための内製CSSフレームワークの仕様・設計を定める。
+
+Adlaire Ecosystem基盤群を採用する全プロダクト(Adlaire Studioなど)、および関連する公開リポジトリ・公開ドキュメントにおいて、色の役割を統一する。
+
+開発正本は独立リポジトリ `Adlaire-Design` で管理する。基盤アーキテクチャにも特定目的型責務ベースモジュラーコンポーネントにも該当しない独立区分である(詳細は第6章を参照)。
+
+---
+
+# 2. 基本方針
+
+- Adlaire Groupのブランド主色は Emerald Green `#00a968` とする。
+- ブランドカラーは、Adlaire Ecosystem基盤群を採用する全プロダクトで共通のパレット(第3章)を使用する。プロダクトごとに独自の配色へ変更しない。
+- 各プロダクトの管理画面・公開面は、共通パレットを固定で使用する。プロダクト固有のテーマ機能がある場合、テーマは共通パレットのCSS変数(第4章)を参照できる。
+- 色は装飾目的だけでなく、操作、状態、情報分類の意味を持つものとして扱う。
+
+---
+
+# 3. ブランドカラーパレット
+
+| 役割 | 色名 | HEX | CSS変数 | 用途 |
+| --- | --- | --- | --- | --- |
+| Primary | Emerald Green | `#00a968` | `--adlaire-color-primary` | ブランド主色、主要操作、選択状態、正常状態 |
+| Secondary | Blue Sky | `#3498db` | `--adlaire-color-secondary` | リンク、補助操作、情報表示 |
+| Accent | Summer Sky | `#40aaef` | `--adlaire-color-accent` | 通知、アップデート案内、テーマ内アクセント |
+| Surface | White Rat | `#ecf0f1` | `--adlaire-color-surface` | 管理画面背景、淡い面 |
+| Border | Silver Tree | `#eceef1` | `--adlaire-color-border` | 境界線、区切り、補助背景 |
+| Support | Solitude | `#58be89` | `--adlaire-color-support` | サブアクセント、補助状態表示 |
+
+---
+
+# 4. CSS変数命名規則
+
+- CSSカスタムプロパティは `--adlaire-color-<role>` の形式で命名する(`<role>` は第3章の役割名を小文字ケバブケースで表記する)。
+- 全CSS変数は `:root` スコープで定義し、コンポーネント単位での再定義は行わない。
+- 変数名にHEX値やプロダクト名を含めない。役割ベースの命名を維持し、将来の配色変更に耐える設計とする。
+
+```css
+:root {
+  --adlaire-color-primary: #00a968;
+  --adlaire-color-secondary: #3498db;
+  --adlaire-color-accent: #40aaef;
+  --adlaire-color-surface: #ecf0f1;
+  --adlaire-color-border: #eceef1;
+  --adlaire-color-support: #58be89;
+}
+```
+
+---
+
+# 5. CSSフレームワーク設計方針
+
+- 外部CSSフレームワーク(Tailwind CSS、Bootstrapなど)は採用しない。内製化方針(`Adlaire-Docs/Common_Documents/External_Library_Exceptions`)に基づき、本仕様書を正本とした内製の軽量CSSフレームワークとして設計する。
+- ユーティリティクラスは `.adlaire-bg-<role>`(背景色)、`.adlaire-text-<role>`(文字色)、`.adlaire-border-<role>`(境界線色)の命名規則に従い、第4章のCSS変数を参照する形で実装する(HEX値を直接埋め込まない)。
+- 内製CSSフレームワークは、各特定目的型責務ベースモジュラーコンポーネントが個別に持たず、共有スタイルシートとして一元管理する。具体的な格納場所は実装時に確定する。
+- 色以外の設計トークン(余白、タイポグラフィなど)は本仕様書の対象外とし、必要になった時点で別途新設を検討する。
+
+---
+
+# 6. リポジトリ構成
+
+`Adlaire-Design` の開発正本は、以下の3領域(フォルダ)で構成する。
+
+- `UI/`: CSSフレームワーク本体(第5章のユーティリティクラス等)。将来的にCSS以外のコンポーネント実装も含みうる領域とする。
+- `Tokens/`: デザイントークン(色・余白・タイポグラフィ等の設計値)。第3章のブランドカラーパレット、第4章のCSS変数はこの領域に対応する。
+- `Brand/`: ブランド全般の資産(ロゴなど、色以外も含む将来拡張領域)。
+
+3領域間の依存関係は、現時点では定めない。
+
+---
+
+# 7. Adlaire-Ecosystemへの統合方針
+
+Adlaire-Ecosystemが実際に使用する成果物(ビルド済みCSS等)は、承認された内容を `Adlaire-Ecosystem` 側へ統合する方針とする。
+
+統合時期は未定とし、本書では決定しない。具体的な統合手順は、統合実施時にあらためて確定する。
+
+---
+
+# 8. Adlaire Studioにおける適用方針
+
+## 8.1 管理画面での使用方針
+
+管理画面は運用基盤としての安定性と視認性を優先する。
+
+主要操作には Primary を使用する。
+
+通常リンク、補助操作、詳細操作には Secondary を使用する。
+
+アップデート通知、情報通知には Accent を使用する。
+
+背景には Surface を使用する。
+
+境界線、区切り、薄い補助背景には Border を使用する。
+
+正常状態、補助ステータスには Primary または Support を使用する。
+
+## 8.2 テーマでの使用方針
+
+v.0.6のテーマ管理では、3個の標準テーマにブランドカラートークンを反映する。
+
+標準テーマの初期方針は以下とする。
+
+| テーマ | 主な用途 | 色方針 |
+| --- | --- | --- |
+| `standard` | 汎用サイト | Primaryを中心に使用する |
+| `blog` | 記事中心サイト | Secondaryを中心に使用する |
+| `media` | 情報発信・広告枠想定サイト | Accentを中心に使用する |
+
+---
+
+# 9. 適用範囲
+
+本仕様は以下に適用する。
+
+- Adlaire Studio管理画面
+- 管理画面補助JavaScriptおよびAdminFrontend
+- 静的生成される公開テーマ
+- テーマ管理機能
+- テーマ内の色トークン
+- `Adlaire-Ecosystem-Public`リポジトリのREADME・USER_GUIDE
+- `PhpTranspiler`リポジトリの公開ドキュメント
+
+本仕様は以下には適用しない。
+
+- ユーザーが管理するコンテンツ本文
+- 認証情報
+- Gitプロバイダー設定
+- 作業データ
+
+---
+
+# 10. 変更ルール
+
+ブランドカラー仕様を変更する場合は、事前にユーザー承認を得る。
+
+承認後、必要に応じて `AdlaireStudio/Project_Charter`(仕様・設計を統合管理)、`Adlaire-Design/Docs/Brand_Color_Spec`(本書)、`Adlaire-Design/Docs/Change_History`、`Adlaire-Docs/Common_Documents/Change_History` を更新する。

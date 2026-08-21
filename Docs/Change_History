@@ -1,0 +1,15 @@
+# Adlaire-Design
+
+# 変更履歴
+
+本ファイルは、Adlaire-Design独立リポジトリにおけるAdlaire-Design専用の変更履歴を記録する正本である。
+
+移行前のAdlaire-Ecosystem-Design関連履歴は、`Adlaire-Docs/Common_Documents/Change_History` および `Adlaire-Docs/Common_Documents/Development_History` の過去記録を参照する。
+
+---
+
+## rev.1
+
+- `Adlaire-Ecosystem-Design` を `Adlaire-Design` へ名称変更し、独立リポジトリとして初期化した。
+- 仕様・設計文書、ドキュメント索引、変更履歴を `Docs/` 配下へ集約した。
+- 開発正本領域として `UI/`、`Tokens/`、`Brand/` を設置した。
