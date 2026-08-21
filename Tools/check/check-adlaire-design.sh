@@ -57,6 +57,11 @@ if ! grep -F '# Adlaire-Design' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1
   exit 1
 fi
 
+if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/LICENSE")" != 'Adlaire-Design Source Viewing and Learning License' ]; then
+  echo "LICENSE must identify Adlaire-Design, not a superseded repository family." >&2
+  exit 1
+fi
+
 if ! grep -F 'Docs/Master_Spec' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
   echo "Adlaire-Design Document_Index must reference Docs/Master_Spec." >&2
   exit 1
@@ -419,6 +424,12 @@ fi
 if grep -R -n 'letter-spacing: -' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-negative-letter-spacing-matches 2>/dev/null; then
   echo "UI CSS files must not contain negative letter-spacing:" >&2
   cat /tmp/adlaire-design-ui-negative-letter-spacing-matches >&2
+  exit 1
+fi
+
+if grep -R -n 'transition: all' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-transition-all-matches 2>/dev/null; then
+  echo "UI CSS files must not use transition: all:" >&2
+  cat /tmp/adlaire-design-ui-transition-all-matches >&2
   exit 1
 fi
 

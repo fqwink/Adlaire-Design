@@ -179,7 +179,7 @@
   color: var(--adlaire-surface-accent);
   font-weight: 500;
   text-decoration: none;
-  transition: all var(--adlaire-transition-base);
+  transition: border-bottom-color var(--adlaire-transition-base), color var(--adlaire-transition-base), transform var(--adlaire-transition-base);
 }
 
 .contact-link {
@@ -292,7 +292,7 @@
   color: var(--adlaire-surface-text-subtle);
   cursor: pointer;
   font-weight: 500;
-  transition: all var(--adlaire-transition-base);
+  transition: background-color var(--adlaire-transition-base), border-color var(--adlaire-transition-base), box-shadow var(--adlaire-transition-base), color var(--adlaire-transition-base);
 }
 
 .adlaire-tab-label:hover,
@@ -346,7 +346,7 @@
   background-color: var(--adlaire-surface-card);
   border-left: 4px solid var(--adlaire-surface-accent);
   border-radius: var(--adlaire-radius-sm);
-  transition: all var(--adlaire-transition-base);
+  transition: box-shadow var(--adlaire-transition-base), transform var(--adlaire-transition-base);
 }
 
 .news-item:hover {
@@ -479,7 +479,7 @@
   color: var(--adlaire-surface-text);
   font-weight: 500;
   text-decoration: none;
-  transition: all var(--adlaire-transition-base);
+  transition: background-color var(--adlaire-transition-base), border-left-color var(--adlaire-transition-base), color var(--adlaire-transition-base), transform var(--adlaire-transition-base);
 }
 
 .sidebar-link:hover {
@@ -574,7 +574,7 @@
   color: var(--adlaire-surface-accent);
   font-weight: 500;
   text-decoration: none;
-  transition: all var(--adlaire-transition-base);
+  transition: color var(--adlaire-transition-base);
 }
 
 .breadcrumb-link:hover {
@@ -639,7 +639,7 @@
   color: var(--adlaire-surface-accent);
   font-weight: 500;
   text-decoration: none;
-  transition: all var(--adlaire-transition-base);
+  transition: background-color var(--adlaire-transition-base), box-shadow var(--adlaire-transition-base), color var(--adlaire-transition-base), transform var(--adlaire-transition-base);
 }
 
 .legal-toc-link:hover {

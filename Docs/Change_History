@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.33
+
+- `Docs/Master_Spec` の版数を `rev.33` へ更新した。
+- `LICENSE` の表題をAdlaire-Design名義へ変更し、現行成果物から旧体系名を外した。
+- `UI/site.css`、`UI/forms.css`、`UI/content.css` に残っていた `transition: all` を対象プロパティ明示へ変更した。
+- `Tools/check/check-adlaire-design.sh` にライセンス表題検査と `transition: all` 禁止検査を追加した。
+- 第3段階検査方針に、UI側CSSのRGBA直接記述禁止、負の `letter-spacing` 禁止、`transition: all` 禁止、ライセンス名義確認を追記した。
+
 ## rev.32
 
 - `Docs/Master_Spec` の版数を `rev.32` へ更新した。

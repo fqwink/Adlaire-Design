@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.32
+**Version:** rev.33
 
 ---
 
@@ -770,6 +770,9 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 - 第3段階で必須とするCSS変数、標準クラス、互換クラス、tab用ID、keyframes、media queryが定義されていること。
 - 第3段階候補ファイルに `@charset`、`@import`、`!important` が存在しないこと。
 - UI側CSSにHEX値を直接記述していないこと。
+- UI側CSSにRGBA値を直接記述していないこと。
+- UI側CSSに負の `letter-spacing` と `transition: all` が存在しないこと。
+- `LICENSE` がAdlaire-Design名義であること。
 - Node.js/npm依存物が存在しないこと。
 - AGWS現行HTMLのclass属性値が `Docs/Master_Spec` のAGWS完全再現仕様に含まれていること。
 - AGWS現行HTMLのid属性値が `Docs/Master_Spec` のAGWS完全再現仕様に含まれていること。
@@ -898,6 +901,8 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 | `--adlaire-z-page-top` | `1000` | page top fixed link |
 
 第3段階トークンは、必要な値をCSS変数へ集約し、UI側CSSではHEX値およびRGBA値を直接記述しない。
+
+UI側CSSのtransitionは対象プロパティを明示する。`transition: all` は、意図しないプロパティ変更や移行時の表示差分を生むため使用しない。
 
 ### 11.10.15 第3段階互換層の方針
 

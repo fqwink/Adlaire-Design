@@ -61,7 +61,7 @@
   color: var(--adlaire-surface-card);
   font-weight: 500;
   text-decoration: none;
-  transition: all var(--adlaire-transition-base);
+  transition: background-color var(--adlaire-transition-base), border-color var(--adlaire-transition-base), box-shadow var(--adlaire-transition-base), transform var(--adlaire-transition-base);
 }
 
 .adlaire-nav-button:hover,
@@ -126,7 +126,7 @@
   color: var(--adlaire-surface-card);
   opacity: 0.9;
   text-decoration: none;
-  transition: all var(--adlaire-transition-base);
+  transition: box-shadow var(--adlaire-transition-base), opacity var(--adlaire-transition-base), transform var(--adlaire-transition-base);
 }
 
 .adlaire-page-top:hover,
