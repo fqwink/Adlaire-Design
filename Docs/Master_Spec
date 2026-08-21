@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.29
+**Version:** rev.30
 
 ---
 
@@ -780,6 +780,97 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 - AGWS側CSSのプロパティ名
 
 この確認は、AGWSの現行表示をAdlaire-Design成果物だけで完全再現するための仕様充足確認であり、AGWS本体の実装変更を意味しない。
+
+### 11.10.13 第3段階ファイルの冒頭コメント
+
+第3段階候補ファイルを実装する場合、各ファイルの冒頭コメントは以下に固定する。
+
+| ファイル | 冒頭コメント |
+| --- | --- |
+| `Tokens/status.css` | `/* Adlaire-Design status tokens */` |
+| `Tokens/effects.css` | `/* Adlaire-Design effect tokens */` |
+| `UI/base.css` | `/* Adlaire-Design base styles */` |
+| `UI/grid.css` | `/* Adlaire-Design grid utilities */` |
+| `UI/site.css` | `/* Adlaire-Design site chrome */` |
+| `UI/forms.css` | `/* Adlaire-Design form components */` |
+| `UI/content.css` | `/* Adlaire-Design content components */` |
+| `UI/utilities.css` | `/* Adlaire-Design utility classes */` |
+| `UI/compat-agws.css` | `/* Adlaire-Design AGWS compatibility */` |
+
+### 11.10.14 第3段階トークン命名候補
+
+`Tokens/status.css` は、以下のCSS変数を候補とする。
+
+| CSS変数 | 値 | 用途 |
+| --- | --- | --- |
+| `--adlaire-status-secondary` | `#6c757d` | secondary button、secondary text |
+| `--adlaire-status-secondary-strong` | `#5a6268` | secondary hover |
+| `--adlaire-status-success` | `#28a745` | success text |
+| `--adlaire-status-danger` | `#dc3545` | danger text、required mark |
+| `--adlaire-status-warning` | `#ffc107` | warning text |
+| `--adlaire-status-info` | `#17a2b8` | info text |
+| `--adlaire-status-dark` | `#343a40` | dark background |
+| `--adlaire-status-gray-777` | `#777777` | subtle text |
+| `--adlaire-status-gray-999` | `#999999` | disabled gradient end、footer subtle text |
+| `--adlaire-status-gray-ccc` | `#cccccc` | footer text、disabled gradient start |
+| `--adlaire-status-gray-ddd` | `#dddddd` | form border |
+| `--adlaire-status-gray-light` | `#f8f9fa` | light background、card header/footer |
+| `--adlaire-status-gray-soft` | `#f9f9f9` | information row background |
+| `--adlaire-alert-info-text` | `#0c5460` | info alert text |
+| `--adlaire-alert-info-bg` | `#d1ecf1` | info alert background |
+| `--adlaire-alert-info-border` | `#bee5eb` | info alert border |
+| `--adlaire-alert-success-text` | `#155724` | success alert text |
+| `--adlaire-alert-success-bg` | `#d4edda` | success alert background |
+| `--adlaire-alert-success-border` | `#c3e6cb` | success alert border |
+| `--adlaire-alert-warning-text` | `#856404` | warning alert text |
+| `--adlaire-alert-warning-bg` | `#fff3cd` | warning alert background |
+| `--adlaire-alert-warning-border` | `#ffeaa7` | warning alert border |
+| `--adlaire-alert-danger-text` | `#721c24` | danger alert text |
+| `--adlaire-alert-danger-bg` | `#f8d7da` | danger alert background |
+| `--adlaire-alert-danger-border` | `#f5c6cb` | danger alert border |
+
+`Tokens/effects.css` は、以下のCSS変数を候補とする。
+
+| CSS変数 | 値 | 用途 |
+| --- | --- | --- |
+| `--adlaire-radius-sm` | `4px` | buttons、notice、links |
+| `--adlaire-radius-md` | `6px` | compact cards、tabs |
+| `--adlaire-radius-lg` | `8px` | cards、main sections |
+| `--adlaire-radius-round` | `50%` | timeline marker、page top |
+| `--adlaire-shadow-card` | `0 2px 8px rgba(0, 0, 0, 0.1)` | cards、main content |
+| `--adlaire-shadow-card-hover` | `0 4px 16px rgba(0, 0, 0, 0.15)` | card hover |
+| `--adlaire-shadow-button` | `0 2px 8px rgba(0, 0, 0, 0.15)` | framework button hover |
+| `--adlaire-shadow-nav` | `0 4px 8px rgba(0, 0, 0, 0.2)` | navigation hover |
+| `--adlaire-shadow-header` | `0 2px 10px rgba(0, 0, 0, 0.1)` | site header |
+| `--adlaire-shadow-blue-soft` | `0 2px 8px rgba(0, 102, 204, 0.15)` | news hover |
+| `--adlaire-shadow-blue` | `0 2px 8px rgba(0, 102, 204, 0.3)` | primary button |
+| `--adlaire-shadow-blue-strong` | `0 4px 12px rgba(0, 102, 204, 0.4)` | page top |
+| `--adlaire-shadow-blue-hover` | `0 4px 12px rgba(0, 102, 204, 0.5)` | submit hover |
+| `--adlaire-shadow-blue-intense` | `0 6px 20px rgba(0, 102, 204, 0.6)` | page top hover |
+| `--adlaire-overlay-white-20` | `rgba(255, 255, 255, 0.2)` | header nav background |
+| `--adlaire-overlay-white-30` | `rgba(255, 255, 255, 0.3)` | header nav border |
+| `--adlaire-overlay-white-40` | `rgba(255, 255, 255, 0.4)` | header nav hover |
+| `--adlaire-overlay-white-50` | `rgba(255, 255, 255, 0.5)` | header nav hover border |
+| `--adlaire-overlay-white-80` | `rgba(255, 255, 255, 0.8)` | translucent selected surfaces |
+| `--adlaire-overlay-white-90` | `rgba(255, 255, 255, 0.9)` | translucent active surfaces |
+| `--adlaire-transition-fast` | `0.15s ease-in-out` | form focus |
+| `--adlaire-transition-base` | `0.3s ease` | site hover |
+| `--adlaire-animation-fade-in` | `fadeIn 0.3s ease-in` | tab pane display |
+| `--adlaire-z-page-top` | `1000` | page top fixed link |
+
+第3段階トークンは、必要な値をCSS変数へ集約し、UI側CSSではHEX値およびRGBA値を直接記述しない。
+
+### 11.10.15 第3段階互換層の方針
+
+`UI/compat-agws.css` は、AGWS現行HTMLを大きく書き換えずにAdlaire-Design成果物を適用するための互換層とする。
+
+- AGWS既存class selector、ID selector、attribute selectorのうち、標準クラスだけでは現行表示を再現できないものを定義する。
+- 互換層のセレクタは、AGWS既存HTMLに存在する名前を維持する。
+- 互換層は、標準クラスと同じCSS変数を参照する。
+- 互換層でもHEX値、RGBA値、`@import`、`@charset`、`!important` は使用しない。
+- 互換層はAGWS初回適用のための移行補助であり、Adlaire-Designの標準APIとは扱わない。
+
+第3段階実装時は、`UI/compat-agws.css` に含めるAGWS既存セレクタ一覧を、`Docs/Master_Spec` のAGWS完全再現仕様と同じ照合軸で検査する。
 
 ---
 

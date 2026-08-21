@@ -1,6 +1,6 @@
 # Adlaire Group Web Site AGWS 解析
 
-**Version:** rev.16
+**Version:** rev.17
 
 ---
 
@@ -232,6 +232,9 @@ Adlaire-Designの第1段階・第2段階により、AGWSの公開面色、基本
 - `#top`、`#company`、法的情報アンカー、フォーム入力IDなど、HTML側のid属性値
 - `header`、`nav`、`main`、`section`、`article`、`aside`、`footer`、フォーム要素など、AGWS現行HTMLで使う要素名
 - `lang`、`charset`、`viewport`、`rel`、`href`、`target`、`aria-label`、`for`、`name`、`type`、`value`、`rows` など、AGWS現行HTMLで使う主要属性
+- 第3段階候補ファイルの冒頭コメント
+- `Tokens/status.css` と `Tokens/effects.css` のCSS変数名候補
+- `UI/compat-agws.css` の互換層としての責務、禁止記述、標準APIではない扱い
 - AGWS既存HTMLクラスをAdlaire-Design標準クラスへつなぐ互換層
 
 これらは、Adlaire-Design側の第3段階として `Tokens/status.css`、`Tokens/effects.css`、`UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css` に分けて仕様化する。
@@ -239,3 +242,5 @@ Adlaire-Designの第1段階・第2段階により、AGWSの公開面色、基本
 AGWS本体を更新するのは、Adlaire-Design側で第3段階の仕様と実装が完了した後とする。AGWS側の初回更新は、見た目を変えるためではなく、Adlaire-Design成果物で現行表示を再現できることを確認するための適用作業として扱う。
 
 2026-08-21時点で、AGWS現行HTMLの要素名、主要属性名、class属性値、id属性値、およびAGWS側CSSのclass selector、ID selector、attribute selector、pseudo selector、media query、keyframes、HEX値、RGBA値、プロパティ名は、`Docs/Master_Spec` のAGWS完全再現仕様に未記載の項目がない状態にしている。
+
+第3段階の実装に進む前の仕様不足として、トークン名、冒頭コメント、互換層の責務も `Docs/Master_Spec` に追記している。

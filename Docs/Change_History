@@ -8,6 +8,15 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.30
+
+- `Docs/Master_Spec` の版数を `rev.30` へ更新した。
+- 第3段階候補ファイルの冒頭コメントを固定した。
+- `Tokens/status.css` と `Tokens/effects.css` のCSS変数名候補、値、用途を追加した。
+- 第3段階トークンはCSS変数へ集約し、UI側CSSではHEX値およびRGBA値を直接記述しない方針を明記した。
+- `UI/compat-agws.css` の互換層としての責務、禁止記述、標準APIではない扱いを追加した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.17` へ更新し、第3段階実装前に不足していたトークン名、冒頭コメント、互換層方針を追記した。
+
 ## rev.29
 
 - `Docs/Master_Spec` の版数を `rev.29` へ更新した。
