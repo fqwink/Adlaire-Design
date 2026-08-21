@@ -5,4 +5,4 @@
 - `Docs/Change_History`(Adlaire-Design専用の変更履歴)
 - `Tokens/colors.css`(ブランドカラーCSS変数)
 - `UI/adlaire.css`(ブランドカラー最小ユーティリティ)
-- `Tools/check/check-adlaire-design.sh`(Adlaire-Design専用の構成検査)
+- `Tools/check/check-adlaire-design.sh`(Adlaire-Design専用の構成・CSS実装検査)

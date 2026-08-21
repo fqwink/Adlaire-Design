@@ -16,6 +16,8 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 - `UI/adlaire.css` に背景色、文字色、境界線色の18ユーティリティクラスを定義した。
 - `Tools/check/check-adlaire-design.sh` に第1段階CSSの必須ファイル、必須変数、必須クラス、禁止記述の検査を追加した。
 - 第1段階CSSの冒頭コメント、`:root` ブロック数、`@charset` 禁止の検査を追加した。
+- `Docs/Master_Spec` の承認単位表を、第1段階は実装済み、第2段階は未確定として整理した。
+- `Docs/Document_Index` の検査シェル説明をCSS実装検査まで含む表現へ更新した。
 
 ## rev.16
 

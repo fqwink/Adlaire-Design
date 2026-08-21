@@ -407,7 +407,7 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 
 ## 11.8 検査方針
 
-第1段階実装に合わせて、`Tools/check/check-adlaire-design.sh` の検査対象を拡張する。
+第1段階実装に合わせて、`Tools/check/check-adlaire-design.sh` の検査対象を拡張している。
 
 第1段階実装後の検査項目は以下とする。
 
@@ -425,16 +425,16 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 
 検査シェルの責務は、構造検査、必須ファイル検査、禁止ファイル検査、必須変数・必須クラス検査、禁止記述検査までとする。CSSの完全なパーサ検証は行わない。
 
-## 11.9 承認単位
+## 11.9 追加実装・変更時の承認単位
 
-実装時の承認単位は以下とする。
+追加実装または既存CSSの仕様変更を行う場合の承認単位は以下とする。
 
-| 段階 | 対象 |
-| --- | --- |
-| 第1段階 | `Tokens/colors.css`、`UI/adlaire.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 |
-| 第2段階A | `Tokens/surface.css` |
-| 第2段階B | `UI/layout.css` |
-| 第2段階C | `UI/components.css` |
+| 段階 | 対象 | 状態 |
+| --- | --- | --- |
+| 第1段階 | `Tokens/colors.css`、`UI/adlaire.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
+| 第2段階A | `Tokens/surface.css` | 未確定 |
+| 第2段階B | `UI/layout.css` | 未確定 |
+| 第2段階C | `UI/components.css` | 未確定 |
 
 ---
 
