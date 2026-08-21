@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.21
+**Version:** rev.22
 
 ---
 
@@ -567,7 +567,7 @@ AGWS完全再現は、AGWS本体を先に変更せず、Adlaire-Design側で必�
 
 | ファイル | 役割 | 状態 |
 | --- | --- | --- |
-| `Tokens/effects.css` | 影、角丸、余白、グラデーションなどの公開面補助トークン | 仕様候補 |
+| `Tokens/effects.css` | 影、角丸、余白、グラデーション、transitionなどの公開面補助トークン | 仕様候補 |
 | `UI/site.css` | サイトヘッダー、ナビゲーション、フッター、ページトップリンク | 仕様候補 |
 | `UI/forms.css` | フォーム、入力、チェック、送信ボタン、フォームnotice | 仕様候補 |
 | `UI/content.css` | ニュース、組織情報、沿革、法的情報目次などの本文固有表現 | 仕様候補 |
@@ -584,13 +584,17 @@ AGWS完全再現に不足している主な表示領域は以下である。
 | サイトヘッダー | `.site-header`、`.site-title`、`.header-link`、`.site-nav`、`.nav-button` | `UI/site.css` |
 | メイン余白 | `.main-content`、`.content-section` | `UI/site.css` または `UI/content.css` |
 | フッター | `.site-footer` | `UI/site.css` |
-| ニュース | `.news-item`、`.news-header`、`.news-date`、`.news-badge`、`.news-title`、`.news-content` | `UI/content.css` |
-| 組織情報 | `.organization-info`、`.info-row`、`.info-label`、`.info-value`、`.business-list` | `UI/content.css` |
-| 沿革詳細 | `.timeline-date`、`.timeline-content`、`.timeline-marker`、`.timeline-text` | `UI/content.css` |
-| フォーム | `.contact-form`、`.form-group`、`.form-label`、`.form-control`、`.form-check`、`.btn-submit` | `UI/forms.css` |
+| リニューアル告知 | `.renewal-notice`、`.renewal-title`、`.renewal-description` | `UI/content.css` |
+| ニュース | `.news-item`、`.news-header`、`.news-date`、`.news-badge`、`.news-badge-press`、`.news-title`、`.news-content` | `UI/content.css` |
+| 組織情報 | `.organization-info`、`.info-row`、`.info-label`、`.info-value`、`.business-list`、`.business-detail` | `UI/content.css` |
+| 沿革詳細 | `.timeline`、`.timeline-item`、`.timeline-date`、`.timeline-content`、`.timeline-marker`、`.timeline-text` | `UI/content.css` |
+| フォーム | `.contact-form`、`.form-description`、`.form-notice`、`.form-group`、`.form-label`、`.form-control`、`.form-check`、`.form-check-input`、`.form-check-label`、`.required`、`.btn`、`.btn-block`、`.btn-submit` | `UI/forms.css` |
 | 法的情報目次 | `.legal-toc-card`、`.legal-toc`、`.legal-toc-link` | `UI/content.css` |
-| 補助テキスト | `.coming-soon`、`.coming-soon-small`、`.info-note`、`.last-updated` | `UI/content.css` |
-| 既存クラス互換 | `.container`、`.content-wrapper`、`.main-area`、`.sidebar`、`.card`、`.section-title`、`.breadcrumb`、`.back-to-top` | `UI/compat-agws.css` |
+| タブ詳細 | `.tab-container`、`.tab-input`、`.tab-labels`、`.tab-label`、`.tab-content`、`.tab-pane` | `UI/content.css` |
+| サイドバー詳細 | `.sidebar-section`、`.sidebar-title`、`.sidebar-content`、`.sidebar-link-list`、`.sidebar-link`、`.active` | `UI/content.css` |
+| リンク表現 | `.contact-link`、`.privacy-link`、`.text-link` | `UI/content.css` |
+| 補助テキスト | `.coming-soon`、`.coming-soon-small`、`.info-note`、`.last-updated`、`.text-muted`、`.mt-30` | `UI/content.css` または `UI/compat-agws.css` |
+| 既存クラス互換 | `.container`、`.content-wrapper`、`.main-area`、`.sidebar`、`.card`、`.section-title`、`.section-content`、`.breadcrumb`、`.breadcrumb-link`、`.breadcrumb-separator`、`.breadcrumb-current`、`.back-to-top`、`.back-to-top-icon` | `UI/compat-agws.css` |
 
 ### 11.10.4 第3段階の命名方針
 
@@ -605,6 +609,7 @@ AGWS完全再現に不足している主な表示領域は以下である。
 | `.adlaire-site-nav` | サイトナビゲーション |
 | `.adlaire-nav-button` | ナビゲーションボタン |
 | `.adlaire-site-footer` | サイトフッター |
+| `.adlaire-renewal-notice` | リニューアル告知 |
 | `.adlaire-news-item` | ニュース項目 |
 | `.adlaire-news-badge` | ニュース種別バッジ |
 | `.adlaire-info-row` | 組織情報行 |
@@ -617,6 +622,8 @@ AGWS完全再現に不足している主な表示領域は以下である。
 | `.adlaire-button-submit` | 送信ボタン |
 | `.adlaire-legal-toc` | 法的情報目次 |
 | `.adlaire-legal-toc-link` | 法的情報目次リンク |
+| `.adlaire-content-link` | 本文内リンク |
+| `.adlaire-muted-text` | 補助テキスト |
 
 ### 11.10.5 第3段階の非対象
 

@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.22
+
+- `Docs/Master_Spec` の版数を `rev.22` へ更新した。
+- AGWS現行HTMLクラスとの照合結果に基づき、第3段階の不足仕様を補強した。
+- リニューアル告知、タブ詳細、サイドバー詳細、リンク表現、フォーム詳細、沿革詳細、補助テキスト、既存クラス互換の不足クラスを追記した。
+- `Tokens/effects.css` の役割にtransitionを追加した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.9` へ更新し、AGWS完全再現の不足領域を補強した。
+
 ## rev.21
 
 - `Docs/Master_Spec` の版数を `rev.21` へ更新した。
