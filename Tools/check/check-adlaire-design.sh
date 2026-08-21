@@ -162,12 +162,22 @@ if ! grep -F 'ビルド、minify、bundleは現状検討しないこと。' "$AD
   exit 1
 fi
 
+if ! grep -F 'CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UIを扱う独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design AGENTS.md must define CSS and WYSIWYG Editor UI as managed scope." >&2
+  exit 1
+fi
+
 if ! grep -F 'Docs/Change_History' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must reference Docs/Change_History." >&2
   exit 1
 fi
 
-if ! grep -F '今後の拡充は、公開面CSS機能、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+if ! grep -F 'CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UIを管理する独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must define CSS and WYSIWYG Editor UI as managed scope." >&2
+  exit 1
+fi
+
+if ! grep -F '今後の拡充は、公開面CSS機能、WYSIWYG Editor UI、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must document the expansion priority policy." >&2
   exit 1
 fi

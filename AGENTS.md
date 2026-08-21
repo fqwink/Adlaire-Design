@@ -6,12 +6,12 @@
 - このリポジトリは `Adlaire-Design` の開発正本・仕様正本として扱うこと。
 - 仕様・設計の正本は `Docs/Master_Spec` とする。
 - リポジトリ索引は `Docs/Document_Index`、変更履歴は `Docs/Change_History` とする。
-- Adlaire-Designは、CSSフレームワーク・デザイントークン・ブランド資産を扱う独立リポジトリとして管理すること。
+- Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UIを扱う独立リポジトリとして管理すること。
 
 ## リポジトリ構成
 
 - `Docs/`: 仕様・設計、リポジトリ索引、変更履歴
-- `UI/`: CSSフレームワーク本体
+- `UI/`: CSSフレームワーク本体およびWYSIWYG Editor UIスキン
 - `Tokens/`: デザイントークン
 - `Brand/`: ブランド資産
 - `Tools/check/`: Adlaire-Design専用の検査シェル

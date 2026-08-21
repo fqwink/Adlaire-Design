@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.55
+
+- `Docs/Master_Spec` の版数を `rev.55` へ更新した。
+- Adlaire-Designの管理対象を、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UIとして明確化した。
+- `AGENTS.md` と `README.md` のリポジトリ定義を、CSSとWYSIWYGを管理する独立リポジトリの表現に更新した。
+- 今後の拡充優先順位にWYSIWYG Editor UIを追加した。
+- `Tools/check/check-adlaire-design.sh` に、Adlaire-Designの管理範囲定義がCSSとWYSIWYG Editor UIを含むことの検査を追加した。
+
 ## rev.54
 
 - `Docs/Master_Spec` の版数を `rev.54` へ更新した。
