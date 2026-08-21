@@ -1,6 +1,6 @@
 # Adlaire Group Web Site AGWS 解析
 
-**Version:** rev.11
+**Version:** rev.16
 
 ---
 
@@ -226,8 +226,16 @@ Adlaire-Designの第1段階・第2段階により、AGWSの公開面色、基本
 - text-shadow、opacity、transform、transition、animation、backdrop-filterなどの視覚効果
 - alert、button variants、text/background utilitiesで使う状態色・中立色
 - 第3段階CSSの読み込み順、冒頭コメント、禁止記述、必須セレクタ、必須変数、検査シェルの判定条件
+- font smoothing、scroll behavior、box sizing、resize、outline、cursor、user-select、position、z-indexなど、クラス名だけでは表せないCSSプロパティ単位の基礎挙動
+- `rgba(...)` による影、半透明背景、白透明の重ね表現
+- `#fff`、`#333`、`#666`、`#777`、`#ddd` などの短縮HEX表記
+- `#top`、`#company`、法的情報アンカー、フォーム入力IDなど、HTML側のid属性値
+- `header`、`nav`、`main`、`section`、`article`、`aside`、`footer`、フォーム要素など、AGWS現行HTMLで使う要素名
+- `lang`、`charset`、`viewport`、`rel`、`href`、`target`、`aria-label`、`for`、`name`、`type`、`value`、`rows` など、AGWS現行HTMLで使う主要属性
 - AGWS既存HTMLクラスをAdlaire-Design標準クラスへつなぐ互換層
 
 これらは、Adlaire-Design側の第3段階として `Tokens/status.css`、`Tokens/effects.css`、`UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css` に分けて仕様化する。
 
 AGWS本体を更新するのは、Adlaire-Design側で第3段階の仕様と実装が完了した後とする。AGWS側の初回更新は、見た目を変えるためではなく、Adlaire-Design成果物で現行表示を再現できることを確認するための適用作業として扱う。
+
+2026-08-21時点で、AGWS現行HTMLの要素名、主要属性名、class属性値、id属性値、およびAGWS側CSSのclass selector、ID selector、attribute selector、pseudo selector、media query、keyframes、HEX値、RGBA値、プロパティ名は、`Docs/Master_Spec` のAGWS完全再現仕様に未記載の項目がない状態にしている。

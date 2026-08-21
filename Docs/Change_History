@@ -8,6 +8,43 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.29
+
+- `Docs/Master_Spec` の版数を `rev.29` へ更新した。
+- AGWS現行HTMLの要素名、主要属性名、class属性値、id属性値、およびAGWS側CSSのclass selector、ID selector、attribute selector、pseudo selector、media query、keyframes、HEX値、RGBA値、プロパティ名を不足ゼロ確認範囲として明記した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.16` へ更新し、AGWS完全再現仕様に未記載項目がない状態にしたことを追記した。
+- 不足ゼロ確認はAGWS本体の実装変更を意味しないことを明記した。
+
+## rev.28
+
+- `Docs/Master_Spec` の版数を `rev.28` へ更新した。
+- AGWS現行HTMLの主要属性名・主要属性値の確認結果に基づき、`lang`、`charset`、`viewport`、`rel`、`href`、`target`、`aria-label`、`for`、`name`、`type`、`value`、`rows` などを第3段階の確認範囲へ追加した。
+- 第3段階の検査方針に、AGWS現行HTMLの主要属性名と主要属性値がAGWS完全再現仕様に含まれていることを追加した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.15` へ更新し、HTML属性に関する不足を追記した。
+
+## rev.27
+
+- `Docs/Master_Spec` の版数を `rev.27` へ更新した。
+- AGWS現行HTMLの要素名の確認結果に基づき、`header`、`nav`、`main`、`section`、`article`、`aside`、`footer`、フォーム要素などを第3段階の確認範囲へ追加した。
+- 第3段階の検査方針に、AGWS現行HTMLの要素名がAGWS完全再現仕様に含まれていることを追加した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.14` へ更新し、HTML要素名に関する不足を追記した。
+
+## rev.26
+
+- `Docs/Master_Spec` の版数を `rev.26` へ更新した。
+- AGWS現行HTMLのid属性値の確認結果に基づき、`#top`、`#company`、法的情報アンカー、フォーム入力IDを第3段階の確認範囲へ追加した。
+- 第3段階の検査方針に、AGWS現行HTMLのid属性値がAGWS完全再現仕様に含まれていることを追加した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.13` へ更新し、HTML側id属性値に関する不足を追記した。
+
+## rev.25
+
+- `Docs/Master_Spec` の版数を `rev.25` へ更新した。
+- AGWS側CSSのプロパティ単位の確認結果に基づき、font smoothing、scroll behavior、box sizing、resize、outline、cursor、user-select、position、z-indexなどを第3段階の確認範囲へ追加した。
+- `#fff`、`#333`、`#666`、`#777`、`#ddd` などの短縮HEX表記を状態色・中立色の確認範囲へ追加した。
+- `label[for="tab-all"]` などのタブ用attribute selectorと、疑似セレクタの具体一覧を追加した。
+- AGWS側CSSに出現するRGBA値を、影・半透明背景・重ね表現の確認範囲として追加した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.12` へ更新し、CSSプロパティ、RGBA、短縮HEXに関する不足を追記した。
+
 ## rev.24
 
 - `Docs/Master_Spec` の版数を `rev.24` へ更新した。
