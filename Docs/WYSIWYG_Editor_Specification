@@ -148,6 +148,13 @@ Markdown / MDXパーサーは、WYSIWYG Editorの入力変換品質と保守性�
 - Deno互換またはブラウザ互換で利用できる形を優先する。
 - Adlaire-Design内に保存する正本は、仕様文書と必要最小限のTypeScriptソースに限定する。
 
+採用ライブラリは以下とする。
+
+| 対象 | ライブラリ | 用途 |
+| --- | --- | --- |
+| Markdown / GFM | `jsr:@deno/gfm@0.12.0` | MarkdownおよびGitHub Flavored Markdownの解析 |
+| MDX | `jsr:@temelj/mdx@0.14.0` | MDXの解析 |
+
 ---
 
 ## 8. CSS読み込み順
