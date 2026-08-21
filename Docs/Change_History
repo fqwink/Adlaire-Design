@@ -8,6 +8,15 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.60
+
+- `Docs/Master_Spec` の版数を `rev.60` へ更新した。
+- JavaScriptなしで成立する優先B/Cの汎用部品を `UI/components.css` と `UI/content.css` に追加した。
+- `Docs/Generic_Component_Catalog` の優先B/Cを、CSS-only実装済み、保留、対象外の状態に合わせて更新した。
+- `Tools/check/check-adlaire-design.sh` に、追加したCSS-only汎用部品クラスの必須検査を追加した。
+- 既存の第3段階標準クラス、アラート部品、連絡先情報部品について、Adlaire接頭辞クラスの実装、状態セレクタ、仕様、検査対象を整合させた。
+- JavaScript、JSONデータ管理、npm、webpack、ビルド、minify、bundle、新規トークンは追加しない方針を維持した。
+
 ## rev.59
 
 - `Docs/Master_Spec` の版数を `rev.59` へ更新した。

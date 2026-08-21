@@ -524,7 +524,26 @@ for class in \
 done
 
 for class in \
+  '.adlaire-content-container' \
+  '.adlaire-grid-row' \
+  '.adlaire-grid-col' \
+  '.container' \
+  '.row' \
+  '.col'; do
+  if ! grep -F -- "$class" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" >/dev/null 2>&1; then
+    echo "UI/grid.css missing required class: $class" >&2
+    exit 1
+  fi
+done
+
+for class in \
   '.adlaire-page' \
+  '.adlaire-site-header' \
+  '.adlaire-site-title' \
+  '.adlaire-site-tagline' \
+  '.adlaire-site-nav' \
+  '.adlaire-nav-button' \
+  '.adlaire-site-footer' \
   '.site-header' \
   '.site-title' \
   '.site-tagline' \
@@ -540,6 +559,16 @@ done
 
 for class in \
   '.contact-form' \
+  '.adlaire-form-group' \
+  '.adlaire-form-label' \
+  '.adlaire-form-control' \
+  '.adlaire-form-check' \
+  '.adlaire-button' \
+  '.adlaire-button-primary' \
+  '.adlaire-button-secondary' \
+  '.adlaire-button-outline' \
+  '.adlaire-button-disabled' \
+  '.adlaire-button-submit' \
   '.form-group' \
   '.form-label' \
   '.form-control' \
@@ -552,18 +581,53 @@ for class in \
   fi
 done
 
+for selector in \
+  '.adlaire-form-label.required::after' \
+  'textarea.adlaire-form-control' \
+  'select.adlaire-form-control' \
+  '.adlaire-form-control:focus' \
+  '.adlaire-button:hover' \
+  '.adlaire-button-primary:hover' \
+  '.adlaire-button-secondary:hover' \
+  '.adlaire-button-outline:hover' \
+  '.adlaire-button-submit:hover' \
+  '.adlaire-button-submit:disabled'; do
+  if ! grep -F -- "$selector" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" >/dev/null 2>&1; then
+    echo "UI/forms.css missing required selector: $selector" >&2
+    exit 1
+  fi
+done
+
 for class in \
+  '.adlaire-renewal-notice' \
   '.renewal-notice' \
+  '.adlaire-news-item' \
+  '.adlaire-news-badge' \
   '.news-item' \
   '.timeline' \
+  '.adlaire-tab-input' \
+  '.adlaire-tab-label' \
+  '.adlaire-tab-content' \
   '.tab-container' \
   '.sidebar-section' \
+  '.adlaire-sidebar-links' \
   '.contact-info' \
   '.breadcrumb' \
+  '.adlaire-legal-toc' \
+  '.adlaire-legal-toc-link' \
   '.legal-toc' \
   '.alert' \
   '.adlaire-table-scroll' \
   '.adlaire-content-table' \
+  '.adlaire-content-link' \
+  '.adlaire-alert' \
+  '.adlaire-alert-info' \
+  '.adlaire-alert-success' \
+  '.adlaire-alert-warning' \
+  '.adlaire-alert-danger' \
+  '.adlaire-info-row' \
+  '.adlaire-info-label' \
+  '.adlaire-info-value' \
   '.adlaire-meta-list' \
   '.adlaire-meta-row' \
   '.adlaire-meta-label' \
@@ -574,13 +638,44 @@ for class in \
   '.adlaire-badge-success' \
   '.adlaire-badge-warning' \
   '.adlaire-badge-danger' \
+  '.adlaire-contact-info' \
+  '.adlaire-contact-item' \
   '.adlaire-note' \
   '.adlaire-note-info' \
   '.adlaire-note-success' \
   '.adlaire-note-warning' \
-  '.adlaire-note-danger'; do
+  '.adlaire-note-danger' \
+  '.adlaire-faq-list' \
+  '.adlaire-faq-item' \
+  '.adlaire-faq-question' \
+  '.adlaire-faq-answer' \
+  '.adlaire-comparison-block' \
+  '.adlaire-pros-cons-list' \
+  '.adlaire-pros-cons-item' \
+  '.adlaire-status-timeline' \
+  '.adlaire-status-timeline-item' \
+  '.adlaire-comparison-grid' \
+  '.adlaire-comparison-grid-item'; do
   if ! grep -F -- "$class" "$ADLAIRE_DESIGN_ROOT/UI/content.css" >/dev/null 2>&1; then
     echo "UI/content.css missing required class: $class" >&2
+    exit 1
+  fi
+done
+
+for selector in \
+  '.adlaire-content-link:hover' \
+  '.adlaire-news-item:hover' \
+  '.adlaire-tab-label:hover' \
+  '.adlaire-sidebar-links li::before' \
+  '.adlaire-sidebar-links a' \
+  '.adlaire-sidebar-links a:hover' \
+  '.adlaire-contact-item h3' \
+  '.adlaire-contact-item p' \
+  '.adlaire-contact-item a' \
+  '.adlaire-contact-item a:hover' \
+  '.adlaire-legal-toc-link:hover'; do
+  if ! grep -F -- "$selector" "$ADLAIRE_DESIGN_ROOT/UI/content.css" >/dev/null 2>&1; then
+    echo "UI/content.css missing required selector: $selector" >&2
     exit 1
   fi
 done
@@ -588,6 +683,7 @@ done
 for class in \
   '.mt-0' \
   '.mb-5' \
+  '.adlaire-muted-text' \
   '.text-primary' \
   '.bg-dark' \
   '.d-flex' \
@@ -689,7 +785,69 @@ for class in \
   '.adlaire-cta-text' \
   '.adlaire-cta-actions' \
   '.adlaire-caption' \
-  '.adlaire-helper-text'; do
+  '.adlaire-helper-text' \
+  '.adlaire-page-heading' \
+  '.adlaire-page-heading-title' \
+  '.adlaire-page-heading-text' \
+  '.adlaire-heading-group' \
+  '.adlaire-heading-eyebrow' \
+  '.adlaire-section-lead' \
+  '.adlaire-announcement-bar' \
+  '.adlaire-update-notice' \
+  '.adlaire-maintenance-notice' \
+  '.adlaire-maintenance-screen' \
+  '.adlaire-maintenance-screen-inner' \
+  '.adlaire-maintenance-screen-title' \
+  '.adlaire-maintenance-screen-text' \
+  '.adlaire-step-list' \
+  '.adlaire-step-item' \
+  '.adlaire-process-list' \
+  '.adlaire-process-item' \
+  '.adlaire-numbered-flow' \
+  '.adlaire-numbered-flow-item' \
+  '.adlaire-highlight-box' \
+  '.adlaire-summary-box' \
+  '.adlaire-stat-block' \
+  '.adlaire-stat-value' \
+  '.adlaire-stat-label' \
+  '.adlaire-anchor-nav' \
+  '.adlaire-anchor-nav-link' \
+  '.adlaire-subnav' \
+  '.adlaire-subnav-link' \
+  '.adlaire-sibling-nav' \
+  '.adlaire-sibling-nav-link' \
+  '.adlaire-card-grid' \
+  '.adlaire-card-media' \
+  '.adlaire-card-media-figure' \
+  '.adlaire-card-actions' \
+  '.adlaire-simple-list' \
+  '.adlaire-simple-list-item' \
+  '.adlaire-bordered-list' \
+  '.adlaire-bordered-list-item' \
+  '.adlaire-compact-list' \
+  '.adlaire-compact-list-item' \
+  '.adlaire-contact-panel' \
+  '.adlaire-inquiry-cta' \
+  '.adlaire-external-link-row' \
+  '.adlaire-progress' \
+  '.adlaire-progress-bar' \
+  '.adlaire-step-indicator' \
+  '.adlaire-step-indicator-item' \
+  '.adlaire-step-indicator-item-current' \
+  '.adlaire-tag-list' \
+  '.adlaire-tooltip-note' \
+  '.adlaire-popover-note' \
+  '.adlaire-hero-panel' \
+  '.adlaire-visual-banner' \
+  '.adlaire-image-frame' \
+  '.adlaire-logo-list' \
+  '.adlaire-logo-list-item' \
+  '.adlaire-partner-list' \
+  '.adlaire-partner-list-item' \
+  '.adlaire-icon-tile-list' \
+  '.adlaire-icon-tile' \
+  '.adlaire-split-block' \
+  '.adlaire-stacked-feature'; do
   if ! grep -F -- "$class" "$ADLAIRE_DESIGN_ROOT/UI/components.css" >/dev/null 2>&1; then
     echo "UI/components.css missing required class: $class" >&2
     exit 1
