@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.41
+**Version:** rev.42
 
 ---
 
@@ -224,6 +224,7 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 - 2026-08-21時点では、ビルド方針は採用しない。`Tokens/` と `UI/` 配下のCSSファイルを正本として直接管理し、生成元と生成物を分けない。
 - Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、minify生成、bundle生成は採用しない。
 - `Dist/` などの生成CSS用ディレクトリは作成しない。
+- 今後の拡充は、公開面で必要となるCSS機能、再現性検査、ドキュメント整備を優先する。ビルド、minify、bundleは現状検討しない。
 
 ## 11.3 実装対象ファイル
 
