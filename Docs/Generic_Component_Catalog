@@ -1,0 +1,195 @@
+# Adlaire-Design 汎用部品カタログ
+
+本ファイルは、Adlaire-Designで扱う汎用部品候補を管理する補助正本である。
+
+最終的な仕様正本は `Docs/Master_Spec` とし、本ファイルは汎用部品の分類、優先度、実装先、実装状態、非対象を一覧管理するために使用する。
+
+---
+
+## 1. 管理方針
+
+- 汎用部品は、特定ページ、本文種別、フォームだけに依存しない再利用可能なUI部品として扱う。
+- 実装先は既存の責務境界に従う。
+- 実装前の候補、実装済み、保留、対象外を同じ一覧で管理する。
+- 実装する場合は、`Docs/Master_Spec`、CSS、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
+- ビルド、minify、bundle、CSSプリプロセッサ、JavaScript、JSONデータ管理、多言語化は前提にしない。
+
+---
+
+## 2. 実装先
+
+| 実装先 | 対象 |
+| --- | --- |
+| `UI/components.css` | 公開面で再利用する汎用コンポーネント |
+| `UI/content.css` | 本文固有の表、注記、メタ情報など |
+| `UI/forms.css` | フォーム専用部品 |
+| `UI/utilities.css` | 単機能の汎用ユーティリティ |
+| `Tokens/` | 複数部品で共有する値が必要な場合のみ |
+
+---
+
+## 3. 優先A
+
+優先Aは、AGWSまたは今後の公開面で再利用性が高く、CSS onlyで成立し、仕様化済みまたは実装済みとして扱う候補である。
+
+| 分類 | 部品 | 実装先 | 状態 |
+| --- | --- | --- | --- |
+| 表示枠 | card | `UI/components.css` | 実装済み |
+| 表示枠 | panel | `UI/components.css` | 実装済み |
+| 表示枠 | well | `UI/components.css` | 実装済み |
+| 操作 | action row | `UI/components.css` | 実装済み |
+| 操作 | button group | `UI/components.css` | 実装済み |
+| 操作 | toolbar | `UI/components.css` | 実装済み |
+| 配置補助 | stack | `UI/components.css` | 実装済み |
+| 配置補助 | inline | `UI/components.css` | 実装済み |
+| 区切り | divider | `UI/components.css` | 実装済み |
+| 空状態 | empty state | `UI/components.css` | 実装済み |
+| リスト | link list | `UI/components.css` | 実装済み |
+| リスト | feature list | `UI/components.css` | 実装済み |
+| リスト | check list | `UI/components.css` | 実装済み |
+| リスト | definition list | `UI/components.css` | 実装済み |
+| 情報整理 | key-value summary | `UI/components.css` | 実装済み |
+| 情報整理 | metadata row | `UI/content.css` | 実装済み |
+| メディア | media object | `UI/components.css` | 実装済み |
+| 状態 | badge | `UI/content.css` | 実装済み |
+| 状態 | note | `UI/content.css` | 実装済み |
+| 状態 | alert | `UI/content.css` | 実装済み |
+| 状態 | chip | `UI/components.css` | 実装済み |
+| 状態 | status pill | `UI/components.css` | 実装済み |
+| 状態 | status dot | `UI/components.css` | 実装済み |
+| 導線 | related links | `UI/components.css` | 実装済み |
+| 導線 | CTA block | `UI/components.css` | 実装済み |
+| 面表示 | surface grid | `UI/components.css` | 実装済み |
+| 面表示 | surface item | `UI/components.css` | 実装済み |
+| 補助 | caption | `UI/components.css` | 実装済み |
+| 補助 | helper text | `UI/components.css` | 実装済み |
+
+### 3.1 実装済みクラス対応表
+
+優先Aの実装済み部品は、以下のクラスで管理する。
+
+| 部品 | 実装済みクラス |
+| --- | --- |
+| card | `.adlaire-card`、`.adlaire-card-header`、`.adlaire-card-body` |
+| panel | `.adlaire-panel`、`.adlaire-panel-header`、`.adlaire-panel-body`、`.adlaire-panel-footer` |
+| well | `.adlaire-well` |
+| action row | `.adlaire-action-row`、`.adlaire-action-row-start`、`.adlaire-action-row-between` |
+| button group | `.adlaire-button-group` |
+| toolbar | `.adlaire-toolbar`、`.adlaire-toolbar-section` |
+| stack | `.adlaire-stack`、`.adlaire-stack-sm`、`.adlaire-stack-lg` |
+| inline | `.adlaire-inline` |
+| divider | `.adlaire-divider` |
+| empty state | `.adlaire-empty-state`、`.adlaire-empty-state-title`、`.adlaire-empty-state-text` |
+| link list | `.adlaire-link-list`、`.adlaire-link-list-item`、`.adlaire-link-list-link` |
+| feature list | `.adlaire-feature-list`、`.adlaire-feature-item` |
+| check list | `.adlaire-check-list`、`.adlaire-check-item` |
+| definition list | `.adlaire-definition-list`、`.adlaire-definition-row`、`.adlaire-definition-term`、`.adlaire-definition-description` |
+| key-value summary | `.adlaire-key-value`、`.adlaire-key-value-row`、`.adlaire-key-value-key`、`.adlaire-key-value-value` |
+| metadata row | `.adlaire-meta-list`、`.adlaire-meta-row`、`.adlaire-meta-label`、`.adlaire-meta-value` |
+| media object | `.adlaire-media`、`.adlaire-media-figure`、`.adlaire-media-body`、`.adlaire-media-title` |
+| badge | `.adlaire-badge`、`.adlaire-badge-primary`、`.adlaire-badge-secondary`、`.adlaire-badge-success`、`.adlaire-badge-warning`、`.adlaire-badge-danger` |
+| note | `.adlaire-note`、`.adlaire-note-info`、`.adlaire-note-success`、`.adlaire-note-warning`、`.adlaire-note-danger` |
+| alert | `.adlaire-alert`、`.adlaire-alert-info`、`.adlaire-alert-success`、`.adlaire-alert-warning`、`.adlaire-alert-danger` |
+| chip | `.adlaire-chip-list`、`.adlaire-chip`、`.adlaire-chip-primary`、`.adlaire-chip-muted` |
+| status pill | `.adlaire-status-pill` |
+| status dot | `.adlaire-status-dot` |
+| related links | `.adlaire-related-links` |
+| CTA block | `.adlaire-cta`、`.adlaire-cta-title`、`.adlaire-cta-text`、`.adlaire-cta-actions` |
+| surface grid | `.adlaire-surface-grid` |
+| surface item | `.adlaire-surface-item` |
+| caption | `.adlaire-caption` |
+| helper text | `.adlaire-helper-text` |
+
+---
+
+## 4. 優先B
+
+優先Bは、CSS onlyで成立しやすく、追加前に利用場面とクラス粒度を固める候補である。
+
+| 分類 | 部品 | 想定実装先 | 状態 |
+| --- | --- | --- | --- |
+| 見出し群 | page heading | `UI/components.css` | 候補 |
+| 見出し群 | heading group | `UI/components.css` | 候補 |
+| 見出し群 | section lead | `UI/components.css` | 候補 |
+| 案内 | announcement bar | `UI/components.css` | 候補 |
+| 案内 | update notice | `UI/components.css` | 候補 |
+| 案内 | maintenance notice | `UI/components.css` | 候補 |
+| FAQ | FAQ list | `UI/content.css` | 候補 |
+| FAQ | FAQ item | `UI/content.css` | 候補 |
+| FAQ | details/summary styling | `UI/content.css` | 候補 |
+| 手順 | step list | `UI/components.css` | 候補 |
+| 手順 | process list | `UI/components.css` | 候補 |
+| 手順 | numbered flow | `UI/components.css` | 候補 |
+| 比較 | comparison block | `UI/content.css` | 候補 |
+| 比較 | pros/cons list | `UI/content.css` | 候補 |
+| 強調 | highlight box | `UI/components.css` | 候補 |
+| 強調 | summary box | `UI/components.css` | 候補 |
+| 強調 | stat block | `UI/components.css` | 候補 |
+| ナビ補助 | anchor nav | `UI/components.css` | 候補 |
+| ナビ補助 | subnav | `UI/components.css` | 候補 |
+| ナビ補助 | sibling nav | `UI/components.css` | 候補 |
+| カード派生 | card grid | `UI/components.css` | 候補 |
+| カード派生 | card media | `UI/components.css` | 候補 |
+| カード派生 | card actions | `UI/components.css` | 候補 |
+| リスト派生 | simple list | `UI/components.css` | 候補 |
+| リスト派生 | bordered list | `UI/components.css` | 候補 |
+| リスト派生 | compact list | `UI/components.css` | 候補 |
+| 連絡導線 | contact panel | `UI/components.css` | 候補 |
+| 連絡導線 | inquiry CTA | `UI/components.css` | 候補 |
+| 連絡導線 | external link row | `UI/components.css` | 候補 |
+
+---
+
+## 5. 優先C
+
+優先Cは、必要性が出てから仕様化する候補である。
+
+| 分類 | 部品 | 想定実装先 | 状態 |
+| --- | --- | --- | --- |
+| 状態表示 | progress | `UI/components.css` | 保留 |
+| 状態表示 | step indicator | `UI/components.css` | 保留 |
+| 状態表示 | status timeline | `UI/content.css` | 保留 |
+| データ表示 | pagination | `UI/components.css` | 保留 |
+| データ表示 | tag list | `UI/components.css` | 保留 |
+| データ表示 | filter chips | `UI/components.css` | 保留 |
+| 補助表示 | tooltip style | `UI/components.css` | 保留 |
+| 補助表示 | popover style | `UI/components.css` | 保留 |
+| 視覚枠 | hero panel | `UI/components.css` | 保留 |
+| 視覚枠 | visual banner | `UI/components.css` | 保留 |
+| 視覚枠 | image frame | `UI/components.css` | 保留 |
+| ブランド表示 | logo list | `Brand/` または `UI/components.css` | 保留 |
+| ブランド表示 | partner list | `Brand/` または `UI/components.css` | 保留 |
+| ブランド表示 | icon tile | `Brand/` または `UI/components.css` | 保留 |
+| レイアウト複合 | split block | `UI/layout.css` または `UI/components.css` | 保留 |
+| レイアウト複合 | stacked feature | `UI/components.css` | 保留 |
+| レイアウト複合 | comparison grid | `UI/layout.css` または `UI/content.css` | 保留 |
+
+---
+
+## 6. 原則対象外
+
+以下は、現方針では汎用部品として実装しない。
+
+| 部品 | 理由 |
+| --- | --- |
+| modal | JavaScript制御とアクセシビリティ設計が必要になりやすい |
+| drawer | JavaScript制御とフォーカス管理が必要になりやすい |
+| dropdown | 状態管理が必要になりやすい |
+| carousel | JavaScript、アクセシビリティ、画像管理の設計が必要になりやすい |
+| sortable table | JavaScriptまたはデータ制御が必要 |
+| search/filter UI | JavaScriptまたはJSONデータ管理に寄りやすい |
+| tooltip動作 | hover/focus制御とアクセシビリティ設計が必要 |
+| icon set | Brand資産仕様を先に固める必要がある |
+
+---
+
+## 7. 追加判断基準
+
+新しい汎用部品を追加する場合は、以下を満たすこと。
+
+- 2ページ以上で再利用できる見込みがある。
+- 既存の部品またはユーティリティの組み合わせだけでは用途が曖昧になる。
+- CSS onlyで成立する。
+- 新規トークンを追加する場合は、複数部品で共有する理由がある。
+- クラス名は `.adlaire-` 接頭辞を使用する。
+- 実装後に `Tools/check/check-adlaire-design.sh` の検査対象へ追加する。

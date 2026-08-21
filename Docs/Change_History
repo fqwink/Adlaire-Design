@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.58
+
+- `Docs/Master_Spec` の版数を `rev.58` へ更新した。
+- 履歴上の既存ドキュメント `Docs/Generic_Component_Catalog` を現行 `Docs/` 管理対象へ復帰した。
+- `Docs/Generic_Component_Catalog` を、汎用部品の分類、優先度、実装先、実装状態、非対象を一覧管理する補助正本として位置づけた。
+- `Docs/Master_Spec` と `Docs/Document_Index` に、汎用部品カタログの参照関係を追加した。
+- `Tools/check/check-adlaire-design.sh` に、`Docs/Generic_Component_Catalog` の存在、索引、主要項目の検査を追加した。
+
 ## rev.57
 
 - `Docs/Master_Spec` の版数を `rev.57` へ更新した。

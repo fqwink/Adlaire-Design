@@ -18,6 +18,7 @@ for path in \
   Docs/Master_Spec \
   Docs/AGWS_Design_Analysis \
   Docs/WYSIWYG_Editor_Specification \
+  Docs/Generic_Component_Catalog \
   Docs/Change_History \
   Tokens/colors.css \
   Tokens/surface.css \
@@ -77,6 +78,7 @@ find "$ADLAIRE_DESIGN_ROOT/Docs" -type f \
   ! -name 'Master_Spec' \
   ! -name 'AGWS_Design_Analysis' \
   ! -name 'WYSIWYG_Editor_Specification' \
+  ! -name 'Generic_Component_Catalog' \
   ! -name 'Document_Index' \
   ! -name 'Change_History' \
   -print >"$TMP_DIR/unexpected-docs-files"
@@ -243,6 +245,7 @@ for indexed_path in \
   Docs/Master_Spec \
   Docs/AGWS_Design_Analysis \
   Docs/WYSIWYG_Editor_Specification \
+  Docs/Generic_Component_Catalog \
   Docs/Change_History \
   Brand/ \
   Tokens/colors.css \
@@ -284,11 +287,32 @@ done
 
 OLD_REPOSITORY_NAME='Adlaire-''Eco''system-Design'
 
-if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/AGWS_Design_Analysis" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
+if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/AGWS_Design_Analysis" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
   echo "current Adlaire-Design documents must not use the old repository name:" >&2
   cat /tmp/adlaire-design-old-name-matches >&2
   exit 1
 fi
+
+for catalog_term in \
+  '# Adlaire-Design 汎用部品カタログ' \
+  '補助正本' \
+  '## 3. 優先A' \
+  '## 4. 優先B' \
+  '## 5. 優先C' \
+  '## 6. 原則対象外' \
+  'toolbar' \
+  'stack' \
+  'inline' \
+  'chip' \
+  'status pill' \
+  'status dot' \
+  'surface grid' \
+  'surface item'; do
+  if ! grep -F -- "$catalog_term" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" >/dev/null 2>&1; then
+    echo "Docs/Generic_Component_Catalog missing required catalog term: $catalog_term" >&2
+    exit 1
+  fi
+done
 
 if grep -R -n '@import' "$ADLAIRE_DESIGN_ROOT/Tokens/colors.css" "$ADLAIRE_DESIGN_ROOT/Tokens/surface.css" "$ADLAIRE_DESIGN_ROOT/Tokens/status.css" "$ADLAIRE_DESIGN_ROOT/Tokens/effects.css" "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-css-import-matches 2>/dev/null; then
   echo "Adlaire-Design CSS files must not use @import:" >&2

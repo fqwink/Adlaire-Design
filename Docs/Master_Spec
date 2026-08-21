@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.57
+**Version:** rev.58
 
 ---
 
@@ -21,6 +21,8 @@ Adlaire Groupが管理するデザイン資産において、色の役割を統�
 AGWSの詳細解析は `Docs/AGWS_Design_Analysis` を参照する。
 
 WYSIWYG EditorのUIと実装コードはAdlaire-Design採用確定とし、編入仕様は `Docs/WYSIWYG_Editor_Specification` を参照する。Adlaire-Designでは、WYSIWYG Editorの表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSS、TypeScript実装コードを管理対象に含める。
+
+汎用部品の分類、優先度、実装先、実装状態は `Docs/Generic_Component_Catalog` で一覧管理する。仕様正本は本書とし、汎用部品カタログは本書の補助正本として扱う。
 
 本方針は、実装変更より先に本仕様書を正本として定義する。実際のCSS、テーマ、公開面への反映は、本仕様書の承認後に個別の実装計画として扱う。
 
@@ -1266,6 +1268,8 @@ WYSIWYG Editor実装コードの拡充では、ブロックデータ構造、編
 ### 11.11.2.2 汎用部品の実装仕様
 
 汎用部品の拡充として、操作行、ツールバー、配置補助、区切り線、空状態、チップ、ステータス、リンクリスト、サーフェスグリッド、メディアオブジェクトを `UI/components.css` に実装する。
+
+汎用部品の一覧管理は `Docs/Generic_Component_Catalog` で行い、実装済み、候補、保留、対象外を同じ表で管理する。
 
 追加対象は以下とする。
 
