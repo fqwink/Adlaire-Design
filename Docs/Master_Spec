@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.49
+**Version:** rev.52
 
 ---
 
@@ -516,6 +516,45 @@ CSS変数は以下とする。
 | `.adlaire-timeline` | タイムライン外枠 |
 | `.adlaire-timeline-item` | タイムライン項目 |
 | `.adlaire-page-top` | ページトップへ戻るリンク |
+| `.adlaire-panel` | 汎用パネル |
+| `.adlaire-panel-header` | 汎用パネル見出し領域 |
+| `.adlaire-panel-body` | 汎用パネル本文領域 |
+| `.adlaire-panel-footer` | 汎用パネル補助領域 |
+| `.adlaire-well` | 補助情報枠 |
+| `.adlaire-button-group` | ボタン群 |
+| `.adlaire-action-row` | 操作要素の横並び領域 |
+| `.adlaire-action-row-start` | 左寄せ操作領域 |
+| `.adlaire-action-row-between` | 両端揃え操作領域 |
+| `.adlaire-divider` | 汎用区切り線 |
+| `.adlaire-empty-state` | 空状態表示 |
+| `.adlaire-empty-state-title` | 空状態見出し |
+| `.adlaire-empty-state-text` | 空状態本文 |
+| `.adlaire-feature-list` | 特徴リスト |
+| `.adlaire-feature-item` | 特徴リスト項目 |
+| `.adlaire-check-list` | チェックリスト |
+| `.adlaire-check-item` | チェックリスト項目 |
+| `.adlaire-definition-list` | 定義リスト |
+| `.adlaire-definition-row` | 定義リスト行 |
+| `.adlaire-definition-term` | 定義語 |
+| `.adlaire-definition-description` | 定義説明 |
+| `.adlaire-key-value` | キー/値サマリー |
+| `.adlaire-key-value-row` | キー/値行 |
+| `.adlaire-key-value-key` | キー |
+| `.adlaire-key-value-value` | 値 |
+| `.adlaire-link-list` | 汎用リンクリスト |
+| `.adlaire-link-list-item` | 汎用リンクリスト項目 |
+| `.adlaire-link-list-link` | 汎用リンクリストリンク |
+| `.adlaire-related-links` | 関連リンク枠 |
+| `.adlaire-media` | メディアオブジェクト外枠 |
+| `.adlaire-media-figure` | メディアオブジェクト図版領域 |
+| `.adlaire-media-body` | メディアオブジェクト本文領域 |
+| `.adlaire-media-title` | メディアオブジェクト見出し |
+| `.adlaire-cta` | CTA枠 |
+| `.adlaire-cta-title` | CTA見出し |
+| `.adlaire-cta-text` | CTA本文 |
+| `.adlaire-cta-actions` | CTA操作領域 |
+| `.adlaire-caption` | キャプション |
+| `.adlaire-helper-text` | 補助説明テキスト |
 
 `UI/components.css` は以下の規則に従う。
 
@@ -655,6 +694,7 @@ AGWS完全再現のために第3段階で実装した主な表示領域は以下
 | リンク表現 | `.contact-link`、`.privacy-link`、`.text-link` | `UI/content.css` |
 | 連絡先情報 | `.contact-info`、`.contact-item`、`.contact-item h3`、`.contact-item p`、`.contact-item a`、`.contact-item a:hover` | `UI/content.css` |
 | 補助テキスト | `.coming-soon`、`.coming-soon-small`、`.info-note`、`.last-updated`、`.text-muted`、`.mt-30` | `UI/content.css` または `UI/compat-agws.css` |
+| 公開面本文部品 | `.adlaire-table-scroll`、`.adlaire-content-table`、`.content-table`、`.adlaire-meta-list`、`.adlaire-meta-row`、`.adlaire-meta-label`、`.adlaire-meta-value`、`.adlaire-badge`、`.adlaire-note` | `UI/content.css` |
 | 汎用ユーティリティ | `.mt-0`、`.mt-1`、`.mt-2`、`.mt-3`、`.mt-4`、`.mt-5`、`.mb-0`、`.mb-1`、`.mb-2`、`.mb-3`、`.mb-4`、`.mb-5`、`.pt-0`、`.pt-1`、`.pt-2`、`.pt-3`、`.pt-4`、`.pt-5`、`.pb-0`、`.pb-1`、`.pb-2`、`.pb-3`、`.pb-4`、`.pb-5`、`.text-left`、`.text-center`、`.text-right`、`.text-primary`、`.text-secondary`、`.text-success`、`.text-danger`、`.text-warning`、`.text-info`、`.text-muted`、`.bg-primary`、`.bg-secondary`、`.bg-light`、`.bg-dark`、`.d-none`、`.d-block`、`.d-inline`、`.d-inline-block`、`.d-flex`、`.flex-row`、`.flex-column`、`.justify-content-start`、`.justify-content-end`、`.justify-content-center`、`.justify-content-between`、`.align-items-start`、`.align-items-end`、`.align-items-center` | `UI/utilities.css` |
 | 疑似要素・状態 | `*::before`、`*::after`、`a:hover`、`.form-label.required::after`、`.form-control:focus`、`.btn:hover`、`.btn-primary:hover`、`.btn-secondary:hover`、`.btn-outline-primary:hover`、`.header-link:hover`、`.nav-button:hover`、`.card:hover`、`.info-row:first-child`、`.info-row:last-child`、`.business-list li:last-child`、`.contact-link:hover`、`.timeline::before`、`.timeline-item:last-child`、`.tab-label:hover`、`.news-item:hover`、`.news-content p:last-child`、`.sidebar-section:hover`、`.sidebar-link-list li:last-child`、`.sidebar-link:hover`、`.sidebar-links a:hover`、`.contact-item a:hover`、`.breadcrumb-link:hover`、`.back-to-top:hover`、`.btn-submit:hover`、`.btn-submit:disabled`、`.privacy-link:hover`、`.text-link:hover`、`.legal-toc-link:hover`、checked、active、focus、disabled状態 | 各対象UIファイル |
 | レスポンシブ調整 | `@media (max-width: 1024px)`、`@media (max-width: 768px)`、`@media (max-width: 480px)` | `UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css` |
@@ -709,7 +749,63 @@ AGWS完全再現のために第3段階で実装した主な表示領域は以下
 | `.adlaire-legal-toc` | 法的情報目次 |
 | `.adlaire-legal-toc-link` | 法的情報目次リンク |
 | `.adlaire-content-link` | 本文内リンク |
+| `.adlaire-table-scroll` | 横スクロール可能な本文表ラッパー |
+| `.adlaire-content-table` | 公開面本文用の表 |
+| `.adlaire-meta-list` | メタ情報リスト |
+| `.adlaire-meta-row` | メタ情報行 |
+| `.adlaire-meta-label` | メタ情報ラベル |
+| `.adlaire-meta-value` | メタ情報値 |
+| `.adlaire-badge` | バッジ基本形 |
+| `.adlaire-badge-primary` | 主要バッジ |
+| `.adlaire-badge-secondary` | 補助バッジ |
+| `.adlaire-badge-success` | 成功バッジ |
+| `.adlaire-badge-warning` | 警告バッジ |
+| `.adlaire-badge-danger` | 危険バッジ |
+| `.adlaire-note` | 注記基本形 |
+| `.adlaire-note-info` | 情報注記 |
+| `.adlaire-note-success` | 成功注記 |
+| `.adlaire-note-warning` | 警告注記 |
+| `.adlaire-note-danger` | 危険注記 |
 | `.adlaire-muted-text` | 補助テキスト |
+| `.adlaire-panel` | 汎用パネル |
+| `.adlaire-panel-header` | 汎用パネル見出し領域 |
+| `.adlaire-panel-body` | 汎用パネル本文領域 |
+| `.adlaire-panel-footer` | 汎用パネル補助領域 |
+| `.adlaire-well` | 補助情報枠 |
+| `.adlaire-button-group` | ボタン群 |
+| `.adlaire-action-row` | 操作要素の横並び領域 |
+| `.adlaire-action-row-start` | 左寄せ操作領域 |
+| `.adlaire-action-row-between` | 両端揃え操作領域 |
+| `.adlaire-divider` | 汎用区切り線 |
+| `.adlaire-empty-state` | 空状態表示 |
+| `.adlaire-empty-state-title` | 空状態見出し |
+| `.adlaire-empty-state-text` | 空状態本文 |
+| `.adlaire-feature-list` | 特徴リスト |
+| `.adlaire-feature-item` | 特徴リスト項目 |
+| `.adlaire-check-list` | チェックリスト |
+| `.adlaire-check-item` | チェックリスト項目 |
+| `.adlaire-definition-list` | 定義リスト |
+| `.adlaire-definition-row` | 定義リスト行 |
+| `.adlaire-definition-term` | 定義語 |
+| `.adlaire-definition-description` | 定義説明 |
+| `.adlaire-key-value` | キー/値サマリー |
+| `.adlaire-key-value-row` | キー/値行 |
+| `.adlaire-key-value-key` | キー |
+| `.adlaire-key-value-value` | 値 |
+| `.adlaire-link-list` | 汎用リンクリスト |
+| `.adlaire-link-list-item` | 汎用リンクリスト項目 |
+| `.adlaire-link-list-link` | 汎用リンクリストリンク |
+| `.adlaire-related-links` | 関連リンク枠 |
+| `.adlaire-media` | メディアオブジェクト外枠 |
+| `.adlaire-media-figure` | メディアオブジェクト図版領域 |
+| `.adlaire-media-body` | メディアオブジェクト本文領域 |
+| `.adlaire-media-title` | メディアオブジェクト見出し |
+| `.adlaire-cta` | CTA枠 |
+| `.adlaire-cta-title` | CTA見出し |
+| `.adlaire-cta-text` | CTA本文 |
+| `.adlaire-cta-actions` | CTA操作領域 |
+| `.adlaire-caption` | キャプション |
+| `.adlaire-helper-text` | 補助説明テキスト |
 
 ### 11.10.5 第3段階の非対象
 
@@ -1086,6 +1182,63 @@ Adlaire-Designの今後の拡充は、ビルド、minify、bundleではなく、
 - 公開面本文固有の表現は `UI/content.css` に定義する。
 - 汎用補助クラスは `UI/utilities.css` に定義する。
 - AGWS既存HTML互換だけに必要なものは `UI/compat-agws.css` に定義する。
+
+### 11.11.2.1 公開面本文部品の実装仕様
+
+公開面本文部品の拡充として、表、メタ情報、バッジ、注記を `UI/content.css` に実装する。
+
+追加対象は以下とする。
+
+| 部品 | クラス | 役割 |
+| --- | --- | --- |
+| 表ラッパー | `.adlaire-table-scroll` | 横幅が不足する画面で表を横スクロール可能にする |
+| 本文表 | `.adlaire-content-table`、`.content-table` | 公開面本文内の比較表、概要表、一覧表を表示する |
+| メタ情報 | `.adlaire-meta-list`、`.adlaire-meta-row`、`.adlaire-meta-label`、`.adlaire-meta-value` | 会社情報、記事属性、補足情報などのラベル/値ペアを表示する |
+| バッジ | `.adlaire-badge`、`.adlaire-badge-primary`、`.adlaire-badge-secondary`、`.adlaire-badge-success`、`.adlaire-badge-warning`、`.adlaire-badge-danger` | 種別、状態、分類を短いラベルで表示する |
+| 注記 | `.adlaire-note`、`.adlaire-note-info`、`.adlaire-note-success`、`.adlaire-note-warning`、`.adlaire-note-danger` | 本文中の補足、注意、状態別メッセージを表示する |
+
+`.content-table` は既存公開面または移行時のHTML変更量を減らすための互換別名として扱う。標準クラス正本は `.adlaire-content-table` とする。
+
+本実装では新規トークンを追加しない。色、角丸、状態色は `Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` の既存CSS変数を参照する。
+
+本実装の非対象は以下とする。
+
+- JavaScriptによる表ソート、フィルタ、折りたたみ
+- JSONデータ管理
+- 多言語化
+- ビルド、minify、bundle
+- AGWS本体HTMLの置換
+
+### 11.11.2.2 汎用部品の実装仕様
+
+汎用部品の拡充として、操作行、区切り線、空状態、リンクリスト、メディアオブジェクトを `UI/components.css` に実装する。
+
+追加対象は以下とする。
+
+| 部品 | クラス | 役割 |
+| --- | --- | --- |
+| 表示枠 | `.adlaire-panel`、`.adlaire-panel-header`、`.adlaire-panel-body`、`.adlaire-panel-footer`、`.adlaire-well` | カードより軽い汎用枠、補助情報枠を表示する |
+| 操作 | `.adlaire-button-group`、`.adlaire-action-row`、`.adlaire-action-row-start`、`.adlaire-action-row-between` | ボタン、リンク、補助操作などを横並びで配置する |
+| 区切り線 | `.adlaire-divider` | セクション間やカード内の視覚的な区切りを表示する |
+| 空状態 | `.adlaire-empty-state`、`.adlaire-empty-state-title`、`.adlaire-empty-state-text` | 一覧や検索結果が空の状態を静的に表示する |
+| リスト | `.adlaire-feature-list`、`.adlaire-feature-item`、`.adlaire-check-list`、`.adlaire-check-item`、`.adlaire-definition-list`、`.adlaire-definition-row`、`.adlaire-definition-term`、`.adlaire-definition-description` | 特徴、チェック項目、定義情報を表示する |
+| サマリー | `.adlaire-key-value`、`.adlaire-key-value-row`、`.adlaire-key-value-key`、`.adlaire-key-value-value` | 主要情報をキー/値形式で表示する |
+| リンクリスト | `.adlaire-link-list`、`.adlaire-link-list-item`、`.adlaire-link-list-link` | 関連リンク、導線、一覧リンクを縦方向に表示する |
+| 関連リンク | `.adlaire-related-links` | 関連リンク群を独立した枠として表示する |
+| メディアオブジェクト | `.adlaire-media`、`.adlaire-media-figure`、`.adlaire-media-body`、`.adlaire-media-title` | 図版、アイコン、画像などと本文を横並びで表示する |
+| CTA | `.adlaire-cta`、`.adlaire-cta-title`、`.adlaire-cta-text`、`.adlaire-cta-actions` | 公開面の主要導線を強調表示する |
+| 補助テキスト | `.adlaire-caption`、`.adlaire-helper-text` | 図表キャプション、入力外の補助説明、注釈を表示する |
+
+汎用部品は、本文固有の意味を持たず、公開面の複数ページで再利用できるものに限定する。見た目の値は既存の `Tokens/surface.css` と `Tokens/effects.css` のCSS変数を参照し、新規トークンは追加しない。
+
+本実装の非対象は以下とする。
+
+- JavaScriptによる開閉、並び替え、状態制御
+- アイコン、画像、ロゴなどのブランド資産追加
+- JSONデータ管理
+- 多言語化
+- ビルド、minify、bundle
+- AGWS本体HTMLの置換
 
 ### 11.11.3 再現性検査の策定仕様
 

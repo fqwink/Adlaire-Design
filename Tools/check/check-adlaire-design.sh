@@ -487,7 +487,24 @@ for class in \
   '.contact-info' \
   '.breadcrumb' \
   '.legal-toc' \
-  '.alert'; do
+  '.alert' \
+  '.adlaire-table-scroll' \
+  '.adlaire-content-table' \
+  '.adlaire-meta-list' \
+  '.adlaire-meta-row' \
+  '.adlaire-meta-label' \
+  '.adlaire-meta-value' \
+  '.adlaire-badge' \
+  '.adlaire-badge-primary' \
+  '.adlaire-badge-secondary' \
+  '.adlaire-badge-success' \
+  '.adlaire-badge-warning' \
+  '.adlaire-badge-danger' \
+  '.adlaire-note' \
+  '.adlaire-note-info' \
+  '.adlaire-note-success' \
+  '.adlaire-note-warning' \
+  '.adlaire-note-danger'; do
   if ! grep -F -- "$class" "$ADLAIRE_DESIGN_ROOT/UI/content.css" >/dev/null 2>&1; then
     echo "UI/content.css missing required class: $class" >&2
     exit 1
@@ -545,7 +562,46 @@ for class in \
   '.adlaire-tab-panel' \
   '.adlaire-timeline' \
   '.adlaire-timeline-item' \
-  '.adlaire-page-top'; do
+  '.adlaire-page-top' \
+  '.adlaire-panel' \
+  '.adlaire-panel-header' \
+  '.adlaire-panel-body' \
+  '.adlaire-panel-footer' \
+  '.adlaire-well' \
+  '.adlaire-button-group' \
+  '.adlaire-action-row' \
+  '.adlaire-action-row-start' \
+  '.adlaire-action-row-between' \
+  '.adlaire-divider' \
+  '.adlaire-empty-state' \
+  '.adlaire-empty-state-title' \
+  '.adlaire-empty-state-text' \
+  '.adlaire-feature-list' \
+  '.adlaire-feature-item' \
+  '.adlaire-check-list' \
+  '.adlaire-check-item' \
+  '.adlaire-definition-list' \
+  '.adlaire-definition-row' \
+  '.adlaire-definition-term' \
+  '.adlaire-definition-description' \
+  '.adlaire-key-value' \
+  '.adlaire-key-value-row' \
+  '.adlaire-key-value-key' \
+  '.adlaire-key-value-value' \
+  '.adlaire-link-list' \
+  '.adlaire-link-list-item' \
+  '.adlaire-link-list-link' \
+  '.adlaire-related-links' \
+  '.adlaire-media' \
+  '.adlaire-media-figure' \
+  '.adlaire-media-body' \
+  '.adlaire-media-title' \
+  '.adlaire-cta' \
+  '.adlaire-cta-title' \
+  '.adlaire-cta-text' \
+  '.adlaire-cta-actions' \
+  '.adlaire-caption' \
+  '.adlaire-helper-text'; do
   if ! grep -F -- "$class" "$ADLAIRE_DESIGN_ROOT/UI/components.css" >/dev/null 2>&1; then
     echo "UI/components.css missing required class: $class" >&2
     exit 1
