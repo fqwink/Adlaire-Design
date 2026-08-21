@@ -73,6 +73,11 @@ if ! grep -F '# Adlaire-Design' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1
   exit 1
 fi
 
+if ! grep -F 'Docs/Change_History' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must reference Docs/Change_History." >&2
+  exit 1
+fi
+
 if ! grep -F '今後の拡充は、公開面CSS機能、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must document the expansion priority policy." >&2
   exit 1
@@ -95,6 +100,19 @@ fi
 
 if ! grep -F '上記の拡充においても、Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、CSS bundle生成、minify版生成、`Dist/` 作成は現状検討しない。' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
   echo "Docs/Master_Spec must keep build, minify, bundle, and preprocessor work out of current consideration." >&2
+  exit 1
+fi
+
+MASTER_SPEC_VERSION=$(sed -n 's/^\*\*Version:\*\* \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec")
+CHANGE_HISTORY_VERSION=$(sed -n 's/^## \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Change_History" | sed -n '1p')
+
+if [ -z "$MASTER_SPEC_VERSION" ]; then
+  echo "Docs/Master_Spec must include a Version line in the form: **Version:** rev.N" >&2
+  exit 1
+fi
+
+if [ "$MASTER_SPEC_VERSION" != "$CHANGE_HISTORY_VERSION" ]; then
+  echo "Docs/Master_Spec Version must match the latest Docs/Change_History rev: $MASTER_SPEC_VERSION != $CHANGE_HISTORY_VERSION" >&2
   exit 1
 fi
 

@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.46
+
+- `Docs/Master_Spec` の版数を `rev.46` へ更新した。
+- `Tools/check/check-adlaire-design.sh` に、`Docs/Master_Spec` の `Version` と `Docs/Change_History` の最新revが一致していることの検査を追加した。
+- `Tools/check/check-adlaire-design.sh` に、READMEが `Docs/Change_History` を参照していることの検査を追加した。
+- `README.md` のドキュメント案内に `Docs/Change_History` を追加した。
+- 再現性検査の策定仕様に、Master_Spec版数とChange_History最新revの一致確認を追加した。
+
 ## rev.45
 
 - `Docs/Master_Spec` の版数を `rev.45` へ更新した。
