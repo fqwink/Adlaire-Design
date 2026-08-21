@@ -8,6 +8,16 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.20
+
+- `Docs/Master_Spec` の版数を `rev.20` へ更新した。
+- 第2段階CSSとして `Tokens/surface.css`、`UI/layout.css`、`UI/components.css` を実装した。
+- `Tokens/surface.css` に公開面用の面・文字・強調・通知トークンを定義した。
+- `UI/layout.css` に公開面のコンテナ、2カラムレイアウト、本文領域、サイドバー領域を定義した。
+- `UI/components.css` に公開面カード、セクション見出し、パンくず、サイドバー関連情報、notice、CSS onlyタブ、タイムライン、ページトップリンクを定義した。
+- `Tools/check/check-adlaire-design.sh` に第2段階CSSの必須ファイル、必須変数、必須クラス、ブレークポイント、禁止記述の検査を追加した。
+- `Docs/Master_Spec` の第2段階状態を実装済みへ更新した。
+
 ## rev.19
 
 - `Docs/Master_Spec` の版数を `rev.19` へ更新した。

@@ -4,5 +4,8 @@
 - `Docs/AGWS_Design_Analysis`(AGWSリポジトリ公開面デザインの解析。`adlaire.com` は公開確認先)
 - `Docs/Change_History`(Adlaire-Design専用の変更履歴)
 - `Tokens/colors.css`(ブランドカラーCSS変数)
+- `Tokens/surface.css`(公開面参照色CSS変数)
 - `UI/adlaire.css`(ブランドカラー最小ユーティリティ)
+- `UI/layout.css`(公開面基本レイアウト)
+- `UI/components.css`(公開面コンポーネント)
 - `Tools/check/check-adlaire-design.sh`(Adlaire-Design専用の構成・CSS実装検査)
