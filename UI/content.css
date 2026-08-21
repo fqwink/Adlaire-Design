@@ -626,7 +626,7 @@
   z-index: var(--adlaire-z-sticky);
   background-color: var(--adlaire-surface-soft);
   border-left: 4px solid var(--adlaire-surface-accent);
-  box-shadow: var(--adlaire-shadow-blue-soft);
+  box-shadow: var(--adlaire-shadow-blue-sticky);
 }
 
 .adlaire-legal-toc-link,
@@ -644,7 +644,7 @@
 
 .legal-toc-link:hover {
   background-color: var(--adlaire-surface-accent);
-  box-shadow: var(--adlaire-shadow-blue);
+  box-shadow: var(--adlaire-shadow-blue-nav-hover);
   color: var(--adlaire-surface-card);
   text-decoration: none;
   transform: translateY(-2px);

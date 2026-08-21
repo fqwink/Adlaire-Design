@@ -16,6 +16,8 @@
   --adlaire-shadow-tab-active: 0 -2px 4px rgba(0, 102, 204, 0.1);
   --adlaire-shadow-blue-soft: 0 2px 8px rgba(0, 102, 204, 0.15);
   --adlaire-shadow-blue: 0 2px 8px rgba(0, 102, 204, 0.3);
+  --adlaire-shadow-blue-nav-hover: 0 4px 8px rgba(0, 102, 204, 0.3);
+  --adlaire-shadow-blue-sticky: 0 4px 12px rgba(0, 102, 204, 0.15);
   --adlaire-shadow-blue-strong: 0 4px 12px rgba(0, 102, 204, 0.4);
   --adlaire-shadow-blue-hover: 0 4px 12px rgba(0, 102, 204, 0.5);
   --adlaire-shadow-blue-intense: 0 6px 20px rgba(0, 102, 204, 0.6);
