@@ -2,13 +2,13 @@
 
 # マスター仕様書
 
-**Version:** rev.55
+**Version:** rev.56
 
 ---
 
 # 1. 目的
 
-本仕様書は、Adlaire-Designのマスター仕様書として、Adlaire Group(開発元: Adlaire Group DX事業セグメントグループ)が使用する統一ブランドカラー、公開面・管理面におけるブランドデザイン、CSSフレームワーク、WYSIWYG Editor UIの基本方針を定める。
+本仕様書は、Adlaire-Designのマスター仕様書として、Adlaire Group(開発元: Adlaire Group DX事業セグメントグループ)が使用する統一ブランドカラー、公開面・管理面におけるブランドデザイン、CSSフレームワーク、WYSIWYG Editor UI、WYSIWYG Editor実装コードの基本方針を定める。
 
 色だけでなく、背景、境界、余白、ボタン、リンク、セクション構成、情報の見せ方など、ユーザーが受け取る見た目全体を設計対象に含める。
 
@@ -20,7 +20,7 @@ Adlaire Groupが管理するデザイン資産において、色の役割を統�
 
 AGWSの詳細解析は `Docs/AGWS_Design_Analysis` を参照する。
 
-WYSIWYG EditorのUIはAdlaire-Design採用確定とし、編入仕様は `Docs/WYSIWYG_Editor_Specification` を参照する。Adlaire-Designでは、WYSIWYG Editorの表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSSを管理対象に含める。
+WYSIWYG EditorのUIと実装コードはAdlaire-Design採用確定とし、編入仕様は `Docs/WYSIWYG_Editor_Specification` を参照する。Adlaire-Designでは、WYSIWYG Editorの表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSS、TypeScript実装コードを管理対象に含める。
 
 本方針は、実装変更より先に本仕様書を正本として定義する。実際のCSS、テーマ、公開面への反映は、本仕様書の承認後に個別の実装計画として扱う。
 
@@ -77,20 +77,21 @@ WYSIWYG EditorのUIはAdlaire-Design採用確定とし、編入仕様は `Docs/W
 - ユーティリティクラスは `.adlaire-bg-<role>`(背景色)、`.adlaire-text-<role>`(文字色)、`.adlaire-border-<role>`(境界線色)の命名規則に従い、第4章のCSS変数を参照する形で実装する(HEX値を直接埋め込まない)。
 - 内製CSSフレームワークは、画面やテーマごとに分散させず、本仕様書で定める共有スタイルシートとして一元管理する。
 - CSSフレームワークとデザイントークンの実装範囲、ファイル構成、段階は第11章に定める。
-- WYSIWYG Editor UIは、Adlaire-Designの管理対象として扱い、エディター表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSSを本リポジトリで管理する。
+- WYSIWYG Editor UIと実装コードは、Adlaire-Designの管理対象として扱い、エディター表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSS、TypeScript実装コードを本リポジトリで管理する。
 - 色以外の設計要素(余白、タイポグラフィなど)は、AGWSリポジトリの方向性を参照する。具体的な設計トークンとして管理する必要が生じた場合は、別途定義を新設する。
 
 ---
 
 # 6. リポジトリ構成
 
-`Adlaire-Design` の開発正本は、以下の3領域(フォルダ)を中心に構成する。
+`Adlaire-Design` の開発正本は、以下の4領域(フォルダ)を中心に構成する。
 
 - `UI/`: CSSフレームワーク本体(第5章のユーティリティクラス等)およびWYSIWYG Editor UIスキン。将来的にCSS以外のコンポーネント実装も含みうる領域とする。
+- `WYSIWYG/`: WYSIWYG Editorの仕様連動実装コード。TypeScriptソース、実装メモ、将来のビルド方針を管理する領域とする。
 - `Tokens/`: デザイントークン(色・余白・タイポグラフィ等の設計値)。第3章のブランドカラーパレット、第4章のCSS変数はこの領域に対応する。
 - `Brand/`: ブランド全般の資産(ロゴなど、色以外も含む将来拡張領域)。
 
-3領域間の依存関係は、現時点では定めない。
+4領域間の依存関係は、現時点では定めない。
 
 ---
 
@@ -98,7 +99,7 @@ WYSIWYG EditorのUIはAdlaire-Design採用確定とし、編入仕様は `Docs/W
 
 Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理する方針とする。
 
-Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産の開発正本として独立して管理する。
+Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、WYSIWYG Editor実装コードの開発正本として独立して管理する。
 
 ---
 
@@ -211,7 +212,7 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 
 ## 11.1 目的
 
-本章は、Adlaire-Design内で管理するCSSフレームワーク、デザイントークン、WYSIWYG Editor UIの実装範囲、ファイル構成、命名、段階を定める。
+本章は、Adlaire-Design内で管理するCSSフレームワーク、デザイントークン、WYSIWYG Editor UI、WYSIWYG Editor実装コードの実装範囲、ファイル構成、命名、段階を定める。
 
 本章は仕様固定と実装整合性の確認を目的とする。実際のCSSファイル作成、テーマ作成、公開面反映は、ユーザー承認後に個別作業として行う。
 
@@ -224,10 +225,12 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 - AGWSリポジトリのCSSはそのまま扱わず、構造・役割・見た目を参考にしてAdlaire-Design内の仕様へ整理する。
 - 実装は、第1段階の色トークンと最小ユーティリティ、第2段階の公開面トークン・レイアウト・コンポーネント、第3段階のAGWS完全再現用CSS、WYSIWYG編入に分けて管理する。
 - `@import` は使用しない。CSSファイルの読み込み順は利用側で明示する。
-- 2026-08-21時点では、ビルド方針は採用しない。`Tokens/` と `UI/` 配下のCSSファイルを正本として直接管理し、生成元と生成物を分けない。
-- Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、minify生成、bundle生成は採用しない。
+- 2026-08-21時点では、CSSビルド方針は採用しない。`Tokens/` と `UI/` 配下のCSSファイルを正本として直接管理し、生成元と生成物を分けない。
+- WYSIWYG Editor実装コードは `WYSIWYG/Source/` 配下のTypeScriptソースを正本として管理する。
+- Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、CSS minify生成、CSS bundle生成は採用しない。
 - `Dist/`、`dist/`、`Build/`、`build/` などの生成CSS用ディレクトリは作成しない。
-- 今後の拡充は、公開面で必要となるCSS機能、WYSIWYG Editor UI、再現性検査、ドキュメント整備を優先する。ビルド、minify、bundleは現状検討しない。
+- npm、webpack、Node.js前提のWYSIWYGビルド設定は採用しない。
+- 今後の拡充は、公開面で必要となるCSS機能、WYSIWYG Editor UI、WYSIWYG Editor実装コード、再現性検査、ドキュメント整備を優先する。CSSのビルド、minify、bundleは現状検討しない。
 
 ## 11.3 実装対象ファイル
 
@@ -269,12 +272,14 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 
 ### 11.3.4 WYSIWYG編入
 
-WYSIWYG編入では、WYSIWYG Editorの表示層をAdlaire-Designの管理対象として実装済みである。
+WYSIWYG編入では、WYSIWYG Editorの表示層と実装コードをAdlaire-Designの管理対象として実装済みである。
 
 | ファイル | 役割 | 状態 |
 | --- | --- | --- |
 | `Docs/WYSIWYG_Editor_Specification` | WYSIWYG EditorのAdlaire-Design編入仕様 | 実装済み |
 | `UI/wysiwyg.css` | WYSIWYG EditorのエディターUI、ブロック表示、プレビュー、JSON表示 | 実装済み |
+| `WYSIWYG/README.md` | WYSIWYG Editor実装コードの管理方針 | 実装済み |
+| `WYSIWYG/Source/editor.ts` | ブロックデータ、履歴、JSON、プレビュー出力の依存なしTypeScript実装 | 実装済み |
 
 ## 11.4 CSS読み込み順
 
@@ -1130,19 +1135,22 @@ AGWS側でAdlaire-Design CSSを採用するPRは、方針文書PRとは分ける
 
 ## 11.11 今後の拡充優先順位
 
-Adlaire-Designの今後の拡充は、ビルド、minify、bundleではなく、公開面で必要になる設計機能、WYSIWYG Editor UI、運用品質を優先する。
+Adlaire-Designの今後の拡充は、CSSのビルド、minify、bundleではなく、公開面で必要になる設計機能、WYSIWYG Editor UI、WYSIWYG Editor実装コード、運用品質を優先する。
 
 拡充優先順位は以下とする。
 
 1. 公開面CSS機能の拡充
 2. WYSIWYG Editor UIの拡充
-3. 再現性検査の拡充
-4. ドキュメント整備
-5. ブランド資産の整理
+3. WYSIWYG Editor実装コードの拡充
+4. 再現性検査の拡充
+5. ドキュメント整備
+6. ブランド資産の整理
 
 公開面CSS機能の拡充では、AGWSまたは今後の公開面で実際に必要になったレイアウト、コンポーネント、フォーム、ナビゲーション、本文部品、ユーティリティ、状態表現を対象にする。追加する場合は、`Tokens/` と `UI/` 配下の既存責務に沿って直接CSSとして管理する。
 
 WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブロック表示、プレビュー、JSON表示、状態表示など、WYSIWYGの表示層で必要になるCSSと仕様を対象にする。TypeScript本体、保存処理、編集ロジック、JavaScriptビルド成果物は対象外のままとする。
+
+WYSIWYG Editor実装コードの拡充では、ブロックデータ構造、編集操作、Undo/Redo、JSON serialization、preview rendering、将来のDeno互換ビルド方針を対象にする。npm、webpack、Node.js前提の設定、生成JavaScript、bundle、minify成果物は対象外とする。
 
 再現性検査の拡充では、CSS読み込み順、CSS変数参照、禁止記述、必須セレクタ、AGWSまたは他公開面との差分確認を優先する。検査は `Tools/check/check-adlaire-design.sh` の責務範囲に収め、CSSの完全なパーサ検証や外部依存ツール導入は行わない。
 
@@ -1158,8 +1166,8 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 - 目的を、公開面で必要な表示、再現性、運用、保守のいずれかに結びつける。
 - 対象ファイル、追加するCSS変数、追加するクラス、利用側の読み込み順、検査方法を明記する。
-- 既存の `Tokens/`、`UI/`、`Brand/`、`Tools/check/` の責務境界に収める。
-- Node.js/npm依存、外部CSSフレームワーク、CSSプリプロセッサ、生成CSS、minify、bundleを前提にしない。
+- 既存の `Tokens/`、`UI/`、`WYSIWYG/`、`Brand/`、`Tools/check/` の責務境界に収める。
+- Node.js/npm依存、外部CSSフレームワーク、CSSプリプロセッサ、生成CSS、CSS minify、CSS bundle、生成JavaScriptを前提にしない。
 - 追加前に、既存CSSで代替できない理由を確認する。
 - 追加後に、`Tools/check/check-adlaire-design.sh` と必要な隣接AGWS検査を通す。
 
@@ -1168,7 +1176,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 - JavaScriptによる表示制御
 - 多言語化
 - JSONデータ管理
-- ビルド処理
+- CSSビルド処理
 - minify版
 - bundle版
 - `Dist/`、`dist/`、`Build/`、`build/` 作成
@@ -1260,7 +1268,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 ### 11.11.2.3 WYSIWYG Editor UIの実装仕様
 
-WYSIWYG EditorのUIはAdlaire-Design採用確定とし、エディター表示層のCSSを `UI/wysiwyg.css` に実装する。
+WYSIWYG EditorのUIと実装コードはAdlaire-Design採用確定とし、エディター表示層のCSSを `UI/wysiwyg.css`、実装コードを `WYSIWYG/Source/editor.ts` に実装する。
 
 Adlaire-Designで管理するWYSIWYG Editorの範囲は以下とする。
 
@@ -1268,6 +1276,7 @@ Adlaire-Designで管理するWYSIWYG Editorの範囲は以下とする。
 | --- | --- | --- |
 | WYSIWYG編入仕様 | `Docs/WYSIWYG_Editor_Specification` | 実装済み |
 | エディターUIスキン | `UI/wysiwyg.css` | 実装済み |
+| エディター実装コード | `WYSIWYG/Source/editor.ts` | 実装済み |
 | 色・面・状態・効果値 | `Tokens/` | 既存トークン参照 |
 | 汎用部品 | `UI/components.css` | 既存部品参照 |
 | 本文・プレビュー部品 | `UI/content.css` | 既存部品参照 |
@@ -1284,23 +1293,21 @@ Adlaire-Designで管理するWYSIWYG Editorの範囲は以下とする。
 | 補助メニュー | `.adlaire-wysiwyg-inline-toolbar`、`.adlaire-wysiwyg-slash-menu`、`.adlaire-wysiwyg-slash-item` | インライン操作とスラッシュコマンド候補を表示する |
 | 表示確認 | `.adlaire-wysiwyg-preview`、`.adlaire-wysiwyg-json-panel`、`.adlaire-wysiwyg-footer` | プレビュー、JSON表示、フッター状態を表示する |
 
-WYSIWYG Editorのブロック種別は、見出し、段落、リスト、コード、引用、画像、区切り線、チェックリスト、callout、label、progressを想定する。ブロック種別ごとのデータ構造、保存形式、編集ロジックはAdlaire-Designでは実装しない。
+WYSIWYG Editorのブロック種別は、見出し、段落、リスト、コード、引用、画像、区切り線、チェックリスト、callout、label、progressを想定する。ブロック種別、データ構造、保存形式、編集ロジックの最小実装は `WYSIWYG/Source/editor.ts` で管理する。
 
 `UI/wysiwyg.css` は既存トークンを参照し、WYSIWYG専用の新規トークンは追加しない。HEX値、RGBA値、`@import`、`@charset`、`!important`、負の `letter-spacing`、`transition: all`、非ゼロの角丸・影・z-index直書きは禁止する。
 
 `UI/wysiwyg.css` の冒頭コメントは `/* Adlaire-Design WYSIWYG editor */` に固定する。
 
-WYSIWYG Editor本体では、TypeScriptからJavaScriptへのtranspile、複数ファイルのbundle、生成JavaScriptのminify、ビルド工程全体のcompileを必須とする。ただし、Adlaire-Designリポジトリではこれらを実行・管理しない。npm、`package.json`、`package-lock.json`、`node_modules`、webpack、Node.js前提のビルド体系は採用しない。
+WYSIWYG Editor本体では、TypeScriptからJavaScriptへのtranspile、複数ファイルのbundle、生成JavaScriptのminify、ビルド工程全体のcompileを必須とする。ただし、Adlaire-Designリポジトリに保存する正本はTypeScriptソースとし、生成JavaScript、bundle、minify成果物は保存しない。npm、`package.json`、`package-lock.json`、`node_modules`、webpack、Node.js前提のビルド体系は採用しない。
 
 本実装の非対象は以下とする。
 
-- WYSIWYG EditorのTypeScriptコア実装
-- JSONスキーマ実装
-- JSON保存処理
-- ドラッグ&ドロップ処理
-- Undo/Redo処理
-- スラッシュコマンド処理
-- インライン編集処理
+- DOM依存の編集UI実装
+- 永続ストレージ連携
+- ドラッグ&ドロップのブラウザイベント実装
+- スラッシュコマンドのDOMメニュー実装
+- インライン編集DOM処理
 - JavaScript bundle、minify、compile成果物
 - npm、webpack、Node.js前提の設定ファイル
 - `Dist/`、`dist/`、`Build/`、`build/` 作成
@@ -1319,11 +1326,11 @@ WYSIWYG Editor本体では、TypeScriptからJavaScriptへのtranspile、複数�
 8. `var(--adlaire-...)` が定義済み変数だけを参照していることの確認
 9. 隣接AGWSリポジトリが存在する場合のHTML/CSS照合
 10. `Docs/Master_Spec`、`Docs/Document_Index`、`README.md` の整合確認
-11. 拡充優先順位、拡充仕様策定条件、ビルド、minify、bundle、CSSプリプロセッサを現状検討しない方針の記録確認
+11. 拡充優先順位、拡充仕様策定条件、CSSビルド、CSS minify、CSS bundle、CSSプリプロセッサを現状検討しない方針の記録確認
 12. `Docs/Master_Spec` の `Version` と `Docs/Change_History` の最新revが一致していることの確認
 13. 生成CSS用ディレクトリ、生成CSSファイル、CSSまたはフロントエンドビルド設定ファイルが存在しないことの確認
-14. `AGENTS.md` がCSSプリプロセッサ、ビルド、minify、bundleを追加しない運用方針を記録していることの確認
-15. トップレベル、`Docs/`、`Tokens/`、`UI/`、`Tools/`、`Brand/` が承認済みのリポジトリ構造から逸脱していないことの確認
+14. `AGENTS.md` がCSSプリプロセッサ、CSSビルド、CSS minify、CSS bundle、npm/webpack系設定を追加しない運用方針を記録していることの確認
+15. トップレベル、`Docs/`、`Tokens/`、`UI/`、`WYSIWYG/`、`Tools/`、`Brand/` が承認済みのリポジトリ構造から逸脱していないことの確認
 16. `Tools/check/check-adlaire-design.sh` が実行可能であることの確認
 
 検査はPOSIX shellで記述し、`Tools/check/check-adlaire-design.sh` に集約する。検査のためにNode.js/npm、外部CSSパーサ、外部CLIを追加しない。

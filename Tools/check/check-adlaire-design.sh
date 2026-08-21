@@ -34,6 +34,9 @@ for path in \
   UI/wysiwyg.css \
   UI/utilities.css \
   UI/compat-agws.css \
+  WYSIWYG \
+  WYSIWYG/README.md \
+  WYSIWYG/Source/editor.ts \
   UI \
   Tokens \
   Brand; do
@@ -43,7 +46,7 @@ for path in \
   fi
 done
 
-for path in UI Tokens Brand; do
+for path in UI Tokens Brand WYSIWYG WYSIWYG/Source; do
   if [ ! -d "$ADLAIRE_DESIGN_ROOT/$path" ]; then
     echo "Adlaire-Design required path must be a directory: $ADLAIRE_DESIGN_ROOT/$path" >&2
     exit 1
@@ -61,6 +64,7 @@ find "$ADLAIRE_DESIGN_ROOT" -mindepth 1 -maxdepth 1 \
   ! -name 'Tokens' \
   ! -name 'Tools' \
   ! -name 'UI' \
+  ! -name 'WYSIWYG' \
   -print >"$TMP_DIR/unexpected-top-level"
 
 if [ -s "$TMP_DIR/unexpected-top-level" ]; then
@@ -101,6 +105,17 @@ find "$ADLAIRE_DESIGN_ROOT/Tools" -type f \
 if [ -s "$TMP_DIR/unexpected-tools-files" ]; then
   echo "Tools/ must contain only approved Adlaire-Design check tools:" >&2
   cat "$TMP_DIR/unexpected-tools-files" >&2
+  exit 1
+fi
+
+find "$ADLAIRE_DESIGN_ROOT/WYSIWYG" -type f \
+  ! -path "$ADLAIRE_DESIGN_ROOT/WYSIWYG/README.md" \
+  ! -path "$ADLAIRE_DESIGN_ROOT/WYSIWYG/Source/editor.ts" \
+  -print >"$TMP_DIR/unexpected-wysiwyg-files"
+
+if [ -s "$TMP_DIR/unexpected-wysiwyg-files" ]; then
+  echo "WYSIWYG/ must contain only approved WYSIWYG source files:" >&2
+  cat "$TMP_DIR/unexpected-wysiwyg-files" >&2
   exit 1
 fi
 
@@ -157,12 +172,12 @@ if ! grep -F 'Sass/SCSS/Less/Stylus/PostCSS等のCSSプリプロセッサを追�
   exit 1
 fi
 
-if ! grep -F 'ビルド、minify、bundleは現状検討しないこと。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+if ! grep -F 'CSSのビルド、minify、bundleは現状検討しないこと。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
   echo "Adlaire-Design AGENTS.md must document that build, minify, and bundle are not under current consideration." >&2
   exit 1
 fi
 
-if ! grep -F 'CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UIを扱う独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+if ! grep -F 'CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、WYSIWYG Editor実装コードを扱う独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
   echo "Adlaire-Design AGENTS.md must define CSS and WYSIWYG Editor UI as managed scope." >&2
   exit 1
 fi
@@ -172,17 +187,17 @@ if ! grep -F 'Docs/Change_History' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2
   exit 1
 fi
 
-if ! grep -F 'CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UIを管理する独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+if ! grep -F 'CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、WYSIWYG Editor実装コードを管理する独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must define CSS and WYSIWYG Editor UI as managed scope." >&2
   exit 1
 fi
 
-if ! grep -F '今後の拡充は、公開面CSS機能、WYSIWYG Editor UI、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+if ! grep -F '今後の拡充は、公開面CSS機能、WYSIWYG Editor UI、WYSIWYG Editor実装コード、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must document the expansion priority policy." >&2
   exit 1
 fi
 
-if ! grep -F 'ビルド、minify、bundle、Sass/SCSS等のCSSプリプロセッサは現状検討しない。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+if ! grep -F 'CSSのビルド、minify、bundle、Sass/SCSS等のCSSプリプロセッサは現状検討しない。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must document that build, minify, bundle, and CSS preprocessors are not under current consideration." >&2
   exit 1
 fi
@@ -245,9 +260,24 @@ for indexed_path in \
   UI/wysiwyg.css \
   UI/utilities.css \
   UI/compat-agws.css \
+  WYSIWYG/ \
+  WYSIWYG/README.md \
+  WYSIWYG/Source/editor.ts \
   Tools/check/check-adlaire-design.sh; do
   if ! grep -F -- "$indexed_path" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
     echo "Adlaire-Design Document_Index must reference $indexed_path." >&2
+    exit 1
+  fi
+done
+
+for export_name in \
+  'export type AdlaireWysiwygBlockType' \
+  'export interface AdlaireWysiwygBlock' \
+  'export interface AdlaireWysiwygDocument' \
+  'export class AdlaireWysiwygEditor' \
+  'export function parseAdlaireWysiwygDocument'; do
+  if ! grep -F -- "$export_name" "$ADLAIRE_DESIGN_ROOT/WYSIWYG/Source/editor.ts" >/dev/null 2>&1; then
+    echo "WYSIWYG/Source/editor.ts missing required export: $export_name" >&2
     exit 1
   fi
 done
