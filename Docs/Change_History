@@ -8,6 +8,15 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.63
+
+- `Docs/Master_Spec` の版数を `rev.63` へ更新した。
+- 汎用部品カタログの優先Bに、CSS-onlyで成立する案内部品としてエラーページを追加した。
+- `UI/components.css` に、`.adlaire-error-page`、`.adlaire-error-page-400`、`.adlaire-error-page-401`、`.adlaire-error-page-403`、`.adlaire-error-page-404`、`.adlaire-error-page-500`、`.adlaire-error-page-510`、`.adlaire-error-page-server`、`.adlaire-error-page-inner`、`.adlaire-error-page-code`、`.adlaire-error-page-title`、`.adlaire-error-page-text`、`.adlaire-error-page-actions` を追加した。
+- `Docs/Master_Spec` に、400、401、403、404、500、510のエラーページ部品の対象クラスと非対象範囲を追加した。
+- AGWS現行HTMLの `#operation` アンカーIDを `Docs/Master_Spec` のAGWS完全再現仕様に捕捉した。
+- `Tools/check/check-adlaire-design.sh` に、エラーページ部品のカタログ語と必須クラス検査を追加した。
+
 ## rev.62
 
 - `Docs/Master_Spec` の版数を `rev.62` へ更新した。

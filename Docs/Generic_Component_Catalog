@@ -115,6 +115,7 @@
 | 案内 | 更新通知 | `UI/components.css` | 実装済み |
 | 案内 | メンテナンス通知 | `UI/components.css` | 実装済み |
 | 案内 | メンテナンス画面 | `UI/components.css` | 実装済み |
+| 案内 | エラーページ | `UI/components.css` | 実装済み |
 | FAQ | FAQリスト | `UI/content.css` | 実装済み |
 | FAQ | FAQ項目 | `UI/content.css` | 実装済み |
 | FAQ | 開閉要素の見た目 | `UI/content.css` | 実装済み |
@@ -150,6 +151,7 @@
 | 更新通知 | `.adlaire-update-notice` |
 | メンテナンス通知 | `.adlaire-maintenance-notice` |
 | メンテナンス画面 | `.adlaire-maintenance-screen`、`.adlaire-maintenance-screen-inner`、`.adlaire-maintenance-screen-title`、`.adlaire-maintenance-screen-text` |
+| エラーページ | `.adlaire-error-page`、`.adlaire-error-page-400`、`.adlaire-error-page-401`、`.adlaire-error-page-403`、`.adlaire-error-page-404`、`.adlaire-error-page-500`、`.adlaire-error-page-510`、`.adlaire-error-page-server`、`.adlaire-error-page-inner`、`.adlaire-error-page-code`、`.adlaire-error-page-title`、`.adlaire-error-page-text`、`.adlaire-error-page-actions` |
 | FAQ | `.adlaire-faq-list`、`.adlaire-faq-item`、`.adlaire-faq-question`、`.adlaire-faq-answer` |
 | 手順 | `.adlaire-step-list`、`.adlaire-step-item`、`.adlaire-process-list`、`.adlaire-process-item`、`.adlaire-numbered-flow`、`.adlaire-numbered-flow-item` |
 | 比較 | `.adlaire-comparison-block`、`.adlaire-pros-cons-list`、`.adlaire-pros-cons-item` |
@@ -250,7 +252,7 @@
 | リポジトリ管理画面 | 操作行、ボタングループ、空状態表示、アラート、ページネーション(保留)、絞り込みチップ(保留)、設定パネル |
 | 社内ポータル | お知らせバー、更新通知、メンテナンス通知、リンクリスト、カードグリッド、連絡パネル、メンバー/チーム表示 |
 | ダッシュボード | サーフェスグリッド、サーフェス項目、数値表示ブロック、ステータス点、ステータスラベル、メンテナンス通知、要約枠 |
-| 静的サイト + API連携 | 読み込み状態、エラー表示、空状態表示、メンテナンス通知、メンテナンス画面、データカード、メタ情報行、更新日時表示 |
+| 静的サイト + API連携 | 読み込み状態、エラー表示、エラーページ、空状態表示、メンテナンス通知、メンテナンス画面、データカード、メタ情報行、更新日時表示 |
 | コンテンツ駆動Webシステム | 本文表、注記、メンテナンス通知、メンテナンス画面、チェックリスト、定義リスト、リンクリスト、関連リンク、CTAブロック |
 
 この一覧は、汎用部品の追加優先度を判断するための補助情報である。ここに記載した部品であっても、JavaScript制御、JSONデータ管理、多言語化、ビルド、minify、bundleが前提になるものは、個別に対象外または保留として扱う。
