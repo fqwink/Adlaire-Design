@@ -8,6 +8,15 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.17
+
+- `Docs/Master_Spec` の版数を `rev.17` へ更新した。
+- 第1段階CSSとして `Tokens/colors.css` と `UI/adlaire.css` を実装した。
+- `Tokens/colors.css` にブランドカラー6種のCSS変数を定義した。
+- `UI/adlaire.css` に背景色、文字色、境界線色の18ユーティリティクラスを定義した。
+- `Tools/check/check-adlaire-design.sh` に第1段階CSSの必須ファイル、必須変数、必須クラス、禁止記述の検査を追加した。
+- 第1段階CSSの冒頭コメント、`:root` ブロック数、`@charset` 禁止の検査を追加した。
+
 ## rev.16
 
 - `Docs/Master_Spec` の版数を `rev.16` へ更新した。
