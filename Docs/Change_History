@@ -8,6 +8,12 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.39
+
+- `Docs/Master_Spec` の版数を `rev.39` へ更新した。
+- AGWSのDocker配信確認後に、Adlaire-Design CSS採用候補から正式移行へ進める計画を追加した。
+- 正式移行の実行順、移行で確定するもの、当面維持する旧CSS、後続PRへ分離する対象を定義した。
+
 ## rev.38
 
 - `Docs/Master_Spec` の版数を `rev.38` へ更新した。

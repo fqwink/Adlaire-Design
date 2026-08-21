@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.38
+**Version:** rev.39
 
 ---
 
@@ -965,6 +965,43 @@ AGWS初回採用で行わないものは以下である。
 - visual refreshを目的にした色・余白・導線の意図的変更
 
 AGWS側でAdlaire-Design CSSを採用するPRは、方針文書PRとは分ける。CSS採用PRでは、適用対象ファイル、CSS読み込み順、互換層の使用有無、ロールバック方法、検証結果を明記する。
+
+### 11.10.17 AGWS正式移行計画
+
+AGWSのDocker配信確認で主要ページとAdlaire-Design CSSの配信に問題がない場合、AGWSはAdlaire-Design CSS採用候補から正式移行へ進める。
+
+正式移行の実行順は以下とする。
+
+1. Adlaire-Design側のAGWS採用方針PRを先に確定する。
+2. AGWS側の採用方針PRを確定する。
+3. AGWS側のAdlaire-Design CSS適用候補PRを確定する。
+4. AGWSの既定CSS読み込みをAdlaire-Design CSS成果物へ移行済みとして扱う。
+5. 移行後に `Tools/check/check-agws.sh`、`Tools/check/check-adlaire-design.sh`、Docker配信HTTP確認を再実行する。
+6. `index.html`、`about.html`、`contact.html`、`legal.html` の主要表示を再確認する。
+
+正式移行で確定するものは以下である。
+
+- AGWSの4ページはAdlaire-Design CSS成果物を仕様順に読み込む。
+- AGWSのHTML本文構造は維持する。
+- `adlaire-design/` 配下のCSS成果物は、Adlaire-Design正本から取り込む配布コピーとして扱う。
+- `UI/compat-agws.css` 相当の互換層は、AGWS既存HTMLを大きく書き換えないために維持する。
+- AGWSの検査では、Adlaire-Design CSS成果物の存在、読み込み順、旧CSSの直接読み込みなし、隣接Adlaire-Design正本との一致を確認する。
+
+正式移行後も当面維持するものは以下である。
+
+- `architect.css`
+- `style.css`
+
+これらはロールバック用の既存CSSとして残す。削除、統合、リネーム、minify、読み込み数削減は、正式移行とは別の後続PRで扱う。
+
+正式移行後も行わないものは以下である。
+
+- JavaScript追加
+- 多言語化
+- JSONデータ管理
+- Node.js/npm依存追加
+- 他リポジトリへの統合
+- コンテンツ本文の再設計
 
 ---
 
