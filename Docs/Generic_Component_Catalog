@@ -104,66 +104,106 @@
 
 ## 4. 優先B
 
-優先Bは、CSSだけで成立しやすく、追加前に利用場面とクラス粒度を固める候補である。
+優先Bは、CSSだけで成立しやすく、利用場面とクラス粒度を固めて管理する汎用部品群である。JavaScriptなしで成立するものは実装済みとして扱う。
 
 | 分類 | 部品 | 想定実装先 | 状態 |
 | --- | --- | --- | --- |
-| 見出し群 | ページ見出し | `UI/components.css` | 候補 |
-| 見出し群 | 見出しグループ | `UI/components.css` | 候補 |
-| 見出し群 | セクションリード | `UI/components.css` | 候補 |
-| 案内 | お知らせバー | `UI/components.css` | 候補 |
-| 案内 | 更新通知 | `UI/components.css` | 候補 |
-| 案内 | メンテナンス通知 | `UI/components.css` | 候補 |
-| 案内 | メンテナンス画面 | `UI/components.css` | 候補 |
-| FAQ | FAQリスト | `UI/content.css` | 候補 |
-| FAQ | FAQ項目 | `UI/content.css` | 候補 |
-| FAQ | 開閉要素の見た目 | `UI/content.css` | 候補 |
-| 手順 | 手順リスト | `UI/components.css` | 候補 |
-| 手順 | 工程リスト | `UI/components.css` | 候補 |
-| 手順 | 番号付きフロー | `UI/components.css` | 候補 |
-| 比較 | 比較ブロック | `UI/content.css` | 候補 |
-| 比較 | メリット/デメリットリスト | `UI/content.css` | 候補 |
-| 強調 | ハイライト枠 | `UI/components.css` | 候補 |
-| 強調 | 要約枠 | `UI/components.css` | 候補 |
-| 強調 | 数値表示ブロック | `UI/components.css` | 候補 |
-| ナビ補助 | アンカーナビ | `UI/components.css` | 候補 |
-| ナビ補助 | サブナビ | `UI/components.css` | 候補 |
-| ナビ補助 | 兄弟ページナビ | `UI/components.css` | 候補 |
-| カード派生 | カードグリッド | `UI/components.css` | 候補 |
-| カード派生 | メディア付きカード | `UI/components.css` | 候補 |
-| カード派生 | カード操作領域 | `UI/components.css` | 候補 |
-| リスト派生 | シンプルリスト | `UI/components.css` | 候補 |
-| リスト派生 | 枠線付きリスト | `UI/components.css` | 候補 |
-| リスト派生 | コンパクトリスト | `UI/components.css` | 候補 |
-| 連絡導線 | 連絡パネル | `UI/components.css` | 候補 |
-| 連絡導線 | 問い合わせCTA | `UI/components.css` | 候補 |
-| 連絡導線 | 外部リンク行 | `UI/components.css` | 候補 |
+| 見出し群 | ページ見出し | `UI/components.css` | 実装済み |
+| 見出し群 | 見出しグループ | `UI/components.css` | 実装済み |
+| 見出し群 | セクションリード | `UI/components.css` | 実装済み |
+| 案内 | お知らせバー | `UI/components.css` | 実装済み |
+| 案内 | 更新通知 | `UI/components.css` | 実装済み |
+| 案内 | メンテナンス通知 | `UI/components.css` | 実装済み |
+| 案内 | メンテナンス画面 | `UI/components.css` | 実装済み |
+| FAQ | FAQリスト | `UI/content.css` | 実装済み |
+| FAQ | FAQ項目 | `UI/content.css` | 実装済み |
+| FAQ | 開閉要素の見た目 | `UI/content.css` | 実装済み |
+| 手順 | 手順リスト | `UI/components.css` | 実装済み |
+| 手順 | 工程リスト | `UI/components.css` | 実装済み |
+| 手順 | 番号付きフロー | `UI/components.css` | 実装済み |
+| 比較 | 比較ブロック | `UI/content.css` | 実装済み |
+| 比較 | メリット/デメリットリスト | `UI/content.css` | 実装済み |
+| 強調 | ハイライト枠 | `UI/components.css` | 実装済み |
+| 強調 | 要約枠 | `UI/components.css` | 実装済み |
+| 強調 | 数値表示ブロック | `UI/components.css` | 実装済み |
+| ナビ補助 | アンカーナビ | `UI/components.css` | 実装済み |
+| ナビ補助 | サブナビ | `UI/components.css` | 実装済み |
+| ナビ補助 | 兄弟ページナビ | `UI/components.css` | 実装済み |
+| カード派生 | カードグリッド | `UI/components.css` | 実装済み |
+| カード派生 | メディア付きカード | `UI/components.css` | 実装済み |
+| カード派生 | カード操作領域 | `UI/components.css` | 実装済み |
+| リスト派生 | シンプルリスト | `UI/components.css` | 実装済み |
+| リスト派生 | 枠線付きリスト | `UI/components.css` | 実装済み |
+| リスト派生 | コンパクトリスト | `UI/components.css` | 実装済み |
+| 連絡導線 | 連絡パネル | `UI/components.css` | 実装済み |
+| 連絡導線 | 問い合わせCTA | `UI/components.css` | 実装済み |
+| 連絡導線 | 外部リンク行 | `UI/components.css` | 実装済み |
+
+### 4.1 実装済みクラス対応表
+
+| 部品 | 実装済みクラス |
+| --- | --- |
+| ページ見出し | `.adlaire-page-heading`、`.adlaire-page-heading-title`、`.adlaire-page-heading-text` |
+| 見出しグループ | `.adlaire-heading-group`、`.adlaire-heading-eyebrow` |
+| セクションリード | `.adlaire-section-lead` |
+| お知らせバー | `.adlaire-announcement-bar` |
+| 更新通知 | `.adlaire-update-notice` |
+| メンテナンス通知 | `.adlaire-maintenance-notice` |
+| メンテナンス画面 | `.adlaire-maintenance-screen`、`.adlaire-maintenance-screen-inner`、`.adlaire-maintenance-screen-title`、`.adlaire-maintenance-screen-text` |
+| FAQ | `.adlaire-faq-list`、`.adlaire-faq-item`、`.adlaire-faq-question`、`.adlaire-faq-answer` |
+| 手順 | `.adlaire-step-list`、`.adlaire-step-item`、`.adlaire-process-list`、`.adlaire-process-item`、`.adlaire-numbered-flow`、`.adlaire-numbered-flow-item` |
+| 比較 | `.adlaire-comparison-block`、`.adlaire-pros-cons-list`、`.adlaire-pros-cons-item` |
+| 強調 | `.adlaire-highlight-box`、`.adlaire-summary-box`、`.adlaire-stat-block`、`.adlaire-stat-value`、`.adlaire-stat-label` |
+| ナビ補助 | `.adlaire-anchor-nav`、`.adlaire-anchor-nav-link`、`.adlaire-subnav`、`.adlaire-subnav-link`、`.adlaire-sibling-nav`、`.adlaire-sibling-nav-link` |
+| カード派生 | `.adlaire-card-grid`、`.adlaire-card-media`、`.adlaire-card-media-figure`、`.adlaire-card-actions` |
+| リスト派生 | `.adlaire-simple-list`、`.adlaire-simple-list-item`、`.adlaire-bordered-list`、`.adlaire-bordered-list-item`、`.adlaire-compact-list`、`.adlaire-compact-list-item` |
+| 連絡導線 | `.adlaire-contact-panel`、`.adlaire-inquiry-cta`、`.adlaire-external-link-row` |
 
 ---
 
 ## 5. 優先C
 
-優先Cは、必要性が出てから仕様化する候補である。
+優先Cは、必要性に応じて仕様化する候補群である。JavaScriptなしで成立するものは実装済みとして扱い、データ制御や状態管理が必要になりやすいものは保留として残す。
 
 | 分類 | 部品 | 想定実装先 | 状態 |
 | --- | --- | --- | --- |
-| 状態表示 | 進捗表示 | `UI/components.css` | 保留 |
-| 状態表示 | ステップ表示 | `UI/components.css` | 保留 |
-| 状態表示 | ステータスタイムライン | `UI/content.css` | 保留 |
+| 状態表示 | 進捗表示 | `UI/components.css` | 実装済み |
+| 状態表示 | ステップ表示 | `UI/components.css` | 実装済み |
+| 状態表示 | ステータスタイムライン | `UI/content.css` | 実装済み |
 | データ表示 | ページネーション | `UI/components.css` | 保留 |
-| データ表示 | タグリスト | `UI/components.css` | 保留 |
+| データ表示 | タグリスト | `UI/components.css` | 実装済み |
 | データ表示 | 絞り込みチップ | `UI/components.css` | 保留 |
-| 補助表示 | ツールチップ風表示 | `UI/components.css` | 保留 |
-| 補助表示 | ポップオーバー風表示 | `UI/components.css` | 保留 |
-| 視覚枠 | ヒーローパネル | `UI/components.css` | 保留 |
-| 視覚枠 | ビジュアルバナー | `UI/components.css` | 保留 |
-| 視覚枠 | 画像フレーム | `UI/components.css` | 保留 |
-| ブランド表示 | ロゴリスト | `Brand/` または `UI/components.css` | 保留 |
-| ブランド表示 | パートナーリスト | `Brand/` または `UI/components.css` | 保留 |
-| ブランド表示 | アイコンタイル | `Brand/` または `UI/components.css` | 保留 |
-| レイアウト複合 | 分割ブロック | `UI/layout.css` または `UI/components.css` | 保留 |
-| レイアウト複合 | 積み上げ特徴表示 | `UI/components.css` | 保留 |
-| レイアウト複合 | 比較グリッド | `UI/layout.css` または `UI/content.css` | 保留 |
+| 補助表示 | ツールチップ風表示 | `UI/components.css` | 実装済み |
+| 補助表示 | ポップオーバー風表示 | `UI/components.css` | 実装済み |
+| 視覚枠 | ヒーローパネル | `UI/components.css` | 実装済み |
+| 視覚枠 | ビジュアルバナー | `UI/components.css` | 実装済み |
+| 視覚枠 | 画像フレーム | `UI/components.css` | 実装済み |
+| ブランド表示 | ロゴリスト | `UI/components.css` | 実装済み |
+| ブランド表示 | パートナーリスト | `UI/components.css` | 実装済み |
+| ブランド表示 | アイコンタイル | `UI/components.css` | 実装済み |
+| レイアウト複合 | 分割ブロック | `UI/components.css` | 実装済み |
+| レイアウト複合 | 積み上げ特徴表示 | `UI/components.css` | 実装済み |
+| レイアウト複合 | 比較グリッド | `UI/content.css` | 実装済み |
+
+### 5.1 実装済みクラス対応表
+
+| 部品 | 実装済みクラス |
+| --- | --- |
+| 進捗表示 | `.adlaire-progress`、`.adlaire-progress-bar`。幅はHTML側で静的指定する |
+| ステップ表示 | `.adlaire-step-indicator`、`.adlaire-step-indicator-item`、`.adlaire-step-indicator-item-current` |
+| ステータスタイムライン | `.adlaire-status-timeline`、`.adlaire-status-timeline-item` |
+| タグリスト | `.adlaire-tag-list`。項目表示は既存の `.adlaire-chip` 系を組み合わせる |
+| ツールチップ風表示 | `.adlaire-tooltip-note` |
+| ポップオーバー風表示 | `.adlaire-popover-note` |
+| ヒーローパネル | `.adlaire-hero-panel` |
+| ビジュアルバナー | `.adlaire-visual-banner` |
+| 画像フレーム | `.adlaire-image-frame` |
+| ロゴリスト | `.adlaire-logo-list`、`.adlaire-logo-list-item` |
+| パートナーリスト | `.adlaire-partner-list`、`.adlaire-partner-list-item` |
+| アイコンタイル | `.adlaire-icon-tile-list`、`.adlaire-icon-tile` |
+| 分割ブロック | `.adlaire-split-block` |
+| 積み上げ特徴表示 | `.adlaire-stacked-feature` |
+| 比較グリッド | `.adlaire-comparison-grid`、`.adlaire-comparison-grid-item` |
 
 ---
 
@@ -204,10 +244,10 @@
 | Auteur用途 | 必要な汎用部品 |
 | --- | --- |
 | ブログ・ドキュメントサイト | ページ見出し、セクションリード、目次、本文カード、注記、コード表示、関連記事、タグリスト |
-| ナレッジベース・Wiki | 検索導線、カテゴリナビ、アンカーナビ、FAQ、定義リスト、更新情報、関連リンク |
+| ナレッジベース・Wiki | 検索ページへのリンク導線、カテゴリナビ、アンカーナビ、FAQ、定義リスト、更新情報、関連リンク |
 | マーケティングサイト | ヒーロー領域、CTAブロック、特徴リスト、カードグリッド、数値表示、比較ブロック、お知らせバー |
 | GitプロバイダーUI | ツールバー、ステータスラベル、キー/値サマリー、メタ情報行、ファイル一覧、コミット一覧、差分表示 |
-| リポジトリ管理画面 | 操作行、ボタングループ、空状態表示、アラート、ページネーション、フィルタチップ、設定パネル |
+| リポジトリ管理画面 | 操作行、ボタングループ、空状態表示、アラート、ページネーション(保留)、絞り込みチップ(保留)、設定パネル |
 | 社内ポータル | お知らせバー、更新通知、メンテナンス通知、リンクリスト、カードグリッド、連絡パネル、メンバー/チーム表示 |
 | ダッシュボード | サーフェスグリッド、サーフェス項目、数値表示ブロック、ステータス点、ステータスラベル、メンテナンス通知、要約枠 |
 | 静的サイト + API連携 | 読み込み状態、エラー表示、空状態表示、メンテナンス通知、メンテナンス画面、データカード、メタ情報行、更新日時表示 |
