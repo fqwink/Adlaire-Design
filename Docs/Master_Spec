@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.50
+**Version:** rev.51
 
 ---
 
@@ -516,6 +516,20 @@ CSS変数は以下とする。
 | `.adlaire-timeline` | タイムライン外枠 |
 | `.adlaire-timeline-item` | タイムライン項目 |
 | `.adlaire-page-top` | ページトップへ戻るリンク |
+| `.adlaire-action-row` | 操作要素の横並び領域 |
+| `.adlaire-action-row-start` | 左寄せ操作領域 |
+| `.adlaire-action-row-between` | 両端揃え操作領域 |
+| `.adlaire-divider` | 汎用区切り線 |
+| `.adlaire-empty-state` | 空状態表示 |
+| `.adlaire-empty-state-title` | 空状態見出し |
+| `.adlaire-empty-state-text` | 空状態本文 |
+| `.adlaire-link-list` | 汎用リンクリスト |
+| `.adlaire-link-list-item` | 汎用リンクリスト項目 |
+| `.adlaire-link-list-link` | 汎用リンクリストリンク |
+| `.adlaire-media` | メディアオブジェクト外枠 |
+| `.adlaire-media-figure` | メディアオブジェクト図版領域 |
+| `.adlaire-media-body` | メディアオブジェクト本文領域 |
+| `.adlaire-media-title` | メディアオブジェクト見出し |
 
 `UI/components.css` は以下の規則に従う。
 
@@ -728,6 +742,20 @@ AGWS完全再現のために第3段階で実装した主な表示領域は以下
 | `.adlaire-note-warning` | 警告注記 |
 | `.adlaire-note-danger` | 危険注記 |
 | `.adlaire-muted-text` | 補助テキスト |
+| `.adlaire-action-row` | 操作要素の横並び領域 |
+| `.adlaire-action-row-start` | 左寄せ操作領域 |
+| `.adlaire-action-row-between` | 両端揃え操作領域 |
+| `.adlaire-divider` | 汎用区切り線 |
+| `.adlaire-empty-state` | 空状態表示 |
+| `.adlaire-empty-state-title` | 空状態見出し |
+| `.adlaire-empty-state-text` | 空状態本文 |
+| `.adlaire-link-list` | 汎用リンクリスト |
+| `.adlaire-link-list-item` | 汎用リンクリスト項目 |
+| `.adlaire-link-list-link` | 汎用リンクリストリンク |
+| `.adlaire-media` | メディアオブジェクト外枠 |
+| `.adlaire-media-figure` | メディアオブジェクト図版領域 |
+| `.adlaire-media-body` | メディアオブジェクト本文領域 |
+| `.adlaire-media-title` | メディアオブジェクト見出し |
 
 ### 11.10.5 第3段階の非対象
 
@@ -1126,6 +1154,31 @@ Adlaire-Designの今後の拡充は、ビルド、minify、bundleではなく、
 本実装の非対象は以下とする。
 
 - JavaScriptによる表ソート、フィルタ、折りたたみ
+- JSONデータ管理
+- 多言語化
+- ビルド、minify、bundle
+- AGWS本体HTMLの置換
+
+### 11.11.2.2 汎用部品の実装仕様
+
+汎用部品の拡充として、操作行、区切り線、空状態、リンクリスト、メディアオブジェクトを `UI/components.css` に実装する。
+
+追加対象は以下とする。
+
+| 部品 | クラス | 役割 |
+| --- | --- | --- |
+| 操作行 | `.adlaire-action-row`、`.adlaire-action-row-start`、`.adlaire-action-row-between` | ボタン、リンク、補助操作などを横並びで配置する |
+| 区切り線 | `.adlaire-divider` | セクション間やカード内の視覚的な区切りを表示する |
+| 空状態 | `.adlaire-empty-state`、`.adlaire-empty-state-title`、`.adlaire-empty-state-text` | 一覧や検索結果が空の状態を静的に表示する |
+| リンクリスト | `.adlaire-link-list`、`.adlaire-link-list-item`、`.adlaire-link-list-link` | 関連リンク、導線、一覧リンクを縦方向に表示する |
+| メディアオブジェクト | `.adlaire-media`、`.adlaire-media-figure`、`.adlaire-media-body`、`.adlaire-media-title` | 図版、アイコン、画像などと本文を横並びで表示する |
+
+汎用部品は、本文固有の意味を持たず、公開面の複数ページで再利用できるものに限定する。見た目の値は既存の `Tokens/surface.css` と `Tokens/effects.css` のCSS変数を参照し、新規トークンは追加しない。
+
+本実装の非対象は以下とする。
+
+- JavaScriptによる開閉、並び替え、状態制御
+- アイコン、画像、ロゴなどのブランド資産追加
 - JSONデータ管理
 - 多言語化
 - ビルド、minify、bundle

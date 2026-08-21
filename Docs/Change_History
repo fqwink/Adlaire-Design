@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.51
+
+- `Docs/Master_Spec` の版数を `rev.51` へ更新した。
+- `UI/components.css` に、汎用部品として操作行、区切り線、空状態、リンクリスト、メディアオブジェクトを追加した。
+- 追加した汎用部品は、既存トークンを参照する直接CSSとして実装し、ビルド、minify、bundle、新規トークン追加は行わない方針を維持した。
+- `Tools/check/check-adlaire-design.sh` に、追加した汎用部品クラスの必須検査を追加した。
+- 汎用部品の対象、追加クラス、非対象を `Docs/Master_Spec` に仕様化した。
+
 ## rev.50
 
 - `Docs/Master_Spec` の版数を `rev.50` へ更新した。

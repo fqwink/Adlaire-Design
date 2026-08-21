@@ -562,7 +562,21 @@ for class in \
   '.adlaire-tab-panel' \
   '.adlaire-timeline' \
   '.adlaire-timeline-item' \
-  '.adlaire-page-top'; do
+  '.adlaire-page-top' \
+  '.adlaire-action-row' \
+  '.adlaire-action-row-start' \
+  '.adlaire-action-row-between' \
+  '.adlaire-divider' \
+  '.adlaire-empty-state' \
+  '.adlaire-empty-state-title' \
+  '.adlaire-empty-state-text' \
+  '.adlaire-link-list' \
+  '.adlaire-link-list-item' \
+  '.adlaire-link-list-link' \
+  '.adlaire-media' \
+  '.adlaire-media-figure' \
+  '.adlaire-media-body' \
+  '.adlaire-media-title'; do
   if ! grep -F -- "$class" "$ADLAIRE_DESIGN_ROOT/UI/components.css" >/dev/null 2>&1; then
     echo "UI/components.css missing required class: $class" >&2
     exit 1
