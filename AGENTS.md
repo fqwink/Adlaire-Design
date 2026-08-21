@@ -25,3 +25,5 @@
 - Adlaire-Design専用の検査シェルは `Tools/check/` で管理すること。
 - Node.js/npm依存物(`package.json`、`package-lock.json`、`node_modules`)を追加しないこと。
 - Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理すること。
+- `Tokens/` と `UI/` 配下のCSSファイルを正本として直接管理し、Sass/SCSS/Less/Stylus/PostCSS等のCSSプリプロセッサを追加しないこと。
+- ビルド、minify、bundleは現状検討しないこと。`Dist/`、`dist/`、`Build/`、`build/`、`*.min.css`、`*.bundle.css`、CSSまたはフロントエンドビルド設定ファイルを追加しないこと。

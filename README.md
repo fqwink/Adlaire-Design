@@ -15,11 +15,15 @@ Adlaire-Designは、CSSフレームワーク・デザイントークン・ブラ
 
 ## ドキュメント
 
-仕様・設計の正本は `Docs/Master_Spec` とする。リポジトリ内の主要ファイルと管理対象は `Docs/Document_Index` を参照する。
+仕様・設計の正本は `Docs/Master_Spec` とする。リポジトリ内の主要ファイルと管理対象は `Docs/Document_Index`、変更履歴は `Docs/Change_History` を参照する。
 
 ## 方針
 
 Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理する。Adlaire-Designは、CSSフレームワーク・デザイントークン・ブランド資産の開発正本として独立して管理する。
+
+今後の拡充は、公開面CSS機能、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。ビルド、minify、bundle、Sass/SCSS等のCSSプリプロセッサは現状検討しない。
+
+拡充仕様の詳細は `Docs/Master_Spec` の「今後の拡充優先順位」および各策定仕様を正本とする。
 
 ## コマンド
 

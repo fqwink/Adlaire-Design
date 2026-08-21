@@ -48,6 +48,72 @@ for path in UI Tokens Brand; do
   fi
 done
 
+find "$ADLAIRE_DESIGN_ROOT" -mindepth 1 -maxdepth 1 \
+  ! -name '.git' \
+  ! -name '.gitignore' \
+  ! -name 'AGENTS.md' \
+  ! -name 'Brand' \
+  ! -name 'Docs' \
+  ! -name 'LICENSE' \
+  ! -name 'README.md' \
+  ! -name 'Tokens' \
+  ! -name 'Tools' \
+  ! -name 'UI' \
+  -print >"$TMP_DIR/unexpected-top-level"
+
+if [ -s "$TMP_DIR/unexpected-top-level" ]; then
+  echo "Adlaire-Design top-level entries must stay within the approved repository structure:" >&2
+  cat "$TMP_DIR/unexpected-top-level" >&2
+  exit 1
+fi
+
+find "$ADLAIRE_DESIGN_ROOT/Docs" -type f \
+  ! -name 'Master_Spec' \
+  ! -name 'AGWS_Design_Analysis' \
+  ! -name 'Document_Index' \
+  ! -name 'Change_History' \
+  -print >"$TMP_DIR/unexpected-docs-files"
+
+if [ -s "$TMP_DIR/unexpected-docs-files" ]; then
+  echo "Docs/ must contain only approved source documents:" >&2
+  cat "$TMP_DIR/unexpected-docs-files" >&2
+  exit 1
+fi
+
+find "$ADLAIRE_DESIGN_ROOT/Tokens" "$ADLAIRE_DESIGN_ROOT/UI" -type f \
+  ! -name '.gitkeep' \
+  ! -name '*.css' \
+  -print >"$TMP_DIR/unexpected-css-area-files"
+
+if [ -s "$TMP_DIR/unexpected-css-area-files" ]; then
+  echo "Tokens/ and UI/ must contain only CSS source files or .gitkeep:" >&2
+  cat "$TMP_DIR/unexpected-css-area-files" >&2
+  exit 1
+fi
+
+find "$ADLAIRE_DESIGN_ROOT/Tools" -type f \
+  ! -path "$ADLAIRE_DESIGN_ROOT/Tools/check/check-adlaire-design.sh" \
+  -print >"$TMP_DIR/unexpected-tools-files"
+
+if [ -s "$TMP_DIR/unexpected-tools-files" ]; then
+  echo "Tools/ must contain only approved Adlaire-Design check tools:" >&2
+  cat "$TMP_DIR/unexpected-tools-files" >&2
+  exit 1
+fi
+
+if [ ! -x "$ADLAIRE_DESIGN_ROOT/Tools/check/check-adlaire-design.sh" ]; then
+  echo "Tools/check/check-adlaire-design.sh must be executable." >&2
+  exit 1
+fi
+
+find "$ADLAIRE_DESIGN_ROOT/Brand" -type f ! -name '.gitkeep' -print >"$TMP_DIR/unexpected-brand-files"
+
+if [ -s "$TMP_DIR/unexpected-brand-files" ]; then
+  echo "Brand/ must not contain brand assets until their asset specification is approved:" >&2
+  cat "$TMP_DIR/unexpected-brand-files" >&2
+  exit 1
+fi
+
 if [ -e "$ADLAIRE_DESIGN_ROOT/Documents" ]; then
   echo "Adlaire-Design must use Docs/, not Documents/." >&2
   exit 1
@@ -58,8 +124,81 @@ if find "$ADLAIRE_DESIGN_ROOT" \( -name 'package.json' -o -name 'package-lock.js
   exit 1
 fi
 
+if find "$ADLAIRE_DESIGN_ROOT" -path "$ADLAIRE_DESIGN_ROOT/.git" -prune -o \( -type d \( -name 'Dist' -o -name 'dist' -o -name 'Build' -o -name 'build' \) \) -print | grep . >/dev/null 2>&1; then
+  echo "Adlaire-Design must not create Dist/dist/Build/build directories while build, minify, and bundle are out of scope." >&2
+  exit 1
+fi
+
+if find "$ADLAIRE_DESIGN_ROOT" -path "$ADLAIRE_DESIGN_ROOT/.git" -prune -o \( -name '*.scss' -o -name '*.sass' -o -name '*.less' -o -name '*.styl' \) -print | grep . >/dev/null 2>&1; then
+  echo "Adlaire-Design must not use CSS preprocessor source files while direct CSS maintenance is the policy." >&2
+  exit 1
+fi
+
+if find "$ADLAIRE_DESIGN_ROOT" -path "$ADLAIRE_DESIGN_ROOT/.git" -prune -o \( -name '*.min.css' -o -name '*.bundle.css' \) -print | grep . >/dev/null 2>&1; then
+  echo "Adlaire-Design must not use generated minified or bundled CSS files." >&2
+  exit 1
+fi
+
+if find "$ADLAIRE_DESIGN_ROOT" -path "$ADLAIRE_DESIGN_ROOT/.git" -prune -o \( -name 'postcss.config.*' -o -name 'vite.config.*' -o -name 'webpack.config.*' -o -name 'rollup.config.*' -o -name 'tailwind.config.*' \) -print | grep . >/dev/null 2>&1; then
+  echo "Adlaire-Design must not use CSS or frontend build tool configuration files." >&2
+  exit 1
+fi
+
 if ! grep -F '# Adlaire-Design' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must identify the repository." >&2
+  exit 1
+fi
+
+if ! grep -F 'Sass/SCSS/Less/Stylus/PostCSS等のCSSプリプロセッサを追加しないこと。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design AGENTS.md must prohibit CSS preprocessors." >&2
+  exit 1
+fi
+
+if ! grep -F 'ビルド、minify、bundleは現状検討しないこと。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design AGENTS.md must document that build, minify, and bundle are not under current consideration." >&2
+  exit 1
+fi
+
+if ! grep -F 'Docs/Change_History' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must reference Docs/Change_History." >&2
+  exit 1
+fi
+
+if ! grep -F '今後の拡充は、公開面CSS機能、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must document the expansion priority policy." >&2
+  exit 1
+fi
+
+if ! grep -F 'ビルド、minify、bundle、Sass/SCSS等のCSSプリプロセッサは現状検討しない。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must document that build, minify, bundle, and CSS preprocessors are not under current consideration." >&2
+  exit 1
+fi
+
+if ! grep -F '## 11.11 今後の拡充優先順位' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+  echo "Docs/Master_Spec must define future expansion priorities." >&2
+  exit 1
+fi
+
+if ! grep -F '### 11.11.1 拡充仕様策定の共通条件' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+  echo "Docs/Master_Spec must define expansion planning conditions." >&2
+  exit 1
+fi
+
+if ! grep -F '上記の拡充においても、Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、CSS bundle生成、minify版生成、`Dist/` 作成は現状検討しない。' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+  echo "Docs/Master_Spec must keep build, minify, bundle, and preprocessor work out of current consideration." >&2
+  exit 1
+fi
+
+MASTER_SPEC_VERSION=$(sed -n 's/^\*\*Version:\*\* \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec")
+CHANGE_HISTORY_VERSION=$(sed -n 's/^## \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Change_History" | sed -n '1p')
+
+if [ -z "$MASTER_SPEC_VERSION" ]; then
+  echo "Docs/Master_Spec must include a Version line in the form: **Version:** rev.N" >&2
+  exit 1
+fi
+
+if [ "$MASTER_SPEC_VERSION" != "$CHANGE_HISTORY_VERSION" ]; then
+  echo "Docs/Master_Spec Version must match the latest Docs/Change_History rev: $MASTER_SPEC_VERSION != $CHANGE_HISTORY_VERSION" >&2
   exit 1
 fi
 
