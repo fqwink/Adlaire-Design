@@ -1,6 +1,6 @@
 # Adlaire Group Web Site AGWS 解析
 
-**Version:** rev.5
+**Version:** rev.6
 
 ---
 
@@ -74,6 +74,10 @@ AGWSは青系を中心とした公開サイト用の視覚表現を採用して�
 | Notice Orange | `#ff9800` | メンテナンス、フォームnotice |
 
 Adlaire-Designの既存ブランド主色 Emerald Green `#00a968` とは異なるため、AGWSの青系は「公開面デザイン参照色」として扱い、管理画面のブランド主色とは役割を分ける必要がある。
+
+AGWSのCSSでは、`style.css` と `architect.css` の両方でHEX値が直接使われている。2026-08-21時点の確認では、特に `#0066cc`、`#ffffff`、`#004499`、`#555555`、`#e0e0e0`、`#333333` が多く、公開面参照色として優先的にトークン候補化する価値が高い。
+
+第2段階では、AGWSで頻出する青系強調、白/薄青の面、グレー文字、notice色を `Tokens/surface.css` の候補として扱う。同時に、2カラム公開ページレイアウトを `UI/layout.css`、カードやnoticeなどの公開面コンポーネントを `UI/components.css` の候補として扱う。ただし、AGWSのHEX値やCSSをそのまま移植するのではなく、用途別のCSS変数、レイアウト、コンポーネントへ整理する。
 
 ## 5.2 レイアウト
 
