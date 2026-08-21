@@ -1,6 +1,6 @@
 # Adlaire Group Web Site AGWS 解析
 
-**Version:** rev.9
+**Version:** rev.10
 
 ---
 
@@ -207,20 +207,24 @@ Adlaire-Designの第1段階・第2段階により、AGWSの公開面色、基本
 
 一方で、AGWSの現行表示をAdlaire-Design成果物だけで完全再現するには、以下の領域が不足している。
 
+- `architect.css` 由来のreset、base、typography、grid、button variants、card subparts、alert、spacing、text、background、display、flex utilities
 - サイトヘッダー、サイトタイトル、ヘッダーリンク、ナビゲーションボタン
 - フッター
 - フォームUI、入力欄、チェック項目、送信ボタン
 - リニューアル告知
-- ニュース項目、ニュースバッジ、ニュース本文
+- ニュース項目、ニュースバッジ、ニュース本文、maintenance badge
 - 組織情報行、ラベル、値、事業領域リスト
 - 沿革タイムライン内の年月、本文、マーカー
-- CSS onlyタブの入力、ラベル、表示パネル
-- サイドバー内のセクション、タイトル、リンクリスト、active表現
-- 法的情報ページ目次
+- CSS onlyタブの入力、ラベル、表示パネル、checked状態、タブ用ID
+- サイドバー内のセクション、タイトル、リンクリスト、旧式リンクリスト、active表現
+- 連絡先情報ブロック、本文内リンク、法的情報ページ目次
 - 本文内リンク、連絡先リンク、プライバシーリンク
 - 準備中表示、小さな注釈、最終更新日、muted text、余白ユーティリティなどの補助表現
+- hover、focus、active、disabled、first-child、last-child、疑似要素などの状態表現
+- `1024px`、`768px`、`480px` のレスポンシブ調整
+- text-shadow、opacity、transform、transition、animation、backdrop-filterなどの視覚効果
 - AGWS既存HTMLクラスをAdlaire-Design標準クラスへつなぐ互換層
 
-これらは、Adlaire-Design側の第3段階として `Tokens/effects.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` に分けて仕様化する。
+これらは、Adlaire-Design側の第3段階として `Tokens/effects.css`、`UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css` に分けて仕様化する。
 
 AGWS本体を更新するのは、Adlaire-Design側で第3段階の仕様と実装が完了した後とする。AGWS側の初回更新は、見た目を変えるためではなく、Adlaire-Design成果物で現行表示を再現できることを確認するための適用作業として扱う。

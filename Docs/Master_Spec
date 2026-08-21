@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.22
+**Version:** rev.23
 
 ---
 
@@ -567,10 +567,13 @@ AGWS完全再現は、AGWS本体を先に変更せず、Adlaire-Design側で必�
 
 | ファイル | 役割 | 状態 |
 | --- | --- | --- |
-| `Tokens/effects.css` | 影、角丸、余白、グラデーション、transitionなどの公開面補助トークン | 仕様候補 |
+| `Tokens/effects.css` | 影、角丸、余白、グラデーション、text-shadow、opacity、transform、transition、animation、backdrop-filterなどの公開面補助トークン | 仕様候補 |
+| `UI/base.css` | reset、base、typography、body、linkなどの基礎スタイル | 仕様候補 |
+| `UI/grid.css` | container、row、columnなどのグリッド互換 | 仕様候補 |
 | `UI/site.css` | サイトヘッダー、ナビゲーション、フッター、ページトップリンク | 仕様候補 |
 | `UI/forms.css` | フォーム、入力、チェック、送信ボタン、フォームnotice | 仕様候補 |
 | `UI/content.css` | ニュース、組織情報、沿革、法的情報目次などの本文固有表現 | 仕様候補 |
+| `UI/utilities.css` | spacing、text、background、display、flexなどの汎用ユーティリティ | 仕様候補 |
 | `UI/compat-agws.css` | AGWS既存HTMLクラスとの互換層 | 仕様候補 |
 
 `UI/compat-agws.css` は、AGWS本体のHTML変更量を最小化するための一時的な互換層として扱う。Adlaire-Designの標準クラス正本は `.adlaire-` 接頭辞のクラスとし、互換層はAGWS適用時に必要な範囲だけ使用する。
@@ -581,19 +584,27 @@ AGWS完全再現に不足している主な表示領域は以下である。
 
 | 領域 | AGWS側の代表クラス | Adlaire-Design側の扱い |
 | --- | --- | --- |
+| 基礎スタイル | `*`、`*::before`、`*::after`、`html`、`body`、`h1`から`h6`、`p`、`a`、`a:hover` | `UI/base.css` |
+| グリッド互換 | `.container-fluid`、`.row`、`.col`、`.col-1`から`.col-12` | `UI/grid.css` |
 | サイトヘッダー | `.site-header`、`.site-title`、`.header-link`、`.site-nav`、`.nav-button` | `UI/site.css` |
 | メイン余白 | `.main-content`、`.content-section` | `UI/site.css` または `UI/content.css` |
 | フッター | `.site-footer` | `UI/site.css` |
 | リニューアル告知 | `.renewal-notice`、`.renewal-title`、`.renewal-description` | `UI/content.css` |
-| ニュース | `.news-item`、`.news-header`、`.news-date`、`.news-badge`、`.news-badge-press`、`.news-title`、`.news-content` | `UI/content.css` |
+| ニュース | `.news-item`、`.news-header`、`.news-date`、`.news-badge`、`.news-badge-press`、`.news-badge-maintenance`、`.news-title`、`.news-content` | `UI/content.css` |
 | 組織情報 | `.organization-info`、`.info-row`、`.info-label`、`.info-value`、`.business-list`、`.business-detail` | `UI/content.css` |
 | 沿革詳細 | `.timeline`、`.timeline-item`、`.timeline-date`、`.timeline-content`、`.timeline-marker`、`.timeline-text` | `UI/content.css` |
-| フォーム | `.contact-form`、`.form-description`、`.form-notice`、`.form-group`、`.form-label`、`.form-control`、`.form-check`、`.form-check-input`、`.form-check-label`、`.required`、`.btn`、`.btn-block`、`.btn-submit` | `UI/forms.css` |
+| フォーム | `.contact-form`、`.form-description`、`.form-notice`、`.form-group`、`.form-label`、`.form-control`、`textarea.form-control`、`select.form-control`、`.form-control:focus`、`.form-check`、`.form-check-input`、`.form-check-label`、`.required`、`.form-label.required::after`、`.btn`、`.btn-primary`、`.btn-secondary`、`.btn-outline-primary`、`.btn-lg`、`.btn-sm`、`.btn-block`、`.btn-submit`、`.btn-submit:hover`、`.btn-submit:disabled` | `UI/forms.css` |
+| カード詳細 | `.card`、`.card-header`、`.card-body`、`.card-footer`、`.card:hover` | `UI/content.css` または `UI/compat-agws.css` |
+| アラート | `.alert`、`.alert-info`、`.alert-success`、`.alert-warning`、`.alert-danger` | `UI/content.css` |
 | 法的情報目次 | `.legal-toc-card`、`.legal-toc`、`.legal-toc-link` | `UI/content.css` |
-| タブ詳細 | `.tab-container`、`.tab-input`、`.tab-labels`、`.tab-label`、`.tab-content`、`.tab-pane` | `UI/content.css` |
-| サイドバー詳細 | `.sidebar-section`、`.sidebar-title`、`.sidebar-content`、`.sidebar-link-list`、`.sidebar-link`、`.active` | `UI/content.css` |
+| タブ詳細 | `.tab-container`、`.tab-input`、`.tab-labels`、`.tab-label`、`.tab-label:hover`、`.tab-content`、`.tab-pane`、`#tab-all:checked`、`#tab-press:checked`、`#tab-maintenance:checked`、`#content-all`、`#content-press`、`#content-maintenance` | `UI/content.css` |
+| サイドバー詳細 | `.sidebar-section`、`.sidebar-section:hover`、`.sidebar-title`、`.sidebar-content`、`.sidebar-link-list`、`.sidebar-link`、`.sidebar-link:hover`、`.sidebar-link.active`、`.sidebar-links`、`.sidebar-links li`、`.sidebar-links li:before`、`.sidebar-links a`、`.sidebar-links a:hover`、`.active` | `UI/content.css` |
 | リンク表現 | `.contact-link`、`.privacy-link`、`.text-link` | `UI/content.css` |
+| 連絡先情報 | `.contact-info`、`.contact-item`、`.contact-item h3`、`.contact-item p`、`.contact-item a`、`.contact-item a:hover` | `UI/content.css` |
 | 補助テキスト | `.coming-soon`、`.coming-soon-small`、`.info-note`、`.last-updated`、`.text-muted`、`.mt-30` | `UI/content.css` または `UI/compat-agws.css` |
+| 汎用ユーティリティ | `.mt-0`から`.mt-5`、`.mb-0`から`.mb-5`、`.pt-0`から`.pt-5`、`.pb-0`から`.pb-5`、`.text-left`、`.text-center`、`.text-right`、`.text-primary`、`.text-secondary`、`.text-success`、`.text-danger`、`.text-warning`、`.text-info`、`.text-muted`、`.bg-primary`、`.bg-secondary`、`.bg-light`、`.bg-dark`、`.d-none`、`.d-block`、`.d-inline`、`.d-inline-block`、`.d-flex`、`.flex-row`、`.flex-column`、`.justify-content-start`、`.justify-content-end`、`.justify-content-center`、`.justify-content-between`、`.align-items-start`、`.align-items-end`、`.align-items-center` | `UI/utilities.css` |
+| 疑似要素・状態 | `.timeline::before`、`.business-list li:last-child`、`.info-row:first-child`、`.info-row:last-child`、`.news-content p:last-child`、各hover、active、focus、disabled状態 | 各対象UIファイル |
+| レスポンシブ調整 | `@media (max-width: 1024px)`、`@media (max-width: 768px)`、`@media (max-width: 480px)` | `UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css` |
 | 既存クラス互換 | `.container`、`.content-wrapper`、`.main-area`、`.sidebar`、`.card`、`.section-title`、`.section-content`、`.breadcrumb`、`.breadcrumb-link`、`.breadcrumb-separator`、`.breadcrumb-current`、`.back-to-top`、`.back-to-top-icon` | `UI/compat-agws.css` |
 
 ### 11.10.4 第3段階の命名方針
@@ -604,8 +615,13 @@ AGWS完全再現に不足している主な表示領域は以下である。
 
 | 標準クラス候補 | 役割 |
 | --- | --- |
+| `.adlaire-page` | ページ全体の基礎面 |
+| `.adlaire-content-container` | 汎用コンテナ |
+| `.adlaire-grid-row` | グリッド行 |
+| `.adlaire-grid-col` | グリッド列 |
 | `.adlaire-site-header` | サイトヘッダー |
 | `.adlaire-site-title` | サイトタイトル |
+| `.adlaire-site-tagline` | サイトタグライン |
 | `.adlaire-site-nav` | サイトナビゲーション |
 | `.adlaire-nav-button` | ナビゲーションボタン |
 | `.adlaire-site-footer` | サイトフッター |
@@ -615,11 +631,27 @@ AGWS完全再現に不足している主な表示領域は以下である。
 | `.adlaire-info-row` | 組織情報行 |
 | `.adlaire-info-label` | 組織情報ラベル |
 | `.adlaire-info-value` | 組織情報値 |
+| `.adlaire-contact-info` | 連絡先情報 |
+| `.adlaire-contact-item` | 連絡先情報項目 |
 | `.adlaire-form-group` | フォーム項目 |
 | `.adlaire-form-label` | フォームラベル |
 | `.adlaire-form-control` | 入力欄 |
 | `.adlaire-form-check` | チェック項目 |
+| `.adlaire-button` | ボタン基本形 |
+| `.adlaire-button-primary` | 主要ボタン |
+| `.adlaire-button-secondary` | 補助ボタン |
+| `.adlaire-button-outline` | アウトラインボタン |
+| `.adlaire-button-disabled` | 無効ボタン状態 |
 | `.adlaire-button-submit` | 送信ボタン |
+| `.adlaire-alert` | アラート基本形 |
+| `.adlaire-alert-info` | 情報アラート |
+| `.adlaire-alert-success` | 成功アラート |
+| `.adlaire-alert-warning` | 警告アラート |
+| `.adlaire-alert-danger` | 危険アラート |
+| `.adlaire-tab-input` | CSS onlyタブ入力 |
+| `.adlaire-tab-label` | CSS onlyタブラベル |
+| `.adlaire-tab-content` | CSS onlyタブ本文 |
+| `.adlaire-sidebar-links` | サイドバーリンク群 |
 | `.adlaire-legal-toc` | 法的情報目次 |
 | `.adlaire-legal-toc-link` | 法的情報目次リンク |
 | `.adlaire-content-link` | 本文内リンク |
@@ -647,6 +679,19 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 - `Tools/check/check-adlaire-design.sh` が第3段階CSSを検査していること。
 - AGWS側では、見た目の変更を目的にせず、Adlaire-Design成果物で現行表示を再現することを目的にすること。
 - AGWS側の初回適用は、CSS読み込みと互換層利用を中心にし、HTML構造変更を最小限にすること。
+
+### 11.10.7 不足確認結果
+
+2026-08-21時点で、AGWS現行HTMLに出現するclass属性値は本節の不足仕様に含めている。
+
+追加で、AGWS側CSSのセレクタ単位を確認した結果、HTMLクラス照合だけでは以下が不足しやすいことを確認した。
+
+- `architect.css` 由来のreset、base、typography、grid、button variants、card subparts、alert、spacing、text、background、display、flex utilities。
+- `style.css` 由来のCSS onlyタブID、checked状態、hover、active、focus、disabled、疑似要素、疑似クラス。
+- `1024px`、`768px`、`480px` のレスポンシブ調整。
+- `text-shadow`、`opacity`、`transform`、`transition`、`animation`、`backdrop-filter` など、色以外の視覚効果。
+
+したがって、第3段階では `UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` だけでなく、`UI/base.css`、`UI/grid.css`、`UI/utilities.css` を含めて仕様確定する必要がある。
 
 ---
 
