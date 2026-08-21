@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.37
+**Version:** rev.38
 
 ---
 
@@ -928,6 +928,43 @@ UI側CSSのtransitionは対象プロパティを明示する。`transition: all`
 - 互換層はAGWS初回適用のための移行補助であり、Adlaire-Designの標準APIとは扱わない。
 
 第3段階実装時は、`UI/compat-agws.css` に含めるAGWS既存セレクタ一覧を、`Docs/Master_Spec` のAGWS完全再現仕様と同じ照合軸で検査する。
+
+### 11.10.16 AGWS採用方針
+
+AGWSは、Adlaire-Designの公開面CSS成果物を採用する対象リポジトリとして扱う。
+
+採用の目的は、AGWS現行表示を崩さず、Adlaire-Designを公開面デザインの正本として運用できる状態に移行することである。初回採用では、見た目の刷新、HTML構造の全面置換、コンテンツ変更を目的にしない。
+
+AGWS採用は以下の順序で進める。
+
+1. Adlaire-Design側で第3段階CSS、互換層、検査が通過していることを確認する。
+2. AGWS側で、`README.md` と `CHANGELOG.md` にAdlaire-Design採用方針を明記する。
+3. AGWS側の検証ブランチで、Adlaire-DesignのCSS読み込み順に基づく適用候補を作る。
+4. AGWSの既存HTML構造を維持したまま、`UI/compat-agws.css` を末尾で読み込む構成を検証する。
+5. `Tools/check/check-agws.sh` と `Tools/check/check-adlaire-design.sh` の両方を通す。
+6. `index.html`、`about.html`、`contact.html`、`legal.html` の主要表示を目視またはスクリーンショットで確認する。
+7. 視覚差分が許容範囲であることをユーザー承認後、AGWS側のCSS採用変更をPR化する。
+
+AGWS初回採用で維持するものは以下である。
+
+- 現行の静的HTML構成
+- JavaScript非依存
+- 多言語化なし
+- JSONデータ管理なし
+- Node.js/npm依存なし
+- 2カラム構成、パンくず、サイドバー、カード、CSS onlyタブ、タイムライン、法的情報目次
+- `adlaire.com` の公開面としての既存情報設計
+
+AGWS初回採用で行わないものは以下である。
+
+- AGWS本体HTMLの全面置換
+- `architect.css` と `style.css` の即時削除
+- 他リポジトリへの統合
+- JavaScriptによるUI制御
+- コンテンツ本文の再設計
+- visual refreshを目的にした色・余白・導線の意図的変更
+
+AGWS側でAdlaire-Design CSSを採用するPRは、方針文書PRとは分ける。CSS採用PRでは、適用対象ファイル、CSS読み込み順、互換層の使用有無、ロールバック方法、検証結果を明記する。
 
 ---
 

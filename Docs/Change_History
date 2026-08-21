@@ -8,6 +8,12 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.38
+
+- `Docs/Master_Spec` の版数を `rev.38` へ更新した。
+- AGWSをAdlaire-Design公開面CSS成果物の採用対象リポジトリとして扱う方針を追加した。
+- AGWS初回採用の順序、維持するもの、行わないもの、CSS採用PRの分離方針を定義した。
+
 ## rev.37
 
 - `Docs/Master_Spec` の版数を `rev.37` へ更新した。
