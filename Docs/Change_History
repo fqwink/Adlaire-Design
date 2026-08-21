@@ -8,6 +8,16 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.18
+
+- `Docs/Master_Spec` の版数を `rev.18` へ更新した。
+- 第2段階をA/B/Cに分けず、`Tokens/surface.css`、`UI/layout.css`、`UI/components.css` をまとめた仕様候補として扱う方針へ変更した。
+- AGWSの頻出色を、公開面用の面・文字・強調・通知トークン候補として整理した。
+- `Tokens/surface.css` の候補CSS変数、HEX、用途、記述規則を定義した。
+- `UI/layout.css` の仕様候補として、1200px基準コンテナ、2カラム構成、レスポンシブ時の1カラム化を整理した。
+- `UI/components.css` の仕様候補として、カード、セクション見出し、パンくず、サイドバー関連情報、notice、CSS onlyタブ、タイムラインを整理した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.6` へ更新し、AGWS CSSの頻出色と第2段階の反映方針を追記した。
+
 ## rev.17
 
 - `Docs/Master_Spec` の版数を `rev.17` へ更新した。
