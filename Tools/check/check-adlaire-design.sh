@@ -83,6 +83,16 @@ if ! grep -F '# Adlaire-Design' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1
   exit 1
 fi
 
+if ! grep -F 'Sass/SCSS/Less/Stylus/PostCSS等のCSSプリプロセッサを追加しないこと。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design AGENTS.md must prohibit CSS preprocessors." >&2
+  exit 1
+fi
+
+if ! grep -F 'ビルド、minify、bundleは現状検討しないこと。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design AGENTS.md must document that build, minify, and bundle are not under current consideration." >&2
+  exit 1
+fi
+
 if ! grep -F 'Docs/Change_History' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must reference Docs/Change_History." >&2
   exit 1

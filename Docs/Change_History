@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.48
+
+- `Docs/Master_Spec` の版数を `rev.48` へ更新した。
+- `AGENTS.md` に、`Tokens/` と `UI/` 配下のCSSを正本として直接管理し、CSSプリプロセッサを追加しない運用方針を追記した。
+- `AGENTS.md` に、ビルド、minify、bundleは現状検討せず、生成CSS用ディレクトリ、生成CSSファイル、CSSまたはフロントエンドビルド設定ファイルを追加しない方針を追記した。
+- `Tools/check/check-adlaire-design.sh` に、AGENTSがCSSプリプロセッサ、ビルド、minify、bundleを追加しない運用方針を記録していることの検査を追加した。
+- 再現性検査の策定仕様に、AGENTSの運用方針確認を追加した。
+
 ## rev.47
 
 - `Docs/Master_Spec` の版数を `rev.47` へ更新した。
