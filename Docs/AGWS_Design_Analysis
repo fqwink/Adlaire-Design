@@ -1,14 +1,16 @@
 # Adlaire Group Web Site AGWS 解析
 
-**Version:** rev.1
+**Version:** rev.5
 
 ---
 
 # 1. 目的
 
-本書は、GitHubリポジトリ `fqwink/Adlaire-Group-Web-Site-AGWS` を解析し、`adlaire.com` の公開面デザインを Adlaire-Design の参照基準として扱うための判断材料を記録する。
+本書は、GitHubリポジトリ `fqwink/Adlaire-Group-Web-Site-AGWS` を解析し、同リポジトリをAdlaire-Designの公開面デザイン参照基準として扱うための判断材料を記録する。
 
-本書は `Docs/Brand_Color_Spec` を補助する解析文書であり、AGWSの構成、見た目、CSS設計、再利用方針、注意点を整理する。
+`adlaire.com` は、AGWSリポジトリに基づく実運用上の公開確認先として扱う。
+
+本書は `Docs/Master_Spec` を補助する解析文書であり、AGWSの構成、見た目、CSS設計、再利用方針、注意点を整理する。
 
 ---
 
@@ -18,6 +20,7 @@
 - 参照ブランチ: `main`
 - 確認コミット: `98e68c8bba684303879dab266c1aa79af02a10e5`
 - 確認日: 2026-08-21
+- 公開確認先: `adlaire.com`
 
 ---
 
@@ -34,7 +37,7 @@ AGWSは、軽量な静的HTMLサイトとして構成されている。
 | `architect.css` | 376 | Architect CSSフレームワーク。基礎スタイル、グリッド、フォーム、ボタン、カード、ユーティリティ |
 | `style.css` | 1153 | サイト固有スタイル。ヘッダー、2カラム、カード、タブ、タイムライン、サイドバー、レスポンシブ |
 | `README.md` | 341 | プロジェクト概要、技術仕様、デザイン仕様、開発予定 |
-| `CHANGELOG.md` | 1262 | バージョン別変更履歴、設計判断、Ver.0.7計画 |
+| `CHANGELOG.md` | 1262 | バージョン別変更履歴、設計判断、今後の方針 |
 
 ---
 
@@ -112,7 +115,7 @@ Adlaire-Designの既存ブランド主色 Emerald Green `#00a968` とは異な�
 - Display / Flex utilities
 - Responsive grid
 
-Adlaire-Designへ取り込む場合は、この層を `UI/` 側のCSSフレームワーク候補として扱える。
+Adlaire-Design内で仕様化・実装する場合は、この層を `UI/` 側のCSSフレームワーク候補として扱える。
 
 ## 6.2 `style.css`
 
@@ -137,13 +140,13 @@ Adlaire-Designへ取り込む場合は、この層を `UI/` 側のCSSフレー�
 - フッター
 - レスポンシブ調整
 
-Adlaire-Designへ取り込む場合は、この層を「公開面テーマ」または「AGWS参照テーマ」として扱い、汎用フレームワークへそのまま混ぜない。
+Adlaire-Design内で仕様化・実装する場合は、この層を「公開面テーマ」または「AGWS参照テーマ」として扱い、汎用フレームワークへそのまま混ぜない。
 
 ---
 
 # 7. Adlaire-Designへの反映方針
 
-AGWSを基準にする場合、以下の順序で取り込む。
+AGWSを基準にAdlaire-Design内で仕様化・実装する場合、以下の順序で整理する。
 
 1. `architect.css` の基礎構造を、Adlaire-Designの `UI/` におけるフレームワーク候補として整理する。
 2. `style.css` の公開サイト固有表現を、公開面テーマの参照実装として整理する。
@@ -178,16 +181,16 @@ Adlaire-Designで仕様化する価値が高い要素は以下である。
 - AGWSは現時点でCSS変数を使っておらず、HEX値が直接記述されている。
 - Adlaire-Designで正式管理する場合は、HEX直書きではなくトークン化する。
 - `architect.css` と `style.css` の両方に `.container` や `.card` などの定義があり、責務境界を整理する必要がある。
-- `style.css` には公開サイト固有の表現が多いため、汎用UIフレームワークへ直接統合しない。
-- READMEにはVer.0.7で多言語化・JSONデータ化・必要最小限のJavaScript再導入が計画されている。現時点の「JavaScriptなし」はVer.0.6の到達点として扱う。
+- `style.css` には公開サイト固有の表現が多いため、汎用UIフレームワークへ直接混ぜない。
+- AGWSでは、JavaScript、多言語化、JSONデータ管理を現時点の開発予定に含めない。現時点では、JavaScriptに依存しない静的HTML/CSS中心の構成を維持する。
 - AGWSの青系公開面トーンと、Adlaire-Design既存仕様のEmerald Green主色は競合しうるため、用途別に役割を分ける。
 
 ---
 
 # 10. 結論
 
-AGWSは、Adlaire Groupの公開面デザインの参照基準として妥当である。
+AGWSリポジトリは、Adlaire Groupの公開面デザインの参照基準として妥当である。
 
 特に、軽量な静的HTML、Architect CSS、JavaScript非依存、2カラム情報設計、青系の清潔な公開サイトトーンは、他の公開面へ展開する価値がある。
 
-一方で、AGWSのCSSをそのままAdlaire-Designの汎用CSSとして取り込むのではなく、`architect.css` をフレームワーク候補、`style.css` を公開面テーマ候補として分けて整理する必要がある。
+一方で、AGWSのCSSをそのままAdlaire-Designの汎用CSSとして扱うのではなく、`architect.css` をフレームワーク候補、`style.css` を公開面テーマ候補として分けて整理する必要がある。

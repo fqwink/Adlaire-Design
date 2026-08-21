@@ -4,9 +4,88 @@
 
 本ファイルは、Adlaire-Design独立リポジトリにおけるAdlaire-Design専用の変更履歴を記録する正本である。
 
-移行前のAdlaire-Ecosystem-Design関連履歴は、`Adlaire-Docs/Common_Documents/Change_History` および `Adlaire-Docs/Common_Documents/Development_History` の過去記録を参照する。
+Adlaire-Designの現行変更履歴は、本ファイルで独立して管理する。
 
 ---
+
+## rev.16
+
+- `Docs/Master_Spec` の版数を `rev.16` へ更新した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.5` へ更新した。
+- AGWSでは、JavaScript、多言語化、JSONデータ管理を現時点の開発予定に含めない方針へ更新した。
+- AGWSはJavaScriptに依存しない静的HTML/CSS中心の構成を維持する前提として整理した。
+- `Docs/Master_Spec` の非対象に、多言語化、JSONデータ管理、JavaScriptによる本文描画またはUI制御を追加した。
+
+## rev.15
+
+- `Docs/Master_Spec` の版数を `rev.15` へ更新した。
+- 第1段階CSSの読み込み順、`@import` 禁止、冒頭コメント、`@charset` 不使用、CSS記述規約を定義した。
+- `Tokens/colors.css` の `:root` ブロック仕様、CSS変数順、HEX小文字、セミコロン必須を定義した。
+- `UI/adlaire.css` の18ユーティリティクラス、対象プロパティ、別名禁止、`!important` 禁止、borderユーティリティの責務を定義した。
+- 第1段階の非対象、色コントラスト保証の対象外、検査シェルの責務、実装時の承認単位を定義した。
+- 変更ルールに、マスター仕様のVersion更新、同revの変更履歴追加、文書索引更新条件を追記した。
+
+## rev.14
+
+- `Docs/Master_Spec` の版数を `rev.14` へ更新した。
+- 第2段階の候補ファイル名から `public` を外した。
+- `Tokens/public-surface.css` を `Tokens/surface.css` へ変更した。
+- `UI/public-layout.css` を `UI/layout.css` へ変更した。
+- `UI/public-components.css` を `UI/components.css` へ変更した。
+- 第2段階のファイル名を候補として明記し、CSS変数名とクラス名は第1段階の実装確認後に確定する方針へ整理した。
+
+## rev.13
+
+- `Docs/Brand_Color_Spec` を `Docs/Master_Spec` へリネームした。
+- `Docs/Master_Spec` をAdlaire-Designの仕様・設計の正本かつマスター仕様書として扱う方針へ更新した。
+- マスター仕様書の文書名を「ブランドデザイン・カラー仕様書」から「マスター仕様書」へ変更した。
+- AGENTS、README、`Docs/Document_Index`、`Docs/AGWS_Design_Analysis`、`Tools/check/check-adlaire-design.sh` の参照先を `Docs/Master_Spec` へ更新した。
+
+## rev.12
+
+- `Docs/Brand_Color_Spec` の版数を `rev.12` へ更新した。
+- `Docs/Brand_Color_Spec` にCSS実装仕様を統合し、仕様・設計の正本を1ファイルへ集約した。
+- CSSフレームワーク・デザイントークンの実装範囲、ファイル構成、段階、非対象、検査方針を第11章に定義した。
+- 第1段階の実装候補を `Tokens/colors.css` と `UI/adlaire.css` に固定した。
+- 第2段階の仕様化候補として、公開面参照色、公開面レイアウト、公開面コンポーネント候補を整理した。
+- `Docs/Document_Index` は `Docs/Brand_Color_Spec` を仕様・設計の正本として参照する構成を維持した。
+
+## rev.11
+
+- `Docs/Brand_Color_Spec` の版数を `rev.11` へ更新した。
+- 成果物管理方針を、本リポジトリ内で完結して管理する肯定形の表現へ整理した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.4` へ更新し、AGWS CSSの扱いを候補として整理する表現へ統一した。
+- `Docs/Document_Index` の `Docs/Brand_Color_Spec` 説明を「仕様・設計の正本」に更新した。
+
+## rev.10
+
+- `Docs/Brand_Color_Spec` の版数を `rev.10` へ更新した。
+- 独立リポジトリ方針と整合しない外部体系由来の分類語を削除した。
+- 管理面、テーマ、CSSフレームワークの説明を、Adlaire-Design内の資産として読める表現へ整理した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.3` へ更新し、AGWSの扱いをAdlaire-Design内での仕様化・実装候補として明確化した。
+
+## rev.9
+
+- `Docs/Brand_Color_Spec` の版数を `rev.9` へ更新した。
+- Adlaire-Designを、他体系との関係を持たない独立リポジトリとして扱う方針へ整理した。
+- READMEとAGENTSから、外部体系との境界・統合に関する現行方針を削除した。
+- `Docs/Brand_Color_Spec` から、外部体系および外部対象への適用・参照記述を削除した。
+- `Docs/Document_Index` から、外部文書への参照元記述を削除した。
+
+## rev.8
+
+- `Docs/Brand_Color_Spec` の版数を `rev.8` へ更新した。
+- Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理する方針へ変更した。
+- `Docs/Brand_Color_Spec` 第7章を「独立管理方針」へ更新した。
+- READMEとAGENTSの成果物管理方針を、本リポジトリ内で完結して管理する表現に更新した。
+
+## rev.7
+
+- `Docs/Brand_Color_Spec` の版数を `rev.7` へ更新した。
+- 公開面デザインの参照基準を `adlaire.com` ではなく、GitHubリポジトリ `fqwink/Adlaire-Group-Web-Site-AGWS` として明確化した。
+- `adlaire.com` は、AGWSリポジトリに基づく実運用上の公開確認先として扱う方針へ整理した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.2` へ更新し、AGWSリポジトリと `adlaire.com` の役割分担を追記した。
+- `Docs/Document_Index` の `Docs/AGWS_Design_Analysis` 説明を、AGWSリポジトリ基準の表現へ更新した。
 
 ## rev.6
 
@@ -39,18 +118,18 @@
 - `Docs/Brand_Color_Spec` の版数を `rev.3` へ更新した。
 - 実装変更より先に仕様書を正本として方針を定義し、実際のCSS、テーマ、公開面への反映は承認後の個別実装計画として扱う方針を明記した。
 - `adlaire.com` など既存公開サイトの現行構成・情報設計・デザインが有効に機能していることを考慮し、ブランドカラー仕様の適用方針を即時全面適用から段階適用へ変更した。
-- 新規プロダクト、新規画面、大規模改修画面では共通パレットを使用し、既存公開面は現行構成の完成度・変更負荷・運用影響・ブランド上の優先度を考慮して段階的に本仕様へ寄せる方針を明記した。
+- 新規デザイン資産や大規模改修時には共通パレットを使用し、既存公開面は現行構成の完成度・変更負荷・運用影響・ブランド上の優先度を考慮して段階的に本仕様へ寄せる方針を明記した。
 - `adlaire.com` の扱いを独立節として追加し、既存画面の構成、導線、情報設計、見た目を一律に置き換えないことを明記した。
 - 適用範囲に、既存公開サイト `adlaire.com` の既存画面に対する即時全面改修を含めないことを明記した。
 
 ## rev.2
 
-- Adlaire-Design専用の検査シェルを `Adlaire-Ecosystem` から `Tools/check/` へ移行した。
+- Adlaire-Design専用の検査シェルを `Tools/check/` へ移行した。
 - `Tools/check/check-adlaire-design.sh` を追加し、Docs集約、旧名称混入、Node.js/npm不使用をAdlaire-Design側で検査するようにした。
 - README、AGENTS、文書索引を新しい検査シェル配置へ更新した。
 
 ## rev.1
 
-- `Adlaire-Ecosystem-Design` を `Adlaire-Design` へ名称変更し、独立リポジトリとして初期化した。
+- 旧称を `Adlaire-Design` へ名称変更し、独立リポジトリとして初期化した。
 - 仕様・設計文書、ドキュメント索引、変更履歴を `Docs/` 配下へ集約した。
 - 開発正本領域として `UI/`、`Tokens/`、`Brand/` を設置した。

@@ -1,0 +1,444 @@
+# Adlaire Group
+
+# マスター仕様書
+
+**Version:** rev.16
+
+---
+
+# 1. 目的
+
+本仕様書は、Adlaire-Designのマスター仕様書として、Adlaire Group(開発元: Adlaire Group DX事業セグメントグループ)が使用する統一ブランドカラー、および公開面・管理面におけるブランドデザインの基本方針を定める。
+
+色だけでなく、背景、境界、余白、ボタン、リンク、セクション構成、情報の見せ方など、ユーザーが受け取る見た目全体を設計対象に含める。
+
+Adlaire Groupが管理するデザイン資産において、色の役割を統一する。
+
+公開面のデザインは、GitHubリポジトリ `fqwink/Adlaire-Group-Web-Site-AGWS` に記録されたサイト構成・情報設計・デザインを参照基準にする。既存構成の良さを維持したうえで、新規実装・大規模改修・ブランド更新のタイミングで、各公開面のカラーや見た目をAGWSの方向性へ段階的に寄せる。
+
+`adlaire.com` は、AGWSリポジトリに基づいて公開される実運用上の確認先として扱う。
+
+AGWSの詳細解析は `Docs/AGWS_Design_Analysis` を参照する。
+
+本方針は、実装変更より先に本仕様書を正本として定義する。実際のCSS、テーマ、公開面への反映は、本仕様書の承認後に個別の実装計画として扱う。
+
+開発正本は独立リポジトリ `Adlaire-Design` で管理する(詳細は第6章を参照)。
+
+---
+
+# 2. 基本方針
+
+- Adlaire Groupのブランド主色は Emerald Green `#00a968` とする。
+- ブランドカラーは、Adlaire Groupが管理する新規デザイン資産、および既存デザイン資産の大規模改修時に、共通のパレット(第3章)を使用する。
+- 公開面のカラー、背景、余白、導線、ボタン、リンク、セクション表現などは、AGWSリポジトリの構成を基準に順次変更する。
+- 既存公開サイトや既存公開面は、現行構成の完成度、変更負荷、運用影響、ブランド上の優先度を考慮し、段階的にAGWSの方向性へ寄せる。
+- 管理面は、原則として共通パレットを固定で使用する。公開面は新規構築または大規模改修時に共通パレットの採用を検討する。テーマを定義する場合、テーマは共通パレットのCSS変数(第4章)を参照できる。
+- 色は装飾目的だけでなく、操作、状態、情報分類の意味を持つものとして扱う。
+
+---
+
+# 3. ブランドカラーパレット
+
+| 役割 | 色名 | HEX | CSS変数 | 用途 |
+| --- | --- | --- | --- | --- |
+| Primary | Emerald Green | `#00a968` | `--adlaire-color-primary` | ブランド主色、主要操作、選択状態、正常状態 |
+| Secondary | Blue Sky | `#3498db` | `--adlaire-color-secondary` | リンク、補助操作、情報表示 |
+| Accent | Summer Sky | `#40aaef` | `--adlaire-color-accent` | 通知、アップデート案内、テーマ内アクセント |
+| Surface | White Rat | `#ecf0f1` | `--adlaire-color-surface` | 管理画面背景、淡い面 |
+| Border | Silver Tree | `#eceef1` | `--adlaire-color-border` | 境界線、区切り、補助背景 |
+| Support | Solitude | `#58be89` | `--adlaire-color-support` | サブアクセント、補助状態表示 |
+
+---
+
+# 4. CSS変数命名規則
+
+- CSSカスタムプロパティは `--adlaire-color-<role>` の形式で命名する(`<role>` は第3章の役割名を小文字ケバブケースで表記する)。
+- 全CSS変数は `:root` スコープで定義し、コンポーネント単位での再定義は行わない。
+- 変数名にHEX値や固有の対象名を含めない。役割ベースの命名を維持し、将来の配色変更に耐える設計とする。
+
+```css
+:root {
+  --adlaire-color-primary: #00a968;
+  --adlaire-color-secondary: #3498db;
+  --adlaire-color-accent: #40aaef;
+  --adlaire-color-surface: #ecf0f1;
+  --adlaire-color-border: #eceef1;
+  --adlaire-color-support: #58be89;
+}
+```
+
+---
+
+# 5. CSSフレームワーク設計方針
+
+- 外部CSSフレームワーク(Tailwind CSS、Bootstrapなど)は採用しない。本仕様書を正本とした内製の軽量CSSフレームワークとして設計する。
+- ユーティリティクラスは `.adlaire-bg-<role>`(背景色)、`.adlaire-text-<role>`(文字色)、`.adlaire-border-<role>`(境界線色)の命名規則に従い、第4章のCSS変数を参照する形で実装する(HEX値を直接埋め込まない)。
+- 内製CSSフレームワークは、画面やテーマごとに分散させず、共有スタイルシートとして一元管理する。具体的な格納場所は実装時に確定する。
+- CSSフレームワークとデザイントークンの実装範囲、ファイル構成、段階は第11章に定める。
+- 色以外の設計要素(余白、タイポグラフィなど)は、AGWSリポジトリの方向性を参照する。具体的な設計トークンとして管理する必要が生じた場合は、別途定義を新設する。
+
+---
+
+# 6. リポジトリ構成
+
+`Adlaire-Design` の開発正本は、以下の3領域(フォルダ)で構成する。
+
+- `UI/`: CSSフレームワーク本体(第5章のユーティリティクラス等)。将来的にCSS以外のコンポーネント実装も含みうる領域とする。
+- `Tokens/`: デザイントークン(色・余白・タイポグラフィ等の設計値)。第3章のブランドカラーパレット、第4章のCSS変数はこの領域に対応する。
+- `Brand/`: ブランド全般の資産(ロゴなど、色以外も含む将来拡張領域)。
+
+3領域間の依存関係は、現時点では定めない。
+
+---
+
+# 7. 独立管理方針
+
+Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理する方針とする。
+
+Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産の開発正本として独立して管理する。
+
+---
+
+# 8. 管理面における適用方針
+
+## 8.1 管理画面での使用方針
+
+管理画面は運用基盤としての安定性と視認性を優先する。
+
+主要操作には Primary を使用する。
+
+通常リンク、補助操作、詳細操作には Secondary を使用する。
+
+アップデート通知、情報通知には Accent を使用する。
+
+背景には Surface を使用する。
+
+境界線、区切り、薄い補助背景には Border を使用する。
+
+正常状態、補助ステータスには Primary または Support を使用する。
+
+## 8.2 テーマでの使用方針
+
+標準テーマを定義する場合は、ブランドカラートークンを反映する。
+
+標準テーマの初期方針は以下とする。
+
+| テーマ | 主な用途 | 色方針 |
+| --- | --- | --- |
+| `standard` | 汎用サイト | Primaryを中心に使用する |
+| `blog` | 記事中心サイト | Secondaryを中心に使用する |
+| `media` | 情報発信・広告枠想定サイト | Accentを中心に使用する |
+
+---
+
+# 9. AGWSリポジトリを基準とする公開面デザイン方針
+
+GitHubリポジトリ `fqwink/Adlaire-Group-Web-Site-AGWS` は、Adlaire Groupの公開面デザインにおける参照基準として扱う。
+
+AGWSリポジトリの参照対象は以下とする。
+
+- GitHubリポジトリ: `https://github.com/fqwink/Adlaire-Group-Web-Site-AGWS`
+- 参照ブランチ: `main`
+- 参照時点の確認コミット: `98e68c8bba684303879dab266c1aa79af02a10e5`
+- 公開確認先: `adlaire.com`
+
+他の公開サイト、公開テーマ、公開ドキュメントの見た目を変更する場合は、上記リポジトリに含まれる `index.html`、`about.html`、`contact.html`、`legal.html`、`architect.css`、`style.css`、`README.md`、`CHANGELOG.md` を参照する。
+
+AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映方針は、`Docs/AGWS_Design_Analysis` に記録する。
+
+特に、以下の構成・表現を公開面デザインの基準として扱う。
+
+- 静的HTMLによる軽量なページ構成
+- JavaScriptに依存しないCSSベースの実装
+- Architect CSSを基調としたコンポーネント構成
+- レスポンシブ対応を前提としたレイアウト
+- ヘッダー、ナビゲーション、メインコンテンツ、サイドバー、フッターで構成する情報設計
+- 2カラムレイアウトを基本とした本文と関連情報の分離
+- CSS onlyのタブ、タイムライン、カード、フォーム、パンくずナビゲーション
+- 青系グラデーション、白背景、ライトグレー背景、ダークグレー文字を基調としたクリーンな視覚表現
+
+変更対象には、少なくとも以下を含める。
+
+- カラー
+- 背景
+- 境界線
+- 余白
+- ボタン
+- リンク
+- セクション構成
+- 情報の優先順位
+- 視覚的なトーン
+
+ただし、`adlaire.com` はAGWSリポジトリに基づいて公開される実運用上の確認先であるため、ブランドカラー仕様を理由として、既存画面の構成、導線、情報設計、見た目を一律に置き換えることはしない。
+
+`adlaire.com` 自体を変更する場合は、以下のいずれかのタイミングで個別に判断する。
+
+- 新規ページまたは新規セクションを追加する場合
+- 既存ページを大規模改修する場合
+- ブランド更新や公開サイト全体の再設計を行う場合
+- ユーザーが個別に承認した場合
+
+反映時は、AGWSリポジトリに記録された既存構成の良さを維持し、色や見た目の統一がユーザー体験を損なわない範囲で適用する。
+
+---
+
+# 10. 適用範囲
+
+本仕様は以下に適用する。
+
+- Adlaire Groupが管理する管理画面
+- 新規作成または大規模改修される静的生成公開テーマ
+- AGWSリポジトリの方向性へ見た目を変更する公開面
+- `Adlaire-Group-Web-Site-AGWS` の構成・見た目を参照して整備する公開面
+- Adlaire-Designで定義するテーマ
+- テーマ内で参照する色トークン
+
+本仕様は以下には適用しない。
+
+- 既存公開サイト `adlaire.com` の既存画面に対する即時全面改修
+- 既存公開面のうち、現行構成が有効に機能しており、別途ユーザー承認を得て段階適用としたもの
+- ユーザーが管理するコンテンツ本文
+- 認証情報
+- Gitプロバイダー設定
+- 作業データ
+
+---
+
+# 11. CSS実装仕様
+
+## 11.1 目的
+
+本章は、Adlaire-Design内で管理するCSSフレームワーク・デザイントークンの実装範囲、ファイル構成、命名、段階を定める。
+
+本章は実装前の仕様固定を目的とする。実際のCSSファイル作成、テーマ作成、公開面反映は、ユーザー承認後に個別作業として行う。
+
+## 11.2 実装方針
+
+- Adlaire-Designの成果物は、本リポジトリ内で完結して管理する。
+- Node.js/npm依存物は追加しない。
+- 外部CSSフレームワークは採用しない。
+- HEX値は原則としてトークン定義に集約し、UI側のCSSはCSS変数を参照する。
+- AGWSリポジトリのCSSはそのまま扱わず、構造・役割・見た目を参考にしてAdlaire-Design内の仕様へ整理する。
+- 最初の実装は色トークンと最小ユーティリティに限定し、公開面レイアウトやコンポーネントは後続段階で扱う。
+- `@import` は使用しない。CSSファイルの読み込み順は利用側で明示する。
+
+## 11.3 実装対象ファイル
+
+### 11.3.1 第1段階
+
+第1段階では、ブランドカラー仕様に直接対応する最小成果物のみを作成する。
+
+| ファイル | 役割 | 状態 |
+| --- | --- | --- |
+| `Tokens/colors.css` | ブランドカラーのCSS変数定義 | 承認後に実装 |
+| `UI/adlaire.css` | ブランドカラーを参照する最小ユーティリティ | 承認後に実装 |
+
+### 11.3.2 第2段階
+
+第2段階では、AGWSリポジトリを参照基準とする公開面用トークンとレイアウト候補を整理する。
+
+| ファイル | 役割 | 状態 |
+| --- | --- | --- |
+| `Tokens/surface.css` | AGWS参照色、画面面色、テキスト色、notice色のCSS変数定義 | 未確定 |
+| `UI/layout.css` | 基本レイアウト候補 | 未確定 |
+| `UI/components.css` | コンポーネント候補 | 未確定 |
+
+## 11.4 CSS読み込み順
+
+第1段階の読み込み順は以下とする。
+
+1. `Tokens/colors.css`
+2. `UI/adlaire.css`
+
+第2段階の読み込み順は以下を候補とする。
+
+1. `Tokens/colors.css`
+2. `Tokens/surface.css`
+3. `UI/adlaire.css`
+4. `UI/layout.css`
+5. `UI/components.css`
+
+## 11.5 第1段階の仕様
+
+### 11.5.1 `Tokens/colors.css`
+
+`Tokens/colors.css` は、第3章・第4章に定義されたブランドカラーを `:root` で定義する。
+
+対象CSS変数は以下とする。
+
+| CSS変数 | HEX |
+| --- | --- |
+| `--adlaire-color-primary` | `#00a968` |
+| `--adlaire-color-secondary` | `#3498db` |
+| `--adlaire-color-accent` | `#40aaef` |
+| `--adlaire-color-surface` | `#ecf0f1` |
+| `--adlaire-color-border` | `#eceef1` |
+| `--adlaire-color-support` | `#58be89` |
+
+`Tokens/colors.css` は以下の規則に従う。
+
+- 冒頭コメントは `/* Adlaire-Design color tokens */` とする。
+- `@charset` は書かない。
+- `@import` は書かない。
+- `:root` ブロックは1個のみとする。
+- `:root` ブロックにはCSS変数定義以外を書かない。
+- CSS変数の記述順は本節の表の順とする。
+- HEX値は小文字で記述する。
+- 全CSS宣言にセミコロンを書く。
+
+### 11.5.2 `UI/adlaire.css`
+
+`UI/adlaire.css` は、`Tokens/colors.css` のCSS変数を参照するユーティリティを定義する。
+
+対象クラスは以下の命名規則に限定する。
+
+- `.adlaire-bg-<role>`
+- `.adlaire-text-<role>`
+- `.adlaire-border-<role>`
+
+`<role>` は以下に限定する。
+
+- `primary`
+- `secondary`
+- `accent`
+- `surface`
+- `border`
+- `support`
+
+第1段階で定義するクラスは以下の18個に限定する。
+
+| クラス | プロパティ | 値 |
+| --- | --- | --- |
+| `.adlaire-bg-primary` | `background-color` | `var(--adlaire-color-primary)` |
+| `.adlaire-bg-secondary` | `background-color` | `var(--adlaire-color-secondary)` |
+| `.adlaire-bg-accent` | `background-color` | `var(--adlaire-color-accent)` |
+| `.adlaire-bg-surface` | `background-color` | `var(--adlaire-color-surface)` |
+| `.adlaire-bg-border` | `background-color` | `var(--adlaire-color-border)` |
+| `.adlaire-bg-support` | `background-color` | `var(--adlaire-color-support)` |
+| `.adlaire-text-primary` | `color` | `var(--adlaire-color-primary)` |
+| `.adlaire-text-secondary` | `color` | `var(--adlaire-color-secondary)` |
+| `.adlaire-text-accent` | `color` | `var(--adlaire-color-accent)` |
+| `.adlaire-text-surface` | `color` | `var(--adlaire-color-surface)` |
+| `.adlaire-text-border` | `color` | `var(--adlaire-color-border)` |
+| `.adlaire-text-support` | `color` | `var(--adlaire-color-support)` |
+| `.adlaire-border-primary` | `border-color` | `var(--adlaire-color-primary)` |
+| `.adlaire-border-secondary` | `border-color` | `var(--adlaire-color-secondary)` |
+| `.adlaire-border-accent` | `border-color` | `var(--adlaire-color-accent)` |
+| `.adlaire-border-surface` | `border-color` | `var(--adlaire-color-surface)` |
+| `.adlaire-border-border` | `border-color` | `var(--adlaire-color-border)` |
+| `.adlaire-border-support` | `border-color` | `var(--adlaire-color-support)` |
+
+`UI/adlaire.css` にはHEX値を直接記述しない。
+
+`UI/adlaire.css` は以下の規則に従う。
+
+- 冒頭コメントは `/* Adlaire-Design color utilities */` とする。
+- `@charset` は書かない。
+- `@import` は書かない。
+- `!important` は使用しない。
+- `border` ユーティリティは `border-color` のみを定義する。
+- `border`、`border-width`、`border-style` は定義しない。
+- `.adlaire-background-primary`、`.is-primary`、`.text-primary` などの別名クラスは作らない。
+- クラス接頭辞は必ず `.adlaire-` とする。
+- CSS変数の別名は作らない。
+
+### 11.5.3 CSS記述規約
+
+第1段階のCSSは以下の記述規約に従う。
+
+- LF改行とする。
+- ファイル末尾は改行ありとする。
+- インデントは2スペースとする。
+- タブは使用しない。
+- セレクタは1行で記述する。
+- `{` はセレクタと同じ行に置く。
+- プロパティは1行1件とする。
+- `}` は単独行に置く。
+- セレクタ間には1空行を置く。
+- 各変数や各クラスごとの冗長コメントは書かない。
+- 生成日、作業者名、環境名は書かない。
+
+### 11.5.4 第1段階の非対象
+
+第1段階では以下を作成しない。
+
+- reset
+- typography
+- spacing
+- layout
+- button
+- card
+- form
+- alert
+- minify版
+- sample HTML
+
+第1段階では、色コントラスト保証を対象外とする。ユーティリティは組み合わせ自由であり、具体的なコントラスト保証は後続のコンポーネント仕様で扱う。
+
+## 11.6 第2段階の仕様化候補
+
+第2段階では、AGWSリポジトリの公開面デザインを参照し、以下を候補として整理する。
+
+- 公開面参照色
+- 1200px基準のコンテナ
+- 2カラム公開ページレイアウト
+- 768px以下の1カラム化
+- カード
+- セクション見出し
+- パンくずナビゲーション
+- サイドバー関連情報
+- notice表現
+
+第2段階のCSS変数名、クラス名は、第1段階の実装確認後に確定する。
+
+## 11.7 全体の非対象
+
+以下は本章の対象外とする。
+
+- JavaScript実装
+- Node.js/npmによるビルド
+- 外部CSSフレームワークの導入
+- AGWSリポジトリCSSのそのままの移植
+- `adlaire.com` 既存画面の直接変更
+- ロゴや画像などのブランド資産作成
+- 多言語化
+- JSONデータ管理
+- JavaScriptによる本文描画またはUI制御
+
+## 11.8 検査方針
+
+実装後は `Tools/check/check-adlaire-design.sh` の検査対象を拡張する。
+
+第1段階実装後の検査候補は以下とする。
+
+- `Tokens/colors.css` が存在すること。
+- `UI/adlaire.css` が存在すること。
+- `Tokens/colors.css` が必要なCSS変数を定義していること。
+- `UI/adlaire.css` が必要なユーティリティクラスを定義していること。
+- `UI/adlaire.css` にHEX値を直接記述していないこと。
+- `Tokens/colors.css` と `UI/adlaire.css` に `@import` が存在しないこと。
+- `UI/adlaire.css` に `!important` が存在しないこと。
+- Node.js/npm依存物が存在しないこと。
+
+検査シェルの責務は、構造検査、必須ファイル検査、禁止ファイル検査、必須変数・必須クラス検査、禁止記述検査までとする。CSSの完全なパーサ検証は行わない。
+
+## 11.9 承認単位
+
+実装時の承認単位は以下とする。
+
+| 段階 | 対象 |
+| --- | --- |
+| 第1段階 | `Tokens/colors.css`、`UI/adlaire.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 |
+| 第2段階A | `Tokens/surface.css` |
+| 第2段階B | `UI/layout.css` |
+| 第2段階C | `UI/components.css` |
+
+---
+
+# 12. 変更ルール
+
+マスター仕様、適用範囲、段階適用方針、CSS実装仕様を変更する場合は、事前にユーザー承認を得る。
+
+承認後、必要に応じて `Adlaire-Design/Docs/Master_Spec`(本書) と `Adlaire-Design/Docs/Change_History` を更新する。
+
+仕様変更時は、本書の `Version` を上げ、`Docs/Change_History` に同じrevの履歴を追加する。`Docs/Document_Index` は文書構成に変更がある場合のみ更新する。

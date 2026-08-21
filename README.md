@@ -1,6 +1,6 @@
 # Adlaire-Design
 
-Adlaire-Designは、Adlaire EcosystemのCSSフレームワーク・デザイントークン・ブランド資産を管理する独立リポジトリである。
+Adlaire-Designは、CSSフレームワーク・デザイントークン・ブランド資産を管理する独立リポジトリである。
 
 開発元: Adlaire Group DX事業セグメントグループ
 
@@ -15,11 +15,11 @@ Adlaire-Designは、Adlaire EcosystemのCSSフレームワーク・デザイン�
 
 ## ドキュメント
 
-仕様・設計の正本は `Docs/Brand_Color_Spec` とする。
+仕様・設計の正本は `Docs/Master_Spec` とする。
 
 ## 方針
 
-Adlaire-Designが実際に使用する成果物(ビルド済みCSS等)は、承認された内容を `Adlaire-Ecosystem` 側へ統合する。統合時期と手順は、統合実施時にあらためて確定する。
+Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理する。Adlaire-Designは、CSSフレームワーク・デザイントークン・ブランド資産の開発正本として独立して管理する。
 
 ## コマンド
 
