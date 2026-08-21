@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.61
+**Version:** rev.62
 
 ---
 
@@ -230,7 +230,7 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 - `@import` は使用しない。CSSファイルの読み込み順は利用側で明示する。
 - 2026-08-21時点では、CSSビルド方針は採用しない。`Tokens/` と `UI/` 配下のCSSファイルを正本として直接管理し、生成元と生成物を分けない。
 - WYSIWYG Editor実装コードは `WYSIWYG/Source/` 配下のTypeScriptソースを正本として管理する。
-- WYSIWYG EditorのMarkdown / MDXパーサーは、例外採用ライブラリの使用を許可する。採用はパーサー用途に限定し、ライブラリ名、用途、実行環境、ライセンス、npm管理物を追加しないことを個別仕様に記録する。
+- WYSIWYG EditorのMarkdown / MDXパーサーは、例外採用ライブラリの使用を許可する。採用はパーサー用途に限定し、ライブラリ名、用途、実行環境、ライセンス、npm管理物を追加しないことを個別仕様に記録する。採用ライブラリはMarkdown / GFMを `jsr:@deno/gfm@0.12.0`、MDXを `jsr:@temelj/mdx@0.14.0` とする。
 - Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、CSS minify生成、CSS bundle生成は採用しない。
 - `Dist/`、`dist/`、`Build/`、`build/` などの生成CSS用ディレクトリは作成しない。
 - npm、webpack、Node.js前提のWYSIWYGビルド設定は採用しない。
@@ -1182,7 +1182,7 @@ Adlaire-Designの今後の拡充は、CSSのビルド、minify、bundleではな
 
 WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブロック表示、プレビュー、JSON表示、状態表示など、WYSIWYGの表示層で必要になるCSSと仕様を対象にする。TypeScript本体、保存処理、編集ロジック、JavaScriptビルド成果物は対象外のままとする。
 
-WYSIWYG Editor実装コードの拡充では、ブロックデータ構造、編集操作、Undo/Redo、JSON serialization、preview rendering、Markdown / MDX parsing、将来のDeno互換ビルド方針を対象にする。Markdown / MDXパーサーは例外採用ライブラリを許可する。npm、webpack、Node.js前提の設定、生成JavaScript、bundle、minify成果物は対象外とする。
+WYSIWYG Editor実装コードの拡充では、ブロックデータ構造、編集操作、Undo/Redo、JSON serialization、preview rendering、Markdown / MDX parsing、将来のDeno互換ビルド方針を対象にする。Markdown / MDXパーサーは例外採用ライブラリを許可し、Markdown / GFMは `jsr:@deno/gfm@0.12.0`、MDXは `jsr:@temelj/mdx@0.14.0` を採用する。npm、webpack、Node.js前提の設定、生成JavaScript、bundle、minify成果物は対象外とする。
 
 再現性検査の拡充では、CSS読み込み順、CSS変数参照、禁止記述、必須セレクタ、AGWSまたは他公開面との差分確認を優先する。検査は `Tools/check/check-adlaire-design.sh` の責務範囲に収め、CSSの完全なパーサ検証や外部依存ツール導入は行わない。
 
@@ -1335,6 +1335,13 @@ Adlaire-Designで管理するWYSIWYG Editorの範囲は以下とする。
 | 表示確認 | `.adlaire-wysiwyg-preview`、`.adlaire-wysiwyg-json-panel`、`.adlaire-wysiwyg-footer` | プレビュー、JSON表示、フッター状態を表示する |
 
 WYSIWYG Editorのブロック種別は、見出し、段落、リスト、コード、引用、画像、区切り線、チェックリスト、callout、label、progressを想定する。ブロック種別、データ構造、保存形式、編集ロジックの最小実装は `WYSIWYG/Source/editor.ts` で管理する。Markdown / MDXからブロックデータへ変換するパーサー仕様では、個別承認された例外採用ライブラリを使用できる。
+
+Markdown / MDXパーサーの例外採用ライブラリは以下とする。
+
+| 対象 | ライブラリ | 用途 |
+| --- | --- | --- |
+| Markdown / GFM | `jsr:@deno/gfm@0.12.0` | MarkdownおよびGitHub Flavored Markdownの解析 |
+| MDX | `jsr:@temelj/mdx@0.14.0` | MDXの解析 |
 
 `UI/wysiwyg.css` は既存トークンを参照し、WYSIWYG専用の新規トークンは追加しない。HEX値、RGBA値、`@import`、`@charset`、`!important`、負の `letter-spacing`、`transition: all`、非ゼロの角丸・影・z-index直書きは禁止する。
 

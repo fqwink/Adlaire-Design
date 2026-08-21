@@ -239,6 +239,20 @@ if ! grep -F 'Markdown / MDXパーサーは、パーサー用途に限定して�
   exit 1
 fi
 
+for parser_library in \
+  'jsr:@deno/gfm@0.12.0' \
+  'jsr:@temelj/mdx@0.14.0'; do
+  if ! grep -F -- "$parser_library" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+    echo "Docs/Master_Spec must document parser library: $parser_library" >&2
+    exit 1
+  fi
+
+  if ! grep -F -- "$parser_library" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" >/dev/null 2>&1; then
+    echo "Docs/WYSIWYG_Editor_Specification must document parser library: $parser_library" >&2
+    exit 1
+  fi
+done
+
 MASTER_SPEC_VERSION=$(sed -n 's/^\*\*Version:\*\* \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec")
 CHANGE_HISTORY_VERSION=$(sed -n 's/^## \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Change_History" | sed -n '1p')
 

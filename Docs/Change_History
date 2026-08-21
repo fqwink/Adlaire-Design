@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.62
+
+- `Docs/Master_Spec` の版数を `rev.62` へ更新した。
+- WYSIWYG EditorのMarkdown / GFMパーサー例外採用ライブラリを `jsr:@deno/gfm@0.12.0` として記録した。
+- WYSIWYG EditorのMDXパーサー例外採用ライブラリを `jsr:@temelj/mdx@0.14.0` として記録した。
+- `Docs/WYSIWYG_Editor_Specification` に、Markdown / GFMおよびMDXの採用ライブラリ表を追加した。
+- `Tools/check/check-adlaire-design.sh` に、採用ライブラリ名の記録確認を追加した。
+
 ## rev.61
 
 - `Docs/Master_Spec` の版数を `rev.61` へ更新した。
