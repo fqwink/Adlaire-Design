@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.18
+**Version:** rev.19
 
 ---
 
@@ -239,9 +239,9 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 
 | ファイル | 役割 | 状態 |
 | --- | --- | --- |
-| `Tokens/surface.css` | AGWS参照色、画面面色、テキスト色、notice色のCSS変数定義 | 第2段階仕様候補 |
-| `UI/layout.css` | 基本レイアウト候補 | 第2段階仕様候補 |
-| `UI/components.css` | コンポーネント候補 | 第2段階仕様候補 |
+| `Tokens/surface.css` | AGWS参照色、画面面色、テキスト色、notice色のCSS変数定義 | 仕様確定・未実装 |
+| `UI/layout.css` | 基本レイアウト | 仕様確定・未実装 |
+| `UI/components.css` | 公開面コンポーネント | 仕様確定・未実装 |
 
 ## 11.4 CSS読み込み順
 
@@ -375,9 +375,9 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 
 第1段階では、色コントラスト保証を対象外とする。ユーティリティは組み合わせ自由であり、具体的なコントラスト保証は後続のコンポーネント仕様で扱う。
 
-## 11.6 第2段階の仕様化候補
+## 11.6 第2段階の確定仕様
 
-第2段階では、AGWSリポジトリの公開面デザインを参照し、以下をひとまとまりの候補として整理する。
+第2段階では、AGWSリポジトリの公開面デザインを参照し、以下をひとまとまりの実装単位として扱う。
 
 - 公開面参照色
 - 1200px基準のコンテナ
@@ -389,15 +389,15 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 - サイドバー関連情報
 - notice表現
 
-### 11.6.1 `Tokens/surface.css` 仕様候補
+### 11.6.1 `Tokens/surface.css`
 
-`Tokens/surface.css` は、AGWSリポジトリの公開面デザインで頻出する色を、公開面用の面・文字・強調・通知トークンとして整理する候補である。
+`Tokens/surface.css` は、AGWSリポジトリの公開面デザインで頻出する色を、公開面用の面・文字・強調・通知トークンとして定義する。
 
-`Tokens/surface.css` を実装する場合は、第1段階の `Tokens/colors.css` とは別ファイルにし、ブランドカラー本体と公開面参照色を混在させない。
+`Tokens/surface.css` は、第1段階の `Tokens/colors.css` とは別ファイルにし、ブランドカラー本体と公開面参照色を混在させない。
 
-候補CSS変数は以下とする。
+CSS変数は以下とする。
 
-| CSS変数候補 | HEX | AGWS上の主な用途 |
+| CSS変数 | HEX | AGWS上の主な用途 |
 | --- | --- | --- |
 | `--adlaire-surface-accent` | `#0066cc` | 見出し、リンク、主要ボタン、境界、強調 |
 | `--adlaire-surface-accent-mid` | `#0055aa` | ヘッダーグラデーション中間、ホバー |
@@ -414,7 +414,7 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 | `--adlaire-surface-notice-soft` | `#fff3cd` | notice背景 |
 | `--adlaire-surface-notice-text` | `#856404` | notice文字 |
 
-`Tokens/surface.css` は以下の規則を候補とする。
+`Tokens/surface.css` は以下の規則に従う。
 
 - 冒頭コメントは `/* Adlaire-Design surface tokens */` とする。
 - `@charset` は書かない。
@@ -424,39 +424,70 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 - HEX値は小文字で記述する。
 - 全CSS宣言にセミコロンを書く。
 
-### 11.6.2 `UI/layout.css` 仕様候補
+### 11.6.2 `UI/layout.css`
 
-`UI/layout.css` は、AGWSリポジトリの公開面レイアウトを参照し、ページ幅、2カラム構成、レスポンシブ時の1カラム化を扱う候補である。
+`UI/layout.css` は、AGWSリポジトリの公開面レイアウトを参照し、ページ幅、2カラム構成、レスポンシブ時の1カラム化を扱う。
 
-候補範囲は以下とする。
+対象クラスは以下とする。
 
-- 最大幅 `1200px` を基準とするコンテナ
-- メインコンテンツとサイドバーの2カラム構成
-- サイドバー幅 `300px` 前後の構成
-- `1024px` 以下のサイドバー調整
-- `768px` 以下の1カラム化
-- `480px` 以下の小型画面調整
+| クラス | 役割 |
+| --- | --- |
+| `.adlaire-container` | 最大幅 `1200px` の中央寄せコンテナ |
+| `.adlaire-public-layout` | 公開面のメイン/サイドバー2カラムレイアウト |
+| `.adlaire-public-main` | 公開面の本文領域 |
+| `.adlaire-public-sidebar` | 公開面のサイドバー領域 |
 
-クラス名、ブレークポイント、余白値は、第2段階全体の実装承認時に `Tokens/surface.css`、`UI/components.css` と合わせて確定する。
+`UI/layout.css` は以下の規則に従う。
 
-### 11.6.3 `UI/components.css` 仕様候補
+- 冒頭コメントは `/* Adlaire-Design public layout */` とする。
+- `@charset` は書かない。
+- `@import` は書かない。
+- `!important` は使用しない。
+- `.adlaire-container` の最大幅は `1200px` とする。
+- `.adlaire-container` は左右余白を持ち、中央寄せとする。
+- `.adlaire-public-layout` はデスクトップで2カラムとする。
+- `.adlaire-public-sidebar` の基準幅は `300px` とする。
+- `1024px` 以下ではサイドバー幅を狭める。
+- `768px` 以下では1カラム化する。
+- `480px` 以下では小型画面向けの余白調整のみを行う。
+- layout層では色、カード、見出し、noticeなどのコンポーネント見た目を定義しない。
 
-`UI/components.css` は、AGWSリポジトリの公開面コンポーネントを参照し、カード、セクション見出し、パンくず、サイドバー関連情報、notice表現を扱う候補である。
+### 11.6.3 `UI/components.css`
 
-候補範囲は以下とする。
+`UI/components.css` は、AGWSリポジトリの公開面コンポーネントを参照し、カード、セクション見出し、パンくず、サイドバー関連情報、notice表現を扱う。
 
-- カード
-- セクション見出し
-- パンくずナビゲーション
-- サイドバー関連情報
-- notice表現
-- CSS onlyタブ
-- タイムライン
-- ページトップへ戻るリンク
+対象クラスは以下とする。
 
-クラス名、状態表現、色参照は、第2段階全体の実装承認時に `Tokens/surface.css`、`UI/layout.css` と合わせて確定する。
+| クラス | 役割 |
+| --- | --- |
+| `.adlaire-card` | 公開面カード |
+| `.adlaire-card-header` | カード見出し領域 |
+| `.adlaire-card-body` | カード本文領域 |
+| `.adlaire-section-title` | セクション見出し |
+| `.adlaire-breadcrumb` | パンくずナビゲーション |
+| `.adlaire-sidebar-list` | サイドバー関連情報リスト |
+| `.adlaire-notice` | notice基本表現 |
+| `.adlaire-notice-warning` | warning notice |
+| `.adlaire-tabs` | CSS onlyタブの外枠 |
+| `.adlaire-tab-list` | タブ一覧 |
+| `.adlaire-tab-panel` | タブ本文 |
+| `.adlaire-timeline` | タイムライン外枠 |
+| `.adlaire-timeline-item` | タイムライン項目 |
+| `.adlaire-page-top` | ページトップへ戻るリンク |
 
-第2段階のCSS変数名、クラス名、ブレークポイント、コンポーネント範囲は、3ファイルをまとめて確定する。
+`UI/components.css` は以下の規則に従う。
+
+- 冒頭コメントは `/* Adlaire-Design public components */` とする。
+- `@charset` は書かない。
+- `@import` は書かない。
+- `!important` は使用しない。
+- 色は `Tokens/colors.css` または `Tokens/surface.css` のCSS変数を参照する。
+- HEX値を直接記述しない。
+- reset、typography、grid汎用ユーティリティは定義しない。
+- JavaScriptに依存する状態管理は定義しない。
+- CSS onlyで成立しない挙動は対象外とする。
+
+第2段階のCSS変数名、クラス名、ブレークポイント、コンポーネント範囲は、本節を確定仕様とする。実装時は3ファイルをまとめて作成し、検査シェルも同じ承認単位で拡張する。
 
 ## 11.7 全体の非対象
 
@@ -499,7 +530,7 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 | 段階 | 対象 | 状態 |
 | --- | --- | --- |
 | 第1段階 | `Tokens/colors.css`、`UI/adlaire.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
-| 第2段階 | `Tokens/surface.css`、`UI/layout.css`、`UI/components.css` | 仕様候補 |
+| 第2段階 | `Tokens/surface.css`、`UI/layout.css`、`UI/components.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 仕様確定・未実装 |
 
 ---
 
