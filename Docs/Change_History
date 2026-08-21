@@ -8,6 +8,40 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.56
+
+- `Docs/Master_Spec` の版数を `rev.56` へ更新した。
+- Adlaire-Designの管理対象に、WYSIWYG Editor実装コードを正式追加した。
+- `WYSIWYG/README.md` と `WYSIWYG/Source/editor.ts` を追加し、依存なしTypeScriptによるWYSIWYG最小コア実装を管理対象にした。
+- WYSIWYG Editor実装コードでは、ブロックデータ、Undo/Redo、JSON serialization、preview renderingをAdlaire-Design側で管理する方針に変更した。
+- npm、webpack、Node.js前提の設定、生成JavaScript、bundle、minify成果物は引き続き対象外とした。
+- `Docs/WYSIWYG_Editor_Specification`、`Docs/Document_Index`、`README.md`、`AGENTS.md` を実装コード込みの方針に合わせて更新した。
+- `Tools/check/check-adlaire-design.sh` に、`WYSIWYG/` 構造とWYSIWYG実装コード必須exportの検査を追加した。
+
+## rev.55
+
+- `Docs/Master_Spec` の版数を `rev.55` へ更新した。
+- Adlaire-Designの管理対象を、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UIとして明確化した。
+- `AGENTS.md` と `README.md` のリポジトリ定義を、CSSとWYSIWYGを管理する独立リポジトリの表現に更新した。
+- 今後の拡充優先順位にWYSIWYG Editor UIを追加した。
+- `Tools/check/check-adlaire-design.sh` に、Adlaire-Designの管理範囲定義がCSSとWYSIWYG Editor UIを含むことの検査を追加した。
+
+## rev.54
+
+- `Docs/Master_Spec` の版数を `rev.54` へ更新した。
+- WYSIWYG EditorのUIはAdlaire-Design採用確定であることを `Docs/Master_Spec`、`Docs/WYSIWYG_Editor_Specification`、`README.md` に明記した。
+- WYSIWYG Editorの読み込み順を、採用時の推奨ではなく採用確定後の固定順として記録した。
+
+## rev.53
+
+- `Docs/Master_Spec` の版数を `rev.53` へ更新した。
+- WYSIWYG EditorのAdlaire-Design編入仕様として `Docs/WYSIWYG_Editor_Specification` を追加した。
+- WYSIWYG Editorの表示層CSSとして `UI/wysiwyg.css` を追加し、既存トークン参照の直接CSSとして管理する方針にした。
+- WYSIWYG Editor本体ではtranspile、bundle、minify、compileを必須としつつ、Adlaire-Designではビルド工程を実行・管理しない境界を明確化した。
+- npm、webpack、Node.js前提のビルド体系を採用しない方針をWYSIWYG編入仕様に記録した。
+- `Docs/Document_Index` と `README.md` をWYSIWYG編入後の管理対象に合わせて更新した。
+- `Tools/check/check-adlaire-design.sh` に、WYSIWYG仕様書、`UI/wysiwyg.css`、必須WYSIWYGクラス、禁止記述の検査を追加した。
+
 ## rev.52
 
 - `Docs/Master_Spec` の版数を `rev.52` へ更新した。

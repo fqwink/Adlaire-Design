@@ -17,6 +17,7 @@ for path in \
   Docs/Document_Index \
   Docs/Master_Spec \
   Docs/AGWS_Design_Analysis \
+  Docs/WYSIWYG_Editor_Specification \
   Docs/Change_History \
   Tokens/colors.css \
   Tokens/surface.css \
@@ -30,8 +31,12 @@ for path in \
   UI/site.css \
   UI/forms.css \
   UI/content.css \
+  UI/wysiwyg.css \
   UI/utilities.css \
   UI/compat-agws.css \
+  WYSIWYG \
+  WYSIWYG/README.md \
+  WYSIWYG/Source/editor.ts \
   UI \
   Tokens \
   Brand; do
@@ -41,7 +46,7 @@ for path in \
   fi
 done
 
-for path in UI Tokens Brand; do
+for path in UI Tokens Brand WYSIWYG WYSIWYG/Source; do
   if [ ! -d "$ADLAIRE_DESIGN_ROOT/$path" ]; then
     echo "Adlaire-Design required path must be a directory: $ADLAIRE_DESIGN_ROOT/$path" >&2
     exit 1
@@ -59,6 +64,7 @@ find "$ADLAIRE_DESIGN_ROOT" -mindepth 1 -maxdepth 1 \
   ! -name 'Tokens' \
   ! -name 'Tools' \
   ! -name 'UI' \
+  ! -name 'WYSIWYG' \
   -print >"$TMP_DIR/unexpected-top-level"
 
 if [ -s "$TMP_DIR/unexpected-top-level" ]; then
@@ -70,6 +76,7 @@ fi
 find "$ADLAIRE_DESIGN_ROOT/Docs" -type f \
   ! -name 'Master_Spec' \
   ! -name 'AGWS_Design_Analysis' \
+  ! -name 'WYSIWYG_Editor_Specification' \
   ! -name 'Document_Index' \
   ! -name 'Change_History' \
   -print >"$TMP_DIR/unexpected-docs-files"
@@ -98,6 +105,17 @@ find "$ADLAIRE_DESIGN_ROOT/Tools" -type f \
 if [ -s "$TMP_DIR/unexpected-tools-files" ]; then
   echo "Tools/ must contain only approved Adlaire-Design check tools:" >&2
   cat "$TMP_DIR/unexpected-tools-files" >&2
+  exit 1
+fi
+
+find "$ADLAIRE_DESIGN_ROOT/WYSIWYG" -type f \
+  ! -path "$ADLAIRE_DESIGN_ROOT/WYSIWYG/README.md" \
+  ! -path "$ADLAIRE_DESIGN_ROOT/WYSIWYG/Source/editor.ts" \
+  -print >"$TMP_DIR/unexpected-wysiwyg-files"
+
+if [ -s "$TMP_DIR/unexpected-wysiwyg-files" ]; then
+  echo "WYSIWYG/ must contain only approved WYSIWYG source files:" >&2
+  cat "$TMP_DIR/unexpected-wysiwyg-files" >&2
   exit 1
 fi
 
@@ -154,8 +172,13 @@ if ! grep -F 'Sass/SCSS/Less/Stylus/PostCSS等のCSSプリプロセッサを追�
   exit 1
 fi
 
-if ! grep -F 'ビルド、minify、bundleは現状検討しないこと。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+if ! grep -F 'CSSのビルド、minify、bundleは現状検討しないこと。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
   echo "Adlaire-Design AGENTS.md must document that build, minify, and bundle are not under current consideration." >&2
+  exit 1
+fi
+
+if ! grep -F 'CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、WYSIWYG Editor実装コードを扱う独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design AGENTS.md must define CSS and WYSIWYG Editor UI as managed scope." >&2
   exit 1
 fi
 
@@ -164,12 +187,17 @@ if ! grep -F 'Docs/Change_History' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2
   exit 1
 fi
 
-if ! grep -F '今後の拡充は、公開面CSS機能、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+if ! grep -F 'CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、WYSIWYG Editor実装コードを管理する独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must define CSS and WYSIWYG Editor UI as managed scope." >&2
+  exit 1
+fi
+
+if ! grep -F '今後の拡充は、公開面CSS機能、WYSIWYG Editor UI、WYSIWYG Editor実装コード、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must document the expansion priority policy." >&2
   exit 1
 fi
 
-if ! grep -F 'ビルド、minify、bundle、Sass/SCSS等のCSSプリプロセッサは現状検討しない。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+if ! grep -F 'CSSのビルド、minify、bundle、Sass/SCSS等のCSSプリプロセッサは現状検討しない。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must document that build, minify, bundle, and CSS preprocessors are not under current consideration." >&2
   exit 1
 fi
@@ -214,6 +242,7 @@ for indexed_path in \
   LICENSE \
   Docs/Master_Spec \
   Docs/AGWS_Design_Analysis \
+  Docs/WYSIWYG_Editor_Specification \
   Docs/Change_History \
   Brand/ \
   Tokens/colors.css \
@@ -228,8 +257,12 @@ for indexed_path in \
   UI/site.css \
   UI/forms.css \
   UI/content.css \
+  UI/wysiwyg.css \
   UI/utilities.css \
   UI/compat-agws.css \
+  WYSIWYG/ \
+  WYSIWYG/README.md \
+  WYSIWYG/Source/editor.ts \
   Tools/check/check-adlaire-design.sh; do
   if ! grep -F -- "$indexed_path" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
     echo "Adlaire-Design Document_Index must reference $indexed_path." >&2
@@ -237,27 +270,39 @@ for indexed_path in \
   fi
 done
 
+for export_name in \
+  'export type AdlaireWysiwygBlockType' \
+  'export interface AdlaireWysiwygBlock' \
+  'export interface AdlaireWysiwygDocument' \
+  'export class AdlaireWysiwygEditor' \
+  'export function parseAdlaireWysiwygDocument'; do
+  if ! grep -F -- "$export_name" "$ADLAIRE_DESIGN_ROOT/WYSIWYG/Source/editor.ts" >/dev/null 2>&1; then
+    echo "WYSIWYG/Source/editor.ts missing required export: $export_name" >&2
+    exit 1
+  fi
+done
+
 OLD_REPOSITORY_NAME='Adlaire-''Eco''system-Design'
 
-if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/AGWS_Design_Analysis" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
+if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/AGWS_Design_Analysis" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
   echo "current Adlaire-Design documents must not use the old repository name:" >&2
   cat /tmp/adlaire-design-old-name-matches >&2
   exit 1
 fi
 
-if grep -R -n '@import' "$ADLAIRE_DESIGN_ROOT/Tokens/colors.css" "$ADLAIRE_DESIGN_ROOT/Tokens/surface.css" "$ADLAIRE_DESIGN_ROOT/Tokens/status.css" "$ADLAIRE_DESIGN_ROOT/Tokens/effects.css" "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-css-import-matches 2>/dev/null; then
+if grep -R -n '@import' "$ADLAIRE_DESIGN_ROOT/Tokens/colors.css" "$ADLAIRE_DESIGN_ROOT/Tokens/surface.css" "$ADLAIRE_DESIGN_ROOT/Tokens/status.css" "$ADLAIRE_DESIGN_ROOT/Tokens/effects.css" "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-css-import-matches 2>/dev/null; then
   echo "Adlaire-Design CSS files must not use @import:" >&2
   cat /tmp/adlaire-design-css-import-matches >&2
   exit 1
 fi
 
-if grep -R -n '@charset' "$ADLAIRE_DESIGN_ROOT/Tokens/colors.css" "$ADLAIRE_DESIGN_ROOT/Tokens/surface.css" "$ADLAIRE_DESIGN_ROOT/Tokens/status.css" "$ADLAIRE_DESIGN_ROOT/Tokens/effects.css" "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-css-charset-matches 2>/dev/null; then
+if grep -R -n '@charset' "$ADLAIRE_DESIGN_ROOT/Tokens/colors.css" "$ADLAIRE_DESIGN_ROOT/Tokens/surface.css" "$ADLAIRE_DESIGN_ROOT/Tokens/status.css" "$ADLAIRE_DESIGN_ROOT/Tokens/effects.css" "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-css-charset-matches 2>/dev/null; then
   echo "Adlaire-Design CSS files must not use @charset:" >&2
   cat /tmp/adlaire-design-css-charset-matches >&2
   exit 1
 fi
 
-if grep -R -n '!important' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-css-important-matches 2>/dev/null; then
+if grep -R -n '!important' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-css-important-matches 2>/dev/null; then
   echo "UI CSS files must not use !important:" >&2
   cat /tmp/adlaire-design-css-important-matches >&2
   exit 1
@@ -325,6 +370,11 @@ fi
 
 if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/utilities.css")" != '/* Adlaire-Design utility classes */' ]; then
   echo "UI/utilities.css must start with the required comment." >&2
+  exit 1
+fi
+
+if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css")" != '/* Adlaire-Design WYSIWYG editor */' ]; then
+  echo "UI/wysiwyg.css must start with the required comment." >&2
   exit 1
 fi
 
@@ -608,6 +658,32 @@ for class in \
   fi
 done
 
+for class in \
+  '.adlaire-wysiwyg' \
+  '.adlaire-wysiwyg-header' \
+  '.adlaire-wysiwyg-title' \
+  '.adlaire-wysiwyg-status' \
+  '.adlaire-wysiwyg-toolbar' \
+  '.adlaire-wysiwyg-toolbar-group' \
+  '.adlaire-wysiwyg-tool' \
+  '.adlaire-wysiwyg-canvas' \
+  '.adlaire-wysiwyg-block' \
+  '.adlaire-wysiwyg-block-selected' \
+  '.adlaire-wysiwyg-block-handle' \
+  '.adlaire-wysiwyg-block-content' \
+  '.adlaire-wysiwyg-placeholder' \
+  '.adlaire-wysiwyg-inline-toolbar' \
+  '.adlaire-wysiwyg-slash-menu' \
+  '.adlaire-wysiwyg-slash-item' \
+  '.adlaire-wysiwyg-preview' \
+  '.adlaire-wysiwyg-json-panel' \
+  '.adlaire-wysiwyg-footer'; do
+  if ! grep -F -- "$class" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" >/dev/null 2>&1; then
+    echo "UI/wysiwyg.css missing required class: $class" >&2
+    exit 1
+  fi
+done
+
 if ! grep -F 'max-width: 1200px;' "$ADLAIRE_DESIGN_ROOT/UI/layout.css" >/dev/null 2>&1; then
   echo "UI/layout.css must define a 1200px container." >&2
   exit 1
@@ -633,43 +709,43 @@ if ! grep -F '@media (max-width: 480px)' "$ADLAIRE_DESIGN_ROOT/UI/layout.css" >/
   exit 1
 fi
 
-if grep -R -n -E '#[0-9a-fA-F]{3,8}' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-hex-matches 2>/dev/null; then
+if grep -R -n -E '#[0-9a-fA-F]{3,8}' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-hex-matches 2>/dev/null; then
   echo "UI CSS files must not contain direct HEX colors:" >&2
   cat /tmp/adlaire-design-ui-hex-matches >&2
   exit 1
 fi
 
-if grep -R -n -E 'rgba?\(' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-rgba-matches 2>/dev/null; then
+if grep -R -n -E 'rgba?\(' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-rgba-matches 2>/dev/null; then
   echo "UI CSS files must not contain direct RGB/RGBA colors:" >&2
   cat /tmp/adlaire-design-ui-rgba-matches >&2
   exit 1
 fi
 
-if grep -R -n 'letter-spacing: -' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-negative-letter-spacing-matches 2>/dev/null; then
+if grep -R -n 'letter-spacing: -' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-negative-letter-spacing-matches 2>/dev/null; then
   echo "UI CSS files must not contain negative letter-spacing:" >&2
   cat /tmp/adlaire-design-ui-negative-letter-spacing-matches >&2
   exit 1
 fi
 
-if grep -R -n 'transition: all' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-transition-all-matches 2>/dev/null; then
+if grep -R -n 'transition: all' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-transition-all-matches 2>/dev/null; then
   echo "UI CSS files must not use transition: all:" >&2
   cat /tmp/adlaire-design-ui-transition-all-matches >&2
   exit 1
 fi
 
-if grep -R -n -E 'border-radius: [1-9]' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-radius-matches 2>/dev/null; then
+if grep -R -n -E 'border-radius: [1-9]' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-radius-matches 2>/dev/null; then
   echo "UI CSS files must not contain direct nonzero border-radius values:" >&2
   cat /tmp/adlaire-design-ui-radius-matches >&2
   exit 1
 fi
 
-if grep -R -n -E 'box-shadow: [-0-9]' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-box-shadow-matches 2>/dev/null; then
+if grep -R -n -E 'box-shadow: [-0-9]' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-box-shadow-matches 2>/dev/null; then
   echo "UI CSS files must not contain direct box-shadow values:" >&2
   cat /tmp/adlaire-design-ui-box-shadow-matches >&2
   exit 1
 fi
 
-if grep -R -n -E 'z-index: [0-9]' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-z-index-matches 2>/dev/null; then
+if grep -R -n -E 'z-index: [0-9]' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-ui-z-index-matches 2>/dev/null; then
   echo "UI CSS files must not contain direct z-index values:" >&2
   cat /tmp/adlaire-design-ui-z-index-matches >&2
   exit 1
