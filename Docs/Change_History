@@ -8,6 +8,41 @@
 
 ---
 
+## rev.6
+
+- `Docs/Brand_Color_Spec` の版数を `rev.6` へ更新した。
+- GitHubリポジトリ `fqwink/Adlaire-Group-Web-Site-AGWS` を詳細解析し、`Docs/AGWS_Design_Analysis` を追加した。
+- AGWSのファイル構成、ページ構成、CSS設計、カラーパレット、レイアウト、再利用方針、注意点を整理した。
+- `architect.css` をフレームワーク候補、`style.css` を公開面テーマ候補として分けて扱う方針を明記した。
+- AGWSの青系公開面トーンと、Adlaire-Design既存仕様のEmerald Green主色は、用途別に役割を分ける必要があることを明記した。
+- `Docs/Document_Index` に `Docs/AGWS_Design_Analysis` を追加した。
+- `Docs/Brand_Color_Spec` から `Docs/AGWS_Design_Analysis` を参照するようにした。
+
+## rev.5
+
+- `Docs/Brand_Color_Spec` の版数を `rev.5` へ更新した。
+- `adlaire.com` の構成・見た目の参照元として、GitHubリポジトリ `https://github.com/fqwink/Adlaire-Group-Web-Site-AGWS` を明記した。
+- 参照ブランチを `main`、参照時点の確認コミットを `98e68c8bba684303879dab266c1aa79af02a10e5` として記録した。
+- `Adlaire-Group-Web-Site-AGWS` に含まれるHTML、CSS、README、CHANGELOGを公開面デザインの参照対象として明記した。
+- 静的HTML、JavaScript非依存、Architect CSS、レスポンシブ対応、2カラム構成、CSS onlyタブ、青系グラデーションなどを、公開面デザインの基準要素として整理した。
+
+## rev.4
+
+- `Docs/Brand_Color_Spec` の版数を `rev.4` へ更新し、文書名をブランドカラー仕様からブランドデザイン・カラー仕様へ広げた。
+- 本仕様の対象をカラーだけでなく、背景、境界、余白、ボタン、リンク、セクション構成、情報の見せ方など、見た目全体へ拡張した。
+- 色以外の設計要素は `adlaire.com` の方向性を参照し、具体的な設計トークン化は必要時に別途定義する方針へ更新した。
+- `adlaire.com` をAdlaire Groupの公開面デザインにおける参照基準として扱い、他の公開面のカラーや見た目を `adlaire.com` の方向性へ順次変更する方針を明記した。
+- `adlaire.com` 自体は基準となる既存構成として扱い、ブランドカラー仕様を理由に一律置換しない方針を維持した。
+
+## rev.3
+
+- `Docs/Brand_Color_Spec` の版数を `rev.3` へ更新した。
+- 実装変更より先に仕様書を正本として方針を定義し、実際のCSS、テーマ、公開面への反映は承認後の個別実装計画として扱う方針を明記した。
+- `adlaire.com` など既存公開サイトの現行構成・情報設計・デザインが有効に機能していることを考慮し、ブランドカラー仕様の適用方針を即時全面適用から段階適用へ変更した。
+- 新規プロダクト、新規画面、大規模改修画面では共通パレットを使用し、既存公開面は現行構成の完成度・変更負荷・運用影響・ブランド上の優先度を考慮して段階的に本仕様へ寄せる方針を明記した。
+- `adlaire.com` の扱いを独立節として追加し、既存画面の構成、導線、情報設計、見た目を一律に置き換えないことを明記した。
+- 適用範囲に、既存公開サイト `adlaire.com` の既存画面に対する即時全面改修を含めないことを明記した。
+
 ## rev.2
 
 - Adlaire-Design専用の検査シェルを `Adlaire-Ecosystem` から `Tools/check/` へ移行した。

@@ -10,6 +10,7 @@ for path in \
   LICENSE \
   Docs/Document_Index \
   Docs/Brand_Color_Spec \
+  Docs/AGWS_Design_Analysis \
   Docs/Change_History \
   UI \
   Tokens \
@@ -47,12 +48,17 @@ if ! grep -F 'Docs/Brand_Color_Spec' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" 
   exit 1
 fi
 
+if ! grep -F 'Docs/AGWS_Design_Analysis' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
+  echo "Adlaire-Design Document_Index must reference Docs/AGWS_Design_Analysis." >&2
+  exit 1
+fi
+
 if ! grep -F 'Docs/Change_History' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
   echo "Adlaire-Design Document_Index must reference Docs/Change_History." >&2
   exit 1
 fi
 
-if grep -R -n 'Adlaire-Ecosystem-Design' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Brand_Color_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
+if grep -R -n 'Adlaire-Ecosystem-Design' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Brand_Color_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/AGWS_Design_Analysis" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
   echo "current Adlaire-Design documents must not use the old repository name:" >&2
   cat /tmp/adlaire-design-old-name-matches >&2
   exit 1
