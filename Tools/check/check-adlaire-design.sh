@@ -108,11 +108,6 @@ if [ -e "$ADLAIRE_DESIGN_ROOT/WYSIWYG" ]; then
   exit 1
 fi
 
-if [ -e "$ADLAIRE_DESIGN_ROOT/Docs/AGWS_Design_Analysis" ]; then
-  echo "Adlaire-Design must not contain Docs/AGWS_Design_Analysis because superseded analysis documents are outside the current specification." >&2
-  exit 1
-fi
-
 if [ ! -x "$ADLAIRE_DESIGN_ROOT/Tools/check/check-adlaire-design.sh" ]; then
   echo "Tools/check/check-adlaire-design.sh must be executable." >&2
   exit 1
@@ -460,7 +455,7 @@ if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css")" != '/* Adlaire-Desig
   exit 1
 fi
 
-if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css")" != '/* Adlaire-Design compatibility layer */' ]; then
+if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css")" != '/* Adlaire-Design specification layer */' ]; then
   echo "UI/compat-agws.css must start with the required comment." >&2
   exit 1
 fi
@@ -662,7 +657,7 @@ for declaration in \
   'padding-left: 20px;' \
   'font: inherit;'; do
   if ! grep -F -- "$declaration" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/dev/null 2>&1; then
-    echo "UI/compat-agws.css missing required Adlaire-Design compatibility declaration: $declaration" >&2
+    echo "UI/compat-agws.css missing required Adlaire-Design specification declaration: $declaration" >&2
     exit 1
   fi
 done

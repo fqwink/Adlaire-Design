@@ -23,5 +23,5 @@
 - `UI/content.css`(本文固有コンポーネント)
 - `UI/wysiwyg.css`(WYSIWYG Editor UIスキン)
 - `UI/utilities.css`(汎用ユーティリティ)
-- `UI/compat-agws.css`(Adlaire-Design仕様の互換CSS層)
+- `UI/compat-agws.css`(Adlaire-Design仕様CSS層)
 - `Tools/check/check-adlaire-design.sh`(Adlaire-Design専用の構成・CSS実装検査)
