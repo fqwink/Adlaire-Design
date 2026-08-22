@@ -21,26 +21,28 @@
 
       if (type === "number") {
         if (!leftHasValue && !rightHasValue) {
-          result = 0;
-        } else if (!leftHasValue || Number.isNaN(leftNumber)) {
-          result = 1;
-        } else if (!rightHasValue || Number.isNaN(rightNumber)) {
-          result = -1;
-        } else {
-          result = leftNumber - rightNumber;
+          return 0;
         }
+        if (!leftHasValue || Number.isNaN(leftNumber)) {
+          return 1;
+        }
+        if (!rightHasValue || Number.isNaN(rightNumber)) {
+          return -1;
+        }
+        result = leftNumber - rightNumber;
       } else if (leftHasValue && rightHasValue && !Number.isNaN(leftNumber) && !Number.isNaN(rightNumber)) {
         result = leftNumber - rightNumber;
       } else if (type === "date") {
         if (!leftHasValue && !rightHasValue) {
-          result = 0;
-        } else if (!leftHasValue || Number.isNaN(leftDate)) {
-          result = 1;
-        } else if (!rightHasValue || Number.isNaN(rightDate)) {
-          result = -1;
-        } else {
-          result = leftDate - rightDate;
+          return 0;
         }
+        if (!leftHasValue || Number.isNaN(leftDate)) {
+          return 1;
+        }
+        if (!rightHasValue || Number.isNaN(rightDate)) {
+          return -1;
+        }
+        result = leftDate - rightDate;
       } else if (leftHasValue && rightHasValue && !Number.isNaN(leftDate) && !Number.isNaN(rightDate)) {
         result = leftDate - rightDate;
       } else {

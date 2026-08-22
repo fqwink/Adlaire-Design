@@ -21,8 +21,9 @@
     root.querySelectorAll("[data-adlaire-filter-item]").forEach(function (item) {
       var text = normalize(item.textContent);
       var group = normalize(item.getAttribute("data-adlaire-filter-item"));
+      var groups = group ? group.split(/\s+/) : [];
       var matchesQuery = !query || text.indexOf(query) !== -1;
-      var matchesFilter = !filter || group === filter;
+      var matchesFilter = !filter || groups.indexOf(filter) !== -1;
       var visible = matchesQuery && matchesFilter;
       item.hidden = !visible;
       if (visible) {

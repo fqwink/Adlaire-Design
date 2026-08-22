@@ -638,6 +638,9 @@ for term in \
   'data-adlaire-dismiss' \
   'data-adlaire-carousel-action' \
   'data-adlaire-carousel-index' \
+  '[data-adlaire-toggle][href]' \
+  'containFocus' \
+  'is-current' \
   'Escape' \
   'adlaire-overlay-open'; do
   if ! grep -F -- "$term" "$ADLAIRE_DESIGN_ROOT/UI/components.js" >/dev/null 2>&1; then
@@ -649,6 +652,9 @@ done
 for term in \
   'data-adlaire-sort' \
   'Date.parse' \
+  'if (!leftHasValue || Number.isNaN(leftNumber))' \
+  'if (!leftHasValue || Number.isNaN(leftDate))' \
+  'return 1;' \
   'aria-sort'; do
   if ! grep -F -- "$term" "$ADLAIRE_DESIGN_ROOT/UI/content.js" >/dev/null 2>&1; then
     echo "UI/content.js missing required interaction term: $term" >&2
@@ -659,12 +665,19 @@ done
 for term in \
   'data-adlaire-filter-count' \
   'data-adlaire-filter-empty' \
+  'split(/\s+/)' \
+  'groups.indexOf(filter)' \
   'visibleCount'; do
   if ! grep -F -- "$term" "$ADLAIRE_DESIGN_ROOT/UI/forms.js" >/dev/null 2>&1; then
     echo "UI/forms.js missing required interaction term: $term" >&2
     exit 1
   fi
 done
+
+if grep -F -- 'slide.hidden' "$ADLAIRE_DESIGN_ROOT/UI/components.js" >/dev/null 2>&1; then
+  echo "UI/components.js must not collapse carousel slides with hidden during movement." >&2
+  exit 1
+fi
 
 if [ "$(grep -c '^:root {' "$ADLAIRE_DESIGN_ROOT/Tokens/colors.css")" -ne 1 ]; then
   echo "Tokens/colors.css must contain exactly one :root block." >&2
@@ -1202,6 +1215,11 @@ for class in \
     exit 1
   fi
 done
+
+if ! grep -F -- 'pointer-events: none;' "$ADLAIRE_DESIGN_ROOT/UI/components.css" >/dev/null 2>&1; then
+  echo "UI/components.css missing disabled interaction guard: pointer-events: none;" >&2
+  exit 1
+fi
 
 for class in \
   '.adlaire-wysiwyg' \
