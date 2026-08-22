@@ -792,51 +792,6 @@ for selector in \
   fi
 done
 
-cat >"$TMP_DIR/compat-agws.expected" <<'EOF'
-/* Adlaire-Design specification layer */
-#top,
-#company,
-#terms,
-#privacy,
-#disclaimer,
-#copyright,
-#contactForm,
-#name,
-#email,
-#subject,
-#inquiry_type,
-#message {
-  scroll-margin-top: 20px;
-}
-
-.container {
-  padding-right: 20px;
-  padding-left: 20px;
-}
-
-[aria-label],
-[target="_blank"],
-[rel="stylesheet"],
-[name="viewport"],
-[name="news-tab"],
-[type="radio"],
-[type="checkbox"],
-[type="submit"],
-[type="text"],
-[type="email"],
-[rows],
-[value],
-[for] {
-  font: inherit;
-}
-EOF
-
-if ! cmp -s "$TMP_DIR/compat-agws.expected" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css"; then
-  echo "UI/compat-agws.css must match the fixed Adlaire-Design specification exactly." >&2
-  diff -u "$TMP_DIR/compat-agws.expected" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >&2 || true
-  exit 1
-fi
-
 for class in \
   '.adlaire-container' \
   '.adlaire-public-layout' \

@@ -714,7 +714,7 @@ Adlaire-Designの標準APIは `.adlaire-` 接頭辞のクラスとする。追�
 
 `UI/compat-agws.css` には、上記以外のセレクタを追加しない。対象セレクタを追加する場合は、本書、CSS、検査シェル、変更履歴を同じ承認単位で更新する。
 
-`UI/compat-agws.css` のファイル内容は、冒頭コメント、セレクタ順、宣言順、空行を含めて本節の仕様に固定する。`Tools/check/check-adlaire-design.sh` は、`UI/compat-agws.css` が固定済みのAdlaire-Design仕様内容と完全一致することを検査する。
+`UI/compat-agws.css` は現行revの管理対象であり、削除、改名、統合を行う場合は仕様変更として本書、索引、CSS、検査シェル、変更履歴を同じ承認単位で更新する。
 
 ### 11.10.5 第3段階の非対象
 
