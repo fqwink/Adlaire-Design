@@ -262,6 +262,8 @@ for wysiwyg_spec_term in \
   '本ファイルは、Adlaire-Designで管理するWYSIWYG Editorのマスター仕様である。' \
   'WYSIWYG Editorに関する詳細仕様の正本は本ファイルとする。' \
   '本仕様で固定する対象は以下とする。' \
+  'document normalization' \
+  'block ID' \
   '### 7.2 ドキュメントデータモデル' \
   '### 7.3 ブロック種別契約' \
   '### 7.4 編集操作契約' \
@@ -270,7 +272,12 @@ for wysiwyg_spec_term in \
   '### 7.7 Markdown / MDX parser入出力契約' \
   '## 12. 変更管理' \
   '未知のブロック種別は保存形式 `version: 1` では許可しない。' \
-  '対応不能なMDX componentは実行せず、`code` または `paragraph` として保持する。'; do
+  '対応不能なMDX componentは実行せず、`code` または `paragraph` として保持する。' \
+  '同一document内での重複IDは許可しない。' \
+  'block種別ごとのHTML出力は以下に固定する。' \
+  '`progress` は `meta.value` を優先し、未指定時は `content` を数値化する。' \
+  '空入力は `version: 1`、`blocks: []` へ変換する。' \
+  'Markdown / MDX parserはpreview HTMLを直接生成しない。'; do
   if ! grep -F -- "$wysiwyg_spec_term" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" >/dev/null 2>&1; then
     echo "Docs/WYSIWYG_Editor_Specification missing required fixed WYSIWYG spec term: $wysiwyg_spec_term" >&2
     exit 1

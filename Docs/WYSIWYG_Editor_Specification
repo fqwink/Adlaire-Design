@@ -12,6 +12,8 @@ WYSIWYG Editorに関する詳細仕様の正本は本ファイルとする。`Do
 - データモデル
 - ブロック種別
 - 編集操作
+- document normalization
+- block ID
 - JSON serialization
 - preview rendering
 - Markdown / MDX parser入出力契約
@@ -193,6 +195,27 @@ WYSIWYG Editorの保存形式は `AdlaireWysiwygDocument` を正本とする。
 | `content` | `string` | ブロック本文または参照値 |
 | `meta` | `Record<string, string | number | boolean>` | 補助情報。入れ子構造、配列、関数、DOM参照は保存しない |
 
+document normalization契約は以下とする。
+
+- `version` は入力値にかかわらず `1` へ正規化する。
+- `blocks` が配列でない場合は空配列へ正規化する。
+- `getDocument()`、`removeBlock()`、`addBlock()`、`updateBlock()` の戻り値は内部状態の直接参照ではなくcloneとする。
+- Undo/Redo snapshotは `blocks` のcloneのみを保持し、DOM状態、selection、cursor、focus、transient UI stateは保持しない。
+
+block ID契約は以下とする。
+
+- `id` はblockの安定識別子とし、`updateBlock()` では変更しない。
+- `addBlock()` で `id` 未指定の場合は `block-` で始まるIDを生成する。
+- parserがblockを生成する場合も、保存前に全blockへ `id` を付与する。
+- 同一document内での重複IDは許可しない。
+
+block正規化契約は以下とする。
+
+- `type` は `AdlaireWysiwygBlockType` に定義された値のみ許可する。
+- `content` は文字列として扱い、raw HTMLとして解釈しない。
+- `meta` は浅いkey-value objectに限定する。
+- `meta` の値は `string | number | boolean` のみ許可し、`null`、配列、object、関数は保存しない。
+
 ### 7.3 ブロック種別契約
 
 ブロック種別は以下に固定する。
@@ -248,6 +271,31 @@ preview renderingは、保存済みblock配列から静的HTML文字列を生成
 - MDX componentの実行、JavaScript実行、イベント属性の生成は行わない。
 - 表示調整は `UI/wysiwyg.css`、`UI/components.css`、`UI/content.css` の既存CSSに委ねる。
 
+block種別ごとのHTML出力は以下に固定する。
+
+| 種別 | 出力 |
+| --- | --- |
+| `heading` | `<h2>` |
+| `paragraph` | `<p>` |
+| `list` | `<ul><li>` |
+| `code` | `<pre><code>` |
+| `quote` | `<blockquote>` |
+| `image` | `<figure><img src="..." alt="..."></figure>` |
+| `divider` | `<hr>` |
+| `checklist` | `<ul class="adlaire-check-list"><li><input type="checkbox" disabled>` |
+| `callout` | `<aside class="adlaire-note adlaire-note-info">` |
+| `label` | `<span class="adlaire-badge adlaire-badge-primary">` |
+| `progress` | `<progress value="..." max="100">` |
+
+preview renderingの値処理は以下とする。
+
+- `heading` は保存形式上 `meta.level` を持てるが、現行preview HTMLは `h2` に固定する。
+- `list` と `checklist` は改行区切りの空行を除外し、各項目をescapeする。
+- `image` は `content` を `src`、`meta.alt` を `alt` としてattribute escapeする。
+- `progress` は `meta.value` を優先し、未指定時は `content` を数値化する。非数値は `0`、範囲外は `0` から `100` に丸める。
+- HTML本文は `&`、`<`、`>`、`"`、`'` をescapeする。
+- HTML属性値は本文escapeに加えてバッククォートをescapeする。
+
 ### 7.7 Markdown / MDX parser入出力契約
 
 Markdown / MDX parserは、Markdown、GFM、MDX入力を `AdlaireWysiwygDocument` へ変換する。
@@ -265,6 +313,16 @@ parser実装時の固定条件は以下とする。
 - GFM task listは `checklist` へ変換する。
 - 対応不能なMDX componentは実行せず、`code` または `paragraph` として保持する。
 - parserはDOM、永続ストレージ、ブラウザイベント、Node.js/npm管理物に依存しない。
+
+parserの出力契約は以下とする。
+
+- 空入力は `version: 1`、`blocks: []` へ変換する。
+- 入力上のblock順序を保持する。
+- 各blockに一意な `id` を付与する。
+- parser由来のblockも、7.2のdocument normalization契約とblock正規化契約に従う。
+- Markdown / MDX parserはpreview HTMLを直接生成しない。出力は常に `AdlaireWysiwygDocument` とする。
+- parsing不能な入力は、実行時例外を外部へ漏らすのではなく、呼び出し側が扱える失敗結果またはfallback documentに変換する。
+- raw HTMLは実行せず、対応可能な場合は `code` または `paragraph` として保持する。
 
 ---
 
