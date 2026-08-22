@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.63
+**Version:** rev.65
 
 ---
 
@@ -20,7 +20,7 @@ Adlaire Groupが管理するデザイン資産において、色の役割を統�
 
 AGWSの詳細解析は `Docs/AGWS_Design_Analysis` を参照する。
 
-WYSIWYG EditorのUIと実装コードはAdlaire-Design採用確定とし、編入仕様は `Docs/WYSIWYG_Editor_Specification` を参照する。Adlaire-Designでは、WYSIWYG Editorの表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSS、TypeScript実装コードを管理対象に含める。
+WYSIWYG EditorのUIと実装コードはAdlaire-Design採用確定とし、WYSIWYG Editorマスター仕様は `Docs/WYSIWYG_Editor_Specification` とする。Adlaire-Designでは、WYSIWYG Editorの表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSS、TypeScript実装コードを管理対象に含める。
 
 汎用部品の分類、優先度、実装先、実装状態は `Docs/Generic_Component_Catalog` で一覧管理する。仕様正本は本書とし、汎用部品カタログは本書の補助正本として扱う。
 
@@ -226,7 +226,7 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 - 外部CSSフレームワークは採用しない。
 - HEX値は原則としてトークン定義に集約し、UI側のCSSはCSS変数を参照する。
 - AGWSリポジトリのCSSはそのまま扱わず、構造・役割・見た目を参考にしてAdlaire-Design内の仕様へ整理する。
-- 実装は、第1段階の色トークンと最小ユーティリティ、第2段階の公開面トークン・レイアウト・コンポーネント、第3段階のAGWS完全再現用CSS、WYSIWYG編入に分けて管理する。
+- 実装は、第1段階の色トークンと最小ユーティリティ、第2段階の公開面トークン・レイアウト・コンポーネント、第3段階のAGWS完全再現用CSS、WYSIWYG Editor管理仕様に分けて管理する。
 - `@import` は使用しない。CSSファイルの読み込み順は利用側で明示する。
 - 2026-08-21時点では、CSSビルド方針は採用しない。`Tokens/` と `UI/` 配下のCSSファイルを正本として直接管理し、生成元と生成物を分けない。
 - WYSIWYG Editor実装コードは `WYSIWYG/Source/` 配下のTypeScriptソースを正本として管理する。
@@ -274,13 +274,13 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 | `UI/utilities.css` | spacing、text、background、display、flexなどの汎用ユーティリティ | 実装済み |
 | `UI/compat-agws.css` | AGWS既存HTMLクラス・ID・属性との互換層 | 実装済み |
 
-### 11.3.4 WYSIWYG編入
+### 11.3.4 WYSIWYG Editor管理仕様
 
-WYSIWYG編入では、WYSIWYG Editorの表示層と実装コードをAdlaire-Designの管理対象として実装済みである。
+WYSIWYG Editor管理仕様では、WYSIWYG Editorのマスター仕様、表示層、実装コードをAdlaire-Designの管理対象として実装済みである。
 
 | ファイル | 役割 | 状態 |
 | --- | --- | --- |
-| `Docs/WYSIWYG_Editor_Specification` | WYSIWYG EditorのAdlaire-Design編入仕様 | 実装済み |
+| `Docs/WYSIWYG_Editor_Specification` | WYSIWYG Editorマスター仕様 | 実装済み |
 | `UI/wysiwyg.css` | WYSIWYG EditorのエディターUI、ブロック表示、プレビュー、JSON表示 | 実装済み |
 | `WYSIWYG/README.md` | WYSIWYG Editor実装コードの管理方針 | 実装済み |
 | `WYSIWYG/Source/editor.ts` | ブロックデータ、履歴、JSON、プレビュー出力のTypeScript実装。Markdown / MDXパーサーに限り例外採用ライブラリを許可 | 実装済み |
@@ -672,7 +672,7 @@ CSS変数は以下とする。
 | 第1段階 | `Tokens/colors.css`、`UI/adlaire.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 | 第2段階 | `Tokens/surface.css`、`UI/layout.css`、`UI/components.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 | 第3段階 | `Tokens/status.css`、`Tokens/effects.css`、`UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
-| WYSIWYG編入 | `Docs/WYSIWYG_Editor_Specification`、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
+| WYSIWYG Editor管理仕様 | `Docs/WYSIWYG_Editor_Specification`、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 
 ## 11.10 AGWS完全再現仕様
 
@@ -1318,50 +1318,16 @@ Adlaire-Designで管理するWYSIWYG Editorの範囲は以下とする。
 
 | 範囲 | 管理先 | 状態 |
 | --- | --- | --- |
-| WYSIWYG編入仕様 | `Docs/WYSIWYG_Editor_Specification` | 実装済み |
+| WYSIWYG Editorマスター仕様 | `Docs/WYSIWYG_Editor_Specification` | 実装済み |
 | エディターUIスキン | `UI/wysiwyg.css` | 実装済み |
 | エディター実装コード | `WYSIWYG/Source/editor.ts` | 実装済み。Markdown / MDXパーサーは例外採用ライブラリを許可 |
 | 色・面・状態・効果値 | `Tokens/` | 既存トークン参照 |
 | 汎用部品 | `UI/components.css` | 既存部品参照 |
 | 本文・プレビュー部品 | `UI/content.css` | 既存部品参照 |
 
-追加対象は以下とする。
+WYSIWYG Editorマスター仕様は `Docs/WYSIWYG_Editor_Specification` とする。ブロック種別、データモデル、保存形式、編集操作、JSON serialization、preview rendering、Markdown / MDX parser入出力契約、採用ライブラリ、非対象、CSS読み込み順、必須クラスは同ファイルに集約する。
 
-| 部品 | クラス | 役割 |
-| --- | --- | --- |
-| エディター外枠 | `.adlaire-wysiwyg` | WYSIWYG Editor全体の面、境界、影を表示する |
-| ヘッダー | `.adlaire-wysiwyg-header`、`.adlaire-wysiwyg-title`、`.adlaire-wysiwyg-status` | 編集対象名、保存状態、補助状態を表示する |
-| ツールバー | `.adlaire-wysiwyg-toolbar`、`.adlaire-wysiwyg-toolbar-group`、`.adlaire-wysiwyg-tool` | ブロック追加、文字装飾、表示切替などの操作群を表示する |
-| 編集キャンバス | `.adlaire-wysiwyg-canvas` | ブロックを配置する編集領域を表示する |
-| ブロック | `.adlaire-wysiwyg-block`、`.adlaire-wysiwyg-block-selected`、`.adlaire-wysiwyg-block-handle`、`.adlaire-wysiwyg-block-content`、`.adlaire-wysiwyg-placeholder` | ブロック本文、選択状態、ドラッグ用ハンドル、空入力状態を表示する |
-| 補助メニュー | `.adlaire-wysiwyg-inline-toolbar`、`.adlaire-wysiwyg-slash-menu`、`.adlaire-wysiwyg-slash-item` | インライン操作とスラッシュコマンド候補を表示する |
-| 表示確認 | `.adlaire-wysiwyg-preview`、`.adlaire-wysiwyg-json-panel`、`.adlaire-wysiwyg-footer` | プレビュー、JSON表示、フッター状態を表示する |
-
-WYSIWYG Editorのブロック種別は、見出し、段落、リスト、コード、引用、画像、区切り線、チェックリスト、callout、label、progressを想定する。ブロック種別、データ構造、保存形式、編集ロジックの最小実装は `WYSIWYG/Source/editor.ts` で管理する。Markdown / MDXからブロックデータへ変換するパーサー仕様では、個別承認された例外採用ライブラリを使用できる。
-
-Markdown / MDXパーサーの例外採用ライブラリは以下とする。
-
-| 対象 | ライブラリ | 用途 |
-| --- | --- | --- |
-| Markdown / GFM | `jsr:@deno/gfm@0.12.0` | MarkdownおよびGitHub Flavored Markdownの解析 |
-| MDX | `jsr:@temelj/mdx@0.14.0` | MDXの解析 |
-
-`UI/wysiwyg.css` は既存トークンを参照し、WYSIWYG専用の新規トークンは追加しない。HEX値、RGBA値、`@import`、`@charset`、`!important`、負の `letter-spacing`、`transition: all`、非ゼロの角丸・影・z-index直書きは禁止する。
-
-`UI/wysiwyg.css` の冒頭コメントは `/* Adlaire-Design WYSIWYG editor */` に固定する。
-
-WYSIWYG Editor本体では、TypeScriptからJavaScriptへのtranspile、複数ファイルのbundle、生成JavaScriptのminify、ビルド工程全体のcompileを必須とする。ただし、Adlaire-Designリポジトリに保存する正本はTypeScriptソースとし、生成JavaScript、bundle、minify成果物は保存しない。npm、`package.json`、`package-lock.json`、`node_modules`、webpack、Node.js前提のビルド体系は採用しない。Markdown / MDXパーサーについては、この禁止方針の例外として、npm管理物を追加せずDeno互換またはブラウザ互換で利用できるライブラリを個別承認により採用できる。
-
-本実装の非対象は以下とする。
-
-- DOM依存の編集UI実装
-- 永続ストレージ連携
-- ドラッグ&ドロップのブラウザイベント実装
-- スラッシュコマンドのDOMメニュー実装
-- インライン編集DOM処理
-- JavaScript bundle、minify、compile成果物
-- npm、webpack、Node.js前提の設定ファイル
-- `Dist/`、`dist/`、`Build/`、`build/` 作成
+`Docs/Master_Spec` では、WYSIWYG EditorがAdlaire-Design採用確定であること、管理対象ファイル、拡充優先順位のみを管理する。WYSIWYG Editorの詳細仕様を変更する場合は、`Docs/WYSIWYG_Editor_Specification` を更新し、必要に応じて本書には参照関係または管理範囲の変更だけを反映する。
 
 ### 11.11.3 再現性検査の策定仕様
 

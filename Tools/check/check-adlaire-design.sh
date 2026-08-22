@@ -209,6 +209,11 @@ if ! grep -F 'WYSIWYG EditorのMarkdown / MDXパーサーは、個別承認さ�
   exit 1
 fi
 
+if ! grep -F 'WYSIWYG Editorマスター仕様は `Docs/WYSIWYG_Editor_Specification`' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must identify Docs/WYSIWYG_Editor_Specification as the WYSIWYG Editor master specification." >&2
+  exit 1
+fi
+
 if ! grep -F 'CSSのビルド、minify、bundle、Sass/SCSS等のCSSプリプロセッサは現状検討しない。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must document that build, minify, bundle, and CSS preprocessors are not under current consideration." >&2
   exit 1
@@ -252,6 +257,46 @@ for parser_library in \
     exit 1
   fi
 done
+
+for wysiwyg_spec_term in \
+  '本ファイルは、Adlaire-Designで管理するWYSIWYG Editorのマスター仕様である。' \
+  'WYSIWYG Editorに関する詳細仕様の正本は本ファイルとする。' \
+  '本仕様で固定する対象は以下とする。' \
+  'document normalization' \
+  'block ID' \
+  '### 7.2 ドキュメントデータモデル' \
+  '### 7.3 ブロック種別契約' \
+  '### 7.4 編集操作契約' \
+  '### 7.5 JSON serialization契約' \
+  '### 7.6 preview rendering契約' \
+  '### 7.7 Markdown / MDX parser入出力契約' \
+  '## 12. 変更管理' \
+  '未知のブロック種別は保存形式 `version: 1` では許可しない。' \
+  '対応不能なMDX componentは実行せず、`code` または `paragraph` として保持する。' \
+  '同一document内での重複IDは許可しない。' \
+  'block種別ごとのHTML出力は以下に固定する。' \
+  '`progress` は `meta.value` を優先し、未指定時は `content` を数値化する。' \
+  '空入力は `version: 1`、`blocks: []` へ変換する。' \
+  'Markdown / MDX parserはpreview HTMLを直接生成しない。'; do
+  if ! grep -F -- "$wysiwyg_spec_term" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" >/dev/null 2>&1; then
+    echo "Docs/WYSIWYG_Editor_Specification missing required fixed WYSIWYG spec term: $wysiwyg_spec_term" >&2
+    exit 1
+  fi
+done
+
+for master_wysiwyg_term in \
+  'WYSIWYG Editorマスター仕様は `Docs/WYSIWYG_Editor_Specification` とする。' \
+  'ブロック種別、データモデル、保存形式、編集操作、JSON serialization、preview rendering、Markdown / MDX parser入出力契約、採用ライブラリ、非対象、CSS読み込み順、必須クラスは同ファイルに集約する。'; do
+  if ! grep -F -- "$master_wysiwyg_term" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+    echo "Docs/Master_Spec missing required fixed WYSIWYG spec term: $master_wysiwyg_term" >&2
+    exit 1
+  fi
+done
+
+if ! grep -F 'Docs/WYSIWYG_Editor_Specification`(WYSIWYG Editorマスター仕様)' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
+  echo "Docs/Document_Index must identify Docs/WYSIWYG_Editor_Specification as the WYSIWYG Editor master specification." >&2
+  exit 1
+fi
 
 MASTER_SPEC_VERSION=$(sed -n 's/^\*\*Version:\*\* \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec")
 CHANGE_HISTORY_VERSION=$(sed -n 's/^## \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Change_History" | sed -n '1p')

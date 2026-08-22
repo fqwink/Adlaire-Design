@@ -6,7 +6,7 @@ The editor source is managed as part of Adlaire-Design. It must stay independent
 
 ## Source
 
-- `Source/editor.ts`: editor core for block data, history, JSON serialization, preview rendering, and future Markdown / MDX parser integration.
+- `Source/editor.ts`: editor core for block data, history, JSON serialization, and preview rendering. Markdown / MDX parser integration is specified separately as a future implementation contract.
 
 ## Policy
 

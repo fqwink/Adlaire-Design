@@ -8,6 +8,28 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.65
+
+- `Docs/Master_Spec` の版数を `rev.65` へ更新した。
+- `Docs/WYSIWYG_Editor_Specification` に、WYSIWYG Editorのdocument normalization契約、block ID契約、block正規化契約を追加した。
+- `Docs/WYSIWYG_Editor_Specification` に、preview renderingのHTML出力形、escape方針、progress値正規化、画像属性出力を固定した。
+- `Docs/WYSIWYG_Editor_Specification` に、Markdown / MDX parserの失敗時挙動、空入力、block順序保持、ID生成、raw HTML / MDX component保持方針を追加した。
+- `Tools/check/check-adlaire-design.sh` に、WYSIWYG Editor固定仕様の追加語句検査を追加した。
+
+## rev.64
+
+- `Docs/Master_Spec` の版数を `rev.64` へ更新した。
+- `Docs/WYSIWYG_Editor_Specification` をWYSIWYG Editorマスター仕様として位置づけ、WYSIWYG Editor詳細仕様を同ファイルへ集約した。
+- `Docs/WYSIWYG_Editor_Specification` に、WYSIWYG Editorのデータモデル、ブロック種別契約、編集操作契約、JSON serialization契約、preview rendering契約を追加した。
+- Markdown / MDX parsingを現行export済み実装とは分離し、将来実装時の入出力契約として固定した。
+- Markdown / GFM、MDX parserの変換対象、GFM task list、未対応MDX componentの扱いを仕様化した。
+- `Docs/Master_Spec` のWYSIWYG詳細契約を要約参照へ整理し、詳細正本を `Docs/WYSIWYG_Editor_Specification` に一本化した。
+- `Docs/Master_Spec` のWYSIWYG UI必須クラス、CSS規則、ビルド境界、非対象の詳細記述を削り、`Docs/WYSIWYG_Editor_Specification` 参照へ集約した。
+- `README.md`、`Docs/Document_Index`、`Docs/Master_Spec` の旧「編入仕様」表現を「WYSIWYG Editorマスター仕様」へ統一した。
+- 現行仕様の「WYSIWYG編入」表現を「WYSIWYG Editor管理仕様」へ整理した。
+- `Docs/WYSIWYG_Editor_Specification` に、仕様固定対象と変更管理ルールを追加した。
+- `Tools/check/check-adlaire-design.sh` に、WYSIWYG Editor固定仕様の主要語句検査を追加した。
+
 ## rev.63
 
 - `Docs/Master_Spec` の版数を `rev.63` へ更新した。
