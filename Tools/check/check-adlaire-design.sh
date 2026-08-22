@@ -201,6 +201,15 @@ if ! grep -F 'WYSIWYG Editor UI仕様と実装境界は `Docs/Master_Spec` に�
   exit 1
 fi
 
+for readme_responsibility_term in \
+  'CSS仕様、CSS実装、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、検査、変更履歴、Auteur側Editor本体実装、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。' \
+  '一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、エディタUIに関する部品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。'; do
+  if ! grep -F -- "$readme_responsibility_term" "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+    echo "Adlaire-Design README missing responsibility boundary term: $readme_responsibility_term" >&2
+    exit 1
+  fi
+done
+
 if ! grep -F 'CSSのビルド、minify、bundle、Sass/SCSS等のCSSプリプロセッサは現状検討しない。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must document that build, minify, bundle, and CSS preprocessors are not under current consideration." >&2
   exit 1
@@ -420,6 +429,16 @@ for indexed_path in \
   Tools/check/check-adlaire-design.sh; do
   if ! grep -F -- "$indexed_path" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
     echo "Adlaire-Design Document_Index must reference $indexed_path." >&2
+    exit 1
+  fi
+done
+
+for document_index_responsibility_term in \
+  '`Docs/Master_Spec`(仕様・設計の正本、CSSとEditor UIの責務境界)' \
+  '`Docs/Generic_Component_Catalog`(一般的なCSS汎用部品の分類、優先度、実装先、実装状態の一覧)' \
+  '`Docs/WYSIWYG_Editor_UI_Catalog`(エディタUIに関する部品の分類、優先度、実装先、実装状態の一覧)'; do
+  if ! grep -F -- "$document_index_responsibility_term" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
+    echo "Docs/Document_Index missing responsibility description: $document_index_responsibility_term" >&2
     exit 1
   fi
 done

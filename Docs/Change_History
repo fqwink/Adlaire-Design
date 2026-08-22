@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.78
+
+- `Docs/Master_Spec` の版数を `rev.78` へ更新した。
+- `README.md` に、CSS仕様、CSS実装、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、検査、変更履歴、Auteur側Editor本体実装、利用先プロダクト採用の責務境界を `Docs/Master_Spec` で整理する方針を追記した。
+- `Docs/Document_Index` の `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`Docs/WYSIWYG_Editor_UI_Catalog` の説明を責務別整理と一致させた。
+- `Tools/check/check-adlaire-design.sh` に、READMEとDocument_Indexの責務別説明検査を追加した。
+
 ## rev.77
 
 - `Docs/Master_Spec` の版数を `rev.77` へ更新した。
