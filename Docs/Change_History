@@ -19,6 +19,7 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 - `UI/compat-agws.css` の冒頭コメントを、Adlaire-Design仕様CSS層を示す表現へ変更した。
 - `UI/compat-agws.css` をAdlaire-Design仕様CSS層として再定義し、旧仕様由来の説明を現行仕様から外した。
 - `UI/compat-agws.css` の対象セレクタと宣言値を `Docs/Master_Spec` に固定し、`Tools/check/check-adlaire-design.sh` で検査するようにした。
+- `UI/compat-agws.css` の冒頭コメント、セレクタ順、宣言順、空行を含むファイル内容をAdlaire-Design仕様として固定し、検査シェルで完全一致確認するようにした。
 
 ## rev.69
 
