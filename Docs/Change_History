@@ -8,6 +8,26 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.84
+
+- `Docs/Master_Spec` の版数を `rev.84` へ更新した。
+- Editor UI JavaScript管理方針と衝突する対象外記載を削除した。
+- Editor本体、保存、編集ロジック、Markdown / MDX parser、生成JavaScriptの対象外境界を簡潔に整理した。
+- CSS/JavaScript読み込み順、責務別JavaScript、Markdown / MDX parser表記の文書整合性を整理した。
+
+## rev.83
+
+- `Docs/Master_Spec` の版数を `rev.83` へ更新した。
+- WYSIWYG Editor UI専用ファイルを `UI/` から `EditorUI/` へ分離した。
+- 汎用UI JavaScriptを `UI/components.js`、`UI/content.js`、`UI/forms.js` として追加し、Editor UI JavaScriptを `EditorUI/wysiwyg.js` として追加した。
+- `Tools/check/check-adlaire-design.sh` を `EditorUI/` とUI JavaScriptの管理構成に合わせて更新した。
+
+## rev.82
+
+- `Docs/Master_Spec` の版数を `rev.82` へ更新した。
+- 現行文書、カタログ、検査シェル、変更履歴から特定プロジェクト名の記載を削除した。
+- WYSIWYG Editor UI仕様はAdlaire-Designの仕様対象として整理し、別プロジェクト名を責務境界の表現に使わない方針へ統一した。
+
 ## rev.81
 
 - `Docs/Master_Spec` の版数を `rev.81` へ更新した。
@@ -32,14 +52,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 ## rev.78
 
 - `Docs/Master_Spec` の版数を `rev.78` へ更新した。
-- `README.md` に、CSS仕様、CSS実装、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、検査、変更履歴、Auteur側Editor本体実装、利用先プロダクト採用の責務境界を `Docs/Master_Spec` で整理する方針を追記した。
+- `README.md` に、CSS仕様、CSS実装、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、検査、変更履歴、利用先プロダクト採用の責務境界を `Docs/Master_Spec` で整理する方針を追記した。
 - `Docs/Document_Index` の `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`Docs/WYSIWYG_Editor_UI_Catalog` の説明を責務別整理と一致させた。
 - `Tools/check/check-adlaire-design.sh` に、READMEとDocument_Indexの責務別説明検査を追加した。
 
 ## rev.77
 
 - `Docs/Master_Spec` の版数を `rev.77` へ更新した。
-- 第11章に責務別整理を追加し、仕様正本、一般CSS汎用部品カタログ、Editor UIカタログ、CSSトークン、CSS実装、検査、変更履歴、Auteur側実装、利用先プロダクト採用の責務境界を整理した。
+- 第11章に責務別整理を追加し、仕様正本、一般CSS汎用部品カタログ、Editor UIカタログ、CSSトークン、CSS実装、検査、変更履歴、利用先プロダクト採用の責務境界を整理した。
 - ファイル責務と責務別の変更単位を追加し、一般CSS部品、Editor UI部品、CSSトークン、検査仕様、索引の同時更新条件を明記した。
 - `Tools/check/check-adlaire-design.sh` に、責務別整理の主要語句検査を追加した。
 
@@ -105,7 +125,7 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 ## rev.68
 
 - `Docs/Master_Spec` の版数を `rev.68` へ更新した。
-- WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界を `Docs/Master_Spec` に統合した。
+- WYSIWYG Editor UI仕様と実装境界を `Docs/Master_Spec` に統合した。
 - 独立仕様ファイル `Docs/WYSIWYG_Editor_Specification` を削除した。
 - WYSIWYG仕様からデータモデル、保存形式、編集操作、Undo / Redo、JSON serialization、preview rendering生成処理、Markdown / MDX parser、公開APIなどのロジック仕様を除外し、Editor UI仕様のみを管理対象にした。
 - `README.md`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh` を、WYSIWYG Editor UI仕様は `Docs/Master_Spec` 正本で管理する方針へ整合させた。
@@ -113,8 +133,8 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 ## rev.67
 
 - `Docs/Master_Spec` の版数を `rev.67` へ更新した。
-- WYSIWYG Editor方針を、Editor UIはAdlaire-Design採用、Editor実装はAuteur内製へ変更した。
-- `Docs/WYSIWYG_Editor_Specification` を、WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界を定める正本へ再定義した。
+- WYSIWYG Editor方針を、Editor UIはAdlaire-Design採用へ変更した。
+- `Docs/WYSIWYG_Editor_Specification` を、WYSIWYG Editor UI仕様と実装境界を定める正本へ再定義した。
 - Adlaire-Designの管理対象からWYSIWYG Editor実装コード、保存形式、編集ロジック、Markdown / MDX parser、parser採用ライブラリ、生成JavaScriptを除外した。
 - `WYSIWYG/README.md` と `WYSIWYG/Source/editor.ts` を削除し、`WYSIWYG/` ディレクトリを非対象に変更した。
 - `AGENTS.md`、`README.md`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh` を新方針へ整合させた。
