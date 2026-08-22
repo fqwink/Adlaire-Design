@@ -272,11 +272,22 @@ for wysiwyg_catalog_term in \
   '# Adlaire-Design WYSIWYG Editor UIカタログ' \
   'WYSIWYG Editor専用UI部品の一覧を管理する補助正本' \
   'Editor.jsおよびNotionに代表されるブロックベース編集UI' \
-  '## 2. 優先A' \
-  '## 3. 優先B' \
-  '## 4. 優先C' \
-  '## 5. 状態クラス' \
-  '## 6. 原則対象外' \
+  '## 2. 共通構造クラス' \
+  '## 3. 優先A' \
+  '## 4. 優先B' \
+  '## 5. 優先C' \
+  '## 6. 状態クラス' \
+  '## 7. 原則対象外' \
+  'Canvas' \
+  'Block' \
+  'Preview' \
+  'JSON panel' \
+  '.adlaire-wysiwyg-canvas' \
+  '.adlaire-wysiwyg-block-content' \
+  '.adlaire-wysiwyg-block-label' \
+  '.adlaire-wysiwyg-block-progress' \
+  '.adlaire-wysiwyg-preview' \
+  '.adlaire-wysiwyg-json-panel' \
   'Mobile bottom sheet' \
   'Transform menu' \
   'Publish check' \

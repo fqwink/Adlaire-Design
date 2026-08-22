@@ -19,7 +19,25 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 
 ---
 
-## 2. 優先A
+## 2. 共通構造クラス
+
+共通構造クラスは、優先A/B/Cの部品分類にまたがるEditor UIの骨格である。
+
+| 部品 | 実装済みクラス |
+| --- | --- |
+| Editor外枠 | `.adlaire-wysiwyg` |
+| Header | `.adlaire-wysiwyg-header`、`.adlaire-wysiwyg-title`、`.adlaire-wysiwyg-status` |
+| Toolbar | `.adlaire-wysiwyg-toolbar`、`.adlaire-wysiwyg-toolbar-group`、`.adlaire-wysiwyg-tool` |
+| Canvas | `.adlaire-wysiwyg-canvas` |
+| Block | `.adlaire-wysiwyg-block`、`.adlaire-wysiwyg-block-selected`、`.adlaire-wysiwyg-block-handle`、`.adlaire-wysiwyg-block-content` |
+| Placeholder | `.adlaire-wysiwyg-placeholder` |
+| Footer / status bar | `.adlaire-wysiwyg-footer` |
+| Preview | `.adlaire-wysiwyg-preview` |
+| JSON panel | `.adlaire-wysiwyg-json-panel` |
+
+---
+
+## 3. 優先A
 
 優先Aは、ブロックベースEditor UIの基本操作に必要な部品である。
 
@@ -42,10 +60,12 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 | ブロック | Image | `UI/wysiwyg.css` | 実装済み |
 | ブロック | Divider | `UI/wysiwyg.css` | 実装済み |
 | ブロック | Callout | `UI/wysiwyg.css` | 実装済み |
+| ブロック | Label | `UI/wysiwyg.css` | 実装済み |
+| ブロック | Progress | `UI/wysiwyg.css` | 実装済み |
 | モバイル | Mobile bar | `UI/wysiwyg.css` | 実装済み |
 | モバイル | Mobile bottom sheet | `UI/wysiwyg.css` | 実装済み |
 
-### 2.1 優先Aクラス
+### 3.1 優先Aクラス
 
 | 部品 | 実装済みクラス |
 | --- | --- |
@@ -66,12 +86,14 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 | Image | `.adlaire-wysiwyg-block-image` |
 | Divider | `.adlaire-wysiwyg-block-divider` |
 | Callout | `.adlaire-wysiwyg-block-callout` |
+| Label | `.adlaire-wysiwyg-block-label` |
+| Progress | `.adlaire-wysiwyg-block-progress` |
 | Mobile bar | `.adlaire-wysiwyg-mobile-bar`、`.adlaire-wysiwyg-mobile-action` |
 | Mobile bottom sheet | `.adlaire-wysiwyg-mobile-sheet`、`.adlaire-wysiwyg-mobile-sheet-header`、`.adlaire-wysiwyg-mobile-sheet-body`、`.adlaire-wysiwyg-mobile-sheet-item` |
 
 ---
 
-## 3. 優先B
+## 4. 優先B
 
 優先Bは、Editor.js / Notion風の編集体験を高める補助UIである。
 
@@ -91,7 +113,7 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 | Publish | Preview / split表示 | `UI/wysiwyg.css` | 実装済み |
 | Publish | Publish check | `UI/wysiwyg.css` | 実装済み |
 
-### 3.1 優先Bクラス
+### 4.1 優先Bクラス
 
 | 部品 | 実装済みクラス |
 | --- | --- |
@@ -106,11 +128,12 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 | Current block indicator | `.adlaire-wysiwyg-current-block-indicator` |
 | Comment marker | `.adlaire-wysiwyg-comment-marker` |
 | Comment panel | `.adlaire-wysiwyg-comment-panel` |
+| Preview / split表示 | `.adlaire-wysiwyg-preview` |
 | Publish check | `.adlaire-wysiwyg-publish-check` |
 
 ---
 
-## 4. 優先C
+## 5. 優先C
 
 優先Cは、必要に応じて利用する高度な表示補助UIである。
 
@@ -124,7 +147,7 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 | Assist | Assist menu | `UI/wysiwyg.css` | 実装済み |
 | Assist | Assist suggestion | `UI/wysiwyg.css` | 実装済み |
 
-### 4.1 優先Cクラス
+### 5.1 優先Cクラス
 
 | 部品 | 実装済みクラス |
 | --- | --- |
@@ -138,7 +161,7 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 
 ---
 
-## 5. 状態クラス
+## 6. 状態クラス
 
 | 状態 | 実装済みクラス |
 | --- | --- |
@@ -154,7 +177,7 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 
 ---
 
-## 6. 原則対象外
+## 7. 原則対象外
 
 | 対象外 | 理由 |
 | --- | --- |
