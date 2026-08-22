@@ -104,7 +104,7 @@ if [ -s "$TMP_DIR/unexpected-tools-files" ]; then
 fi
 
 if [ -e "$ADLAIRE_DESIGN_ROOT/WYSIWYG" ]; then
-  echo "Adlaire-Design must not contain WYSIWYG/ because Editor implementation is managed inside Auteur." >&2
+  echo "Adlaire-Design must not contain WYSIWYG/ because Editor implementation is managed by the consuming side." >&2
   exit 1
 fi
 
@@ -171,8 +171,8 @@ if ! grep -F 'CSSフレームワーク、デザイントークン、ブランド
   exit 1
 fi
 
-if ! grep -F 'WYSIWYG Editor実装はAuteur内製とし、Adlaire-Designでは実装コードを管理しないこと。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
-  echo "Adlaire-Design AGENTS.md must document that Editor implementation is managed inside Auteur." >&2
+if ! grep -F 'WYSIWYG Editor実装は利用側で管理し、Adlaire-Designでは実装コードを管理しないこと。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design AGENTS.md must document that Editor implementation is managed by the consuming side." >&2
   exit 1
 fi
 
@@ -191,18 +191,18 @@ if ! grep -F '今後の拡充は、公開面CSS機能、WYSIWYG Editor UI、再�
   exit 1
 fi
 
-if ! grep -F 'WYSIWYG Editor実装コード、Markdown / MDXパーサー、保存処理、編集ロジックはAuteur内製側で管理する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
-  echo "Adlaire-Design README must document that Editor implementation is managed inside Auteur." >&2
+if ! grep -F 'WYSIWYG Editor実装コード、Markdown / MDXパーサー、保存処理、編集ロジックは利用側で管理する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must document that Editor implementation is managed by the consuming side." >&2
   exit 1
 fi
 
 if ! grep -F 'WYSIWYG Editor UI仕様と実装境界は `Docs/Master_Spec` に統合する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
-  echo "Adlaire-Design README must identify the WYSIWYG UI and Auteur implementation boundary." >&2
+  echo "Adlaire-Design README must identify the WYSIWYG UI and consuming-side implementation boundary." >&2
   exit 1
 fi
 
 for readme_responsibility_term in \
-  'CSS仕様、CSS実装、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、検査、変更履歴、Auteur側Editor本体実装、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。' \
+  'CSS仕様、CSS実装、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、検査、変更履歴、利用側Editor本体、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。' \
   '一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、エディタUIに関する部品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。'; do
   if ! grep -F -- "$readme_responsibility_term" "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
     echo "Adlaire-Design README missing responsibility boundary term: $readme_responsibility_term" >&2
@@ -230,8 +230,8 @@ if ! grep -F '上記の拡充においても、Sass、SCSS、Less、Stylus、Pos
   exit 1
 fi
 
-if ! grep -F 'WYSIWYG Editor UIはAdlaire-Design採用確定とし、Editor実装はAuteur内製とする。' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
-  echo "Docs/Master_Spec must document the WYSIWYG UI and Auteur implementation boundary." >&2
+if ! grep -F 'WYSIWYG Editor UIはAdlaire-Design採用確定とし、Editor実装は利用側で管理する。' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+  echo "Docs/Master_Spec must document the WYSIWYG UI and consuming-side implementation boundary." >&2
   exit 1
 fi
 
@@ -246,7 +246,7 @@ for css_master_term in \
   '責務別の管理範囲は以下に固定する。' \
   'ファイル責務は以下に整理する。' \
   '責務別の変更単位は以下に固定する。' \
-  '責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、実装ロジックをAuteur側、採用・移行を利用先プロダクト側として扱う。' \
+  '責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、実装ロジックを利用側、採用・移行を利用先プロダクト側として扱う。' \
   '### 11.2.2 CSSマスター仕様' \
   'Adlaire-DesignのCSSマスター仕様は、本節を正本とする。' \
   'CSSマスター仕様で固定する対象は以下とする。' \
@@ -299,7 +299,7 @@ for wysiwyg_spec_term in \
   '### 11.11.2.3 WYSIWYG Editor UIマスター仕様' \
   '本節は、Adlaire-DesignにおけるWYSIWYG Editor UIのマスター仕様である。' \
   'WYSIWYG Editor UIマスター仕様' \
-  'WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。' \
+  'WYSIWYG Editor UI仕様と利用側のEditor実装との責務境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。' \
   'Editor UI完全固定対象は以下とする。' \
   'Editor UI階層は以下に固定する。' \
   'Editor UI表示モードは以下に固定する。' \
@@ -322,9 +322,9 @@ for wysiwyg_spec_term in \
   '`UI/wysiwyg.css` は、以下のクラスを定義する。' \
   'CSS内では `Editor UI common structure`、`Priority A: core block editor UI`、`Editor UI state classes`、`Priority B: editing support UI`、`Priority C: advanced support UI` の実装境界を持つ。' \
   '優先A/B/Cの部品は `Docs/WYSIWYG_Editor_UI_Catalog` の分類をCSS実装順と実装確認単位にする。' \
-  'Auteur内製Editor実装は、Adlaire-Designが定義するUI classをHTMLまたは表示層に適用できることを期待する。' \
+  '利用側のEditor実装は、Adlaire-Designが定義するUI classをHTMLまたは表示層に適用できることを期待する。' \
   '上記のブロック種別は表示想定であり、Editor実装上の保存形式またはparser出力契約ではない。' \
-  'Adlaire-Designは、Auteur実装に以下を要求しない。' \
+  'Adlaire-Designは、利用側実装に以下を要求しない。' \
   '独立したWYSIWYG仕様ファイル作成'; do
   if ! grep -F -- "$wysiwyg_spec_term" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
     echo "Docs/Master_Spec missing required fixed WYSIWYG UI spec term: $wysiwyg_spec_term" >&2
@@ -333,7 +333,7 @@ for wysiwyg_spec_term in \
 done
 
 for master_wysiwyg_term in \
-  'WYSIWYG Editor UIはAdlaire-Design採用確定とし、Editor実装はAuteur内製とする。' \
+  'WYSIWYG Editor UIはAdlaire-Design採用確定とし、Editor実装は利用側で管理する。' \
   'WYSIWYG Editor UI仕様と実装境界は本書に統合する。'; do
   if ! grep -F -- "$master_wysiwyg_term" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
     echo "Docs/Master_Spec missing required fixed WYSIWYG spec term: $master_wysiwyg_term" >&2
@@ -463,6 +463,14 @@ OLD_REPOSITORY_NAME='Adlaire-''Eco''system-Design'
 if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
   echo "current Adlaire-Design documents must not use the old repository name:" >&2
   cat /tmp/adlaire-design-old-name-matches >&2
+  exit 1
+fi
+
+OLD_EDITOR_PROJECT_NAME='Au''teur'
+
+if grep -R -n "$OLD_EDITOR_PROJECT_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs" "$ADLAIRE_DESIGN_ROOT/Tools" >/tmp/adlaire-design-old-editor-project-matches 2>/dev/null; then
+  echo "current Adlaire-Design documents must not use the removed editor project name:" >&2
+  cat /tmp/adlaire-design-old-editor-project-matches >&2
   exit 1
 fi
 
