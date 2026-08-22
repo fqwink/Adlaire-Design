@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.85
+**Version:** rev.86
 
 ---
 
@@ -1089,6 +1089,8 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 汎用部品は、本文固有の意味を持たず、公開面の複数ページで再利用できるものに限定する。見た目の値は既存の `Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` のCSS変数を参照し、新規トークンは追加しない。
 
 優先B/Cの汎用部品として、見出し群、案内、エラーページ、手順、強調、ナビ補助、カード派生、リスト派生、連絡導線、進捗表示、ステップ表示、タグリスト、静的な補助表示、視覚枠、ブランド表示、レイアウト複合、ページネーション、絞り込みチップ、モーダル、ドロワー、ドロップダウン、カルーセル、ツールチップ動作を `UI/components.css` に追加実装済みである。FAQ、比較、ステータスタイムライン、比較グリッド、ソート可能テーブル、検索/絞り込みUIは本文文脈の部品として `UI/content.css` に追加実装済みである。必要なJavaScriptは `UI/components.js`、`UI/content.js`、`UI/forms.js` に責務別で実装する。追加実装済みクラスの詳細は、`Docs/Generic_Component_Catalog` の実装済みクラス対応表で管理する。進捗表示の幅はHTML側の静的指定で表現し、JavaScriptによる進捗計算や状態更新を前提にしない。
+
+JavaScriptあり汎用部品は、CSS表示契約を壊さない範囲で操作状態のみを管理する。モーダルとドロワーは `aria-expanded`、`hidden`、`.is-open`、フォーカス入退場、Tabフォーカス循環、Escapeまたはdismissによる閉鎖を同期する。カルーセルはスライド幅を維持するため、移動時にスライドへ `hidden` を付与せず、`.is-current` と `aria-hidden` で現在状態を表す。ソート可能テーブルは明示的な数値/日付ソートで空値または不正値を昇順/降順にかかわらず末尾に送る。検索/絞り込みUIは、`data-adlaire-filter-item` の空白区切り複数分類を扱えるものとする。無効ページリンクは視覚状態だけでなくポインター操作も無効化する。
 
 エラーページ部品は、`.adlaire-error-page`、`.adlaire-error-page-inner`、`.adlaire-error-page-code`、`.adlaire-error-page-title`、`.adlaire-error-page-text`、`.adlaire-error-page-actions` で構成し、400、401、403、404、500、510などの静的エラー画面を表示する。ステータスコード別の表示には、`.adlaire-error-page-400`、`.adlaire-error-page-401`、`.adlaire-error-page-403`、`.adlaire-error-page-404`、`.adlaire-error-page-500`、`.adlaire-error-page-510` を併用する。500系のサーバーエラーページでは `.adlaire-error-page-server` も使用できる。エラー判定、リダイレクト、ログ送信、翻訳、動的メッセージ生成は対象外とする。
 

@@ -2,6 +2,8 @@
 (function () {
   "use strict";
 
+  var lastFocus = null;
+
   function getTarget(trigger) {
     var selector = trigger.getAttribute("data-adlaire-target") || trigger.getAttribute("href");
     if (!selector || selector.charAt(0) !== "#") {
@@ -29,9 +31,24 @@
       return [];
     }
 
-    return Array.prototype.filter.call(document.querySelectorAll("[data-adlaire-target]"), function (trigger) {
+    return Array.prototype.filter.call(document.querySelectorAll("[data-adlaire-toggle][data-adlaire-target]"), function (trigger) {
       return trigger.getAttribute("data-adlaire-target") === "#" + target.id;
+    }).concat(Array.prototype.filter.call(document.querySelectorAll("[data-adlaire-toggle][href]"), function (trigger) {
+      return trigger.getAttribute("href") === "#" + target.id;
+    }));
+  }
+
+  function getFocusable(target) {
+    return Array.prototype.filter.call(target.querySelectorAll("button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"), function (item) {
+      return !item.hidden && !item.disabled && item.getAttribute("aria-hidden") !== "true";
     });
+  }
+
+  function focusFirst(target) {
+    var focusable = getFocusable(target)[0];
+    if (focusable) {
+      focusable.focus();
+    }
   }
 
   function closeSiblings(trigger, target) {
@@ -40,7 +57,7 @@
       return;
     }
 
-    document.querySelectorAll("[data-adlaire-group]").forEach(function (item) {
+    document.querySelectorAll("[data-adlaire-toggle][data-adlaire-group]").forEach(function (item) {
       if (item.getAttribute("data-adlaire-group") !== group) {
         return;
       }
@@ -84,6 +101,9 @@
       if (!document.querySelector(".adlaire-modal.is-open, .adlaire-drawer.is-open")) {
         document.documentElement.classList.remove("adlaire-overlay-open");
       }
+      if (lastFocus && typeof lastFocus.focus === "function") {
+        lastFocus.focus();
+      }
       return;
     }
 
@@ -101,12 +121,22 @@
 
       event.preventDefault();
       var isExpanded = trigger.getAttribute("aria-expanded") === "true";
+      lastFocus = trigger;
       closeSiblings(trigger, target);
       setExpanded(trigger, target, !isExpanded);
+      if (!isExpanded && target.matches(".adlaire-modal, .adlaire-drawer")) {
+        focusFirst(target);
+      }
     }
   });
 
   document.addEventListener("keydown", function (event) {
+    var activeOverlay = document.querySelector(".adlaire-modal.is-open, .adlaire-drawer.is-open");
+    if (event.key === "Tab" && activeOverlay) {
+      containFocus(event, activeOverlay);
+      return;
+    }
+
     if (event.key !== "Escape") {
       return;
     }
@@ -119,7 +149,31 @@
       });
     });
     document.documentElement.classList.remove("adlaire-overlay-open");
+    if (lastFocus && typeof lastFocus.focus === "function") {
+      lastFocus.focus();
+    }
   });
+
+  function containFocus(event, target) {
+    var focusable = getFocusable(target);
+    if (focusable.length === 0) {
+      event.preventDefault();
+      return;
+    }
+
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (!target.contains(document.activeElement)) {
+      event.preventDefault();
+      first.focus();
+    } else if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
 
   function moveCarousel(control) {
     var root = control.closest("[data-adlaire-carousel]");
@@ -137,6 +191,9 @@
     var requested = control.getAttribute("data-adlaire-carousel-index");
     var action = control.getAttribute("data-adlaire-carousel-action");
     var next = requested !== null ? Number(requested) : current + (action === "previous" ? -1 : 1);
+    if (!Number.isFinite(next)) {
+      next = 0;
+    }
 
     if (next < 0) {
       next = slides.length - 1;
@@ -148,8 +205,9 @@
     root.setAttribute("data-adlaire-carousel-index", String(next));
     track.style.transform = "translateX(-" + (next * 100) + "%)";
     slides.forEach(function (slide, index) {
-      slide.hidden = index !== next;
-      slide.setAttribute("aria-hidden", index === next ? "false" : "true");
+      var currentSlide = index === next;
+      slide.classList.toggle("is-current", currentSlide);
+      slide.setAttribute("aria-hidden", currentSlide ? "false" : "true");
     });
     Array.prototype.filter.call(root.querySelectorAll("[data-adlaire-carousel-index]"), function (indicator) {
       return !indicator.hasAttribute("data-adlaire-carousel");

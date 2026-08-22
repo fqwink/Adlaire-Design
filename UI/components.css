@@ -984,6 +984,7 @@
   background-color: var(--adlaire-status-gray-light);
   color: var(--adlaire-status-gray-999);
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 .adlaire-filter-chip-list {
