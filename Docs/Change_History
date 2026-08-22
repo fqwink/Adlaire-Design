@@ -8,6 +8,15 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.67
+
+- `Docs/Master_Spec` の版数を `rev.67` へ更新した。
+- WYSIWYG Editor方針を、Editor UIはAdlaire-Design採用、Editor実装はAuteur内製へ変更した。
+- `Docs/WYSIWYG_Editor_Specification` を、WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界を定める正本へ再定義した。
+- Adlaire-Designの管理対象からWYSIWYG Editor実装コード、保存形式、編集ロジック、Markdown / MDX parser、parser採用ライブラリ、生成JavaScriptを除外した。
+- `WYSIWYG/README.md` と `WYSIWYG/Source/editor.ts` を削除し、`WYSIWYG/` ディレクトリを非対象に変更した。
+- `AGENTS.md`、`README.md`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh` を新方針へ整合させた。
+
 ## rev.66
 
 - `Docs/Master_Spec` の版数を `rev.66` へ更新した。

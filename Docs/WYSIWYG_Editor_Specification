@@ -1,31 +1,24 @@
-# Adlaire-Design WYSIWYG Editor Specification
+# Adlaire-Design WYSIWYG Editor UI Specification
 
-本ファイルは、Adlaire-Designで管理するWYSIWYG Editorのマスター仕様である。
+本ファイルは、Adlaire-Designで管理するWYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界を定める正本である。
 
-添付された `WYSIWYG_Editor_Specification.md` は解析元として扱い、本仕様ではAdlaire-Designのリポジトリ方針に合わせて、採用確定範囲、実装コード管理範囲、データモデル、ブロック種別契約、編集操作契約、Markdown / MDX parser契約、非対象、ビルド方針、CSS管理範囲を集約して定義する。
+WYSIWYG Editor UIはAdlaire-Design採用とする。Editor実装はAuteur内製とする。
 
-WYSIWYG Editorに関する詳細仕様の正本は本ファイルとする。`Docs/Master_Spec` はAdlaire-Design全体仕様として、本ファイルへの参照と採用範囲の要約のみを持つ。
+Adlaire-Designでは、WYSIWYG Editorの表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSS、CSS読み込み順、必須クラスを管理する。WYSIWYG EditorのTypeScript実装、保存形式、編集ロジック、Undo/Redo、JSON serialization、preview rendering生成処理、Markdown / MDX parser、生成JavaScript、bundle、minify成果物は管理しない。
 
-本仕様はWYSIWYG Editorの完全固定仕様である。明示されていないblock種別、保存フィールド、公開API、preview HTML、CSS必須クラス、parser出力、依存ライブラリ、管理対象ファイルは採用しない。変更が必要な場合は、12章および13章の変更管理に従い、仕様、実装、検査、変更履歴を同一PRで更新する。
+`Docs/Master_Spec` はAdlaire-Design全体仕様として、本ファイルへの参照と採用範囲の要約のみを持つ。
 
 本仕様で固定する対象は以下とする。
 
+- WYSIWYG Editor UIのAdlaire-Design採用範囲
+- Auteur内製Editor実装との責務境界
 - 管理対象ファイル
-- 公開API
-- データモデル
-- ブロック種別
-- 編集操作
-- document normalization
-- block ID
-- JSON serialization
-- preview rendering
-- Markdown / MDX parser入出力契約
-- 例外採用ライブラリ
 - CSS読み込み順
 - `UI/wysiwyg.css` の必須クラス
-- セキュリティ境界
+- CSS禁止事項
 - 非対象範囲
 - 検査方針
+- 変更管理
 
 上記を変更する場合は、本ファイル、`Docs/Change_History`、`Tools/check/check-adlaire-design.sh` を同じ承認単位で更新する。Adlaire-Design全体の管理範囲またはREADME上の案内が変わる場合のみ、`Docs/Master_Spec`、`README.md`、`Docs/Document_Index` も更新する。
 
@@ -33,34 +26,44 @@ WYSIWYG Editorに関する詳細仕様の正本は本ファイルとする。`Do
 
 ## 1. 目的
 
-WYSIWYG Editorは、Adlaire系プロダクトで再利用するブロックベース編集UIとして扱う。
+WYSIWYG Editor UIは、Adlaire系プロダクトで再利用するブロックベース編集UIの表示層として扱う。
 
-Adlaire-Designでは、WYSIWYG Editorの表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSS、TypeScript実装コードを管理する。
+Adlaire-Designは、WYSIWYG Editorの見た目とCSS契約を管理する。Auteurは、Editor本体の実装、データ構造、編集動作、パーサー、保存処理を管理する。
 
 ---
 
-## 2. Adlaire-Designで管理する範囲
+## 2. 管理範囲
+
+Adlaire-Designで管理する範囲は以下とする。
 
 | 範囲 | 管理先 | 状態 |
 | --- | --- | --- |
-| WYSIWYG Editorマスター仕様 | `Docs/WYSIWYG_Editor_Specification` | 実装済み |
+| WYSIWYG Editor UI仕様と実装境界 | `Docs/WYSIWYG_Editor_Specification` | 実装済み |
 | エディターUIスキン | `UI/wysiwyg.css` | 実装済み |
-| エディター実装コード | `WYSIWYG/Source/editor.ts` | 実装済み |
 | 色・面・状態・効果値 | `Tokens/` | 既存トークン参照 |
 | 汎用部品 | `UI/components.css` | 既存部品参照 |
 | 本文・プレビュー部品 | `UI/content.css` | 既存部品参照 |
 
-Adlaire-Designは、WYSIWYG EditorのTypeScriptコア、ブロックデータ、Undo/Redo、JSON serialization、preview renderingを管理する。
+Auteur内製側で管理する範囲は以下とする。
 
-Markdown / MDXからWYSIWYG Editorのブロックデータへ変換するパーサーは、Adlaire-Designで固定する将来実装契約として扱う。パーサー実装では、個別承認された例外採用ライブラリを使用できる。
-
-Adlaire-Designは、WYSIWYG EditorのDOM依存編集UI、永続ストレージ連携、ドラッグ&ドロップのブラウザイベント、スラッシュコマンドのDOMメニュー、ビルド成果物生成を管理しない。
+| 範囲 | 管理先 |
+| --- | --- |
+| Editor TypeScript / JavaScript実装 | Auteur |
+| ブロックデータ構造 | Auteur |
+| 保存形式 | Auteur |
+| 編集操作 | Auteur |
+| Undo / Redo | Auteur |
+| JSON serialization | Auteur |
+| preview rendering生成処理 | Auteur |
+| Markdown / MDX parser | Auteur |
+| parser採用ライブラリ | Auteur |
+| bundle、minify、compile成果物 | Auteur |
 
 ---
 
-## 3. WYSIWYG側のAdlaire-Design採用確定
+## 3. UI採用確定対象
 
-WYSIWYG EditorのUIは、UI/CSSフレームワークとしてAdlaire-Design採用確定とする。
+WYSIWYG Editor UIは、UI/CSSフレームワークとしてAdlaire-Design採用確定とする。
 
 採用確定対象は以下とする。
 
@@ -78,36 +81,20 @@ WYSIWYG EditorのUIは、UI/CSSフレームワークとしてAdlaire-Design採�
 
 ---
 
-## 4. WYSIWYG側のビルド方針
-
-WYSIWYG Editor本体では、以下の工程を必須とする。
-
-| 工程 | 方針 |
-| --- | --- |
-| transpile | TypeScriptをJavaScriptへ変換する |
-| bundle | 複数ファイルを配布または実行しやすい単位にまとめる |
-| minify | 生成JavaScriptを軽量化する |
-| compile | ビルド工程全体を管理する |
-
-ただし、Adlaire-Designリポジトリに保存する正本はTypeScriptソースとし、上記ビルド工程の生成物は保存しない。
-
-WYSIWYG Editor本体のビルド方針は以下とする。
-
-- npm管理物は追加しない。
-- `package.json`、`package-lock.json`、`node_modules` は使用しない。
-- webpackはnpm前提のため採用しない。
-- Node.js前提のビルド体系は採用しない。
-- DenoまたはDeno互換の実行環境を前提にする。
-- ビルド依存は、npmを使わず、Denoで実行可能なものに限り個別承認で許容する。
-- Markdown / MDXパーサーは、パーサー用途に限定して例外採用ライブラリを許可する。
-- 例外採用ライブラリは、ライブラリ名、用途、実行環境、ライセンス、npm管理物を追加しないことを個別仕様に記録する。
-
----
-
-## 5. Adlaire-Design側の非対象
+## 4. 非対象
 
 Adlaire-Designでは以下を対象外とする。
 
+- WYSIWYG Editor実装コード
+- TypeScript / JavaScriptのEditor本体
+- ブロックデータ構造
+- 保存形式
+- 編集操作
+- Undo / Redo
+- JSON serialization
+- preview rendering生成処理
+- Markdown / MDX parser
+- parser採用ライブラリ
 - DOM依存の編集UI実装
 - 永続ストレージ連携
 - ドラッグ&ドロップのブラウザイベント実装
@@ -115,13 +102,12 @@ Adlaire-Designでは以下を対象外とする。
 - インライン編集DOM処理
 - JavaScriptのbundle、minify、compile
 - npm、webpack、Node.js前提の設定
+- `WYSIWYG/` ディレクトリ作成
 - `Dist/`、`dist/`、`Build/`、`build/` 作成
-
-ただし、Markdown / MDXパーサーに限り、個別承認した例外採用ライブラリは対象外から除外する。例外採用ライブラリを採用する場合でも、npm管理物、webpack設定、Node.js前提の設定、生成JavaScript、bundle、minify成果物は追加しない。
 
 ---
 
-## 6. ブロック表示方針
+## 5. ブロック表示方針
 
 WYSIWYG Editorのブロック表示は、Adlaire-Designの既存部品を優先して使用する。
 
@@ -139,256 +125,13 @@ WYSIWYG Editorのブロック表示は、Adlaire-Designの既存部品を優先�
 | label | `UI/content.css` または `UI/wysiwyg.css` |
 | progress | `UI/wysiwyg.css` |
 
----
-
-## 7. 実装コード
-
-WYSIWYG Editorの実装コードは `WYSIWYG/Source/editor.ts` を正本とする。
-
-`WYSIWYG/Source/editor.ts` が提供する公開APIは7.8に固定する。
-
-Markdown / MDX parsingは、`WYSIWYG/Source/editor.ts` の既存実装済みexportとは分離し、将来実装時の入出力契約を本仕様で固定する。
-
-実装コードはTypeScriptを正本とする。Markdown / MDXパーサーに限り、個別承認された例外採用ライブラリを許可する。npm、webpack、Node.js前提の設定、生成JavaScript、bundle、minify成果物は含めない。
-
-### 7.1 Markdown / MDXパーサー例外採用方針
-
-Markdown / MDXパーサーは、WYSIWYG Editorの入力変換品質と保守性を優先し、例外採用ライブラリを使用できる。
-
-例外採用の条件は以下とする。
-
-- 用途をMarkdown / MDX parsingに限定する。
-- ライブラリ名、用途、実行環境、ライセンス、採用理由を仕様に記録する。
-- `package.json`、`package-lock.json`、`node_modules` を追加しない。
-- webpack、Node.js前提の設定、生成JavaScript、bundle、minify成果物を追加しない。
-- Deno互換またはブラウザ互換で利用できる形を優先する。
-- Adlaire-Design内に保存する正本は、仕様文書と必要最小限のTypeScriptソースに限定する。
-
-採用ライブラリは以下とする。
-
-| 対象 | ライブラリ | 用途 |
-| --- | --- | --- |
-| Markdown / GFM | `jsr:@deno/gfm@0.12.0` | MarkdownおよびGitHub Flavored Markdownの解析 |
-| MDX | `jsr:@temelj/mdx@0.14.0` | MDXの解析 |
-
-### 7.2 ドキュメントデータモデル
-
-WYSIWYG Editorの保存形式は `AdlaireWysiwygDocument` を正本とする。
-
-| 項目 | 型 | 仕様 |
-| --- | --- | --- |
-| `version` | `1` | 保存形式のバージョン。現行は `1` 固定 |
-| `blocks` | `AdlaireWysiwygBlock[]` | 表示順のブロック配列 |
-
-`AdlaireWysiwygBlock` は以下で構成する。
-
-| 項目 | 型 | 仕様 |
-| --- | --- | --- |
-| `id` | `string` | ブロックを識別する安定ID |
-| `type` | `AdlaireWysiwygBlockType` | ブロック種別 |
-| `content` | `string` | ブロック本文または参照値 |
-| `meta` | `Record<string, string | number | boolean>` | 補助情報。入れ子構造、配列、関数、DOM参照は保存しない |
-
-document normalization契約は以下とする。
-
-- `version` は入力値にかかわらず `1` へ正規化する。
-- `blocks` が配列でない場合は空配列へ正規化する。
-- `getDocument()`、`removeBlock()`、`addBlock()`、`updateBlock()` の戻り値は内部状態の直接参照ではなくcloneとする。
-- Undo/Redo snapshotは `blocks` のcloneのみを保持し、DOM状態、selection、cursor、focus、transient UI stateは保持しない。
-
-block ID契約は以下とする。
-
-- `id` はblockの安定識別子とし、`updateBlock()` では変更しない。
-- `addBlock()` で `id` 未指定の場合は `block-` で始まるIDを生成する。
-- parserがblockを生成する場合も、保存前に全blockへ `id` を付与する。
-- 同一document内での重複IDは許可しない。
-
-block正規化契約は以下とする。
-
-- `type` は `AdlaireWysiwygBlockType` に定義された値のみ許可する。
-- `content` は文字列として扱い、raw HTMLとして解釈しない。
-- `meta` は浅いkey-value objectに限定する。
-- `meta` の値は `string | number | boolean` のみ許可し、`null`、配列、object、関数は保存しない。
-
-### 7.3 ブロック種別契約
-
-ブロック種別は以下に固定する。
-
-| 種別 | `content` | 主な `meta` | プレビュー方針 |
-| --- | --- | --- | --- |
-| `heading` | 見出し本文 | `level` | 見出しとして表示する。現行プレビューは `h2` |
-| `paragraph` | 段落本文 | なし | 段落として表示する |
-| `list` | 改行区切りの項目 | なし | 箇条書きとして表示する |
-| `code` | コード本文 | `language` | コードブロックとして表示する |
-| `quote` | 引用本文 | なし | 引用として表示する |
-| `image` | 画像URL | `alt` | 画像として表示する |
-| `divider` | 空文字を許容 | なし | 区切り線として表示する |
-| `checklist` | 改行区切りの項目 | なし | チェックリストとして表示する |
-| `callout` | 補足本文 | `kind` | 注記として表示する |
-| `label` | ラベル本文 | `tone` | バッジとして表示する |
-| `progress` | 数値文字列または空文字 | `value` | 0から100の進捗として表示する |
-
-未知のブロック種別は保存形式 `version: 1` では許可しない。
-
-### 7.4 編集操作契約
-
-WYSIWYG Editorの最小編集操作は以下に固定する。
-
-| 操作 | 仕様 |
-| --- | --- |
-| document取得 | 内部状態のcloneを返す |
-| document差し替え | Undo対象として保存し、Redoを破棄する |
-| block追加 | 指定位置または末尾へ追加し、ID未指定時は生成する |
-| block更新 | `id` を維持し、指定patchだけを反映する |
-| block削除 | 対象blockを削除し、削除blockのcloneを返す |
-| block移動 | 範囲外indexは有効範囲へ丸める |
-| Undo/Redo | block配列snapshotを復元する |
-
-DOM選択範囲、カーソル位置、フォーカス状態、ドラッグ状態は保存形式に含めない。
-
-### 7.5 JSON serialization契約
-
-JSON serializationは `AdlaireWysiwygDocument` のみを対象にする。
-
-- `version` は `1` 固定とする。
-- `blocks` は配列以外を許容しない。正規化時に配列以外は空配列として扱う。
-- `meta` は `string | number | boolean` の浅いオブジェクトに限定する。
-- DOM、関数、Date、Map、Set、循環参照は保存しない。
-- 生成JSON、bundle、minify成果物は保存しない。
-
-### 7.6 preview rendering契約
-
-preview renderingは、保存済みblock配列から静的HTML文字列を生成する。
-
-- `content` と属性値はHTML escapeする。
-- raw HTMLの直接挿入は行わない。
-- MDX componentの実行、JavaScript実行、イベント属性の生成は行わない。
-- 表示調整は `UI/wysiwyg.css`、`UI/components.css`、`UI/content.css` の既存CSSに委ねる。
-
-block種別ごとのHTML出力は以下に固定する。
-
-| 種別 | 出力 |
-| --- | --- |
-| `heading` | `<h2>` |
-| `paragraph` | `<p>` |
-| `list` | `<ul><li>` |
-| `code` | `<pre><code>` |
-| `quote` | `<blockquote>` |
-| `image` | `<figure><img src="..." alt="..."></figure>` |
-| `divider` | `<hr>` |
-| `checklist` | `<ul class="adlaire-check-list"><li><input type="checkbox" disabled>` |
-| `callout` | `<aside class="adlaire-note adlaire-note-info">` |
-| `label` | `<span class="adlaire-badge adlaire-badge-primary">` |
-| `progress` | `<progress value="..." max="100">` |
-
-preview renderingの値処理は以下とする。
-
-- `heading` は保存形式上 `meta.level` を持てるが、現行preview HTMLは `h2` に固定する。
-- `list` と `checklist` は改行区切りの空行を除外し、各項目をescapeする。
-- `image` は `content` を `src`、`meta.alt` を `alt` としてattribute escapeする。
-- `progress` は `meta.value` を優先し、未指定時は `content` を数値化する。非数値は `0`、範囲外は `0` から `100` に丸める。
-- HTML本文は `&`、`<`、`>`、`"`、`'` をescapeする。
-- HTML属性値は本文escapeに加えてバッククォートをescapeする。
-
-### 7.7 Markdown / MDX parser入出力契約
-
-Markdown / MDX parserは、Markdown、GFM、MDX入力を `AdlaireWysiwygDocument` へ変換する。
-
-| 入力 | 出力 |
-| --- | --- |
-| Markdown / GFM文字列 | `version: 1` の `AdlaireWysiwygDocument` |
-| MDX文字列 | `version: 1` の `AdlaireWysiwygDocument` |
-
-parser実装時の固定条件は以下とする。
-
-- Markdown / GFMは `jsr:@deno/gfm@0.12.0` を使用する。
-- MDXは `jsr:@temelj/mdx@0.14.0` を使用する。
-- Markdown見出し、段落、リスト、コード、引用、画像、区切り線を既存block種別へ変換する。
-- GFM task listは `checklist` へ変換する。
-- 対応不能なMDX componentは実行せず、`code` または `paragraph` として保持する。
-- parserはDOM、永続ストレージ、ブラウザイベント、Node.js/npm管理物に依存しない。
-
-parserの出力契約は以下とする。
-
-- 空入力は `version: 1`、`blocks: []` へ変換する。
-- 入力上のblock順序を保持する。
-- 各blockに一意な `id` を付与する。
-- parser由来のblockも、7.2のdocument normalization契約とblock正規化契約に従う。
-- Markdown / MDX parserはpreview HTMLを直接生成しない。出力は常に `AdlaireWysiwygDocument` とする。
-- parsing不能な入力は、実行時例外を外部へ漏らすのではなく、呼び出し側が扱える失敗結果またはfallback documentに変換する。
-- raw HTMLは実行せず、対応可能な場合は `code` または `paragraph` として保持する。
-
-### 7.8 公開API契約
-
-`WYSIWYG/Source/editor.ts` の公開APIは以下に固定する。
-
-| API | 契約 |
-| --- | --- |
-| `AdlaireWysiwygBlockType` | 7.3のblock種別union |
-| `AdlaireWysiwygBlock` | `id`、`type`、`content`、任意の `meta` を持つblock interface |
-| `AdlaireWysiwygDocument` | `version: 1` と `blocks` を持つdocument interface |
-| `AdlaireWysiwygSnapshot` | Undo/Redo用の `blocks` snapshot interface |
-| `AdlaireWysiwygEditor` | document操作、Undo/Redo、JSON serialization、preview renderingを提供するclass |
-| `parseAdlaireWysiwygDocument(json: string)` | JSON文字列を `AdlaireWysiwygDocument` へparseし、正規化して返すfunction |
-
-`AdlaireWysiwygEditor` のconstructorとmethod契約は以下に固定する。
-
-| API | 引数 | 戻り値 | 失敗時 |
-| --- | --- | --- | --- |
-| `constructor` | `initialDocument?: AdlaireWysiwygDocument` | instance | 入力documentを正規化する |
-| `getDocument()` | なし | `AdlaireWysiwygDocument` | 失敗しない |
-| `setDocument(nextDocument)` | `AdlaireWysiwygDocument` | `void` | 入力documentを正規化する |
-| `addBlock(block, index?)` | `Omit<AdlaireWysiwygBlock, "id"> & { id?: string }`, `number?` | `AdlaireWysiwygBlock` | indexは有効範囲へ丸める |
-| `updateBlock(id, patch)` | `string`, `Partial<Omit<AdlaireWysiwygBlock, "id">>` | `AdlaireWysiwygBlock | null` | 対象IDなしは `null` |
-| `removeBlock(id)` | `string` | `AdlaireWysiwygBlock | null` | 対象IDなしは `null` |
-| `moveBlock(id, nextIndex)` | `string`, `number` | `boolean` | 対象IDなしは `false` |
-| `undo()` | なし | `boolean` | 復元対象なしは `false` |
-| `redo()` | なし | `boolean` | 復元対象なしは `false` |
-| `toJSON()` | なし | `string` | 失敗しない |
-| `renderPreview()` | なし | `string` | 失敗しない |
-
-公開APIの追加、削除、改名、引数変更、戻り値変更は完全固定後の仕様変更として扱う。
-
-### 7.9 状態遷移契約
-
-編集状態の遷移は以下に固定する。
-
-- `constructor` はUndo/Redo stackを空にする。
-- `setDocument()`、`addBlock()`、`updateBlock()`、`removeBlock()`、`moveBlock()` は、実変更前の `blocks` snapshotをUndo stackへ積む。
-- `setDocument()`、`addBlock()`、`updateBlock()`、`removeBlock()`、実際に移動した `moveBlock()` はRedo stackを破棄する。
-- 対象IDが存在しない `updateBlock()`、`removeBlock()`、`moveBlock()` はUndo/Redo stackを変更しない。
-- 移動元と移動先が同じ `moveBlock()` は `true` を返し、Undo/Redo stackを変更しない。
-- `undo()` 成功時は現在snapshotをRedo stackへ積み、直前のUndo snapshotを復元する。
-- `redo()` 成功時は現在snapshotをUndo stackへ積み、直前のRedo snapshotを復元する。
-
-### 7.10 セキュリティ境界
-
-WYSIWYG Editorのセキュリティ境界は以下に固定する。
-
-- preview renderingはHTML文字列を生成するが、raw HTML、script、event handler、MDX componentを実行しない。
-- `content` は常にtextとして扱い、HTMLとして解釈しない。
-- `image` の `src` はattribute escapeの対象とする。URL fetch、file access、scheme validation、upload処理はAdlaire-Designの対象外とする。
-- parserはMarkdown / MDXを実行環境として扱わず、document dataへの変換だけを行う。
-- 永続化、認可、サニタイズ済みHTMLの保存、XSS対策の実行時統合は利用側プロダクトの責務とする。
-
-### 7.11 仕様外拡張の扱い
-
-完全固定後の仕様外拡張は以下の通り扱う。
-
-- 未定義block種別を追加しない。
-- `AdlaireWysiwygDocument` に `version` と `blocks` 以外のtop-level fieldを追加しない。
-- `AdlaireWysiwygBlock` に `id`、`type`、`content`、`meta` 以外のfieldを追加しない。
-- `meta` に入れ子object、配列、`null`、関数、DOM参照を保存しない。
-- preview HTMLのtag、class、attributeを変更しない。
-- 必須CSSクラスを削除、改名、別prefix化しない。
-- parser採用ライブラリの追加、削除、version変更を行わない。
-- `WYSIWYG/` 配下へ新規ファイルを追加しない。ただし完全固定後の変更承認で `Tools/check/check-adlaire-design.sh` と本仕様を同時更新する場合を除く。
+上記のブロック種別は表示想定であり、Editor実装上の保存形式またはparser出力契約ではない。実装上のblock type、schema、parser変換はAuteur内製側で管理する。
 
 ---
 
-## 8. CSS読み込み順
+## 6. CSS読み込み順
 
-WYSIWYG EditorでAdlaire-Designを採用する際の読み込み順は以下に固定する。
+WYSIWYG Editor UIでAdlaire-Designを採用する際の読み込み順は以下に固定する。
 
 1. `Tokens/colors.css`
 2. `Tokens/surface.css`
@@ -408,7 +151,7 @@ WYSIWYG EditorでAdlaire-Designを採用する際の読み込み順は以下に�
 
 ---
 
-## 9. `UI/wysiwyg.css`
+## 7. `UI/wysiwyg.css`
 
 `UI/wysiwyg.css` は以下の規則に従う。
 
@@ -424,7 +167,7 @@ WYSIWYG EditorでAdlaire-Designを採用する際の読み込み順は以下に�
 
 ---
 
-## 10. 必須クラス
+## 8. 必須クラス
 
 `UI/wysiwyg.css` は、以下のクラスを定義する。
 
@@ -452,52 +195,50 @@ WYSIWYG EditorでAdlaire-Designを採用する際の読み込み順は以下に�
 
 ---
 
-## 11. 検査方針
+## 9. Auteur実装との境界
+
+Auteur内製Editor実装は、Adlaire-Designが定義するUI classをHTMLまたは表示層に適用できることを期待する。
+
+Adlaire-Designは、Auteur実装に以下を要求しない。
+
+- 特定のTypeScript interface
+- 特定のblock schema
+- 特定のJSON保存形式
+- 特定のMarkdown / MDX parser
+- 特定のUndo / Redo実装
+- 特定のDOMイベント実装
+- 特定のビルドツール
+
+Auteur実装がAdlaire-Design UIを採用する場合は、6章のCSS読み込み順と8章の必須クラスを優先する。
+
+---
+
+## 10. 検査方針
 
 `Tools/check/check-adlaire-design.sh` では以下を確認する。
 
 - `Docs/WYSIWYG_Editor_Specification` が存在すること。
 - `UI/wysiwyg.css` が存在すること。
-- `WYSIWYG/README.md` が存在すること。
-- `WYSIWYG/Source/editor.ts` が存在すること。
 - `Docs/Document_Index` が `Docs/WYSIWYG_Editor_Specification` と `UI/wysiwyg.css` を参照していること。
 - `UI/wysiwyg.css` の冒頭コメントが仕様どおりであること。
 - `UI/wysiwyg.css` が必須クラスを定義していること。
-- `WYSIWYG/Source/editor.ts` が必須exportを定義していること。
+- `WYSIWYG/` が作成されていないこと。
 - 既存UIファイルと同じ禁止記述検査に `UI/wysiwyg.css` を含めること。
-- 本仕様で固定したデータモデル、ブロック種別契約、編集操作契約、JSON serialization契約、preview rendering契約、Markdown / MDX parser入出力契約の主要語句が記録されていること。
+- WYSIWYG Editor UIがAdlaire-Design採用であること。
+- Editor実装がAuteur内製であること。
 
 ---
 
-## 12. 変更管理
+## 11. 変更管理
 
-WYSIWYG Editor仕様の変更は、以下の単位で扱う。
+WYSIWYG Editor UI仕様またはAuteur実装境界の変更は、以下の単位で扱う。
 
 | 変更対象 | 更新必須 |
 | --- | --- |
-| データモデル | `Docs/WYSIWYG_Editor_Specification`、`Docs/Change_History`、`Tools/check/check-adlaire-design.sh` |
-| ブロック種別 | `Docs/WYSIWYG_Editor_Specification`、`WYSIWYG/Source/editor.ts`、`Docs/Change_History`、`Tools/check/check-adlaire-design.sh` |
-| 編集操作 | `Docs/WYSIWYG_Editor_Specification`、`WYSIWYG/Source/editor.ts`、`Docs/Change_History`、`Tools/check/check-adlaire-design.sh` |
-| Markdown / MDX parser採用ライブラリ | `Docs/WYSIWYG_Editor_Specification`、`Docs/Master_Spec`、`Docs/Change_History`、`Tools/check/check-adlaire-design.sh` |
+| UI採用範囲 | `Docs/WYSIWYG_Editor_Specification`、`Docs/Change_History`、`Tools/check/check-adlaire-design.sh` |
 | CSS読み込み順 | `Docs/WYSIWYG_Editor_Specification`、`UI/wysiwyg.css`、`Docs/Change_History`、`Tools/check/check-adlaire-design.sh` |
 | 必須クラス | `Docs/WYSIWYG_Editor_Specification`、`UI/wysiwyg.css`、`Docs/Change_History`、`Tools/check/check-adlaire-design.sh` |
+| Auteur実装境界 | `Docs/WYSIWYG_Editor_Specification`、`Docs/Master_Spec`、`README.md`、`Docs/Document_Index`、`Docs/Change_History`、`Tools/check/check-adlaire-design.sh` |
 | 管理対象範囲 | `Docs/WYSIWYG_Editor_Specification`、`Docs/Master_Spec`、`README.md`、`Docs/Document_Index`、`Docs/Change_History`、`Tools/check/check-adlaire-design.sh` |
 
-変更時も、npm管理物、webpack設定、Node.js前提の設定、生成JavaScript、bundle、minify成果物は追加しない。
-
----
-
-## 13. 完全固定後の変更承認条件
-
-完全固定後にWYSIWYG Editor仕様を変更する場合は、以下をすべて満たす。
-
-1. `Docs/WYSIWYG_Editor_Specification` の該当契約を更新する。
-2. `Docs/Change_History` に同revの変更理由と影響範囲を記録する。
-3. `Docs/Master_Spec` の `Version` を更新する。
-4. `Tools/check/check-adlaire-design.sh` に、変更後の固定語句または構造検査を追加する。
-5. 実装影響がある場合は `WYSIWYG/Source/editor.ts` を同一PRで更新する。
-6. CSS影響がある場合は `UI/wysiwyg.css` を同一PRで更新する。
-7. 管理対象または索引説明が変わる場合は `README.md` と `Docs/Document_Index` を同一PRで更新する。
-8. `package.json`、`package-lock.json`、`node_modules`、webpack設定、Node.js前提の設定、生成JavaScript、bundle、minify成果物を追加しない。
-
-上記を満たさない変更は、WYSIWYG Editor完全固定仕様への不整合として扱う。
+変更時も、Adlaire-DesignにはWYSIWYG Editor実装コード、npm管理物、webpack設定、Node.js前提の設定、生成JavaScript、bundle、minify成果物を追加しない。
