@@ -14,7 +14,7 @@
 - 本カタログは一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティを扱う。
 - WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 接頭辞のクラス、Editor UI状態表示は本カタログに含めない。
 - 実装先は既存の責務境界に従う。
-- 実装前の候補、実装済み、保留、対象外を同じ一覧で管理する。
+- 実装前の候補、実装済み、対象外を同じ一覧で管理する。
 - 実装する場合は、`Docs/Master_Spec`、CSS、必要なJavaScript、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
 - ビルド、minify、bundle、CSSプリプロセッサ、JSONデータ管理、多言語化は前提にしない。JavaScriptが必要な汎用部品は、対応する `UI/*.js` で管理する。
 
@@ -174,16 +174,16 @@ WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `Edit
 
 ## 5. 優先C
 
-優先Cは、必要性に応じて仕様化する候補群である。CSSで成立するものはCSS実装、JavaScriptが必要なものは対応する `UI/*.js` の責務範囲で扱い、データ制御や状態管理が大きいものは保留として残す。
+優先Cは、必要性に応じて仕様化する候補群である。CSSで成立するものはCSS実装、JavaScriptが必要なものは対応する `UI/*.js` の責務範囲で扱う。
 
 | 分類 | 部品 | 想定実装先 | 状態 |
 | --- | --- | --- | --- |
 | 状態表示 | 進捗表示 | `UI/components.css` | 実装済み |
 | 状態表示 | ステップ表示 | `UI/components.css` | 実装済み |
 | 状態表示 | ステータスタイムライン | `UI/content.css` | 実装済み |
-| データ表示 | ページネーション | `UI/components.css` | 保留 |
+| データ表示 | ページネーション | `UI/components.css` | 実装済み |
 | データ表示 | タグリスト | `UI/components.css` | 実装済み |
-| データ表示 | 絞り込みチップ | `UI/components.css` | 保留 |
+| データ表示 | 絞り込みチップ | `UI/components.css`、`UI/forms.js` | 実装済み |
 | 補助表示 | ツールチップ風表示 | `UI/components.css` | 実装済み |
 | 補助表示 | ポップオーバー風表示 | `UI/components.css` | 実装済み |
 | 視覚枠 | ヒーローパネル | `UI/components.css` | 実装済み |
@@ -203,7 +203,9 @@ WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `Edit
 | 進捗表示 | `.adlaire-progress`、`.adlaire-progress-bar`。幅はHTML側で静的指定する |
 | ステップ表示 | `.adlaire-step-indicator`、`.adlaire-step-indicator-item`、`.adlaire-step-indicator-item-current` |
 | ステータスタイムライン | `.adlaire-status-timeline`、`.adlaire-status-timeline-item` |
+| ページネーション | `.adlaire-pagination`、`.adlaire-page-link`、`.adlaire-page-link-current`、`.adlaire-page-link-disabled` |
 | タグリスト | `.adlaire-tag-list`。項目表示は既存の `.adlaire-chip` 系を組み合わせる |
+| 絞り込みチップ | `.adlaire-filter-chip-list`、`.adlaire-filter-chip` |
 | ツールチップ風表示 | `.adlaire-tooltip-note` |
 | ポップオーバー風表示 | `.adlaire-popover-note` |
 | ヒーローパネル | `.adlaire-hero-panel` |
@@ -218,21 +220,40 @@ WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `Edit
 
 ---
 
-## 6. 原則対象外
+## 6. JavaScriptあり実装済み部品
+
+以下は、責務別JavaScriptを併用して汎用部品として実装する。
+
+| 部品 | 実装先 |
+| --- | --- |
+| モーダル | `UI/components.css`、`UI/components.js` |
+| ドロワー | `UI/components.css`、`UI/components.js` |
+| ドロップダウン | `UI/components.css`、`UI/components.js` |
+| カルーセル | `UI/components.css`、`UI/components.js` |
+| ソート可能テーブル | `UI/content.css`、`UI/content.js` |
+| 検索/絞り込みUI | `UI/forms.css`、`UI/forms.js`、`UI/content.css` |
+| ツールチップ動作 | `UI/components.css`、`UI/components.js` |
+
+### 6.1 JavaScriptあり実装済みクラス
+
+| 部品 | 実装済みクラス |
+| --- | --- |
+| モーダル | `.adlaire-modal`、`.adlaire-modal-dialog`、`.adlaire-modal-header`、`.adlaire-modal-title`、`.adlaire-modal-body`、`.adlaire-modal-footer`、`.adlaire-modal-close` |
+| ドロワー | `.adlaire-drawer`、`.adlaire-drawer-left`、`.adlaire-drawer-panel`、`.adlaire-drawer-header`、`.adlaire-drawer-title`、`.adlaire-drawer-body`、`.adlaire-drawer-footer`、`.adlaire-drawer-close` |
+| ドロップダウン | `.adlaire-dropdown`、`.adlaire-dropdown-trigger`、`.adlaire-dropdown-menu`、`.adlaire-dropdown-item` |
+| カルーセル | `.adlaire-carousel`、`.adlaire-carousel-viewport`、`.adlaire-carousel-track`、`.adlaire-carousel-slide`、`.adlaire-carousel-controls`、`.adlaire-carousel-control`、`.adlaire-carousel-indicators`、`.adlaire-carousel-indicator` |
+| ソート可能テーブル | `.adlaire-sortable-table`、`.adlaire-sort-button` |
+| 検索/絞り込みUI | `.adlaire-filter`、`.adlaire-filter-row`、`.adlaire-filter-input`、`.adlaire-filter-count`、`.adlaire-filter-results`、`.adlaire-filter-empty`、`.adlaire-filter-item` |
+| ツールチップ動作 | `.adlaire-tooltip`、`.adlaire-tooltip-trigger`、`.adlaire-tooltip-content` |
+
+## 6.2 原則対象外
 
 以下は、現方針では汎用部品として実装しない。
 
 | 部品 | 理由 |
 | --- | --- |
-| モーダル | JavaScript制御とアクセシビリティ設計が必要になりやすい |
-| ドロワー | JavaScript制御とフォーカス管理が必要になりやすい |
-| ドロップダウン | 状態管理が必要になりやすい |
 | WYSIWYG Editor UI専用品 | `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する |
 | `.adlaire-wysiwyg-` 接頭辞のクラス | Editor UI専用CSS契約であり、汎用部品ではない |
-| カルーセル | JavaScript、アクセシビリティ、画像管理の設計が必要になりやすい |
-| ソート可能テーブル | JavaScriptまたはデータ制御が必要 |
-| 検索/絞り込みUI | JavaScriptまたはJSONデータ管理に寄りやすい |
-| ツールチップ動作 | hover/focus制御とアクセシビリティ設計が必要 |
 | アイコンセット | Brand資産仕様を先に固める必要がある |
 
 ---
@@ -260,10 +281,10 @@ WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `Edit
 | ナレッジベース・Wiki | 検索ページへのリンク導線、カテゴリナビ、アンカーナビ、FAQ、定義リスト、更新情報、関連リンク |
 | マーケティングサイト | ヒーロー領域、CTAブロック、特徴リスト、カードグリッド、数値表示、比較ブロック、お知らせバー |
 | GitプロバイダーUI | ツールバー、ステータスラベル、キー/値サマリー、メタ情報行、ファイル一覧、コミット一覧、差分表示 |
-| リポジトリ管理画面 | 操作行、ボタングループ、空状態表示、アラート、ページネーション(保留)、絞り込みチップ(保留)、設定パネル |
+| リポジトリ管理画面 | 操作行、ボタングループ、空状態表示、アラート、ページネーション、絞り込みチップ、設定パネル |
 | 社内ポータル | お知らせバー、更新通知、メンテナンス通知、リンクリスト、カードグリッド、連絡パネル、メンバー/チーム表示 |
 | ダッシュボード | サーフェスグリッド、サーフェス項目、数値表示ブロック、ステータス点、ステータスラベル、メンテナンス通知、要約枠 |
 | 静的サイト + API連携 | 読み込み状態、エラー表示、エラーページ、空状態表示、メンテナンス通知、メンテナンス画面、データカード、メタ情報行、更新日時表示 |
 | コンテンツ駆動Webシステム | 本文表、注記、メンテナンス通知、メンテナンス画面、チェックリスト、定義リスト、リンクリスト、関連リンク、CTAブロック |
 
-この一覧は、汎用部品の追加優先度を判断するための補助情報である。ここに記載した部品であっても、JSONデータ管理、多言語化、ビルド、minify、bundleが前提になるものは、個別に対象外または保留として扱う。
+この一覧は、汎用部品の追加優先度を判断するための補助情報である。ここに記載した部品であっても、JSONデータ管理、多言語化、ビルド、minify、bundleが前提になるものは、個別に対象外として扱う。

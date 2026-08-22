@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.84
+**Version:** rev.85
 
 ---
 
@@ -999,7 +999,6 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 拡充仕様では、以下を必ず非対象として記録する。
 
-- JavaScriptによる表示制御
 - 多言語化
 - JSONデータ管理
 - CSSビルド処理
@@ -1016,7 +1015,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 | --- | --- | --- |
 | レイアウト | 2カラム、1カラム、余白、コンテナ、グリッド補助 | 複数の公開面で再利用が見込める |
 | コンポーネント | カード、notice、タブ、タイムライン、目次、ニュース項目 | 本文構造を変えずに表示品質を上げられる |
-| フォーム | 入力、ラベル、チェック、エラー、送信ボタン | CSS onlyで状態表現できる |
+| フォーム | 入力、ラベル、チェック、エラー、送信ボタン、検索/絞り込みUI | CSSと責務別JavaScriptで状態表現できる |
 | ナビゲーション | ヘッダー、フッター、パンくず、サイドバー、ページ内リンク | 既存HTML構造を維持できる |
 | 本文部品 | セクション、リスト、表、注記、日付、メタ情報 | コンテンツ本文を再設計せず使える |
 | ユーティリティ | spacing、display、text、background、flex | 既存命名と衝突せず用途が明確 |
@@ -1064,7 +1063,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 汎用部品の拡充として、操作行、ツールバー、配置補助、区切り線、空状態、エラーページ、チップ、ステータス、リンクリスト、サーフェスグリッド、メディアオブジェクトを `UI/components.css` に実装する。
 
-汎用部品の一覧管理は `Docs/Generic_Component_Catalog` で行い、実装済み、候補、保留、対象外を同じ表で管理する。
+汎用部品の一覧管理は `Docs/Generic_Component_Catalog` で行い、実装済み、候補、対象外を同じ表で管理する。
 
 追加対象は以下とする。
 
@@ -1089,7 +1088,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 汎用部品は、本文固有の意味を持たず、公開面の複数ページで再利用できるものに限定する。見た目の値は既存の `Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` のCSS変数を参照し、新規トークンは追加しない。
 
-JavaScriptなしで成立する優先B/Cの汎用部品として、見出し群、案内、エラーページ、手順、強調、ナビ補助、カード派生、リスト派生、連絡導線、進捗表示、ステップ表示、タグリスト、静的な補助表示、視覚枠、ブランド表示、レイアウト複合を `UI/components.css` に追加実装済みである。FAQ、比較、ステータスタイムライン、比較グリッドは本文文脈の部品として `UI/content.css` に追加実装済みである。追加実装済みクラスの詳細は、`Docs/Generic_Component_Catalog` の実装済みクラス対応表で管理する。進捗表示の幅はHTML側の静的指定で表現し、JavaScriptによる進捗計算や状態更新を前提にしない。
+優先B/Cの汎用部品として、見出し群、案内、エラーページ、手順、強調、ナビ補助、カード派生、リスト派生、連絡導線、進捗表示、ステップ表示、タグリスト、静的な補助表示、視覚枠、ブランド表示、レイアウト複合、ページネーション、絞り込みチップ、モーダル、ドロワー、ドロップダウン、カルーセル、ツールチップ動作を `UI/components.css` に追加実装済みである。FAQ、比較、ステータスタイムライン、比較グリッド、ソート可能テーブル、検索/絞り込みUIは本文文脈の部品として `UI/content.css` に追加実装済みである。必要なJavaScriptは `UI/components.js`、`UI/content.js`、`UI/forms.js` に責務別で実装する。追加実装済みクラスの詳細は、`Docs/Generic_Component_Catalog` の実装済みクラス対応表で管理する。進捗表示の幅はHTML側の静的指定で表現し、JavaScriptによる進捗計算や状態更新を前提にしない。
 
 エラーページ部品は、`.adlaire-error-page`、`.adlaire-error-page-inner`、`.adlaire-error-page-code`、`.adlaire-error-page-title`、`.adlaire-error-page-text`、`.adlaire-error-page-actions` で構成し、400、401、403、404、500、510などの静的エラー画面を表示する。ステータスコード別の表示には、`.adlaire-error-page-400`、`.adlaire-error-page-401`、`.adlaire-error-page-403`、`.adlaire-error-page-404`、`.adlaire-error-page-500`、`.adlaire-error-page-510` を併用する。500系のサーバーエラーページでは `.adlaire-error-page-server` も使用できる。エラー判定、リダイレクト、ログ送信、翻訳、動的メッセージ生成は対象外とする。
 

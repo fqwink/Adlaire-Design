@@ -939,6 +939,358 @@
   gap: 16px;
 }
 
+.adlaire-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.adlaire-page-link {
+  display: inline-flex;
+  min-width: 36px;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-sm);
+  color: var(--adlaire-surface-text-muted);
+  text-decoration: none;
+}
+
+.adlaire-page-link:hover,
+.adlaire-page-link:focus-visible {
+  border-color: var(--adlaire-surface-accent);
+  box-shadow: var(--adlaire-shadow-focus-ring);
+  color: var(--adlaire-surface-accent);
+  outline: 0;
+}
+
+.adlaire-page-link-current,
+.adlaire-page-link[aria-current="page"] {
+  background-color: var(--adlaire-surface-accent);
+  border-color: var(--adlaire-surface-accent);
+  color: var(--adlaire-surface-card);
+  font-weight: 700;
+}
+
+.adlaire-page-link-disabled,
+.adlaire-page-link[aria-disabled="true"] {
+  background-color: var(--adlaire-status-gray-light);
+  color: var(--adlaire-status-gray-999);
+  cursor: not-allowed;
+}
+
+.adlaire-filter-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.adlaire-filter-chip {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-sm);
+  color: var(--adlaire-surface-text-muted);
+  cursor: pointer;
+}
+
+.adlaire-filter-chip:hover,
+.adlaire-filter-chip:focus-visible,
+.adlaire-filter-chip[aria-pressed="true"] {
+  background-color: var(--adlaire-surface-soft);
+  border-color: var(--adlaire-surface-accent);
+  color: var(--adlaire-surface-accent-strong);
+  outline: 0;
+}
+
+.adlaire-modal,
+.adlaire-drawer {
+  position: fixed;
+  inset: 0;
+  display: none;
+  background-color: var(--adlaire-overlay-white-80);
+  z-index: var(--adlaire-z-page-top);
+}
+
+.adlaire-overlay-open {
+  overflow: hidden;
+}
+
+.adlaire-modal.is-open,
+.adlaire-drawer.is-open {
+  display: grid;
+}
+
+.adlaire-modal {
+  place-items: center;
+  padding: 24px;
+}
+
+.adlaire-modal-dialog {
+  display: grid;
+  width: min(100%, 640px);
+  max-height: 100%;
+  overflow: auto;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-lg);
+  box-shadow: var(--adlaire-shadow-card);
+}
+
+.adlaire-modal-header,
+.adlaire-modal-footer,
+.adlaire-drawer-header,
+.adlaire-drawer-footer {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--adlaire-surface-border);
+}
+
+.adlaire-modal-footer,
+.adlaire-drawer-footer {
+  justify-content: flex-end;
+  border-top: 1px solid var(--adlaire-surface-border);
+  border-bottom: none;
+}
+
+.adlaire-modal-title,
+.adlaire-drawer-title {
+  margin: 0;
+  color: var(--adlaire-surface-text);
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+
+.adlaire-modal-body,
+.adlaire-drawer-body {
+  padding: 16px;
+  color: var(--adlaire-surface-text-muted);
+  line-height: 1.7;
+}
+
+.adlaire-modal-close,
+.adlaire-drawer-close {
+  display: inline-flex;
+  min-width: 36px;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background-color: transparent;
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-sm);
+  color: var(--adlaire-surface-text-muted);
+  cursor: pointer;
+}
+
+.adlaire-modal-close:hover,
+.adlaire-modal-close:focus-visible,
+.adlaire-drawer-close:hover,
+.adlaire-drawer-close:focus-visible {
+  border-color: var(--adlaire-surface-accent);
+  box-shadow: var(--adlaire-shadow-focus-ring);
+  color: var(--adlaire-surface-accent);
+  outline: 0;
+}
+
+.adlaire-drawer {
+  align-items: stretch;
+  justify-content: end;
+}
+
+.adlaire-drawer-left {
+  justify-content: start;
+}
+
+.adlaire-drawer-panel {
+  display: grid;
+  width: min(100%, 420px);
+  grid-template-rows: auto 1fr auto;
+  overflow: auto;
+  background-color: var(--adlaire-surface-card);
+  border-left: 1px solid var(--adlaire-surface-border);
+  box-shadow: var(--adlaire-shadow-card);
+}
+
+.adlaire-drawer-left .adlaire-drawer-panel {
+  border-right: 1px solid var(--adlaire-surface-border);
+  border-left: none;
+}
+
+.adlaire-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.adlaire-dropdown-trigger {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-sm);
+  color: var(--adlaire-surface-text);
+  cursor: pointer;
+}
+
+.adlaire-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  display: none;
+  min-width: 180px;
+  margin-top: 6px;
+  padding: 6px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-md);
+  box-shadow: var(--adlaire-shadow-card);
+  z-index: var(--adlaire-z-sticky);
+}
+
+.adlaire-dropdown-menu.is-open {
+  display: grid;
+  gap: 4px;
+}
+
+.adlaire-dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  background-color: transparent;
+  border: 0;
+  border-radius: var(--adlaire-radius-sm);
+  color: var(--adlaire-surface-text-muted);
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+}
+
+.adlaire-dropdown-item:hover,
+.adlaire-dropdown-item:focus-visible,
+.adlaire-dropdown-item[aria-current="true"] {
+  background-color: var(--adlaire-surface-soft);
+  color: var(--adlaire-surface-accent-strong);
+  outline: 0;
+}
+
+.adlaire-carousel {
+  display: grid;
+  gap: 12px;
+}
+
+.adlaire-carousel-viewport {
+  overflow: hidden;
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-lg);
+}
+
+.adlaire-carousel-track {
+  display: flex;
+  transition: transform var(--adlaire-transition-base);
+}
+
+.adlaire-carousel-slide {
+  min-width: 100%;
+  padding: 24px;
+  background-color: var(--adlaire-surface-card);
+  color: var(--adlaire-surface-text-muted);
+}
+
+.adlaire-carousel-controls,
+.adlaire-carousel-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.adlaire-carousel-control,
+.adlaire-carousel-indicator {
+  display: inline-flex;
+  min-width: 36px;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-sm);
+  color: var(--adlaire-surface-text-muted);
+  cursor: pointer;
+}
+
+.adlaire-carousel-indicator {
+  min-width: 12px;
+  min-height: 12px;
+  padding: 0;
+  border-radius: var(--adlaire-radius-round);
+}
+
+.adlaire-carousel-control:hover,
+.adlaire-carousel-control:focus-visible,
+.adlaire-carousel-indicator:hover,
+.adlaire-carousel-indicator:focus-visible,
+.adlaire-carousel-indicator[aria-current="true"] {
+  background-color: var(--adlaire-surface-soft);
+  border-color: var(--adlaire-surface-accent);
+  color: var(--adlaire-surface-accent-strong);
+  outline: 0;
+}
+
+.adlaire-tooltip {
+  position: relative;
+  display: inline-flex;
+}
+
+.adlaire-tooltip-trigger {
+  cursor: help;
+}
+
+.adlaire-tooltip-content {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  display: none;
+  min-width: 180px;
+  max-width: 280px;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  background-color: var(--adlaire-status-dark);
+  border-radius: var(--adlaire-radius-sm);
+  color: var(--adlaire-surface-card);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  transform: translateX(-50%);
+  z-index: var(--adlaire-z-sticky);
+}
+
+.adlaire-tooltip:hover .adlaire-tooltip-content,
+.adlaire-tooltip:focus-within .adlaire-tooltip-content,
+.adlaire-tooltip-content.is-open {
+  display: block;
+}
+
 @media (max-width: 480px) {
   .adlaire-action-row,
   .adlaire-action-row-between {
@@ -971,5 +1323,14 @@
 
   .adlaire-split-block {
     grid-template-columns: 1fr;
+  }
+
+  .adlaire-modal {
+    padding: 12px;
+  }
+
+  .adlaire-modal-dialog,
+  .adlaire-drawer-panel {
+    width: 100%;
   }
 }

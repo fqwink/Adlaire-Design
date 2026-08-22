@@ -498,7 +498,8 @@ for catalog_term in \
   '## 3. 優先A' \
   '## 4. 優先B' \
   '## 5. 優先C' \
-  '## 6. 原則対象外' \
+  '## 6. JavaScriptあり実装済み部品' \
+  '## 6.2 原則対象外' \
   'ツールバー' \
   '縦積み' \
   '横並び' \
@@ -513,6 +514,12 @@ for catalog_term in \
     exit 1
   fi
 done
+
+if grep -R -n -E '保留|ページネーション\(保留\)|絞り込みチップ\(保留\)|JavaScriptによる表示制御|CSSだけで成立|JavaScriptなしで成立|対象外として実装しない' "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/tmp/adlaire-design-unimplemented-doc-matches 2>/dev/null; then
+  echo "current Master_Spec and Generic_Component_Catalog must not contain unresolved implementation terms:" >&2
+  cat /tmp/adlaire-design-unimplemented-doc-matches >&2
+  exit 1
+fi
 
 if grep -R -n '@import' "$ADLAIRE_DESIGN_ROOT/Tokens/colors.css" "$ADLAIRE_DESIGN_ROOT/Tokens/surface.css" "$ADLAIRE_DESIGN_ROOT/Tokens/status.css" "$ADLAIRE_DESIGN_ROOT/Tokens/effects.css" "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIRE_DESIGN_ROOT/UI/base.css" "$ADLAIRE_DESIGN_ROOT/UI/grid.css" "$ADLAIRE_DESIGN_ROOT/UI/layout.css" "$ADLAIRE_DESIGN_ROOT/UI/components.css" "$ADLAIRE_DESIGN_ROOT/UI/site.css" "$ADLAIRE_DESIGN_ROOT/UI/forms.css" "$ADLAIRE_DESIGN_ROOT/UI/content.css" "$ADLAIRE_DESIGN_ROOT/EditorUI/wysiwyg.css" "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/tmp/adlaire-design-css-import-matches 2>/dev/null; then
   echo "Adlaire-Design CSS files must not use @import:" >&2
@@ -626,6 +633,38 @@ if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css")" != '/* Adlaire-D
   echo "UI/compat-agws.css must start with the required comment." >&2
   exit 1
 fi
+
+for term in \
+  'data-adlaire-dismiss' \
+  'data-adlaire-carousel-action' \
+  'data-adlaire-carousel-index' \
+  'Escape' \
+  'adlaire-overlay-open'; do
+  if ! grep -F -- "$term" "$ADLAIRE_DESIGN_ROOT/UI/components.js" >/dev/null 2>&1; then
+    echo "UI/components.js missing required interaction term: $term" >&2
+    exit 1
+  fi
+done
+
+for term in \
+  'data-adlaire-sort' \
+  'Date.parse' \
+  'aria-sort'; do
+  if ! grep -F -- "$term" "$ADLAIRE_DESIGN_ROOT/UI/content.js" >/dev/null 2>&1; then
+    echo "UI/content.js missing required interaction term: $term" >&2
+    exit 1
+  fi
+done
+
+for term in \
+  'data-adlaire-filter-count' \
+  'data-adlaire-filter-empty' \
+  'visibleCount'; do
+  if ! grep -F -- "$term" "$ADLAIRE_DESIGN_ROOT/UI/forms.js" >/dev/null 2>&1; then
+    echo "UI/forms.js missing required interaction term: $term" >&2
+    exit 1
+  fi
+done
 
 if [ "$(grep -c '^:root {' "$ADLAIRE_DESIGN_ROOT/Tokens/colors.css")" -ne 1 ]; then
   echo "Tokens/colors.css must contain exactly one :root block." >&2
@@ -789,6 +828,11 @@ for class in \
   '.adlaire-button-outline' \
   '.adlaire-button-disabled' \
   '.adlaire-button-submit' \
+  '.adlaire-filter' \
+  '.adlaire-filter-row' \
+  '.adlaire-filter-input' \
+  '.adlaire-filter-count' \
+  '.adlaire-filter-item' \
   '.form-group' \
   '.form-label' \
   '.form-control' \
@@ -886,7 +930,11 @@ for class in \
   '.adlaire-status-timeline' \
   '.adlaire-status-timeline-item' \
   '.adlaire-comparison-grid' \
-  '.adlaire-comparison-grid-item'; do
+  '.adlaire-comparison-grid-item' \
+  '.adlaire-sortable-table' \
+  '.adlaire-sort-button' \
+  '.adlaire-filter-results' \
+  '.adlaire-filter-empty'; do
   if ! grep -F -- "$class" "$ADLAIRE_DESIGN_ROOT/UI/content.css" >/dev/null 2>&1; then
     echo "UI/content.css missing required class: $class" >&2
     exit 1
@@ -1112,7 +1160,43 @@ for class in \
   '.adlaire-icon-tile-list' \
   '.adlaire-icon-tile' \
   '.adlaire-split-block' \
-  '.adlaire-stacked-feature'; do
+  '.adlaire-stacked-feature' \
+  '.adlaire-pagination' \
+  '.adlaire-page-link' \
+  '.adlaire-page-link-current' \
+  '.adlaire-page-link-disabled' \
+  '.adlaire-filter-chip-list' \
+  '.adlaire-filter-chip' \
+  '.adlaire-modal' \
+  '.adlaire-modal-dialog' \
+  '.adlaire-modal-header' \
+  '.adlaire-modal-title' \
+  '.adlaire-modal-body' \
+  '.adlaire-modal-footer' \
+  '.adlaire-modal-close' \
+  '.adlaire-drawer' \
+  '.adlaire-drawer-left' \
+  '.adlaire-drawer-panel' \
+  '.adlaire-drawer-header' \
+  '.adlaire-drawer-title' \
+  '.adlaire-drawer-body' \
+  '.adlaire-drawer-footer' \
+  '.adlaire-drawer-close' \
+  '.adlaire-dropdown' \
+  '.adlaire-dropdown-trigger' \
+  '.adlaire-dropdown-menu' \
+  '.adlaire-dropdown-item' \
+  '.adlaire-carousel' \
+  '.adlaire-carousel-viewport' \
+  '.adlaire-carousel-track' \
+  '.adlaire-carousel-slide' \
+  '.adlaire-carousel-controls' \
+  '.adlaire-carousel-control' \
+  '.adlaire-carousel-indicators' \
+  '.adlaire-carousel-indicator' \
+  '.adlaire-tooltip' \
+  '.adlaire-tooltip-trigger' \
+  '.adlaire-tooltip-content'; do
   if ! grep -F -- "$class" "$ADLAIRE_DESIGN_ROOT/UI/components.css" >/dev/null 2>&1; then
     echo "UI/components.css missing required class: $class" >&2
     exit 1

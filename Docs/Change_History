@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.85
+
+- `Docs/Master_Spec` の版数を `rev.85` へ更新した。
+- 汎用部品のページネーション、絞り込みチップ、モーダル、ドロワー、ドロップダウン、カルーセル、ソート可能テーブル、検索/絞り込みUI、ツールチップ動作を実装済みにした。
+- `UI/components.css`、`UI/content.css`、`UI/forms.css`、`UI/components.js`、`UI/content.js`、`UI/forms.js` を責務別JavaScriptあり実装に合わせて拡張した。
+- `Docs/Generic_Component_Catalog`、`Docs/Master_Spec`、`Tools/check/check-adlaire-design.sh` を汎用部品実装完了状態に同期した。
+
 ## rev.84
 
 - `Docs/Master_Spec` の版数を `rev.84` へ更新した。
