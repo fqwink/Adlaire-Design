@@ -8,6 +8,12 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.73
+
+- `Docs/Master_Spec` の版数を `rev.73` へ更新した。
+- CSSマスター仕様として、正本、補助正本、実装正本、検査正本、CSS層構造、用途別読み込み順、ファイル責務境界、命名規則、値管理規則、禁止事項、変更管理、検査条件を固定した。
+- `Tools/check/check-adlaire-design.sh` に、CSSマスター仕様の主要語句検査を追加した。
+
 ## rev.72
 
 - `Docs/Master_Spec` の版数を `rev.72` へ更新した。

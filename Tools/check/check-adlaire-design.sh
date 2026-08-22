@@ -231,6 +231,32 @@ if ! grep -F 'WYSIWYG Editor UI仕様と実装境界は本書に統合する。'
   exit 1
 fi
 
+for css_master_term in \
+  '### 11.2.1 CSSマスター仕様' \
+  'Adlaire-DesignのCSSマスター仕様は、本節を正本とする。' \
+  'CSSマスター仕様で固定する対象は以下とする。' \
+  'CSS層構造は以下に固定する。' \
+  'CSS読み込み順は用途別に以下へ固定する。' \
+  'CSSファイルの責務境界は以下とする。' \
+  'CSS命名規則は以下に固定する。' \
+  'CSS値の管理規則は以下に固定する。' \
+  'CSS禁止事項は以下に固定する。' \
+  'CSS変更管理は以下に固定する。' \
+  'CSSマスター仕様の検査条件は以下とする。' \
+  'CSS仕様は `Docs/Master_Spec` を正本とする' \
+  'CSS実装は `Tokens/` と `UI/` 配下のCSSファイルを正本とする' \
+  'Specification layer' \
+  'WYSIWYG Editor UI | `UI/wysiwyg.css`' \
+  'UI側CSSではCSS変数を参照し、HEX値、RGB/RGBA値を直接記述しない' \
+  'CSSプリプロセッサを追加しない。' \
+  'CSSビルド、minify、bundle、生成CSSファイルを追加しない。' \
+  'CSS実装を伴わない仕様整理'; do
+  if ! grep -F -- "$css_master_term" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+    echo "Docs/Master_Spec missing required CSS master spec term: $css_master_term" >&2
+    exit 1
+  fi
+done
+
 for wysiwyg_spec_term in \
   'WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。' \
   'Editor UI完全固定対象は以下とする。' \
