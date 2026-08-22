@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.79
+
+- `Docs/Master_Spec` の版数を `rev.79` へ更新した。
+- `Docs/WYSIWYG_Editor_UI_Catalog` に、UI階層、表示モード、状態入力、レスポンシブ境界、アクセシビリティUI、Preview / JSON表示境界、変更管理を追加した。
+- `Docs/WYSIWYG_Editor_UI_Catalog` を、Editor UI部品の状態、優先度、実装先、非対象範囲を管理する完成カタログとして扱う方針を明記した。
+- `Tools/check/check-adlaire-design.sh` に、WYSIWYG Editor UIカタログ完成項目の検査を追加した。
+
 ## rev.78
 
 - `Docs/Master_Spec` の版数を `rev.78` へ更新した。

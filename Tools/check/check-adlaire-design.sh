@@ -356,6 +356,18 @@ for wysiwyg_catalog_term in \
   '表示モード' \
   '状態入力' \
   'レスポンシブ境界' \
+  '## 1.2 UI階層' \
+  '## 1.3 表示モード' \
+  '## 1.4 状態入力' \
+  '## 1.5 レスポンシブ境界' \
+  '## 1.6 アクセシビリティUI' \
+  '## 1.7 Preview / JSON表示境界' \
+  '## 1.8 変更管理' \
+  'keyboard focusの視認性を確保する' \
+  'data属性名を固定しない' \
+  'Preview | `.adlaire-wysiwyg-preview`' \
+  'JSON panel | `.adlaire-wysiwyg-json-panel`' \
+  'WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装先、非対象範囲を管理する完成カタログとして扱う。' \
   '変更管理' \
   '## 2. 共通構造クラス' \
   '## 3. 優先A' \
