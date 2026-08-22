@@ -7,16 +7,42 @@
     return cell ? cell.textContent.trim() : "";
   }
 
-  function compareRows(index, direction) {
+  function compareRows(index, direction, type) {
     return function (left, right) {
       var leftText = cellText(left, index);
       var rightText = cellText(right, index);
       var leftNumber = Number(leftText.replace(/,/g, ""));
       var rightNumber = Number(rightText.replace(/,/g, ""));
+      var leftDate = Date.parse(leftText);
+      var rightDate = Date.parse(rightText);
+      var leftHasValue = leftText !== "";
+      var rightHasValue = rightText !== "";
       var result;
 
-      if (!Number.isNaN(leftNumber) && !Number.isNaN(rightNumber)) {
+      if (type === "number") {
+        if (!leftHasValue && !rightHasValue) {
+          result = 0;
+        } else if (!leftHasValue || Number.isNaN(leftNumber)) {
+          result = 1;
+        } else if (!rightHasValue || Number.isNaN(rightNumber)) {
+          result = -1;
+        } else {
+          result = leftNumber - rightNumber;
+        }
+      } else if (leftHasValue && rightHasValue && !Number.isNaN(leftNumber) && !Number.isNaN(rightNumber)) {
         result = leftNumber - rightNumber;
+      } else if (type === "date") {
+        if (!leftHasValue && !rightHasValue) {
+          result = 0;
+        } else if (!leftHasValue || Number.isNaN(leftDate)) {
+          result = 1;
+        } else if (!rightHasValue || Number.isNaN(rightDate)) {
+          result = -1;
+        } else {
+          result = leftDate - rightDate;
+        }
+      } else if (leftHasValue && rightHasValue && !Number.isNaN(leftDate) && !Number.isNaN(rightDate)) {
+        result = leftDate - rightDate;
       } else {
         result = leftText.localeCompare(rightText);
       }
@@ -31,22 +57,24 @@
       return;
     }
 
-    var table = header.closest("table");
+    var columnHeader = header.closest("th") || header;
+    var table = columnHeader.closest("table");
     var body = table ? table.tBodies[0] : null;
     if (!body) {
       return;
     }
 
-    var headers = Array.prototype.slice.call(header.parentNode.children);
-    var index = headers.indexOf(header);
-    var direction = header.getAttribute("aria-sort") === "ascending" ? "desc" : "asc";
+    var headers = Array.prototype.slice.call(columnHeader.parentNode.children);
+    var index = headers.indexOf(columnHeader);
+    var direction = columnHeader.getAttribute("aria-sort") === "ascending" ? "desc" : "asc";
+    var type = header.getAttribute("data-adlaire-sort") || columnHeader.getAttribute("data-adlaire-sort") || "text";
 
     headers.forEach(function (item) {
       item.removeAttribute("aria-sort");
     });
 
-    header.setAttribute("aria-sort", direction === "asc" ? "ascending" : "descending");
-    Array.prototype.slice.call(body.rows).sort(compareRows(index, direction)).forEach(function (row) {
+    columnHeader.setAttribute("aria-sort", direction === "asc" ? "ascending" : "descending");
+    Array.prototype.slice.call(body.rows).sort(compareRows(index, direction, type)).forEach(function (row) {
       body.appendChild(row);
     });
   });
