@@ -2,6 +2,8 @@
 
 本ファイルは、WYSIWYG Editor専用UI部品の一覧を管理する補助正本である。
 
+本ファイルは、Adlaire-DesignにおけるエディタUIに関するカタログである。
+
 仕様正本は `Docs/Master_Spec` とする。本ファイルは、Editor.jsおよびNotionに代表されるブロックベース編集UIを前提に、Adlaire-Designで管理するEditor UI部品、優先度、実装先、状態を一覧管理する。
 
 Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo / Redo、DOMイベント、APIはAuteur内製側の責務とし、本カタログでは扱わない。
@@ -12,6 +14,7 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 
 - WYSIWYG Editor UIはAdlaire-Design採用とする。
 - Editor実装はAuteur内製とする。
+- 本カタログはエディタUIに関するカタログとして扱う。
 - WYSIWYG Editor UI仕様は `Docs/Master_Spec` で完全固定する。
 - 本カタログは表示層、UI部品、状態表示、モバイルUI、補助パネルのみを扱う。
 - UI実装先は `UI/wysiwyg.css` とする。

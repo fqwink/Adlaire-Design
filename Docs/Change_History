@@ -8,6 +8,12 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.76
+
+- `Docs/Master_Spec` の版数を `rev.76` へ更新した。
+- `Docs/WYSIWYG_Editor_UI_Catalog` はAdlaire-DesignにおけるエディタUIに関するカタログであることを明記した。
+- `Tools/check/check-adlaire-design.sh` に、WYSIWYG Editor UIカタログの責務明示検査を追加した。
+
 ## rev.75
 
 - `Docs/Master_Spec` の版数を `rev.75` へ更新した。

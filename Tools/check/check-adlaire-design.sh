@@ -247,6 +247,7 @@ for css_master_term in \
   'CSS仕様は `Docs/Master_Spec` を正本とする' \
   '一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog` で一覧管理する' \
   'CSS実装は `Tokens/` と `UI/` 配下のCSSファイルを正本とする' \
+  '`Docs/WYSIWYG_Editor_UI_Catalog` は、Adlaire-DesignにおけるエディタUIに関するカタログとして扱う。' \
   'Editor UI専用品は `Docs/Generic_Component_Catalog` に含めない。' \
   '`.adlaire-wysiwyg-` 接頭辞のクラスは `Docs/WYSIWYG_Editor_UI_Catalog` で管理する。' \
   'Specification layer' \
@@ -331,6 +332,8 @@ fi
 for wysiwyg_catalog_term in \
   '# Adlaire-Design WYSIWYG Editor UIカタログ' \
   'WYSIWYG Editor専用UI部品の一覧を管理する補助正本' \
+  '本ファイルは、Adlaire-DesignにおけるエディタUIに関するカタログである。' \
+  '本カタログはエディタUIに関するカタログとして扱う。' \
   'WYSIWYG Editor UI仕様は `Docs/Master_Spec` で完全固定する。' \
   '## 1.1 完全固定対象' \
   'Editor.jsおよびNotionに代表されるブロックベース編集UI' \
