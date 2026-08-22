@@ -109,7 +109,7 @@ if [ -e "$ADLAIRE_DESIGN_ROOT/WYSIWYG" ]; then
 fi
 
 if [ -e "$ADLAIRE_DESIGN_ROOT/Docs/AGWS_Design_Analysis" ]; then
-  echo "Adlaire-Design must not contain Docs/AGWS_Design_Analysis because AGWS is no longer an active reference source." >&2
+  echo "Adlaire-Design must not contain Docs/AGWS_Design_Analysis because superseded analysis documents are outside the current specification." >&2
   exit 1
 fi
 
@@ -460,7 +460,7 @@ if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css")" != '/* Adlaire-Desig
   exit 1
 fi
 
-if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css")" != '/* Adlaire-Design base compatibility */' ]; then
+if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css")" != '/* Adlaire-Design compatibility layer */' ]; then
   echo "UI/compat-agws.css must start with the required comment." >&2
   exit 1
 fi
@@ -656,6 +656,17 @@ for selector in \
   fi
 done
 
+for declaration in \
+  'scroll-margin-top: 20px;' \
+  'padding-right: 20px;' \
+  'padding-left: 20px;' \
+  'font: inherit;'; do
+  if ! grep -F -- "$declaration" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/dev/null 2>&1; then
+    echo "UI/compat-agws.css missing required Adlaire-Design compatibility declaration: $declaration" >&2
+    exit 1
+  fi
+done
+
 for class in \
   '.adlaire-renewal-notice' \
   '.renewal-notice' \
@@ -755,10 +766,31 @@ done
 
 for selector in \
   '#top' \
+  '#company' \
+  '#terms' \
+  '#privacy' \
+  '#disclaimer' \
+  '#copyright' \
   '#contactForm' \
+  '#name' \
+  '#email' \
+  '#subject' \
+  '#inquiry_type' \
+  '#message' \
   '.container' \
   '[aria-label]' \
-  '[target="_blank"]'; do
+  '[target="_blank"]' \
+  '[rel="stylesheet"]' \
+  '[name="viewport"]' \
+  '[name="news-tab"]' \
+  '[type="radio"]' \
+  '[type="checkbox"]' \
+  '[type="submit"]' \
+  '[type="text"]' \
+  '[type="email"]' \
+  '[rows]' \
+  '[value]' \
+  '[for]'; do
   if ! grep -F -- "$selector" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/dev/null 2>&1; then
     echo "UI/compat-agws.css missing required selector: $selector" >&2
     exit 1

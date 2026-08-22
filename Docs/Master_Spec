@@ -164,7 +164,7 @@ Adlaire-Designは、公開面デザインの参照基準を本リポジトリ内
 
 既存プロダクトへAdlaire-Designを採用する場合は、以下を前提とする。
 
-- Adlaire-Design側では既存ベース互換層を管理し、プロダクト固有の追加互換層は管理しない。
+- Adlaire-Design側では互換CSS層を仕様化して管理し、プロダクト固有の追加互換層は管理しない。
 - プロダクト固有のCSS移行、読み込み順、ロールバック方法は利用先で管理する。
 - Adlaire-Design側の責務は、標準クラス、トークン、CSS読み込み順、表示境界の仕様化に限定する。
 - 特定プロダクトの見た目を完全再現することをAdlaire-Designの必須条件にしない。
@@ -254,7 +254,7 @@ Adlaire-Designは、公開面デザインの参照基準を本リポジトリ内
 | `UI/forms.css` | フォーム、入力、チェック、送信ボタン、フォームnotice | 実装済み |
 | `UI/content.css` | ニュース、組織情報、沿革、法的情報目次などの本文固有表現 | 実装済み |
 | `UI/utilities.css` | spacing、text、background、display、flexなどの汎用ユーティリティ | 実装済み |
-| `UI/compat-agws.css` | 既存ベース互換層 | 実装済み |
+| `UI/compat-agws.css` | Adlaire-Design互換CSS層 | 実装済み |
 
 ### 11.3.4 WYSIWYG Editor管理仕様
 
@@ -656,9 +656,9 @@ CSS変数は以下とする。
 
 ## 11.10 Adlaire-Design公開面CSS基盤仕様
 
-第3段階では、Adlaire-Designの公開面CSS基盤として、サイト外枠、フォーム、本文部品、グリッド、ユーティリティ、状態表現、既存ベース互換層を実装済みである。
+第3段階では、Adlaire-Designの公開面CSS基盤として、サイト外枠、フォーム、本文部品、グリッド、ユーティリティ、状態表現、Adlaire-Design互換CSS層を実装済みである。
 
-特定プロダクトの既存HTML/CSSを完全再現することは、本リポジトリの必須条件にしない。Adlaire-Designは標準クラス、トークン、読み込み順、表示境界、既存ベース互換層を管理し、プロダクト固有の追加互換層は利用先で管理する。
+特定プロダクトの既存HTML/CSSを完全再現することは、本リポジトリの必須条件にしない。Adlaire-Designは標準クラス、トークン、読み込み順、表示境界、互換CSS層を管理し、プロダクト固有の追加互換層は利用先で管理する。
 
 ### 11.10.1 第3段階の目的
 
@@ -678,7 +678,7 @@ CSS変数は以下とする。
 | `UI/forms.css` | フォーム、入力、チェック、送信ボタン、フォームnotice | 実装済み |
 | `UI/content.css` | ニュース、組織情報、沿革、法的情報目次などの本文固有表現 | 実装済み |
 | `UI/utilities.css` | spacing、text、background、display、flexなどの汎用ユーティリティ | 実装済み |
-| `UI/compat-agws.css` | 既存ベース互換層 | 実装済み |
+| `UI/compat-agws.css` | Adlaire-Design互換CSS層 | 実装済み |
 
 ### 11.10.3 実装済みの対象領域
 
@@ -692,7 +692,7 @@ CSS変数は以下とする。
 | フォーム | `UI/forms.css` |
 | ニュース、組織情報、沿革、法的情報目次、本文表、注記 | `UI/content.css` |
 | 汎用ユーティリティ | `UI/utilities.css` |
-| 既存ベース互換層 | `UI/compat-agws.css` |
+| Adlaire-Design互換CSS層 | `UI/compat-agws.css` |
 | 状態色・中立色 | `Tokens/status.css` |
 | 影、角丸、transition、animation、z-index | `Tokens/effects.css` |
 
@@ -700,9 +700,19 @@ CSS変数は以下とする。
 
 第3段階でAdlaire-Design側に新設する標準クラスは、原則として `.adlaire-` 接頭辞を使用する。
 
-`UI/compat-agws.css` は、Adlaire-Design仕様の既存ベース互換層として保持する。ファイル名は互換維持のため残すが、AGWSをAdlaire-Designの参照正本にする意味ではない。
+`UI/compat-agws.css` は、Adlaire-Design仕様の互換CSS層として管理する。履歴上のファイル名を維持しつつ、現在の仕様上の責務はAdlaire-Designの表示互換を受け持つことに限定する。
 
 Adlaire-Designの標準APIは `.adlaire-` 接頭辞のクラスとする。追加のプロダクト固有互換層、移行計画、利用先での採用検査は、利用先プロダクト側で管理する。
+
+`UI/compat-agws.css` で定義する互換仕様は以下に固定する。
+
+| 対象 | セレクタ | 仕様 |
+| --- | --- | --- |
+| アンカー位置 | `#top`、`#company`、`#terms`、`#privacy`、`#disclaimer`、`#copyright`、`#contactForm`、`#name`、`#email`、`#subject`、`#inquiry_type`、`#message` | `scroll-margin-top: 20px;` を定義する |
+| コンテナ余白 | `.container` | `padding-right: 20px;` と `padding-left: 20px;` を定義する |
+| 属性互換 | `[aria-label]`、`[target="_blank"]`、`[rel="stylesheet"]`、`[name="viewport"]`、`[name="news-tab"]`、`[type="radio"]`、`[type="checkbox"]`、`[type="submit"]`、`[type="text"]`、`[type="email"]`、`[rows]`、`[value]`、`[for]` | `font: inherit;` を定義する |
+
+`UI/compat-agws.css` には、上記以外の互換セレクタを追加しない。互換対象を追加する場合は、本書、CSS、検査シェル、変更履歴を同じ承認単位で更新する。
 
 ### 11.10.5 第3段階の非対象
 
@@ -754,7 +764,7 @@ Adlaire-Designの標準APIは `.adlaire-` 接頭辞のクラスとする。追�
 - `LICENSE` がAdlaire-Design名義であること。
 - Node.js/npm依存物が存在しないこと。
 - `Docs/AGWS_Design_Analysis` が存在しないこと。
-- `UI/compat-agws.css` が存在し、既存ベース互換層として必須セレクタを定義していること。
+- `UI/compat-agws.css` が存在し、Adlaire-Design互換CSS層として必須セレクタを定義していること。
 
 ### 11.10.8 第3段階ファイルの冒頭コメント
 
@@ -770,7 +780,7 @@ Adlaire-Designの標準APIは `.adlaire-` 接頭辞のクラスとする。追�
 | `UI/forms.css` | `/* Adlaire-Design form components */` |
 | `UI/content.css` | `/* Adlaire-Design content components */` |
 | `UI/utilities.css` | `/* Adlaire-Design utility classes */` |
-| `UI/compat-agws.css` | `/* Adlaire-Design base compatibility */` |
+| `UI/compat-agws.css` | `/* Adlaire-Design compatibility layer */` |
 
 ### 11.10.9 第3段階トークン方針
 

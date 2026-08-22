@@ -12,11 +12,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 - `Docs/Master_Spec` の版数を `rev.70` へ更新した。
 - AGWSとの関係を現時点で切り離し、公開面デザイン方針をAdlaire-Design単独の仕様、Tokens、UI CSS、部品カタログを正本とする方針へ変更した。
-- `Docs/AGWS_Design_Analysis` を削除し、AGWS解析文書を現行管理対象から外した。`UI/compat-agws.css` はAdlaire-Design仕様の既存ベース互換層として保持した。
+- `Docs/AGWS_Design_Analysis` を削除し、旧解析文書を現行管理対象から外した。`UI/compat-agws.css` はAdlaire-Design仕様の互換CSS層として保持した。
 - `Docs/Document_Index`、`README.md`、`Docs/Generic_Component_Catalog` をAdlaire-Design単独方針に整合させた。
 - `Tools/check/check-adlaire-design.sh` からAGWS解析文書検査と隣接AGWSリポジトリ照合を削除し、`UI/compat-agws.css` の必須ファイル検査は維持した。
-- 特定プロダクト固有の追加互換層、移行計画、CSS採用検査は利用先プロダクト側で管理し、Adlaire-Designでは標準クラス、トークン、CSS読み込み順、表示境界、既存ベース互換層を管理する方針を明記した。
-- `UI/compat-agws.css` の冒頭コメントを、AGWS互換ではなく既存ベース互換を示す表現へ変更した。
+- 特定プロダクト固有の追加互換層、移行計画、CSS採用検査は利用先プロダクト側で管理し、Adlaire-Designでは標準クラス、トークン、CSS読み込み順、表示境界、Adlaire-Design互換CSS層を管理する方針を明記した。
+- `UI/compat-agws.css` の冒頭コメントを、Adlaire-Design互換CSS層を示す表現へ変更した。
+- `UI/compat-agws.css` をAdlaire-Design仕様の互換CSS層として再定義し、旧仕様由来の説明を現行仕様から外した。
+- `UI/compat-agws.css` の対象セレクタと宣言値を `Docs/Master_Spec` に固定し、`Tools/check/check-adlaire-design.sh` で検査するようにした。
 
 ## rev.69
 
