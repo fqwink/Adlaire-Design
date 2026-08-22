@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.70
+**Version:** rev.71
 
 ---
 
@@ -1071,7 +1071,7 @@ WYSIWYG Editor UIの機能優先度は以下とする。
 
 | 優先 | UI機能 |
 | --- | --- |
-| A | heading、paragraph、list、checklist、quote、code、image、divider、callout、block handle、slash menu、mobile bottom sheet |
+| A | heading、paragraph、list、checklist、quote、code、image、divider、callout、label、progress、block handle、slash menu、mobile bottom sheet |
 | B | outline、block transform、quick insert、comment marker、preview/split、publish check |
 | C | history panel、assist menu、suggested blocks、block group、width modes |
 

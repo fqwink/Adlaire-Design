@@ -8,6 +8,12 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.71
+
+- `Docs/Master_Spec` の版数を `rev.71` へ更新した。
+- `Docs/Master_Spec` と `Docs/WYSIWYG_Editor_UI_Catalog` に、`UI/wysiwyg.css` の骨格クラス、Label、Progress、Preview、JSON panelの追跡性を補強した。
+- `Tools/check/check-adlaire-design.sh` のWYSIWYG Editor UIカタログ検査を、共通構造クラスとPreview / JSON panelの記録確認に合わせて更新した。
+
 ## rev.70
 
 - `Docs/Master_Spec` の版数を `rev.70` へ更新した。
