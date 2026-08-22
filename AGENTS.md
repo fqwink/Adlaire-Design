@@ -8,7 +8,7 @@
 - リポジトリ索引は `Docs/Document_Index`、変更履歴は `Docs/Change_History` とする。
 - Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UIを扱う独立リポジトリとして管理すること。
 - WYSIWYG Editor UIはAdlaire-Design採用とする。
-- WYSIWYG Editor実装はAuteur内製とし、Adlaire-Designでは実装コードを管理しないこと。
+- WYSIWYG Editor UIはAdlaire-Designの仕様対象として管理すること。
 
 ## リポジトリ構成
 
@@ -29,5 +29,4 @@
 - Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理すること。
 - `Tokens/` と `UI/` 配下のCSSファイルを正本として直接管理し、Sass/SCSS/Less/Stylus/PostCSS等のCSSプリプロセッサを追加しないこと。
 - CSSのビルド、minify、bundleは現状検討しないこと。`Dist/`、`dist/`、`Build/`、`build/`、`*.min.css`、`*.bundle.css`、CSSまたはnpm/webpack系フロントエンドビルド設定ファイルを追加しないこと。
-- WYSIWYG Editor実装コード、Markdown / MDXパーサー、保存処理、編集ロジック、生成JavaScriptはAuteur内製側で管理すること。
 - Adlaire-Designでは、WYSIWYG Editor UIスキン、UI必須クラス、CSS読み込み順、表示境界のみを管理すること。

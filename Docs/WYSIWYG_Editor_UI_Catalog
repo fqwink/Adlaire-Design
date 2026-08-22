@@ -6,14 +6,13 @@
 
 仕様正本は `Docs/Master_Spec` とする。本ファイルは、Editor.jsおよびNotionに代表されるブロックベース編集UIを前提に、Adlaire-Designで管理するEditor UI部品、優先度、実装先、状態を一覧管理する。
 
-Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo / Redo、DOMイベント、APIはAuteur内製側の責務とし、本カタログでは扱わない。
+Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo / Redo、DOMイベント、APIは本カタログでは扱わない。
 
 ---
 
 ## 1. 管理方針
 
 - WYSIWYG Editor UIはAdlaire-Design採用とする。
-- Editor実装はAuteur内製とする。
 - 本カタログはエディタUIに関するカタログとして扱う。
 - WYSIWYG Editor UI仕様は `Docs/Master_Spec` で完全固定する。
 - 本カタログは表示層、UI部品、状態表示、モバイルUI、補助パネルのみを扱う。
@@ -55,12 +54,12 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 
 | 表示モード | UI仕様 | 実装境界 |
 | --- | --- | --- |
-| editor | Canvasを主表示とし、ブロック編集面を表示する | 表示モード切替ロジックはAuteur側 |
-| preview | Previewを主表示とし、生成済みまたは渡されたプレビューHTMLの見た目を整える | preview rendering生成処理はAuteur側 |
-| split | CanvasとPreviewを併置できる表示を想定する | 分割比率、同期スクロール、生成処理はAuteur側 |
-| readonly | 編集操作UIを抑制した読み取り専用表示を想定する | readonly判定はAuteur側 |
-| error | ブロックまたはEditor全体のエラー表示を受ける | エラー判定、文言生成、送信はAuteur側 |
-| mobile | 下部操作バーとbottom sheetを優先する | デバイス判定、メニュー開閉はAuteur側 |
+| editor | Canvasを主表示とし、ブロック編集面を表示する | 表示モード切替ロジックは含めない |
+| preview | Previewを主表示とし、生成済みまたは渡されたプレビューHTMLの見た目を整える | preview rendering生成処理は含めない |
+| split | CanvasとPreviewを併置できる表示を想定する | 分割比率、同期スクロール、生成処理は含めない |
+| readonly | 編集操作UIを抑制した読み取り専用表示を想定する | readonly判定は含めない |
+| error | ブロックまたはEditor全体のエラー表示を受ける | エラー判定、文言生成、送信は含めない |
+| mobile | 下部操作バーとbottom sheetを優先する | デバイス判定、メニュー開閉は含めない |
 
 ## 1.4 状態入力
 
@@ -280,12 +279,12 @@ WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装
 
 | 対象外 | 理由 |
 | --- | --- |
-| Editor実装コード | Auteur内製側で管理するため |
-| block schema | Auteur内製側で管理するため |
-| 保存形式 | Auteur内製側で管理するため |
-| Markdown / MDX parser | Auteur内製側で管理するため |
-| Undo / Redo | Auteur内製側で管理するため |
-| DOMイベント | Auteur内製側で管理するため |
-| ドラッグ処理ロジック | Auteur内製側で管理するため |
-| AI補助処理 | Auteur内製側で管理するため |
-| 共同編集処理 | Auteur内製側で管理するため |
+| Editor実装コード | UIカタログの範囲に含めないため |
+| block schema | UIカタログの範囲に含めないため |
+| 保存形式 | UIカタログの範囲に含めないため |
+| Markdown / MDX parser | UIカタログの範囲に含めないため |
+| Undo / Redo | UIカタログの範囲に含めないため |
+| DOMイベント | UIカタログの範囲に含めないため |
+| ドラッグ処理ロジック | UIカタログの範囲に含めないため |
+| AI補助処理 | UIカタログの範囲に含めないため |
+| 共同編集処理 | UIカタログの範囲に含めないため |

@@ -15,13 +15,13 @@ Adlaire-Designは、CSSフレームワーク、デザイントークン、ブラ
 
 ## ドキュメント
 
-仕様・設計の正本は `Docs/Master_Spec` とする。CSS仕様、CSS実装、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、検査、変更履歴、Auteur側Editor本体実装、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。WYSIWYG Editor UIはAdlaire-Design採用、Editor実装はAuteur内製とし、WYSIWYG Editor UI仕様と実装境界は `Docs/Master_Spec` に統合する。
+仕様・設計の正本は `Docs/Master_Spec` とする。CSS仕様、CSS実装、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、検査、変更履歴、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。WYSIWYG Editor UIはAdlaire-Design採用とし、WYSIWYG Editor UI仕様と実装境界は `Docs/Master_Spec` に統合する。
 
 一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、エディタUIに関する部品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。リポジトリ内の主要ファイルと管理対象は `Docs/Document_Index`、変更履歴は `Docs/Change_History` を参照する。
 
 ## 方針
 
-Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理する。Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UIの開発正本として独立して管理する。WYSIWYG Editor実装コード、Markdown / MDXパーサー、保存処理、編集ロジックはAuteur内製側で管理する。
+Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理する。Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UIの開発正本として独立して管理する。
 
 今後の拡充は、公開面CSS機能、WYSIWYG Editor UI、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。CSSのビルド、minify、bundle、Sass/SCSS等のCSSプリプロセッサは現状検討しない。
 
