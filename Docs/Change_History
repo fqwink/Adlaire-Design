@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.66
+
+- `Docs/Master_Spec` の版数を `rev.66` へ更新した。
+- `Docs/WYSIWYG_Editor_Specification` に、WYSIWYG Editor仕様の完全固定宣言を追加した。
+- `Docs/WYSIWYG_Editor_Specification` に、公開API契約、戻り値、失敗時挙動、Undo/Redo状態遷移を固定した。
+- `Docs/WYSIWYG_Editor_Specification` に、仕様外拡張禁止、セキュリティ境界、実装同期条件、完全固定後の変更承認条件を追加した。
+- `Tools/check/check-adlaire-design.sh` に、WYSIWYG Editor完全固定仕様の主要語句検査を追加した。
+
 ## rev.65
 
 - `Docs/Master_Spec` の版数を `rev.65` へ更新した。

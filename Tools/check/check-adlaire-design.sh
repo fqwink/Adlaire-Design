@@ -261,7 +261,9 @@ done
 for wysiwyg_spec_term in \
   '本ファイルは、Adlaire-Designで管理するWYSIWYG Editorのマスター仕様である。' \
   'WYSIWYG Editorに関する詳細仕様の正本は本ファイルとする。' \
+  '本仕様はWYSIWYG Editorの完全固定仕様である。' \
   '本仕様で固定する対象は以下とする。' \
+  '公開API' \
   'document normalization' \
   'block ID' \
   '### 7.2 ドキュメントデータモデル' \
@@ -270,14 +272,23 @@ for wysiwyg_spec_term in \
   '### 7.5 JSON serialization契約' \
   '### 7.6 preview rendering契約' \
   '### 7.7 Markdown / MDX parser入出力契約' \
+  '### 7.8 公開API契約' \
+  '### 7.9 状態遷移契約' \
+  '### 7.10 セキュリティ境界' \
+  '### 7.11 仕様外拡張の扱い' \
   '## 12. 変更管理' \
+  '## 13. 完全固定後の変更承認条件' \
   '未知のブロック種別は保存形式 `version: 1` では許可しない。' \
   '対応不能なMDX componentは実行せず、`code` または `paragraph` として保持する。' \
   '同一document内での重複IDは許可しない。' \
   'block種別ごとのHTML出力は以下に固定する。' \
   '`progress` は `meta.value` を優先し、未指定時は `content` を数値化する。' \
   '空入力は `version: 1`、`blocks: []` へ変換する。' \
-  'Markdown / MDX parserはpreview HTMLを直接生成しない。'; do
+  'Markdown / MDX parserはpreview HTMLを直接生成しない。' \
+  '公開APIの追加、削除、改名、引数変更、戻り値変更は完全固定後の仕様変更として扱う。' \
+  'preview renderingはHTML文字列を生成するが、raw HTML、script、event handler、MDX componentを実行しない。' \
+  '未定義block種別を追加しない。' \
+  '上記を満たさない変更は、WYSIWYG Editor完全固定仕様への不整合として扱う。'; do
   if ! grep -F -- "$wysiwyg_spec_term" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" >/dev/null 2>&1; then
     echo "Docs/WYSIWYG_Editor_Specification missing required fixed WYSIWYG spec term: $wysiwyg_spec_term" >&2
     exit 1
