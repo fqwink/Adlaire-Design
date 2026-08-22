@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.77
+
+- `Docs/Master_Spec` の版数を `rev.77` へ更新した。
+- 第11章に責務別整理を追加し、仕様正本、一般CSS汎用部品カタログ、Editor UIカタログ、CSSトークン、CSS実装、検査、変更履歴、Auteur側実装、利用先プロダクト採用の責務境界を整理した。
+- ファイル責務と責務別の変更単位を追加し、一般CSS部品、Editor UI部品、CSSトークン、検査仕様、索引の同時更新条件を明記した。
+- `Tools/check/check-adlaire-design.sh` に、責務別整理の主要語句検査を追加した。
+
 ## rev.76
 
 - `Docs/Master_Spec` の版数を `rev.76` へ更新した。

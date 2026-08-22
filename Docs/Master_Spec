@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.76
+**Version:** rev.77
 
 ---
 
@@ -218,7 +218,52 @@ Adlaire-Designは、公開面デザインの参照基準を本リポジトリ内
 - npm、webpack、Node.js前提のWYSIWYGビルド設定はAdlaire-Designでは採用しない。
 - 今後の拡充は、公開面で必要となるCSS機能、WYSIWYG Editor UI、再現性検査、ドキュメント整備を優先する。CSSのビルド、minify、bundleは現状検討しない。
 
-### 11.2.1 CSSマスター仕様
+### 11.2.1 責務別整理
+
+Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品カタログ、Editor UIカタログ、検査、変更履歴に分けて管理する。Editor本体実装、保存、parser、プロダクト固有採用はAdlaire-Designの責務に含めない。
+
+責務別の管理範囲は以下に固定する。
+
+| 責務 | 管理主体 | 管理先 | 対象 | 対象外 |
+| --- | --- | --- | --- | --- |
+| 仕様正本 | Adlaire-Design | `Docs/Master_Spec` | CSSマスター仕様、Editor UIマスター仕様、責務境界、読み込み順、禁止事項、変更管理 | 実装コード、プロダクト固有採用計画 |
+| 一般CSS汎用部品カタログ | Adlaire-Design | `Docs/Generic_Component_Catalog` | 一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティ | WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 具体クラス |
+| Editor UIカタログ | Adlaire-Design | `Docs/WYSIWYG_Editor_UI_Catalog` | エディタUIに関する部品、状態表示、モバイルEditor UI、補助パネル | 一般公開面の汎用部品、Editor実装ロジック |
+| CSSトークン | Adlaire-Design | `Tokens/` | 色、面、状態、効果のCSS変数 | UI部品セレクタ、JavaScript状態管理 |
+| CSS実装 | Adlaire-Design | `UI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク |
+| 検査 | Adlaire-Design | `Tools/check/check-adlaire-design.sh` | 構造、必須ファイル、必須語句、必須変数、必須クラス、禁止記述、未定義変数参照 | 外部CSS parser、Node.js/npm依存検査基盤 |
+| 変更履歴 | Adlaire-Design | `Docs/Change_History` | Master_Spec、カタログ、CSS、検査の変更記録 | 履歴上の旧仕様を現行仕様として復活させること |
+| Editor本体実装 | Auteur | Auteur側 | TypeScript / JavaScript実装、保存形式、編集操作、parser、DOMイベント | Adlaire-Design内での実装管理 |
+| プロダクト採用 | 利用先プロダクト | 利用先プロダクト側 | 採用判断、移行計画、プロダクト固有CSS層、公開面反映、ロールバック | Adlaire-Design正本の直接変更なしの仕様逸脱 |
+
+ファイル責務は以下に整理する。
+
+| 領域 | ファイル | 責務 |
+| --- | --- | --- |
+| Docs | `Docs/Master_Spec` | 仕様正本 |
+| Docs | `Docs/Generic_Component_Catalog` | 一般CSS汎用部品カタログ |
+| Docs | `Docs/WYSIWYG_Editor_UI_Catalog` | Editor UIカタログ |
+| Docs | `Docs/Document_Index` | リポジトリ索引 |
+| Docs | `Docs/Change_History` | 変更履歴 |
+| Tokens | `Tokens/colors.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` | CSS変数 |
+| UI | `UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css` | 公開面CSS基盤 |
+| UI | `UI/wysiwyg.css` | WYSIWYG Editor UIスキン |
+| Tools | `Tools/check/check-adlaire-design.sh` | Adlaire-Design専用検査 |
+
+責務別の変更単位は以下に固定する。
+
+| 変更対象 | 同時更新が必要なもの |
+| --- | --- |
+| CSS仕様 | `Docs/Master_Spec`、必要なカタログ、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| 一般CSS汎用部品 | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、対象 `UI/*.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| Editor UI部品 | `Docs/Master_Spec`、`Docs/WYSIWYG_Editor_UI_Catalog`、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| CSSトークン | `Docs/Master_Spec`、対象 `Tokens/*.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| 検査仕様 | `Docs/Master_Spec`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| 索引 | `Docs/Document_Index`、必要に応じて `Docs/Master_Spec`、`Docs/Change_History` |
+
+責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、実装ロジックをAuteur側、採用・移行を利用先プロダクト側として扱う。
+
+### 11.2.2 CSSマスター仕様
 
 Adlaire-DesignのCSSマスター仕様は、本節を正本とする。CSS実装、トークン、読み込み順、禁止事項、変更管理、検査条件は、本節と第11章各節に従う。
 

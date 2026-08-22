@@ -232,7 +232,13 @@ if ! grep -F 'WYSIWYG Editor UI仕様と実装境界は本書に統合する。'
 fi
 
 for css_master_term in \
-  '### 11.2.1 CSSマスター仕様' \
+  '### 11.2.1 責務別整理' \
+  'Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品カタログ、Editor UIカタログ、検査、変更履歴に分けて管理する。' \
+  '責務別の管理範囲は以下に固定する。' \
+  'ファイル責務は以下に整理する。' \
+  '責務別の変更単位は以下に固定する。' \
+  '責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、実装ロジックをAuteur側、採用・移行を利用先プロダクト側として扱う。' \
+  '### 11.2.2 CSSマスター仕様' \
   'Adlaire-DesignのCSSマスター仕様は、本節を正本とする。' \
   'CSSマスター仕様で固定する対象は以下とする。' \
   'CSS層構造は以下に固定する。' \
