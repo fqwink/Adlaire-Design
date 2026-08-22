@@ -7,7 +7,7 @@ Adlaire-Designは、CSSフレームワーク、デザイントークン、ブラ
 ## 構成
 
 - `Docs/`: 仕様・設計、リポジトリ索引、変更履歴。
-- `UI/`: CSSフレームワーク本体およびWYSIWYG Editor UIスキン。`UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/wysiwyg.css`、`UI/utilities.css`、`UI/compat-agws.css` を管理する。
+- `UI/`: CSSフレームワーク本体およびWYSIWYG Editor UIスキン。`UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/wysiwyg.css`、`UI/utilities.css`、`UI/compat-agws.css` を管理する。`UI/compat-agws.css` は名称を互換維持のため残す既存ベース互換層であり、AGWSを参照正本にする意味ではない。
 - `Tokens/`: デザイントークン。`Tokens/colors.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` を管理する。
 - `Brand/`: ブランド資産。
 - `Tools/check/`: Adlaire-Design専用の検査シェル。

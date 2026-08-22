@@ -460,7 +460,7 @@ if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css")" != '/* Adlaire-Desig
   exit 1
 fi
 
-if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css")" != '/* Adlaire-Design AGWS compatibility */' ]; then
+if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css")" != '/* Adlaire-Design base compatibility */' ]; then
   echo "UI/compat-agws.css must start with the required comment." >&2
   exit 1
 fi

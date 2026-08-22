@@ -700,7 +700,9 @@ CSS変数は以下とする。
 
 第3段階でAdlaire-Design側に新設する標準クラスは、原則として `.adlaire-` 接頭辞を使用する。
 
-`UI/compat-agws.css` は、既存ベースに必要な最小互換層として保持する。ただし、Adlaire-Designの標準APIは `.adlaire-` 接頭辞のクラスとし、追加のプロダクト固有互換層は利用先プロダクト側で管理する。
+`UI/compat-agws.css` は、既存ベースに必要な最小互換層として保持する。ファイル名は互換維持のため残すが、AGWSをAdlaire-Designの参照正本にする意味ではない。
+
+Adlaire-Designの標準APIは `.adlaire-` 接頭辞のクラスとする。追加のプロダクト固有互換層、移行計画、利用先での採用検査は、利用先プロダクト側で管理する。
 
 ### 11.10.5 第3段階の非対象
 
@@ -768,7 +770,7 @@ CSS変数は以下とする。
 | `UI/forms.css` | `/* Adlaire-Design form components */` |
 | `UI/content.css` | `/* Adlaire-Design content components */` |
 | `UI/utilities.css` | `/* Adlaire-Design utility classes */` |
-| `UI/compat-agws.css` | `/* Adlaire-Design AGWS compatibility */` |
+| `UI/compat-agws.css` | `/* Adlaire-Design base compatibility */` |
 
 ### 11.10.9 第3段階トークン方針
 
