@@ -233,12 +233,21 @@ fi
 
 for wysiwyg_spec_term in \
   'WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。' \
+  'Editor UI完全固定対象は以下とする。' \
+  'Editor UI階層は以下に固定する。' \
+  'Editor UI表示モードは以下に固定する。' \
+  '状態入力の受け方は以下に固定する。' \
   'WYSIWYG Editor UIは、Editor.jsおよびNotionに代表されるブロックベース編集UIを参照し、1ブロックを1編集単位として扱う表示層を提供する。' \
   'ブロックベースアーキテクチャのUI方針は以下とする。' \
+  'ブロック表示契約は以下とする。' \
   'モバイルファーストUI方針は以下とする。' \
+  'レスポンシブ境界は以下とする。' \
   'WYSIWYG Editor UIの機能優先度は以下とする。' \
   '追加のUI機能は以下とする。' \
   'アクセシビリティUI方針は以下とする。' \
+  'プレビュー/JSON表示境界は以下とする。' \
+  'Editor UI完全固定後の変更管理は以下とする。' \
+  'Master_Spec、カタログ、CSS、検査シェル、変更履歴のいずれかだけを単独で変更しない。' \
   'Adlaire-Designで固定する対象は以下とする。' \
   '採用確定対象は以下とする。' \
   'Adlaire-Designでは以下を対象外とする。' \
@@ -271,7 +280,14 @@ fi
 for wysiwyg_catalog_term in \
   '# Adlaire-Design WYSIWYG Editor UIカタログ' \
   'WYSIWYG Editor専用UI部品の一覧を管理する補助正本' \
+  'WYSIWYG Editor UI仕様は `Docs/Master_Spec` で完全固定する。' \
+  '## 1.1 完全固定対象' \
   'Editor.jsおよびNotionに代表されるブロックベース編集UI' \
+  'UI階層' \
+  '表示モード' \
+  '状態入力' \
+  'レスポンシブ境界' \
+  '変更管理' \
   '## 2. 共通構造クラス' \
   '## 3. 優先A' \
   '## 4. 優先B' \

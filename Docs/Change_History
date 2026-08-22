@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.72
+
+- `Docs/Master_Spec` の版数を `rev.72` へ更新した。
+- WYSIWYG Editor UIの完全固定対象として、UI階層、表示モード、状態入力、ブロック表示契約、レスポンシブ境界、プレビュー/JSON表示境界、変更管理条件を追加した。
+- `Docs/WYSIWYG_Editor_UI_Catalog` に完全固定対象の要約を追加した。
+- `Tools/check/check-adlaire-design.sh` に、WYSIWYG Editor UI完全固定仕様の主要語句検査を追加した。
+
 ## rev.71
 
 - `Docs/Master_Spec` の版数を `rev.71` へ更新した。
