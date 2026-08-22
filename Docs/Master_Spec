@@ -700,7 +700,7 @@ CSS変数は以下とする。
 
 第3段階でAdlaire-Design側に新設する標準クラスは、原則として `.adlaire-` 接頭辞を使用する。
 
-`UI/compat-agws.css` は、既存ベースに必要な最小互換層として保持する。ファイル名は互換維持のため残すが、AGWSをAdlaire-Designの参照正本にする意味ではない。
+`UI/compat-agws.css` は、Adlaire-Design仕様の既存ベース互換層として保持する。ファイル名は互換維持のため残すが、AGWSをAdlaire-Designの参照正本にする意味ではない。
 
 Adlaire-Designの標準APIは `.adlaire-` 接頭辞のクラスとする。追加のプロダクト固有互換層、移行計画、利用先での採用検査は、利用先プロダクト側で管理する。
 
