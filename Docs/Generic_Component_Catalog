@@ -4,11 +4,15 @@
 
 最終的な仕様正本は `Docs/Master_Spec` とし、本ファイルは汎用部品の分類、優先度、実装先、実装状態、非対象を一覧管理するために使用する。
 
+本ファイルは一般的なCSS汎用部品のカタログであり、WYSIWYG Editor UI専用品は含めない。WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。
+
 ---
 
 ## 1. 管理方針
 
 - 汎用部品は、特定ページ、本文種別、フォームだけに依存しない再利用可能なUI部品として扱う。
+- 本カタログは一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティを扱う。
+- WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 接頭辞のクラス、Editor UI状態表示は本カタログに含めない。
 - 実装先は既存の責務境界に従う。
 - 実装前の候補、実装済み、保留、対象外を同じ一覧で管理する。
 - 実装する場合は、`Docs/Master_Spec`、CSS、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
@@ -25,6 +29,8 @@
 | `UI/forms.css` | フォーム専用部品 |
 | `UI/utilities.css` | 単機能の汎用ユーティリティ |
 | `Tokens/` | 複数部品で共有する値が必要な場合のみ |
+
+WYSIWYG Editor UI専用品の実装先である `UI/wysiwyg.css` は、本カタログの実装先に含めない。
 
 ---
 
@@ -218,6 +224,8 @@
 | モーダル | JavaScript制御とアクセシビリティ設計が必要になりやすい |
 | ドロワー | JavaScript制御とフォーカス管理が必要になりやすい |
 | ドロップダウン | 状態管理が必要になりやすい |
+| WYSIWYG Editor UI専用品 | `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する |
+| `.adlaire-wysiwyg-` 接頭辞のクラス | Editor UI専用CSS契約であり、汎用部品ではない |
 | カルーセル | JavaScript、アクセシビリティ、画像管理の設計が必要になりやすい |
 | ソート可能テーブル | JavaScriptまたはデータ制御が必要 |
 | 検索/絞り込みUI | JavaScriptまたはJSONデータ管理に寄りやすい |

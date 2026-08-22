@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.71
+**Version:** rev.79
 
 ---
 
@@ -217,6 +217,180 @@ Adlaire-Designは、公開面デザインの参照基準を本リポジトリ内
 - `Dist/`、`dist/`、`Build/`、`build/` などの生成CSS用ディレクトリは作成しない。
 - npm、webpack、Node.js前提のWYSIWYGビルド設定はAdlaire-Designでは採用しない。
 - 今後の拡充は、公開面で必要となるCSS機能、WYSIWYG Editor UI、再現性検査、ドキュメント整備を優先する。CSSのビルド、minify、bundleは現状検討しない。
+
+### 11.2.1 責務別整理
+
+Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品カタログ、Editor UIカタログ、検査、変更履歴に分けて管理する。Editor本体実装、保存、parser、プロダクト固有採用はAdlaire-Designの責務に含めない。
+
+責務別の管理範囲は以下に固定する。
+
+| 責務 | 管理主体 | 管理先 | 対象 | 対象外 |
+| --- | --- | --- | --- | --- |
+| 仕様正本 | Adlaire-Design | `Docs/Master_Spec` | CSSマスター仕様、Editor UIマスター仕様、責務境界、読み込み順、禁止事項、変更管理 | 実装コード、プロダクト固有採用計画 |
+| 一般CSS汎用部品カタログ | Adlaire-Design | `Docs/Generic_Component_Catalog` | 一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティ | WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 具体クラス |
+| Editor UIカタログ | Adlaire-Design | `Docs/WYSIWYG_Editor_UI_Catalog` | エディタUIに関する部品、状態表示、モバイルEditor UI、補助パネル | 一般公開面の汎用部品、Editor実装ロジック |
+| CSSトークン | Adlaire-Design | `Tokens/` | 色、面、状態、効果のCSS変数 | UI部品セレクタ、JavaScript状態管理 |
+| CSS実装 | Adlaire-Design | `UI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク |
+| 検査 | Adlaire-Design | `Tools/check/check-adlaire-design.sh` | 構造、必須ファイル、必須語句、必須変数、必須クラス、禁止記述、未定義変数参照 | 外部CSS parser、Node.js/npm依存検査基盤 |
+| 変更履歴 | Adlaire-Design | `Docs/Change_History` | Master_Spec、カタログ、CSS、検査の変更記録 | 履歴上の旧仕様を現行仕様として復活させること |
+| Editor本体実装 | Auteur | Auteur側 | TypeScript / JavaScript実装、保存形式、編集操作、parser、DOMイベント | Adlaire-Design内での実装管理 |
+| プロダクト採用 | 利用先プロダクト | 利用先プロダクト側 | 採用判断、移行計画、プロダクト固有CSS層、公開面反映、ロールバック | Adlaire-Design正本の直接変更なしの仕様逸脱 |
+
+ファイル責務は以下に整理する。
+
+| 領域 | ファイル | 責務 |
+| --- | --- | --- |
+| Docs | `Docs/Master_Spec` | 仕様正本 |
+| Docs | `Docs/Generic_Component_Catalog` | 一般CSS汎用部品カタログ |
+| Docs | `Docs/WYSIWYG_Editor_UI_Catalog` | Editor UIカタログ |
+| Docs | `Docs/Document_Index` | リポジトリ索引 |
+| Docs | `Docs/Change_History` | 変更履歴 |
+| Tokens | `Tokens/colors.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` | CSS変数 |
+| UI | `UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css` | 公開面CSS基盤 |
+| UI | `UI/wysiwyg.css` | WYSIWYG Editor UIスキン |
+| Tools | `Tools/check/check-adlaire-design.sh` | Adlaire-Design専用検査 |
+
+責務別の変更単位は以下に固定する。
+
+| 変更対象 | 同時更新が必要なもの |
+| --- | --- |
+| CSS仕様 | `Docs/Master_Spec`、必要なカタログ、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| 一般CSS汎用部品 | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、対象 `UI/*.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| Editor UI部品 | `Docs/Master_Spec`、`Docs/WYSIWYG_Editor_UI_Catalog`、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| CSSトークン | `Docs/Master_Spec`、対象 `Tokens/*.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| 検査仕様 | `Docs/Master_Spec`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| 索引 | `Docs/Document_Index`、必要に応じて `Docs/Master_Spec`、`Docs/Change_History` |
+
+責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、実装ロジックをAuteur側、採用・移行を利用先プロダクト側として扱う。
+
+### 11.2.2 CSSマスター仕様
+
+Adlaire-DesignのCSSマスター仕様は、本節を正本とする。CSS実装、トークン、読み込み順、禁止事項、変更管理、検査条件は、本節と第11章各節に従う。
+
+CSSマスター仕様で固定する対象は以下とする。
+
+| 固定対象 | 固定内容 |
+| --- | --- |
+| 正本 | CSS仕様は `Docs/Master_Spec` を正本とする |
+| 補助正本 | 一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog` で一覧管理する |
+| 実装正本 | CSS実装は `Tokens/` と `UI/` 配下のCSSファイルを正本とする |
+| 検査正本 | 構造、必須ファイル、禁止ファイル、必須変数、必須クラス、禁止記述は `Tools/check/check-adlaire-design.sh` で検査する |
+| 変更履歴 | CSS仕様またはCSS実装を変更する場合は `Docs/Change_History` を更新する |
+| 非対象 | CSSビルド、minify、bundle、プリプロセッサ、npm、外部CSSフレームワークは採用しない |
+
+CSS層構造は以下に固定する。
+
+| 層 | ファイル | 役割 |
+| --- | --- | --- |
+| Brand token | `Tokens/colors.css` | ブランド主色と基本色のCSS変数 |
+| Surface token | `Tokens/surface.css` | 公開面の面、本文、境界、notice系CSS変数 |
+| Status token | `Tokens/status.css` | success、warning、danger、neutralなどの状態CSS変数 |
+| Effect token | `Tokens/effects.css` | 影、角丸、transition、animation、z-indexなどの効果CSS変数 |
+| Minimal utility | `UI/adlaire.css` | ブランドカラー最小ユーティリティ |
+| Base | `UI/base.css` | reset、body、typography、linkなどの基礎スタイル |
+| Grid | `UI/grid.css` | container、row、columnなどのグリッド |
+| Layout | `UI/layout.css` | 公開面基本レイアウト |
+| Components | `UI/components.css` | 汎用コンポーネント |
+| Site chrome | `UI/site.css` | ヘッダー、ナビゲーション、フッター、ページトップリンク |
+| Forms | `UI/forms.css` | フォーム、入力、チェック、送信、フォームnotice |
+| Content | `UI/content.css` | 本文固有コンポーネント |
+| Utilities | `UI/utilities.css` | spacing、display、text、background、flexなどの汎用ユーティリティ |
+| Specification layer | `UI/compat-agws.css` | Adlaire-Design仕様CSS層 |
+| WYSIWYG Editor UI | `UI/wysiwyg.css` | WYSIWYG Editor UIスキン |
+
+CSS読み込み順は用途別に以下へ固定する。
+
+| 用途 | 読み込み順 |
+| --- | --- |
+| 公開面CSS基盤 | `Tokens/colors.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css`、`UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css` |
+| WYSIWYG Editor UI | `Tokens/colors.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css`、`UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/wysiwyg.css` |
+
+CSSファイルの責務境界は以下とする。
+
+| ファイル群 | 許可する内容 | 禁止する内容 |
+| --- | --- | --- |
+| `Tokens/*.css` | `:root` のCSS変数定義 | セレクタベースのUI部品、HTML要素スタイル、ユーティリティクラス |
+| `UI/adlaire.css` | ブランド色の最小ユーティリティ | レイアウト、フォーム、本文部品、WYSIWYG部品 |
+| `UI/base.css` | reset、基礎タイポグラフィ、body、link | コンポーネント固有見た目 |
+| `UI/grid.css` | container、row、column | 個別ページ固有の余白、本文部品 |
+| `UI/layout.css` | 公開面レイアウト、2カラム、サイドバー、ページ構造 | 個別コンポーネントの詳細装飾 |
+| `UI/components.css` | 複数ページで再利用する汎用部品 | 本文文脈専用部品、WYSIWYG専用部品 |
+| `UI/site.css` | サイト外枠、ナビゲーション、フッター | フォーム詳細、本文固有部品 |
+| `UI/forms.css` | フォーム部品とフォーム状態表示 | フォーム送信処理、validationロジック |
+| `UI/content.css` | 本文固有部品 | 汎用レイアウト、WYSIWYG専用部品 |
+| `UI/utilities.css` | 小粒度の汎用ユーティリティ | 意味を持つコンポーネント一式 |
+| `UI/compat-agws.css` | Adlaire-Design仕様CSS層の固定セレクタ | プロダクト固有CSS層、追加移行CSS |
+| `UI/wysiwyg.css` | WYSIWYG Editor UIスキン | Editor実装、DOMイベント、保存、parser、生成JavaScript |
+
+カタログ責務境界は以下に固定する。
+
+| カタログ | 対象 | 対象外 |
+| --- | --- | --- |
+| `Docs/Generic_Component_Catalog` | 公開面で再利用する一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティ | WYSIWYG Editor UI専用品、Editor実装、Editor状態管理 |
+| `Docs/WYSIWYG_Editor_UI_Catalog` | WYSIWYG Editor UI専用部品、Editor UI状態表示、モバイルEditor UI、補助パネル | 一般公開面の汎用部品、本文固有CSS部品、フォーム部品 |
+
+`Docs/WYSIWYG_Editor_UI_Catalog` は、Adlaire-DesignにおけるエディタUIに関するカタログとして扱う。
+
+Editor UI専用品は `Docs/Generic_Component_Catalog` に含めない。`.adlaire-wysiwyg-` 接頭辞のクラスは `Docs/WYSIWYG_Editor_UI_Catalog` で管理する。
+
+CSS命名規則は以下に固定する。
+
+| 対象 | 命名規則 |
+| --- | --- |
+| CSS変数 | `--adlaire-<category>-<name>` を基本とする |
+| 標準クラス | `.adlaire-` 接頭辞を使用する |
+| WYSIWYG専用クラス | `.adlaire-wysiwyg-` 接頭辞を使用する |
+| 状態クラス | 意味が分かる状態名を末尾に置く |
+| IDセレクタ | `UI/compat-agws.css` の固定対象を除き、新規標準APIとして追加しない |
+| data属性 | Adlaire-DesignのCSS契約として固定しない |
+
+CSS値の管理規則は以下に固定する。
+
+| 値 | 規則 |
+| --- | --- |
+| 色 | UI側CSSではCSS変数を参照し、HEX値、RGB/RGBA値を直接記述しない |
+| 角丸 | 非ゼロ値は `Tokens/effects.css` のCSS変数を参照する |
+| 影 | `Tokens/effects.css` のCSS変数を参照する |
+| z-index | 非ゼロ値は `Tokens/effects.css` のCSS変数を参照する |
+| transition | 対象プロパティを明示し、`transition: all` は使用しない |
+| letter-spacing | 負の値は使用しない |
+| media query | 既存のbreakpoint方針と整合させる |
+| keyframes | `Tokens/effects.css` または対象UIファイルで用途を限定して管理する |
+
+CSS禁止事項は以下に固定する。
+
+- `@charset` を追加しない。
+- `@import` を追加しない。
+- `!important` を使用しない。
+- UI側CSSにHEX値を直接記述しない。
+- UI側CSSにRGB/RGBA値を直接記述しない。
+- UI側CSSに直接の非ゼロ `border-radius`、直接の `box-shadow`、直接の非ゼロ `z-index` を記述しない。
+- `transition: all` を使用しない。
+- 負の `letter-spacing` を使用しない。
+- CSSプリプロセッサを追加しない。
+- CSSビルド、minify、bundle、生成CSSファイルを追加しない。
+- npm、webpack、Vite、Rollup、PostCSS、Tailwind CSSなどの設定を追加しない。
+- 外部CSSフレームワークを導入しない。
+- JavaScriptによる状態制御をCSS仕様の前提にしない。
+
+CSS変更管理は以下に固定する。
+
+| 変更種別 | 必須更新 |
+| --- | --- |
+| CSS変数を追加、削除、改名する | `Docs/Master_Spec`、対象 `Tokens/*.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| 標準クラスを追加、削除、改名する | `Docs/Master_Spec`、対象 `UI/*.css`、必要なカタログ、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| CSS読み込み順を変更する | `Docs/Master_Spec`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| CSS禁止事項を変更する | `Docs/Master_Spec`、`AGENTS.md`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| CSS層の責務を変更する | `Docs/Master_Spec`、`Docs/Document_Index`、必要なカタログ、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| CSS実装を伴わない仕様整理 | `Docs/Master_Spec`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+
+CSSマスター仕様の検査条件は以下とする。
+
+- `Tokens/` と `UI/` 配下のCSSファイル構成が承認済み構造から逸脱していないこと。
+- CSSマスター仕様で固定した層構造、読み込み順、責務境界、命名規則、値管理規則、禁止事項、変更管理が `Docs/Master_Spec` に記録されていること。
+- 必須CSS変数、必須クラス、必須セレクタ、必須media query、必須keyframesが検査対象になっていること。
+- UI側CSSが未定義の `var(--adlaire-...)` を参照していないこと。
+- `Docs/Master_Spec` の `Version` と `Docs/Change_History` の最新revが一致していること。
 
 ## 11.3 実装対象ファイル
 
@@ -930,9 +1104,11 @@ JavaScriptなしで成立する優先B/Cの汎用部品として、見出し群�
 - ビルド、minify、bundle
 - 特定プロダクト本体HTMLの置換
 
-### 11.11.2.3 WYSIWYG Editor UIの実装仕様
+### 11.11.2.3 WYSIWYG Editor UIマスター仕様
 
 WYSIWYG Editor UIはAdlaire-Design採用確定とし、エディター表示層のCSSを `UI/wysiwyg.css` に実装する。Editor実装はAuteur内製とし、Adlaire-Designでは実装コードを管理しない。
+
+本節は、Adlaire-DesignにおけるWYSIWYG Editor UIのマスター仕様である。WYSIWYG Editor UIの採用範囲、表示層、UI部品、状態表示、CSS契約、読み込み順、非対象範囲、変更管理、検査方針は本節で固定する。
 
 WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。
 
@@ -963,19 +1139,45 @@ Auteur内製側で管理する範囲は以下とする。
 
 Adlaire-Designで固定する対象は以下とする。
 
+- WYSIWYG Editor UIマスター仕様
 - WYSIWYG Editor UIのAdlaire-Design採用範囲
 - Auteur内製Editor実装との責務境界
+- Editor UI完全固定対象
+- Editor UI階層
+- Editor UI表示モード
 - ブロックベースアーキテクチャの表示方針
 - モバイルファーストUI方針
+- ブロック表示契約
 - ブロック機能UI
 - ブロック操作UI
+- インライン操作UI
 - 補助パネルUI
 - レビュー/公開前確認UI
+- 空状態、readonly、error、syncの状態表示
+- プレビュー/JSON表示境界
+- アクセシビリティUI
+- レスポンシブ境界
 - CSS読み込み順
 - `UI/wysiwyg.css` の必須クラス
 - CSS禁止事項
 - 非対象範囲
 - 検査方針
+- 仕様変更時の同期更新条件
+
+Editor UI完全固定対象は以下とする。
+
+| 固定対象 | 固定内容 |
+| --- | --- |
+| 正本 | WYSIWYG Editor UI仕様は `Docs/Master_Spec` を正本とする |
+| 補助正本 | UI部品一覧は `Docs/WYSIWYG_Editor_UI_Catalog` で管理する |
+| CSS実装 | Editor UIスキンは `UI/wysiwyg.css` で管理する |
+| 実装境界 | Editor本体、保存、編集ロジック、parser、DOMイベントはAuteur内製側で管理する |
+| UI思想 | Editor.js / Notionに代表されるブロックベース編集UIを表示方針の参照とする |
+| レイアウト思想 | モバイルファーストを前提に、desktopでは補助パネルを追加表示できる構成とする |
+| CSS契約 | `.adlaire-wysiwyg-*` classをAdlaire-Design側のEditor UI契約とする |
+| 状態入力 | class、ARIA属性、HTML属性として渡された状態をCSSで受ける |
+| 禁止事項 | JavaScript、TypeScript、npm、bundle、minify、CSSプリプロセッサ、parser実装は追加しない |
+| 検査 | Master_Spec、カタログ、CSS、検査シェル、変更履歴の同期を検査対象とする |
 
 採用確定対象は以下とする。
 
@@ -998,6 +1200,46 @@ Adlaire-Designで固定する対象は以下とする。
 - JSON表示パネル
 - プレビュー領域
 - 状態バー
+
+Editor UI階層は以下に固定する。
+
+| 階層 | 必須または任意 | 代表クラス | 役割 |
+| --- | --- | --- | --- |
+| Root | 必須 | `.adlaire-wysiwyg` | Editor UI全体の表示境界 |
+| Header | 任意 | `.adlaire-wysiwyg-header` | タイトル、保存状態、補助情報 |
+| Toolbar | 任意 | `.adlaire-wysiwyg-toolbar` | 主要操作群の表示 |
+| Canvas | 必須 | `.adlaire-wysiwyg-canvas` | ブロック一覧の表示領域 |
+| Block | 必須 | `.adlaire-wysiwyg-block` | 1ブロック単位の表示境界 |
+| Block content | 必須 | `.adlaire-wysiwyg-block-content` | ブロック本文または表示内容 |
+| Inline toolbar | 任意 | `.adlaire-wysiwyg-inline-toolbar` | 選択範囲に対する補助操作 |
+| Slash menu | 任意 | `.adlaire-wysiwyg-slash-menu` | ブロック追加候補の表示 |
+| Mobile surface | 任意 | `.adlaire-wysiwyg-mobile-bar`、`.adlaire-wysiwyg-mobile-sheet` | mobile操作面 |
+| Side / helper panels | 任意 | `.adlaire-wysiwyg-outline`、`.adlaire-wysiwyg-comment-panel`、`.adlaire-wysiwyg-history-panel` | 補助情報表示 |
+| Preview | 任意 | `.adlaire-wysiwyg-preview` | プレビュー表示領域 |
+| JSON panel | 任意 | `.adlaire-wysiwyg-json-panel` | JSON文字列表現の表示領域 |
+| Footer | 任意 | `.adlaire-wysiwyg-footer` | 状態バー、補助情報 |
+
+Editor UI表示モードは以下に固定する。
+
+| 表示モード | UI仕様 | 実装境界 |
+| --- | --- | --- |
+| editor | Canvasを主表示とし、ブロック編集面を表示する | 表示モード切替ロジックはAuteur側 |
+| preview | Previewを主表示とし、生成済みまたは渡されたプレビューHTMLの見た目を整える | preview rendering生成処理はAuteur側 |
+| split | CanvasとPreviewを併置できる表示を想定する | 分割比率、同期スクロール、生成処理はAuteur側 |
+| readonly | 編集操作UIを抑制した読み取り専用表示を想定する | readonly判定はAuteur側 |
+| error | ブロックまたはEditor全体のエラー表示を受ける | エラー判定、文言生成、送信はAuteur側 |
+| mobile | 下部操作バーとbottom sheetを優先する | デバイス判定、メニュー開閉はAuteur側 |
+
+状態入力の受け方は以下に固定する。
+
+| 状態入力 | Adlaire-Design側の扱い |
+| --- | --- |
+| class | `.adlaire-wysiwyg-block-selected` などの状態classを視覚化する |
+| ARIA属性 | `[aria-pressed="true"]`、`[aria-selected="true"]`、`[aria-current="true"]` を受けて表示を変える |
+| HTML属性 | `readonly` 相当の状態はclassまたはARIA属性で受ける |
+| data属性 | Adlaire-Designではdata属性名を固定しない |
+| inline style | progress幅など利用先HTML側の静的指定は許容するが、CSS契約としては固定しない |
+| JavaScript状態 | Adlaire-Designでは生成、更新、監視しない |
 
 Adlaire-Designでは以下を対象外とする。
 
@@ -1055,6 +1297,21 @@ WYSIWYG Editor UIは、Editor.jsおよびNotionに代表されるブロックベ
 | 空状態 | 空ドキュメントと空ブロックのplaceholderを表示する |
 | 読み取り専用 | readonly状態の表示を持つ |
 
+ブロック表示契約は以下とする。
+
+| 項目 | UI仕様 |
+| --- | --- |
+| 1ブロック単位 | すべての本文要素は `.adlaire-wysiwyg-block` を表示境界にできる |
+| 本文領域 | ブロック本文は `.adlaire-wysiwyg-block-content` を基本表示領域とする |
+| ブロック種別 | heading、paragraph、list、checklist、quote、code、image、divider、callout、label、progressを表示種別として扱う |
+| 追加操作 | ブロック間追加は `.adlaire-wysiwyg-block-inserter` または `.adlaire-wysiwyg-quick-insert` で表示する |
+| 移動操作 | 移動可能性は `.adlaire-wysiwyg-block-handle`、drop位置はdrop-before/drop-afterで表示する |
+| 折りたたみ | 折りたたみ表示は `.adlaire-wysiwyg-block-collapsed` で受ける |
+| エラー | ブロック単位のエラー表示は `.adlaire-wysiwyg-block-error` で受ける |
+| 空ブロック | 空ブロックは `.adlaire-wysiwyg-block-empty` と `.adlaire-wysiwyg-placeholder` で表示する |
+| コード | code blockのみ横スクロールを許容する |
+| 画像 | 画像配置の表示差分はAuteur側から渡されたclass構成をCSSで受ける |
+
 モバイルファーストUI方針は以下とする。
 
 | 項目 | UI仕様 |
@@ -1066,6 +1323,17 @@ WYSIWYG Editor UIは、Editor.jsおよびNotionに代表されるブロックベ
 | touch target | 操作部品は最小44px相当を目安にする |
 | keyboard safe area | ソフトキーボード表示時に操作バーが隠れない構成を想定する |
 | overflow | 横スクロールは原則避け、code blockのみ例外として許容する |
+
+レスポンシブ境界は以下とする。
+
+| 境界 | UI仕様 |
+| --- | --- |
+| default | 1カラムのCanvasを基本とし、補助パネルは任意で追加する |
+| 768px以下 | Header、Footer、Previewの余白を圧縮し、縦積み表示を優先する |
+| 480px以下 | Toolbarは縦積み、Blockは1カラム、Mobile barは下部sticky表示を想定する |
+| touch target | mobile操作面の主要操作は44px相当を目安にする |
+| popover | mobileではpopoverよりbottom sheetを優先する |
+| fixed panel | small viewportでは固定サイドパネルを前提にしない |
 
 WYSIWYG Editor UIの機能優先度は以下とする。
 
@@ -1108,6 +1376,28 @@ WYSIWYG Editor UIの機能優先度は以下とする。
 | reduced motion | `prefers-reduced-motion` を尊重する |
 | contrast | 状態表示は色だけに依存しない |
 | error | エラー状態は色、アイコン領域、テキスト領域を持つ |
+
+プレビュー/JSON表示境界は以下とする。
+
+| 対象 | UI仕様 | 非対象 |
+| --- | --- | --- |
+| Preview | `.adlaire-wysiwyg-preview` でプレビュー領域の余白、背景、本文色、行間を整える | HTML生成、sanitize、Markdown / MDX変換 |
+| JSON panel | `.adlaire-wysiwyg-json-panel` で等幅表示と横スクロールを提供する | JSON serialization、format、validate |
+| Split表示 | editorとpreviewを同時表示できるUIクラス群を前提にする | 同期スクロール、差分計算、pane resize |
+| Publish check | `.adlaire-wysiwyg-publish-check` で公開前確認の表示枠を提供する | チェック実行、リンク検査、alt判定 |
+
+Editor UI完全固定後の変更管理は以下とする。
+
+| 変更種別 | 必須更新 |
+| --- | --- |
+| UI部品を追加する | `Docs/Master_Spec`、`Docs/WYSIWYG_Editor_UI_Catalog`、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| UI部品を削除する | `Docs/Master_Spec`、`Docs/WYSIWYG_Editor_UI_Catalog`、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| class名を変更する | `Docs/Master_Spec`、`Docs/WYSIWYG_Editor_UI_Catalog`、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| CSS読み込み順を変更する | `Docs/Master_Spec`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| 非対象範囲を変更する | `Docs/Master_Spec`、`AGENTS.md`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| カタログだけを整理する | `Docs/WYSIWYG_Editor_UI_Catalog`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+
+Editor UI完全固定後は、Master_Spec、カタログ、CSS、検査シェル、変更履歴のいずれかだけを単独で変更しない。CSS実装を伴わない仕様整理であっても、検査対象語句を更新して仕様ドリフトを防ぐ。
 
 WYSIWYG Editor UIでAdlaire-Designを採用する際の読み込み順は以下に固定する。
 

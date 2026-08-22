@@ -201,6 +201,15 @@ if ! grep -F 'WYSIWYG Editor UI仕様と実装境界は `Docs/Master_Spec` に�
   exit 1
 fi
 
+for readme_responsibility_term in \
+  'CSS仕様、CSS実装、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、検査、変更履歴、Auteur側Editor本体実装、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。' \
+  '一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、エディタUIに関する部品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。'; do
+  if ! grep -F -- "$readme_responsibility_term" "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+    echo "Adlaire-Design README missing responsibility boundary term: $readme_responsibility_term" >&2
+    exit 1
+  fi
+done
+
 if ! grep -F 'CSSのビルド、minify、bundle、Sass/SCSS等のCSSプリプロセッサは現状検討しない。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must document that build, minify, bundle, and CSS preprocessors are not under current consideration." >&2
   exit 1
@@ -231,14 +240,81 @@ if ! grep -F 'WYSIWYG Editor UI仕様と実装境界は本書に統合する。'
   exit 1
 fi
 
+for css_master_term in \
+  '### 11.2.1 責務別整理' \
+  'Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品カタログ、Editor UIカタログ、検査、変更履歴に分けて管理する。' \
+  '責務別の管理範囲は以下に固定する。' \
+  'ファイル責務は以下に整理する。' \
+  '責務別の変更単位は以下に固定する。' \
+  '責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、実装ロジックをAuteur側、採用・移行を利用先プロダクト側として扱う。' \
+  '### 11.2.2 CSSマスター仕様' \
+  'Adlaire-DesignのCSSマスター仕様は、本節を正本とする。' \
+  'CSSマスター仕様で固定する対象は以下とする。' \
+  'CSS層構造は以下に固定する。' \
+  'CSS読み込み順は用途別に以下へ固定する。' \
+  'CSSファイルの責務境界は以下とする。' \
+  'カタログ責務境界は以下に固定する。' \
+  'CSS命名規則は以下に固定する。' \
+  'CSS値の管理規則は以下に固定する。' \
+  'CSS禁止事項は以下に固定する。' \
+  'CSS変更管理は以下に固定する。' \
+  'CSSマスター仕様の検査条件は以下とする。' \
+  'CSS仕様は `Docs/Master_Spec` を正本とする' \
+  '一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog` で一覧管理する' \
+  'CSS実装は `Tokens/` と `UI/` 配下のCSSファイルを正本とする' \
+  '`Docs/WYSIWYG_Editor_UI_Catalog` は、Adlaire-DesignにおけるエディタUIに関するカタログとして扱う。' \
+  'Editor UI専用品は `Docs/Generic_Component_Catalog` に含めない。' \
+  '`.adlaire-wysiwyg-` 接頭辞のクラスは `Docs/WYSIWYG_Editor_UI_Catalog` で管理する。' \
+  'Specification layer' \
+  'WYSIWYG Editor UI | `UI/wysiwyg.css`' \
+  'UI側CSSではCSS変数を参照し、HEX値、RGB/RGBA値を直接記述しない' \
+  'CSSプリプロセッサを追加しない。' \
+  'CSSビルド、minify、bundle、生成CSSファイルを追加しない。' \
+  'CSS実装を伴わない仕様整理'; do
+  if ! grep -F -- "$css_master_term" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+    echo "Docs/Master_Spec missing required CSS master spec term: $css_master_term" >&2
+    exit 1
+  fi
+done
+
+for generic_catalog_boundary_term in \
+  '本ファイルは一般的なCSS汎用部品のカタログであり、WYSIWYG Editor UI専用品は含めない。' \
+  'WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。' \
+  '本カタログは一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティを扱う。' \
+  'WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 接頭辞のクラス、Editor UI状態表示は本カタログに含めない。' \
+  'WYSIWYG Editor UI専用品の実装先である `UI/wysiwyg.css` は、本カタログの実装先に含めない。'; do
+  if ! grep -F -- "$generic_catalog_boundary_term" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" >/dev/null 2>&1; then
+    echo "Docs/Generic_Component_Catalog missing required generic/editor catalog boundary term: $generic_catalog_boundary_term" >&2
+    exit 1
+  fi
+done
+
+if grep -F '.adlaire-wysiwyg-' "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" \
+  | grep -v '`.adlaire-wysiwyg-` 接頭辞のクラス' >/dev/null 2>&1; then
+  echo "Docs/Generic_Component_Catalog must not list concrete WYSIWYG Editor UI classes." >&2
+  exit 1
+fi
+
 for wysiwyg_spec_term in \
+  '### 11.11.2.3 WYSIWYG Editor UIマスター仕様' \
+  '本節は、Adlaire-DesignにおけるWYSIWYG Editor UIのマスター仕様である。' \
+  'WYSIWYG Editor UIマスター仕様' \
   'WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。' \
+  'Editor UI完全固定対象は以下とする。' \
+  'Editor UI階層は以下に固定する。' \
+  'Editor UI表示モードは以下に固定する。' \
+  '状態入力の受け方は以下に固定する。' \
   'WYSIWYG Editor UIは、Editor.jsおよびNotionに代表されるブロックベース編集UIを参照し、1ブロックを1編集単位として扱う表示層を提供する。' \
   'ブロックベースアーキテクチャのUI方針は以下とする。' \
+  'ブロック表示契約は以下とする。' \
   'モバイルファーストUI方針は以下とする。' \
+  'レスポンシブ境界は以下とする。' \
   'WYSIWYG Editor UIの機能優先度は以下とする。' \
   '追加のUI機能は以下とする。' \
   'アクセシビリティUI方針は以下とする。' \
+  'プレビュー/JSON表示境界は以下とする。' \
+  'Editor UI完全固定後の変更管理は以下とする。' \
+  'Master_Spec、カタログ、CSS、検査シェル、変更履歴のいずれかだけを単独で変更しない。' \
   'Adlaire-Designで固定する対象は以下とする。' \
   '採用確定対象は以下とする。' \
   'Adlaire-Designでは以下を対象外とする。' \
@@ -271,7 +347,28 @@ fi
 for wysiwyg_catalog_term in \
   '# Adlaire-Design WYSIWYG Editor UIカタログ' \
   'WYSIWYG Editor専用UI部品の一覧を管理する補助正本' \
+  '本ファイルは、Adlaire-DesignにおけるエディタUIに関するカタログである。' \
+  '本カタログはエディタUIに関するカタログとして扱う。' \
+  'WYSIWYG Editor UI仕様は `Docs/Master_Spec` で完全固定する。' \
+  '## 1.1 完全固定対象' \
   'Editor.jsおよびNotionに代表されるブロックベース編集UI' \
+  'UI階層' \
+  '表示モード' \
+  '状態入力' \
+  'レスポンシブ境界' \
+  '## 1.2 UI階層' \
+  '## 1.3 表示モード' \
+  '## 1.4 状態入力' \
+  '## 1.5 レスポンシブ境界' \
+  '## 1.6 アクセシビリティUI' \
+  '## 1.7 Preview / JSON表示境界' \
+  '## 1.8 変更管理' \
+  'keyboard focusの視認性を確保する' \
+  'data属性名を固定しない' \
+  'Preview | `.adlaire-wysiwyg-preview`' \
+  'JSON panel | `.adlaire-wysiwyg-json-panel`' \
+  'WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装先、非対象範囲を管理する完成カタログとして扱う。' \
+  '変更管理' \
   '## 2. 共通構造クラス' \
   '## 3. 優先A' \
   '## 4. 優先B' \
@@ -344,6 +441,16 @@ for indexed_path in \
   Tools/check/check-adlaire-design.sh; do
   if ! grep -F -- "$indexed_path" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
     echo "Adlaire-Design Document_Index must reference $indexed_path." >&2
+    exit 1
+  fi
+done
+
+for document_index_responsibility_term in \
+  '`Docs/Master_Spec`(仕様・設計の正本、CSSとEditor UIの責務境界)' \
+  '`Docs/Generic_Component_Catalog`(一般的なCSS汎用部品の分類、優先度、実装先、実装状態の一覧)' \
+  '`Docs/WYSIWYG_Editor_UI_Catalog`(エディタUIに関する部品の分類、優先度、実装先、実装状態の一覧)'; do
+  if ! grep -F -- "$document_index_responsibility_term" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
+    echo "Docs/Document_Index missing responsibility description: $document_index_responsibility_term" >&2
     exit 1
   fi
 done

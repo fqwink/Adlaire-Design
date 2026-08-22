@@ -2,6 +2,8 @@
 
 本ファイルは、WYSIWYG Editor専用UI部品の一覧を管理する補助正本である。
 
+本ファイルは、Adlaire-DesignにおけるエディタUIに関するカタログである。
+
 仕様正本は `Docs/Master_Spec` とする。本ファイルは、Editor.jsおよびNotionに代表されるブロックベース編集UIを前提に、Adlaire-Designで管理するEditor UI部品、優先度、実装先、状態を一覧管理する。
 
 Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo / Redo、DOMイベント、APIはAuteur内製側の責務とし、本カタログでは扱わない。
@@ -12,10 +14,106 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 
 - WYSIWYG Editor UIはAdlaire-Design採用とする。
 - Editor実装はAuteur内製とする。
+- 本カタログはエディタUIに関するカタログとして扱う。
+- WYSIWYG Editor UI仕様は `Docs/Master_Spec` で完全固定する。
 - 本カタログは表示層、UI部品、状態表示、モバイルUI、補助パネルのみを扱う。
 - UI実装先は `UI/wysiwyg.css` とする。
 - 仕様変更時は `Docs/Master_Spec`、本ファイル、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
 - JavaScript、JSONデータ管理、Markdown / MDX parser、生成JavaScript、bundle、minify、CSSプリプロセッサは前提にしない。
+
+## 1.1 完全固定対象
+
+| 固定対象 | 内容 |
+| --- | --- |
+| UI階層 | Root、Header、Toolbar、Canvas、Block、Inline toolbar、Slash menu、Mobile surface、補助パネル、Preview、JSON panel、Footer |
+| 表示モード | editor、preview、split、readonly、error、mobile |
+| 状態入力 | class、ARIA属性、HTML属性をCSSで受ける |
+| レスポンシブ境界 | default、768px以下、480px以下、touch target、bottom sheet |
+| 非対象 | Editor実装、保存、parser、DOMイベント、AI処理、共同編集処理 |
+| 変更管理 | Master_Spec、カタログ、CSS、検査、変更履歴を同期更新する |
+
+## 1.2 UI階層
+
+| 階層 | 必須または任意 | 代表クラス | 役割 |
+| --- | --- | --- | --- |
+| Root | 必須 | `.adlaire-wysiwyg` | Editor UI全体の表示境界 |
+| Header | 任意 | `.adlaire-wysiwyg-header` | タイトル、保存状態、補助情報 |
+| Toolbar | 任意 | `.adlaire-wysiwyg-toolbar` | 主要操作群の表示 |
+| Canvas | 必須 | `.adlaire-wysiwyg-canvas` | ブロック一覧の表示領域 |
+| Block | 必須 | `.adlaire-wysiwyg-block` | 1ブロック単位の表示境界 |
+| Block content | 必須 | `.adlaire-wysiwyg-block-content` | ブロック本文または表示内容 |
+| Inline toolbar | 任意 | `.adlaire-wysiwyg-inline-toolbar` | 選択範囲に対する補助操作 |
+| Slash menu | 任意 | `.adlaire-wysiwyg-slash-menu` | ブロック追加候補の表示 |
+| Mobile surface | 任意 | `.adlaire-wysiwyg-mobile-bar`、`.adlaire-wysiwyg-mobile-sheet` | mobile操作面 |
+| Side / helper panels | 任意 | `.adlaire-wysiwyg-outline`、`.adlaire-wysiwyg-comment-panel`、`.adlaire-wysiwyg-history-panel` | 補助情報表示 |
+| Preview | 任意 | `.adlaire-wysiwyg-preview` | プレビュー表示領域 |
+| JSON panel | 任意 | `.adlaire-wysiwyg-json-panel` | JSON文字列表現の表示領域 |
+| Footer | 任意 | `.adlaire-wysiwyg-footer` | 状態バー、補助情報 |
+
+## 1.3 表示モード
+
+| 表示モード | UI仕様 | 実装境界 |
+| --- | --- | --- |
+| editor | Canvasを主表示とし、ブロック編集面を表示する | 表示モード切替ロジックはAuteur側 |
+| preview | Previewを主表示とし、生成済みまたは渡されたプレビューHTMLの見た目を整える | preview rendering生成処理はAuteur側 |
+| split | CanvasとPreviewを併置できる表示を想定する | 分割比率、同期スクロール、生成処理はAuteur側 |
+| readonly | 編集操作UIを抑制した読み取り専用表示を想定する | readonly判定はAuteur側 |
+| error | ブロックまたはEditor全体のエラー表示を受ける | エラー判定、文言生成、送信はAuteur側 |
+| mobile | 下部操作バーとbottom sheetを優先する | デバイス判定、メニュー開閉はAuteur側 |
+
+## 1.4 状態入力
+
+| 状態入力 | Adlaire-Design側の扱い |
+| --- | --- |
+| class | `.adlaire-wysiwyg-block-selected` などの状態classを視覚化する |
+| ARIA属性 | `[aria-pressed="true"]`、`[aria-selected="true"]`、`[aria-current="true"]` を受けて表示を変える |
+| HTML属性 | `readonly` 相当の状態はclassまたはARIA属性で受ける |
+| data属性 | Adlaire-Designではdata属性名を固定しない |
+| inline style | progress幅など利用先HTML側の静的指定は許容するが、CSS契約としては固定しない |
+| JavaScript状態 | Adlaire-Designでは生成、更新、監視しない |
+
+## 1.5 レスポンシブ境界
+
+| 境界 | UI仕様 |
+| --- | --- |
+| default | 1カラムのCanvasを基本とし、補助パネルは任意で追加する |
+| 768px以下 | Header、Footer、Previewの余白を圧縮し、縦積み表示を優先する |
+| 480px以下 | Toolbarは縦積み、Blockは1カラム、Mobile barは下部sticky表示を想定する |
+| touch target | mobile操作面の主要操作は44px相当を目安にする |
+| popover | mobileではpopoverよりbottom sheetを優先する |
+| fixed panel | small viewportでは固定サイドパネルを前提にしない |
+
+## 1.6 アクセシビリティUI
+
+| 項目 | UI仕様 |
+| --- | --- |
+| focus | keyboard focusの視認性を確保する |
+| aria | toolbar、menu、button、statusにARIA属性を受けるCSSを用意する |
+| reduced motion | `prefers-reduced-motion` を尊重する |
+| contrast | 状態表示は色だけに依存しない |
+| error | エラー状態は色、アイコン領域、テキスト領域を持つ |
+
+## 1.7 Preview / JSON表示境界
+
+| 対象 | UI仕様 | 非対象 |
+| --- | --- | --- |
+| Preview | `.adlaire-wysiwyg-preview` でプレビュー領域の余白、背景、本文色、行間を整える | HTML生成、sanitize、Markdown / MDX変換 |
+| JSON panel | `.adlaire-wysiwyg-json-panel` で等幅表示と横スクロールを提供する | JSON serialization、format、validate |
+| Split表示 | editorとpreviewを同時表示できるUIクラス群を前提にする | 同期スクロール、差分計算、pane resize |
+| Publish check | `.adlaire-wysiwyg-publish-check` で公開前確認の表示枠を提供する | チェック実行、リンク検査、alt判定 |
+
+## 1.8 変更管理
+
+| 変更種別 | 必須更新 |
+| --- | --- |
+| UI部品を追加する | `Docs/Master_Spec`、本カタログ、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| UI部品を削除する | `Docs/Master_Spec`、本カタログ、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| class名を変更する | `Docs/Master_Spec`、本カタログ、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| CSS読み込み順を変更する | `Docs/Master_Spec`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| 非対象範囲を変更する | `Docs/Master_Spec`、`AGENTS.md`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| カタログだけを整理する | 本カタログ、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+
+WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装先、非対象範囲を管理する完成カタログとして扱う。
 
 ---
 

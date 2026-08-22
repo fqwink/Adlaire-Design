@@ -8,6 +8,59 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.79
+
+- `Docs/Master_Spec` の版数を `rev.79` へ更新した。
+- `Docs/WYSIWYG_Editor_UI_Catalog` に、UI階層、表示モード、状態入力、レスポンシブ境界、アクセシビリティUI、Preview / JSON表示境界、変更管理を追加した。
+- `Docs/WYSIWYG_Editor_UI_Catalog` を、Editor UI部品の状態、優先度、実装先、非対象範囲を管理する完成カタログとして扱う方針を明記した。
+- `Tools/check/check-adlaire-design.sh` に、WYSIWYG Editor UIカタログ完成項目の検査を追加した。
+
+## rev.78
+
+- `Docs/Master_Spec` の版数を `rev.78` へ更新した。
+- `README.md` に、CSS仕様、CSS実装、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、検査、変更履歴、Auteur側Editor本体実装、利用先プロダクト採用の責務境界を `Docs/Master_Spec` で整理する方針を追記した。
+- `Docs/Document_Index` の `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`Docs/WYSIWYG_Editor_UI_Catalog` の説明を責務別整理と一致させた。
+- `Tools/check/check-adlaire-design.sh` に、READMEとDocument_Indexの責務別説明検査を追加した。
+
+## rev.77
+
+- `Docs/Master_Spec` の版数を `rev.77` へ更新した。
+- 第11章に責務別整理を追加し、仕様正本、一般CSS汎用部品カタログ、Editor UIカタログ、CSSトークン、CSS実装、検査、変更履歴、Auteur側実装、利用先プロダクト採用の責務境界を整理した。
+- ファイル責務と責務別の変更単位を追加し、一般CSS部品、Editor UI部品、CSSトークン、検査仕様、索引の同時更新条件を明記した。
+- `Tools/check/check-adlaire-design.sh` に、責務別整理の主要語句検査を追加した。
+
+## rev.76
+
+- `Docs/Master_Spec` の版数を `rev.76` へ更新した。
+- `Docs/WYSIWYG_Editor_UI_Catalog` はAdlaire-DesignにおけるエディタUIに関するカタログであることを明記した。
+- `Tools/check/check-adlaire-design.sh` に、WYSIWYG Editor UIカタログの責務明示検査を追加した。
+
+## rev.75
+
+- `Docs/Master_Spec` の版数を `rev.75` へ更新した。
+- `Docs/Generic_Component_Catalog` は一般的なCSS汎用部品のカタログであり、WYSIWYG Editor UI専用品を含めないことを明記した。
+- `Docs/WYSIWYG_Editor_UI_Catalog` をEditor UI専用品の分離管理先として固定し、`.adlaire-wysiwyg-` 接頭辞クラスは同カタログで管理する方針を明記した。
+- `Tools/check/check-adlaire-design.sh` に、汎用部品カタログとEditor UIカタログの責務境界検査を追加した。
+
+## rev.74
+
+- `Docs/Master_Spec` の版数を `rev.74` へ更新した。
+- WYSIWYG Editor UI節の見出しを「WYSIWYG Editor UIマスター仕様」に変更し、同節がAdlaire-DesignにおけるEditor UIのマスター仕様であることを明記した。
+- `Tools/check/check-adlaire-design.sh` に、Editor UIマスター仕様の明示文言検査を追加した。
+
+## rev.73
+
+- `Docs/Master_Spec` の版数を `rev.73` へ更新した。
+- CSSマスター仕様として、正本、補助正本、実装正本、検査正本、CSS層構造、用途別読み込み順、ファイル責務境界、命名規則、値管理規則、禁止事項、変更管理、検査条件を固定した。
+- `Tools/check/check-adlaire-design.sh` に、CSSマスター仕様の主要語句検査を追加した。
+
+## rev.72
+
+- `Docs/Master_Spec` の版数を `rev.72` へ更新した。
+- WYSIWYG Editor UIの完全固定対象として、UI階層、表示モード、状態入力、ブロック表示契約、レスポンシブ境界、プレビュー/JSON表示境界、変更管理条件を追加した。
+- `Docs/WYSIWYG_Editor_UI_Catalog` に完全固定対象の要約を追加した。
+- `Tools/check/check-adlaire-design.sh` に、WYSIWYG Editor UI完全固定仕様の主要語句検査を追加した。
+
 ## rev.71
 
 - `Docs/Master_Spec` の版数を `rev.71` へ更新した。
