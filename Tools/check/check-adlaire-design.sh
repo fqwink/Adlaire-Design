@@ -238,13 +238,17 @@ for css_master_term in \
   'CSS層構造は以下に固定する。' \
   'CSS読み込み順は用途別に以下へ固定する。' \
   'CSSファイルの責務境界は以下とする。' \
+  'カタログ責務境界は以下に固定する。' \
   'CSS命名規則は以下に固定する。' \
   'CSS値の管理規則は以下に固定する。' \
   'CSS禁止事項は以下に固定する。' \
   'CSS変更管理は以下に固定する。' \
   'CSSマスター仕様の検査条件は以下とする。' \
   'CSS仕様は `Docs/Master_Spec` を正本とする' \
+  '一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog` で一覧管理する' \
   'CSS実装は `Tokens/` と `UI/` 配下のCSSファイルを正本とする' \
+  'Editor UI専用品は `Docs/Generic_Component_Catalog` に含めない。' \
+  '`.adlaire-wysiwyg-` 接頭辞のクラスは `Docs/WYSIWYG_Editor_UI_Catalog` で管理する。' \
   'Specification layer' \
   'WYSIWYG Editor UI | `UI/wysiwyg.css`' \
   'UI側CSSではCSS変数を参照し、HEX値、RGB/RGBA値を直接記述しない' \
@@ -256,6 +260,24 @@ for css_master_term in \
     exit 1
   fi
 done
+
+for generic_catalog_boundary_term in \
+  '本ファイルは一般的なCSS汎用部品のカタログであり、WYSIWYG Editor UI専用品は含めない。' \
+  'WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。' \
+  '本カタログは一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティを扱う。' \
+  'WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 接頭辞のクラス、Editor UI状態表示は本カタログに含めない。' \
+  'WYSIWYG Editor UI専用品の実装先である `UI/wysiwyg.css` は、本カタログの実装先に含めない。'; do
+  if ! grep -F -- "$generic_catalog_boundary_term" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" >/dev/null 2>&1; then
+    echo "Docs/Generic_Component_Catalog missing required generic/editor catalog boundary term: $generic_catalog_boundary_term" >&2
+    exit 1
+  fi
+done
+
+if grep -F '.adlaire-wysiwyg-' "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" \
+  | grep -v '`.adlaire-wysiwyg-` 接頭辞のクラス' >/dev/null 2>&1; then
+  echo "Docs/Generic_Component_Catalog must not list concrete WYSIWYG Editor UI classes." >&2
+  exit 1
+fi
 
 for wysiwyg_spec_term in \
   '### 11.11.2.3 WYSIWYG Editor UIマスター仕様' \

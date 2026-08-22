@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.75
+
+- `Docs/Master_Spec` の版数を `rev.75` へ更新した。
+- `Docs/Generic_Component_Catalog` は一般的なCSS汎用部品のカタログであり、WYSIWYG Editor UI専用品を含めないことを明記した。
+- `Docs/WYSIWYG_Editor_UI_Catalog` をEditor UI専用品の分離管理先として固定し、`.adlaire-wysiwyg-` 接頭辞クラスは同カタログで管理する方針を明記した。
+- `Tools/check/check-adlaire-design.sh` に、汎用部品カタログとEditor UIカタログの責務境界検査を追加した。
+
 ## rev.74
 
 - `Docs/Master_Spec` の版数を `rev.74` へ更新した。

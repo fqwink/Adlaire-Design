@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.74
+**Version:** rev.75
 
 ---
 
@@ -227,7 +227,7 @@ CSSマスター仕様で固定する対象は以下とする。
 | 固定対象 | 固定内容 |
 | --- | --- |
 | 正本 | CSS仕様は `Docs/Master_Spec` を正本とする |
-| 補助正本 | 汎用部品は `Docs/Generic_Component_Catalog`、WYSIWYG Editor UIは `Docs/WYSIWYG_Editor_UI_Catalog` で一覧管理する |
+| 補助正本 | 一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog` で一覧管理する |
 | 実装正本 | CSS実装は `Tokens/` と `UI/` 配下のCSSファイルを正本とする |
 | 検査正本 | 構造、必須ファイル、禁止ファイル、必須変数、必須クラス、禁止記述は `Tools/check/check-adlaire-design.sh` で検査する |
 | 変更履歴 | CSS仕様またはCSS実装を変更する場合は `Docs/Change_History` を更新する |
@@ -276,6 +276,15 @@ CSSファイルの責務境界は以下とする。
 | `UI/utilities.css` | 小粒度の汎用ユーティリティ | 意味を持つコンポーネント一式 |
 | `UI/compat-agws.css` | Adlaire-Design仕様CSS層の固定セレクタ | プロダクト固有CSS層、追加移行CSS |
 | `UI/wysiwyg.css` | WYSIWYG Editor UIスキン | Editor実装、DOMイベント、保存、parser、生成JavaScript |
+
+カタログ責務境界は以下に固定する。
+
+| カタログ | 対象 | 対象外 |
+| --- | --- | --- |
+| `Docs/Generic_Component_Catalog` | 公開面で再利用する一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティ | WYSIWYG Editor UI専用品、Editor実装、Editor状態管理 |
+| `Docs/WYSIWYG_Editor_UI_Catalog` | WYSIWYG Editor UI専用部品、Editor UI状態表示、モバイルEditor UI、補助パネル | 一般公開面の汎用部品、本文固有CSS部品、フォーム部品 |
+
+Editor UI専用品は `Docs/Generic_Component_Catalog` に含めない。`.adlaire-wysiwyg-` 接頭辞のクラスは `Docs/WYSIWYG_Editor_UI_Catalog` で管理する。
 
 CSS命名規則は以下に固定する。
 
