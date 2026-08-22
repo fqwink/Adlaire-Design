@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.83
+
+- `Docs/Master_Spec` の版数を `rev.83` へ更新した。
+- WYSIWYG Editor UI専用ファイルを `UI/` から `EditorUI/` へ分離した。
+- 汎用UI JavaScriptを `UI/components.js`、`UI/content.js`、`UI/forms.js` として追加し、Editor UI JavaScriptを `EditorUI/wysiwyg.js` として追加した。
+- `Tools/check/check-adlaire-design.sh` を `EditorUI/` とUI JavaScriptの管理構成に合わせて更新した。
+
 ## rev.82
 
 - `Docs/Master_Spec` の版数を `rev.82` へ更新した。

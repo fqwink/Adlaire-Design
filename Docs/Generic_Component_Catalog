@@ -16,7 +16,7 @@
 - 実装先は既存の責務境界に従う。
 - 実装前の候補、実装済み、保留、対象外を同じ一覧で管理する。
 - 実装する場合は、`Docs/Master_Spec`、CSS、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
-- ビルド、minify、bundle、CSSプリプロセッサ、JavaScript、JSONデータ管理、多言語化は前提にしない。
+- ビルド、minify、bundle、CSSプリプロセッサ、JSONデータ管理、多言語化は前提にしない。JavaScriptが必要な汎用部品は、対応する `UI/*.js` で管理する。
 
 ---
 
@@ -25,12 +25,15 @@
 | 実装先 | 対象 |
 | --- | --- |
 | `UI/components.css` | 公開面で再利用する汎用コンポーネント |
+| `UI/components.js` | 公開面で再利用する汎用コンポーネントのJavaScript |
 | `UI/content.css` | 本文固有の表、注記、メタ情報など |
+| `UI/content.js` | 本文固有コンポーネントのJavaScript |
 | `UI/forms.css` | フォーム専用部品 |
+| `UI/forms.js` | フォーム専用部品のJavaScript |
 | `UI/utilities.css` | 単機能の汎用ユーティリティ |
 | `Tokens/` | 複数部品で共有する値が必要な場合のみ |
 
-WYSIWYG Editor UI専用品の実装先である `UI/wysiwyg.css` は、本カタログの実装先に含めない。
+WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `EditorUI/wysiwyg.js` は、本カタログの実装先に含めない。
 
 ---
 

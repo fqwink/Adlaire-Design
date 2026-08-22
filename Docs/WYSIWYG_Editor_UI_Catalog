@@ -15,11 +15,12 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 - WYSIWYG Editor UIはAdlaire-Design採用とする。
 - 本カタログはエディタUIに関するカタログとして扱う。
 - WYSIWYG Editor UI仕様は `Docs/Master_Spec` で完全固定する。
-- 本カタログは表示層、UI部品、状態表示、モバイルUI、補助パネルのみを扱う。
-- UI実装先は `UI/wysiwyg.css` とする。
-- `UI/wysiwyg.css` は、本カタログの優先A/B/C分類を実装確認単位として扱う。
-- 仕様変更時は `Docs/Master_Spec`、本ファイル、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
-- JavaScript、JSONデータ管理、Markdown / MDX parser、生成JavaScript、bundle、minify、CSSプリプロセッサは前提にしない。
+- 本カタログは表示層、UI部品、状態表示、モバイルUI、補助パネル、Editor UI JavaScriptを扱う。
+- CSS実装先は `EditorUI/wysiwyg.css`、JavaScript実装先は `EditorUI/wysiwyg.js` とする。
+- `EditorUI/wysiwyg.css` は、本カタログの優先A/B/C分類を実装確認単位として扱う。
+- `EditorUI/wysiwyg.js` は、表示モード切替、メニュー開閉、パネル開閉を実装確認単位として扱う。
+- 仕様変更時は `Docs/Master_Spec`、本ファイル、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
+- JSONデータ管理、Markdown / MDX parser、生成JavaScript、bundle、minify、CSSプリプロセッサは前提にしない。
 
 ## 1.1 完全固定対象
 
@@ -106,9 +107,9 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 
 | 変更種別 | 必須更新 |
 | --- | --- |
-| UI部品を追加する | `Docs/Master_Spec`、本カタログ、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
-| UI部品を削除する | `Docs/Master_Spec`、本カタログ、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
-| class名を変更する | `Docs/Master_Spec`、本カタログ、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| UI部品を追加する | `Docs/Master_Spec`、本カタログ、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| UI部品を削除する | `Docs/Master_Spec`、本カタログ、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| class名を変更する | `Docs/Master_Spec`、本カタログ、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | CSS読み込み順を変更する | `Docs/Master_Spec`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | 非対象範囲を変更する | `Docs/Master_Spec`、`AGENTS.md`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | カタログだけを整理する | 本カタログ、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
@@ -141,27 +142,27 @@ WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装
 
 | 分類 | 部品 | 実装先 | 状態 |
 | --- | --- | --- | --- |
-| 基本枠 | Editor外枠 | `UI/wysiwyg.css` | 実装済み |
-| 基本枠 | Header | `UI/wysiwyg.css` | 実装済み |
-| 基本枠 | Footer / status bar | `UI/wysiwyg.css` | 実装済み |
-| 操作 | Toolbar | `UI/wysiwyg.css` | 実装済み |
-| 操作 | Inline toolbar | `UI/wysiwyg.css` | 実装済み |
-| 操作 | Slash menu | `UI/wysiwyg.css` | 実装済み |
-| 操作 | Block handle | `UI/wysiwyg.css` | 実装済み |
-| 操作 | Block inserter | `UI/wysiwyg.css` | 実装済み |
-| ブロック | Heading | `UI/wysiwyg.css` | 実装済み |
-| ブロック | Paragraph | `UI/wysiwyg.css` | 実装済み |
-| ブロック | List | `UI/wysiwyg.css` | 実装済み |
-| ブロック | Checklist | `UI/wysiwyg.css` | 実装済み |
-| ブロック | Quote | `UI/wysiwyg.css` | 実装済み |
-| ブロック | Code | `UI/wysiwyg.css` | 実装済み |
-| ブロック | Image | `UI/wysiwyg.css` | 実装済み |
-| ブロック | Divider | `UI/wysiwyg.css` | 実装済み |
-| ブロック | Callout | `UI/wysiwyg.css` | 実装済み |
-| ブロック | Label | `UI/wysiwyg.css` | 実装済み |
-| ブロック | Progress | `UI/wysiwyg.css` | 実装済み |
-| モバイル | Mobile bar | `UI/wysiwyg.css` | 実装済み |
-| モバイル | Mobile bottom sheet | `UI/wysiwyg.css` | 実装済み |
+| 基本枠 | Editor外枠 | `EditorUI/wysiwyg.css` | 実装済み |
+| 基本枠 | Header | `EditorUI/wysiwyg.css` | 実装済み |
+| 基本枠 | Footer / status bar | `EditorUI/wysiwyg.css` | 実装済み |
+| 操作 | Toolbar | `EditorUI/wysiwyg.css` | 実装済み |
+| 操作 | Inline toolbar | `EditorUI/wysiwyg.css` | 実装済み |
+| 操作 | Slash menu | `EditorUI/wysiwyg.css` | 実装済み |
+| 操作 | Block handle | `EditorUI/wysiwyg.css` | 実装済み |
+| 操作 | Block inserter | `EditorUI/wysiwyg.css` | 実装済み |
+| ブロック | Heading | `EditorUI/wysiwyg.css` | 実装済み |
+| ブロック | Paragraph | `EditorUI/wysiwyg.css` | 実装済み |
+| ブロック | List | `EditorUI/wysiwyg.css` | 実装済み |
+| ブロック | Checklist | `EditorUI/wysiwyg.css` | 実装済み |
+| ブロック | Quote | `EditorUI/wysiwyg.css` | 実装済み |
+| ブロック | Code | `EditorUI/wysiwyg.css` | 実装済み |
+| ブロック | Image | `EditorUI/wysiwyg.css` | 実装済み |
+| ブロック | Divider | `EditorUI/wysiwyg.css` | 実装済み |
+| ブロック | Callout | `EditorUI/wysiwyg.css` | 実装済み |
+| ブロック | Label | `EditorUI/wysiwyg.css` | 実装済み |
+| ブロック | Progress | `EditorUI/wysiwyg.css` | 実装済み |
+| モバイル | Mobile bar | `EditorUI/wysiwyg.css` | 実装済み |
+| モバイル | Mobile bottom sheet | `EditorUI/wysiwyg.css` | 実装済み |
 
 ### 3.1 優先Aクラス
 
@@ -197,19 +198,19 @@ WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装
 
 | 分類 | 部品 | 実装先 | 状態 |
 | --- | --- | --- | --- |
-| 操作 | Block toolbar | `UI/wysiwyg.css` | 実装済み |
-| 操作 | Block menu | `UI/wysiwyg.css` | 実装済み |
-| 操作 | Transform menu | `UI/wysiwyg.css` | 実装済み |
-| 操作 | Style menu | `UI/wysiwyg.css` | 実装済み |
-| 挿入 | Quick insert | `UI/wysiwyg.css` | 実装済み |
-| 挿入 | Recent blocks | `UI/wysiwyg.css` | 実装済み |
-| 挿入 | Suggested blocks | `UI/wysiwyg.css` | 実装済み |
-| Navigation | Outline | `UI/wysiwyg.css` | 実装済み |
-| Navigation | Current block indicator | `UI/wysiwyg.css` | 実装済み |
-| Review | Comment marker | `UI/wysiwyg.css` | 実装済み |
-| Review | Comment panel | `UI/wysiwyg.css` | 実装済み |
-| Publish | Preview / split表示 | `UI/wysiwyg.css` | 実装済み |
-| Publish | Publish check | `UI/wysiwyg.css` | 実装済み |
+| 操作 | Block toolbar | `EditorUI/wysiwyg.css` | 実装済み |
+| 操作 | Block menu | `EditorUI/wysiwyg.css` | 実装済み |
+| 操作 | Transform menu | `EditorUI/wysiwyg.css` | 実装済み |
+| 操作 | Style menu | `EditorUI/wysiwyg.css` | 実装済み |
+| 挿入 | Quick insert | `EditorUI/wysiwyg.css` | 実装済み |
+| 挿入 | Recent blocks | `EditorUI/wysiwyg.css` | 実装済み |
+| 挿入 | Suggested blocks | `EditorUI/wysiwyg.css` | 実装済み |
+| Navigation | Outline | `EditorUI/wysiwyg.css` | 実装済み |
+| Navigation | Current block indicator | `EditorUI/wysiwyg.css` | 実装済み |
+| Review | Comment marker | `EditorUI/wysiwyg.css` | 実装済み |
+| Review | Comment panel | `EditorUI/wysiwyg.css` | 実装済み |
+| Publish | Preview / split表示 | `EditorUI/wysiwyg.css` | 実装済み |
+| Publish | Publish check | `EditorUI/wysiwyg.css` | 実装済み |
 
 ### 4.1 優先Bクラス
 
@@ -237,13 +238,13 @@ WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装
 
 | 分類 | 部品 | 実装先 | 状態 |
 | --- | --- | --- | --- |
-| Layout | Width modes | `UI/wysiwyg.css` | 実装済み |
-| Layout | Block group | `UI/wysiwyg.css` | 実装済み |
-| Review | Suggestion | `UI/wysiwyg.css` | 実装済み |
-| Review | History panel | `UI/wysiwyg.css` | 実装済み |
-| Status | Sync status | `UI/wysiwyg.css` | 実装済み |
-| Assist | Assist menu | `UI/wysiwyg.css` | 実装済み |
-| Assist | Assist suggestion | `UI/wysiwyg.css` | 実装済み |
+| Layout | Width modes | `EditorUI/wysiwyg.css` | 実装済み |
+| Layout | Block group | `EditorUI/wysiwyg.css` | 実装済み |
+| Review | Suggestion | `EditorUI/wysiwyg.css` | 実装済み |
+| Review | History panel | `EditorUI/wysiwyg.css` | 実装済み |
+| Status | Sync status | `EditorUI/wysiwyg.css` | 実装済み |
+| Assist | Assist menu | `EditorUI/wysiwyg.css` | 実装済み |
+| Assist | Assist suggestion | `EditorUI/wysiwyg.css` | 実装済み |
 
 ### 5.1 優先Cクラス
 
