@@ -1,0 +1,169 @@
+# Adlaire-Design WYSIWYG Editor UIカタログ
+
+本ファイルは、WYSIWYG Editor専用UI部品の一覧を管理する補助正本である。
+
+仕様正本は `Docs/Master_Spec` とする。本ファイルは、Editor.jsおよびNotionに代表されるブロックベース編集UIを前提に、Adlaire-Designで管理するEditor UI部品、優先度、実装先、状態を一覧管理する。
+
+Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo / Redo、DOMイベント、APIはAuteur内製側の責務とし、本カタログでは扱わない。
+
+---
+
+## 1. 管理方針
+
+- WYSIWYG Editor UIはAdlaire-Design採用とする。
+- Editor実装はAuteur内製とする。
+- 本カタログは表示層、UI部品、状態表示、モバイルUI、補助パネルのみを扱う。
+- UI実装先は `UI/wysiwyg.css` とする。
+- 仕様変更時は `Docs/Master_Spec`、本ファイル、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
+- JavaScript、JSONデータ管理、Markdown / MDX parser、生成JavaScript、bundle、minify、CSSプリプロセッサは前提にしない。
+
+---
+
+## 2. 優先A
+
+優先Aは、ブロックベースEditor UIの基本操作に必要な部品である。
+
+| 分類 | 部品 | 実装先 | 状態 |
+| --- | --- | --- | --- |
+| 基本枠 | Editor外枠 | `UI/wysiwyg.css` | 実装済み |
+| 基本枠 | Header | `UI/wysiwyg.css` | 実装済み |
+| 基本枠 | Footer / status bar | `UI/wysiwyg.css` | 実装済み |
+| 操作 | Toolbar | `UI/wysiwyg.css` | 実装済み |
+| 操作 | Inline toolbar | `UI/wysiwyg.css` | 実装済み |
+| 操作 | Slash menu | `UI/wysiwyg.css` | 実装済み |
+| 操作 | Block handle | `UI/wysiwyg.css` | 実装済み |
+| 操作 | Block inserter | `UI/wysiwyg.css` | 実装済み |
+| ブロック | Heading | `UI/wysiwyg.css` | 実装済み |
+| ブロック | Paragraph | `UI/wysiwyg.css` | 実装済み |
+| ブロック | List | `UI/wysiwyg.css` | 実装済み |
+| ブロック | Checklist | `UI/wysiwyg.css` | 実装済み |
+| ブロック | Quote | `UI/wysiwyg.css` | 実装済み |
+| ブロック | Code | `UI/wysiwyg.css` | 実装済み |
+| ブロック | Image | `UI/wysiwyg.css` | 実装済み |
+| ブロック | Divider | `UI/wysiwyg.css` | 実装済み |
+| ブロック | Callout | `UI/wysiwyg.css` | 実装済み |
+| モバイル | Mobile bar | `UI/wysiwyg.css` | 実装済み |
+| モバイル | Mobile bottom sheet | `UI/wysiwyg.css` | 実装済み |
+
+### 2.1 優先Aクラス
+
+| 部品 | 実装済みクラス |
+| --- | --- |
+| Editor外枠 | `.adlaire-wysiwyg` |
+| Header | `.adlaire-wysiwyg-header`、`.adlaire-wysiwyg-title`、`.adlaire-wysiwyg-status` |
+| Footer / status bar | `.adlaire-wysiwyg-footer` |
+| Toolbar | `.adlaire-wysiwyg-toolbar`、`.adlaire-wysiwyg-toolbar-group`、`.adlaire-wysiwyg-tool` |
+| Inline toolbar | `.adlaire-wysiwyg-inline-toolbar` |
+| Slash menu | `.adlaire-wysiwyg-slash-menu`、`.adlaire-wysiwyg-slash-item` |
+| Block handle | `.adlaire-wysiwyg-block-handle` |
+| Block inserter | `.adlaire-wysiwyg-block-inserter` |
+| Heading | `.adlaire-wysiwyg-block-heading` |
+| Paragraph | `.adlaire-wysiwyg-block-paragraph` |
+| List | `.adlaire-wysiwyg-block-list` |
+| Checklist | `.adlaire-wysiwyg-block-checklist` |
+| Quote | `.adlaire-wysiwyg-block-quote` |
+| Code | `.adlaire-wysiwyg-block-code` |
+| Image | `.adlaire-wysiwyg-block-image` |
+| Divider | `.adlaire-wysiwyg-block-divider` |
+| Callout | `.adlaire-wysiwyg-block-callout` |
+| Mobile bar | `.adlaire-wysiwyg-mobile-bar`、`.adlaire-wysiwyg-mobile-action` |
+| Mobile bottom sheet | `.adlaire-wysiwyg-mobile-sheet`、`.adlaire-wysiwyg-mobile-sheet-header`、`.adlaire-wysiwyg-mobile-sheet-body`、`.adlaire-wysiwyg-mobile-sheet-item` |
+
+---
+
+## 3. 優先B
+
+優先Bは、Editor.js / Notion風の編集体験を高める補助UIである。
+
+| 分類 | 部品 | 実装先 | 状態 |
+| --- | --- | --- | --- |
+| 操作 | Block toolbar | `UI/wysiwyg.css` | 実装済み |
+| 操作 | Block menu | `UI/wysiwyg.css` | 実装済み |
+| 操作 | Transform menu | `UI/wysiwyg.css` | 実装済み |
+| 操作 | Style menu | `UI/wysiwyg.css` | 実装済み |
+| 挿入 | Quick insert | `UI/wysiwyg.css` | 実装済み |
+| 挿入 | Recent blocks | `UI/wysiwyg.css` | 実装済み |
+| 挿入 | Suggested blocks | `UI/wysiwyg.css` | 実装済み |
+| Navigation | Outline | `UI/wysiwyg.css` | 実装済み |
+| Navigation | Current block indicator | `UI/wysiwyg.css` | 実装済み |
+| Review | Comment marker | `UI/wysiwyg.css` | 実装済み |
+| Review | Comment panel | `UI/wysiwyg.css` | 実装済み |
+| Publish | Preview / split表示 | `UI/wysiwyg.css` | 実装済み |
+| Publish | Publish check | `UI/wysiwyg.css` | 実装済み |
+
+### 3.1 優先Bクラス
+
+| 部品 | 実装済みクラス |
+| --- | --- |
+| Block toolbar | `.adlaire-wysiwyg-block-toolbar` |
+| Block menu | `.adlaire-wysiwyg-block-menu` |
+| Transform menu | `.adlaire-wysiwyg-transform-menu` |
+| Style menu | `.adlaire-wysiwyg-style-menu` |
+| Quick insert | `.adlaire-wysiwyg-quick-insert` |
+| Recent blocks | `.adlaire-wysiwyg-recent-blocks` |
+| Suggested blocks | `.adlaire-wysiwyg-suggested-blocks` |
+| Outline | `.adlaire-wysiwyg-outline`、`.adlaire-wysiwyg-outline-item` |
+| Current block indicator | `.adlaire-wysiwyg-current-block-indicator` |
+| Comment marker | `.adlaire-wysiwyg-comment-marker` |
+| Comment panel | `.adlaire-wysiwyg-comment-panel` |
+| Publish check | `.adlaire-wysiwyg-publish-check` |
+
+---
+
+## 4. 優先C
+
+優先Cは、必要に応じて利用する高度な表示補助UIである。
+
+| 分類 | 部品 | 実装先 | 状態 |
+| --- | --- | --- | --- |
+| Layout | Width modes | `UI/wysiwyg.css` | 実装済み |
+| Layout | Block group | `UI/wysiwyg.css` | 実装済み |
+| Review | Suggestion | `UI/wysiwyg.css` | 実装済み |
+| Review | History panel | `UI/wysiwyg.css` | 実装済み |
+| Status | Sync status | `UI/wysiwyg.css` | 実装済み |
+| Assist | Assist menu | `UI/wysiwyg.css` | 実装済み |
+| Assist | Assist suggestion | `UI/wysiwyg.css` | 実装済み |
+
+### 4.1 優先Cクラス
+
+| 部品 | 実装済みクラス |
+| --- | --- |
+| Width modes | `.adlaire-wysiwyg-width-narrow`、`.adlaire-wysiwyg-width-wide`、`.adlaire-wysiwyg-width-full` |
+| Block group | `.adlaire-wysiwyg-block-group` |
+| Suggestion | `.adlaire-wysiwyg-suggestion` |
+| History panel | `.adlaire-wysiwyg-history-panel` |
+| Sync status | `.adlaire-wysiwyg-sync-status` |
+| Assist menu | `.adlaire-wysiwyg-assist-menu` |
+| Assist suggestion | `.adlaire-wysiwyg-assist-suggestion` |
+
+---
+
+## 5. 状態クラス
+
+| 状態 | 実装済みクラス |
+| --- | --- |
+| hover | `.adlaire-wysiwyg-block-hover` |
+| focused | `.adlaire-wysiwyg-block-focused` |
+| dragging | `.adlaire-wysiwyg-block-dragging` |
+| drop before | `.adlaire-wysiwyg-block-drop-before` |
+| drop after | `.adlaire-wysiwyg-block-drop-after` |
+| empty | `.adlaire-wysiwyg-block-empty` |
+| readonly | `.adlaire-wysiwyg-block-readonly` |
+| error | `.adlaire-wysiwyg-block-error` |
+| collapsed | `.adlaire-wysiwyg-block-collapsed` |
+
+---
+
+## 6. 原則対象外
+
+| 対象外 | 理由 |
+| --- | --- |
+| Editor実装コード | Auteur内製側で管理するため |
+| block schema | Auteur内製側で管理するため |
+| 保存形式 | Auteur内製側で管理するため |
+| Markdown / MDX parser | Auteur内製側で管理するため |
+| Undo / Redo | Auteur内製側で管理するため |
+| DOMイベント | Auteur内製側で管理するため |
+| ドラッグ処理ロジック | Auteur内製側で管理するため |
+| AI補助処理 | Auteur内製側で管理するため |
+| 共同編集処理 | Auteur内製側で管理するため |

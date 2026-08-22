@@ -8,6 +8,40 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.69
+
+- `Docs/Master_Spec` の版数を `rev.69` へ更新した。
+- WYSIWYG Editor UI仕様に、Editor.jsおよびNotionを参照したブロックベースアーキテクチャ方針を追加した。
+- WYSIWYG Editor UI仕様に、モバイルファースト、bottom sheet、block transform、quick insert、outline、comment、publish check、assist UIの表示仕様を追加した。
+- `Docs/WYSIWYG_Editor_UI_Catalog` を追加し、WYSIWYG Editor専用UI部品の分類、優先度、実装先、実装状態を分離管理する方針にした。
+- `UI/wysiwyg.css` に、WYSIWYG Editor UI拡充用のブロック種別、状態、モバイル、アウトライン、レビュー、公開前確認、補助UIクラスを追加した。
+- `Tools/check/check-adlaire-design.sh` に、WYSIWYG Editor UI拡充仕様と追加クラスの検査を追加した。
+
+## rev.68
+
+- `Docs/Master_Spec` の版数を `rev.68` へ更新した。
+- WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界を `Docs/Master_Spec` に統合した。
+- 独立仕様ファイル `Docs/WYSIWYG_Editor_Specification` を削除した。
+- WYSIWYG仕様からデータモデル、保存形式、編集操作、Undo / Redo、JSON serialization、preview rendering生成処理、Markdown / MDX parser、公開APIなどのロジック仕様を除外し、Editor UI仕様のみを管理対象にした。
+- `README.md`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh` を、WYSIWYG Editor UI仕様は `Docs/Master_Spec` 正本で管理する方針へ整合させた。
+
+## rev.67
+
+- `Docs/Master_Spec` の版数を `rev.67` へ更新した。
+- WYSIWYG Editor方針を、Editor UIはAdlaire-Design採用、Editor実装はAuteur内製へ変更した。
+- `Docs/WYSIWYG_Editor_Specification` を、WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界を定める正本へ再定義した。
+- Adlaire-Designの管理対象からWYSIWYG Editor実装コード、保存形式、編集ロジック、Markdown / MDX parser、parser採用ライブラリ、生成JavaScriptを除外した。
+- `WYSIWYG/README.md` と `WYSIWYG/Source/editor.ts` を削除し、`WYSIWYG/` ディレクトリを非対象に変更した。
+- `AGENTS.md`、`README.md`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh` を新方針へ整合させた。
+
+## rev.66
+
+- `Docs/Master_Spec` の版数を `rev.66` へ更新した。
+- `Docs/WYSIWYG_Editor_Specification` に、WYSIWYG Editor仕様の完全固定宣言を追加した。
+- `Docs/WYSIWYG_Editor_Specification` に、公開API契約、戻り値、失敗時挙動、Undo/Redo状態遷移を固定した。
+- `Docs/WYSIWYG_Editor_Specification` に、仕様外拡張禁止、セキュリティ境界、実装同期条件、完全固定後の変更承認条件を追加した。
+- `Tools/check/check-adlaire-design.sh` に、WYSIWYG Editor完全固定仕様の主要語句検査を追加した。
+
 ## rev.65
 
 - `Docs/Master_Spec` の版数を `rev.65` へ更新した。

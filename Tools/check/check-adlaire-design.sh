@@ -17,8 +17,8 @@ for path in \
   Docs/Document_Index \
   Docs/Master_Spec \
   Docs/AGWS_Design_Analysis \
-  Docs/WYSIWYG_Editor_Specification \
   Docs/Generic_Component_Catalog \
+  Docs/WYSIWYG_Editor_UI_Catalog \
   Docs/Change_History \
   Tokens/colors.css \
   Tokens/surface.css \
@@ -35,9 +35,6 @@ for path in \
   UI/wysiwyg.css \
   UI/utilities.css \
   UI/compat-agws.css \
-  WYSIWYG \
-  WYSIWYG/README.md \
-  WYSIWYG/Source/editor.ts \
   UI \
   Tokens \
   Brand; do
@@ -47,7 +44,7 @@ for path in \
   fi
 done
 
-for path in UI Tokens Brand WYSIWYG WYSIWYG/Source; do
+for path in UI Tokens Brand; do
   if [ ! -d "$ADLAIRE_DESIGN_ROOT/$path" ]; then
     echo "Adlaire-Design required path must be a directory: $ADLAIRE_DESIGN_ROOT/$path" >&2
     exit 1
@@ -65,7 +62,6 @@ find "$ADLAIRE_DESIGN_ROOT" -mindepth 1 -maxdepth 1 \
   ! -name 'Tokens' \
   ! -name 'Tools' \
   ! -name 'UI' \
-  ! -name 'WYSIWYG' \
   -print >"$TMP_DIR/unexpected-top-level"
 
 if [ -s "$TMP_DIR/unexpected-top-level" ]; then
@@ -77,8 +73,8 @@ fi
 find "$ADLAIRE_DESIGN_ROOT/Docs" -type f \
   ! -name 'Master_Spec' \
   ! -name 'AGWS_Design_Analysis' \
-  ! -name 'WYSIWYG_Editor_Specification' \
   ! -name 'Generic_Component_Catalog' \
+  ! -name 'WYSIWYG_Editor_UI_Catalog' \
   ! -name 'Document_Index' \
   ! -name 'Change_History' \
   -print >"$TMP_DIR/unexpected-docs-files"
@@ -110,14 +106,8 @@ if [ -s "$TMP_DIR/unexpected-tools-files" ]; then
   exit 1
 fi
 
-find "$ADLAIRE_DESIGN_ROOT/WYSIWYG" -type f \
-  ! -path "$ADLAIRE_DESIGN_ROOT/WYSIWYG/README.md" \
-  ! -path "$ADLAIRE_DESIGN_ROOT/WYSIWYG/Source/editor.ts" \
-  -print >"$TMP_DIR/unexpected-wysiwyg-files"
-
-if [ -s "$TMP_DIR/unexpected-wysiwyg-files" ]; then
-  echo "WYSIWYG/ must contain only approved WYSIWYG source files:" >&2
-  cat "$TMP_DIR/unexpected-wysiwyg-files" >&2
+if [ -e "$ADLAIRE_DESIGN_ROOT/WYSIWYG" ]; then
+  echo "Adlaire-Design must not contain WYSIWYG/ because Editor implementation is managed inside Auteur." >&2
   exit 1
 fi
 
@@ -179,13 +169,13 @@ if ! grep -F 'CSSのビルド、minify、bundleは現状検討しないこと。
   exit 1
 fi
 
-if ! grep -F 'CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、WYSIWYG Editor実装コードを扱う独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+if ! grep -F 'CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UIを扱う独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
   echo "Adlaire-Design AGENTS.md must define CSS and WYSIWYG Editor UI as managed scope." >&2
   exit 1
 fi
 
-if ! grep -F 'WYSIWYG EditorのMarkdown / MDXパーサーは、仕様で個別承認された例外採用ライブラリを許可する。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
-  echo "Adlaire-Design AGENTS.md must document the Markdown / MDX parser exception library policy." >&2
+if ! grep -F 'WYSIWYG Editor実装はAuteur内製とし、Adlaire-Designでは実装コードを管理しないこと。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design AGENTS.md must document that Editor implementation is managed inside Auteur." >&2
   exit 1
 fi
 
@@ -194,23 +184,23 @@ if ! grep -F 'Docs/Change_History' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2
   exit 1
 fi
 
-if ! grep -F 'CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、WYSIWYG Editor実装コードを管理する独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+if ! grep -F 'CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UIを管理する独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must define CSS and WYSIWYG Editor UI as managed scope." >&2
   exit 1
 fi
 
-if ! grep -F '今後の拡充は、公開面CSS機能、WYSIWYG Editor UI、WYSIWYG Editor実装コード、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+if ! grep -F '今後の拡充は、公開面CSS機能、WYSIWYG Editor UI、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must document the expansion priority policy." >&2
   exit 1
 fi
 
-if ! grep -F 'WYSIWYG EditorのMarkdown / MDXパーサーは、個別承認された例外採用ライブラリを許可する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
-  echo "Adlaire-Design README must document the Markdown / MDX parser exception library policy." >&2
+if ! grep -F 'WYSIWYG Editor実装コード、Markdown / MDXパーサー、保存処理、編集ロジックはAuteur内製側で管理する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must document that Editor implementation is managed inside Auteur." >&2
   exit 1
 fi
 
-if ! grep -F 'WYSIWYG Editorマスター仕様は `Docs/WYSIWYG_Editor_Specification`' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
-  echo "Adlaire-Design README must identify Docs/WYSIWYG_Editor_Specification as the WYSIWYG Editor master specification." >&2
+if ! grep -F 'WYSIWYG Editor UI仕様と実装境界は `Docs/Master_Spec` に統合する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must identify the WYSIWYG UI and Auteur implementation boundary." >&2
   exit 1
 fi
 
@@ -234,69 +224,71 @@ if ! grep -F '上記の拡充においても、Sass、SCSS、Less、Stylus、Pos
   exit 1
 fi
 
-if ! grep -F 'WYSIWYG EditorのMarkdown / MDXパーサーは、例外採用ライブラリの使用を許可する。' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
-  echo "Docs/Master_Spec must document the Markdown / MDX parser exception library policy." >&2
+if ! grep -F 'WYSIWYG Editor UIはAdlaire-Design採用確定とし、Editor実装はAuteur内製とする。' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+  echo "Docs/Master_Spec must document the WYSIWYG UI and Auteur implementation boundary." >&2
   exit 1
 fi
 
-if ! grep -F 'Markdown / MDXパーサーは、パーサー用途に限定して例外採用ライブラリを許可する。' "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" >/dev/null 2>&1; then
-  echo "Docs/WYSIWYG_Editor_Specification must document the Markdown / MDX parser exception library policy." >&2
+if ! grep -F 'WYSIWYG Editor UI仕様と実装境界は本書に統合する。' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+  echo "Docs/Master_Spec must document that WYSIWYG UI specification is integrated into Master_Spec." >&2
   exit 1
 fi
-
-for parser_library in \
-  'jsr:@deno/gfm@0.12.0' \
-  'jsr:@temelj/mdx@0.14.0'; do
-  if ! grep -F -- "$parser_library" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
-    echo "Docs/Master_Spec must document parser library: $parser_library" >&2
-    exit 1
-  fi
-
-  if ! grep -F -- "$parser_library" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" >/dev/null 2>&1; then
-    echo "Docs/WYSIWYG_Editor_Specification must document parser library: $parser_library" >&2
-    exit 1
-  fi
-done
 
 for wysiwyg_spec_term in \
-  '本ファイルは、Adlaire-Designで管理するWYSIWYG Editorのマスター仕様である。' \
-  'WYSIWYG Editorに関する詳細仕様の正本は本ファイルとする。' \
-  '本仕様で固定する対象は以下とする。' \
-  'document normalization' \
-  'block ID' \
-  '### 7.2 ドキュメントデータモデル' \
-  '### 7.3 ブロック種別契約' \
-  '### 7.4 編集操作契約' \
-  '### 7.5 JSON serialization契約' \
-  '### 7.6 preview rendering契約' \
-  '### 7.7 Markdown / MDX parser入出力契約' \
-  '## 12. 変更管理' \
-  '未知のブロック種別は保存形式 `version: 1` では許可しない。' \
-  '対応不能なMDX componentは実行せず、`code` または `paragraph` として保持する。' \
-  '同一document内での重複IDは許可しない。' \
-  'block種別ごとのHTML出力は以下に固定する。' \
-  '`progress` は `meta.value` を優先し、未指定時は `content` を数値化する。' \
-  '空入力は `version: 1`、`blocks: []` へ変換する。' \
-  'Markdown / MDX parserはpreview HTMLを直接生成しない。'; do
-  if ! grep -F -- "$wysiwyg_spec_term" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" >/dev/null 2>&1; then
-    echo "Docs/WYSIWYG_Editor_Specification missing required fixed WYSIWYG spec term: $wysiwyg_spec_term" >&2
+  'WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。' \
+  'WYSIWYG Editor UIは、Editor.jsおよびNotionに代表されるブロックベース編集UIを参照し、1ブロックを1編集単位として扱う表示層を提供する。' \
+  'ブロックベースアーキテクチャのUI方針は以下とする。' \
+  'モバイルファーストUI方針は以下とする。' \
+  'WYSIWYG Editor UIの機能優先度は以下とする。' \
+  '追加のUI機能は以下とする。' \
+  'アクセシビリティUI方針は以下とする。' \
+  'Adlaire-Designで固定する対象は以下とする。' \
+  '採用確定対象は以下とする。' \
+  'Adlaire-Designでは以下を対象外とする。' \
+  'WYSIWYG Editor UIでAdlaire-Designを採用する際の読み込み順は以下に固定する。' \
+  '`UI/wysiwyg.css` は、以下のクラスを定義する。' \
+  'Auteur内製Editor実装は、Adlaire-Designが定義するUI classをHTMLまたは表示層に適用できることを期待する。' \
+  '上記のブロック種別は表示想定であり、Editor実装上の保存形式またはparser出力契約ではない。' \
+  'Adlaire-Designは、Auteur実装に以下を要求しない。' \
+  '独立したWYSIWYG仕様ファイル作成'; do
+  if ! grep -F -- "$wysiwyg_spec_term" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+    echo "Docs/Master_Spec missing required fixed WYSIWYG UI spec term: $wysiwyg_spec_term" >&2
     exit 1
   fi
 done
 
 for master_wysiwyg_term in \
-  'WYSIWYG Editorマスター仕様は `Docs/WYSIWYG_Editor_Specification` とする。' \
-  'ブロック種別、データモデル、保存形式、編集操作、JSON serialization、preview rendering、Markdown / MDX parser入出力契約、採用ライブラリ、非対象、CSS読み込み順、必須クラスは同ファイルに集約する。'; do
+  'WYSIWYG Editor UIはAdlaire-Design採用確定とし、Editor実装はAuteur内製とする。' \
+  'WYSIWYG Editor UI仕様と実装境界は本書に統合する。'; do
   if ! grep -F -- "$master_wysiwyg_term" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
     echo "Docs/Master_Spec missing required fixed WYSIWYG spec term: $master_wysiwyg_term" >&2
     exit 1
   fi
 done
 
-if ! grep -F 'Docs/WYSIWYG_Editor_Specification`(WYSIWYG Editorマスター仕様)' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
-  echo "Docs/Document_Index must identify Docs/WYSIWYG_Editor_Specification as the WYSIWYG Editor master specification." >&2
+if grep -F 'Docs/WYSIWYG_Editor_Specification' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
+  echo "Docs/Document_Index must not reference removed Docs/WYSIWYG_Editor_Specification." >&2
   exit 1
 fi
+
+for wysiwyg_catalog_term in \
+  '# Adlaire-Design WYSIWYG Editor UIカタログ' \
+  'WYSIWYG Editor専用UI部品の一覧を管理する補助正本' \
+  'Editor.jsおよびNotionに代表されるブロックベース編集UI' \
+  '## 2. 優先A' \
+  '## 3. 優先B' \
+  '## 4. 優先C' \
+  '## 5. 状態クラス' \
+  '## 6. 原則対象外' \
+  'Mobile bottom sheet' \
+  'Transform menu' \
+  'Publish check' \
+  'Assist suggestion'; do
+  if ! grep -F -- "$wysiwyg_catalog_term" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_UI_Catalog" >/dev/null 2>&1; then
+    echo "Docs/WYSIWYG_Editor_UI_Catalog missing required catalog term: $wysiwyg_catalog_term" >&2
+    exit 1
+  fi
+done
 
 MASTER_SPEC_VERSION=$(sed -n 's/^\*\*Version:\*\* \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec")
 CHANGE_HISTORY_VERSION=$(sed -n 's/^## \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Change_History" | sed -n '1p')
@@ -323,8 +315,8 @@ for indexed_path in \
   LICENSE \
   Docs/Master_Spec \
   Docs/AGWS_Design_Analysis \
-  Docs/WYSIWYG_Editor_Specification \
   Docs/Generic_Component_Catalog \
+  Docs/WYSIWYG_Editor_UI_Catalog \
   Docs/Change_History \
   Brand/ \
   Tokens/colors.css \
@@ -342,9 +334,6 @@ for indexed_path in \
   UI/wysiwyg.css \
   UI/utilities.css \
   UI/compat-agws.css \
-  WYSIWYG/ \
-  WYSIWYG/README.md \
-  WYSIWYG/Source/editor.ts \
   Tools/check/check-adlaire-design.sh; do
   if ! grep -F -- "$indexed_path" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
     echo "Adlaire-Design Document_Index must reference $indexed_path." >&2
@@ -352,21 +341,9 @@ for indexed_path in \
   fi
 done
 
-for export_name in \
-  'export type AdlaireWysiwygBlockType' \
-  'export interface AdlaireWysiwygBlock' \
-  'export interface AdlaireWysiwygDocument' \
-  'export class AdlaireWysiwygEditor' \
-  'export function parseAdlaireWysiwygDocument'; do
-  if ! grep -F -- "$export_name" "$ADLAIRE_DESIGN_ROOT/WYSIWYG/Source/editor.ts" >/dev/null 2>&1; then
-    echo "WYSIWYG/Source/editor.ts missing required export: $export_name" >&2
-    exit 1
-  fi
-done
-
 OLD_REPOSITORY_NAME='Adlaire-''Eco''system-Design'
 
-if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/AGWS_Design_Analysis" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
+if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/AGWS_Design_Analysis" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
   echo "current Adlaire-Design documents must not use the old repository name:" >&2
   cat /tmp/adlaire-design-old-name-matches >&2
   exit 1
@@ -966,7 +943,56 @@ for class in \
   '.adlaire-wysiwyg-slash-item' \
   '.adlaire-wysiwyg-preview' \
   '.adlaire-wysiwyg-json-panel' \
-  '.adlaire-wysiwyg-footer'; do
+  '.adlaire-wysiwyg-footer' \
+  '.adlaire-wysiwyg-block-heading' \
+  '.adlaire-wysiwyg-block-paragraph' \
+  '.adlaire-wysiwyg-block-list' \
+  '.adlaire-wysiwyg-block-checklist' \
+  '.adlaire-wysiwyg-block-quote' \
+  '.adlaire-wysiwyg-block-code' \
+  '.adlaire-wysiwyg-block-image' \
+  '.adlaire-wysiwyg-block-divider' \
+  '.adlaire-wysiwyg-block-callout' \
+  '.adlaire-wysiwyg-block-label' \
+  '.adlaire-wysiwyg-block-progress' \
+  '.adlaire-wysiwyg-block-hover' \
+  '.adlaire-wysiwyg-block-focused' \
+  '.adlaire-wysiwyg-block-dragging' \
+  '.adlaire-wysiwyg-block-drop-before' \
+  '.adlaire-wysiwyg-block-drop-after' \
+  '.adlaire-wysiwyg-block-empty' \
+  '.adlaire-wysiwyg-block-readonly' \
+  '.adlaire-wysiwyg-block-error' \
+  '.adlaire-wysiwyg-block-collapsed' \
+  '.adlaire-wysiwyg-block-toolbar' \
+  '.adlaire-wysiwyg-block-inserter' \
+  '.adlaire-wysiwyg-block-menu' \
+  '.adlaire-wysiwyg-mobile-bar' \
+  '.adlaire-wysiwyg-mobile-action' \
+  '.adlaire-wysiwyg-mobile-sheet' \
+  '.adlaire-wysiwyg-mobile-sheet-header' \
+  '.adlaire-wysiwyg-mobile-sheet-body' \
+  '.adlaire-wysiwyg-mobile-sheet-item' \
+  '.adlaire-wysiwyg-outline' \
+  '.adlaire-wysiwyg-outline-item' \
+  '.adlaire-wysiwyg-current-block-indicator' \
+  '.adlaire-wysiwyg-quick-insert' \
+  '.adlaire-wysiwyg-recent-blocks' \
+  '.adlaire-wysiwyg-suggested-blocks' \
+  '.adlaire-wysiwyg-transform-menu' \
+  '.adlaire-wysiwyg-style-menu' \
+  '.adlaire-wysiwyg-width-narrow' \
+  '.adlaire-wysiwyg-width-wide' \
+  '.adlaire-wysiwyg-width-full' \
+  '.adlaire-wysiwyg-block-group' \
+  '.adlaire-wysiwyg-comment-marker' \
+  '.adlaire-wysiwyg-comment-panel' \
+  '.adlaire-wysiwyg-suggestion' \
+  '.adlaire-wysiwyg-history-panel' \
+  '.adlaire-wysiwyg-sync-status' \
+  '.adlaire-wysiwyg-publish-check' \
+  '.adlaire-wysiwyg-assist-menu' \
+  '.adlaire-wysiwyg-assist-suggestion'; do
   if ! grep -F -- "$class" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" >/dev/null 2>&1; then
     echo "UI/wysiwyg.css missing required class: $class" >&2
     exit 1
