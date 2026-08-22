@@ -8,6 +8,18 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.70
+
+- `Docs/Master_Spec` の版数を `rev.70` へ更新した。
+- 旧外部参照関係を現時点で切り離し、公開面デザイン方針をAdlaire-Design単独の仕様、Tokens、UI CSS、部品カタログを正本とする方針へ変更した。
+- `Docs/AGWS_Design_Analysis` を削除し、旧解析文書を現行管理対象から外した。`UI/compat-agws.css` はAdlaire-Design仕様CSS層として保持した。
+- `Docs/Document_Index`、`README.md`、`Docs/Generic_Component_Catalog` をAdlaire-Design単独方針に整合させた。
+- `Tools/check/check-adlaire-design.sh` から旧解析文書検査と隣接リポジトリ照合を削除し、`UI/compat-agws.css` の必須ファイル検査は維持した。
+- 特定プロダクト固有の追加CSS層、移行計画、CSS採用検査は利用先プロダクト側で管理し、Adlaire-Designでは標準クラス、トークン、CSS読み込み順、表示境界、Adlaire-Design仕様CSS層を管理する方針を明記した。
+- `UI/compat-agws.css` の冒頭コメントを、Adlaire-Design仕様CSS層を示す表現へ変更した。
+- `UI/compat-agws.css` をAdlaire-Design仕様CSS層として再定義し、旧仕様由来の説明を現行仕様から外した。
+- `UI/compat-agws.css` の対象セレクタと宣言値を `Docs/Master_Spec` に固定し、`Tools/check/check-adlaire-design.sh` で検査するようにした。
+
 ## rev.69
 
 - `Docs/Master_Spec` の版数を `rev.69` へ更新した。
@@ -177,7 +189,7 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 - `UI/content.css` に、公開面本文部品として表、メタ情報、バッジ、注記のCSSを追加した。
 - 追加した本文部品は、既存トークンを参照する直接CSSとして実装し、ビルド、minify、bundle、新規トークン追加は行わない方針を維持した。
 - `Tools/check/check-adlaire-design.sh` に、追加した公開面本文部品クラスの必須検査を追加した。
-- 公開面本文部品の対象、標準クラス、互換別名、非対象を `Docs/Master_Spec` に仕様化した。
+- 公開面本文部品の対象、標準クラス、移行別名、非対象を `Docs/Master_Spec` に仕様化した。
 
 ## rev.49
 
@@ -293,7 +305,7 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 - `Tokens/effects.css` にfocus ring、timeline marker ring、active tab shadow、timeline marker z-index、sticky z-indexの効果トークンを追加した。
 - `UI/components.css`、`UI/forms.css`、`UI/content.css` に残っていた角丸、影、z-indexの非ゼロ効果値直書きをCSS変数参照へ変更した。
 - `Tools/check/check-adlaire-design.sh` に、UI側CSSの非ゼロ `border-radius`、直接 `box-shadow`、直接 `z-index` の禁止検査を追加した。
-- 第3段階実装済みに合わせて、実装方針と互換層説明の文書整合性を修正した。
+- 第3段階実装済みに合わせて、実装方針とCSS層説明の文書整合性を修正した。
 - `Docs/Master_Spec` の第11.10節を、未実装時の不足仕様表現から実装済みのAGWS完全再現仕様表現へ更新した。
 - `Docs/Master_Spec` の第11.10.3節と不足確認結果の文言を、実装済みの再現対象として読める表現へ更新した。
 
@@ -331,8 +343,8 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 - 第3段階候補ファイルの冒頭コメントを固定した。
 - `Tokens/status.css` と `Tokens/effects.css` のCSS変数名候補、値、用途を追加した。
 - 第3段階トークンはCSS変数へ集約し、UI側CSSではHEX値およびRGBA値を直接記述しない方針を明記した。
-- `UI/compat-agws.css` の互換層としての責務、禁止記述、標準APIではない扱いを追加した。
-- `Docs/AGWS_Design_Analysis` の版数を `rev.17` へ更新し、第3段階実装前に不足していたトークン名、冒頭コメント、互換層方針を追記した。
+- `UI/compat-agws.css` のCSS層としての責務、禁止記述、標準APIではない扱いを追加した。
+- `Docs/AGWS_Design_Analysis` の版数を `rev.17` へ更新し、第3段階実装前に不足していたトークン名、冒頭コメント、CSS層方針を追記した。
 
 ## rev.29
 

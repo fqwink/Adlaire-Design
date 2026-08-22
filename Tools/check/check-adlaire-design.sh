@@ -3,7 +3,6 @@ set -eu
 
 TOOL_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 ADLAIRE_DESIGN_ROOT=$(CDPATH= cd -- "$TOOL_DIR/../.." && pwd)
-AGWS_ROOT=$(CDPATH= cd -- "$ADLAIRE_DESIGN_ROOT/../Adlaire-Group-Web-Site-AGWS" 2>/dev/null && pwd || true)
 TMP_DIR="${TMPDIR:-/tmp}/adlaire-design-check.$$"
 
 mkdir -p "$TMP_DIR"
@@ -16,7 +15,6 @@ for path in \
   LICENSE \
   Docs/Document_Index \
   Docs/Master_Spec \
-  Docs/AGWS_Design_Analysis \
   Docs/Generic_Component_Catalog \
   Docs/WYSIWYG_Editor_UI_Catalog \
   Docs/Change_History \
@@ -72,7 +70,6 @@ fi
 
 find "$ADLAIRE_DESIGN_ROOT/Docs" -type f \
   ! -name 'Master_Spec' \
-  ! -name 'AGWS_Design_Analysis' \
   ! -name 'Generic_Component_Catalog' \
   ! -name 'WYSIWYG_Editor_UI_Catalog' \
   ! -name 'Document_Index' \
@@ -314,7 +311,6 @@ for indexed_path in \
   README.md \
   LICENSE \
   Docs/Master_Spec \
-  Docs/AGWS_Design_Analysis \
   Docs/Generic_Component_Catalog \
   Docs/WYSIWYG_Editor_UI_Catalog \
   Docs/Change_History \
@@ -343,7 +339,7 @@ done
 
 OLD_REPOSITORY_NAME='Adlaire-''Eco''system-Design'
 
-if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/AGWS_Design_Analysis" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
+if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
   echo "current Adlaire-Design documents must not use the old repository name:" >&2
   cat /tmp/adlaire-design-old-name-matches >&2
   exit 1
@@ -459,7 +455,7 @@ if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css")" != '/* Adlaire-Desig
   exit 1
 fi
 
-if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css")" != '/* Adlaire-Design AGWS compatibility */' ]; then
+if [ "$(sed -n '1p' "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css")" != '/* Adlaire-Design specification layer */' ]; then
   echo "UI/compat-agws.css must start with the required comment." >&2
   exit 1
 fi
@@ -655,6 +651,17 @@ for selector in \
   fi
 done
 
+for declaration in \
+  'scroll-margin-top: 20px;' \
+  'padding-right: 20px;' \
+  'padding-left: 20px;' \
+  'font: inherit;'; do
+  if ! grep -F -- "$declaration" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/dev/null 2>&1; then
+    echo "UI/compat-agws.css missing required Adlaire-Design specification declaration: $declaration" >&2
+    exit 1
+  fi
+done
+
 for class in \
   '.adlaire-renewal-notice' \
   '.renewal-notice' \
@@ -754,10 +761,31 @@ done
 
 for selector in \
   '#top' \
+  '#company' \
+  '#terms' \
+  '#privacy' \
+  '#disclaimer' \
+  '#copyright' \
   '#contactForm' \
+  '#name' \
+  '#email' \
+  '#subject' \
+  '#inquiry_type' \
+  '#message' \
   '.container' \
   '[aria-label]' \
-  '[target="_blank"]'; do
+  '[target="_blank"]' \
+  '[rel="stylesheet"]' \
+  '[name="viewport"]' \
+  '[name="news-tab"]' \
+  '[type="radio"]' \
+  '[type="checkbox"]' \
+  '[type="submit"]' \
+  '[type="text"]' \
+  '[type="email"]' \
+  '[rows]' \
+  '[value]' \
+  '[for]'; do
   if ! grep -F -- "$selector" "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css" >/dev/null 2>&1; then
     echo "UI/compat-agws.css missing required selector: $selector" >&2
     exit 1
@@ -1081,81 +1109,5 @@ if comm -23 "$TMP_DIR/css-var-refs" "$TMP_DIR/css-var-defs" >"$TMP_DIR/css-var-m
   exit 1
 fi
 
-if [ -n "$AGWS_ROOT" ] && [ -d "$AGWS_ROOT" ]; then
-  grep -h -E -o 'class="[^"]+"' "$AGWS_ROOT"/*.html 2>/dev/null \
-    | sed 's/class="//' \
-    | sed 's/"$//' \
-    | tr ' ' '\n' \
-    | sort -u >"$TMP_DIR/agws-html-classes"
-
-  grep -R -h -E -o '\.[A-Za-z0-9_-]+' "$ADLAIRE_DESIGN_ROOT/UI" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" 2>/dev/null \
-    | sed 's/^\.//' \
-    | sort -u >"$TMP_DIR/adlaire-class-coverage"
-
-  if comm -23 "$TMP_DIR/agws-html-classes" "$TMP_DIR/adlaire-class-coverage" >"$TMP_DIR/agws-html-classes-missing" && [ -s "$TMP_DIR/agws-html-classes-missing" ]; then
-    echo "AGWS HTML classes must be covered by Adlaire-Design UI or Master_Spec:" >&2
-    cat "$TMP_DIR/agws-html-classes-missing" >&2
-    exit 1
-  fi
-
-  grep -h -E -o 'id="[^"]+"' "$AGWS_ROOT"/*.html 2>/dev/null \
-    | sed 's/id="//' \
-    | sed 's/"$//' \
-    | sort -u >"$TMP_DIR/agws-html-ids"
-
-  grep -R -h -E -o '#[A-Za-z_][A-Za-z0-9_-]*' "$ADLAIRE_DESIGN_ROOT/UI" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" 2>/dev/null \
-    | sed 's/^#//' \
-    | sort -u >"$TMP_DIR/adlaire-id-coverage"
-
-  if comm -23 "$TMP_DIR/agws-html-ids" "$TMP_DIR/adlaire-id-coverage" >"$TMP_DIR/agws-html-ids-missing" && [ -s "$TMP_DIR/agws-html-ids-missing" ]; then
-    echo "AGWS HTML ids must be covered by Adlaire-Design UI or Master_Spec:" >&2
-    cat "$TMP_DIR/agws-html-ids-missing" >&2
-    exit 1
-  fi
-
-  grep -R -h -E -o '\.[A-Za-z0-9_-]+' "$AGWS_ROOT/style.css" "$AGWS_ROOT/architect.css" 2>/dev/null \
-    | sed 's/^\.//' \
-    | sort -u >"$TMP_DIR/agws-css-classes"
-
-  if comm -23 "$TMP_DIR/agws-css-classes" "$TMP_DIR/adlaire-class-coverage" >"$TMP_DIR/agws-css-classes-missing" && [ -s "$TMP_DIR/agws-css-classes-missing" ]; then
-    echo "AGWS CSS class selectors must be covered by Adlaire-Design UI or Master_Spec:" >&2
-    cat "$TMP_DIR/agws-css-classes-missing" >&2
-    exit 1
-  fi
-
-  grep -R -h -E -o '#[A-Za-z_][A-Za-z0-9_-]*' "$AGWS_ROOT/style.css" "$AGWS_ROOT/architect.css" "$AGWS_ROOT"/*.html 2>/dev/null \
-    | sed 's/^#//' \
-    | sort -u >"$TMP_DIR/agws-css-ids"
-
-  if comm -23 "$TMP_DIR/agws-css-ids" "$TMP_DIR/adlaire-id-coverage" >"$TMP_DIR/agws-css-ids-missing" && [ -s "$TMP_DIR/agws-css-ids-missing" ]; then
-    echo "AGWS CSS and anchor ids must be covered by Adlaire-Design UI or Master_Spec:" >&2
-    cat "$TMP_DIR/agws-css-ids-missing" >&2
-    exit 1
-  fi
-
-  grep -R -h -E -o '@media \([^)]*\)' "$AGWS_ROOT/style.css" "$AGWS_ROOT/architect.css" 2>/dev/null \
-    | sort -u >"$TMP_DIR/agws-media"
-
-  grep -R -h -E -o '@media \([^)]*\)' "$ADLAIRE_DESIGN_ROOT/UI" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" 2>/dev/null \
-    | sort -u >"$TMP_DIR/adlaire-media-coverage"
-
-  if comm -23 "$TMP_DIR/agws-media" "$TMP_DIR/adlaire-media-coverage" >"$TMP_DIR/agws-media-missing" && [ -s "$TMP_DIR/agws-media-missing" ]; then
-    echo "AGWS media queries must be covered by Adlaire-Design UI or Master_Spec:" >&2
-    cat "$TMP_DIR/agws-media-missing" >&2
-    exit 1
-  fi
-
-  grep -R -h -E -o 'rgba?\([^)]*\)|#[0-9a-fA-F]{3,8}' "$AGWS_ROOT/style.css" "$AGWS_ROOT/architect.css" 2>/dev/null \
-    | sort -u >"$TMP_DIR/agws-colors"
-
-  grep -R -h -E -o 'rgba?\([^)]*\)|#[0-9a-fA-F]{3,8}' "$ADLAIRE_DESIGN_ROOT/Tokens" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" 2>/dev/null \
-    | sort -u >"$TMP_DIR/adlaire-color-coverage"
-
-  if comm -23 "$TMP_DIR/agws-colors" "$TMP_DIR/adlaire-color-coverage" >"$TMP_DIR/agws-colors-missing" && [ -s "$TMP_DIR/agws-colors-missing" ]; then
-    echo "AGWS CSS colors and rgba values must be covered by Adlaire-Design tokens or Master_Spec:" >&2
-    cat "$TMP_DIR/agws-colors-missing" >&2
-    exit 1
-  fi
-fi
 
 echo "adlaire-design-check-ok"
