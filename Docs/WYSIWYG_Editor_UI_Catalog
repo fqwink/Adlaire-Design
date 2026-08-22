@@ -6,7 +6,7 @@
 
 仕様正本は `Docs/Master_Spec` とする。本ファイルは、Editor.jsおよびNotionに代表されるブロックベース編集UIを前提に、Adlaire-Designで管理するEditor UI部品、優先度、実装先、状態を一覧管理する。
 
-Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo / Redo、DOMイベント、APIは本カタログでは扱わない。
+Editor本体、保存形式、編集ロジック、Markdown / MDX parser、Undo / Redo、API連携は本カタログでは扱わない。
 
 ---
 
@@ -30,7 +30,7 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 | 表示モード | editor、preview、split、readonly、error、mobile |
 | 状態入力 | class、ARIA属性、HTML属性をCSSで受ける |
 | レスポンシブ境界 | default、768px以下、480px以下、touch target、bottom sheet |
-| 非対象 | Editor実装、保存、parser、DOMイベント、AI処理、共同編集処理 |
+| 非対象 | Editor本体、保存、編集ロジック、Markdown / MDX parser、AI処理、共同編集処理 |
 | 変更管理 | Master_Spec、カタログ、CSS、検査、変更履歴を同期更新する |
 
 ## 1.2 UI階層
@@ -55,12 +55,12 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 
 | 表示モード | UI仕様 | 実装境界 |
 | --- | --- | --- |
-| editor | Canvasを主表示とし、ブロック編集面を表示する | 表示モード切替ロジックは含めない |
+| editor | Canvasを主表示とし、ブロック編集面を表示する | Editor本文編集ロジックは含めない |
 | preview | Previewを主表示とし、生成済みまたは渡されたプレビューHTMLの見た目を整える | preview rendering生成処理は含めない |
 | split | CanvasとPreviewを併置できる表示を想定する | 分割比率、同期スクロール、生成処理は含めない |
 | readonly | 編集操作UIを抑制した読み取り専用表示を想定する | readonly判定は含めない |
 | error | ブロックまたはEditor全体のエラー表示を受ける | エラー判定、文言生成、送信は含めない |
-| mobile | 下部操作バーとbottom sheetを優先する | デバイス判定、メニュー開閉は含めない |
+| mobile | 下部操作バーとbottom sheetを優先する | デバイス判定は含めない |
 
 ## 1.4 状態入力
 
@@ -71,7 +71,7 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 | HTML属性 | `readonly` 相当の状態はclassまたはARIA属性で受ける |
 | data属性 | Adlaire-Designではdata属性名を固定しない |
 | inline style | progress幅など利用先HTML側の静的指定は許容するが、CSS契約としては固定しない |
-| JavaScript状態 | Adlaire-Designでは生成、更新、監視しない |
+| Editor本体状態 | Adlaire-Designでは生成、更新、監視しない |
 
 ## 1.5 レスポンシブ境界
 
@@ -110,7 +110,7 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 | UI部品を追加する | `Docs/Master_Spec`、本カタログ、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | UI部品を削除する | `Docs/Master_Spec`、本カタログ、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | class名を変更する | `Docs/Master_Spec`、本カタログ、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
-| CSS読み込み順を変更する | `Docs/Master_Spec`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| CSS/JavaScript読み込み順を変更する | `Docs/Master_Spec`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | 非対象範囲を変更する | `Docs/Master_Spec`、`AGENTS.md`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | カタログだけを整理する | 本カタログ、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 
@@ -285,7 +285,6 @@ WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装
 | 保存形式 | UIカタログの範囲に含めないため |
 | Markdown / MDX parser | UIカタログの範囲に含めないため |
 | Undo / Redo | UIカタログの範囲に含めないため |
-| DOMイベント | UIカタログの範囲に含めないため |
 | ドラッグ処理ロジック | UIカタログの範囲に含めないため |
 | AI補助処理 | UIカタログの範囲に含めないため |
 | 共同編集処理 | UIカタログの範囲に含めないため |

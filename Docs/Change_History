@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.84
+
+- `Docs/Master_Spec` の版数を `rev.84` へ更新した。
+- Editor UI JavaScript管理方針と衝突する対象外記載を削除した。
+- Editor本体、保存、編集ロジック、Markdown / MDX parser、生成JavaScriptの対象外境界を簡潔に整理した。
+- CSS/JavaScript読み込み順、責務別JavaScript、Markdown / MDX parser表記の文書整合性を整理した。
+
 ## rev.83
 
 - `Docs/Master_Spec` の版数を `rev.83` へ更新した。

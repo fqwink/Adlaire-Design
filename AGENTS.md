@@ -30,4 +30,4 @@
 - Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理すること。
 - `Tokens/`、`UI/`、`EditorUI/` 配下のCSSファイルを正本として直接管理し、Sass/SCSS/Less/Stylus/PostCSS等のCSSプリプロセッサを追加しないこと。
 - CSSのビルド、minify、bundleは現状検討しないこと。`Dist/`、`dist/`、`Build/`、`build/`、`*.min.css`、`*.bundle.css`、CSSまたはnpm/webpack系フロントエンドビルド設定ファイルを追加しないこと。
-- Adlaire-Designでは、WYSIWYG Editor UIスキン、UI必須クラス、CSS読み込み順、表示境界、Editor UI JavaScriptを管理すること。
+- Adlaire-Designでは、WYSIWYG Editor UIスキン、UI必須クラス、CSS/JavaScript読み込み順、表示境界、Editor UI JavaScriptを管理すること。
