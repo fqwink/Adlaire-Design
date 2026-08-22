@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.79
+**Version:** rev.80
 
 ---
 
@@ -1418,6 +1418,7 @@ WYSIWYG Editor UIでAdlaire-Designを採用する際の読み込み順は以下�
 `UI/wysiwyg.css` は以下の規則に従う。
 
 - 冒頭コメントは `/* Adlaire-Design WYSIWYG editor */` とする。
+- CSS内では `Editor UI common structure`、`Priority A: core block editor UI`、`Editor UI state classes`、`Priority B: editing support UI`、`Priority C: advanced support UI` の実装境界を持つ。
 - `@charset` は書かない。
 - `@import` は書かない。
 - `!important` は使用しない。
@@ -1426,6 +1427,7 @@ WYSIWYG Editor UIでAdlaire-Designを採用する際の読み込み順は以下�
 - HEX値、RGB/RGBA値、非ゼロ角丸、影、z-indexを直接記述しない。
 - JavaScriptに依存する状態制御は定義しない。
 - 状態表現は、HTML側が付与するclassまたはARIA属性を受けるCSSに限定する。
+- 優先A/B/Cの部品は `Docs/WYSIWYG_Editor_UI_Catalog` の分類をCSS実装順と実装確認単位にする。
 
 `UI/wysiwyg.css` は、以下のクラスを定義する。
 

@@ -320,6 +320,8 @@ for wysiwyg_spec_term in \
   'Adlaire-Designでは以下を対象外とする。' \
   'WYSIWYG Editor UIでAdlaire-Designを採用する際の読み込み順は以下に固定する。' \
   '`UI/wysiwyg.css` は、以下のクラスを定義する。' \
+  'CSS内では `Editor UI common structure`、`Priority A: core block editor UI`、`Editor UI state classes`、`Priority B: editing support UI`、`Priority C: advanced support UI` の実装境界を持つ。' \
+  '優先A/B/Cの部品は `Docs/WYSIWYG_Editor_UI_Catalog` の分類をCSS実装順と実装確認単位にする。' \
   'Auteur内製Editor実装は、Adlaire-Designが定義するUI classをHTMLまたは表示層に適用できることを期待する。' \
   '上記のブロック種別は表示想定であり、Editor実装上の保存形式またはparser出力契約ではない。' \
   'Adlaire-Designは、Auteur実装に以下を要求しない。' \
@@ -368,6 +370,7 @@ for wysiwyg_catalog_term in \
   'Preview | `.adlaire-wysiwyg-preview`' \
   'JSON panel | `.adlaire-wysiwyg-json-panel`' \
   'WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装先、非対象範囲を管理する完成カタログとして扱う。' \
+  '`UI/wysiwyg.css` は、本カタログの優先A/B/C分類を実装確認単位として扱う。' \
   '変更管理' \
   '## 2. 共通構造クラス' \
   '## 3. 優先A' \
@@ -1141,6 +1144,27 @@ for class in \
   '.adlaire-wysiwyg-assist-suggestion'; do
   if ! grep -F -- "$class" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" >/dev/null 2>&1; then
     echo "UI/wysiwyg.css missing required class: $class" >&2
+    exit 1
+  fi
+done
+
+for wysiwyg_css_term in \
+  '/* Editor UI common structure */' \
+  '/* Priority A: core block editor UI */' \
+  '/* Editor UI state classes */' \
+  '/* Priority B: editing support UI */' \
+  '/* Priority C: advanced support UI */' \
+  '.adlaire-wysiwyg-tool:focus-visible' \
+  '.adlaire-wysiwyg-block[aria-selected="true"]' \
+  '.adlaire-wysiwyg-slash-item[aria-current="true"]' \
+  '.adlaire-wysiwyg-mobile-action[aria-pressed="true"]' \
+  '.adlaire-wysiwyg-mobile-sheet-item[aria-selected="true"]' \
+  '.adlaire-wysiwyg-comment-panel[aria-busy="true"]' \
+  '.adlaire-wysiwyg-sync-status[aria-live]' \
+  '.adlaire-wysiwyg-comment-marker[aria-current="true"]' \
+  '.adlaire-wysiwyg-assist-suggestion[aria-selected="true"]'; do
+  if ! grep -F -- "$wysiwyg_css_term" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" >/dev/null 2>&1; then
+    echo "UI/wysiwyg.css missing required Editor UI priority implementation term: $wysiwyg_css_term" >&2
     exit 1
   fi
 done

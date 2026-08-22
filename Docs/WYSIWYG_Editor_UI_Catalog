@@ -18,6 +18,7 @@ Editor実装、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 - WYSIWYG Editor UI仕様は `Docs/Master_Spec` で完全固定する。
 - 本カタログは表示層、UI部品、状態表示、モバイルUI、補助パネルのみを扱う。
 - UI実装先は `UI/wysiwyg.css` とする。
+- `UI/wysiwyg.css` は、本カタログの優先A/B/C分類を実装確認単位として扱う。
 - 仕様変更時は `Docs/Master_Spec`、本ファイル、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
 - JavaScript、JSONデータ管理、Markdown / MDX parser、生成JavaScript、bundle、minify、CSSプリプロセッサは前提にしない。
 

@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.80
+
+- `Docs/Master_Spec` の版数を `rev.80` へ更新した。
+- `UI/wysiwyg.css` に、Editor UI共通構造、優先A、状態クラス、優先B、優先Cの実装境界を追加した。
+- `UI/wysiwyg.css` に、ARIA/focus、selected/current、busy、disabled、mobile sheet、quick insert、menu、review/assist系の視覚状態を追加した。
+- `Docs/Master_Spec` と `Docs/WYSIWYG_Editor_UI_Catalog` に、優先A/B/C分類をCSS実装確認単位として扱う方針を追記した。
+- `Tools/check/check-adlaire-design.sh` に、Editor UI優先度別CSS実装境界の検査を追加した。
+
 ## rev.79
 
 - `Docs/Master_Spec` の版数を `rev.79` へ更新した。
