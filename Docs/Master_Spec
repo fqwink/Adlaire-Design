@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.68
+**Version:** rev.69
 
 ---
 
@@ -23,6 +23,8 @@ AGWSの詳細解析は `Docs/AGWS_Design_Analysis` を参照する。
 WYSIWYG Editor UIはAdlaire-Design採用確定とし、Editor実装はAuteur内製とする。WYSIWYG Editor UI仕様と実装境界は本書に統合する。Adlaire-Designでは、WYSIWYG Editorの表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSSを管理対象に含める。
 
 汎用部品の分類、優先度、実装先、実装状態は `Docs/Generic_Component_Catalog` で一覧管理する。仕様正本は本書とし、汎用部品カタログは本書の補助正本として扱う。
+
+WYSIWYG Editor専用UI部品の分類、優先度、実装先、実装状態は `Docs/WYSIWYG_Editor_UI_Catalog` で一覧管理する。仕様正本は本書とし、WYSIWYG Editor UIカタログは本書の補助正本として扱う。
 
 本方針は、実装変更より先に本仕様書を正本として定義する。実際のCSS、テーマ、公開面への反映は、本仕様書の承認後に個別の実装計画として扱う。
 
@@ -280,6 +282,7 @@ WYSIWYG Editor管理仕様では、WYSIWYG Editor UIの仕様、表示層、Aute
 | ファイル | 役割 | 状態 |
 | --- | --- | --- |
 | `UI/wysiwyg.css` | WYSIWYG EditorのエディターUI、ブロック表示、プレビュー、JSON表示 | 実装済み |
+| `Docs/WYSIWYG_Editor_UI_Catalog` | WYSIWYG Editor専用UI部品の分類、優先度、実装先、実装状態 | 実装済み |
 
 ## 11.4 CSS読み込み順
 
@@ -1338,6 +1341,12 @@ Adlaire-Designで固定する対象は以下とする。
 
 - WYSIWYG Editor UIのAdlaire-Design採用範囲
 - Auteur内製Editor実装との責務境界
+- ブロックベースアーキテクチャの表示方針
+- モバイルファーストUI方針
+- ブロック機能UI
+- ブロック操作UI
+- 補助パネルUI
+- レビュー/公開前確認UI
 - CSS読み込み順
 - `UI/wysiwyg.css` の必須クラス
 - CSS禁止事項
@@ -1350,10 +1359,18 @@ Adlaire-Designで固定する対象は以下とする。
 - ヘッダー
 - ツールバー
 - ブロックキャンバス
+- ブロック間挿入UI
 - ブロック選択状態
 - ブロックハンドル
+- ブロック変換メニュー
+- ブロックメニュー
 - インラインツールバー
 - スラッシュコマンドメニュー
+- モバイルbottom sheet
+- アウトラインパネル
+- コメント表示
+- 公開前チェック表示
+- 補助候補表示
 - JSON表示パネル
 - プレビュー領域
 - 状態バー
@@ -1398,6 +1415,75 @@ WYSIWYG Editorのブロック表示は、Adlaire-Designの既存部品を優先�
 | progress | `UI/wysiwyg.css` |
 
 上記のブロック種別は表示想定であり、Editor実装上の保存形式またはparser出力契約ではない。実装上のblock type、schema、parser変換はAuteur内製側で管理する。
+
+WYSIWYG Editor UIは、Editor.jsおよびNotionに代表されるブロックベース編集UIを参照し、1ブロックを1編集単位として扱う表示層を提供する。
+
+ブロックベースアーキテクチャのUI方針は以下とする。
+
+| 項目 | UI仕様 |
+| --- | --- |
+| 編集単位 | 1ブロックを1編集単位として縦積み表示する |
+| ブロック追加 | ブロック間の追加ポイントまたはslash menuで表示する |
+| ブロック変換 | paragraphからheading、list、quote、code、callout等へ変換するメニューを表示する |
+| ブロック移動 | block handleとdrop indicatorを表示する |
+| ブロック削除 | block menu内の操作として表示する |
+| ブロック選択 | selected、focused、dragging、drop-before、drop-afterを視覚化する |
+| 空状態 | 空ドキュメントと空ブロックのplaceholderを表示する |
+| 読み取り専用 | readonly状態の表示を持つ |
+
+モバイルファーストUI方針は以下とする。
+
+| 項目 | UI仕様 |
+| --- | --- |
+| 基本レイアウト | 1カラムを基本とし、横並び前提の操作を避ける |
+| ツールバー | mobileでは下部固定バーまたはbottom sheetを優先する |
+| slash menu | mobileではbottom sheetとして表示できる |
+| block menu | desktopではpopover、mobileではbottom sheetとして表示できる |
+| touch target | 操作部品は最小44px相当を目安にする |
+| keyboard safe area | ソフトキーボード表示時に操作バーが隠れない構成を想定する |
+| overflow | 横スクロールは原則避け、code blockのみ例外として許容する |
+
+WYSIWYG Editor UIの機能優先度は以下とする。
+
+| 優先 | UI機能 |
+| --- | --- |
+| A | heading、paragraph、list、checklist、quote、code、image、divider、callout、block handle、slash menu、mobile bottom sheet |
+| B | outline、block transform、quick insert、comment marker、preview/split、publish check |
+| C | history panel、assist menu、suggested blocks、block group、width modes |
+
+追加のUI機能は以下とする。
+
+| 分類 | 機能 | UI仕様 |
+| --- | --- | --- |
+| Navigation | ドキュメントアウトライン | 見出し一覧を表示するサイドまたは下部パネル |
+| Navigation | 現在ブロック位置 | 現在編集中のブロック位置を薄く表示 |
+| Insert | クイック追加 | ブロック間の追加ボタン |
+| Insert | 最近使ったブロック | slash menu上部に最近利用項目を表示 |
+| Insert | おすすめブロック | 空状態や文脈に応じた候補枠 |
+| Transform | ブロックタイプ変換 | paragraphからheading、list、callout等へ変換するメニュー |
+| Transform | スタイル切替 | callout tone、label tone、code themeなどの表示切替 |
+| Layout | 横幅モード | narrow、default、wide、fullの見た目 |
+| Layout | 画像配置 | center、left、right、fullの見た目 |
+| Layout | グループ表示 | 複数ブロックを視覚的にグループ化 |
+| Review | コメント表示 | ブロック単位のコメントマーカーとスレッドパネル |
+| Review | 提案表示 | 変更提案の差分表示 |
+| Review | 変更履歴表示 | 変更履歴パネルの表示枠 |
+| Status | 保存状態 | saved、saving、unsaved、error |
+| Status | 同期状態 | online、offline、reconnecting |
+| Publish | プレビュー | editor、preview、splitの表示切替 |
+| Publish | 公開前チェック | 必須項目、画像alt、リンク確認等の表示枠 |
+| Assist | AI補助入口 | rewrite、summarize、expandなどのメニュー枠 |
+| Assist | 補助候補 | ブロック下部に候補カード表示 |
+
+アクセシビリティUI方針は以下とする。
+
+| 項目 | UI仕様 |
+| --- | --- |
+| focus | keyboard focusの視認性を確保する |
+| aria | toolbar、menu、button、statusにARIA属性を受けるCSSを用意する |
+| reduced motion | `prefers-reduced-motion` を尊重する |
+| contrast | 状態表示は色だけに依存しない |
+| error | エラー状態は色、アイコン領域、テキスト領域を持つ |
 
 WYSIWYG Editor UIでAdlaire-Designを採用する際の読み込み順は以下に固定する。
 
@@ -1450,6 +1536,55 @@ WYSIWYG Editor UIでAdlaire-Designを採用する際の読み込み順は以下�
 | `.adlaire-wysiwyg-preview` | プレビュー領域 |
 | `.adlaire-wysiwyg-json-panel` | JSON表示領域 |
 | `.adlaire-wysiwyg-footer` | フッター/状態バー |
+| `.adlaire-wysiwyg-block-heading` | 見出しブロック |
+| `.adlaire-wysiwyg-block-paragraph` | 段落ブロック |
+| `.adlaire-wysiwyg-block-list` | リストブロック |
+| `.adlaire-wysiwyg-block-checklist` | チェックリストブロック |
+| `.adlaire-wysiwyg-block-quote` | 引用ブロック |
+| `.adlaire-wysiwyg-block-code` | コードブロック |
+| `.adlaire-wysiwyg-block-image` | 画像ブロック |
+| `.adlaire-wysiwyg-block-divider` | 区切り線ブロック |
+| `.adlaire-wysiwyg-block-callout` | calloutブロック |
+| `.adlaire-wysiwyg-block-label` | label表示 |
+| `.adlaire-wysiwyg-block-progress` | progress表示 |
+| `.adlaire-wysiwyg-block-hover` | hover状態 |
+| `.adlaire-wysiwyg-block-focused` | focus状態 |
+| `.adlaire-wysiwyg-block-dragging` | dragging状態 |
+| `.adlaire-wysiwyg-block-drop-before` | 前方drop位置 |
+| `.adlaire-wysiwyg-block-drop-after` | 後方drop位置 |
+| `.adlaire-wysiwyg-block-empty` | 空ブロック状態 |
+| `.adlaire-wysiwyg-block-readonly` | 読み取り専用状態 |
+| `.adlaire-wysiwyg-block-error` | エラー状態 |
+| `.adlaire-wysiwyg-block-collapsed` | 折りたたみ状態 |
+| `.adlaire-wysiwyg-block-toolbar` | ブロック操作ツールバー |
+| `.adlaire-wysiwyg-block-inserter` | ブロック追加UI |
+| `.adlaire-wysiwyg-block-menu` | ブロックメニュー |
+| `.adlaire-wysiwyg-mobile-bar` | モバイル下部操作バー |
+| `.adlaire-wysiwyg-mobile-action` | モバイル操作ボタン |
+| `.adlaire-wysiwyg-mobile-sheet` | モバイルbottom sheet |
+| `.adlaire-wysiwyg-mobile-sheet-header` | bottom sheetヘッダー |
+| `.adlaire-wysiwyg-mobile-sheet-body` | bottom sheet本文 |
+| `.adlaire-wysiwyg-mobile-sheet-item` | bottom sheet項目 |
+| `.adlaire-wysiwyg-outline` | アウトラインパネル |
+| `.adlaire-wysiwyg-outline-item` | アウトライン項目 |
+| `.adlaire-wysiwyg-current-block-indicator` | 現在ブロック表示 |
+| `.adlaire-wysiwyg-quick-insert` | クイック追加 |
+| `.adlaire-wysiwyg-recent-blocks` | 最近使ったブロック |
+| `.adlaire-wysiwyg-suggested-blocks` | おすすめブロック |
+| `.adlaire-wysiwyg-transform-menu` | ブロック変換メニュー |
+| `.adlaire-wysiwyg-style-menu` | スタイル切替メニュー |
+| `.adlaire-wysiwyg-width-narrow` | narrow幅 |
+| `.adlaire-wysiwyg-width-wide` | wide幅 |
+| `.adlaire-wysiwyg-width-full` | full幅 |
+| `.adlaire-wysiwyg-block-group` | ブロックグループ |
+| `.adlaire-wysiwyg-comment-marker` | コメントマーカー |
+| `.adlaire-wysiwyg-comment-panel` | コメントパネル |
+| `.adlaire-wysiwyg-suggestion` | 提案表示 |
+| `.adlaire-wysiwyg-history-panel` | 変更履歴パネル |
+| `.adlaire-wysiwyg-sync-status` | 同期状態 |
+| `.adlaire-wysiwyg-publish-check` | 公開前チェック |
+| `.adlaire-wysiwyg-assist-menu` | 補助メニュー |
+| `.adlaire-wysiwyg-assist-suggestion` | 補助候補 |
 
 Auteur内製Editor実装は、Adlaire-Designが定義するUI classをHTMLまたは表示層に適用できることを期待する。
 

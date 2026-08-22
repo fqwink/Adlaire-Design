@@ -18,6 +18,7 @@ for path in \
   Docs/Master_Spec \
   Docs/AGWS_Design_Analysis \
   Docs/Generic_Component_Catalog \
+  Docs/WYSIWYG_Editor_UI_Catalog \
   Docs/Change_History \
   Tokens/colors.css \
   Tokens/surface.css \
@@ -73,6 +74,7 @@ find "$ADLAIRE_DESIGN_ROOT/Docs" -type f \
   ! -name 'Master_Spec' \
   ! -name 'AGWS_Design_Analysis' \
   ! -name 'Generic_Component_Catalog' \
+  ! -name 'WYSIWYG_Editor_UI_Catalog' \
   ! -name 'Document_Index' \
   ! -name 'Change_History' \
   -print >"$TMP_DIR/unexpected-docs-files"
@@ -234,6 +236,12 @@ fi
 
 for wysiwyg_spec_term in \
   'WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。' \
+  'WYSIWYG Editor UIは、Editor.jsおよびNotionに代表されるブロックベース編集UIを参照し、1ブロックを1編集単位として扱う表示層を提供する。' \
+  'ブロックベースアーキテクチャのUI方針は以下とする。' \
+  'モバイルファーストUI方針は以下とする。' \
+  'WYSIWYG Editor UIの機能優先度は以下とする。' \
+  '追加のUI機能は以下とする。' \
+  'アクセシビリティUI方針は以下とする。' \
   'Adlaire-Designで固定する対象は以下とする。' \
   '採用確定対象は以下とする。' \
   'Adlaire-Designでは以下を対象外とする。' \
@@ -263,6 +271,25 @@ if grep -F 'Docs/WYSIWYG_Editor_Specification' "$ADLAIRE_DESIGN_ROOT/Docs/Docume
   exit 1
 fi
 
+for wysiwyg_catalog_term in \
+  '# Adlaire-Design WYSIWYG Editor UIカタログ' \
+  'WYSIWYG Editor専用UI部品の一覧を管理する補助正本' \
+  'Editor.jsおよびNotionに代表されるブロックベース編集UI' \
+  '## 2. 優先A' \
+  '## 3. 優先B' \
+  '## 4. 優先C' \
+  '## 5. 状態クラス' \
+  '## 6. 原則対象外' \
+  'Mobile bottom sheet' \
+  'Transform menu' \
+  'Publish check' \
+  'Assist suggestion'; do
+  if ! grep -F -- "$wysiwyg_catalog_term" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_UI_Catalog" >/dev/null 2>&1; then
+    echo "Docs/WYSIWYG_Editor_UI_Catalog missing required catalog term: $wysiwyg_catalog_term" >&2
+    exit 1
+  fi
+done
+
 MASTER_SPEC_VERSION=$(sed -n 's/^\*\*Version:\*\* \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec")
 CHANGE_HISTORY_VERSION=$(sed -n 's/^## \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Change_History" | sed -n '1p')
 
@@ -289,6 +316,7 @@ for indexed_path in \
   Docs/Master_Spec \
   Docs/AGWS_Design_Analysis \
   Docs/Generic_Component_Catalog \
+  Docs/WYSIWYG_Editor_UI_Catalog \
   Docs/Change_History \
   Brand/ \
   Tokens/colors.css \
@@ -915,7 +943,56 @@ for class in \
   '.adlaire-wysiwyg-slash-item' \
   '.adlaire-wysiwyg-preview' \
   '.adlaire-wysiwyg-json-panel' \
-  '.adlaire-wysiwyg-footer'; do
+  '.adlaire-wysiwyg-footer' \
+  '.adlaire-wysiwyg-block-heading' \
+  '.adlaire-wysiwyg-block-paragraph' \
+  '.adlaire-wysiwyg-block-list' \
+  '.adlaire-wysiwyg-block-checklist' \
+  '.adlaire-wysiwyg-block-quote' \
+  '.adlaire-wysiwyg-block-code' \
+  '.adlaire-wysiwyg-block-image' \
+  '.adlaire-wysiwyg-block-divider' \
+  '.adlaire-wysiwyg-block-callout' \
+  '.adlaire-wysiwyg-block-label' \
+  '.adlaire-wysiwyg-block-progress' \
+  '.adlaire-wysiwyg-block-hover' \
+  '.adlaire-wysiwyg-block-focused' \
+  '.adlaire-wysiwyg-block-dragging' \
+  '.adlaire-wysiwyg-block-drop-before' \
+  '.adlaire-wysiwyg-block-drop-after' \
+  '.adlaire-wysiwyg-block-empty' \
+  '.adlaire-wysiwyg-block-readonly' \
+  '.adlaire-wysiwyg-block-error' \
+  '.adlaire-wysiwyg-block-collapsed' \
+  '.adlaire-wysiwyg-block-toolbar' \
+  '.adlaire-wysiwyg-block-inserter' \
+  '.adlaire-wysiwyg-block-menu' \
+  '.adlaire-wysiwyg-mobile-bar' \
+  '.adlaire-wysiwyg-mobile-action' \
+  '.adlaire-wysiwyg-mobile-sheet' \
+  '.adlaire-wysiwyg-mobile-sheet-header' \
+  '.adlaire-wysiwyg-mobile-sheet-body' \
+  '.adlaire-wysiwyg-mobile-sheet-item' \
+  '.adlaire-wysiwyg-outline' \
+  '.adlaire-wysiwyg-outline-item' \
+  '.adlaire-wysiwyg-current-block-indicator' \
+  '.adlaire-wysiwyg-quick-insert' \
+  '.adlaire-wysiwyg-recent-blocks' \
+  '.adlaire-wysiwyg-suggested-blocks' \
+  '.adlaire-wysiwyg-transform-menu' \
+  '.adlaire-wysiwyg-style-menu' \
+  '.adlaire-wysiwyg-width-narrow' \
+  '.adlaire-wysiwyg-width-wide' \
+  '.adlaire-wysiwyg-width-full' \
+  '.adlaire-wysiwyg-block-group' \
+  '.adlaire-wysiwyg-comment-marker' \
+  '.adlaire-wysiwyg-comment-panel' \
+  '.adlaire-wysiwyg-suggestion' \
+  '.adlaire-wysiwyg-history-panel' \
+  '.adlaire-wysiwyg-sync-status' \
+  '.adlaire-wysiwyg-publish-check' \
+  '.adlaire-wysiwyg-assist-menu' \
+  '.adlaire-wysiwyg-assist-suggestion'; do
   if ! grep -F -- "$class" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" >/dev/null 2>&1; then
     echo "UI/wysiwyg.css missing required class: $class" >&2
     exit 1

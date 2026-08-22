@@ -8,6 +8,15 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.69
+
+- `Docs/Master_Spec` の版数を `rev.69` へ更新した。
+- WYSIWYG Editor UI仕様に、Editor.jsおよびNotionを参照したブロックベースアーキテクチャ方針を追加した。
+- WYSIWYG Editor UI仕様に、モバイルファースト、bottom sheet、block transform、quick insert、outline、comment、publish check、assist UIの表示仕様を追加した。
+- `Docs/WYSIWYG_Editor_UI_Catalog` を追加し、WYSIWYG Editor専用UI部品の分類、優先度、実装先、実装状態を分離管理する方針にした。
+- `UI/wysiwyg.css` に、WYSIWYG Editor UI拡充用のブロック種別、状態、モバイル、アウトライン、レビュー、公開前確認、補助UIクラスを追加した。
+- `Tools/check/check-adlaire-design.sh` に、WYSIWYG Editor UI拡充仕様と追加クラスの検査を追加した。
+
 ## rev.68
 
 - `Docs/Master_Spec` の版数を `rev.68` へ更新した。
