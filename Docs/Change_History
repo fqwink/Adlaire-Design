@@ -8,6 +8,15 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.70
+
+- `Docs/Master_Spec` の版数を `rev.70` へ更新した。
+- AGWSとの関係を現時点で切り離し、公開面デザイン方針をAdlaire-Design単独の仕様、Tokens、UI CSS、部品カタログを正本とする方針へ変更した。
+- `Docs/AGWS_Design_Analysis` と `UI/compat-agws.css` を削除し、AGWS解析文書とAGWS互換層を現行管理対象から外した。
+- `Docs/Document_Index`、`README.md`、`Docs/Generic_Component_Catalog` をAdlaire-Design単独方針に整合させた。
+- `Tools/check/check-adlaire-design.sh` からAGWS専用ファイル検査、AGWS互換層検査、隣接AGWSリポジトリ照合を削除した。
+- 特定プロダクト固有の互換層、移行計画、CSS採用検査は利用先プロダクト側で管理し、Adlaire-Designでは標準クラス、トークン、CSS読み込み順、表示境界を管理する方針を明記した。
+
 ## rev.69
 
 - `Docs/Master_Spec` の版数を `rev.69` へ更新した。

@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.69
+**Version:** rev.70
 
 ---
 
@@ -14,11 +14,7 @@
 
 Adlaire Groupが管理するデザイン資産において、色の役割を統一する。
 
-公開面のデザインは、GitHubリポジトリ `fqwink/Adlaire-Group-Web-Site-AGWS` に記録されたサイト構成・情報設計・デザインを参照基準にする。既存構成の良さを維持したうえで、新規実装・大規模改修・ブランド更新のタイミングで、各公開面のカラーや見た目をAGWSの方向性へ段階的に寄せる。
-
-`adlaire.com` は、AGWSリポジトリに基づいて公開される実運用上の確認先として扱う。
-
-AGWSの詳細解析は `Docs/AGWS_Design_Analysis` を参照する。
+公開面のデザインは、Adlaire-Design内で定義するトークン、レイアウト、コンポーネント、WYSIWYG Editor UIを参照基準にする。特定の外部または隣接リポジトリを正本にせず、利用先ごとの採用判断は各プロダクト側で行う。
 
 WYSIWYG Editor UIはAdlaire-Design採用確定とし、Editor実装はAuteur内製とする。WYSIWYG Editor UI仕様と実装境界は本書に統合する。Adlaire-Designでは、WYSIWYG Editorの表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSSを管理対象に含める。
 
@@ -36,8 +32,8 @@ WYSIWYG Editor専用UI部品の分類、優先度、実装先、実装状態は 
 
 - Adlaire Groupのブランド主色は Emerald Green `#00a968` とする。
 - ブランドカラーは、Adlaire Groupが管理する新規デザイン資産、および既存デザイン資産の大規模改修時に、共通のパレット(第3章)を使用する。
-- 公開面のカラー、背景、余白、導線、ボタン、リンク、セクション表現などは、AGWSリポジトリの構成を基準に順次変更する。
-- 既存公開サイトや既存公開面は、現行構成の完成度、変更負荷、運用影響、ブランド上の優先度を考慮し、段階的にAGWSの方向性へ寄せる。
+- 公開面のカラー、背景、余白、導線、ボタン、リンク、セクション表現などは、Adlaire-Designで定義する設計仕様を基準に整理する。
+- 既存公開サイトや既存公開面は、現行構成の完成度、変更負荷、運用影響、ブランド上の優先度を考慮し、Adlaire-Design採用可否を個別に判断する。
 - 管理面は、原則として共通パレットを固定で使用する。公開面は新規構築または大規模改修時に共通パレットの採用を検討する。テーマを定義する場合、テーマは共通パレットのCSS変数(第4章)を参照できる。
 - 色は装飾目的だけでなく、操作、状態、情報分類の意味を持つものとして扱う。
 
@@ -83,7 +79,7 @@ WYSIWYG Editor専用UI部品の分類、優先度、実装先、実装状態は 
 - CSSフレームワークとデザイントークンの実装範囲、ファイル構成、段階は第11章に定める。
 - WYSIWYG Editor UIはAdlaire-Design採用とし、エディター表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSSを本リポジトリで管理する。
 - WYSIWYG Editor実装コード、Markdown / MDXパーサー、保存処理、編集ロジック、生成JavaScriptはAuteur内製側で管理し、Adlaire-Designの管理対象に含めない。
-- 色以外の設計要素(余白、タイポグラフィなど)は、AGWSリポジトリの方向性を参照する。具体的な設計トークンとして管理する必要が生じた場合は、別途定義を新設する。
+- 色以外の設計要素(余白、タイポグラフィなど)は、Adlaire-Design内のトークン、UI CSS、汎用部品仕様として管理する。具体的な設計トークンとして管理する必要が生じた場合は、別途定義を新設する。
 
 ---
 
@@ -139,31 +135,20 @@ Adlaire-Designは、CSSフレームワーク、デザイントークン、ブラ
 
 ---
 
-# 9. AGWSリポジトリを基準とする公開面デザイン方針
+# 9. Adlaire-Design単独の公開面デザイン方針
 
-GitHubリポジトリ `fqwink/Adlaire-Group-Web-Site-AGWS` は、Adlaire Groupの公開面デザインにおける参照基準として扱う。
+Adlaire-Designは、公開面デザインの参照基準を本リポジトリ内の仕様、Tokens、UI CSS、部品カタログに集約する。
 
-AGWSリポジトリの参照対象は以下とする。
+特定の外部サイト、隣接リポジトリ、既存プロダクトのHTML/CSSは、Adlaire-Designの正本として扱わない。利用先プロダクトはAdlaire-Designを採用できるが、採用方針、移行計画、互換層、検査は各プロダクト側で管理する。
 
-- GitHubリポジトリ: `https://github.com/fqwink/Adlaire-Group-Web-Site-AGWS`
-- 参照ブランチ: `main`
-- 参照時点の確認コミット: `98e68c8bba684303879dab266c1aa79af02a10e5`
-- 公開確認先: `adlaire.com`
+公開面デザインで基準とする構成・表現は以下とする。
 
-他の公開サイト、公開テーマ、公開ドキュメントの見た目を変更する場合は、上記リポジトリに含まれる `index.html`、`about.html`、`contact.html`、`legal.html`、`architect.css`、`style.css`、`README.md`、`CHANGELOG.md` を参照する。
-
-AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映方針は、`Docs/AGWS_Design_Analysis` に記録する。
-
-特に、以下の構成・表現を公開面デザインの基準として扱う。
-
-- 静的HTMLによる軽量なページ構成
-- JavaScriptに依存しないCSSベースの実装
-- Architect CSSを基調としたコンポーネント構成
+- JavaScriptに依存しないCSSベースの表示
 - レスポンシブ対応を前提としたレイアウト
 - ヘッダー、ナビゲーション、メインコンテンツ、サイドバー、フッターで構成する情報設計
-- 2カラムレイアウトを基本とした本文と関連情報の分離
-- CSS onlyのタブ、タイムライン、カード、フォーム、パンくずナビゲーション
-- 青系グラデーション、白背景、ライトグレー背景、ダークグレー文字を基調としたクリーンな視覚表現
+- 1カラム、2カラム、グリッド、本文幅制御を扱うレイアウト
+- カード、パネル、notice、タブ、タイムライン、フォーム、パンくずナビゲーションなどのCSS only部品
+- 色、背景、境界、余白、影、角丸、状態表示をトークン経由で扱う視覚表現
 
 変更対象には、少なくとも以下を含める。
 
@@ -177,16 +162,12 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 - 情報の優先順位
 - 視覚的なトーン
 
-ただし、`adlaire.com` はAGWSリポジトリに基づいて公開される実運用上の確認先であるため、ブランドカラー仕様を理由として、既存画面の構成、導線、情報設計、見た目を一律に置き換えることはしない。
+既存プロダクトへAdlaire-Designを採用する場合は、以下を前提とする。
 
-`adlaire.com` 自体を変更する場合は、以下のいずれかのタイミングで個別に判断する。
-
-- 新規ページまたは新規セクションを追加する場合
-- 既存ページを大規模改修する場合
-- ブランド更新や公開サイト全体の再設計を行う場合
-- ユーザーが個別に承認した場合
-
-反映時は、AGWSリポジトリに記録された既存構成の良さを維持し、色や見た目の統一がユーザー体験を損なわない範囲で適用する。
+- Adlaire-Design側ではプロダクト固有HTMLの互換層を管理しない。
+- プロダクト固有のCSS移行、読み込み順、ロールバック方法は利用先で管理する。
+- Adlaire-Design側の責務は、標準クラス、トークン、CSS読み込み順、表示境界の仕様化に限定する。
+- 特定プロダクトの見た目を完全再現することをAdlaire-Designの必須条件にしない。
 
 ---
 
@@ -196,14 +177,14 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 
 - Adlaire Groupが管理する管理画面
 - 新規作成または大規模改修される静的生成公開テーマ
-- AGWSリポジトリの方向性へ見た目を変更する公開面
-- `Adlaire-Group-Web-Site-AGWS` の構成・見た目を参照して整備する公開面
+- Adlaire-Designで定義する公開面CSSを採用する公開面
+- Adlaire-Designの構成・見た目を参照して整備する公開面
 - Adlaire-Designで定義するテーマ
 - テーマ内で参照する色トークン
 
 本仕様は以下には適用しない。
 
-- 既存公開サイト `adlaire.com` の既存画面に対する即時全面改修
+- 既存公開サイトの既存画面に対する即時全面改修
 - 既存公開面のうち、現行構成が有効に機能しており、別途ユーザー承認を得て段階適用としたもの
 - ユーザーが管理するコンテンツ本文
 - 認証情報
@@ -226,8 +207,8 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 - Node.js/npm依存物は追加しない。
 - 外部CSSフレームワークは採用しない。
 - HEX値は原則としてトークン定義に集約し、UI側のCSSはCSS変数を参照する。
-- AGWSリポジトリのCSSはそのまま扱わず、構造・役割・見た目を参考にしてAdlaire-Design内の仕様へ整理する。
-- 実装は、第1段階の色トークンと最小ユーティリティ、第2段階の公開面トークン・レイアウト・コンポーネント、第3段階のAGWS完全再現用CSS、WYSIWYG Editor管理仕様に分けて管理する。
+- 既存プロダクト固有CSSはそのまま扱わず、必要な構造・役割・見た目をAdlaire-Design内の標準仕様へ整理する。
+- 実装は、第1段階の色トークンと最小ユーティリティ、第2段階の公開面トークン・レイアウト・コンポーネント、第3段階の公開面CSS基盤、WYSIWYG Editor管理仕様に分けて管理する。
 - `@import` は使用しない。CSSファイルの読み込み順は利用側で明示する。
 - 2026-08-21時点では、CSSビルド方針は採用しない。`Tokens/` と `UI/` 配下のCSSファイルを正本として直接管理し、生成元と生成物を分けない。
 - WYSIWYG Editor実装コード、Markdown / MDXパーサー、保存処理、編集ロジックはAuteur内製側で管理する。
@@ -250,30 +231,29 @@ AGWSの構成、CSS設計、色、レイアウト、Adlaire-Designへの反映�
 
 ### 11.3.2 第2段階
 
-第2段階では、AGWSリポジトリを参照基準とする公開面用トークン、レイアウト、コンポーネントをまとめて整理する。
+第2段階では、Adlaire-Designの公開面用トークン、レイアウト、コンポーネントをまとめて整理する。
 
 | ファイル | 役割 | 状態 |
 | --- | --- | --- |
-| `Tokens/surface.css` | AGWS参照色、画面面色、テキスト色、notice色のCSS変数定義 | 実装済み |
+| `Tokens/surface.css` | 公開面アクセント色、画面面色、テキスト色、notice色のCSS変数定義 | 実装済み |
 | `Tokens/effects.css` | `UI/components.css` が参照する影・角丸などの効果トークン | 実装済み |
 | `UI/layout.css` | 基本レイアウト | 実装済み |
 | `UI/components.css` | 公開面コンポーネント | 実装済み |
 
 ### 11.3.3 第3段階
 
-第3段階では、AGWSの現行表示をAdlaire-Design成果物だけで再現するための対象領域を実装済みである。
+第3段階では、Adlaire-Designの公開面CSS基盤として必要な対象領域を実装済みである。
 
 | ファイル | 役割 | 状態 |
 | --- | --- | --- |
 | `Tokens/status.css` | 状態色・中立色トークン | 実装済み |
 | `Tokens/effects.css` | 影、角丸、半透明、transition、animation、z-indexなどの効果トークン | 実装済み |
 | `UI/base.css` | reset、base、typography、body、linkなどの基礎スタイル | 実装済み |
-| `UI/grid.css` | container、row、columnなどのグリッド互換 | 実装済み |
+| `UI/grid.css` | container、row、columnなどのグリッド | 実装済み |
 | `UI/site.css` | サイトヘッダー、ナビゲーション、フッター、ページトップリンク | 実装済み |
 | `UI/forms.css` | フォーム、入力、チェック、送信ボタン、フォームnotice | 実装済み |
 | `UI/content.css` | ニュース、組織情報、沿革、法的情報目次などの本文固有表現 | 実装済み |
 | `UI/utilities.css` | spacing、text、background、display、flexなどの汎用ユーティリティ | 実装済み |
-| `UI/compat-agws.css` | AGWS既存HTMLクラス・ID・属性との互換層 | 実装済み |
 
 ### 11.3.4 WYSIWYG Editor管理仕様
 
@@ -315,7 +295,6 @@ WYSIWYG Editor管理仕様では、WYSIWYG Editor UIの仕様、表示層、Aute
 11. `UI/forms.css`
 12. `UI/content.css`
 13. `UI/utilities.css`
-14. `UI/compat-agws.css`
 
 WYSIWYG EditorのUIにおけるAdlaire-Design採用は確定済みとする。WYSIWYG Editorでの読み込み順は、本書に定める。WYSIWYG固有CSSである `UI/wysiwyg.css` は、既存UIファイルの後に読み込む。
 
@@ -438,7 +417,7 @@ WYSIWYG EditorのUIにおけるAdlaire-Design採用は確定済みとする。WY
 
 ## 11.6 第2段階の確定仕様
 
-第2段階では、AGWSリポジトリの公開面デザインを参照し、以下をひとまとまりの実装単位として扱う。
+第2段階では、Adlaire-Designの公開面デザイン基盤として、以下をひとまとまりの実装単位として扱う。
 
 - 公開面参照色
 - 1200px基準のコンテナ
@@ -455,13 +434,13 @@ WYSIWYG EditorのUIにおけるAdlaire-Design採用は確定済みとする。WY
 
 ### 11.6.1 `Tokens/surface.css`
 
-`Tokens/surface.css` は、AGWSリポジトリの公開面デザインで頻出する色を、公開面用の面・文字・強調・通知トークンとして定義する。
+`Tokens/surface.css` は、公開面用の面・文字・強調・通知トークンを定義する。
 
 `Tokens/surface.css` は、第1段階の `Tokens/colors.css` とは別ファイルにし、ブランドカラー本体と公開面参照色を混在させない。
 
 CSS変数は以下とする。
 
-| CSS変数 | HEX | AGWS上の主な用途 |
+| CSS変数 | HEX | 主な用途 |
 | --- | --- | --- |
 | `--adlaire-surface-accent` | `#0066cc` | 見出し、リンク、主要ボタン、境界、強調 |
 | `--adlaire-surface-accent-mid` | `#0055aa` | ヘッダーグラデーション中間、ホバー |
@@ -490,7 +469,7 @@ CSS変数は以下とする。
 
 ### 11.6.2 `UI/layout.css`
 
-`UI/layout.css` は、AGWSリポジトリの公開面レイアウトを参照し、ページ幅、2カラム構成、レスポンシブ時の1カラム化を扱う。
+`UI/layout.css` は、公開面レイアウトとして、ページ幅、2カラム構成、レスポンシブ時の1カラム化を扱う。
 
 対象クラスは以下とする。
 
@@ -518,7 +497,7 @@ CSS変数は以下とする。
 
 ### 11.6.3 `UI/components.css`
 
-`UI/components.css` は、AGWSリポジトリの公開面コンポーネントを参照し、カード、セクション見出し、パンくず、サイドバー関連情報、notice表現を扱う。
+`UI/components.css` は、公開面コンポーネントとして、カード、セクション見出し、パンくず、サイドバー関連情報、notice表現を扱う。
 
 対象クラスは以下とする。
 
@@ -621,8 +600,8 @@ CSS変数は以下とする。
 - `*.min.css` や `*.bundle.css` などの生成CSSファイル
 - PostCSS、Vite、Webpack、Rollup、Tailwind CSSなどのビルド設定ファイル
 - 外部CSSフレームワークの導入
-- AGWSリポジトリCSSのそのままの移植
-- `adlaire.com` 既存画面の直接変更
+- 既存プロダクト固有CSSのそのままの移植
+- 既存プロダクト画面の直接変更
 - 仕様化されていないロゴや画像などのブランド資産作成
 - 多言語化
 - JSONデータ管理
@@ -670,20 +649,18 @@ CSS変数は以下とする。
 | --- | --- | --- |
 | 第1段階 | `Tokens/colors.css`、`UI/adlaire.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 | 第2段階 | `Tokens/surface.css`、`UI/layout.css`、`UI/components.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
-| 第3段階 | `Tokens/status.css`、`Tokens/effects.css`、`UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
+| 第3段階 | `Tokens/status.css`、`Tokens/effects.css`、`UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 | WYSIWYG Editor管理仕様 | `Docs/Master_Spec`、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 
-## 11.10 AGWS完全再現仕様
+## 11.10 Adlaire-Design公開面CSS基盤仕様
 
-Adlaire-Designの第1段階・第2段階は、AGWSの公開面トーン、基本レイアウト、主要コンポーネントを抽出している。第3段階では、AGWSの現行表示をAdlaire-Design成果物だけで再現するため、サイト外枠、フォーム、ニュース、組織情報、既存クラス互換を含むCSS仕様を実装済みである。
+第3段階では、Adlaire-Designの公開面CSS基盤として、サイト外枠、フォーム、本文部品、グリッド、ユーティリティ、状態表現を実装済みである。
 
-AGWS完全再現は、AGWS本体を先に変更せず、Adlaire-Design側で必要なCSS仕様を満たした後に、AGWSを適用先として更新する。
+特定プロダクトの既存HTML/CSSを完全再現することは、本リポジトリの必須条件にしない。Adlaire-Designは標準クラス、トークン、読み込み順、表示境界を管理し、プロダクト固有の互換層は利用先で管理する。
 
 ### 11.10.1 第3段階の目的
 
-第3段階は、AGWSの現行HTML/CSSが提供している見た目と構成を、Adlaire-Design側のCSS成果物で再現できる状態にすることを目的とする。
-
-第3段階では、AGWSのCSSをそのまま移植しない。既存表示を基準に、Adlaire-Designの命名、責務分離、CSS変数参照へ整理する。
+第3段階は、公開面で再利用可能なCSS基盤を、Adlaire-Designの命名、責務分離、CSS変数参照へ整理することを目的とする。
 
 ### 11.10.2 第3段階の対象ファイル
 
@@ -694,176 +671,40 @@ AGWS完全再現は、AGWS本体を先に変更せず、Adlaire-Design側で必�
 | `Tokens/status.css` | alert、button variants、text/background utilitiesで使う状態色・中立色トークン | 実装済み |
 | `Tokens/effects.css` | 影、角丸、余白、グラデーション、text-shadow、opacity、transform、transition、animation、backdrop-filter、z-indexなどの公開面補助トークン | 実装済み |
 | `UI/base.css` | reset、base、typography、body、linkなどの基礎スタイル | 実装済み |
-| `UI/grid.css` | container、row、columnなどのグリッド互換 | 実装済み |
+| `UI/grid.css` | container、row、columnなどのグリッド | 実装済み |
 | `UI/site.css` | サイトヘッダー、ナビゲーション、フッター、ページトップリンク | 実装済み |
 | `UI/forms.css` | フォーム、入力、チェック、送信ボタン、フォームnotice | 実装済み |
 | `UI/content.css` | ニュース、組織情報、沿革、法的情報目次などの本文固有表現 | 実装済み |
 | `UI/utilities.css` | spacing、text、background、display、flexなどの汎用ユーティリティ | 実装済み |
-| `UI/compat-agws.css` | AGWS既存HTMLクラス・ID・属性との互換層 | 実装済み |
 
-`UI/compat-agws.css` は、AGWS本体のHTML変更量を最小化するための一時的な互換層として扱う。Adlaire-Designの標準クラス正本は `.adlaire-` 接頭辞のクラスとし、互換層はAGWS適用時に必要な範囲だけ使用する。
+### 11.10.3 実装済みの対象領域
 
-### 11.10.3 実装済みの再現対象領域
+第3段階で実装した主な表示領域は以下である。
 
-AGWS完全再現のために第3段階で実装した主な表示領域は以下である。
-
-| 領域 | AGWS側の代表クラス | Adlaire-Design側の扱い |
-| --- | --- | --- |
-| 基礎スタイル | `*`、`*::before`、`*::after`、`html`、`body`、`h1`から`h6`、`p`、`a`、`a:hover`、font smoothing、scroll behavior、box sizing | `UI/base.css` |
-| HTML要素 | `html`、`head`、`meta`、`title`、`link`、`body`、`header`、`nav`、`main`、`section`、`article`、`aside`、`footer`、`div`、`h1`、`h2`、`h3`、`p`、`a`、`ul`、`li`、`span`、`strong`、`small`、`br`、`form`、`label`、`input`、`select`、`option`、`textarea`、`button` | `UI/base.css`、`UI/forms.css`、`UI/content.css` |
-| HTML属性 | `lang="ja"`、`charset="UTF-8"`、`name="viewport"`、`content`、`initial-scale=1.0`、`rel="stylesheet"`、`href`、`target="_blank"`、`aria-label`、`class`、`id`、`for`、`name`、`type`、`value`、`rows` | `UI/base.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` |
-| グリッド互換 | `.container-fluid`、`.row`、`.col`、`.col-1`、`.col-2`、`.col-3`、`.col-4`、`.col-5`、`.col-6`、`.col-7`、`.col-8`、`.col-9`、`.col-10`、`.col-11`、`.col-12` | `UI/grid.css` |
-| サイトヘッダー | `.site-header`、`.site-title`、`.site-tagline`、`.header-link`、`.site-nav`、`.nav-button` | `UI/site.css` |
-| メイン余白 | `.main-content`、`.content-section` | `UI/site.css` または `UI/content.css` |
-| フッター | `.site-footer` | `UI/site.css` |
-| リニューアル告知 | `.renewal-notice`、`.renewal-title`、`.renewal-description` | `UI/content.css` |
-| ニュース | `.news-item`、`.news-header`、`.news-date`、`.news-badge`、`.news-badge-press`、`.news-badge-maintenance`、`.news-title`、`.news-content` | `UI/content.css` |
-| 組織情報 | `.organization-info`、`.info-row`、`.info-label`、`.info-value`、`.business-list`、`.business-detail` | `UI/content.css` |
-| 沿革詳細 | `.timeline`、`.timeline-item`、`.timeline-date`、`.timeline-content`、`.timeline-marker`、`.timeline-text` | `UI/content.css` |
-| フォーム | `.contact-form`、`.form-description`、`.form-notice`、`.form-group`、`.form-label`、`.form-control`、`textarea.form-control`、`select.form-control`、`.form-control:focus`、`.form-check`、`.form-check-input`、`.form-check-label`、`.required`、`.form-label.required::after`、`.btn`、`.btn-primary`、`.btn-secondary`、`.btn-outline-primary`、`.btn-lg`、`.btn-sm`、`.btn-block`、`.btn-submit`、`.btn-submit:hover`、`.btn-submit:disabled` | `UI/forms.css` |
-| フォームID | `#contactForm`、`#name`、`#email`、`#subject`、`#inquiry_type`、`#message` | `UI/forms.css` または `UI/compat-agws.css` |
-| カード詳細 | `.card`、`.card-header`、`.card-body`、`.card-footer`、`.card:hover` | `UI/content.css` または `UI/compat-agws.css` |
-| 状態色・中立色 | `#6c757d`、`#5a6268`、`#28a745`、`#dc3545`、`#ffc107`、`#17a2b8`、`#343a40`、`#777777`、`#999999`、`#cccccc`、`#dddddd`、`#f8f9fa`、`#f9f9f9`、`#0c5460`、`#d1ecf1`、`#bee5eb`、`#155724`、`#d4edda`、`#c3e6cb`、`#856404`、`#fff3cd`、`#ffeaa7`、`#721c24`、`#f8d7da`、`#f5c6cb`、短縮HEXの`#fff`、`#333`、`#666`、`#777`、`#ddd` | `Tokens/status.css` |
-| アラート | `.alert`、`.alert-info`、`.alert-success`、`.alert-warning`、`.alert-danger` | `UI/content.css` |
-| 法的情報目次 | `.legal-toc-card`、`.legal-toc`、`.legal-toc-link`、`#terms`、`#privacy`、`#disclaimer`、`#copyright` | `UI/content.css` |
-| タブ詳細 | `.tab-container`、`.tab-input`、`.tab-labels`、`.tab-label`、`.tab-label:hover`、`.tab-content`、`.tab-pane`、`#tab-all:checked`、`#tab-press:checked`、`#tab-maintenance:checked`、`#content-all`、`#content-press`、`#content-maintenance`、`label[for="tab-all"]`、`label[for="tab-press"]`、`label[for="tab-maintenance"]`、`@keyframes fadeIn` | `UI/content.css` |
-| サイドバー詳細 | `.sidebar-section`、`.sidebar-section:hover`、`.sidebar-title`、`.sidebar-content`、`.sidebar-link-list`、`.sidebar-link`、`.sidebar-link:hover`、`.sidebar-link.active`、`.sidebar-links`、`.sidebar-links li`、`.sidebar-links li:before`、`.sidebar-links a`、`.sidebar-links a:hover`、`.active` | `UI/content.css` |
-| リンク表現 | `.contact-link`、`.privacy-link`、`.text-link` | `UI/content.css` |
-| 連絡先情報 | `.contact-info`、`.contact-item`、`.contact-item h3`、`.contact-item p`、`.contact-item a`、`.contact-item a:hover` | `UI/content.css` |
-| 補助テキスト | `.coming-soon`、`.coming-soon-small`、`.info-note`、`.last-updated`、`.text-muted`、`.mt-30` | `UI/content.css` または `UI/compat-agws.css` |
-| 公開面本文部品 | `.adlaire-table-scroll`、`.adlaire-content-table`、`.content-table`、`.adlaire-meta-list`、`.adlaire-meta-row`、`.adlaire-meta-label`、`.adlaire-meta-value`、`.adlaire-badge`、`.adlaire-note` | `UI/content.css` |
-| 汎用ユーティリティ | `.mt-0`、`.mt-1`、`.mt-2`、`.mt-3`、`.mt-4`、`.mt-5`、`.mb-0`、`.mb-1`、`.mb-2`、`.mb-3`、`.mb-4`、`.mb-5`、`.pt-0`、`.pt-1`、`.pt-2`、`.pt-3`、`.pt-4`、`.pt-5`、`.pb-0`、`.pb-1`、`.pb-2`、`.pb-3`、`.pb-4`、`.pb-5`、`.text-left`、`.text-center`、`.text-right`、`.text-primary`、`.text-secondary`、`.text-success`、`.text-danger`、`.text-warning`、`.text-info`、`.text-muted`、`.bg-primary`、`.bg-secondary`、`.bg-light`、`.bg-dark`、`.d-none`、`.d-block`、`.d-inline`、`.d-inline-block`、`.d-flex`、`.flex-row`、`.flex-column`、`.justify-content-start`、`.justify-content-end`、`.justify-content-center`、`.justify-content-between`、`.align-items-start`、`.align-items-end`、`.align-items-center` | `UI/utilities.css` |
-| 疑似要素・状態 | `*::before`、`*::after`、`a:hover`、`.form-label.required::after`、`.adlaire-form-label.required::after`、`.form-control:focus`、`.adlaire-form-control:focus`、`.btn:hover`、`.adlaire-button:hover`、`.btn-primary:hover`、`.adlaire-button-primary:hover`、`.btn-secondary:hover`、`.adlaire-button-secondary:hover`、`.btn-outline-primary:hover`、`.adlaire-button-outline:hover`、`.header-link:hover`、`.nav-button:hover`、`.card:hover`、`.info-row:first-child`、`.info-row:last-child`、`.business-list li:last-child`、`.contact-link:hover`、`.adlaire-content-link:hover`、`.timeline::before`、`.timeline-item:last-child`、`.tab-label:hover`、`.adlaire-tab-label:hover`、`.news-item:hover`、`.adlaire-news-item:hover`、`.news-content p:last-child`、`.sidebar-section:hover`、`.sidebar-link-list li:last-child`、`.sidebar-link:hover`、`.sidebar-links a:hover`、`.adlaire-sidebar-links a:hover`、`.contact-item a:hover`、`.adlaire-contact-item a:hover`、`.breadcrumb-link:hover`、`.back-to-top:hover`、`.btn-submit:hover`、`.adlaire-button-submit:hover`、`.btn-submit:disabled`、`.adlaire-button-submit:disabled`、`.privacy-link:hover`、`.text-link:hover`、`.legal-toc-link:hover`、`.adlaire-legal-toc-link:hover`、checked、active、focus、disabled状態 | 各対象UIファイル |
-| レスポンシブ調整 | `@media (max-width: 1024px)`、`@media (max-width: 768px)`、`@media (max-width: 480px)` | `UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css` |
-| HTMLアンカーID | `#top`、`#company`、`#operation` | `UI/site.css` または `UI/content.css` |
-| 既存クラス互換 | `.container`、`.content-wrapper`、`.main-area`、`.sidebar`、`.card`、`.section-title`、`.section-content`、`.breadcrumb`、`.breadcrumb-link`、`.breadcrumb-separator`、`.breadcrumb-current`、`.back-to-top`、`.back-to-top-icon` | `UI/compat-agws.css` |
+| 領域 | Adlaire-Design側の扱い |
+| --- | --- |
+| 基礎スタイル | `UI/base.css` |
+| グリッド | `UI/grid.css` |
+| サイトヘッダー、ナビゲーション、フッター | `UI/site.css` |
+| フォーム | `UI/forms.css` |
+| ニュース、組織情報、沿革、法的情報目次、本文表、注記 | `UI/content.css` |
+| 汎用ユーティリティ | `UI/utilities.css` |
+| 状態色・中立色 | `Tokens/status.css` |
+| 影、角丸、transition、animation、z-index | `Tokens/effects.css` |
 
 ### 11.10.4 第3段階の命名方針
 
 第3段階でAdlaire-Design側に新設する標準クラスは、原則として `.adlaire-` 接頭辞を使用する。
 
-実装済みの標準クラスは以下とする。
-
-| 標準クラス | 役割 |
-| --- | --- |
-| `.adlaire-page` | ページ全体の基礎面 |
-| `.adlaire-content-container` | 汎用コンテナ |
-| `.adlaire-grid-row` | グリッド行 |
-| `.adlaire-grid-col` | グリッド列 |
-| `.adlaire-site-header` | サイトヘッダー |
-| `.adlaire-site-title` | サイトタイトル |
-| `.adlaire-site-tagline` | サイトタグライン |
-| `.adlaire-site-nav` | サイトナビゲーション |
-| `.adlaire-nav-button` | ナビゲーションボタン |
-| `.adlaire-site-footer` | サイトフッター |
-| `.adlaire-renewal-notice` | リニューアル告知 |
-| `.adlaire-news-item` | ニュース項目 |
-| `.adlaire-news-badge` | ニュース種別バッジ |
-| `.adlaire-info-row` | 組織情報行 |
-| `.adlaire-info-label` | 組織情報ラベル |
-| `.adlaire-info-value` | 組織情報値 |
-| `.adlaire-contact-info` | 連絡先情報 |
-| `.adlaire-contact-item` | 連絡先情報項目 |
-| `.adlaire-form-group` | フォーム項目 |
-| `.adlaire-form-label` | フォームラベル |
-| `.adlaire-form-control` | 入力欄 |
-| `.adlaire-form-check` | チェック項目 |
-| `.adlaire-button` | ボタン基本形 |
-| `.adlaire-button-primary` | 主要ボタン |
-| `.adlaire-button-secondary` | 補助ボタン |
-| `.adlaire-button-outline` | アウトラインボタン |
-| `.adlaire-button-disabled` | 無効ボタン状態 |
-| `.adlaire-button-submit` | 送信ボタン |
-| `.adlaire-alert` | アラート基本形 |
-| `.adlaire-alert-info` | 情報アラート |
-| `.adlaire-alert-success` | 成功アラート |
-| `.adlaire-alert-warning` | 警告アラート |
-| `.adlaire-alert-danger` | 危険アラート |
-| `.adlaire-tab-input` | CSS onlyタブ入力 |
-| `.adlaire-tab-label` | CSS onlyタブラベル |
-| `.adlaire-tab-content` | CSS onlyタブ本文 |
-| `.adlaire-sidebar-links` | サイドバーリンク群 |
-| `.adlaire-legal-toc` | 法的情報目次 |
-| `.adlaire-legal-toc-link` | 法的情報目次リンク |
-| `.adlaire-content-link` | 本文内リンク |
-| `.adlaire-table-scroll` | 横スクロール可能な本文表ラッパー |
-| `.adlaire-content-table` | 公開面本文用の表 |
-| `.adlaire-meta-list` | メタ情報リスト |
-| `.adlaire-meta-row` | メタ情報行 |
-| `.adlaire-meta-label` | メタ情報ラベル |
-| `.adlaire-meta-value` | メタ情報値 |
-| `.adlaire-badge` | バッジ基本形 |
-| `.adlaire-badge-primary` | 主要バッジ |
-| `.adlaire-badge-secondary` | 補助バッジ |
-| `.adlaire-badge-success` | 成功バッジ |
-| `.adlaire-badge-warning` | 警告バッジ |
-| `.adlaire-badge-danger` | 危険バッジ |
-| `.adlaire-note` | 注記基本形 |
-| `.adlaire-note-info` | 情報注記 |
-| `.adlaire-note-success` | 成功注記 |
-| `.adlaire-note-warning` | 警告注記 |
-| `.adlaire-note-danger` | 危険注記 |
-| `.adlaire-muted-text` | 補助テキスト |
-| `.adlaire-panel` | 汎用パネル |
-| `.adlaire-panel-header` | 汎用パネル見出し領域 |
-| `.adlaire-panel-body` | 汎用パネル本文領域 |
-| `.adlaire-panel-footer` | 汎用パネル補助領域 |
-| `.adlaire-well` | 補助情報枠 |
-| `.adlaire-button-group` | ボタン群 |
-| `.adlaire-toolbar` | 汎用ツールバー |
-| `.adlaire-toolbar-section` | ツールバー内の操作グループ |
-| `.adlaire-action-row` | 操作要素の横並び領域 |
-| `.adlaire-action-row-start` | 左寄せ操作領域 |
-| `.adlaire-action-row-between` | 両端揃え操作領域 |
-| `.adlaire-divider` | 汎用区切り線 |
-| `.adlaire-stack` | 縦方向スタック |
-| `.adlaire-stack-sm` | 小さい間隔の縦方向スタック |
-| `.adlaire-stack-lg` | 大きい間隔の縦方向スタック |
-| `.adlaire-inline` | 折り返し可能なインライン配置 |
-| `.adlaire-empty-state` | 空状態表示 |
-| `.adlaire-empty-state-title` | 空状態見出し |
-| `.adlaire-empty-state-text` | 空状態本文 |
-| `.adlaire-feature-list` | 特徴リスト |
-| `.adlaire-feature-item` | 特徴リスト項目 |
-| `.adlaire-check-list` | チェックリスト |
-| `.adlaire-check-item` | チェックリスト項目 |
-| `.adlaire-chip-list` | チップ一覧 |
-| `.adlaire-chip` | 汎用チップ |
-| `.adlaire-chip-primary` | 主要チップ |
-| `.adlaire-chip-muted` | 補助チップ |
-| `.adlaire-status-pill` | ステータスピル |
-| `.adlaire-status-dot` | ステータス点 |
-| `.adlaire-definition-list` | 定義リスト |
-| `.adlaire-definition-row` | 定義リスト行 |
-| `.adlaire-definition-term` | 定義語 |
-| `.adlaire-definition-description` | 定義説明 |
-| `.adlaire-key-value` | キー/値サマリー |
-| `.adlaire-key-value-row` | キー/値行 |
-| `.adlaire-key-value-key` | キー |
-| `.adlaire-key-value-value` | 値 |
-| `.adlaire-link-list` | 汎用リンクリスト |
-| `.adlaire-link-list-item` | 汎用リンクリスト項目 |
-| `.adlaire-link-list-link` | 汎用リンクリストリンク |
-| `.adlaire-related-links` | 関連リンク枠 |
-| `.adlaire-surface-grid` | 面付き項目のレスポンシブグリッド |
-| `.adlaire-surface-item` | 面付き項目 |
-| `.adlaire-media` | メディアオブジェクト外枠 |
-| `.adlaire-media-figure` | メディアオブジェクト図版領域 |
-| `.adlaire-media-body` | メディアオブジェクト本文領域 |
-| `.adlaire-media-title` | メディアオブジェクト見出し |
-| `.adlaire-cta` | CTA枠 |
-| `.adlaire-cta-title` | CTA見出し |
-| `.adlaire-cta-text` | CTA本文 |
-| `.adlaire-cta-actions` | CTA操作領域 |
-| `.adlaire-caption` | キャプション |
-| `.adlaire-helper-text` | 補助説明テキスト |
+既存HTMLとの互換だけを目的とする無接頭辞クラス、プロダクト固有ID、プロダクト固有属性セレクタは、Adlaire-Designの標準APIとして追加しない。移行時に必要な互換層は、利用先プロダクト側で管理する。
 
 ### 11.10.5 第3段階の非対象
 
 第3段階では以下を対象外とする。
 
-- AGWS本体HTMLの置換
-- AGWS本体CSSの削除
+- 特定プロダクト本体HTMLの置換
+- 特定プロダクト本体CSSの削除
+- 特定プロダクト固有の互換層
 - JavaScript実装
 - 多言語化
 - JSONデータ管理
@@ -871,34 +712,7 @@ AGWS完全再現のために第3段階で実装した主な表示領域は以下
 - minify版
 - 画像・ロゴ作成
 
-### 11.10.6 AGWS適用前の判定条件
-
-AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
-
-- Adlaire-Design側で第3段階CSSの仕様が確定していること。
-- Adlaire-Design側で第3段階CSSが実装済みであること。
-- `Tools/check/check-adlaire-design.sh` が第3段階CSSを検査していること。
-- AGWS側では、見た目の変更を目的にせず、Adlaire-Design成果物で現行表示を再現することを目的にすること。
-- AGWS側の初回適用は、CSS読み込みと互換層利用を中心にし、HTML構造変更を最小限にすること。
-
-### 11.10.7 再現範囲確認結果
-
-2026-08-21時点で、AGWS現行HTMLに出現するclass属性値は本節のAGWS完全再現仕様に含めている。
-
-追加で、AGWS側CSSのセレクタ単位を確認した結果、HTMLクラス照合だけでは以下が不足しやすいことを確認した。
-
-- `architect.css` 由来のreset、base、typography、grid、button variants、card subparts、alert、spacing、text、background、display、flex utilities。
-- `style.css` 由来のCSS onlyタブID、checked状態、hover、active、focus、disabled、疑似要素、疑似クラス。
-- `1024px`、`768px`、`480px` のレスポンシブ調整。
-- `text-shadow`、`opacity`、`transform`、`transition`、`animation`、`backdrop-filter` など、色以外の視覚効果。
-- `.site-tagline` のように現行HTMLでは未使用でもCSSに残っている表示要素。
-- alert、button variants、text/background utilitiesで使う状態色・中立色。
-- CSSプロパティ単位では、`font-smoothing`、`scroll-behavior`、`box-sizing`、`resize`、`outline`、`cursor`、`user-select`、`position`、`z-index` などの基礎挙動。
-- `rgba(...)` で表現される影、半透明背景、白透明の重ね表現。
-
-したがって、第3段階では `UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` だけでなく、`Tokens/status.css`、`UI/base.css`、`UI/grid.css`、`UI/utilities.css` を含めて仕様確定済みである。
-
-### 11.10.8 第3段階の読み込み順
+### 11.10.6 第3段階の読み込み順
 
 第3段階の読み込み順は以下とする。
 
@@ -915,18 +729,15 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 11. `UI/forms.css`
 12. `UI/content.css`
 13. `UI/utilities.css`
-14. `UI/compat-agws.css`
 
-`UI/compat-agws.css` はAGWS既存クラスを最後に受けるため、読み込み順の末尾に置く。
-
-### 11.10.9 第3段階の検査方針
+### 11.10.7 第3段階の検査方針
 
 第3段階では、`Tools/check/check-adlaire-design.sh` で以下を検査する。
 
 - 第3段階候補ファイルが存在すること。
 - 第3段階候補ファイルの冒頭コメントが仕様どおりであること。
 - `Tokens/status.css` と `Tokens/effects.css` の `:root` ブロックが1個であること。
-- 第3段階で必須とするCSS変数、標準クラス、互換クラス、tab用ID、keyframes、media queryが定義されていること。
+- 第3段階で必須とするCSS変数、標準クラス、keyframes、media queryが定義されていること。
 - 第3段階候補ファイルに `@charset`、`@import`、`!important` が存在しないこと。
 - UI側CSSにHEX値を直接記述していないこと。
 - UI側CSSにRGBA値を直接記述していないこと。
@@ -935,54 +746,9 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 - UI側CSSとTokens内の `var(--adlaire-...)` 参照が、UIまたはTokens内で定義済みのCSS変数だけを参照していること。
 - `LICENSE` がAdlaire-Design名義であること。
 - Node.js/npm依存物が存在しないこと。
-- AGWS現行HTMLのclass属性値が `Docs/Master_Spec` のAGWS完全再現仕様に含まれていること。
-- AGWS現行HTMLのid属性値が `Docs/Master_Spec` のAGWS完全再現仕様に含まれていること。
-- AGWS現行HTMLの要素名が `Docs/Master_Spec` のAGWS完全再現仕様に含まれていること。
-- AGWS現行HTMLの主要属性名と主要属性値が `Docs/Master_Spec` のAGWS完全再現仕様に含まれていること。
-- AGWS側CSSに出現するclass selector、ID selector、attribute selector、pseudo selector、keyframes、media query、色値が本節のAGWS完全再現仕様に含まれていること。
-- AGWSリポジトリが隣接パスに存在する場合、AGWS現行HTML/CSSのclass、id、media query、色値がAdlaire-DesignのUI、Tokens、または `Docs/Master_Spec` で捕捉されていること。
+- `Docs/AGWS_Design_Analysis` と `UI/compat-agws.css` が存在しないこと。
 
-### 11.10.10 第3段階のCSSプロパティ確認範囲
-
-第3段階では、AGWS側CSSに出現する以下のCSSプロパティを再現対象として確認する。
-
-- 基礎: `box-sizing`、`scroll-behavior`、`-webkit-font-smoothing`、`-moz-osx-font-smoothing`
-- タイポグラフィ: `font-family`、`font-size`、`font-weight`、`line-height`、`letter-spacing`、`text-align`、`text-decoration`、`text-transform`
-- 色・背景・境界: `color`、`background`、`background-color`、`border`、`border-color`、`border-width`、`border-top`、`border-bottom`、`border-bottom-color`、`border-left`、`border-left-color`、`border-radius`
-- 余白・寸法: `margin`、`margin-top`、`margin-right`、`margin-bottom`、`padding`、`padding-top`、`padding-right`、`padding-bottom`、`padding-left`、`width`、`min-width`、`max-width`、`height`、`min-height`
-- レイアウト: `display`、`position`、`top`、`right`、`bottom`、`left`、`z-index`、`grid-template-columns`、`gap`、`flex`、`flex-wrap`、`flex-shrink`、`flex-direction`、`order`、`justify-content`、`align-items`
-- 操作・フォーム: `cursor`、`outline`、`resize`、`user-select`、`list-style`、`content`
-- 視覚効果: `box-shadow`、`text-shadow`、`opacity`、`transform`、`transition`、`animation`、`backdrop-filter`
-
-### 11.10.11 第3段階のRGBA確認範囲
-
-第3段階では、AGWS側CSSに出現する以下のRGBA値を、影・半透明背景・重ね表現の候補値として確認する。
-
-- 黒影: `rgba(0, 0, 0, 0.1)`、`rgba(0, 0, 0, 0.15)`、`rgba(0, 0, 0, 0.2)`、`rgba(0, 0, 0, 0.3)`
-- 青影: `rgba(0, 102, 204, 0.1)`、`rgba(0, 102, 204, 0.15)`、`rgba(0, 102, 204, 0.3)`、`rgba(0, 102, 204, 0.4)`、`rgba(0, 102, 204, 0.5)`、`rgba(0, 102, 204, 0.6)`
-- 白透明: `rgba(255, 255, 255, 0.2)`、`rgba(255, 255, 255, 0.3)`、`rgba(255, 255, 255, 0.4)`、`rgba(255, 255, 255, 0.5)`、`rgba(255, 255, 255, 0.8)`、`rgba(255, 255, 255, 0.9)`
-
-### 11.10.12 未記載ゼロ確認範囲
-
-2026-08-21時点で、AGWS現行ファイルに対して以下の照合軸を確認し、`Docs/Master_Spec` のAGWS完全再現仕様に未記載の項目がない状態にしている。
-
-- AGWS現行HTMLの要素名
-- AGWS現行HTMLの主要属性名
-- AGWS現行HTMLのclass属性値
-- AGWS現行HTMLのid属性値
-- AGWS側CSSのclass selector
-- AGWS側CSSのID selector
-- AGWS側CSSのattribute selector
-- AGWS側CSSのpseudo selector
-- AGWS側CSSのmedia query
-- AGWS側CSSのkeyframes
-- AGWS側CSSのHEX値
-- AGWS側CSSのRGBA値
-- AGWS側CSSのプロパティ名
-
-この確認は、AGWSの現行表示をAdlaire-Design成果物だけで完全再現するための仕様充足確認であり、AGWS本体の実装変更を意味しない。
-
-### 11.10.13 第3段階ファイルの冒頭コメント
+### 11.10.8 第3段階ファイルの冒頭コメント
 
 第3段階ファイルの冒頭コメントは以下に固定する。
 
@@ -996,173 +762,14 @@ AGWSをAdlaire-Design準拠へ更新する前に、以下を満たすこと。
 | `UI/forms.css` | `/* Adlaire-Design form components */` |
 | `UI/content.css` | `/* Adlaire-Design content components */` |
 | `UI/utilities.css` | `/* Adlaire-Design utility classes */` |
-| `UI/compat-agws.css` | `/* Adlaire-Design AGWS compatibility */` |
 
-### 11.10.14 第3段階トークン命名仕様
-
-`Tokens/status.css` は、以下のCSS変数を定義する。
-
-| CSS変数 | 値 | 用途 |
-| --- | --- | --- |
-| `--adlaire-status-secondary` | `#6c757d` | secondary button、secondary text |
-| `--adlaire-status-secondary-strong` | `#5a6268` | secondary hover |
-| `--adlaire-status-success` | `#28a745` | success text |
-| `--adlaire-status-danger` | `#dc3545` | danger text、required mark |
-| `--adlaire-status-warning` | `#ffc107` | warning text |
-| `--adlaire-status-info` | `#17a2b8` | info text |
-| `--adlaire-status-dark` | `#343a40` | dark background |
-| `--adlaire-status-gray-777` | `#777777` | subtle text |
-| `--adlaire-status-gray-999` | `#999999` | disabled gradient end、footer subtle text |
-| `--adlaire-status-gray-ccc` | `#cccccc` | footer text、disabled gradient start |
-| `--adlaire-status-gray-ddd` | `#dddddd` | form border |
-| `--adlaire-status-gray-light` | `#f8f9fa` | light background、card header/footer |
-| `--adlaire-status-gray-soft` | `#f9f9f9` | information row background |
-| `--adlaire-alert-info-text` | `#0c5460` | info alert text |
-| `--adlaire-alert-info-bg` | `#d1ecf1` | info alert background |
-| `--adlaire-alert-info-border` | `#bee5eb` | info alert border |
-| `--adlaire-alert-success-text` | `#155724` | success alert text |
-| `--adlaire-alert-success-bg` | `#d4edda` | success alert background |
-| `--adlaire-alert-success-border` | `#c3e6cb` | success alert border |
-| `--adlaire-alert-warning-text` | `#856404` | warning alert text |
-| `--adlaire-alert-warning-bg` | `#fff3cd` | warning alert background |
-| `--adlaire-alert-warning-border` | `#ffeaa7` | warning alert border |
-| `--adlaire-alert-danger-text` | `#721c24` | danger alert text |
-| `--adlaire-alert-danger-bg` | `#f8d7da` | danger alert background |
-| `--adlaire-alert-danger-border` | `#f5c6cb` | danger alert border |
-
-`Tokens/effects.css` は、以下のCSS変数を定義する。
-
-| CSS変数 | 値 | 用途 |
-| --- | --- | --- |
-| `--adlaire-radius-sm` | `4px` | buttons、notice、links |
-| `--adlaire-radius-md` | `6px` | compact cards、tabs |
-| `--adlaire-radius-lg` | `8px` | cards、main sections |
-| `--adlaire-radius-round` | `50%` | timeline marker、page top |
-| `--adlaire-shadow-card` | `0 2px 8px rgba(0, 0, 0, 0.1)` | cards、main content |
-| `--adlaire-shadow-card-hover` | `0 4px 16px rgba(0, 0, 0, 0.15)` | card hover |
-| `--adlaire-shadow-button` | `0 2px 8px rgba(0, 0, 0, 0.15)` | framework button hover |
-| `--adlaire-shadow-nav` | `0 4px 8px rgba(0, 0, 0, 0.2)` | navigation hover |
-| `--adlaire-shadow-header` | `0 2px 10px rgba(0, 0, 0, 0.1)` | site header |
-| `--adlaire-shadow-title` | `2px 2px 4px rgba(0, 0, 0, 0.3)` | site title text shadow |
-| `--adlaire-shadow-focus-color` | `rgba(0, 102, 204, 0.1)` | form focus and active tab shadow color |
-| `--adlaire-shadow-focus-ring` | `0 0 0 3px rgba(0, 102, 204, 0.1)` | form focus ring |
-| `--adlaire-shadow-marker-ring` | `0 0 0 2px var(--adlaire-surface-accent)` | timeline marker ring |
-| `--adlaire-shadow-tab-active` | `0 -2px 4px rgba(0, 102, 204, 0.1)` | active tab shadow |
-| `--adlaire-shadow-blue-soft` | `0 2px 8px rgba(0, 102, 204, 0.15)` | news hover |
-| `--adlaire-shadow-blue` | `0 2px 8px rgba(0, 102, 204, 0.3)` | primary button |
-| `--adlaire-shadow-blue-nav-hover` | `0 4px 8px rgba(0, 102, 204, 0.3)` | legal toc hover |
-| `--adlaire-shadow-blue-sticky` | `0 4px 12px rgba(0, 102, 204, 0.15)` | sticky legal toc |
-| `--adlaire-shadow-blue-strong` | `0 4px 12px rgba(0, 102, 204, 0.4)` | page top |
-| `--adlaire-shadow-blue-hover` | `0 4px 12px rgba(0, 102, 204, 0.5)` | submit hover |
-| `--adlaire-shadow-blue-intense` | `0 6px 20px rgba(0, 102, 204, 0.6)` | page top hover |
-| `--adlaire-overlay-white-20` | `rgba(255, 255, 255, 0.2)` | header nav background |
-| `--adlaire-overlay-white-30` | `rgba(255, 255, 255, 0.3)` | header nav border |
-| `--adlaire-overlay-white-40` | `rgba(255, 255, 255, 0.4)` | header nav hover |
-| `--adlaire-overlay-white-50` | `rgba(255, 255, 255, 0.5)` | header nav hover border |
-| `--adlaire-overlay-white-80` | `rgba(255, 255, 255, 0.8)` | translucent selected surfaces |
-| `--adlaire-overlay-white-90` | `rgba(255, 255, 255, 0.9)` | translucent active surfaces |
-| `--adlaire-transition-fast` | `0.15s ease-in-out` | form focus |
-| `--adlaire-transition-button` | `0.2s ease-in-out` | button hover |
-| `--adlaire-transition-base` | `0.3s ease` | site hover |
-| `--adlaire-animation-fade-in` | `fadeIn 0.3s ease-in` | tab pane display |
-| `--adlaire-z-timeline-marker` | `1` | timeline marker stacking |
-| `--adlaire-z-sticky` | `100` | sticky legal toc |
-| `--adlaire-z-page-top` | `1000` | page top fixed link |
+### 11.10.9 第3段階トークン方針
 
 第3段階トークンは、必要な値をCSS変数へ集約し、UI側CSSではHEX値およびRGBA値を直接記述しない。
 
 UI側CSSの角丸、影、z-indexの非ゼロ効果値は `Tokens/effects.css` のCSS変数を参照する。`0` や `none` のような無効化値は直接記述できる。
 
 UI側CSSのtransitionは対象プロパティを明示する。`transition: all` は、意図しないプロパティ変更や移行時の表示差分を生むため使用しない。
-
-### 11.10.15 第3段階互換層の方針
-
-`UI/compat-agws.css` は、AGWS現行HTMLを大きく書き換えずにAdlaire-Design成果物を適用するための互換層とする。
-
-- AGWS既存class selector、ID selector、attribute selectorのうち、標準クラスだけでは現行表示を再現できないものを定義する。
-- 互換層のセレクタは、AGWS既存HTMLに存在する名前を維持する。
-- 互換層は、標準クラスと同じCSS変数を参照する。
-- `.container` はAGWS現行 `style.css` に合わせて左右20pxの余白を末尾で補正する。
-- 互換層でもHEX値、RGBA値、`@import`、`@charset`、`!important` は使用しない。
-- 互換層はAGWS初回適用のための移行補助であり、Adlaire-Designの標準APIとは扱わない。
-
-第3段階実装時は、`UI/compat-agws.css` に含めるAGWS既存セレクタ一覧を、`Docs/Master_Spec` のAGWS完全再現仕様と同じ照合軸で検査する。
-
-### 11.10.16 AGWS採用方針
-
-AGWSは、Adlaire-Designの公開面CSS成果物を採用する対象リポジトリとして扱う。
-
-採用の目的は、AGWS現行表示を崩さず、Adlaire-Designを公開面デザインの正本として運用できる状態に移行することである。初回採用では、見た目の刷新、HTML構造の全面置換、コンテンツ変更を目的にしない。
-
-AGWS採用は以下の順序で進める。
-
-1. Adlaire-Design側で第3段階CSS、互換層、検査が通過していることを確認する。
-2. AGWS側で、`README.md` と `CHANGELOG.md` にAdlaire-Design採用方針を明記する。
-3. AGWS側の検証ブランチで、Adlaire-DesignのCSS読み込み順に基づく適用候補を作る。
-4. AGWSの既存HTML構造を維持したまま、`UI/compat-agws.css` を末尾で読み込む構成を検証する。
-5. `Tools/check/check-agws.sh` と `Tools/check/check-adlaire-design.sh` の両方を通す。
-6. `index.html`、`about.html`、`contact.html`、`legal.html` の主要表示を目視またはスクリーンショットで確認する。
-7. 視覚差分が許容範囲であることをユーザー承認後、AGWS側のCSS採用変更をPR化する。
-
-AGWS初回採用で維持するものは以下である。
-
-- 現行の静的HTML構成
-- JavaScript非依存
-- 多言語化なし
-- JSONデータ管理なし
-- Node.js/npm依存なし
-- 2カラム構成、パンくず、サイドバー、カード、CSS onlyタブ、タイムライン、法的情報目次
-- `adlaire.com` の公開面としての既存情報設計
-
-AGWS初回採用で行わないものは以下である。
-
-- AGWS本体HTMLの全面置換
-- `architect.css` と `style.css` の即時削除
-- 他リポジトリへの統合
-- JavaScriptによるUI制御
-- コンテンツ本文の再設計
-- visual refreshを目的にした色・余白・導線の意図的変更
-
-AGWS側でAdlaire-Design CSSを採用するPRは、方針文書PRとは分ける。CSS採用PRでは、適用対象ファイル、CSS読み込み順、互換層の使用有無、ロールバック方法、検証結果を明記する。
-
-2026-08-21時点で、AGWS側のAdlaire-Design CSS適用候補PRは作成済みである。このPRは、正式移行へ進める判断後はAdlaire-Design CSS正式移行PRとして扱う。以後の扱いは、11.10.17に従う。
-
-### 11.10.17 AGWS正式移行計画
-
-2026-08-21時点で、AGWSのDocker配信確認により、主要ページとAdlaire-Design CSSの配信に問題がないことを確認している。AGWSはAdlaire-Design CSS採用候補から正式移行へ進める。
-
-正式移行の実行順は以下とする。
-
-1. Adlaire-Design側のAGWS採用方針PRを先に確定する。
-2. AGWS側の採用方針PRを確定する。
-3. AGWS側のAdlaire-Design CSS正式移行PRを確定する。
-4. AGWSの既定CSS読み込みをAdlaire-Design CSS成果物へ移行済みとして扱う。
-5. 移行後に `Tools/check/check-agws.sh`、`Tools/check/check-adlaire-design.sh`、Docker配信HTTP確認を再実行する。
-6. `index.html`、`about.html`、`contact.html`、`legal.html` の主要表示を再確認する。
-
-正式移行で確定するものは以下である。
-
-- AGWSの4ページはAdlaire-Design CSS成果物を仕様順に読み込む。
-- AGWSのHTML本文構造は維持する。
-- `adlaire-design/` 配下のCSS成果物は、Adlaire-Design正本から取り込む配布コピーとして扱う。
-- `UI/compat-agws.css` 相当の互換層は、AGWS既存HTMLを大きく書き換えないために維持する。
-- AGWSの検査では、Adlaire-Design CSS成果物の存在、読み込み順、旧CSSの直接読み込みなし、隣接Adlaire-Design正本との一致を確認する。
-
-正式移行後も当面維持するものは以下である。
-
-- `architect.css`
-- `style.css`
-
-これらはロールバック用の既存CSSとして残す。削除、統合、リネーム、minify、読み込み数削減は、正式移行とは別の後続PRで扱う。
-
-正式移行後も行わないものは以下である。
-
-- JavaScript追加
-- 多言語化
-- JSONデータ管理
-- Node.js/npm依存追加
-- 他リポジトリへの統合
-- コンテンツ本文の再設計
 
 ## 11.11 今後の拡充優先順位
 
@@ -1176,13 +783,13 @@ Adlaire-Designの今後の拡充は、CSSのビルド、minify、bundleではな
 4. ドキュメント整備
 5. ブランド資産の整理
 
-公開面CSS機能の拡充では、AGWSまたは今後の公開面で実際に必要になったレイアウト、コンポーネント、フォーム、ナビゲーション、本文部品、ユーティリティ、状態表現を対象にする。追加する場合は、`Tokens/` と `UI/` 配下の既存責務に沿って直接CSSとして管理する。
+公開面CSS機能の拡充では、Adlaire-Design利用先の公開面で実際に必要になったレイアウト、コンポーネント、フォーム、ナビゲーション、本文部品、ユーティリティ、状態表現を対象にする。追加する場合は、`Tokens/` と `UI/` 配下の既存責務に沿って直接CSSとして管理する。
 
 WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブロック表示、プレビュー、JSON表示、状態表示など、WYSIWYGの表示層で必要になるCSSと仕様を対象にする。TypeScript本体、保存処理、編集ロジック、Markdown / MDX parsing、JavaScriptビルド成果物はAuteur内製側の対象とし、Adlaire-Designでは対象外のままとする。
 
-再現性検査の拡充では、CSS読み込み順、CSS変数参照、禁止記述、必須セレクタ、AGWSまたは他公開面との差分確認を優先する。検査は `Tools/check/check-adlaire-design.sh` の責務範囲に収め、CSSの完全なパーサ検証や外部依存ツール導入は行わない。
+再現性検査の拡充では、CSS読み込み順、CSS変数参照、禁止記述、必須セレクタ、仕様と実装の整合確認を優先する。検査は `Tools/check/check-adlaire-design.sh` の責務範囲に収め、CSSの完全なパーサ検証や外部依存ツール導入は行わない。
 
-ドキュメント整備では、追加CSS機能の目的、適用対象、非対象、承認単位、検査方法、利用側の読み込み順を `Docs/Master_Spec` に記録する。必要に応じて `Docs/AGWS_Design_Analysis`、`Docs/Document_Index`、`README.md` を更新する。
+ドキュメント整備では、追加CSS機能の目的、適用対象、非対象、承認単位、検査方法、利用側の読み込み順を `Docs/Master_Spec` に記録する。必要に応じて `Docs/Document_Index`、`README.md` を更新する。
 
 ブランド資産の整理では、ロゴ、画像、アイコン、OGPなどの必要性が明確になった場合に、`Brand/` 配下で管理する対象、形式、用途、検査方法を先に仕様化する。ブランド資産の追加は、CSS機能および検査の拡充とは別承認単位で扱う。
 
@@ -1198,7 +805,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 - Node.js/npm依存、外部CSSフレームワーク、CSSプリプロセッサ、生成CSS、CSS minify、CSS bundle、生成JavaScriptを前提にしない。
 - WYSIWYG EditorのMarkdown / MDXパーサーはAuteur内製側で管理し、Adlaire-Designでは採用ライブラリを管理しない。
 - 追加前に、既存CSSで代替できない理由を確認する。
-- 追加後に、`Tools/check/check-adlaire-design.sh` と必要な隣接AGWS検査を通す。
+- 追加後に、`Tools/check/check-adlaire-design.sh` を通す。
 
 拡充仕様では、以下を必ず非対象として記録する。
 
@@ -1217,7 +824,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 | 分類 | 対象例 | 優先条件 |
 | --- | --- | --- |
-| レイアウト | 2カラム、1カラム、余白、コンテナ、グリッド補助 | AGWSまたは他公開面で再利用が見込める |
+| レイアウト | 2カラム、1カラム、余白、コンテナ、グリッド補助 | 複数の公開面で再利用が見込める |
 | コンポーネント | カード、notice、タブ、タイムライン、目次、ニュース項目 | 本文構造を変えずに表示品質を上げられる |
 | フォーム | 入力、ラベル、チェック、エラー、送信ボタン | CSS onlyで状態表現できる |
 | ナビゲーション | ヘッダー、フッター、パンくず、サイドバー、ページ内リンク | 既存HTML構造を維持できる |
@@ -1229,14 +836,13 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 - 色、面、状態、影、角丸、transition、z-indexなどの値は `Tokens/` に定義する。
 - reset、typography、基礎挙動は `UI/base.css` に定義する。
-- gridやcontainer互換は `UI/grid.css` に定義する。
+- gridやcontainerは `UI/grid.css` に定義する。
 - ページ構造や広域レイアウトは `UI/layout.css` に定義する。
 - 汎用コンポーネントは `UI/components.css` に定義する。
 - サイト外枠は `UI/site.css` に定義する。
 - フォームは `UI/forms.css` に定義する。
 - 公開面本文固有の表現は `UI/content.css` に定義する。
 - 汎用補助クラスは `UI/utilities.css` に定義する。
-- AGWS既存HTML互換だけに必要なものは `UI/compat-agws.css` に定義する。
 
 ### 11.11.2.1 公開面本文部品の実装仕様
 
@@ -1262,7 +868,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 - JSONデータ管理
 - 多言語化
 - ビルド、minify、bundle
-- AGWS本体HTMLの置換
+- 特定プロダクト本体HTMLの置換
 
 ### 11.11.2.2 汎用部品の実装仕様
 
@@ -1304,7 +910,7 @@ JavaScriptなしで成立する優先B/Cの汎用部品として、見出し群�
 - JSONデータ管理
 - 多言語化
 - ビルド、minify、bundle
-- AGWS本体HTMLの置換
+- 特定プロダクト本体HTMLの置換
 
 ### 11.11.2.3 WYSIWYG Editor UIの実装仕様
 
@@ -1612,7 +1218,7 @@ Auteur実装がAdlaire-Design UIを採用する場合は、本節のCSS読み込
 6. 必須セレクタ、ID、keyframes、media queryの確認
 7. `@import`、`@charset`、`!important`、HEX直書き、RGBA直書き、負の `letter-spacing`、`transition: all` の禁止確認
 8. `var(--adlaire-...)` が定義済み変数だけを参照していることの確認
-9. 隣接AGWSリポジトリが存在する場合のHTML/CSS照合
+9. 仕様と実装の整合確認
 10. `Docs/Master_Spec`、`Docs/Document_Index`、`README.md` の整合確認
 11. 拡充優先順位、拡充仕様策定条件、CSSビルド、CSS minify、CSS bundle、CSSプリプロセッサを現状検討しない方針の記録確認
 12. `Docs/Master_Spec` の `Version` と `Docs/Change_History` の最新revが一致していることの確認
@@ -1632,7 +1238,6 @@ Auteur実装がAdlaire-Design UIを採用する場合は、本節のCSS読み込
 | `Docs/Master_Spec` | 仕様、非対象、承認単位、読み込み順、検査方針を変更する場合 |
 | `Docs/Change_History` | `Docs/Master_Spec` または管理対象を変更する場合 |
 | `Docs/Document_Index` | 主要ファイル、ディレクトリ、説明が増減する場合 |
-| `Docs/AGWS_Design_Analysis` | AGWS参照基準、再現範囲、正式移行判断に影響する場合 |
 | WYSIWYG Editor UI仕様 | WYSIWYG Editor UIのAdlaire-Design採用確定範囲、Auteur内製実装との境界、非対象、CSS管理範囲を変更する場合 |
 | `README.md` | 利用者が最初に読む方針、構成、コマンド、非対象が変わる場合 |
 | `AGENTS.md` | 作業開始時ルール、リポジトリ運用ルールが変わる場合 |
