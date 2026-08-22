@@ -1169,6 +1169,55 @@ for wysiwyg_css_term in \
   fi
 done
 
+wysiwyg_line_number() {
+  grep -nF -- "$1" "$ADLAIRE_DESIGN_ROOT/UI/wysiwyg.css" | sed -n '1s/:.*//p'
+}
+
+WYSIWYG_PRIORITY_A_LINE=$(wysiwyg_line_number '/* Priority A: core block editor UI */')
+WYSIWYG_PRIORITY_B_LINE=$(wysiwyg_line_number '/* Priority B: editing support UI */')
+WYSIWYG_PRIORITY_C_LINE=$(wysiwyg_line_number '/* Priority C: advanced support UI */')
+WYSIWYG_BLOCK_INSERTER_LINE=$(wysiwyg_line_number '.adlaire-wysiwyg-block-inserter {')
+WYSIWYG_MOBILE_BAR_LINE=$(wysiwyg_line_number '.adlaire-wysiwyg-mobile-bar {')
+WYSIWYG_BLOCK_TOOLBAR_LINE=$(wysiwyg_line_number '.adlaire-wysiwyg-block-toolbar,')
+WYSIWYG_QUICK_INSERT_LINE=$(wysiwyg_line_number '.adlaire-wysiwyg-quick-insert {')
+WYSIWYG_ASSIST_MENU_LINE=$(wysiwyg_line_number '.adlaire-wysiwyg-assist-menu {')
+
+for line_value in \
+  "$WYSIWYG_PRIORITY_A_LINE" \
+  "$WYSIWYG_PRIORITY_B_LINE" \
+  "$WYSIWYG_PRIORITY_C_LINE" \
+  "$WYSIWYG_BLOCK_INSERTER_LINE" \
+  "$WYSIWYG_MOBILE_BAR_LINE" \
+  "$WYSIWYG_BLOCK_TOOLBAR_LINE" \
+  "$WYSIWYG_QUICK_INSERT_LINE" \
+  "$WYSIWYG_ASSIST_MENU_LINE"; do
+  if [ -z "$line_value" ]; then
+    echo "UI/wysiwyg.css missing required line for Editor UI priority boundary order check." >&2
+    exit 1
+  fi
+done
+
+if [ "$WYSIWYG_PRIORITY_A_LINE" -ge "$WYSIWYG_BLOCK_INSERTER_LINE" ] \
+  || [ "$WYSIWYG_BLOCK_INSERTER_LINE" -ge "$WYSIWYG_PRIORITY_B_LINE" ] \
+  || [ "$WYSIWYG_PRIORITY_A_LINE" -ge "$WYSIWYG_MOBILE_BAR_LINE" ] \
+  || [ "$WYSIWYG_MOBILE_BAR_LINE" -ge "$WYSIWYG_PRIORITY_B_LINE" ]; then
+  echo "UI/wysiwyg.css Priority A classes must appear between the Priority A and Priority B boundaries." >&2
+  exit 1
+fi
+
+if [ "$WYSIWYG_PRIORITY_B_LINE" -ge "$WYSIWYG_BLOCK_TOOLBAR_LINE" ] \
+  || [ "$WYSIWYG_BLOCK_TOOLBAR_LINE" -ge "$WYSIWYG_PRIORITY_C_LINE" ] \
+  || [ "$WYSIWYG_PRIORITY_B_LINE" -ge "$WYSIWYG_QUICK_INSERT_LINE" ] \
+  || [ "$WYSIWYG_QUICK_INSERT_LINE" -ge "$WYSIWYG_PRIORITY_C_LINE" ]; then
+  echo "UI/wysiwyg.css Priority B classes must appear between the Priority B and Priority C boundaries." >&2
+  exit 1
+fi
+
+if [ "$WYSIWYG_PRIORITY_C_LINE" -ge "$WYSIWYG_ASSIST_MENU_LINE" ]; then
+  echo "UI/wysiwyg.css Priority C classes must appear after the Priority C boundary." >&2
+  exit 1
+fi
+
 if ! grep -F 'max-width: 1200px;' "$ADLAIRE_DESIGN_ROOT/UI/layout.css" >/dev/null 2>&1; then
   echo "UI/layout.css must define a 1200px container." >&2
   exit 1
