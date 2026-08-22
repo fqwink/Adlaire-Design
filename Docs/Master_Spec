@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.67
+**Version:** rev.68
 
 ---
 
@@ -20,7 +20,7 @@ Adlaire Groupが管理するデザイン資産において、色の役割を統�
 
 AGWSの詳細解析は `Docs/AGWS_Design_Analysis` を参照する。
 
-WYSIWYG Editor UIはAdlaire-Design採用確定とし、Editor実装はAuteur内製とする。WYSIWYG Editor UI仕様と実装境界は `Docs/WYSIWYG_Editor_Specification` とする。Adlaire-Designでは、WYSIWYG Editorの表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSSを管理対象に含める。
+WYSIWYG Editor UIはAdlaire-Design採用確定とし、Editor実装はAuteur内製とする。WYSIWYG Editor UI仕様と実装境界は本書に統合する。Adlaire-Designでは、WYSIWYG Editorの表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSSを管理対象に含める。
 
 汎用部品の分類、優先度、実装先、実装状態は `Docs/Generic_Component_Catalog` で一覧管理する。仕様正本は本書とし、汎用部品カタログは本書の補助正本として扱う。
 
@@ -279,7 +279,6 @@ WYSIWYG Editor管理仕様では、WYSIWYG Editor UIの仕様、表示層、Aute
 
 | ファイル | 役割 | 状態 |
 | --- | --- | --- |
-| `Docs/WYSIWYG_Editor_Specification` | WYSIWYG Editor UI仕様とAuteur実装境界 | 実装済み |
 | `UI/wysiwyg.css` | WYSIWYG EditorのエディターUI、ブロック表示、プレビュー、JSON表示 | 実装済み |
 
 ## 11.4 CSS読み込み順
@@ -315,7 +314,7 @@ WYSIWYG Editor管理仕様では、WYSIWYG Editor UIの仕様、表示層、Aute
 13. `UI/utilities.css`
 14. `UI/compat-agws.css`
 
-WYSIWYG EditorのUIにおけるAdlaire-Design採用は確定済みとする。WYSIWYG Editorでの読み込み順は、`Docs/WYSIWYG_Editor_Specification` に定める。WYSIWYG固有CSSである `UI/wysiwyg.css` は、既存UIファイルの後に読み込む。
+WYSIWYG EditorのUIにおけるAdlaire-Design採用は確定済みとする。WYSIWYG Editorでの読み込み順は、本書に定める。WYSIWYG固有CSSである `UI/wysiwyg.css` は、既存UIファイルの後に読み込む。
 
 ## 11.5 第1段階の仕様
 
@@ -669,7 +668,7 @@ CSS変数は以下とする。
 | 第1段階 | `Tokens/colors.css`、`UI/adlaire.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 | 第2段階 | `Tokens/surface.css`、`UI/layout.css`、`UI/components.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 | 第3段階 | `Tokens/status.css`、`Tokens/effects.css`、`UI/base.css`、`UI/grid.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
-| WYSIWYG Editor管理仕様 | `Docs/WYSIWYG_Editor_Specification`、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
+| WYSIWYG Editor管理仕様 | `Docs/Master_Spec`、`UI/wysiwyg.css`、`Tools/check/check-adlaire-design.sh` の検査拡張 | 実装済み |
 
 ## 11.10 AGWS完全再現仕様
 
@@ -1308,19 +1307,163 @@ JavaScriptなしで成立する優先B/Cの汎用部品として、見出し群�
 
 WYSIWYG Editor UIはAdlaire-Design採用確定とし、エディター表示層のCSSを `UI/wysiwyg.css` に実装する。Editor実装はAuteur内製とし、Adlaire-Designでは実装コードを管理しない。
 
-Adlaire-Designで管理するWYSIWYG Editorの範囲は以下とする。
+WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。
+
+Adlaire-Designで管理する範囲は以下とする。
 
 | 範囲 | 管理先 | 状態 |
 | --- | --- | --- |
-| WYSIWYG Editor UI仕様と実装境界 | `Docs/WYSIWYG_Editor_Specification` | 実装済み |
+| WYSIWYG Editor UI仕様と実装境界 | `Docs/Master_Spec` | 実装済み |
 | エディターUIスキン | `UI/wysiwyg.css` | 実装済み |
 | 色・面・状態・効果値 | `Tokens/` | 既存トークン参照 |
 | 汎用部品 | `UI/components.css` | 既存部品参照 |
 | 本文・プレビュー部品 | `UI/content.css` | 既存部品参照 |
 
-WYSIWYG Editor UI仕様と実装境界は `Docs/WYSIWYG_Editor_Specification` とする。Adlaire-Designで固定する対象は、UI採用範囲、非対象、CSS読み込み順、必須クラス、Auteur内製実装との責務境界とする。
+Auteur内製側で管理する範囲は以下とする。
 
-`Docs/Master_Spec` では、WYSIWYG Editor UIがAdlaire-Design採用確定であること、Editor実装がAuteur内製であること、管理対象ファイル、拡充優先順位のみを管理する。WYSIWYG Editor UI仕様または実装境界を変更する場合は、`Docs/WYSIWYG_Editor_Specification` を更新し、必要に応じて本書には参照関係または管理範囲の変更だけを反映する。
+| 範囲 | 管理先 |
+| --- | --- |
+| Editor TypeScript / JavaScript実装 | Auteur |
+| ブロックデータ構造 | Auteur |
+| 保存形式 | Auteur |
+| 編集操作 | Auteur |
+| Undo / Redo | Auteur |
+| JSON serialization | Auteur |
+| preview rendering生成処理 | Auteur |
+| Markdown / MDX parser | Auteur |
+| parser採用ライブラリ | Auteur |
+| bundle、minify、compile成果物 | Auteur |
+
+Adlaire-Designで固定する対象は以下とする。
+
+- WYSIWYG Editor UIのAdlaire-Design採用範囲
+- Auteur内製Editor実装との責務境界
+- CSS読み込み順
+- `UI/wysiwyg.css` の必須クラス
+- CSS禁止事項
+- 非対象範囲
+- 検査方針
+
+採用確定対象は以下とする。
+
+- エディター外枠
+- ヘッダー
+- ツールバー
+- ブロックキャンバス
+- ブロック選択状態
+- ブロックハンドル
+- インラインツールバー
+- スラッシュコマンドメニュー
+- JSON表示パネル
+- プレビュー領域
+- 状態バー
+
+Adlaire-Designでは以下を対象外とする。
+
+- WYSIWYG Editor実装コード
+- TypeScript / JavaScriptのEditor本体
+- ブロックデータ構造
+- 保存形式
+- 編集操作
+- Undo / Redo
+- JSON serialization
+- preview rendering生成処理
+- Markdown / MDX parser
+- parser採用ライブラリ
+- DOM依存の編集UI実装
+- 永続ストレージ連携
+- ドラッグ&ドロップのブラウザイベント実装
+- スラッシュコマンドのDOMメニュー実装
+- インライン編集DOM処理
+- JavaScriptのbundle、minify、compile
+- npm、webpack、Node.js前提の設定
+- `WYSIWYG/` ディレクトリ作成
+- 独立したWYSIWYG仕様ファイル作成
+- `Dist/`、`dist/`、`Build/`、`build/` 作成
+
+WYSIWYG Editorのブロック表示は、Adlaire-Designの既存部品を優先して使用する。
+
+| ブロック | Adlaire-Design側の扱い |
+| --- | --- |
+| heading | `UI/base.css` と `UI/wysiwyg.css` |
+| paragraph | `UI/base.css` と `UI/wysiwyg.css` |
+| list | `UI/base.css`、`UI/content.css`、`UI/wysiwyg.css` |
+| code | `UI/wysiwyg.css` |
+| quote | `UI/wysiwyg.css` |
+| image | `UI/wysiwyg.css` |
+| divider | `UI/components.css` または `UI/wysiwyg.css` |
+| checklist | `UI/components.css` または `UI/wysiwyg.css` |
+| callout | `UI/content.css` または `UI/wysiwyg.css` |
+| label | `UI/content.css` または `UI/wysiwyg.css` |
+| progress | `UI/wysiwyg.css` |
+
+上記のブロック種別は表示想定であり、Editor実装上の保存形式またはparser出力契約ではない。実装上のblock type、schema、parser変換はAuteur内製側で管理する。
+
+WYSIWYG Editor UIでAdlaire-Designを採用する際の読み込み順は以下に固定する。
+
+1. `Tokens/colors.css`
+2. `Tokens/surface.css`
+3. `Tokens/status.css`
+4. `Tokens/effects.css`
+5. `UI/adlaire.css`
+6. `UI/base.css`
+7. `UI/grid.css`
+8. `UI/layout.css`
+9. `UI/components.css`
+10. `UI/forms.css`
+11. `UI/content.css`
+12. `UI/utilities.css`
+13. `UI/wysiwyg.css`
+
+`UI/wysiwyg.css` は以下の規則に従う。
+
+- 冒頭コメントは `/* Adlaire-Design WYSIWYG editor */` とする。
+- `@charset` は書かない。
+- `@import` は書かない。
+- `!important` は使用しない。
+- 色は `Tokens/colors.css`、`Tokens/surface.css`、`Tokens/status.css` のCSS変数を参照する。
+- 角丸、影、transition、z-indexは `Tokens/effects.css` のCSS変数を参照する。
+- HEX値、RGB/RGBA値、非ゼロ角丸、影、z-indexを直接記述しない。
+- JavaScriptに依存する状態制御は定義しない。
+- 状態表現は、HTML側が付与するclassまたはARIA属性を受けるCSSに限定する。
+
+`UI/wysiwyg.css` は、以下のクラスを定義する。
+
+| クラス | 役割 |
+| --- | --- |
+| `.adlaire-wysiwyg` | エディター全体 |
+| `.adlaire-wysiwyg-header` | エディターヘッダー |
+| `.adlaire-wysiwyg-title` | エディタータイトル |
+| `.adlaire-wysiwyg-status` | エディター状態表示 |
+| `.adlaire-wysiwyg-toolbar` | ツールバー |
+| `.adlaire-wysiwyg-toolbar-group` | ツールバーグループ |
+| `.adlaire-wysiwyg-tool` | ツールボタン |
+| `.adlaire-wysiwyg-canvas` | 編集キャンバス |
+| `.adlaire-wysiwyg-block` | ブロック |
+| `.adlaire-wysiwyg-block-selected` | 選択中ブロック |
+| `.adlaire-wysiwyg-block-handle` | ブロック操作ハンドル |
+| `.adlaire-wysiwyg-block-content` | ブロック本文 |
+| `.adlaire-wysiwyg-placeholder` | プレースホルダー |
+| `.adlaire-wysiwyg-inline-toolbar` | インラインツールバー |
+| `.adlaire-wysiwyg-slash-menu` | スラッシュコマンドメニュー |
+| `.adlaire-wysiwyg-slash-item` | スラッシュコマンド項目 |
+| `.adlaire-wysiwyg-preview` | プレビュー領域 |
+| `.adlaire-wysiwyg-json-panel` | JSON表示領域 |
+| `.adlaire-wysiwyg-footer` | フッター/状態バー |
+
+Auteur内製Editor実装は、Adlaire-Designが定義するUI classをHTMLまたは表示層に適用できることを期待する。
+
+Adlaire-Designは、Auteur実装に以下を要求しない。
+
+- 特定のTypeScript interface
+- 特定のblock schema
+- 特定のJSON保存形式
+- 特定のMarkdown / MDX parser
+- 特定のUndo / Redo実装
+- 特定のDOMイベント実装
+- 特定のビルドツール
+
+Auteur実装がAdlaire-Design UIを採用する場合は、本節のCSS読み込み順と必須クラスを優先する。
 
 ### 11.11.3 再現性検査の策定仕様
 
@@ -1355,7 +1498,7 @@ WYSIWYG Editor UI仕様と実装境界は `Docs/WYSIWYG_Editor_Specification` �
 | `Docs/Change_History` | `Docs/Master_Spec` または管理対象を変更する場合 |
 | `Docs/Document_Index` | 主要ファイル、ディレクトリ、説明が増減する場合 |
 | `Docs/AGWS_Design_Analysis` | AGWS参照基準、再現範囲、正式移行判断に影響する場合 |
-| `Docs/WYSIWYG_Editor_Specification` | WYSIWYG Editor UIのAdlaire-Design採用確定範囲、Auteur内製実装との境界、非対象、CSS管理範囲を変更する場合 |
+| WYSIWYG Editor UI仕様 | WYSIWYG Editor UIのAdlaire-Design採用確定範囲、Auteur内製実装との境界、非対象、CSS管理範囲を変更する場合 |
 | `README.md` | 利用者が最初に読む方針、構成、コマンド、非対象が変わる場合 |
 | `AGENTS.md` | 作業開始時ルール、リポジトリ運用ルールが変わる場合 |
 

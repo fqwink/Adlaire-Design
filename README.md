@@ -15,7 +15,7 @@ Adlaire-Designは、CSSフレームワーク、デザイントークン、ブラ
 
 ## ドキュメント
 
-仕様・設計の正本は `Docs/Master_Spec` とする。WYSIWYG Editor UIはAdlaire-Design採用、Editor実装はAuteur内製とし、WYSIWYG Editor UI仕様と実装境界は `Docs/WYSIWYG_Editor_Specification`、リポジトリ内の主要ファイルと管理対象は `Docs/Document_Index`、変更履歴は `Docs/Change_History` を参照する。
+仕様・設計の正本は `Docs/Master_Spec` とする。WYSIWYG Editor UIはAdlaire-Design採用、Editor実装はAuteur内製とし、WYSIWYG Editor UI仕様と実装境界は `Docs/Master_Spec` に統合する。リポジトリ内の主要ファイルと管理対象は `Docs/Document_Index`、変更履歴は `Docs/Change_History` を参照する。
 
 ## 方針
 

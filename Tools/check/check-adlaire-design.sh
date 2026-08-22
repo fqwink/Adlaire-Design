@@ -17,7 +17,6 @@ for path in \
   Docs/Document_Index \
   Docs/Master_Spec \
   Docs/AGWS_Design_Analysis \
-  Docs/WYSIWYG_Editor_Specification \
   Docs/Generic_Component_Catalog \
   Docs/Change_History \
   Tokens/colors.css \
@@ -73,7 +72,6 @@ fi
 find "$ADLAIRE_DESIGN_ROOT/Docs" -type f \
   ! -name 'Master_Spec' \
   ! -name 'AGWS_Design_Analysis' \
-  ! -name 'WYSIWYG_Editor_Specification' \
   ! -name 'Generic_Component_Catalog' \
   ! -name 'Document_Index' \
   ! -name 'Change_History' \
@@ -199,7 +197,7 @@ if ! grep -F 'WYSIWYG Editor実装コード、Markdown / MDXパーサー、保�
   exit 1
 fi
 
-if ! grep -F 'WYSIWYG Editor UIはAdlaire-Design採用、Editor実装はAuteur内製' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+if ! grep -F 'WYSIWYG Editor UI仕様と実装境界は `Docs/Master_Spec` に統合する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must identify the WYSIWYG UI and Auteur implementation boundary." >&2
   exit 1
 fi
@@ -229,42 +227,39 @@ if ! grep -F 'WYSIWYG Editor UIはAdlaire-Design採用確定とし、Editor実�
   exit 1
 fi
 
-if ! grep -F 'WYSIWYG Editor UIはAdlaire-Design採用とする。Editor実装はAuteur内製とする。' "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" >/dev/null 2>&1; then
-  echo "Docs/WYSIWYG_Editor_Specification must document the WYSIWYG UI and Auteur implementation boundary." >&2
+if ! grep -F 'WYSIWYG Editor UI仕様と実装境界は本書に統合する。' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+  echo "Docs/Master_Spec must document that WYSIWYG UI specification is integrated into Master_Spec." >&2
   exit 1
 fi
 
 for wysiwyg_spec_term in \
-  '本ファイルは、Adlaire-Designで管理するWYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界を定める正本である。' \
-  'Adlaire-Designでは、WYSIWYG Editorの表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSS、CSS読み込み順、必須クラスを管理する。' \
-  '本仕様で固定する対象は以下とする。' \
-  '## 2. 管理範囲' \
-  '## 4. 非対象' \
-  '## 6. CSS読み込み順' \
-  '## 8. 必須クラス' \
-  '## 9. Auteur実装との境界' \
-  '## 11. 変更管理' \
+  'WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。' \
+  'Adlaire-Designで固定する対象は以下とする。' \
+  '採用確定対象は以下とする。' \
+  'Adlaire-Designでは以下を対象外とする。' \
+  'WYSIWYG Editor UIでAdlaire-Designを採用する際の読み込み順は以下に固定する。' \
+  '`UI/wysiwyg.css` は、以下のクラスを定義する。' \
+  'Auteur内製Editor実装は、Adlaire-Designが定義するUI classをHTMLまたは表示層に適用できることを期待する。' \
   '上記のブロック種別は表示想定であり、Editor実装上の保存形式またはparser出力契約ではない。' \
   'Adlaire-Designは、Auteur実装に以下を要求しない。' \
-  '`WYSIWYG/` が作成されていないこと。' \
-  '変更時も、Adlaire-DesignにはWYSIWYG Editor実装コード、npm管理物、webpack設定、Node.js前提の設定、生成JavaScript、bundle、minify成果物を追加しない。'; do
-  if ! grep -F -- "$wysiwyg_spec_term" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" >/dev/null 2>&1; then
-    echo "Docs/WYSIWYG_Editor_Specification missing required fixed WYSIWYG spec term: $wysiwyg_spec_term" >&2
+  '独立したWYSIWYG仕様ファイル作成'; do
+  if ! grep -F -- "$wysiwyg_spec_term" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+    echo "Docs/Master_Spec missing required fixed WYSIWYG UI spec term: $wysiwyg_spec_term" >&2
     exit 1
   fi
 done
 
 for master_wysiwyg_term in \
   'WYSIWYG Editor UIはAdlaire-Design採用確定とし、Editor実装はAuteur内製とする。' \
-  'WYSIWYG Editor UI仕様と実装境界は `Docs/WYSIWYG_Editor_Specification` とする。'; do
+  'WYSIWYG Editor UI仕様と実装境界は本書に統合する。'; do
   if ! grep -F -- "$master_wysiwyg_term" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
     echo "Docs/Master_Spec missing required fixed WYSIWYG spec term: $master_wysiwyg_term" >&2
     exit 1
   fi
 done
 
-if ! grep -F 'Docs/WYSIWYG_Editor_Specification`(WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界)' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
-  echo "Docs/Document_Index must identify Docs/WYSIWYG_Editor_Specification." >&2
+if grep -F 'Docs/WYSIWYG_Editor_Specification' "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
+  echo "Docs/Document_Index must not reference removed Docs/WYSIWYG_Editor_Specification." >&2
   exit 1
 fi
 
@@ -293,7 +288,6 @@ for indexed_path in \
   LICENSE \
   Docs/Master_Spec \
   Docs/AGWS_Design_Analysis \
-  Docs/WYSIWYG_Editor_Specification \
   Docs/Generic_Component_Catalog \
   Docs/Change_History \
   Brand/ \
@@ -321,7 +315,7 @@ done
 
 OLD_REPOSITORY_NAME='Adlaire-''Eco''system-Design'
 
-if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/AGWS_Design_Analysis" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_Specification" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
+if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/AGWS_Design_Analysis" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
   echo "current Adlaire-Design documents must not use the old repository name:" >&2
   cat /tmp/adlaire-design-old-name-matches >&2
   exit 1

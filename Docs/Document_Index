@@ -6,7 +6,6 @@
 - `LICENSE`(ライセンス本文)
 - `Docs/Master_Spec`(仕様・設計の正本)
 - `Docs/AGWS_Design_Analysis`(AGWSリポジトリ公開面デザインの解析。`adlaire.com` は公開確認先)
-- `Docs/WYSIWYG_Editor_Specification`(WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界)
 - `Docs/Generic_Component_Catalog`(汎用部品の分類、優先度、実装先、実装状態の一覧)
 - `Docs/Change_History`(Adlaire-Design専用の変更履歴)
 - `Brand/`(ブランド資産)
