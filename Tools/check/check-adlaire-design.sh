@@ -258,6 +258,9 @@ for css_master_term in \
 done
 
 for wysiwyg_spec_term in \
+  '### 11.11.2.3 WYSIWYG Editor UIマスター仕様' \
+  '本節は、Adlaire-DesignにおけるWYSIWYG Editor UIのマスター仕様である。' \
+  'WYSIWYG Editor UIマスター仕様' \
   'WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。' \
   'Editor UI完全固定対象は以下とする。' \
   'Editor UI階層は以下に固定する。' \

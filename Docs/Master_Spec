@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.73
+**Version:** rev.74
 
 ---
 
@@ -1048,9 +1048,11 @@ JavaScriptなしで成立する優先B/Cの汎用部品として、見出し群�
 - ビルド、minify、bundle
 - 特定プロダクト本体HTMLの置換
 
-### 11.11.2.3 WYSIWYG Editor UIの実装仕様
+### 11.11.2.3 WYSIWYG Editor UIマスター仕様
 
 WYSIWYG Editor UIはAdlaire-Design採用確定とし、エディター表示層のCSSを `UI/wysiwyg.css` に実装する。Editor実装はAuteur内製とし、Adlaire-Designでは実装コードを管理しない。
+
+本節は、Adlaire-DesignにおけるWYSIWYG Editor UIのマスター仕様である。WYSIWYG Editor UIの採用範囲、表示層、UI部品、状態表示、CSS契約、読み込み順、非対象範囲、変更管理、検査方針は本節で固定する。
 
 WYSIWYG Editor UI仕様とAuteur内製Editor実装との責務境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。
 
@@ -1081,6 +1083,7 @@ Auteur内製側で管理する範囲は以下とする。
 
 Adlaire-Designで固定する対象は以下とする。
 
+- WYSIWYG Editor UIマスター仕様
 - WYSIWYG Editor UIのAdlaire-Design採用範囲
 - Auteur内製Editor実装との責務境界
 - Editor UI完全固定対象

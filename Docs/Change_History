@@ -8,6 +8,12 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.74
+
+- `Docs/Master_Spec` の版数を `rev.74` へ更新した。
+- WYSIWYG Editor UI節の見出しを「WYSIWYG Editor UIマスター仕様」に変更し、同節がAdlaire-DesignにおけるEditor UIのマスター仕様であることを明記した。
+- `Tools/check/check-adlaire-design.sh` に、Editor UIマスター仕様の明示文言検査を追加した。
+
 ## rev.73
 
 - `Docs/Master_Spec` の版数を `rev.73` へ更新した。
