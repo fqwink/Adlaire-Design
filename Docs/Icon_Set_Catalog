@@ -6,7 +6,7 @@
 
 本カタログは公式アイコンセットカタログであり、ブランド資産カタログではない。ブランド資産は `Brand/` と `Docs/Master_Spec` のブランド資産仕様で管理する。
 
-公式アイコンSVGの実体制作は `AD-TASK-015` として管理し、公式アイコンセットの策定とは別の変更単位とする。
+公式アイコンSVGの実体は `Icons/` に配置し、本カタログの実装状態と同期する。
 
 ---
 
@@ -18,7 +18,7 @@
 - カテゴリは `navigation`、`action`、`status`、`content`、`editor`、`media`、`form` に固定する。
 - 装飾アイコンは代替テキストを空にし、意味アイコンは用途に応じた代替テキストまたはラベルを利用側で付与する。
 - 実装状態が `実装済み` のアイコンは、対応するSVGファイルを `Icons/` に配置する。
-- 実装状態が `未制作` のアイコンは、公式アイコンセットの初期候補として管理し、SVG実体の追加は `AD-TASK-015` の完了条件で確認する。
+- 実装状態が `実装済み` のアイコンは、公式アイコンセットの初期SVGとして利用できる。
 
 ---
 
@@ -26,28 +26,28 @@
 
 | ID | ファイル名 | カテゴリ | 用途 | 表示サイズ | 種別 | 代替テキスト方針 | 実装状態 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| AD-ICON-001 | `adlaire-icon-navigation-menu.svg` | navigation | メニューを開く | sm / md | 意味 | 操作ラベルを付与する | 未制作 |
-| AD-ICON-002 | `adlaire-icon-navigation-close.svg` | navigation | 閉じる | sm / md | 意味 | 操作ラベルを付与する | 未制作 |
-| AD-ICON-003 | `adlaire-icon-navigation-chevron-down.svg` | navigation | 下方向の展開 | sm | 装飾 | 空にする | 未制作 |
-| AD-ICON-004 | `adlaire-icon-navigation-chevron-right.svg` | navigation | 右方向の展開 | sm | 装飾 | 空にする | 未制作 |
-| AD-ICON-005 | `adlaire-icon-navigation-arrow-left.svg` | navigation | 戻る | sm / md | 意味 | 操作ラベルを付与する | 未制作 |
-| AD-ICON-006 | `adlaire-icon-navigation-arrow-right.svg` | navigation | 進む | sm / md | 意味 | 操作ラベルを付与する | 未制作 |
-| AD-ICON-007 | `adlaire-icon-action-search.svg` | action | 検索 | sm / md | 意味 | 操作ラベルを付与する | 未制作 |
-| AD-ICON-008 | `adlaire-icon-action-plus.svg` | action | 追加 | sm / md | 意味 | 操作ラベルを付与する | 未制作 |
-| AD-ICON-009 | `adlaire-icon-action-minus.svg` | action | 削除または折りたたみ | sm / md | 意味 | 操作ラベルを付与する | 未制作 |
-| AD-ICON-010 | `adlaire-icon-action-edit.svg` | action | 編集 | sm / md | 意味 | 操作ラベルを付与する | 未制作 |
-| AD-ICON-011 | `adlaire-icon-action-trash.svg` | action | 削除 | sm / md | 意味 | 操作ラベルを付与する | 未制作 |
-| AD-ICON-012 | `adlaire-icon-action-copy.svg` | action | コピー | sm / md | 意味 | 操作ラベルを付与する | 未制作 |
-| AD-ICON-013 | `adlaire-icon-status-info.svg` | status | 情報 | sm / md | 意味 | 状態ラベルを付与する | 未制作 |
-| AD-ICON-014 | `adlaire-icon-status-success.svg` | status | 成功 | sm / md | 意味 | 状態ラベルを付与する | 未制作 |
-| AD-ICON-015 | `adlaire-icon-status-warning.svg` | status | 警告 | sm / md | 意味 | 状態ラベルを付与する | 未制作 |
-| AD-ICON-016 | `adlaire-icon-status-error.svg` | status | エラー | sm / md | 意味 | 状態ラベルを付与する | 未制作 |
-| AD-ICON-017 | `adlaire-icon-status-loading.svg` | status | 読み込み中 | sm / md | 意味 | 状態ラベルを付与する | 未制作 |
-| AD-ICON-018 | `adlaire-icon-content-link.svg` | content | リンク | sm / md | 意味 | 文脈ラベルを付与する | 未制作 |
-| AD-ICON-019 | `adlaire-icon-content-file.svg` | content | ファイル | sm / md | 意味 | 文脈ラベルを付与する | 未制作 |
-| AD-ICON-020 | `adlaire-icon-content-image.svg` | content | 画像 | sm / md | 意味 | 文脈ラベルを付与する | 未制作 |
-| AD-ICON-021 | `adlaire-icon-content-code.svg` | content | コード | sm / md | 意味 | 文脈ラベルを付与する | 未制作 |
-| AD-ICON-022 | `adlaire-icon-editor-bold.svg` | editor | 太字 | sm / md | 意味 | 操作ラベルを付与する | 未制作 |
-| AD-ICON-023 | `adlaire-icon-editor-italic.svg` | editor | 斜体 | sm / md | 意味 | 操作ラベルを付与する | 未制作 |
-| AD-ICON-024 | `adlaire-icon-editor-heading.svg` | editor | 見出し | sm / md | 意味 | 操作ラベルを付与する | 未制作 |
-| AD-ICON-025 | `adlaire-icon-form-check.svg` | form | 選択済み | sm / md | 意味 | 状態ラベルを付与する | 未制作 |
+| AD-ICON-001 | `adlaire-icon-navigation-menu.svg` | navigation | メニューを開く | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-002 | `adlaire-icon-navigation-close.svg` | navigation | 閉じる | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-003 | `adlaire-icon-navigation-chevron-down.svg` | navigation | 下方向の展開 | sm | 装飾 | 空にする | 実装済み |
+| AD-ICON-004 | `adlaire-icon-navigation-chevron-right.svg` | navigation | 右方向の展開 | sm | 装飾 | 空にする | 実装済み |
+| AD-ICON-005 | `adlaire-icon-navigation-arrow-left.svg` | navigation | 戻る | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-006 | `adlaire-icon-navigation-arrow-right.svg` | navigation | 進む | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-007 | `adlaire-icon-action-search.svg` | action | 検索 | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-008 | `adlaire-icon-action-plus.svg` | action | 追加 | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-009 | `adlaire-icon-action-minus.svg` | action | 削除または折りたたみ | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-010 | `adlaire-icon-action-edit.svg` | action | 編集 | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-011 | `adlaire-icon-action-trash.svg` | action | 削除 | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-012 | `adlaire-icon-action-copy.svg` | action | コピー | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-013 | `adlaire-icon-status-info.svg` | status | 情報 | sm / md | 意味 | 状態ラベルを付与する | 実装済み |
+| AD-ICON-014 | `adlaire-icon-status-success.svg` | status | 成功 | sm / md | 意味 | 状態ラベルを付与する | 実装済み |
+| AD-ICON-015 | `adlaire-icon-status-warning.svg` | status | 警告 | sm / md | 意味 | 状態ラベルを付与する | 実装済み |
+| AD-ICON-016 | `adlaire-icon-status-error.svg` | status | エラー | sm / md | 意味 | 状態ラベルを付与する | 実装済み |
+| AD-ICON-017 | `adlaire-icon-status-loading.svg` | status | 読み込み中 | sm / md | 意味 | 状態ラベルを付与する | 実装済み |
+| AD-ICON-018 | `adlaire-icon-content-link.svg` | content | リンク | sm / md | 意味 | 文脈ラベルを付与する | 実装済み |
+| AD-ICON-019 | `adlaire-icon-content-file.svg` | content | ファイル | sm / md | 意味 | 文脈ラベルを付与する | 実装済み |
+| AD-ICON-020 | `adlaire-icon-content-image.svg` | content | 画像 | sm / md | 意味 | 文脈ラベルを付与する | 実装済み |
+| AD-ICON-021 | `adlaire-icon-content-code.svg` | content | コード | sm / md | 意味 | 文脈ラベルを付与する | 実装済み |
+| AD-ICON-022 | `adlaire-icon-editor-bold.svg` | editor | 太字 | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-023 | `adlaire-icon-editor-italic.svg` | editor | 斜体 | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-024 | `adlaire-icon-editor-heading.svg` | editor | 見出し | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-025 | `adlaire-icon-form-check.svg` | form | 選択済み | sm / md | 意味 | 状態ラベルを付与する | 実装済み |

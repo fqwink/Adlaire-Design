@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.96
+
+- `Docs/Master_Spec` の版数を `rev.96` へ更新した。
+- 代表的な画面種別に対する共通UIパターン整理を確定仕様として扱い、完了した `AD-TASK-003` を `Docs/Pending_Tasks` から削除した。
+- Adlaire-Design公式アイコン初期セット25件のSVG実体を `Icons/` に追加し、`Docs/Icon_Set_Catalog` の実装状態を `実装済み` に更新した。
+- サンプルデザインの公式アイコン表示を実SVG参照へ更新し、完了した `AD-TASK-015` を `Docs/Pending_Tasks` から削除した。
+
 ## rev.95
 
 - `Docs/Master_Spec` の版数を `rev.95` へ更新した。

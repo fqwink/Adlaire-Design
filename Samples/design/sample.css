@@ -122,6 +122,12 @@ body {
   font-size: 13px;
 }
 
+.sample-icon-slot img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
 .sample-code-block {
   overflow-x: auto;
   margin: 18px 0;

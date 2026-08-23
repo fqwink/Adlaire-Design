@@ -368,8 +368,7 @@ for css_master_term in \
   '公式アイコンの命名規則は `adlaire-icon-<category>-<name>.svg` とする。' \
   '公式アイコンカテゴリは、`navigation`、`action`、`status`、`content`、`editor`、`media`、`form` に固定する。' \
   '公式アイコンセットの補助正本は `Docs/Icon_Set_Catalog` とする。' \
-  '公式アイコンSVGの実体制作は、アイコンセット策定とは別タスクとして管理する。' \
-  '公式アイコンSVGの制作は `AD-TASK-015` として管理し、公式アイコンセットの策定とは別の変更単位とする。' \
+  '公式アイコンSVGの実体制作は完了済みとし、初期セットのSVG実体は `Icons/` で管理する。' \
   '### 11.11.4.1 サンプルデザインとスクリーンショット' \
   'サンプルデザインおよびスクリーンショットは、Adlaire-Designの理解補助と利用イメージの共有を目的として制作できる。' \
   'サンプルデザインおよびスクリーンショットは仕様正本ではない。' \
@@ -425,6 +424,7 @@ for generic_catalog_boundary_term in \
   '本カタログは一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティを扱う。' \
   '本カタログは部品一覧と実装状態を管理し、未完了タスクの管理は `Docs/Pending_Tasks` に集約する。' \
   '画面種別はデザインシステムの分類軸ではなく、共通部品の利用例として扱う。画面種別ごとの専用テーマや専用設計体系は作らない。' \
+  '本章の代表例は、共通UIパターン整理の確定仕様として扱う。' \
   '| 代表的な画面種別 | 必要な汎用部品 |' \
   'WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 接頭辞のクラス、Editor UI状態表示は本カタログに含めない。' \
   '汎用部品は WCAG 2.2 A を参照し、状態や意味を色だけで伝えない。' \
@@ -624,11 +624,8 @@ for pending_task_term in \
   '本ファイルには未完了タスクだけを記載する。' \
   'タスクを完了した場合は、該当行を削除する。' \
   '完了済みタスクの保管場所として使わない。' \
-  'AD-TASK-003' \
-  '代表的な画面種別に対する共通UIパターンを整理する' \
   'AD-TASK-013' \
-  'AD-TASK-014' \
-  'AD-TASK-015'; do
+  'AD-TASK-014'; do
   if ! grep -F -- "$pending_task_term" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" >/dev/null 2>&1; then
     echo "Docs/Pending_Tasks missing required pending task management term: $pending_task_term" >&2
     exit 1

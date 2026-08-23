@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.95
+**Version:** rev.96
 
 ---
 
@@ -327,7 +327,7 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、ブランド
 | 索引 | `Docs/Document_Index`、必要に応じて `Docs/Master_Spec`、`Docs/Change_History` |
 | 未タスク管理 | `Docs/Pending_Tasks`、`Docs/Master_Spec`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 
-公式アイコンSVGの制作は `AD-TASK-015` として管理し、公式アイコンセットの策定とは別の変更単位とする。
+公式アイコン初期セットのSVG実体は制作済みとし、追加や変更は公式アイコンセットの変更単位として管理する。
 
 責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、汎用UIで使う公式アイコンを `Docs/Icon_Set_Catalog` と `Icons/`、採用・移行を利用先プロダクト側として扱う。
 
@@ -1649,7 +1649,7 @@ CSSはアイコンSVG本体を埋め込まない。CSSは `.adlaire-icon`、`.ad
 
 `Docs/Generic_Component_Catalog` のアイコンタイル等は、アイコンを表示する汎用UI部品であり、公式アイコンセットそのものではない。
 
-公式アイコンSVGの実体制作は、アイコンセット策定とは別タスクとして管理する。
+公式アイコンSVGの実体制作は完了済みとし、初期セットのSVG実体は `Icons/` で管理する。
 
 検査では、`Icons/` の存在、許可形式、命名規則、`Docs/Icon_Set_Catalog` との整合性、禁止形式、仕様必須語句を確認する。`Docs/Icon_Set_Catalog` で `実装済み` としたアイコンは、対応するSVGファイルが `Icons/` に存在しなければならない。
 
