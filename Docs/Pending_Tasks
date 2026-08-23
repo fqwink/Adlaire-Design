@@ -19,7 +19,6 @@
 
 | ID | 分類 | 未タスク | 完了条件 | 主な更新対象 |
 | --- | --- | --- | --- | --- |
-| AD-TASK-001 | Brand | ブランド資産仕様を策定する | ロゴ、画像、アイコン、OGP、ブランド説明素材の対象、形式、命名、代替テキスト、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Document_Index`、`Brand/`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | AD-TASK-002 | Brand | アイコンセット仕様を策定する | 汎用アイコンセットの採用可否、管理先、命名、形式、CSSとの関係、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`Brand/`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | AD-TASK-003 | Theme | `standard`、`blog`、`media` テーマ実装仕様を策定する | テーマのCSSファイル有無、class、読み込み順、切替仕様、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | AD-TASK-004 | Admin UI | 管理画面専用UIカタログの要否を決める | 管理画面専用部品を作るか、公開面汎用部品へ統合するかが決まり、必要なカタログまたは管理方針が仕様化されている | `Docs/Master_Spec`、必要なカタログ、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |

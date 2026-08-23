@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.92
+
+- `Docs/Master_Spec` の版数を `rev.92` へ更新した。
+- ブランド資産仕様として、対象、許可形式、非対応形式、命名規則、代替テキストまたは説明、検査方法を策定した。
+- `Tools/check/check-adlaire-design.sh` にブランド資産の許可形式と命名規則検査を追加した。
+- 完了した `AD-TASK-001` を `Docs/Pending_Tasks` から削除した。
+
 ## rev.91
 
 - `Docs/Master_Spec` の版数を `rev.91` へ更新した。

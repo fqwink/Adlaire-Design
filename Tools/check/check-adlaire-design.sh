@@ -133,10 +133,11 @@ if [ ! -x "$ADLAIRE_DESIGN_ROOT/Tools/check/check-adlaire-design.sh" ]; then
   exit 1
 fi
 
-find "$ADLAIRE_DESIGN_ROOT/Brand" -type f ! -name '.gitkeep' -print >"$TMP_DIR/unexpected-brand-files"
+find "$ADLAIRE_DESIGN_ROOT/Brand" -type f ! -name '.gitkeep' -print >"$TMP_DIR/brand-files"
+grep -E -v '/adlaire-(logo|image|icon|ogp|brand)-[a-z0-9]([a-z0-9-]*[a-z0-9])?\.(svg|png|webp)$' "$TMP_DIR/brand-files" >"$TMP_DIR/unexpected-brand-files" || true
 
 if [ -s "$TMP_DIR/unexpected-brand-files" ]; then
-  echo "Brand/ must not contain brand assets until their asset specification is approved:" >&2
+  echo "Brand/ contains unapproved brand asset names or formats:" >&2
   cat "$TMP_DIR/unexpected-brand-files" >&2
   exit 1
 fi
@@ -262,6 +263,10 @@ for css_master_term in \
   '汎用UI部品とは、公開面、管理面、本文表示、フォーム、ナビゲーション、状態表示で再利用するUI部品である。' \
   'WYSIWYG Editor UI部品とは、WYSIWYG Editorの表示層を構成する専用UI部品である。' \
   'Adlaire-Designは、保存処理、API通信、翻訳処理、本文生成、Editor本体処理、プロダクト固有画面実装を管理しない。' \
+  '### 11.11.5 ブランド資産整理の策定仕様' \
+  '許可するファイル形式は、SVG、PNG、WebPに限定する。JPG、JPEG、GIF、PDF、AI、PSD、EPSは対応しない。' \
+  '`<name>` は小文字英数字とハイフンで構成し、先頭と末尾にハイフンを置かない。' \
+  'ブランド資産の検査は `Tools/check/check-adlaire-design.sh` で行う。' \
   '### 11.2.1 責務別整理' \
   'Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品カタログ、Editor UIカタログ、未タスク管理、検査、変更履歴に分けて管理する。' \
   '| CSS実装 | Adlaire-Design | `UI/`、`EditorUI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、WYSIWYG Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク |' \
@@ -496,7 +501,7 @@ for pending_task_term in \
   '本ファイルには未完了タスクだけを記載する。' \
   'タスクを完了した場合は、該当行を削除する。' \
   '完了済みタスクの保管場所として使わない。' \
-  'AD-TASK-001' \
+  'AD-TASK-002' \
   'AD-TASK-013' \
   'AD-TASK-014'; do
   if ! grep -F -- "$pending_task_term" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" >/dev/null 2>&1; then
