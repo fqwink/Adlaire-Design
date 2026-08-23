@@ -260,7 +260,7 @@ for css_master_term in \
   '### 11.2.1 責務別整理' \
   'Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品カタログ、Editor UIカタログ、未タスク管理、検査、変更履歴に分けて管理する。' \
   '| CSS実装 | Adlaire-Design | `UI/`、`EditorUI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、WYSIWYG Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク |' \
-  '| 未タスク管理 | Adlaire-Design | `Docs/Pending_Tasks` | 未策定または未完了タスク | 完了済みタスク、対象外事項、変更履歴 |' \
+  '| 未タスク管理 | Adlaire-Design | `Docs/Pending_Tasks` | 未策定または未完了タスク | 完了済みタスク、変更履歴 |' \
   '未策定または未完了のまま残っているタスクは `Docs/Pending_Tasks` に集約する。' \
   '| Docs | `Docs/Pending_Tasks` | 未策定または未完了タスクの管理 |' \
   '| 未タスク管理 | `Docs/Pending_Tasks`、`Docs/Master_Spec`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |' \
@@ -335,21 +335,20 @@ for wysiwyg_spec_term in \
   'WYSIWYG Editor UIの機能優先度は以下とする。' \
   '追加のUI機能は以下とする。' \
   'アクセシビリティUI方針は以下とする。' \
-  'プレビュー/JSON表示境界は以下とする。' \
+  'プレビュー/JSON表示UIは以下とする。' \
   'Editor UI完全固定後の変更管理は以下とする。' \
   'Master_Spec、カタログ、CSS、検査シェル、変更履歴のいずれかだけを単独で変更しない。' \
   'Adlaire-Designで固定する対象は以下とする。' \
   '採用確定対象は以下とする。' \
-  'Adlaire-Designでは以下を対象外とする。' \
+  'WYSIWYG Editor UIは、表示層、UI部品、状態表示、CSS/JavaScript読み込み順、Editor UI JavaScriptを仕様対象とする。' \
   'WYSIWYG Editor UIでAdlaire-Designを採用する際の読み込み順は以下に固定する。' \
   '`EditorUI/wysiwyg.css` は、以下のクラスを定義する。' \
   '`EditorUI/wysiwyg.js` は以下の規則に従う。' \
   'CSS内では `Editor UI common structure`、`Priority A: core block editor UI`、`Editor UI state classes`、`Priority B: editing support UI`、`Priority C: advanced support UI` の実装境界を持つ。' \
   '優先A/B/Cの部品は `Docs/WYSIWYG_Editor_UI_Catalog` の分類をCSS実装順と実装確認単位にする。' \
   'Adlaire-Designが定義するUI classは、HTMLまたは表示層に適用できる形式とする。' \
-  '上記のブロック種別は表示想定であり、Editor実装上の保存形式またはparser出力契約ではない。' \
-  'Adlaire-Designは、以下を要求しない。' \
-  '独立したWYSIWYG仕様ファイル作成'; do
+  '上記のブロック種別は、Editor UI上の表示想定として扱う。' \
+  'Adlaire-Designが定義するUI classは、特定のEditor実装形式に依存しない。'; do
   if ! grep -F -- "$wysiwyg_spec_term" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
     echo "Docs/Master_Spec missing required fixed WYSIWYG UI spec term: $wysiwyg_spec_term" >&2
     exit 1
@@ -387,13 +386,13 @@ for wysiwyg_catalog_term in \
   '## 1.4 状態入力' \
   '## 1.5 レスポンシブ境界' \
   '## 1.6 アクセシビリティUI' \
-  '## 1.7 Preview / JSON表示境界' \
+  '## 1.7 Preview / JSON表示UI' \
   '## 1.8 変更管理' \
   'keyboard focusの視認性を確保する' \
   'data属性名を固定しない' \
   'Preview | `.adlaire-wysiwyg-preview`' \
   'JSON panel | `.adlaire-wysiwyg-json-panel`' \
-  'WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装先、非対象範囲を管理する完成カタログとして扱う。' \
+  'WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装先を管理する完成カタログとして扱う。' \
   '`EditorUI/wysiwyg.css` は、本カタログの優先A/B/C分類を実装確認単位として扱う。' \
   '変更管理' \
   '## 2. 共通構造クラス' \
@@ -401,7 +400,6 @@ for wysiwyg_catalog_term in \
   '## 4. 優先B' \
   '## 5. 優先C' \
   '## 6. 状態クラス' \
-  '## 7. 原則対象外' \
   'Canvas' \
   'Block' \
   'Preview' \

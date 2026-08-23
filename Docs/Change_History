@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.89
+
+- `Docs/Master_Spec` の版数を `rev.89` へ更新した。
+- WYSIWYG Editor UI仕様から実処理名の詳細列挙を削除し、表示層とUI部品の仕様に整理した。
+- `Docs/WYSIWYG_Editor_UI_Catalog` の表示モード、Preview / JSON表示UI、実処理詳細欄を簡潔化した。
+- `Docs/Pending_Tasks` から範囲外事項の管理表現を削除し、未完了タスクだけを管理する方針に整合させた。
+
 ## rev.88
 
 - `Docs/Master_Spec` の版数を `rev.88` へ更新した。

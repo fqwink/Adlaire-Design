@@ -6,7 +6,7 @@
 
 仕様正本は `Docs/Master_Spec` とする。本ファイルは、Editor.jsおよびNotionに代表されるブロックベース編集UIを前提に、Adlaire-Designで管理するEditor UI部品、優先度、実装先、状態を一覧管理する。
 
-Editor本体、保存形式、編集ロジック、Markdown / MDX parser、Undo / Redo、API連携は本カタログでは扱わない。
+本カタログは、WYSIWYG Editor UIの表示層、UI部品、状態表示、モバイルUI、補助パネル、Editor UI JavaScriptを一覧管理する。
 
 ---
 
@@ -20,7 +20,7 @@ Editor本体、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 - `EditorUI/wysiwyg.css` は、本カタログの優先A/B/C分類を実装確認単位として扱う。
 - `EditorUI/wysiwyg.js` は、表示モード切替、メニュー開閉、パネル開閉を実装確認単位として扱う。
 - 仕様変更時は `Docs/Master_Spec`、本ファイル、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
-- JSONデータ管理、Markdown / MDX parser、生成JavaScript、bundle、minify、CSSプリプロセッサは前提にしない。
+- CSS/JavaScriptのビルド、bundle、minify、CSSプリプロセッサは前提にしない。
 
 ## 1.1 完全固定対象
 
@@ -30,7 +30,6 @@ Editor本体、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 | 表示モード | editor、preview、split、readonly、error、mobile |
 | 状態入力 | class、ARIA属性、HTML属性をCSSで受ける |
 | レスポンシブ境界 | default、768px以下、480px以下、touch target、bottom sheet |
-| 非対象 | Editor本体、保存、編集ロジック、Markdown / MDX parser、AI処理、共同編集処理 |
 | 変更管理 | Master_Spec、カタログ、CSS、検査、変更履歴を同期更新する |
 
 ## 1.2 UI階層
@@ -53,14 +52,14 @@ Editor本体、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 
 ## 1.3 表示モード
 
-| 表示モード | UI仕様 | 実装境界 |
-| --- | --- | --- |
-| editor | Canvasを主表示とし、ブロック編集面を表示する | Editor本文編集ロジックは含めない |
-| preview | Previewを主表示とし、生成済みまたは渡されたプレビューHTMLの見た目を整える | preview rendering生成処理は含めない |
-| split | CanvasとPreviewを併置できる表示を想定する | 分割比率、同期スクロール、生成処理は含めない |
-| readonly | 編集操作UIを抑制した読み取り専用表示を想定する | readonly判定は含めない |
-| error | ブロックまたはEditor全体のエラー表示を受ける | エラー判定、文言生成、送信は含めない |
-| mobile | 下部操作バーとbottom sheetを優先する | デバイス判定は含めない |
+| 表示モード | UI仕様 |
+| --- | --- |
+| editor | Canvasを主表示とし、ブロック編集面を表示する |
+| preview | Previewを主表示とし、生成済みまたは渡されたプレビューHTMLの見た目を整える |
+| split | CanvasとPreviewを併置できる表示を想定する |
+| readonly | 編集操作UIを抑制した読み取り専用表示を想定する |
+| error | ブロックまたはEditor全体のエラー表示を受ける |
+| mobile | 下部操作バーとbottom sheetを優先する |
 
 ## 1.4 状態入力
 
@@ -94,14 +93,14 @@ Editor本体、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 | contrast | 状態表示は色だけに依存しない |
 | error | エラー状態は色、アイコン領域、テキスト領域を持つ |
 
-## 1.7 Preview / JSON表示境界
+## 1.7 Preview / JSON表示UI
 
-| 対象 | UI仕様 | 非対象 |
-| --- | --- | --- |
-| Preview | `.adlaire-wysiwyg-preview` でプレビュー領域の余白、背景、本文色、行間を整える | HTML生成、sanitize、Markdown / MDX変換 |
-| JSON panel | `.adlaire-wysiwyg-json-panel` で等幅表示と横スクロールを提供する | JSON serialization、format、validate |
-| Split表示 | editorとpreviewを同時表示できるUIクラス群を前提にする | 同期スクロール、差分計算、pane resize |
-| Publish check | `.adlaire-wysiwyg-publish-check` で公開前確認の表示枠を提供する | チェック実行、リンク検査、alt判定 |
+| 対象 | UI仕様 |
+| --- | --- |
+| Preview | `.adlaire-wysiwyg-preview` でプレビュー領域の余白、背景、本文色、行間を整える |
+| JSON panel | `.adlaire-wysiwyg-json-panel` で等幅表示と横スクロールを提供する |
+| Split表示 | editorとpreviewを同時表示できるUIクラス群を前提にする |
+| Publish check | `.adlaire-wysiwyg-publish-check` で公開前確認の表示枠を提供する |
 
 ## 1.8 変更管理
 
@@ -111,10 +110,9 @@ Editor本体、保存形式、編集ロジック、Markdown / MDX parser、Undo 
 | UI部品を削除する | `Docs/Master_Spec`、本カタログ、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | class名を変更する | `Docs/Master_Spec`、本カタログ、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | CSS/JavaScript読み込み順を変更する | `Docs/Master_Spec`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
-| 非対象範囲を変更する | `Docs/Master_Spec`、`AGENTS.md`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | カタログだけを整理する | 本カタログ、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 
-WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装先、非対象範囲を管理する完成カタログとして扱う。
+WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装先を管理する完成カタログとして扱う。
 
 ---
 
@@ -275,16 +273,3 @@ WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装
 | collapsed | `.adlaire-wysiwyg-block-collapsed` |
 
 ---
-
-## 7. 原則対象外
-
-| 対象外 | 理由 |
-| --- | --- |
-| Editor実装コード | UIカタログの範囲に含めないため |
-| block schema | UIカタログの範囲に含めないため |
-| 保存形式 | UIカタログの範囲に含めないため |
-| Markdown / MDX parser | UIカタログの範囲に含めないため |
-| Undo / Redo | UIカタログの範囲に含めないため |
-| ドラッグ処理ロジック | UIカタログの範囲に含めないため |
-| AI補助処理 | UIカタログの範囲に含めないため |
-| 共同編集処理 | UIカタログの範囲に含めないため |
