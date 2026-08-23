@@ -2,13 +2,13 @@
 
 # マスター仕様書
 
-**Version:** rev.86
+**Version:** rev.93
 
 ---
 
 # 1. 目的
 
-本仕様書は、Adlaire-Designのマスター仕様書として、Adlaire Group(開発元: Adlaire Group DX事業セグメントグループ)が使用する統一ブランドカラー、公開面・管理面におけるブランドデザイン、CSSフレームワーク、WYSIWYG Editor UIの基本方針を定める。
+本仕様書は、Adlaire-Designのマスター仕様書として、Adlaire Group(開発元: Adlaire Group DX事業セグメントグループ)が使用するデザインシステム、統一ブランドカラー、公開面・管理面におけるブランドデザイン、CSSフレームワーク、WYSIWYG Editor UIの基本方針を定める。
 
 色だけでなく、背景、境界、余白、ボタン、リンク、セクション構成、情報の見せ方など、ユーザーが受け取る見た目全体を設計対象に含める。
 
@@ -22,9 +22,47 @@ WYSIWYG Editor UIはAdlaire-Design採用確定とする。WYSIWYG Editor UI仕�
 
 WYSIWYG Editor専用UI部品の分類、優先度、実装先、実装状態は `Docs/WYSIWYG_Editor_UI_Catalog` で一覧管理する。仕様正本は本書とし、WYSIWYG Editor UIカタログは本書の補助正本として扱う。
 
-本方針は、実装変更より先に本仕様書を正本として定義する。実際のCSS、テーマ、公開面への反映は、本仕様書の承認後に個別の実装計画として扱う。
+未策定または未完了のまま残っているタスクは `Docs/Pending_Tasks` に集約する。同ファイルには未完了タスクだけを残し、完了したタスクは削除する。
+
+本方針は、実装変更より先に本仕様書を正本として定義する。実際のCSS、公開面への反映は、本仕様書の承認後に個別の実装計画として扱う。
 
 開発正本は独立リポジトリ `Adlaire-Design` で管理する(詳細は第6章を参照)。
+
+## 1.1 Adlaire-Designの概念と定義
+
+Adlaire-Designは、Adlaire GroupのUI表現を統一するためのデザインシステム正本である。
+
+Adlaire-Designにおけるデザインシステムとは、Adlaire GroupのUI表現を一貫させるための正本体系である。
+
+デザインシステムは、単なるCSS集、テーマ集、部品一覧、ブランドガイドではない。
+
+デザインシステムは、デザイントークン、CSS契約、UI部品、状態表現、ブランド資産、公式アイコン、WYSIWYG Editor UI、検査条件を同じルールで接続し、利用側が一貫した画面を構築できるようにする。
+
+Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産、公式アイコンセット、汎用UI部品、WYSIWYG Editor UI部品を一体で管理する。
+
+Adlaire-Designは、UI表現、デザイントークン、CSS契約、汎用部品、公式アイコン、ブランド資産、WYSIWYG Editor UIを正本化する。
+
+ブログ・ドキュメント、GitプロバイダーUI、社内ポータル、静的サイトなどの画面種別は、Adlaire-Designの共通部品とルールを適用する代表例として扱う。
+
+Adlaire-Designでは、画面種別ごとの専用テーマや専用設計体系は策定しない。
+
+Adlaire-Designは、特定プロダクトの画面実装ではなく、複数プロダクトで再利用できるUI仕様と部品を定義する。
+
+Adlaire-Designは、デザインシステムとしてのUI表現、部品、トークン、資産、CSS契約、検査条件を管理する。
+
+汎用UI部品とは、公開面、管理面、本文表示、フォーム、ナビゲーション、状態表示で再利用するUI部品である。
+
+WYSIWYG Editor UI部品とは、WYSIWYG Editorの表示層を構成する専用UI部品である。
+
+WYSIWYG Editor UI部品には、Editor外枠、Header、Toolbar、Canvas、Block、Inline toolbar、Slash menu、Mobile surface、Preview、JSON panel、Footer、状態表示、補助パネルを含める。
+
+デザイントークンとは、色、面、状態、効果値など、複数UI部品で共有する見た目の値である。
+
+ブランド資産とは、ロゴ、画像、アイコン、OGPなど、ブランド表示に必要な素材である。
+
+公式アイコンセットとは、`Icons/` で管理する汎用UI用SVGアイコンである。
+
+Adlaire-DesignのJavaScriptとは、UIの表示状態を補助するための責務別JavaScriptである。
 
 ---
 
@@ -75,7 +113,7 @@ WYSIWYG Editor専用UI部品の分類、優先度、実装先、実装状態は 
 
 - 外部CSSフレームワーク(Tailwind CSS、Bootstrapなど)は採用しない。本仕様書を正本とした内製の軽量CSSフレームワークとして設計する。
 - ユーティリティクラスは `.adlaire-bg-<role>`(背景色)、`.adlaire-text-<role>`(文字色)、`.adlaire-border-<role>`(境界線色)の命名規則に従い、第4章のCSS変数を参照する形で実装する(HEX値を直接埋め込まない)。
-- 内製CSSフレームワークは、画面やテーマごとに分散させず、本仕様書で定める共有スタイルシートとして一元管理する。
+- 内製CSSフレームワークは、画面種別ごとの専用設計体系に分散させず、本仕様書で定める共有スタイルシートとして一元管理する。
 - CSSフレームワークとデザイントークンの実装範囲、ファイル構成、段階は第11章に定める。
 - WYSIWYG Editor UIはAdlaire-Design採用とし、エディター表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSSを本リポジトリで管理する。
 - 色以外の設計要素(余白、タイポグラフィなど)は、Adlaire-Design内のトークン、UI CSS、汎用部品仕様として管理する。具体的な設計トークンとして管理する必要が生じた場合は、別途定義を新設する。
@@ -99,7 +137,7 @@ WYSIWYG Editor専用UI部品の分類、優先度、実装先、実装状態は 
 
 Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理する方針とする。
 
-Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UIの開発正本として独立して管理する。
+Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産、公式アイコンセット、WYSIWYG Editor UIの開発正本として独立して管理する。
 
 ---
 
@@ -121,17 +159,15 @@ Adlaire-Designは、CSSフレームワーク、デザイントークン、ブラ
 
 正常状態、補助ステータスには Primary または Support を使用する。
 
-## 8.2 テーマでの使用方針
+## 8.2 デザインシステムでの色使用方針
 
-標準テーマを定義する場合は、ブランドカラートークンを反映する。
+Adlaire-Designでは、テーマ切替を前提にした色体系を策定しない。
 
-標準テーマの初期方針は以下とする。
+ブランドカラートークンは、共通部品、状態表示、ナビゲーション、本文部品、Editor UIなどのUI表現で一貫して参照する。
 
-| テーマ | 主な用途 | 色方針 |
-| --- | --- | --- |
-| `standard` | 汎用サイト | Primaryを中心に使用する |
-| `blog` | 記事中心サイト | Secondaryを中心に使用する |
-| `media` | 情報発信・広告枠想定サイト | Accentを中心に使用する |
+画面種別ごとの専用テーマ名、専用テーマCSS、専用テーマclassは定義しない。
+
+ブログ・ドキュメント、GitプロバイダーUI、社内ポータル、静的サイトなどの画面種別は、共通部品とルールを適用する代表例として扱う。
 
 ---
 
@@ -176,11 +212,10 @@ Adlaire-Designは、公開面デザインの参照基準を本リポジトリ内
 本仕様は以下に適用する。
 
 - Adlaire Groupが管理する管理画面
-- 新規作成または大規模改修される静的生成公開テーマ
+- 新規作成または大規模改修される静的公開面
 - Adlaire-Designで定義する公開面CSSを採用する公開面
 - Adlaire-Designの構成・見た目を参照して整備する公開面
-- Adlaire-Designで定義するテーマ
-- テーマ内で参照する色トークン
+- Adlaire-Designで定義するデザイントークン、CSS契約、汎用部品、公式アイコン、ブランド資産、WYSIWYG Editor UI
 
 本仕様は以下には適用しない。
 
@@ -199,7 +234,7 @@ Adlaire-Designは、公開面デザインの参照基準を本リポジトリ内
 
 本章は、Adlaire-Design内で管理するCSSフレームワーク、デザイントークン、WYSIWYG Editor UIの実装範囲、ファイル構成、命名、段階を定める。
 
-本章は仕様固定と実装整合性の確認を目的とする。実際のCSSファイル作成、テーマ作成、公開面反映は、ユーザー承認後に個別作業として行う。
+本章は仕様固定と実装整合性の確認を目的とする。実際のCSSファイル作成、公開面反映は、ユーザー承認後に個別作業として行う。
 
 ## 11.2 実装方針
 
@@ -211,16 +246,16 @@ Adlaire-Designは、公開面デザインの参照基準を本リポジトリ内
 - 実装は、第1段階の色トークンと最小ユーティリティ、第2段階の公開面トークン・レイアウト・コンポーネント、第3段階の公開面CSS基盤、WYSIWYG Editor管理仕様に分けて管理する。
 - `@import` は使用しない。CSSファイルの読み込み順は利用側で明示する。
 - 2026-08-21時点では、CSSビルド方針は採用しない。`Tokens/`、`UI/`、`EditorUI/` 配下のCSSファイルを正本として直接管理し、生成元と生成物を分けない。
-- WYSIWYG Editor本体のTypeScriptソース、生成JavaScript、Markdown / MDX parser、Editorビルド設定は管理対象外とする。
+- WYSIWYG Editor UIは、`EditorUI/` のCSSとJavaScriptで表示層の操作を管理する。
 - UI部品のJavaScript処理は、CSSと合体させず、同じ責務名の `.js` ファイルとして管理する。
 - Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、CSS minify生成、CSS bundle生成は採用しない。
 - `Dist/`、`dist/`、`Build/`、`build/` などの生成CSS用ディレクトリは作成しない。
-- npm、webpack、Node.js前提のWYSIWYGビルド設定はAdlaire-Designでは採用しない。
+- WYSIWYG Editor UIは、npm、webpack、Node.js前提のビルド設定を使わずに管理する。
 - 今後の拡充は、公開面で必要となるCSS機能、WYSIWYG Editor UI、再現性検査、ドキュメント整備を優先する。CSSのビルド、minify、bundleは現状検討しない。
 
 ### 11.2.1 責務別整理
 
-Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品カタログ、Editor UIカタログ、検査、変更履歴に分けて管理する。Editor本体、保存、編集ロジック、Markdown / MDX parser、プロダクト固有採用はAdlaire-Designの責務に含めない。
+Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、ブランド資産、公式アイコンセット、汎用部品カタログ、Editor UIカタログ、未タスク管理、検査、変更履歴に分けて管理する。
 
 責務別の管理範囲は以下に固定する。
 
@@ -229,8 +264,12 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品
 | 仕様正本 | Adlaire-Design | `Docs/Master_Spec` | CSSマスター仕様、Editor UIマスター仕様、責務境界、読み込み順、禁止事項、変更管理 | 実装コード、プロダクト固有採用計画 |
 | 一般CSS汎用部品カタログ | Adlaire-Design | `Docs/Generic_Component_Catalog` | 一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティ | WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 具体クラス |
 | Editor UIカタログ | Adlaire-Design | `Docs/WYSIWYG_Editor_UI_Catalog` | エディタUIに関する部品、状態表示、モバイルEditor UI、補助パネル | 一般公開面の汎用部品、Editor実装ロジック |
+| 公式アイコンセットカタログ | Adlaire-Design | `Docs/Icon_Set_Catalog` | 公式アイコンの分類、用途、表示サイズ、代替テキスト方針、実装状態 | ブランド資産、アイコン検索や挿入などの利用側処理 |
+| 未タスク管理 | Adlaire-Design | `Docs/Pending_Tasks` | 未策定または未完了タスク | 完了済みタスク、変更履歴 |
+| ブランド資産 | Adlaire-Design | `Brand/` | ロゴ、ブランド画像、OGP、ブランド固有アイコン、ブランド説明用素材 | 汎用UI用の公式アイコンセット |
+| 公式アイコンセット | Adlaire-Design | `Icons/` | 汎用UIで使う公式アイコンSVG | ロゴ、ブランド画像、OGP、PNG/WebP/JPG/JPEG、生成アイコンCSS |
 | CSSトークン | Adlaire-Design | `Tokens/` | 色、面、状態、効果のCSS変数 | UI部品セレクタ、JavaScript状態管理 |
-| CSS実装 | Adlaire-Design | `UI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク |
+| CSS実装 | Adlaire-Design | `UI/`、`EditorUI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、WYSIWYG Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク |
 | 検査 | Adlaire-Design | `Tools/check/check-adlaire-design.sh` | 構造、必須ファイル、必須語句、必須変数、必須クラス、禁止記述、未定義変数参照 | 外部CSS parser、Node.js/npm依存検査基盤 |
 | 変更履歴 | Adlaire-Design | `Docs/Change_History` | Master_Spec、カタログ、CSS、検査の変更記録 | 履歴上の旧仕様を現行仕様として復活させること |
 | プロダクト採用 | 利用先プロダクト | 利用先プロダクト側 | 採用判断、移行計画、プロダクト固有CSS層、公開面反映、ロールバック | Adlaire-Design正本の直接変更なしの仕様逸脱 |
@@ -242,8 +281,12 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品
 | Docs | `Docs/Master_Spec` | 仕様正本 |
 | Docs | `Docs/Generic_Component_Catalog` | 一般CSS汎用部品カタログ |
 | Docs | `Docs/WYSIWYG_Editor_UI_Catalog` | Editor UIカタログ |
+| Docs | `Docs/Icon_Set_Catalog` | 公式アイコンセットカタログ |
+| Docs | `Docs/Pending_Tasks` | 未策定または未完了タスクの管理 |
 | Docs | `Docs/Document_Index` | リポジトリ索引 |
 | Docs | `Docs/Change_History` | 変更履歴 |
+| Brand | `Brand/` | ブランド資産 |
+| Icons | `Icons/` | 公式アイコンSVG |
 | Tokens | `Tokens/colors.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` | CSS変数 |
 | UI | `UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/components.js`、`UI/site.css`、`UI/forms.css`、`UI/forms.js`、`UI/content.css`、`UI/content.js`、`UI/utilities.css`、`UI/compat-agws.css` | 公開面CSS基盤と汎用UI JavaScript |
 | EditorUI | `EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js` | WYSIWYG Editor UIスキンとEditor UI JavaScript |
@@ -256,11 +299,16 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品
 | CSS仕様 | `Docs/Master_Spec`、必要なカタログ、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | 一般CSS汎用部品 | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、対象 `UI/*.css`、必要な `UI/*.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | Editor UI部品 | `Docs/Master_Spec`、`Docs/WYSIWYG_Editor_UI_Catalog`、`EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| 公式アイコンセット | `Docs/Master_Spec`、`Docs/Icon_Set_Catalog`、`Icons/`、必要な `UI/*.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| ブランド資産 | `Docs/Master_Spec`、`Docs/Document_Index`、`Brand/`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | CSSトークン | `Docs/Master_Spec`、対象 `Tokens/*.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | 検査仕様 | `Docs/Master_Spec`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | 索引 | `Docs/Document_Index`、必要に応じて `Docs/Master_Spec`、`Docs/Change_History` |
+| 未タスク管理 | `Docs/Pending_Tasks`、`Docs/Master_Spec`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 
-責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、採用・移行を利用先プロダクト側として扱う。
+公式アイコンSVGの制作は `AD-TASK-015` として管理し、公式アイコンセットの策定とは別の変更単位とする。
+
+責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、汎用UIで使う公式アイコンを `Docs/Icon_Set_Catalog` と `Icons/`、採用・移行を利用先プロダクト側として扱う。
 
 ### 11.2.2 CSSマスター仕様
 
@@ -271,7 +319,7 @@ CSSマスター仕様で固定する対象は以下とする。
 | 固定対象 | 固定内容 |
 | --- | --- |
 | 正本 | CSS仕様は `Docs/Master_Spec` を正本とする |
-| 補助正本 | 一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog` で一覧管理する |
+| 補助正本 | 一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog`、公式アイコンセットは `Docs/Icon_Set_Catalog` で一覧管理する |
 | 実装正本 | CSS実装は `Tokens/`、`UI/`、`EditorUI/` 配下のCSSファイル、UI JavaScriptは `UI/`、`EditorUI/` 配下のJSファイルを正本とする |
 | 検査正本 | 構造、必須ファイル、禁止ファイル、必須変数、必須クラス、禁止記述は `Tools/check/check-adlaire-design.sh` で検査する |
 | 変更履歴 | CSS仕様またはCSS実装を変更する場合は `Docs/Change_History` を更新する |
@@ -319,8 +367,8 @@ CSSファイルの責務境界は以下とする。
 | `UI/content.css` | 本文固有部品 | 汎用レイアウト、WYSIWYG専用部品 |
 | `UI/utilities.css` | 小粒度の汎用ユーティリティ | 意味を持つコンポーネント一式 |
 | `UI/compat-agws.css` | Adlaire-Design仕様CSS層の固定セレクタ | プロダクト固有CSS層、追加移行CSS |
-| `EditorUI/wysiwyg.css` | WYSIWYG Editor UIスキン | Editor本体、保存、Markdown / MDX parser、生成JavaScript |
-| `EditorUI/wysiwyg.js` | WYSIWYG Editor UIの表示切替、メニュー開閉、パネル開閉 | Editor本体、保存、Markdown / MDX parser、生成JavaScript |
+| `EditorUI/wysiwyg.css` | WYSIWYG Editor UIスキン | CSSビルド成果物 |
+| `EditorUI/wysiwyg.js` | WYSIWYG Editor UIの表示切替、メニュー開閉、パネル開閉 | JavaScriptビルド成果物 |
 
 カタログ責務境界は以下に固定する。
 
@@ -779,7 +827,6 @@ CSS変数は以下とする。
 - 既存プロダクト固有CSSのそのままの移植
 - 既存プロダクト画面の直接変更
 - 仕様化されていないロゴや画像などのブランド資産作成
-- 多言語化
 - JSONデータ管理
 - JavaScriptによる本文描画
 
@@ -895,7 +942,6 @@ Adlaire-Designの標準APIは `.adlaire-` 接頭辞のクラスとする。追�
 - 特定プロダクト本体HTMLの置換
 - 特定プロダクト本体CSSの削除
 - 特定プロダクト固有の追加CSS層
-- 多言語化
 - JSONデータ管理
 - ビルド処理
 - minify版
@@ -999,7 +1045,6 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 拡充仕様では、以下を必ず非対象として記録する。
 
-- 多言語化
 - JSONデータ管理
 - CSSビルド処理
 - minify版
@@ -1016,7 +1061,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 | レイアウト | 2カラム、1カラム、余白、コンテナ、グリッド補助 | 複数の公開面で再利用が見込める |
 | コンポーネント | カード、notice、タブ、タイムライン、目次、ニュース項目 | 本文構造を変えずに表示品質を上げられる |
 | フォーム | 入力、ラベル、チェック、エラー、送信ボタン、検索/絞り込みUI | CSSと責務別JavaScriptで状態表現できる |
-| ナビゲーション | ヘッダー、フッター、パンくず、サイドバー、ページ内リンク | 既存HTML構造を維持できる |
+| ナビゲーション | ヘッダー、フッター、パンくず、サイドバー、ページ内リンク、多言語化UI | 既存HTML構造を維持できる |
 | 本文部品 | セクション、リスト、表、注記、日付、メタ情報 | コンテンツ本文を再設計せず使える |
 | ユーティリティ | spacing、display、text、background、flex | 既存命名と衝突せず用途が明確 |
 | 状態表現 | alert、badge、disabled、focus、hover | Tokens側の状態色または効果トークンで説明できる |
@@ -1055,7 +1100,6 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 - JavaScriptによる表ソート、フィルタ、折りたたみ
 - JSONデータ管理
-- 多言語化
 - ビルド、minify、bundle
 - 特定プロダクト本体HTMLの置換
 
@@ -1063,7 +1107,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 汎用部品の拡充として、操作行、ツールバー、配置補助、区切り線、空状態、エラーページ、チップ、ステータス、リンクリスト、サーフェスグリッド、メディアオブジェクトを `UI/components.css` に実装する。
 
-汎用部品の一覧管理は `Docs/Generic_Component_Catalog` で行い、実装済み、候補、対象外を同じ表で管理する。
+汎用部品の一覧管理は `Docs/Generic_Component_Catalog` で行い、実装済み部品、部品状態、対象外を管理する。未完了タスクの管理は `Docs/Pending_Tasks` に集約する。
 
 追加対象は以下とする。
 
@@ -1085,6 +1129,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 | メディアオブジェクト | `.adlaire-media`、`.adlaire-media-figure`、`.adlaire-media-body`、`.adlaire-media-title` | 図版、アイコン、画像などと本文を横並びで表示する |
 | CTA | `.adlaire-cta`、`.adlaire-cta-title`、`.adlaire-cta-text`、`.adlaire-cta-actions` | 公開面の主要導線を強調表示する |
 | 補助テキスト | `.adlaire-caption`、`.adlaire-helper-text` | 図表キャプション、入力外の補助説明、注釈を表示する |
+| 多言語化UI | `.adlaire-language-switcher`、`.adlaire-language-switcher-label`、`.adlaire-language-switcher-list`、`.adlaire-language-option`、`.adlaire-language-option-current` | 言語切替、現在言語、選択肢を表示する |
 
 汎用部品は、本文固有の意味を持たず、公開面の複数ページで再利用できるものに限定する。見た目の値は既存の `Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` のCSS変数を参照し、新規トークンは追加しない。
 
@@ -1098,7 +1143,6 @@ JavaScriptあり汎用部品は、CSS表示契約を壊さない範囲で操作�
 
 - アイコン、画像、ロゴなどのブランド資産追加
 - JSONデータ管理
-- 多言語化
 - ビルド、minify、bundle
 - 特定プロダクト本体HTMLの置換
 
@@ -1106,7 +1150,7 @@ JavaScriptあり汎用部品は、CSS表示契約を壊さない範囲で操作�
 
 WYSIWYG Editor UIはAdlaire-Design採用確定とし、エディター表示層のCSSを `EditorUI/wysiwyg.css`、Editor UIのJavaScript処理を `EditorUI/wysiwyg.js` に実装する。
 
-本節は、Adlaire-DesignにおけるWYSIWYG Editor UIのマスター仕様である。WYSIWYG Editor UIの採用範囲、表示層、UI部品、状態表示、CSS契約、読み込み順、非対象範囲、変更管理、検査方針は本節で固定する。
+本節は、Adlaire-DesignにおけるWYSIWYG Editor UIのマスター仕様である。WYSIWYG Editor UIの採用範囲、表示層、UI部品、状態表示、CSS契約、読み込み順、変更管理、検査方針は本節で固定する。
 
 WYSIWYG Editor UI仕様と実装境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。
 
@@ -1138,14 +1182,13 @@ Adlaire-Designで固定する対象は以下とする。
 - 補助パネルUI
 - レビュー/公開前確認UI
 - 空状態、readonly、error、syncの状態表示
-- プレビュー/JSON表示境界
+- プレビュー/JSON表示UI
 - アクセシビリティUI
 - レスポンシブ境界
 - CSS/JavaScript読み込み順
 - `EditorUI/wysiwyg.css` の必須クラス
 - `EditorUI/wysiwyg.js` のUI操作
 - CSS禁止事項
-- 非対象範囲
 - 検査方針
 - 仕様変更時の同期更新条件
 
@@ -1157,7 +1200,7 @@ Editor UI完全固定対象は以下とする。
 | 補助正本 | UI部品一覧は `Docs/WYSIWYG_Editor_UI_Catalog` で管理する |
 | CSS実装 | Editor UIスキンは `EditorUI/wysiwyg.css` で管理する |
 | JavaScript実装 | Editor UI操作は `EditorUI/wysiwyg.js` で管理する |
-| 実装境界 | Editor本体、保存、編集ロジック、Markdown / MDX parserは含めない |
+| 実装境界 | 表示層、UI部品、状態表示、読み込み順、Editor UI JavaScriptを固定する |
 | UI思想 | Editor.js / Notionに代表されるブロックベース編集UIを表示方針の参照とする |
 | レイアウト思想 | モバイルファーストを前提に、desktopでは補助パネルを追加表示できる構成とする |
 | CSS契約 | `.adlaire-wysiwyg-*` classをAdlaire-Design側のEditor UI契約とする |
@@ -1207,14 +1250,14 @@ Editor UI階層は以下に固定する。
 
 Editor UI表示モードは以下に固定する。
 
-| 表示モード | UI仕様 | 実装境界 |
-| --- | --- | --- |
-| editor | Canvasを主表示とし、ブロック編集面を表示する | Editor本文編集ロジックは含めない |
-| preview | Previewを主表示とし、生成済みまたは渡されたプレビューHTMLの見た目を整える | preview rendering生成処理は含めない |
-| split | CanvasとPreviewを併置できる表示を想定する | 分割比率、同期スクロール、生成処理は含めない |
-| readonly | 編集操作UIを抑制した読み取り専用表示を想定する | readonly判定は含めない |
-| error | ブロックまたはEditor全体のエラー表示を受ける | エラー判定、文言生成、送信は含めない |
-| mobile | 下部操作バーとbottom sheetを優先する | デバイス判定は含めない |
+| 表示モード | UI仕様 |
+| --- | --- |
+| editor | Canvasを主表示とし、ブロック編集面を表示する |
+| preview | Previewを主表示とし、生成済みまたは渡されたプレビューHTMLの見た目を整える |
+| split | CanvasとPreviewを併置できる表示を想定する |
+| readonly | 編集操作UIを抑制した読み取り専用表示を想定する |
+| error | ブロックまたはEditor全体のエラー表示を受ける |
+| mobile | 下部操作バーとbottom sheetを優先する |
 
 状態入力の受け方は以下に固定する。
 
@@ -1227,24 +1270,7 @@ Editor UI表示モードは以下に固定する。
 | inline style | progress幅など利用先HTML側の静的指定は許容するが、CSS契約としては固定しない |
 | Editor本体状態 | Adlaire-Designでは生成、更新、監視しない |
 
-Adlaire-Designでは以下を対象外とする。
-
-- WYSIWYG Editor実装コード
-- TypeScript / JavaScriptのEditor本体
-- ブロックデータ構造
-- 保存形式
-- 編集操作
-- Undo / Redo
-- JSON serialization
-- preview rendering生成処理
-- Markdown / MDX parser
-- parser採用ライブラリ
-- 永続ストレージ連携
-- JavaScriptのbundle、minify、compile
-- npm、webpack、Node.js前提の設定
-- `WYSIWYG/` ディレクトリ作成
-- 独立したWYSIWYG仕様ファイル作成
-- `Dist/`、`dist/`、`Build/`、`build/` 作成
+WYSIWYG Editor UIは、表示層、UI部品、状態表示、CSS/JavaScript読み込み順、Editor UI JavaScriptを仕様対象とする。
 
 WYSIWYG Editorのブロック表示は、Adlaire-Designの既存部品を優先して使用する。
 
@@ -1262,7 +1288,7 @@ WYSIWYG Editorのブロック表示は、Adlaire-Designの既存部品を優先�
 | label | `UI/content.css` または `EditorUI/wysiwyg.css` |
 | progress | `EditorUI/wysiwyg.css` |
 
-上記のブロック種別は表示想定であり、Editor実装上の保存形式またはparser出力契約ではない。
+上記のブロック種別は、Editor UI上の表示想定として扱う。
 
 WYSIWYG Editor UIは、Editor.jsおよびNotionに代表されるブロックベース編集UIを参照し、1ブロックを1編集単位として扱う表示層を提供する。
 
@@ -1359,14 +1385,14 @@ WYSIWYG Editor UIの機能優先度は以下とする。
 | contrast | 状態表示は色だけに依存しない |
 | error | エラー状態は色、アイコン領域、テキスト領域を持つ |
 
-プレビュー/JSON表示境界は以下とする。
+プレビュー/JSON表示UIは以下とする。
 
-| 対象 | UI仕様 | 非対象 |
-| --- | --- | --- |
-| Preview | `.adlaire-wysiwyg-preview` でプレビュー領域の余白、背景、本文色、行間を整える | HTML生成、sanitize、Markdown / MDX変換 |
-| JSON panel | `.adlaire-wysiwyg-json-panel` で等幅表示と横スクロールを提供する | JSON serialization、format、validate |
-| Split表示 | editorとpreviewを同時表示できるUIクラス群を前提にする | 同期スクロール、差分計算、pane resize |
-| Publish check | `.adlaire-wysiwyg-publish-check` で公開前確認の表示枠を提供する | チェック実行、リンク検査、alt判定 |
+| 対象 | UI仕様 |
+| --- | --- |
+| Preview | `.adlaire-wysiwyg-preview` でプレビュー領域の余白、背景、本文色、行間を整える |
+| JSON panel | `.adlaire-wysiwyg-json-panel` で等幅表示と横スクロールを提供する |
+| Split表示 | editorとpreviewを同時表示できるUIクラス群を前提にする |
+| Publish check | `.adlaire-wysiwyg-publish-check` で公開前確認の表示枠を提供する |
 
 Editor UI完全固定後の変更管理は以下とする。
 
@@ -1376,7 +1402,6 @@ Editor UI完全固定後の変更管理は以下とする。
 | UI部品を削除する | `Docs/Master_Spec`、`Docs/WYSIWYG_Editor_UI_Catalog`、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | class名を変更する | `Docs/Master_Spec`、`Docs/WYSIWYG_Editor_UI_Catalog`、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | CSS/JavaScript読み込み順を変更する | `Docs/Master_Spec`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
-| 非対象範囲を変更する | `Docs/Master_Spec`、`AGENTS.md`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | カタログだけを整理する | `Docs/WYSIWYG_Editor_UI_Catalog`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 
 Editor UI完全固定後は、Master_Spec、カタログ、CSS、検査シェル、変更履歴のいずれかだけを単独で変更しない。CSS実装を伴わない仕様整理であっても、検査対象語句を更新して仕様ドリフトを防ぐ。
@@ -1414,7 +1439,7 @@ WYSIWYG Editor UIでAdlaire-Designを採用する際の読み込み順は以下�
 
 - 冒頭コメントは `/* Adlaire-Design WYSIWYG editor interactions */` とする。
 - 表示モード切替、メニュー開閉、パネル開閉のみを扱う。
-- Editor本文の保存、Markdown / MDX parser、生成JavaScript、API通信は扱わない。
+- 表示モード切替、メニュー開閉、パネル開閉に限定する。
 - npm、bundle、minify、compileを前提にしない。
 - 優先A/B/Cの部品は `Docs/WYSIWYG_Editor_UI_Catalog` の分類をCSS実装順と実装確認単位にする。
 
@@ -1493,14 +1518,7 @@ WYSIWYG Editor UIでAdlaire-Designを採用する際の読み込み順は以下�
 
 Adlaire-Designが定義するUI classは、HTMLまたは表示層に適用できる形式とする。
 
-Adlaire-Designは、以下を要求しない。
-
-- 特定のTypeScript interface
-- 特定のblock schema
-- 特定のJSON保存形式
-- 特定のMarkdown / MDX parser
-- 特定のUndo / Redo実装
-- 特定のビルドツール
+Adlaire-Designが定義するUI classは、特定のEditor実装形式に依存しない。
 
 Adlaire-Design UIを採用する場合は、本節のCSS/JavaScript読み込み順と必須クラスを優先する。
 
@@ -1524,6 +1542,7 @@ Adlaire-Design UIを採用する場合は、本節のCSS/JavaScript読み込み�
 14. `AGENTS.md` がCSSプリプロセッサ、CSSビルド、CSS minify、CSS bundle、npm/webpack系設定を追加しない運用方針を記録していることの確認
 15. トップレベル、`Docs/`、`Tokens/`、`UI/`、`Tools/`、`Brand/` が承認済みのリポジトリ構造から逸脱していないことの確認
 16. `Tools/check/check-adlaire-design.sh` が実行可能であることの確認
+17. `Samples/` が理解補助資料の配置先として許可形式だけを含むことの確認
 
 検査はPOSIX shellで記述し、`Tools/check/check-adlaire-design.sh` に集約する。検査のためにNode.js/npm、外部CSSパーサ、外部CLIを追加しない。
 
@@ -1533,29 +1552,77 @@ Adlaire-Design UIを採用する場合は、本節のCSS/JavaScript読み込み�
 
 | ファイル | 更新条件 |
 | --- | --- |
-| `Docs/Master_Spec` | 仕様、非対象、承認単位、読み込み順、検査方針を変更する場合 |
+| `Docs/Master_Spec` | 仕様、承認単位、読み込み順、検査方針を変更する場合 |
 | `Docs/Change_History` | `Docs/Master_Spec` または管理対象を変更する場合 |
 | `Docs/Document_Index` | 主要ファイル、ディレクトリ、説明が増減する場合 |
-| WYSIWYG Editor UI仕様 | WYSIWYG Editor UIのAdlaire-Design採用確定範囲、実装境界、非対象、CSS管理範囲を変更する場合 |
-| `README.md` | 利用者が最初に読む方針、構成、コマンド、非対象が変わる場合 |
+| `Docs/Pending_Tasks` | 未策定または未完了タスクを追加、削除、分割、統合する場合 |
+| WYSIWYG Editor UI仕様 | WYSIWYG Editor UIのAdlaire-Design採用確定範囲、実装境界、CSS管理範囲を変更する場合 |
+| `README.md` | 利用者が最初に読む方針、構成、コマンドが変わる場合 |
 | `AGENTS.md` | 作業開始時ルール、リポジトリ運用ルールが変わる場合 |
 
 ドキュメント整備では、仕様と実装のどちらが正本かを曖昧にしない。CSS実装を変更する場合は、仕様、実装、検査、変更履歴を同じ承認単位で扱う。
 
+### 11.11.4.1 サンプルデザインとスクリーンショット
+
+サンプルデザインおよびスクリーンショットは、Adlaire-Designの理解補助と利用イメージの共有を目的として制作できる。
+
+サンプルデザインおよびスクリーンショットは仕様正本ではない。正本は `Docs/Master_Spec`、各カタログ、`Tokens/`、`UI/`、`EditorUI/`、`Icons/`、`Brand/` とする。
+
+サンプルデザインは `Samples/design/`、スクリーンショットは `Samples/screenshots/` に配置する。
+
+`Samples/design/` にはHTML、CSS、JS、SVG、PNG、WebP、`.gitkeep` を配置できる。`Samples/screenshots/` にはSVG、PNG、WebP、`.gitkeep` を配置できる。JPG/JPEGは使用しない。
+
+サンプルデザインとスクリーンショットの検査は、配置先と許可形式の確認に限定する。
+
 ### 11.11.5 ブランド資産整理の策定仕様
 
-ブランド資産を整理する場合は、追加前に以下を仕様化する。
+ブランド資産は、Adlaire-Designの表示品質とブランド識別に必要な素材として `Brand/` で管理する。
 
-- 資産種別
-- 用途
-- 配置先
-- ファイル形式
-- 命名規則
-- 代替テキストまたは説明
-- 利用対象
-- 更新時の検査方法
+ブランド資産の対象は以下に固定する。
 
-`Brand/` 配下は、ロゴ、画像、アイコン、OGP、ブランド説明用素材など、CSSでは表現できないブランド資産を管理する領域とする。ブランド資産の追加は、必要性が明確になった場合に限り、CSS機能拡充とは別の承認単位で扱う。
+| 資産種別 | 用途 | 命名規則 |
+| --- | --- | --- |
+| ロゴ | ブランド名、サービス名、識別表示 | `adlaire-logo-<name>.<ext>` |
+| ブランド画像 | ブランド説明、紹介、背景以外の視覚素材 | `adlaire-image-<name>.<ext>` |
+| アイコン | ブランド固有の意味を持つ小型素材 | `adlaire-icon-<name>.<ext>` |
+| OGP画像 | OGP、SNS共有、リンクプレビュー | `adlaire-ogp-<name>.<ext>` |
+| ブランド説明用素材 | ブランド説明、資料、案内で使う補助素材 | `adlaire-brand-<name>.<ext>` |
+
+許可するファイル形式は、SVG、PNG、WebPに限定する。JPG、JPEG、GIF、PDF、AI、PSD、EPSは対応しない。
+
+`<name>` は小文字英数字とハイフンで構成し、先頭と末尾にハイフンを置かない。
+
+ブランド資産には、利用先HTMLまたは採用仕様で代替テキストまたは説明を必ず定義する。ロゴはブランド名または用途、ブランド画像は内容、アイコンは意味または用途、OGP画像はページまたはブランド説明、ブランド説明用素材は用途説明を記録する。
+
+`Brand/` 配下に配置できるファイルは、上記の命名規則と許可形式に一致するものだけとする。`.gitkeep` は空ディレクトリ維持のため例外として許可する。
+
+ブランド資産の検査は `Tools/check/check-adlaire-design.sh` で行う。検査では、許可形式、命名規則、未承認形式、仕様必須語句を確認する。
+
+ブランド資産の追加は、必要性が明確になった場合に限り、`Docs/Master_Spec`、`Docs/Document_Index`、`Brand/`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
+
+### 11.11.6 公式アイコンセット策定仕様
+
+Adlaire-Design公式アイコンセットは、Adlaire-Designの汎用UI資産として策定する。
+
+公式アイコンセットの管理先は `Icons/` とし、`Brand/` には含めない。`Brand/` はロゴ、ブランド画像、OGP、ブランド固有アイコンを管理し、`Icons/` は汎用UIで使う公式アイコンを管理する。
+
+公式アイコンセットの正本形式はSVGのみとする。PNG、WebP、JPG、JPEG、GIF、PDF、AI、PSD、EPSは公式アイコンセットに含めない。
+
+公式アイコンの命名規則は `adlaire-icon-<category>-<name>.svg` とする。`<category>` と `<name>` は小文字英数字とハイフンで構成し、先頭と末尾にハイフンを置かない。
+
+公式アイコンカテゴリは、`navigation`、`action`、`status`、`content`、`editor`、`media`、`form` に固定する。
+
+公式アイコンセットの補助正本は `Docs/Icon_Set_Catalog` とする。同カタログでは、ID、ファイル名、カテゴリ、用途、表示サイズ、装飾アイコンまたは意味アイコン、代替テキスト方針、実装状態を管理する。
+
+CSSはアイコンSVG本体を埋め込まない。CSSは `.adlaire-icon`、`.adlaire-icon-sm`、`.adlaire-icon-md`、`.adlaire-icon-lg` などの表示枠、サイズ、余白、配置、色、状態だけを定義する。
+
+公式アイコンセット自体はJavaScriptを持たない。アイコン検索、挿入、切替、非同期読み込みは利用側または別UI実装の責務として扱う。
+
+`Docs/Generic_Component_Catalog` のアイコンタイル等は、アイコンを表示する汎用UI部品であり、公式アイコンセットそのものではない。
+
+公式アイコンSVGの実体制作は、アイコンセット策定とは別タスクとして管理する。
+
+検査では、`Icons/` の存在、許可形式、命名規則、`Docs/Icon_Set_Catalog` との整合性、禁止形式、仕様必須語句を確認する。`Docs/Icon_Set_Catalog` で `実装済み` としたアイコンは、対応するSVGファイルが `Icons/` に存在しなければならない。
 
 ---
 

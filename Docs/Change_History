@@ -8,6 +8,62 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.93
+
+- `Docs/Master_Spec` の版数を `rev.93` へ更新した。
+- Adlaire-Design公式アイコンセットを汎用UI資産として策定し、管理先を `Icons/` に固定した。
+- `Docs/Icon_Set_Catalog` を追加し、公式アイコンのカテゴリ、命名、用途、表示サイズ、代替テキスト方針、実装状態を管理する方針を定義した。
+- 公式アイコンセットの正本形式をSVGのみに固定し、CSSおよびJavaScriptとの責務境界を定義した。
+- `Docs/Master_Spec` の責務別整理、ファイル責務、変更単位を公式アイコンセットに合わせて整合させた。
+- Adlaire-Designをデザインシステム正本として明確化し、画面種別は共通部品とルールを適用する代表例として整理した。
+- `Docs/Master_Spec` の概念と定義で、デザインシステムをCSS集、テーマ集、部品一覧、ブランドガイドではない正本体系として明確化した。
+- `Docs/Master_Spec` の概念と定義から個別処理名の対象外列挙を削除し、デザインシステムとしての管理対象を1文に集約した。
+- `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`Docs/Icon_Set_Catalog` の公式アイコンセット、代表的な画面種別、制作分離の表現を整合させた。
+- サンプルデザインとスクリーンショットを理解補助資料として制作できる方針を追加し、配置先を `Samples/design/` と `Samples/screenshots/` に固定した。
+- `AD-TASK-003` をデザインシステムの共通UIパターン整理へ再定義した。
+- 公式アイコンSVG制作を `AD-TASK-015` として分離し、完了した `AD-TASK-002` を `Docs/Pending_Tasks` から削除した。
+
+## rev.92
+
+- `Docs/Master_Spec` の版数を `rev.92` へ更新した。
+- ブランド資産仕様として、対象、許可形式、非対応形式、命名規則、代替テキストまたは説明、検査方法を策定した。
+- `Tools/check/check-adlaire-design.sh` にブランド資産の許可形式と命名規則検査を追加した。
+- 完了した `AD-TASK-001` を `Docs/Pending_Tasks` から削除した。
+
+## rev.91
+
+- `Docs/Master_Spec` の版数を `rev.91` へ更新した。
+- `Docs/Master_Spec` にAdlaire-Designの概念と定義を追加した。
+- 汎用UI部品、WYSIWYG Editor UI部品、デザイントークン、ブランド資産、責務別JavaScriptの定義を明文化した。
+
+## rev.90
+
+- `Docs/Master_Spec` の版数を `rev.90` へ更新した。
+- 多言語化UIを一般CSS汎用部品カタログの策定対象として追加した。
+- 多言語化UIの未完了タスクを `Docs/Pending_Tasks` に追加した。
+- 多言語化UIを公開面CSS機能のナビゲーション部品として扱うよう文書整合性を更新した。
+
+## rev.89
+
+- `Docs/Master_Spec` の版数を `rev.89` へ更新した。
+- WYSIWYG Editor UI仕様から実処理名の詳細列挙を削除し、表示層とUI部品の仕様に整理した。
+- `Docs/WYSIWYG_Editor_UI_Catalog` の表示モード、Preview / JSON表示UI、実処理詳細欄を簡潔化した。
+- `Docs/Pending_Tasks` から範囲外事項の管理表現を削除し、未完了タスクだけを管理する方針に整合させた。
+
+## rev.88
+
+- `Docs/Master_Spec` の版数を `rev.88` へ更新した。
+- 未策定または未完了タスクだけを集約する `Docs/Pending_Tasks` を追加した。
+- 未タスク管理は完了済みタスクを残さず、完了時に該当行を削除する運用として固定した。
+- 汎用部品カタログの責務を部品一覧と実装状態の管理に整理し、未完了タスク管理を `Docs/Pending_Tasks` へ分離した。
+- `Docs/Document_Index`、`README.md`、`Tools/check/check-adlaire-design.sh` を未タスク管理ファイルに合わせて更新した。
+
+## rev.87
+
+- `Docs/Master_Spec` の版数を `rev.87` へ更新した。
+- 責務別整理の `CSS実装` 管理先を `UI/` と `EditorUI/` に整理し、WYSIWYG Editor UIスキンが `EditorUI/` 分離方針と矛盾しないよう文書整合性を修正した。
+- `Tools/check/check-adlaire-design.sh` に、責務表の管理先整合性を確認する検査語句を追加した。
+
 ## rev.86
 
 - `Docs/Master_Spec` の版数を `rev.86` へ更新した。

@@ -1,0 +1,34 @@
+# Adlaire-Design 未タスク
+
+本ファイルは、Adlaire-Designで未策定または未完了のまま残っているタスクだけを集約する管理ファイルである。
+
+完了済みタスクと履歴は本ファイルに残さない。タスクが完了したら該当行を本ファイルから削除し、必要な変更記録は `Docs/Change_History` に残す。
+
+---
+
+## 1. 管理ルール
+
+- 本ファイルには未完了タスクだけを記載する。
+- タスクを完了した場合は、該当行を削除する。
+- 完了済みタスクの保管場所として使わない。
+- タスクを追加、削除、分割、統合する場合は、必要に応じて `Docs/Master_Spec`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同期更新する。
+
+---
+
+## 2. 未タスク一覧
+
+| ID | 分類 | 未タスク | 完了条件 | 主な更新対象 |
+| --- | --- | --- | --- | --- |
+| AD-TASK-003 | Design System | 代表的な画面種別に対する共通UIパターンを整理する | ブログ・ドキュメント、GitプロバイダーUI、社内ポータル、静的サイトなどを分類軸ではなく代表例として扱い、共通部品、CSS契約、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| AD-TASK-004 | Admin UI | 管理画面専用UIカタログの要否を決める | 管理画面専用部品を作るか、公開面汎用部品へ統合するかが決まり、必要なカタログまたは管理方針が仕様化されている | `Docs/Master_Spec`、必要なカタログ、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| AD-TASK-005 | Accessibility | 色コントラスト保証仕様を策定する | コントラスト基準、対象部品、責務境界、検査方法、手動確認範囲が仕様化されている | `Docs/Master_Spec`、`Tokens/`、`UI/`、`EditorUI/`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| AD-TASK-006 | Tokens | タイポグラフィとspacingのトークン体系を策定する | token化する値、既存CSSとの関係、追加ファイルの有無、命名、検査方法が仕様化されている | `Docs/Master_Spec`、`Tokens/`、`UI/base.css`、`UI/utilities.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| AD-TASK-007 | Generic UI | 汎用目次部品を策定する | 目次部品のclass、実装先、既存 `.adlaire-legal-toc` との関係、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`UI/content.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| AD-TASK-008 | Generic UI | 本文カード、コード表示、関連記事部品を策定する | 各部品のclass、実装先、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`UI/content.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| AD-TASK-009 | Knowledge UI | 検索ページ導線、カテゴリナビ、更新情報部品を策定する | ナレッジベース向け部品のclass、実装先、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`UI/components.css`、`UI/content.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| AD-TASK-010 | Repository UI | ファイル一覧、コミット一覧、差分表示部品を策定する | GitプロバイダーUI向け部品のclass、実装先、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`UI/content.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| AD-TASK-011 | Repository UI | 設定パネル部品を策定する | リポジトリ管理画面向け設定パネルのclass、実装先、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`UI/components.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| AD-TASK-012 | Portal UI | メンバー/チーム表示部品を策定する | メンバー/チーム表示のclass、実装先、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`UI/components.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| AD-TASK-013 | API UI | 読み込み状態、データカード、更新日時表示を策定する | API連携画面向け表示部品のclass、既存 `.last-updated` との関係、実装先、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`UI/components.css`、`UI/content.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| AD-TASK-014 | Multilingual UI | 多言語化UI汎用部品を策定する | 言語切替、現在言語表示、言語候補リスト、選択状態のclass、実装先、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`UI/components.css`、必要な `UI/components.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| AD-TASK-015 | Icons | Adlaire-Design公式アイコン初期セットを制作する | `Docs/Icon_Set_Catalog` の初期セットに対応するSVG実体が `Icons/` に追加され、実装状態、命名、形式、検査が整合している | `Icons/`、`Docs/Icon_Set_Catalog`、`UI/components.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
