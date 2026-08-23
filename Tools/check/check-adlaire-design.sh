@@ -348,6 +348,9 @@ for css_master_term in \
   'デザインシステムは、単なるCSS集、テーマ集、部品一覧、ブランドガイドではない。' \
   'デザインシステムは、デザイントークン、CSS契約、UI部品、状態表現、ブランド資産、公式アイコン、WYSIWYG Editor UI、検査条件を同じルールで接続し、利用側が一貫した画面を構築できるようにする。' \
   'Adlaire-Designは、UI表現、デザイントークン、CSS契約、汎用部品、公式アイコン、ブランド資産、WYSIWYG Editor UIを正本化する。' \
+  'アクセシビリティ方針は WCAG 2.2 A を参照し、状態や意味を色だけで伝えない。' \
+  'Adlaire-Designのアクセシビリティ方針は WCAG 2.2 A を参照する。' \
+  'エラー、警告、成功、情報、フォーカス、選択、入力エラーなどの状態は、色だけで意味を伝えない。' \
   'ブログ・ドキュメント、GitプロバイダーUI、社内ポータル、静的サイトなどの画面種別は、Adlaire-Designの共通部品とルールを適用する代表例として扱う。' \
   'Adlaire-Designでは、画面種別ごとの専用テーマや専用設計体系は策定しない。' \
   'Adlaire-Designは、デザインシステムとしてのUI表現、部品、トークン、資産、CSS契約、検査条件を管理する。' \
@@ -424,6 +427,8 @@ for generic_catalog_boundary_term in \
   '画面種別はデザインシステムの分類軸ではなく、共通部品の利用例として扱う。画面種別ごとの専用テーマや専用設計体系は作らない。' \
   '| 代表的な画面種別 | 必要な汎用部品 |' \
   'WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 接頭辞のクラス、Editor UI状態表示は本カタログに含めない。' \
+  '汎用部品は WCAG 2.2 A を参照し、状態や意味を色だけで伝えない。' \
+  'エラー、警告、成功、情報、フォーカス、選択、入力エラーは、ラベル、文言、境界、アイコン領域、形状などを併用する。' \
   'WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `EditorUI/wysiwyg.js` は、本カタログの実装先に含めない。'; do
   if ! grep -F -- "$generic_catalog_boundary_term" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" >/dev/null 2>&1; then
     echo "Docs/Generic_Component_Catalog missing required generic/editor catalog boundary term: $generic_catalog_boundary_term" >&2
@@ -454,6 +459,8 @@ for wysiwyg_spec_term in \
   'WYSIWYG Editor UIの機能優先度は以下とする。' \
   '追加のUI機能は以下とする。' \
   'アクセシビリティUI方針は以下とする。' \
+  'WCAG 2.2 Aを参照し、状態表示は色だけに依存しない' \
+  'ツールバー選択、ブロック選択、補助表示は色以外の手掛かりを併用する' \
   'プレビュー/JSON表示UIは以下とする。' \
   'Editor UI完全固定後の変更管理は以下とする。' \
   'Master_Spec、カタログ、CSS、検査シェル、変更履歴のいずれかだけを単独で変更しない。' \
@@ -508,6 +515,8 @@ for wysiwyg_catalog_term in \
   '## 1.7 Preview / JSON表示UI' \
   '## 1.8 変更管理' \
   'keyboard focusの視認性を確保する' \
+  'WCAG 2.2 Aを参照し、状態表示は色だけに依存しない' \
+  'ツールバー選択、ブロック選択、補助表示は色以外の手掛かりを併用する' \
   'data属性名を固定しない' \
   'Preview | `.adlaire-wysiwyg-preview`' \
   'JSON panel | `.adlaire-wysiwyg-json-panel`' \

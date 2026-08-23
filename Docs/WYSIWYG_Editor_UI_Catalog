@@ -90,8 +90,9 @@
 | focus | keyboard focusの視認性を確保する |
 | aria | toolbar、menu、button、statusにARIA属性を受けるCSSを用意する |
 | reduced motion | `prefers-reduced-motion` を尊重する |
-| contrast | 状態表示は色だけに依存しない |
+| contrast | WCAG 2.2 Aを参照し、状態表示は色だけに依存しない |
 | error | エラー状態は色、アイコン領域、テキスト領域を持つ |
+| selection | ツールバー選択、ブロック選択、補助表示は色以外の手掛かりを併用する |
 
 ## 1.7 Preview / JSON表示UI
 

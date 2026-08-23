@@ -21,7 +21,6 @@
 | --- | --- | --- | --- | --- |
 | AD-TASK-003 | Design System | 代表的な画面種別に対する共通UIパターンを整理する | ブログ・ドキュメント、GitプロバイダーUI、社内ポータル、静的サイトなどを分類軸ではなく代表例として扱い、共通部品、CSS契約、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | AD-TASK-004 | Admin UI | 管理画面専用UIカタログの要否を決める | 管理画面専用部品を作るか、公開面汎用部品へ統合するかが決まり、必要なカタログまたは管理方針が仕様化されている | `Docs/Master_Spec`、必要なカタログ、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
-| AD-TASK-005 | Accessibility | 色コントラスト保証仕様を策定する | コントラスト基準、対象部品、責務境界、検査方法、手動確認範囲が仕様化されている | `Docs/Master_Spec`、`Tokens/`、`UI/`、`EditorUI/`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | AD-TASK-006 | Tokens | タイポグラフィとspacingのトークン体系を策定する | token化する値、既存CSSとの関係、追加ファイルの有無、命名、検査方法が仕様化されている | `Docs/Master_Spec`、`Tokens/`、`UI/base.css`、`UI/utilities.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | AD-TASK-007 | Generic UI | 汎用目次部品を策定する | 目次部品のclass、実装先、既存 `.adlaire-legal-toc` との関係、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`UI/content.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | AD-TASK-008 | Generic UI | 本文カード、コード表示、関連記事部品を策定する | 各部品のclass、実装先、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`UI/content.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
