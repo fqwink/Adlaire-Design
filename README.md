@@ -16,9 +16,9 @@ Adlaire-Designは、CSSフレームワーク、デザイントークン、ブラ
 
 ## ドキュメント
 
-仕様・設計の正本は `Docs/Master_Spec` とする。CSS仕様、CSS実装、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、検査、変更履歴、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。WYSIWYG Editor UIはAdlaire-Design採用とし、WYSIWYG Editor UI仕様と実装境界は `Docs/Master_Spec` に統合する。
+仕様・設計の正本は `Docs/Master_Spec` とする。CSS仕様、CSS実装、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、未タスク管理、検査、変更履歴、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。WYSIWYG Editor UIはAdlaire-Design採用とし、WYSIWYG Editor UI仕様と実装境界は `Docs/Master_Spec` に統合する。
 
-一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、エディタUIに関する部品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。リポジトリ内の主要ファイルと管理対象は `Docs/Document_Index`、変更履歴は `Docs/Change_History` を参照する。
+一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、エディタUIに関する部品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。未策定または未完了タスクは `Docs/Pending_Tasks` に未完了分だけを集約する。リポジトリ内の主要ファイルと管理対象は `Docs/Document_Index`、変更履歴は `Docs/Change_History` を参照する。
 
 ## 方針
 

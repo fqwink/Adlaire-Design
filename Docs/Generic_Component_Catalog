@@ -1,6 +1,6 @@
 # Adlaire-Design 汎用部品カタログ
 
-本ファイルは、Adlaire-Designで扱う汎用部品候補を管理する補助正本である。
+本ファイルは、Adlaire-Designで扱う汎用部品の分類、実装先、実装状態、非対象を管理する補助正本である。
 
 最終的な仕様正本は `Docs/Master_Spec` とし、本ファイルは汎用部品の分類、優先度、実装先、実装状態、非対象を一覧管理するために使用する。
 
@@ -14,7 +14,7 @@
 - 本カタログは一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティを扱う。
 - WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 接頭辞のクラス、Editor UI状態表示は本カタログに含めない。
 - 実装先は既存の責務境界に従う。
-- 実装前の候補、実装済み、対象外を同じ一覧で管理する。
+- 本カタログは部品一覧と実装状態を管理し、未完了タスクの管理は `Docs/Pending_Tasks` に集約する。
 - 実装する場合は、`Docs/Master_Spec`、CSS、必要なJavaScript、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
 - ビルド、minify、bundle、CSSプリプロセッサ、JSONデータ管理、多言語化は前提にしない。JavaScriptが必要な汎用部品は、対応する `UI/*.js` で管理する。
 
@@ -39,7 +39,7 @@ WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `Edit
 
 ## 3. 優先A
 
-優先Aは、Adlaire-Design利用先の公開面で再利用性が高く、CSSを基本に必要なJavaScriptを責務別ファイルで補える、仕様化済みまたは実装済みとして扱う候補である。
+優先Aは、Adlaire-Design利用先の公開面で再利用性が高く、CSSを基本に必要なJavaScriptを責務別ファイルで補える、仕様化済みまたは実装済みとして扱う部品群である。
 
 | 分類 | 部品 | 実装先 | 状態 |
 | --- | --- | --- | --- |

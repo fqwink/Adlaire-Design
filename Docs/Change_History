@@ -8,6 +8,14 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.88
+
+- `Docs/Master_Spec` の版数を `rev.88` へ更新した。
+- 未策定または未完了タスクだけを集約する `Docs/Pending_Tasks` を追加した。
+- 未タスク管理は完了済みタスクを残さず、完了時に該当行を削除する運用として固定した。
+- 汎用部品カタログの責務を部品一覧と実装状態の管理に整理し、未完了タスク管理を `Docs/Pending_Tasks` へ分離した。
+- `Docs/Document_Index`、`README.md`、`Tools/check/check-adlaire-design.sh` を未タスク管理ファイルに合わせて更新した。
+
 ## rev.87
 
 - `Docs/Master_Spec` の版数を `rev.87` へ更新した。

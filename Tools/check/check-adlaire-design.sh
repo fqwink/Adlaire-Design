@@ -17,6 +17,7 @@ for path in \
   Docs/Master_Spec \
   Docs/Generic_Component_Catalog \
   Docs/WYSIWYG_Editor_UI_Catalog \
+  Docs/Pending_Tasks \
   Docs/Change_History \
   Tokens/colors.css \
   Tokens/surface.css \
@@ -78,6 +79,7 @@ find "$ADLAIRE_DESIGN_ROOT/Docs" -type f \
   ! -name 'Master_Spec' \
   ! -name 'Generic_Component_Catalog' \
   ! -name 'WYSIWYG_Editor_UI_Catalog' \
+  ! -name 'Pending_Tasks' \
   ! -name 'Document_Index' \
   ! -name 'Change_History' \
   -print >"$TMP_DIR/unexpected-docs-files"
@@ -215,8 +217,9 @@ if ! grep -F 'WYSIWYG Editor UI仕様と実装境界は `Docs/Master_Spec` に�
 fi
 
 for readme_responsibility_term in \
-  'CSS仕様、CSS実装、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、検査、変更履歴、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。' \
-  '一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、エディタUIに関する部品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。'; do
+  'CSS仕様、CSS実装、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、未タスク管理、検査、変更履歴、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。' \
+  '一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、エディタUIに関する部品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。' \
+  '未策定または未完了タスクは `Docs/Pending_Tasks` に未完了分だけを集約する。'; do
   if ! grep -F -- "$readme_responsibility_term" "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
     echo "Adlaire-Design README missing responsibility boundary term: $readme_responsibility_term" >&2
     exit 1
@@ -255,8 +258,12 @@ fi
 
 for css_master_term in \
   '### 11.2.1 責務別整理' \
-  'Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品カタログ、Editor UIカタログ、検査、変更履歴に分けて管理する。' \
+  'Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品カタログ、Editor UIカタログ、未タスク管理、検査、変更履歴に分けて管理する。' \
   '| CSS実装 | Adlaire-Design | `UI/`、`EditorUI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、WYSIWYG Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク |' \
+  '| 未タスク管理 | Adlaire-Design | `Docs/Pending_Tasks` | 未策定または未完了タスク | 完了済みタスク、対象外事項、変更履歴 |' \
+  '未策定または未完了のまま残っているタスクは `Docs/Pending_Tasks` に集約する。' \
+  '| Docs | `Docs/Pending_Tasks` | 未策定または未完了タスクの管理 |' \
+  '| 未タスク管理 | `Docs/Pending_Tasks`、`Docs/Master_Spec`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |' \
   '責務別の管理範囲は以下に固定する。' \
   'ファイル責務は以下に整理する。' \
   '責務別の変更単位は以下に固定する。' \
@@ -292,9 +299,11 @@ for css_master_term in \
 done
 
 for generic_catalog_boundary_term in \
+  '本ファイルは、Adlaire-Designで扱う汎用部品の分類、実装先、実装状態、非対象を管理する補助正本である。' \
   '本ファイルは一般的なCSS汎用部品のカタログであり、WYSIWYG Editor UI専用品は含めない。' \
   'WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。' \
   '本カタログは一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティを扱う。' \
+  '本カタログは部品一覧と実装状態を管理し、未完了タスクの管理は `Docs/Pending_Tasks` に集約する。' \
   'WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 接頭辞のクラス、Editor UI状態表示は本カタログに含めない。' \
   'WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `EditorUI/wysiwyg.js` は、本カタログの実装先に含めない。'; do
   if ! grep -F -- "$generic_catalog_boundary_term" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" >/dev/null 2>&1; then
@@ -439,6 +448,7 @@ for indexed_path in \
   Docs/Master_Spec \
   Docs/Generic_Component_Catalog \
   Docs/WYSIWYG_Editor_UI_Catalog \
+  Docs/Pending_Tasks \
   Docs/Change_History \
   Brand/ \
   Tokens/colors.css \
@@ -470,16 +480,30 @@ done
 for document_index_responsibility_term in \
   '`Docs/Master_Spec`(仕様・設計の正本、CSSとEditor UIの責務境界)' \
   '`Docs/Generic_Component_Catalog`(一般的なCSS汎用部品の分類、優先度、実装先、実装状態の一覧)' \
-  '`Docs/WYSIWYG_Editor_UI_Catalog`(エディタUIに関する部品の分類、優先度、実装先、実装状態の一覧)'; do
+  '`Docs/WYSIWYG_Editor_UI_Catalog`(エディタUIに関する部品の分類、優先度、実装先、実装状態の一覧)' \
+  '`Docs/Pending_Tasks`(未策定または未完了タスクだけを集約する管理ファイル)'; do
   if ! grep -F -- "$document_index_responsibility_term" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
     echo "Docs/Document_Index missing responsibility description: $document_index_responsibility_term" >&2
     exit 1
   fi
 done
 
+for pending_task_term in \
+  '# Adlaire-Design 未タスク' \
+  '本ファイルには未完了タスクだけを記載する。' \
+  'タスクを完了した場合は、該当行を削除する。' \
+  '完了済みタスクの保管場所として使わない。' \
+  'AD-TASK-001' \
+  'AD-TASK-013'; do
+  if ! grep -F -- "$pending_task_term" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" >/dev/null 2>&1; then
+    echo "Docs/Pending_Tasks missing required pending task management term: $pending_task_term" >&2
+    exit 1
+  fi
+done
+
 OLD_REPOSITORY_NAME='Adlaire-''Eco''system-Design'
 
-if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
+if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_UI_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
   echo "current Adlaire-Design documents must not use the old repository name:" >&2
   cat /tmp/adlaire-design-old-name-matches >&2
   exit 1

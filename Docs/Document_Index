@@ -7,6 +7,7 @@
 - `Docs/Master_Spec`(仕様・設計の正本、CSSとEditor UIの責務境界)
 - `Docs/Generic_Component_Catalog`(一般的なCSS汎用部品の分類、優先度、実装先、実装状態の一覧)
 - `Docs/WYSIWYG_Editor_UI_Catalog`(エディタUIに関する部品の分類、優先度、実装先、実装状態の一覧)
+- `Docs/Pending_Tasks`(未策定または未完了タスクだけを集約する管理ファイル)
 - `Docs/Change_History`(Adlaire-Design専用の変更履歴)
 - `Brand/`(ブランド資産)
 - `Tokens/colors.css`(ブランドカラーCSS変数)

@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.87
+**Version:** rev.88
 
 ---
 
@@ -21,6 +21,8 @@ WYSIWYG Editor UIはAdlaire-Design採用確定とする。WYSIWYG Editor UI仕�
 汎用部品の分類、優先度、実装先、実装状態は `Docs/Generic_Component_Catalog` で一覧管理する。仕様正本は本書とし、汎用部品カタログは本書の補助正本として扱う。
 
 WYSIWYG Editor専用UI部品の分類、優先度、実装先、実装状態は `Docs/WYSIWYG_Editor_UI_Catalog` で一覧管理する。仕様正本は本書とし、WYSIWYG Editor UIカタログは本書の補助正本として扱う。
+
+未策定または未完了のまま残っているタスクは `Docs/Pending_Tasks` に集約する。同ファイルには未完了タスクだけを残し、完了したタスクは削除する。
 
 本方針は、実装変更より先に本仕様書を正本として定義する。実際のCSS、テーマ、公開面への反映は、本仕様書の承認後に個別の実装計画として扱う。
 
@@ -220,7 +222,7 @@ Adlaire-Designは、公開面デザインの参照基準を本リポジトリ内
 
 ### 11.2.1 責務別整理
 
-Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品カタログ、Editor UIカタログ、検査、変更履歴に分けて管理する。Editor本体、保存、編集ロジック、Markdown / MDX parser、プロダクト固有採用はAdlaire-Designの責務に含めない。
+Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品カタログ、Editor UIカタログ、未タスク管理、検査、変更履歴に分けて管理する。Editor本体、保存、編集ロジック、Markdown / MDX parser、プロダクト固有採用はAdlaire-Designの責務に含めない。
 
 責務別の管理範囲は以下に固定する。
 
@@ -229,6 +231,7 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品
 | 仕様正本 | Adlaire-Design | `Docs/Master_Spec` | CSSマスター仕様、Editor UIマスター仕様、責務境界、読み込み順、禁止事項、変更管理 | 実装コード、プロダクト固有採用計画 |
 | 一般CSS汎用部品カタログ | Adlaire-Design | `Docs/Generic_Component_Catalog` | 一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティ | WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 具体クラス |
 | Editor UIカタログ | Adlaire-Design | `Docs/WYSIWYG_Editor_UI_Catalog` | エディタUIに関する部品、状態表示、モバイルEditor UI、補助パネル | 一般公開面の汎用部品、Editor実装ロジック |
+| 未タスク管理 | Adlaire-Design | `Docs/Pending_Tasks` | 未策定または未完了タスク | 完了済みタスク、対象外事項、変更履歴 |
 | CSSトークン | Adlaire-Design | `Tokens/` | 色、面、状態、効果のCSS変数 | UI部品セレクタ、JavaScript状態管理 |
 | CSS実装 | Adlaire-Design | `UI/`、`EditorUI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、WYSIWYG Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク |
 | 検査 | Adlaire-Design | `Tools/check/check-adlaire-design.sh` | 構造、必須ファイル、必須語句、必須変数、必須クラス、禁止記述、未定義変数参照 | 外部CSS parser、Node.js/npm依存検査基盤 |
@@ -242,6 +245,7 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品
 | Docs | `Docs/Master_Spec` | 仕様正本 |
 | Docs | `Docs/Generic_Component_Catalog` | 一般CSS汎用部品カタログ |
 | Docs | `Docs/WYSIWYG_Editor_UI_Catalog` | Editor UIカタログ |
+| Docs | `Docs/Pending_Tasks` | 未策定または未完了タスクの管理 |
 | Docs | `Docs/Document_Index` | リポジトリ索引 |
 | Docs | `Docs/Change_History` | 変更履歴 |
 | Tokens | `Tokens/colors.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` | CSS変数 |
@@ -259,6 +263,7 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品
 | CSSトークン | `Docs/Master_Spec`、対象 `Tokens/*.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | 検査仕様 | `Docs/Master_Spec`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | 索引 | `Docs/Document_Index`、必要に応じて `Docs/Master_Spec`、`Docs/Change_History` |
+| 未タスク管理 | `Docs/Pending_Tasks`、`Docs/Master_Spec`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 
 責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、採用・移行を利用先プロダクト側として扱う。
 
@@ -1063,7 +1068,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 汎用部品の拡充として、操作行、ツールバー、配置補助、区切り線、空状態、エラーページ、チップ、ステータス、リンクリスト、サーフェスグリッド、メディアオブジェクトを `UI/components.css` に実装する。
 
-汎用部品の一覧管理は `Docs/Generic_Component_Catalog` で行い、実装済み、候補、対象外を同じ表で管理する。
+汎用部品の一覧管理は `Docs/Generic_Component_Catalog` で行い、実装済み部品、部品状態、対象外を管理する。未完了タスクの管理は `Docs/Pending_Tasks` に集約する。
 
 追加対象は以下とする。
 
@@ -1536,6 +1541,7 @@ Adlaire-Design UIを採用する場合は、本節のCSS/JavaScript読み込み�
 | `Docs/Master_Spec` | 仕様、非対象、承認単位、読み込み順、検査方針を変更する場合 |
 | `Docs/Change_History` | `Docs/Master_Spec` または管理対象を変更する場合 |
 | `Docs/Document_Index` | 主要ファイル、ディレクトリ、説明が増減する場合 |
+| `Docs/Pending_Tasks` | 未策定または未完了タスクを追加、削除、分割、統合する場合 |
 | WYSIWYG Editor UI仕様 | WYSIWYG Editor UIのAdlaire-Design採用確定範囲、実装境界、非対象、CSS管理範囲を変更する場合 |
 | `README.md` | 利用者が最初に読む方針、構成、コマンド、非対象が変わる場合 |
 | `AGENTS.md` | 作業開始時ルール、リポジトリ運用ルールが変わる場合 |
