@@ -60,6 +60,8 @@ WYSIWYG Editor UI部品には、Editor外枠、Header、Toolbar、Canvas、Block
 
 ブランド資産とは、ロゴ、画像、アイコン、OGPなど、ブランド表示に必要な素材である。
 
+公式アイコンセットとは、`Icons/` で管理する汎用UI用SVGアイコンである。
+
 Adlaire-DesignのJavaScriptとは、UIの表示状態を補助するための責務別JavaScriptである。
 
 ---
@@ -303,6 +305,8 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、ブランド
 | 検査仕様 | `Docs/Master_Spec`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | 索引 | `Docs/Document_Index`、必要に応じて `Docs/Master_Spec`、`Docs/Change_History` |
 | 未タスク管理 | `Docs/Pending_Tasks`、`Docs/Master_Spec`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+
+公式アイコンSVGの制作は `AD-TASK-015` として管理し、公式アイコンセットの策定とは別の変更単位とする。
 
 責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、汎用UIで使う公式アイコンを `Docs/Icon_Set_Catalog` と `Icons/`、採用・移行を利用先プロダクト側として扱う。
 
