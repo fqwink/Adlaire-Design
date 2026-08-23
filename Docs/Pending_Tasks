@@ -11,6 +11,8 @@
 - 本ファイルには未完了タスクだけを記載する。
 - タスクを完了した場合は、該当行を削除する。
 - 完了済みタスクの保管場所として使わない。
+- 未実装リストには、仕様確定済みで実装だけが未完了の項目だけを記載する。
+- 仕様未確定、要否未決定、策定中の項目は未実装リストに含めない。
 - タスクを追加、削除、分割、統合する場合は、必要に応じて `Docs/Master_Spec`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同期更新する。
 
 ---
@@ -29,3 +31,13 @@
 | AD-TASK-012 | Portal UI | メンバー/チーム表示部品を策定する | メンバー/チーム表示のclass、実装先、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`UI/components.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | AD-TASK-013 | API UI | 読み込み状態、データカード、更新日時表示を策定する | API連携画面向け表示部品のclass、既存 `.last-updated` との関係、実装先、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`UI/components.css`、`UI/content.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | AD-TASK-014 | Multilingual UI | 多言語化UI汎用部品を策定する | 言語切替、現在言語表示、言語候補リスト、選択状態のclass、実装先、責務境界、検査方法が仕様化されている | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`UI/components.css`、必要な `UI/components.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+
+---
+
+## 3. 未実装リスト
+
+本章は、仕様確定済みで、実装だけが未完了の項目を管理する。
+
+仕様未確定、要否未決定、策定中の項目は本章に含めない。それらは「未タスク一覧」で管理する。
+
+現時点で該当なし。
