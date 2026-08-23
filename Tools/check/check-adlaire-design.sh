@@ -492,7 +492,8 @@ for pending_task_term in \
   'タスクを完了した場合は、該当行を削除する。' \
   '完了済みタスクの保管場所として使わない。' \
   'AD-TASK-001' \
-  'AD-TASK-013'; do
+  'AD-TASK-013' \
+  'AD-TASK-014'; do
   if ! grep -F -- "$pending_task_term" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" >/dev/null 2>&1; then
     echo "Docs/Pending_Tasks missing required pending task management term: $pending_task_term" >&2
     exit 1
@@ -531,7 +532,9 @@ for catalog_term in \
   'ステータス点' \
   'サーフェスグリッド' \
   'サーフェス項目' \
-  'エラーページ'; do
+  'エラーページ' \
+  '多言語化UI' \
+  '.adlaire-language-switcher'; do
   if ! grep -F -- "$catalog_term" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" >/dev/null 2>&1; then
     echo "Docs/Generic_Component_Catalog missing required catalog term: $catalog_term" >&2
     exit 1

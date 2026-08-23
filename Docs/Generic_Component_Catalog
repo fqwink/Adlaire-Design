@@ -16,7 +16,7 @@
 - 実装先は既存の責務境界に従う。
 - 本カタログは部品一覧と実装状態を管理し、未完了タスクの管理は `Docs/Pending_Tasks` に集約する。
 - 実装する場合は、`Docs/Master_Spec`、CSS、必要なJavaScript、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
-- ビルド、minify、bundle、CSSプリプロセッサ、JSONデータ管理、多言語化は前提にしない。JavaScriptが必要な汎用部品は、対応する `UI/*.js` で管理する。
+- ビルド、minify、bundle、CSSプリプロセッサ、JSONデータ管理は前提にしない。JavaScriptが必要な汎用部品は、対応する `UI/*.js` で管理する。
 
 ---
 
@@ -192,6 +192,7 @@ WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `Edit
 | ブランド表示 | ロゴリスト | `UI/components.css` | 実装済み |
 | ブランド表示 | パートナーリスト | `UI/components.css` | 実装済み |
 | ブランド表示 | アイコンタイル | `UI/components.css` | 実装済み |
+| ナビ補助 | 多言語化UI | `UI/components.css`、必要な `UI/components.js` | 策定対象 |
 | レイアウト複合 | 分割ブロック | `UI/components.css` | 実装済み |
 | レイアウト複合 | 積み上げ特徴表示 | `UI/components.css` | 実装済み |
 | レイアウト複合 | 比較グリッド | `UI/content.css` | 実装済み |
@@ -214,6 +215,7 @@ WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `Edit
 | ロゴリスト | `.adlaire-logo-list`、`.adlaire-logo-list-item` |
 | パートナーリスト | `.adlaire-partner-list`、`.adlaire-partner-list-item` |
 | アイコンタイル | `.adlaire-icon-tile-list`、`.adlaire-icon-tile` |
+| 多言語化UI | `.adlaire-language-switcher`、`.adlaire-language-switcher-label`、`.adlaire-language-switcher-list`、`.adlaire-language-option`、`.adlaire-language-option-current` |
 | 分割ブロック | `.adlaire-split-block` |
 | 積み上げ特徴表示 | `.adlaire-stacked-feature` |
 | 比較グリッド | `.adlaire-comparison-grid`、`.adlaire-comparison-grid-item` |
@@ -286,5 +288,6 @@ WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `Edit
 | ダッシュボード | サーフェスグリッド、サーフェス項目、数値表示ブロック、ステータス点、ステータスラベル、メンテナンス通知、要約枠 |
 | 静的サイト + API連携 | 読み込み状態、エラー表示、エラーページ、空状態表示、メンテナンス通知、メンテナンス画面、データカード、メタ情報行、更新日時表示 |
 | コンテンツ駆動Webシステム | 本文表、注記、メンテナンス通知、メンテナンス画面、チェックリスト、定義リスト、リンクリスト、関連リンク、CTAブロック |
+| 多言語サイト | 多言語化UI、サブナビ、リンクリスト、ステータスラベル、補助テキスト |
 
-この一覧は、汎用部品の追加優先度を判断するための補助情報である。ここに記載した部品であっても、JSONデータ管理、多言語化、ビルド、minify、bundleが前提になるものは、個別に対象外として扱う。
+この一覧は、汎用部品の追加優先度を判断するための補助情報である。ここに記載した部品であっても、JSONデータ管理、ビルド、minify、bundleが前提になるものは、個別に扱う。

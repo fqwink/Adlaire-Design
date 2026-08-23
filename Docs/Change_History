@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.90
+
+- `Docs/Master_Spec` の版数を `rev.90` へ更新した。
+- 多言語化UIを一般CSS汎用部品カタログの策定対象として追加した。
+- 多言語化UIの未完了タスクを `Docs/Pending_Tasks` に追加した。
+- 多言語化UIを公開面CSS機能のナビゲーション部品として扱うよう文書整合性を更新した。
+
 ## rev.89
 
 - `Docs/Master_Spec` の版数を `rev.89` へ更新した。

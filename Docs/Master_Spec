@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.89
+**Version:** rev.90
 
 ---
 
@@ -784,7 +784,6 @@ CSS変数は以下とする。
 - 既存プロダクト固有CSSのそのままの移植
 - 既存プロダクト画面の直接変更
 - 仕様化されていないロゴや画像などのブランド資産作成
-- 多言語化
 - JSONデータ管理
 - JavaScriptによる本文描画
 
@@ -900,7 +899,6 @@ Adlaire-Designの標準APIは `.adlaire-` 接頭辞のクラスとする。追�
 - 特定プロダクト本体HTMLの置換
 - 特定プロダクト本体CSSの削除
 - 特定プロダクト固有の追加CSS層
-- 多言語化
 - JSONデータ管理
 - ビルド処理
 - minify版
@@ -1004,7 +1002,6 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 拡充仕様では、以下を必ず非対象として記録する。
 
-- 多言語化
 - JSONデータ管理
 - CSSビルド処理
 - minify版
@@ -1021,7 +1018,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 | レイアウト | 2カラム、1カラム、余白、コンテナ、グリッド補助 | 複数の公開面で再利用が見込める |
 | コンポーネント | カード、notice、タブ、タイムライン、目次、ニュース項目 | 本文構造を変えずに表示品質を上げられる |
 | フォーム | 入力、ラベル、チェック、エラー、送信ボタン、検索/絞り込みUI | CSSと責務別JavaScriptで状態表現できる |
-| ナビゲーション | ヘッダー、フッター、パンくず、サイドバー、ページ内リンク | 既存HTML構造を維持できる |
+| ナビゲーション | ヘッダー、フッター、パンくず、サイドバー、ページ内リンク、多言語化UI | 既存HTML構造を維持できる |
 | 本文部品 | セクション、リスト、表、注記、日付、メタ情報 | コンテンツ本文を再設計せず使える |
 | ユーティリティ | spacing、display、text、background、flex | 既存命名と衝突せず用途が明確 |
 | 状態表現 | alert、badge、disabled、focus、hover | Tokens側の状態色または効果トークンで説明できる |
@@ -1060,7 +1057,6 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 - JavaScriptによる表ソート、フィルタ、折りたたみ
 - JSONデータ管理
-- 多言語化
 - ビルド、minify、bundle
 - 特定プロダクト本体HTMLの置換
 
@@ -1090,6 +1086,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 | メディアオブジェクト | `.adlaire-media`、`.adlaire-media-figure`、`.adlaire-media-body`、`.adlaire-media-title` | 図版、アイコン、画像などと本文を横並びで表示する |
 | CTA | `.adlaire-cta`、`.adlaire-cta-title`、`.adlaire-cta-text`、`.adlaire-cta-actions` | 公開面の主要導線を強調表示する |
 | 補助テキスト | `.adlaire-caption`、`.adlaire-helper-text` | 図表キャプション、入力外の補助説明、注釈を表示する |
+| 多言語化UI | `.adlaire-language-switcher`、`.adlaire-language-switcher-label`、`.adlaire-language-switcher-list`、`.adlaire-language-option`、`.adlaire-language-option-current` | 言語切替、現在言語、選択肢を表示する |
 
 汎用部品は、本文固有の意味を持たず、公開面の複数ページで再利用できるものに限定する。見た目の値は既存の `Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` のCSS変数を参照し、新規トークンは追加しない。
 
@@ -1103,7 +1100,6 @@ JavaScriptあり汎用部品は、CSS表示契約を壊さない範囲で操作�
 
 - アイコン、画像、ロゴなどのブランド資産追加
 - JSONデータ管理
-- 多言語化
 - ビルド、minify、bundle
 - 特定プロダクト本体HTMLの置換
 
