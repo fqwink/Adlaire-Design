@@ -257,6 +257,11 @@ if ! grep -F 'WYSIWYG Editor UI仕様と実装境界は本書に統合する。'
 fi
 
 for css_master_term in \
+  '## 1.1 Adlaire-Designの概念と定義' \
+  'Adlaire-Designは、Adlaire GroupのUI表現を統一するための設計正本である。' \
+  '汎用UI部品とは、公開面、管理面、本文表示、フォーム、ナビゲーション、状態表示で再利用するUI部品である。' \
+  'WYSIWYG Editor UI部品とは、WYSIWYG Editorの表示層を構成する専用UI部品である。' \
+  'Adlaire-Designは、保存処理、API通信、翻訳処理、本文生成、Editor本体処理、プロダクト固有画面実装を管理しない。' \
   '### 11.2.1 責務別整理' \
   'Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品カタログ、Editor UIカタログ、未タスク管理、検査、変更履歴に分けて管理する。' \
   '| CSS実装 | Adlaire-Design | `UI/`、`EditorUI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、WYSIWYG Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク |' \

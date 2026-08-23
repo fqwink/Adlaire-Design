@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.90
+**Version:** rev.91
 
 ---
 
@@ -27,6 +27,30 @@ WYSIWYG Editor専用UI部品の分類、優先度、実装先、実装状態は 
 本方針は、実装変更より先に本仕様書を正本として定義する。実際のCSS、テーマ、公開面への反映は、本仕様書の承認後に個別の実装計画として扱う。
 
 開発正本は独立リポジトリ `Adlaire-Design` で管理する(詳細は第6章を参照)。
+
+## 1.1 Adlaire-Designの概念と定義
+
+Adlaire-Designは、Adlaire GroupのUI表現を統一するための設計正本である。
+
+Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産、汎用UI部品、WYSIWYG Editor UI部品を一体で管理する。
+
+Adlaire-Designは、特定プロダクトの画面実装ではなく、複数プロダクトで再利用できるUI仕様と部品を定義する。
+
+Adlaire-Designは、見た目、状態表現、読み込み順、CSS契約、JavaScript補助、検査条件を管理する。
+
+汎用UI部品とは、公開面、管理面、本文表示、フォーム、ナビゲーション、状態表示で再利用するUI部品である。
+
+WYSIWYG Editor UI部品とは、WYSIWYG Editorの表示層を構成する専用UI部品である。
+
+WYSIWYG Editor UI部品には、Editor外枠、Header、Toolbar、Canvas、Block、Inline toolbar、Slash menu、Mobile surface、Preview、JSON panel、Footer、状態表示、補助パネルを含める。
+
+デザイントークンとは、色、面、状態、効果値など、複数UI部品で共有する見た目の値である。
+
+ブランド資産とは、ロゴ、画像、アイコン、OGPなど、ブランド表示に必要な素材である。
+
+Adlaire-DesignのJavaScriptとは、UIの表示状態を補助するための責務別JavaScriptである。
+
+Adlaire-Designは、保存処理、API通信、翻訳処理、本文生成、Editor本体処理、プロダクト固有画面実装を管理しない。
 
 ---
 

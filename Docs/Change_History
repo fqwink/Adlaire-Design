@@ -8,6 +8,12 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.91
+
+- `Docs/Master_Spec` の版数を `rev.91` へ更新した。
+- `Docs/Master_Spec` にAdlaire-Designの概念と定義を追加した。
+- 汎用UI部品、WYSIWYG Editor UI部品、デザイントークン、ブランド資産、責務別JavaScriptの定義を明文化した。
+
 ## rev.90
 
 - `Docs/Master_Spec` の版数を `rev.90` へ更新した。
