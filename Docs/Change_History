@@ -8,6 +8,13 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.94
+
+- `Docs/Master_Spec` の版数を `rev.94` へ更新した。
+- Adlaire-Designのブランドカラー正本を、AGWS Blueをデフォルトブランドカラー、AGWS Greenをセカンドブランドカラーとして整理した。
+- `Tokens/colors.css` にAGWS Blue/AGWS Greenの明示トークンを追加し、既存の `primary`、`secondary`、`accent` をAGWS Blue互換参照に変更した。
+- サンプルデザインと検査シェルをAGWS Blue/AGWS Greenのブランドカラー定義に合わせた。
+
 ## rev.93
 
 - `Docs/Master_Spec` の版数を `rev.93` へ更新した。

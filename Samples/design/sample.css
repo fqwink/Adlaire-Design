@@ -99,6 +99,11 @@ body {
   color: #ffffff;
 }
 
+.sample-swatch-green {
+  background: var(--adlaire-color-agws-green-primary);
+  color: #ffffff;
+}
+
 .sample-swatch-surface {
   background: var(--adlaire-surface-card);
   color: var(--adlaire-surface-text);

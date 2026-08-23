@@ -852,12 +852,18 @@ if [ "$(grep -c '^:root {' "$ADLAIRE_DESIGN_ROOT/Tokens/effects.css")" -ne 1 ]; 
 fi
 
 for token in \
-  '--adlaire-color-primary: #00a968;' \
-  '--adlaire-color-secondary: #3498db;' \
-  '--adlaire-color-accent: #40aaef;' \
-  '--adlaire-color-surface: #ecf0f1;' \
-  '--adlaire-color-border: #eceef1;' \
-  '--adlaire-color-support: #58be89;'; do
+  '--adlaire-color-agws-blue-primary: #0066cc;' \
+  '--adlaire-color-agws-blue-secondary: #0055aa;' \
+  '--adlaire-color-agws-blue-accent: #004499;' \
+  '--adlaire-color-agws-green-primary: #00a968;' \
+  '--adlaire-color-agws-green-secondary: #58be89;' \
+  '--adlaire-color-agws-green-accent: #40aaef;' \
+  '--adlaire-color-primary: var(--adlaire-color-agws-blue-primary);' \
+  '--adlaire-color-secondary: var(--adlaire-color-agws-blue-secondary);' \
+  '--adlaire-color-accent: var(--adlaire-color-agws-blue-accent);' \
+  '--adlaire-color-surface: #f5f5f5;' \
+  '--adlaire-color-border: #e0e0e0;' \
+  '--adlaire-color-support: var(--adlaire-color-agws-green-primary);'; do
   if ! grep -F -- "$token" "$ADLAIRE_DESIGN_ROOT/Tokens/colors.css" >/dev/null 2>&1; then
     echo "Tokens/colors.css missing required token: $token" >&2
     exit 1
