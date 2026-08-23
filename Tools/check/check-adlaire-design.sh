@@ -17,8 +17,10 @@ for path in \
   Docs/Master_Spec \
   Docs/Generic_Component_Catalog \
   Docs/WYSIWYG_Editor_UI_Catalog \
+  Docs/Icon_Set_Catalog \
   Docs/Pending_Tasks \
   Docs/Change_History \
+  Icons \
   Tokens/colors.css \
   Tokens/surface.css \
   Tokens/status.css \
@@ -39,6 +41,7 @@ for path in \
   UI/utilities.css \
   UI/compat-agws.css \
   EditorUI \
+  Icons \
   UI \
   Tokens \
   Brand; do
@@ -48,7 +51,7 @@ for path in \
   fi
 done
 
-for path in UI EditorUI Tokens Brand; do
+for path in UI EditorUI Tokens Brand Icons; do
   if [ ! -d "$ADLAIRE_DESIGN_ROOT/$path" ]; then
     echo "Adlaire-Design required path must be a directory: $ADLAIRE_DESIGN_ROOT/$path" >&2
     exit 1
@@ -62,6 +65,7 @@ find "$ADLAIRE_DESIGN_ROOT" -mindepth 1 -maxdepth 1 \
   ! -name 'Brand' \
   ! -name 'Docs' \
   ! -name 'EditorUI' \
+  ! -name 'Icons' \
   ! -name 'LICENSE' \
   ! -name 'README.md' \
   ! -name 'Tokens' \
@@ -79,6 +83,7 @@ find "$ADLAIRE_DESIGN_ROOT/Docs" -type f \
   ! -name 'Master_Spec' \
   ! -name 'Generic_Component_Catalog' \
   ! -name 'WYSIWYG_Editor_UI_Catalog' \
+  ! -name 'Icon_Set_Catalog' \
   ! -name 'Pending_Tasks' \
   ! -name 'Document_Index' \
   ! -name 'Change_History' \
@@ -141,6 +146,42 @@ if [ -s "$TMP_DIR/unexpected-brand-files" ]; then
   cat "$TMP_DIR/unexpected-brand-files" >&2
   exit 1
 fi
+
+find "$ADLAIRE_DESIGN_ROOT/Icons" -type f ! -name '.gitkeep' -print >"$TMP_DIR/icon-files"
+grep -E -v '/adlaire-icon-(navigation|action|status|content|editor|media|form)-[a-z0-9]([a-z0-9-]*[a-z0-9])?\.svg$' "$TMP_DIR/icon-files" >"$TMP_DIR/unexpected-icon-files" || true
+
+if [ -s "$TMP_DIR/unexpected-icon-files" ]; then
+  echo "Icons/ contains unapproved official icon names or formats:" >&2
+  cat "$TMP_DIR/unexpected-icon-files" >&2
+  exit 1
+fi
+
+while IFS= read -r icon_file; do
+  icon_name=$(basename "$icon_file")
+  if ! grep -F -- "\`$icon_name\`" "$ADLAIRE_DESIGN_ROOT/Docs/Icon_Set_Catalog" >/dev/null 2>&1; then
+    echo "Icons/ file is missing from Docs/Icon_Set_Catalog: $icon_name" >&2
+    exit 1
+  fi
+done <"$TMP_DIR/icon-files"
+
+awk -F '|' '
+  /^\| AD-ICON-/ {
+    filename = $3
+    status = $9
+    gsub(/^[ \t`]+|[ \t`]+$/, "", filename)
+    gsub(/^[ \t]+|[ \t]+$/, "", status)
+    if (status == "実装済み") {
+      print filename
+    }
+  }
+' "$ADLAIRE_DESIGN_ROOT/Docs/Icon_Set_Catalog" >"$TMP_DIR/implemented-icons"
+
+while IFS= read -r icon_name; do
+  if [ ! -f "$ADLAIRE_DESIGN_ROOT/Icons/$icon_name" ]; then
+    echo "Docs/Icon_Set_Catalog marks an icon as implemented but Icons/ is missing it: $icon_name" >&2
+    exit 1
+  fi
+done <"$TMP_DIR/implemented-icons"
 
 if [ -e "$ADLAIRE_DESIGN_ROOT/Documents" ]; then
   echo "Adlaire-Design must use Docs/, not Documents/." >&2
@@ -259,16 +300,32 @@ fi
 
 for css_master_term in \
   '## 1.1 Adlaire-Designの概念と定義' \
-  'Adlaire-Designは、Adlaire GroupのUI表現を統一するための設計正本である。' \
+  'Adlaire-Designは、Adlaire GroupのUI表現を統一するためのデザインシステム正本である。' \
+  'Adlaire-Designにおけるデザインシステムとは、Adlaire GroupのUI表現を一貫させるための正本体系である。' \
+  'デザインシステムは、単なるCSS集、テーマ集、部品一覧、ブランドガイドではない。' \
+  'デザインシステムは、デザイントークン、CSS契約、UI部品、状態表現、ブランド資産、公式アイコン、WYSIWYG Editor UI、検査条件を同じルールで接続し、利用側が一貫した画面を構築できるようにする。' \
+  'Adlaire-Designは、UI表現、デザイントークン、CSS契約、汎用部品、公式アイコン、ブランド資産、WYSIWYG Editor UIを正本化する。' \
+  'ブログ・ドキュメント、GitプロバイダーUI、社内ポータル、静的サイトなどの画面種別は、Adlaire-Designの共通部品とルールを適用する代表例として扱う。' \
+  'Adlaire-Designでは、画面種別ごとの専用テーマや専用設計体系は策定しない。' \
+  'Adlaire-Designは、デザインシステムとしてのUI表現、部品、トークン、資産、CSS契約、検査条件を管理する。' \
   '汎用UI部品とは、公開面、管理面、本文表示、フォーム、ナビゲーション、状態表示で再利用するUI部品である。' \
   'WYSIWYG Editor UI部品とは、WYSIWYG Editorの表示層を構成する専用UI部品である。' \
-  'Adlaire-Designは、保存処理、API通信、翻訳処理、本文生成、Editor本体処理、プロダクト固有画面実装を管理しない。' \
   '### 11.11.5 ブランド資産整理の策定仕様' \
   '許可するファイル形式は、SVG、PNG、WebPに限定する。JPG、JPEG、GIF、PDF、AI、PSD、EPSは対応しない。' \
   '`<name>` は小文字英数字とハイフンで構成し、先頭と末尾にハイフンを置かない。' \
   'ブランド資産の検査は `Tools/check/check-adlaire-design.sh` で行う。' \
+  '### 11.11.6 公式アイコンセット策定仕様' \
+  'Adlaire-Design公式アイコンセットは、Adlaire-Designの汎用UI資産として策定する。' \
+  '公式アイコンセットの管理先は `Icons/` とし、`Brand/` には含めない。' \
+  '公式アイコンセットの正本形式はSVGのみとする。' \
+  '公式アイコンの命名規則は `adlaire-icon-<category>-<name>.svg` とする。' \
+  '公式アイコンカテゴリは、`navigation`、`action`、`status`、`content`、`editor`、`media`、`form` に固定する。' \
+  '公式アイコンセットの補助正本は `Docs/Icon_Set_Catalog` とする。' \
+  '公式アイコンSVGの実体制作は、アイコンセット策定とは別タスクとして管理する。' \
   '### 11.2.1 責務別整理' \
-  'Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品カタログ、Editor UIカタログ、未タスク管理、検査、変更履歴に分けて管理する。' \
+  'Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、ブランド資産、公式アイコンセット、汎用部品カタログ、Editor UIカタログ、未タスク管理、検査、変更履歴に分けて管理する。' \
+  '| 公式アイコンセットカタログ | Adlaire-Design | `Docs/Icon_Set_Catalog` | 公式アイコンの分類、用途、表示サイズ、代替テキスト方針、実装状態 | ブランド資産、アイコン検索や挿入などの利用側処理 |' \
+  '| 公式アイコンセット | Adlaire-Design | `Icons/` | 汎用UIで使う公式アイコンSVG | ロゴ、ブランド画像、OGP、PNG/WebP/JPG/JPEG、生成アイコンCSS |' \
   '| CSS実装 | Adlaire-Design | `UI/`、`EditorUI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、WYSIWYG Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク |' \
   '| 未タスク管理 | Adlaire-Design | `Docs/Pending_Tasks` | 未策定または未完了タスク | 完了済みタスク、変更履歴 |' \
   '未策定または未完了のまま残っているタスクは `Docs/Pending_Tasks` に集約する。' \
@@ -277,7 +334,7 @@ for css_master_term in \
   '責務別の管理範囲は以下に固定する。' \
   'ファイル責務は以下に整理する。' \
   '責務別の変更単位は以下に固定する。' \
-  '責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、採用・移行を利用先プロダクト側として扱う。' \
+  '責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、汎用UIで使う公式アイコンを `Docs/Icon_Set_Catalog` と `Icons/`、採用・移行を利用先プロダクト側として扱う。' \
   '### 11.2.2 CSSマスター仕様' \
   'Adlaire-DesignのCSSマスター仕様は、本節を正本とする。' \
   'CSSマスター仕様で固定する対象は以下とする。' \
@@ -291,7 +348,7 @@ for css_master_term in \
   'CSS変更管理は以下に固定する。' \
   'CSSマスター仕様の検査条件は以下とする。' \
   'CSS仕様は `Docs/Master_Spec` を正本とする' \
-  '一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog` で一覧管理する' \
+  '一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog`、公式アイコンセットは `Docs/Icon_Set_Catalog` で一覧管理する' \
   'CSS実装は `Tokens/`、`UI/`、`EditorUI/` 配下のCSSファイル、UI JavaScriptは `UI/`、`EditorUI/` 配下のJSファイルを正本とする' \
   '`Docs/WYSIWYG_Editor_UI_Catalog` は、Adlaire-DesignにおけるエディタUIに関するカタログとして扱う。' \
   'Editor UI専用品は `Docs/Generic_Component_Catalog` に含めない。' \
@@ -314,6 +371,7 @@ for generic_catalog_boundary_term in \
   'WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。' \
   '本カタログは一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティを扱う。' \
   '本カタログは部品一覧と実装状態を管理し、未完了タスクの管理は `Docs/Pending_Tasks` に集約する。' \
+  '画面種別はデザインシステムの分類軸ではなく、共通部品の利用例として扱う。画面種別ごとの専用テーマや専用設計体系は作らない。' \
   'WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 接頭辞のクラス、Editor UI状態表示は本カタログに含めない。' \
   'WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `EditorUI/wysiwyg.js` は、本カタログの実装先に含めない。'; do
   if ! grep -F -- "$generic_catalog_boundary_term" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" >/dev/null 2>&1; then
@@ -456,9 +514,11 @@ for indexed_path in \
   Docs/Master_Spec \
   Docs/Generic_Component_Catalog \
   Docs/WYSIWYG_Editor_UI_Catalog \
+  Docs/Icon_Set_Catalog \
   Docs/Pending_Tasks \
   Docs/Change_History \
   Brand/ \
+  Icons/ \
   Tokens/colors.css \
   Tokens/surface.css \
   Tokens/status.css \
@@ -486,9 +546,10 @@ for indexed_path in \
 done
 
 for document_index_responsibility_term in \
-  '`Docs/Master_Spec`(仕様・設計の正本、CSSとEditor UIの責務境界)' \
+  '`Docs/Master_Spec`(仕様・設計の正本、CSS、Editor UI、公式アイコンセットの責務境界)' \
   '`Docs/Generic_Component_Catalog`(一般的なCSS汎用部品の分類、優先度、実装先、実装状態の一覧)' \
   '`Docs/WYSIWYG_Editor_UI_Catalog`(エディタUIに関する部品の分類、優先度、実装先、実装状態の一覧)' \
+  '`Docs/Icon_Set_Catalog`(Adlaire-Design公式アイコンセットの分類、用途、実装状態の一覧)' \
   '`Docs/Pending_Tasks`(未策定または未完了タスクだけを集約する管理ファイル)'; do
   if ! grep -F -- "$document_index_responsibility_term" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
     echo "Docs/Document_Index missing responsibility description: $document_index_responsibility_term" >&2
@@ -501,9 +562,11 @@ for pending_task_term in \
   '本ファイルには未完了タスクだけを記載する。' \
   'タスクを完了した場合は、該当行を削除する。' \
   '完了済みタスクの保管場所として使わない。' \
-  'AD-TASK-002' \
+  'AD-TASK-003' \
+  '代表的な画面種別に対する共通UIパターンを整理する' \
   'AD-TASK-013' \
-  'AD-TASK-014'; do
+  'AD-TASK-014' \
+  'AD-TASK-015'; do
   if ! grep -F -- "$pending_task_term" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" >/dev/null 2>&1; then
     echo "Docs/Pending_Tasks missing required pending task management term: $pending_task_term" >&2
     exit 1
@@ -512,7 +575,7 @@ done
 
 OLD_REPOSITORY_NAME='Adlaire-''Eco''system-Design'
 
-if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_UI_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
+if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_UI_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Icon_Set_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
   echo "current Adlaire-Design documents must not use the old repository name:" >&2
   cat /tmp/adlaire-design-old-name-matches >&2
   exit 1
