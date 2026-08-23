@@ -1542,6 +1542,7 @@ Adlaire-Design UIを採用する場合は、本節のCSS/JavaScript読み込み�
 14. `AGENTS.md` がCSSプリプロセッサ、CSSビルド、CSS minify、CSS bundle、npm/webpack系設定を追加しない運用方針を記録していることの確認
 15. トップレベル、`Docs/`、`Tokens/`、`UI/`、`Tools/`、`Brand/` が承認済みのリポジトリ構造から逸脱していないことの確認
 16. `Tools/check/check-adlaire-design.sh` が実行可能であることの確認
+17. `Samples/` が理解補助資料の配置先として許可形式だけを含むことの確認
 
 検査はPOSIX shellで記述し、`Tools/check/check-adlaire-design.sh` に集約する。検査のためにNode.js/npm、外部CSSパーサ、外部CLIを追加しない。
 
@@ -1560,6 +1561,18 @@ Adlaire-Design UIを採用する場合は、本節のCSS/JavaScript読み込み�
 | `AGENTS.md` | 作業開始時ルール、リポジトリ運用ルールが変わる場合 |
 
 ドキュメント整備では、仕様と実装のどちらが正本かを曖昧にしない。CSS実装を変更する場合は、仕様、実装、検査、変更履歴を同じ承認単位で扱う。
+
+### 11.11.4.1 サンプルデザインとスクリーンショット
+
+サンプルデザインおよびスクリーンショットは、Adlaire-Designの理解補助と利用イメージの共有を目的として制作できる。
+
+サンプルデザインおよびスクリーンショットは仕様正本ではない。正本は `Docs/Master_Spec`、各カタログ、`Tokens/`、`UI/`、`EditorUI/`、`Icons/`、`Brand/` とする。
+
+サンプルデザインは `Samples/design/`、スクリーンショットは `Samples/screenshots/` に配置する。
+
+`Samples/design/` にはHTML、CSS、JS、SVG、PNG、WebP、`.gitkeep` を配置できる。`Samples/screenshots/` にはSVG、PNG、WebP、`.gitkeep` を配置できる。JPG/JPEGは使用しない。
+
+サンプルデザインとスクリーンショットの検査は、配置先と許可形式の確認に限定する。
 
 ### 11.11.5 ブランド資産整理の策定仕様
 

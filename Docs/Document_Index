@@ -12,6 +12,8 @@
 - `Docs/Change_History`(Adlaire-Design専用の変更履歴)
 - `Brand/`(ブランド資産)
 - `Icons/`(Adlaire-Design公式アイコンセット)
+- `Samples/design/`(理解補助用サンプルデザイン)
+- `Samples/screenshots/`(理解補助用スクリーンショット)
 - `Tokens/colors.css`(ブランドカラーCSS変数)
 - `Tokens/surface.css`(公開面参照色CSS変数)
 - `Tokens/status.css`(状態色・中立色CSS変数)
