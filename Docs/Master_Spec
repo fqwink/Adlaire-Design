@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.86
+**Version:** rev.87
 
 ---
 
@@ -230,7 +230,7 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、汎用部品
 | 一般CSS汎用部品カタログ | Adlaire-Design | `Docs/Generic_Component_Catalog` | 一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティ | WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 具体クラス |
 | Editor UIカタログ | Adlaire-Design | `Docs/WYSIWYG_Editor_UI_Catalog` | エディタUIに関する部品、状態表示、モバイルEditor UI、補助パネル | 一般公開面の汎用部品、Editor実装ロジック |
 | CSSトークン | Adlaire-Design | `Tokens/` | 色、面、状態、効果のCSS変数 | UI部品セレクタ、JavaScript状態管理 |
-| CSS実装 | Adlaire-Design | `UI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク |
+| CSS実装 | Adlaire-Design | `UI/`、`EditorUI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、WYSIWYG Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク |
 | 検査 | Adlaire-Design | `Tools/check/check-adlaire-design.sh` | 構造、必須ファイル、必須語句、必須変数、必須クラス、禁止記述、未定義変数参照 | 外部CSS parser、Node.js/npm依存検査基盤 |
 | 変更履歴 | Adlaire-Design | `Docs/Change_History` | Master_Spec、カタログ、CSS、検査の変更記録 | 履歴上の旧仕様を現行仕様として復活させること |
 | プロダクト採用 | 利用先プロダクト | 利用先プロダクト側 | 採用判断、移行計画、プロダクト固有CSS層、公開面反映、ロールバック | Adlaire-Design正本の直接変更なしの仕様逸脱 |

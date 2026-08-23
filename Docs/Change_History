@@ -8,6 +8,12 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 
 ---
 
+## rev.87
+
+- `Docs/Master_Spec` の版数を `rev.87` へ更新した。
+- 責務別整理の `CSS実装` 管理先を `UI/` と `EditorUI/` に整理し、WYSIWYG Editor UIスキンが `EditorUI/` 分離方針と矛盾しないよう文書整合性を修正した。
+- `Tools/check/check-adlaire-design.sh` に、責務表の管理先整合性を確認する検査語句を追加した。
+
 ## rev.86
 
 - `Docs/Master_Spec` の版数を `rev.86` へ更新した。
