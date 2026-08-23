@@ -1,0 +1,143 @@
+/* Adlaire-Design sample layout */
+
+body {
+  background: var(--adlaire-surface-page);
+  color: var(--adlaire-surface-text);
+}
+
+.sample-hero {
+  background: linear-gradient(135deg, var(--adlaire-color-primary), var(--adlaire-color-secondary));
+  color: #ffffff;
+  padding: 56px 0;
+}
+
+.sample-hero-inner {
+  display: grid;
+  gap: 18px;
+}
+
+.sample-hero h1 {
+  margin: 0;
+  font-size: 42px;
+  line-height: 1.16;
+}
+
+.sample-hero p {
+  max-width: 760px;
+  margin: 0;
+}
+
+.sample-kicker {
+  margin: 0;
+  color: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.sample-actions,
+.sample-icon-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sample-shell {
+  display: grid;
+  gap: 28px;
+  padding-top: 32px;
+  padding-bottom: 48px;
+}
+
+.sample-section {
+  display: grid;
+  gap: 16px;
+}
+
+.sample-section-heading {
+  display: grid;
+  gap: 6px;
+}
+
+.sample-section-heading h2 {
+  margin: 0;
+}
+
+.sample-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.sample-swatch-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.sample-swatch {
+  min-height: 104px;
+  border-radius: var(--adlaire-radius-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  box-shadow: var(--adlaire-shadow-card);
+}
+
+.sample-swatch-primary {
+  background: var(--adlaire-color-primary);
+  color: #ffffff;
+}
+
+.sample-swatch-secondary {
+  background: var(--adlaire-color-secondary);
+  color: #ffffff;
+}
+
+.sample-swatch-accent {
+  background: var(--adlaire-color-accent);
+  color: #ffffff;
+}
+
+.sample-swatch-green {
+  background: var(--adlaire-color-agws-green-primary);
+  color: #ffffff;
+}
+
+.sample-swatch-surface {
+  background: var(--adlaire-surface-card);
+  color: var(--adlaire-surface-text);
+  border: 1px solid var(--adlaire-surface-border);
+}
+
+.sample-icon-slot {
+  width: 86px;
+  height: 72px;
+  border: 1px dashed var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-sm);
+  display: grid;
+  place-items: center;
+  background: var(--adlaire-surface-card);
+  color: var(--adlaire-surface-text-muted);
+  font-size: 13px;
+}
+
+.sample-code-block {
+  overflow-x: auto;
+  margin: 18px 0;
+  padding: 14px 16px;
+  border-radius: var(--adlaire-radius-sm);
+  background: var(--adlaire-surface-soft);
+  color: var(--adlaire-surface-text);
+}
+
+@media (max-width: 768px) {
+  .sample-hero h1 {
+    font-size: 32px;
+  }
+
+  .sample-grid-two,
+  .sample-swatch-grid {
+    grid-template-columns: 1fr;
+  }
+}
