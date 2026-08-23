@@ -19,7 +19,7 @@ Adlaire-Designの現行変更履歴は、本ファイルで独立して管理す
 - `Docs/Master_Spec` の概念と定義で、デザインシステムをCSS集、テーマ集、部品一覧、ブランドガイドではない正本体系として明確化した。
 - `Docs/Master_Spec` の概念と定義から個別処理名の対象外列挙を削除し、デザインシステムとしての管理対象を1文に集約した。
 - `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、`Docs/Icon_Set_Catalog` の公式アイコンセット、代表的な画面種別、制作分離の表現を整合させた。
-- サンプルデザインとスクリーンショットを理解補助資料として制作できる方針を追加し、配置先を `Samples/design/` と `Samples/screenshots/` に固定した。
+- サンプルデザインとスクリーンショットを理解補助資料として制作できる方針を追加し、`Samples/README.md`、`Samples/design/`、`Samples/` 直下PNG/WebPスクリーンショットの配置方針を固定した。
 - `AD-TASK-003` をデザインシステムの共通UIパターン整理へ再定義した。
 - 公式アイコンSVG制作を `AD-TASK-015` として分離し、完了した `AD-TASK-002` を `Docs/Pending_Tasks` から削除した。
 

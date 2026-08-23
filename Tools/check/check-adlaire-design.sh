@@ -21,8 +21,8 @@ for path in \
   Docs/Pending_Tasks \
   Docs/Change_History \
   Icons \
+  Samples/README.md \
   Samples/design \
-  Samples/screenshots \
   Tokens/colors.css \
   Tokens/surface.css \
   Tokens/status.css \
@@ -54,7 +54,7 @@ for path in \
   fi
 done
 
-for path in UI EditorUI Tokens Brand Icons Samples Samples/design Samples/screenshots; do
+for path in UI EditorUI Tokens Brand Icons Samples Samples/design; do
   if [ ! -d "$ADLAIRE_DESIGN_ROOT/$path" ]; then
     echo "Adlaire-Design required path must be a directory: $ADLAIRE_DESIGN_ROOT/$path" >&2
     exit 1
@@ -187,6 +187,29 @@ while IFS= read -r icon_name; do
   fi
 done <"$TMP_DIR/implemented-icons"
 
+find "$ADLAIRE_DESIGN_ROOT/Samples" -maxdepth 1 -type f \
+  ! -name '.gitkeep' \
+  ! -name 'README.md' \
+  ! -name '*.png' \
+  ! -name '*.webp' \
+  -print >"$TMP_DIR/unexpected-sample-root-files"
+
+if [ -s "$TMP_DIR/unexpected-sample-root-files" ]; then
+  echo "Samples/ must contain only README.md, PNG/WebP screenshots, or .gitkeep at the root:" >&2
+  cat "$TMP_DIR/unexpected-sample-root-files" >&2
+  exit 1
+fi
+
+find "$ADLAIRE_DESIGN_ROOT/Samples" -mindepth 1 -maxdepth 1 -type d \
+  ! -name 'design' \
+  -print >"$TMP_DIR/unexpected-sample-directories"
+
+if [ -s "$TMP_DIR/unexpected-sample-directories" ]; then
+  echo "Samples/ must contain only Samples/design/ as a subdirectory:" >&2
+  cat "$TMP_DIR/unexpected-sample-directories" >&2
+  exit 1
+fi
+
 find "$ADLAIRE_DESIGN_ROOT/Samples/design" -type f \
   ! -name '.gitkeep' \
   ! -name '*.html' \
@@ -200,19 +223,6 @@ find "$ADLAIRE_DESIGN_ROOT/Samples/design" -type f \
 if [ -s "$TMP_DIR/unexpected-sample-design-files" ]; then
   echo "Samples/design/ must contain only HTML/CSS/JS/SVG/PNG/WebP files or .gitkeep:" >&2
   cat "$TMP_DIR/unexpected-sample-design-files" >&2
-  exit 1
-fi
-
-find "$ADLAIRE_DESIGN_ROOT/Samples/screenshots" -type f \
-  ! -name '.gitkeep' \
-  ! -name '*.svg' \
-  ! -name '*.png' \
-  ! -name '*.webp' \
-  -print >"$TMP_DIR/unexpected-sample-screenshot-files"
-
-if [ -s "$TMP_DIR/unexpected-sample-screenshot-files" ]; then
-  echo "Samples/screenshots/ must contain only SVG/PNG/WebP files or .gitkeep:" >&2
-  cat "$TMP_DIR/unexpected-sample-screenshot-files" >&2
   exit 1
 fi
 
@@ -360,7 +370,8 @@ for css_master_term in \
   '### 11.11.4.1 サンプルデザインとスクリーンショット' \
   'サンプルデザインおよびスクリーンショットは、Adlaire-Designの理解補助と利用イメージの共有を目的として制作できる。' \
   'サンプルデザインおよびスクリーンショットは仕様正本ではない。' \
-  'サンプルデザインは `Samples/design/`、スクリーンショットは `Samples/screenshots/` に配置する。' \
+  'Samples全体の説明は `Samples/README.md` に記録する。' \
+  'サンプルデザインは `Samples/design/` に配置する。PNG/WebPスクリーンショットは `Samples/` 直下に配置する。' \
   '### 11.2.1 責務別整理' \
   'Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、ブランド資産、公式アイコンセット、汎用部品カタログ、Editor UIカタログ、未タスク管理、検査、変更履歴に分けて管理する。' \
   '| 公式アイコンセットカタログ | Adlaire-Design | `Docs/Icon_Set_Catalog` | 公式アイコンの分類、用途、表示サイズ、代替テキスト方針、実装状態 | ブランド資産、アイコン検索や挿入などの利用側処理 |' \
@@ -559,8 +570,8 @@ for indexed_path in \
   Docs/Change_History \
   Brand/ \
   Icons/ \
+  Samples/README.md \
   Samples/design/ \
-  Samples/screenshots/ \
   Tokens/colors.css \
   Tokens/surface.css \
   Tokens/status.css \

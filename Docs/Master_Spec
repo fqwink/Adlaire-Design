@@ -1568,9 +1568,11 @@ Adlaire-Design UIを採用する場合は、本節のCSS/JavaScript読み込み�
 
 サンプルデザインおよびスクリーンショットは仕様正本ではない。正本は `Docs/Master_Spec`、各カタログ、`Tokens/`、`UI/`、`EditorUI/`、`Icons/`、`Brand/` とする。
 
-サンプルデザインは `Samples/design/`、スクリーンショットは `Samples/screenshots/` に配置する。
+Samples全体の説明は `Samples/README.md` に記録する。
 
-`Samples/design/` にはHTML、CSS、JS、SVG、PNG、WebP、`.gitkeep` を配置できる。`Samples/screenshots/` にはSVG、PNG、WebP、`.gitkeep` を配置できる。JPG/JPEGは使用しない。
+サンプルデザインは `Samples/design/` に配置する。PNG/WebPスクリーンショットは `Samples/` 直下に配置する。
+
+`Samples/` 直下には `README.md`、`.gitkeep`、PNG、WebPを配置できる。`Samples/design/` にはHTML、CSS、JS、SVG、PNG、WebP、`.gitkeep` を配置できる。JPG/JPEGは使用しない。
 
 サンプルデザインとスクリーンショットの検査は、配置先と許可形式の確認に限定する。
 
