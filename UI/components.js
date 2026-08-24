@@ -215,4 +215,81 @@
       indicator.setAttribute("aria-current", index === next ? "true" : "false");
     });
   }
+
+  document.addEventListener("click", function (event) {
+    var copy = event.target.closest("[data-adlaire-copy]");
+    var remove = event.target.closest("[data-adlaire-remove]");
+    var select = event.target.closest("[data-adlaire-select]");
+
+    if (copy) {
+      var copyTarget = getTarget(copy);
+      var text = copyTarget ? copyTarget.textContent : copy.getAttribute("data-adlaire-copy");
+      if (text && navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+        copy.setAttribute("data-adlaire-copied", "true");
+      }
+    }
+
+    if (remove) {
+      var removable = getTarget(remove) || remove.closest(".adlaire-toast, .adlaire-snackbar, .adlaire-upload-item, .adlaire-attachment-item");
+      if (removable) {
+        removable.remove();
+      }
+    }
+
+    if (select) {
+      var list = select.closest("[data-adlaire-select-list]");
+      if (list) {
+        list.querySelectorAll("[data-adlaire-select]").forEach(function (item) {
+          item.setAttribute("aria-selected", item === select ? "true" : "false");
+        });
+      }
+    }
+  });
+
+  document.addEventListener("input", function (event) {
+    var filter = event.target.closest("[data-adlaire-filter-input]");
+    var search = event.target.closest("[data-adlaire-search-input]");
+    if (filter) {
+      applyTextFilter(filter);
+    }
+    if (search) {
+      applyTextFilter(search);
+    }
+  });
+
+  function applyTextFilter(input) {
+    var root = document.querySelector(input.getAttribute("data-adlaire-filter-root") || input.getAttribute("data-adlaire-search-root"));
+    var itemSelector = input.getAttribute("data-adlaire-filter-item") || input.getAttribute("data-adlaire-search-item");
+    if (!root || !itemSelector) {
+      return;
+    }
+
+    var query = input.value.trim().toLowerCase();
+    root.querySelectorAll(itemSelector).forEach(function (item) {
+      var matched = item.textContent.toLowerCase().indexOf(query) !== -1;
+      item.hidden = !matched;
+    });
+  }
+
+  document.querySelectorAll("[data-adlaire-split-pane]").forEach(function (root) {
+    var handle = root.querySelector(".adlaire-pane-resize-handle");
+    var panes = root.querySelectorAll(".adlaire-pane");
+    if (!handle || panes.length < 2) {
+      return;
+    }
+    handle.addEventListener("keydown", function (event) {
+      var current = Number(root.getAttribute("data-adlaire-pane-ratio") || "50");
+      if (event.key === "ArrowLeft") {
+        current = Math.max(20, current - 5);
+      } else if (event.key === "ArrowRight") {
+        current = Math.min(80, current + 5);
+      } else {
+        return;
+      }
+      event.preventDefault();
+      root.setAttribute("data-adlaire-pane-ratio", String(current));
+      root.style.gridTemplateColumns = current + "% 8px 1fr";
+    });
+  });
 }());

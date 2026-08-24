@@ -80,4 +80,35 @@
       body.appendChild(row);
     });
   });
+
+  document.addEventListener("click", function (event) {
+    var copy = event.target.closest("[data-adlaire-code-copy]");
+    if (!copy) {
+      return;
+    }
+
+    var selector = copy.getAttribute("data-adlaire-code-copy");
+    var target = selector ? document.querySelector(selector) : copy.closest(".adlaire-code-block");
+    if (target && navigator.clipboard) {
+      navigator.clipboard.writeText(target.textContent);
+      copy.setAttribute("data-adlaire-copied", "true");
+    }
+  });
+
+  document.addEventListener("click", function (event) {
+    var line = event.target.closest("[data-adlaire-code-line]");
+    if (!line) {
+      return;
+    }
+
+    var viewer = line.closest(".adlaire-git-code-view");
+    if (!viewer) {
+      return;
+    }
+
+    viewer.querySelectorAll(".adlaire-git-line-highlight").forEach(function (item) {
+      item.classList.remove("adlaire-git-line-highlight");
+    });
+    line.classList.add("adlaire-git-line-highlight");
+  });
 }());

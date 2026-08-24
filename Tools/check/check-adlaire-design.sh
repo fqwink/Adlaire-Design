@@ -25,6 +25,11 @@ for path in \
   Samples/README.md \
   Samples/design \
   Tokens/colors.css \
+  Tokens/typography.css \
+  Tokens/spacing.css \
+  Tokens/motion.css \
+  Tokens/layer.css \
+  Tokens/breakpoints.css \
   Tokens/surface.css \
   Tokens/status.css \
   Tokens/effects.css \
@@ -639,7 +644,7 @@ for pending_task_term in \
   '## 3. 未実装リスト' \
   '本章は、仕様確定済みで、実装だけが未完了の項目を管理する。' \
   'AD-TASK-101' \
-  'AD-IMPL-030'; do
+  '現時点で該当なし'; do
   if ! grep -F -- "$pending_task_term" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" >/dev/null 2>&1; then
     echo "Docs/Pending_Tasks missing required pending task management term: $pending_task_term" >&2
     exit 1

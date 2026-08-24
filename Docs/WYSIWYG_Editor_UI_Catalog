@@ -275,11 +275,11 @@ WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装
 
 ---
 
-## 7. 機能追加UI仕様確定項目
+## 7. 機能追加UI実装済み項目
 
-以下は、WYSIWYG Editor UIの機能追加部品として仕様確定する。実装先は `EditorUI/wysiwyg.css`、必要な表示補助JavaScriptは `EditorUI/wysiwyg.js` とする。
+以下は、WYSIWYG Editor UIの機能追加部品として実装済みである。実装先は `EditorUI/wysiwyg.css`、必要な表示補助JavaScriptは `EditorUI/wysiwyg.js` とする。
 
-| ID | 部品 | 仕様確定クラス |
+| ID | 部品 | 実装済みクラス |
 | --- | --- | --- |
 | AD-TASK-024 | ブロック挿入UI | `.adlaire-wysiwyg-insert`、`.adlaire-wysiwyg-insert-menu`、`.adlaire-wysiwyg-insert-item` |
 | AD-TASK-025 | ブロック変換UI | `.adlaire-wysiwyg-transform`、`.adlaire-wysiwyg-transform-menu`、`.adlaire-wysiwyg-block-type` |

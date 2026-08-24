@@ -43,4 +43,23 @@
     target.hidden = !open;
     target.classList.toggle("is-open", open);
   });
+
+  document.addEventListener("click", function (event) {
+    var selectable = event.target.closest("[data-adlaire-wysiwyg-select]");
+    if (!selectable) {
+      return;
+    }
+
+    var root = editorRoot(selectable);
+    if (!root) {
+      return;
+    }
+
+    root.querySelectorAll(".adlaire-wysiwyg-block-selected, [data-adlaire-wysiwyg-select][aria-selected='true']").forEach(function (item) {
+      item.classList.remove("adlaire-wysiwyg-block-selected");
+      item.setAttribute("aria-selected", "false");
+    });
+    selectable.classList.add("adlaire-wysiwyg-block-selected");
+    selectable.setAttribute("aria-selected", "true");
+  });
 }());

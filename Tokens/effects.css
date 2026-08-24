@@ -27,6 +27,8 @@
   --adlaire-overlay-white-50: rgba(255, 255, 255, 0.5);
   --adlaire-overlay-white-80: rgba(255, 255, 255, 0.8);
   --adlaire-overlay-white-90: rgba(255, 255, 255, 0.9);
+  --adlaire-overlay-black-48: rgba(0, 0, 0, 0.48);
+  --adlaire-upload-progress: 0%;
   --adlaire-transition-fast: 0.15s ease-in-out;
   --adlaire-transition-button: 0.2s ease-in-out;
   --adlaire-transition-base: 0.3s ease;
