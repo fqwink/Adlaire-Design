@@ -17,6 +17,8 @@
 - 本カタログは部品一覧と実装状態を管理し、未完了タスクの管理は `Docs/Pending_Tasks` に集約する。
 - 実装する場合は、`Docs/Master_Spec`、CSS、必要なJavaScript、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
 - ビルド、minify、bundle、CSSプリプロセッサ、JSONデータ管理は前提にしない。JavaScriptが必要な汎用部品は、対応する `UI/*.js` で管理する。
+- 汎用部品は WCAG 2.2 A を参照し、状態や意味を色だけで伝えない。
+- エラー、警告、成功、情報、フォーカス、選択、入力エラーは、ラベル、文言、境界、アイコン領域、形状などを併用する。
 
 ---
 
@@ -192,7 +194,69 @@ WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `Edit
 | ブランド表示 | ロゴリスト | `UI/components.css` | 実装済み |
 | ブランド表示 | パートナーリスト | `UI/components.css` | 実装済み |
 | ブランド表示 | アイコンタイル | `UI/components.css` | 実装済み |
-| ナビ補助 | 多言語化UI | `UI/components.css`、必要な `UI/components.js` | 策定対象 |
+| Knowledge UI | Knowledge検索導線 | `UI/content.css` | 仕様確定 |
+| Knowledge UI | Knowledgeカテゴリナビ | `UI/content.css` | 仕様確定 |
+| Knowledge UI | Knowledge更新情報 | `UI/content.css` | 仕様確定 |
+| Repository UI | Repositoryファイル一覧 | `UI/content.css` | 仕様確定 |
+| Repository UI | Repositoryコミット一覧 | `UI/content.css` | 仕様確定 |
+| Repository UI | Repository差分表示 | `UI/content.css` | 仕様確定 |
+| Repository UI | Repository設定パネル | `UI/components.css`、`UI/forms.css` | 仕様確定 |
+| Portal UI | メンバー/チーム表示 | `UI/components.css` | 仕様確定 |
+| API UI | 読み込み状態/データカード | `UI/components.css`、`UI/content.css` | 仕様確定 |
+| ナビ補助 | 多言語化UI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
+| データ表示 | テーブルUI | `UI/content.css`、`UI/components.css` | 仕様確定 |
+| 操作面 | モーダル/ダイアログUI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
+| フォーム | アップロードUI | `UI/forms.css`、必要な `UI/forms.js` | 仕様確定 |
+| 操作面 | フィルターUI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
+| 検索 | 検索UI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 仕様確定 |
+| データ表示 | ページネーションUI | `UI/components.css` | 仕様確定 |
+| 設定 | 設定UI | `UI/components.css`、`UI/forms.css`、必要な `UI/forms.js` | 仕様確定 |
+| フォーム | バリデーションUI | `UI/forms.css`、必要な `UI/forms.js` | 仕様確定 |
+| ナビ補助 | 汎用目次 | `UI/content.css` | 仕様確定 |
+| 本文補助 | 本文カード | `UI/content.css` | 仕様確定 |
+| 本文補助 | コード表示 | `UI/content.css`、必要な `UI/content.js` | 仕様確定 |
+| 本文補助 | 関連記事 | `UI/content.css` | 仕様確定 |
+| Git Provider UI | リポジトリ一覧UI | `UI/content.css`、`UI/components.css` | 仕様確定 |
+| Git Provider UI | リポジトリ概要/README表示UI | `UI/content.css` | 仕様確定 |
+| Git Provider UI | ブランチ/タグ切替UI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
+| Git Provider UI | ファイルツリー/パスナビUI | `UI/content.css`、必要な `UI/content.js` | 仕様確定 |
+| Git Provider UI | ファイルビューアUI | `UI/content.css` | 仕様確定 |
+| Git Provider UI | コード表示/行番号/行ハイライトUI | `UI/content.css`、必要な `UI/content.js` | 仕様確定 |
+| Git Provider UI | コミット一覧/コミット詳細UI | `UI/content.css` | 仕様確定 |
+| Git Provider UI | 差分ビューアUI | `UI/content.css`、必要な `UI/content.js` | 仕様確定 |
+| Git Provider UI | Pull Request一覧/詳細UI | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` | 仕様確定 |
+| Git Provider UI | Issue一覧/詳細UI | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` | 仕様確定 |
+| Git Provider UI | レビューコメント/スレッドUI | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` | 仕様確定 |
+| Git Provider UI | CI/CDステータス/チェック結果UI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 仕様確定 |
+| Git Provider UI | リリース/タグ一覧UI | `UI/content.css` | 仕様確定 |
+| Git Provider UI | セキュリティアラートUI | `UI/components.css`、`UI/content.css` | 仕様確定 |
+| Git Provider UI | リポジトリ設定/権限/危険操作UI | `UI/components.css`、`UI/forms.css`、必要な `UI/forms.js` | 仕様確定 |
+| Git Provider UI | Web IDE入口/編集導線UI | `UI/components.css` | 仕様確定 |
+| Git Provider UI | 検索/コード検索/絞り込みUI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 仕様確定 |
+| Git Provider UI | Activity/Insights/貢献グラフUI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 仕様確定 |
+| Git Provider UI | Wiki/Docs表示UI | `UI/content.css` | 仕様確定 |
+| Git Provider UI | Packages/Artifacts表示UI | `UI/content.css`、`UI/components.css` | 仕様確定 |
+| Git Provider UI | Projects/カンバン/タスクボードUI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
+| Git Provider UI | 通知/Watch/Star/Fork操作UI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
+| Git Provider UI | 組織/チーム/メンバー権限UI | `UI/components.css`、`UI/forms.css` | 仕様確定 |
+| Git Provider UI | 空状態/読み込み/エラー状態UI | `UI/components.css`、`UI/content.css` | 仕様確定 |
+| Git Provider UI | モバイルGitプロバイダーUI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 仕様確定 |
+| Accessibility UI | フォーカスリング/キーボード操作表示 | `UI/components.css`、`UI/forms.css`、`EditorUI/wysiwyg.css` | 仕様確定 |
+| Accessibility UI | スキップリンク/ランドマーク補助UI | `UI/base.css`、`UI/components.css` | 仕様確定 |
+| Form UI | 入力グループ/複合入力UI | `UI/forms.css`、必要な `UI/forms.js` | 仕様確定 |
+| Form UI | 日付/時刻/期間入力UI | `UI/forms.css`、必要な `UI/forms.js` | 仕様確定 |
+| Data Viz UI | チャート枠/凡例/データラベルUI | `UI/content.css`、`UI/components.css` | 仕様確定 |
+| Data Viz UI | KPI/メトリクス比較UI | `UI/components.css`、`UI/content.css` | 仕様確定 |
+| Navigation UI | コマンドパレットUI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
+| Navigation UI | グローバル検索/オムニバーUI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 仕様確定 |
+| Layout UI | App shell / Sidebar layout | `UI/layout.css`、`UI/components.css`、必要な `UI/components.js` | 仕様確定 |
+| Layout UI | Split pane / Resizable pane UI | `UI/layout.css`、必要な `UI/components.js` | 仕様確定 |
+| Feedback UI | Toast / Snackbar UI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
+| Feedback UI | Empty / Error / Loading state統合 | `UI/components.css`、`UI/content.css`、`UI/forms.css`、`EditorUI/wysiwyg.css` | 仕様確定 |
+| Content UI | Markdown/MDX表示用本文部品 | `UI/content.css`、必要な `UI/content.js` | 仕様確定 |
+| Media UI | Avatar / User presence UI | `UI/components.css` | 仕様確定 |
+| Media UI | Gallery / Lightbox UI | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` | 仕様確定 |
+| Security UI | Permission / Role / Scope表示UI | `UI/components.css`、`UI/forms.css` | 仕様確定 |
 | レイアウト複合 | 分割ブロック | `UI/components.css` | 実装済み |
 | レイアウト複合 | 積み上げ特徴表示 | `UI/components.css` | 実装済み |
 | レイアウト複合 | 比較グリッド | `UI/content.css` | 実装済み |
@@ -215,10 +279,77 @@ WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `Edit
 | ロゴリスト | `.adlaire-logo-list`、`.adlaire-logo-list-item` |
 | パートナーリスト | `.adlaire-partner-list`、`.adlaire-partner-list-item` |
 | アイコンタイル | `.adlaire-icon-tile-list`、`.adlaire-icon-tile` |
-| 多言語化UI | `.adlaire-language-switcher`、`.adlaire-language-switcher-label`、`.adlaire-language-switcher-list`、`.adlaire-language-option`、`.adlaire-language-option-current` |
 | 分割ブロック | `.adlaire-split-block` |
 | 積み上げ特徴表示 | `.adlaire-stacked-feature` |
 | 比較グリッド | `.adlaire-comparison-grid`、`.adlaire-comparison-grid-item` |
+
+### 5.2 仕様確定クラス対応表
+
+| 部品 | 仕様確定クラス |
+| --- | --- |
+| Knowledge検索導線 | `.adlaire-knowledge-search-nav`、`.adlaire-knowledge-list`、`.adlaire-knowledge-empty` |
+| Knowledgeカテゴリナビ | `.adlaire-knowledge-category-nav` |
+| Knowledge更新情報 | `.adlaire-knowledge-update-list` |
+| Repositoryファイル一覧 | `.adlaire-repo-file-list`、`.adlaire-repo-file-row`、`.adlaire-repo-directory-row` |
+| Repositoryコミット一覧 | `.adlaire-repo-commit-list` |
+| Repository差分表示 | `.adlaire-repo-diff`、`.adlaire-repo-diff-added`、`.adlaire-repo-diff-removed`、`.adlaire-repo-change-badge` |
+| Repository設定パネル | `.adlaire-repo-settings`、`.adlaire-repo-settings-section`、`.adlaire-repo-settings-row`、`.adlaire-repo-save-status` |
+| メンバー/チーム表示 | `.adlaire-member-list`、`.adlaire-member-item`、`.adlaire-team-list`、`.adlaire-team-item`、`.adlaire-role-badge`、`.adlaire-invite-status`、`.adlaire-affiliation-meta` |
+| 読み込み状態/データカード | `.adlaire-loading-state`、`.adlaire-data-card`、`.adlaire-data-card-title`、`.adlaire-data-card-value`、`.adlaire-last-updated`、`.adlaire-sync-status`、`.adlaire-api-error` |
+| 多言語化UI | `.adlaire-language-switcher`、`.adlaire-language-switcher-label`、`.adlaire-language-current`、`.adlaire-language-list`、`.adlaire-language-option`、`.adlaire-language-option-current` |
+| テーブルUI | `.adlaire-table`、`.adlaire-data-table`、`.adlaire-comparison-table`、`.adlaire-content-table`、`.adlaire-table-scroll`、`.adlaire-table-empty`、`.adlaire-table-row-selected`、`.adlaire-table-cell-muted` |
+| モーダル/ダイアログUI | `.adlaire-modal`、`.adlaire-modal-dialog`、`.adlaire-confirm-dialog`、`.adlaire-notice-dialog`、`.adlaire-drawer`、`.adlaire-dialog-close` |
+| アップロードUI | `.adlaire-file-picker`、`.adlaire-dropzone`、`.adlaire-upload-progress`、`.adlaire-attachment-list`、`.adlaire-attachment-item`、`.adlaire-upload-error` |
+| フィルターUI | `.adlaire-filter-panel`、`.adlaire-filter-condition`、`.adlaire-saved-filter-list`、`.adlaire-saved-filter-item`、`.adlaire-filter-chip`、`.adlaire-filter-clear` |
+| 検索UI | `.adlaire-search-box`、`.adlaire-search-input`、`.adlaire-search-suggest`、`.adlaire-search-suggest-item`、`.adlaire-search-results`、`.adlaire-search-result-item`、`.adlaire-search-empty` |
+| ページネーションUI | `.adlaire-pagination`、`.adlaire-pagination-count`、`.adlaire-page-prev`、`.adlaire-page-next`、`.adlaire-page-link`、`.adlaire-page-link-current`、`.adlaire-page-link-disabled` |
+| 設定UI | `.adlaire-settings-group`、`.adlaire-settings-row`、`.adlaire-settings-label`、`.adlaire-settings-help`、`.adlaire-toggle`、`.adlaire-danger-zone` |
+| バリデーションUI | `.adlaire-field-error`、`.adlaire-field-warning`、`.adlaire-field-success`、`.adlaire-error-summary`、`.adlaire-error-summary-item`、`.adlaire-input-hint` |
+| 汎用目次 | `.adlaire-toc`、`.adlaire-toc-title`、`.adlaire-toc-list`、`.adlaire-toc-item`、`.adlaire-toc-link`、`.adlaire-toc-link-current`、`.adlaire-toc-sticky` |
+| 本文カード | `.adlaire-content-card`、`.adlaire-content-card-header`、`.adlaire-content-card-body`、`.adlaire-content-card-footer` |
+| コード表示 | `.adlaire-code-block`、`.adlaire-code-title`、`.adlaire-code-body`、`.adlaire-code-copy` |
+| 関連記事 | `.adlaire-related-list`、`.adlaire-related-item`、`.adlaire-related-link`、`.adlaire-related-meta` |
+| リポジトリ一覧UI | `.adlaire-git-repo-list`、`.adlaire-git-repo-card`、`.adlaire-git-repo-meta` |
+| リポジトリ概要/README表示UI | `.adlaire-git-repo-summary`、`.adlaire-git-readme`、`.adlaire-git-readme-meta` |
+| ブランチ/タグ切替UI | `.adlaire-git-ref-switcher`、`.adlaire-git-ref-menu`、`.adlaire-git-ref-current` |
+| ファイルツリー/パスナビUI | `.adlaire-git-file-tree`、`.adlaire-git-file-row`、`.adlaire-git-path-nav` |
+| ファイルビューアUI | `.adlaire-git-file-viewer`、`.adlaire-git-file-header`、`.adlaire-git-file-empty` |
+| コード表示/行番号/行ハイライトUI | `.adlaire-git-code-view`、`.adlaire-git-line-number`、`.adlaire-git-line-highlight` |
+| コミット一覧/コミット詳細UI | `.adlaire-git-commit-list`、`.adlaire-git-commit-item`、`.adlaire-git-commit-detail` |
+| 差分ビューアUI | `.adlaire-git-diff-viewer`、`.adlaire-git-diff-added`、`.adlaire-git-diff-removed` |
+| Pull Request一覧/詳細UI | `.adlaire-git-pr-list`、`.adlaire-git-pr-item`、`.adlaire-git-pr-detail` |
+| Issue一覧/詳細UI | `.adlaire-git-issue-list`、`.adlaire-git-issue-item`、`.adlaire-git-issue-detail` |
+| レビューコメント/スレッドUI | `.adlaire-git-review-thread`、`.adlaire-git-review-comment`、`.adlaire-git-review-resolved` |
+| CI/CDステータス/チェック結果UI | `.adlaire-git-check-list`、`.adlaire-git-check-item`、`.adlaire-git-check-status` |
+| リリース/タグ一覧UI | `.adlaire-git-release-list`、`.adlaire-git-release-item`、`.adlaire-git-tag` |
+| セキュリティアラートUI | `.adlaire-git-security-alert`、`.adlaire-git-severity`、`.adlaire-git-alert-status` |
+| リポジトリ設定/権限/危険操作UI | `.adlaire-git-settings`、`.adlaire-git-permission`、`.adlaire-git-danger-zone` |
+| Web IDE入口/編集導線UI | `.adlaire-git-web-ide-entry`、`.adlaire-git-edit-action`、`.adlaire-git-edit-disabled` |
+| 検索/コード検索/絞り込みUI | `.adlaire-git-code-search`、`.adlaire-git-search-filter`、`.adlaire-git-search-result` |
+| Activity/Insights/貢献グラフUI | `.adlaire-git-activity`、`.adlaire-git-insights`、`.adlaire-git-contribution-graph` |
+| Wiki/Docs表示UI | `.adlaire-git-wiki`、`.adlaire-git-docs-page`、`.adlaire-git-docs-nav` |
+| Packages/Artifacts表示UI | `.adlaire-git-package-list`、`.adlaire-git-artifact-list`、`.adlaire-git-download-action` |
+| Projects/カンバン/タスクボードUI | `.adlaire-git-project-board`、`.adlaire-git-board-column`、`.adlaire-git-board-card` |
+| 通知/Watch/Star/Fork操作UI | `.adlaire-git-watch-action`、`.adlaire-git-star-action`、`.adlaire-git-fork-action` |
+| 組織/チーム/メンバー権限UI | `.adlaire-git-org`、`.adlaire-git-team-list`、`.adlaire-git-member-permission` |
+| 空状態/読み込み/エラー状態UI | `.adlaire-git-empty`、`.adlaire-git-loading`、`.adlaire-git-error` |
+| モバイルGitプロバイダーUI | `.adlaire-git-mobile-nav`、`.adlaire-git-mobile-tab`、`.adlaire-git-mobile-action` |
+| フォーカスリング/キーボード操作表示 | `.adlaire-focus-ring`、`.adlaire-keyboard-focus`、`.adlaire-pressed`、`.adlaire-focus-surface` |
+| スキップリンク/ランドマーク補助UI | `.adlaire-skip-link`、`.adlaire-landmark-label`、`.adlaire-sr-only`、`.adlaire-a11y-helper` |
+| 入力グループ/複合入力UI | `.adlaire-input-group`、`.adlaire-input-prefix`、`.adlaire-input-suffix`、`.adlaire-composite-input` |
+| 日付/時刻/期間入力UI | `.adlaire-date-input`、`.adlaire-time-input`、`.adlaire-date-range`、`.adlaire-period-field` |
+| チャート枠/凡例/データラベルUI | `.adlaire-chart-frame`、`.adlaire-chart-legend`、`.adlaire-chart-label`、`.adlaire-chart-empty` |
+| KPI/メトリクス比較UI | `.adlaire-kpi-card`、`.adlaire-metric-delta`、`.adlaire-metric-trend`、`.adlaire-metric-comparison` |
+| コマンドパレットUI | `.adlaire-command-palette`、`.adlaire-command-input`、`.adlaire-command-item`、`.adlaire-command-shortcut` |
+| グローバル検索/オムニバーUI | `.adlaire-omnibar`、`.adlaire-omnibar-input`、`.adlaire-omnibar-result`、`.adlaire-omnibar-empty` |
+| App shell / Sidebar layout | `.adlaire-app-shell`、`.adlaire-app-sidebar`、`.adlaire-app-main`、`.adlaire-sidebar-collapsed` |
+| Split pane / Resizable pane UI | `.adlaire-split-pane`、`.adlaire-pane`、`.adlaire-pane-resize-handle`、`.adlaire-pane-collapsed` |
+| Toast / Snackbar UI | `.adlaire-toast-stack`、`.adlaire-toast`、`.adlaire-snackbar`、`.adlaire-toast-dismiss` |
+| Empty / Error / Loading state統合 | `.adlaire-state`、`.adlaire-state-empty`、`.adlaire-state-error`、`.adlaire-state-loading` |
+| Markdown/MDX表示用本文部品 | `.adlaire-markdown-body`、`.adlaire-mdx-body`、`.adlaire-md-note`、`.adlaire-md-footnote` |
+| Avatar / User presence UI | `.adlaire-avatar`、`.adlaire-avatar-group`、`.adlaire-presence`、`.adlaire-presence-dot` |
+| Gallery / Lightbox UI | `.adlaire-gallery`、`.adlaire-gallery-item`、`.adlaire-lightbox`、`.adlaire-lightbox-caption` |
+| Permission / Role / Scope表示UI | `.adlaire-permission`、`.adlaire-role`、`.adlaire-scope`、`.adlaire-restricted` |
 
 ---
 
@@ -278,6 +409,8 @@ WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `Edit
 本章は、Adlaire-Designの共通部品とルールを適用する代表的な画面種別から、必要になりやすい汎用部品を逆引きするための一覧である。
 
 画面種別はデザインシステムの分類軸ではなく、共通部品の利用例として扱う。画面種別ごとの専用テーマや専用設計体系は作らない。
+
+本章の代表例は、共通UIパターン整理の確定仕様として扱う。
 
 | 代表的な画面種別 | 必要な汎用部品 |
 | --- | --- |
