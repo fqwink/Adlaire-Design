@@ -1,0 +1,45 @@
+# Adlaire-Design Admin UIカタログ
+
+本ファイルは、Adlaire-Designで扱う管理画面専用UI部品の分類、優先度、実装先、実装状態を管理する補助正本である。
+
+仕様正本は `Docs/Master_Spec` とし、本ファイルは管理画面専用UI部品の一覧管理に使用する。
+
+---
+
+## 1. 管理方針
+
+- 管理画面専用UIは、管理者、運用者、編集者が反復操作する画面で使うUI部品として扱う。
+- 管理項目は、部品名、class案、実装先、優先度、状態、CSS責務、JS責務とする。
+- 実装する場合は、`Docs/Master_Spec`、本カタログ、対象CSS、必要なJavaScript、検査、履歴を同じ変更単位で確認する。
+
+---
+
+## 2. 初期分類
+
+| 分類 | 管理対象 |
+| --- | --- |
+| Dashboard | 管理ダッシュボード |
+| Settings | 設定画面 |
+| Data List | データ一覧 |
+| Bulk Action | 一括操作 |
+| User / Role | 権限/ロール表示 |
+| Danger Zone | 危険操作 |
+| Audit | 監査/履歴 |
+| Admin Form | 管理フォーム |
+
+---
+
+## 3. 初期管理項目
+
+| 部品 | class案 | 実装先 | 優先度 | 状態 | CSS責務 | JS責務 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 管理ダッシュボード | `.adlaire-admin-dashboard` | `UI/components.css` | A | 仕様確定 | レイアウト、面、見出し、状態表示 | 表示状態補助 |
+| 設定画面 | `.adlaire-admin-settings` | `UI/components.css`、`UI/forms.css` | A | 仕様確定 | 設定グループ、設定行、補助説明 | トグル、開閉補助 |
+| データ一覧 | `.adlaire-admin-data-list` | `UI/components.css` | A | 仕様確定 | 一覧、行、列、空状態 | 選択状態補助 |
+| 一括操作 | `.adlaire-admin-bulk-action` | `UI/components.css` | B | 仕様確定 | 選択件数、操作バー、ボタン配置 | 選択状態補助 |
+| 権限/ロール表示 | `.adlaire-admin-role` | `UI/components.css` | B | 仕様確定 | ロール表示、権限ラベル、状態表示 | 表示状態補助 |
+| 危険操作 | `.adlaire-admin-danger-zone` | `UI/components.css`、`UI/forms.css` | A | 仕様確定 | 警告枠、説明、確認操作配置 | 確認状態補助 |
+| 監査/履歴 | `.adlaire-admin-audit-log` | `UI/content.css` | B | 仕様確定 | 履歴行、時刻、操作主体、状態 | 表示状態補助 |
+| 管理フォーム | `.adlaire-admin-form` | `UI/forms.css` | A | 仕様確定 | 入力行、補助説明、検証表示 | 入力状態補助 |
+| Audit trail / Activity log | `.adlaire-audit-trail`、`.adlaire-activity-log`、`.adlaire-activity-actor`、`.adlaire-activity-time` | `UI/content.css`、`UI/components.css` | B | 仕様確定 | 監査履歴、操作主体、時刻、イベント種別、詳細表示 | 表示状態補助 |
+| Permission / Role / Scope表示 | `.adlaire-permission`、`.adlaire-role`、`.adlaire-scope`、`.adlaire-restricted` | `UI/components.css`、`UI/forms.css` | A | 仕様確定 | 権限、ロール、スコープ、制限状態の表示 | 表示状態補助 |

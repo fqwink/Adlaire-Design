@@ -13,12 +13,15 @@
 ## 1. 管理方針
 
 - 公式アイコンセットはAdlaire-Designの汎用UI資産として管理する。
+- 公式アイコンSVGの実体フォルダは `Icons/` とする。
 - 正本形式はSVGのみとする。
+- PNG、WebP、JPG、JPEG、GIF、PDF、AI、PSD、EPSは公式アイコン実体として扱わない。
 - ファイル名は `adlaire-icon-<category>-<name>.svg` とする。
 - カテゴリは `navigation`、`action`、`status`、`content`、`editor`、`media`、`form` に固定する。
 - 装飾アイコンは代替テキストを空にし、意味アイコンは用途に応じた代替テキストまたはラベルを利用側で付与する。
 - 実装状態が `実装済み` のアイコンは、対応するSVGファイルを `Icons/` に配置する。
 - 実装状態が `実装済み` のアイコンは、公式アイコンセットの初期SVGとして利用できる。
+- `Icons/README.md` は必要に応じて公式アイコン実体フォルダの運用説明として配置できる。
 
 ---
 

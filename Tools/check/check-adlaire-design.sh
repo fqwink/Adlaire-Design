@@ -16,6 +16,7 @@ for path in \
   Docs/Document_Index \
   Docs/Master_Spec \
   Docs/Generic_Component_Catalog \
+  Docs/Admin_UI_Catalog \
   Docs/WYSIWYG_Editor_UI_Catalog \
   Docs/Icon_Set_Catalog \
   Docs/Pending_Tasks \
@@ -86,6 +87,7 @@ fi
 find "$ADLAIRE_DESIGN_ROOT/Docs" -type f \
   ! -name 'Master_Spec' \
   ! -name 'Generic_Component_Catalog' \
+  ! -name 'Admin_UI_Catalog' \
   ! -name 'WYSIWYG_Editor_UI_Catalog' \
   ! -name 'Icon_Set_Catalog' \
   ! -name 'Pending_Tasks' \
@@ -151,7 +153,14 @@ if [ -s "$TMP_DIR/unexpected-brand-files" ]; then
   exit 1
 fi
 
-find "$ADLAIRE_DESIGN_ROOT/Icons" -type f ! -name '.gitkeep' -print >"$TMP_DIR/icon-files"
+find "$ADLAIRE_DESIGN_ROOT/Icons" -type f ! -name '.gitkeep' ! -name 'README.md' -print >"$TMP_DIR/icon-files"
+find "$ADLAIRE_DESIGN_ROOT/Icons" -type f ! -name '.gitkeep' ! -name 'README.md' ! -name '*.svg' -print >"$TMP_DIR/unexpected-icon-format-files"
+
+if [ -s "$TMP_DIR/unexpected-icon-format-files" ]; then
+  echo "Icons/ must contain only SVG files, README.md, or .gitkeep:" >&2
+  cat "$TMP_DIR/unexpected-icon-format-files" >&2
+  exit 1
+fi
 grep -E -v '/adlaire-icon-(navigation|action|status|content|editor|media|form)-[a-z0-9]([a-z0-9-]*[a-z0-9])?\.svg$' "$TMP_DIR/icon-files" >"$TMP_DIR/unexpected-icon-files" || true
 
 if [ -s "$TMP_DIR/unexpected-icon-files" ]; then
@@ -386,7 +395,7 @@ for css_master_term in \
   '責務別の管理範囲は以下に固定する。' \
   'ファイル責務は以下に整理する。' \
   '責務別の変更単位は以下に固定する。' \
-  '責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、汎用UIで使う公式アイコンを `Docs/Icon_Set_Catalog` と `Icons/`、採用・移行を利用先プロダクト側として扱う。' \
+  '責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、管理画面専用UI部品を `Docs/Admin_UI_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、汎用UIで使う公式アイコンを `Docs/Icon_Set_Catalog` と `Icons/`、採用・移行を利用先プロダクト側として扱う。' \
   '### 11.2.2 CSSマスター仕様' \
   'Adlaire-DesignのCSSマスター仕様は、本節を正本とする。' \
   'CSSマスター仕様で固定する対象は以下とする。' \
@@ -400,7 +409,7 @@ for css_master_term in \
   'CSS変更管理は以下に固定する。' \
   'CSSマスター仕様の検査条件は以下とする。' \
   'CSS仕様は `Docs/Master_Spec` を正本とする' \
-  '一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog`、公式アイコンセットは `Docs/Icon_Set_Catalog` で一覧管理する' \
+  '一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、管理画面専用UI部品は `Docs/Admin_UI_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog`、公式アイコンセットは `Docs/Icon_Set_Catalog` で一覧管理する' \
   'CSS実装は `Tokens/`、`UI/`、`EditorUI/` 配下のCSSファイル、UI JavaScriptは `UI/`、`EditorUI/` 配下のJSファイルを正本とする' \
   '`Docs/WYSIWYG_Editor_UI_Catalog` は、Adlaire-DesignにおけるエディタUIに関するカタログとして扱う。' \
   'Editor UI専用品は `Docs/Generic_Component_Catalog` に含めない。' \
@@ -608,8 +617,9 @@ for indexed_path in \
 done
 
 for document_index_responsibility_term in \
-  '`Docs/Master_Spec`(仕様・設計の正本、CSS、Editor UI、公式アイコンセットの責務境界)' \
+  '`Docs/Master_Spec`(仕様・設計の正本、CSS、Editor UI、公式アイコンセット、Samples、カタログ責務索引)' \
   '`Docs/Generic_Component_Catalog`(一般的なCSS汎用部品の分類、優先度、実装先、実装状態の一覧)' \
+  '`Docs/Admin_UI_Catalog`(管理画面専用UI部品の分類、優先度、実装先、実装状態の一覧)' \
   '`Docs/WYSIWYG_Editor_UI_Catalog`(エディタUIに関する部品の分類、優先度、実装先、実装状態の一覧)' \
   '`Docs/Icon_Set_Catalog`(Adlaire-Design公式アイコンセットの分類、用途、実装状態の一覧)' \
   '`Docs/Pending_Tasks`(未策定または未完了タスクだけを集約する管理ファイル)'; do
@@ -628,9 +638,8 @@ for pending_task_term in \
   '仕様未確定、要否未決定、策定中の項目は未実装リストに含めない。' \
   '## 3. 未実装リスト' \
   '本章は、仕様確定済みで、実装だけが未完了の項目を管理する。' \
-  '現時点で該当なし。' \
-  'AD-TASK-013' \
-  'AD-TASK-014'; do
+  'AD-TASK-101' \
+  'AD-IMPL-030'; do
   if ! grep -F -- "$pending_task_term" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" >/dev/null 2>&1; then
     echo "Docs/Pending_Tasks missing required pending task management term: $pending_task_term" >&2
     exit 1

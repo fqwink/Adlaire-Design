@@ -274,3 +274,40 @@ WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装
 | collapsed | `.adlaire-wysiwyg-block-collapsed` |
 
 ---
+
+## 7. 機能追加UI仕様確定項目
+
+以下は、WYSIWYG Editor UIの機能追加部品として仕様確定する。実装先は `EditorUI/wysiwyg.css`、必要な表示補助JavaScriptは `EditorUI/wysiwyg.js` とする。
+
+| ID | 部品 | 仕様確定クラス |
+| --- | --- | --- |
+| AD-TASK-024 | ブロック挿入UI | `.adlaire-wysiwyg-insert`、`.adlaire-wysiwyg-insert-menu`、`.adlaire-wysiwyg-insert-item` |
+| AD-TASK-025 | ブロック変換UI | `.adlaire-wysiwyg-transform`、`.adlaire-wysiwyg-transform-menu`、`.adlaire-wysiwyg-block-type` |
+| AD-TASK-026 | ブロック並び替えUI | `.adlaire-wysiwyg-reorder`、`.adlaire-wysiwyg-drag-target`、`.adlaire-wysiwyg-dragging` |
+| AD-TASK-027 | ブロック選択/複数選択UI | `.adlaire-wysiwyg-block-selected`、`.adlaire-wysiwyg-selection-toolbar`、`.adlaire-wysiwyg-selection-count` |
+| AD-TASK-028 | インライン装飾ツールバー | `.adlaire-wysiwyg-inline-toolbar`、`.adlaire-wysiwyg-inline-button`、`.adlaire-wysiwyg-inline-active` |
+| AD-TASK-029 | リンク編集UI | `.adlaire-wysiwyg-link-editor`、`.adlaire-wysiwyg-link-preview`、`.adlaire-wysiwyg-link-error` |
+| AD-TASK-030 | コメント/注釈UI | `.adlaire-wysiwyg-comment`、`.adlaire-wysiwyg-comment-thread`、`.adlaire-wysiwyg-comment-resolved` |
+| AD-TASK-031 | 文字数/読了時間/構成情報UI | `.adlaire-wysiwyg-stats`、`.adlaire-wysiwyg-stat-item`、`.adlaire-wysiwyg-outline-meta` |
+| AD-TASK-032 | 見出し/本文/引用/リスト系ブロックUI | `.adlaire-wysiwyg-heading-block`、`.adlaire-wysiwyg-text-block`、`.adlaire-wysiwyg-quote-block`、`.adlaire-wysiwyg-list-block` |
+| AD-TASK-033 | 画像/動画/ファイル添付ブロックUI | `.adlaire-wysiwyg-media-block`、`.adlaire-wysiwyg-image-block`、`.adlaire-wysiwyg-video-block`、`.adlaire-wysiwyg-file-block` |
+| AD-TASK-034 | テーブルブロックUI | `.adlaire-wysiwyg-table-block`、`.adlaire-wysiwyg-table-toolbar`、`.adlaire-wysiwyg-table-cell-selected` |
+| AD-TASK-035 | コードブロックUI | `.adlaire-wysiwyg-code-block`、`.adlaire-wysiwyg-code-language`、`.adlaire-wysiwyg-code-copy` |
+| AD-TASK-036 | コールアウト/注記/警告ブロックUI | `.adlaire-wysiwyg-callout-block`、`.adlaire-wysiwyg-note-block`、`.adlaire-wysiwyg-warning-block` |
+| AD-TASK-037 | 区切り線/スペーサー/埋め込みブロックUI | `.adlaire-wysiwyg-divider-block`、`.adlaire-wysiwyg-spacer-block`、`.adlaire-wysiwyg-embed-block` |
+| AD-TASK-038 | ブロックテンプレート/再利用ブロックUI | `.adlaire-wysiwyg-template-panel`、`.adlaire-wysiwyg-template-item`、`.adlaire-wysiwyg-reusable-block` |
+| AD-TASK-039 | ドラッグハンドル/ブロックメニューUI | `.adlaire-wysiwyg-drag-handle`、`.adlaire-wysiwyg-block-menu`、`.adlaire-wysiwyg-block-action` |
+| AD-TASK-040 | スラッシュコマンド/挿入メニューUI | `.adlaire-wysiwyg-slash-menu`、`.adlaire-wysiwyg-command-item`、`.adlaire-wysiwyg-command-active` |
+| AD-TASK-041 | モバイル編集操作UI | `.adlaire-wysiwyg-mobile-toolbar`、`.adlaire-wysiwyg-mobile-sheet`、`.adlaire-wysiwyg-mobile-action` |
+| AD-TASK-042 | キーボード操作ヒントUI | `.adlaire-wysiwyg-shortcut-help`、`.adlaire-wysiwyg-kbd`、`.adlaire-wysiwyg-help-panel` |
+| AD-TASK-043 | Editor UI状態表示 | `.adlaire-wysiwyg-status`、`.adlaire-wysiwyg-status-saving`、`.adlaire-wysiwyg-status-error` |
+| AD-TASK-044 | readonly/disabled/locked表示UI | `.adlaire-wysiwyg-readonly`、`.adlaire-wysiwyg-disabled`、`.adlaire-wysiwyg-locked` |
+| AD-TASK-045 | 差分/変更履歴表示UI | `.adlaire-wysiwyg-diff`、`.adlaire-wysiwyg-diff-added`、`.adlaire-wysiwyg-history-panel` |
+| AD-TASK-046 | 公開前チェック表示UI | `.adlaire-wysiwyg-publish-check`、`.adlaire-wysiwyg-check-item`、`.adlaire-wysiwyg-check-warning` |
+| AD-TASK-047 | AI補助入口UI | `.adlaire-wysiwyg-ai-entry`、`.adlaire-wysiwyg-ai-suggestion`、`.adlaire-wysiwyg-ai-loading` |
+| AD-TASK-048 | 共同編集者/カーソル/選択範囲表示UI | `.adlaire-wysiwyg-collaborator`、`.adlaire-wysiwyg-remote-cursor`、`.adlaire-wysiwyg-remote-selection` |
+| AD-TASK-049 | アクセシビリティ補助表示UI | `.adlaire-wysiwyg-a11y-panel`、`.adlaire-wysiwyg-a11y-warning`、`.adlaire-wysiwyg-alt-warning` |
+| AD-TASK-050 | エディタ空状態/初期案内UI | `.adlaire-wysiwyg-empty`、`.adlaire-wysiwyg-empty-title`、`.adlaire-wysiwyg-empty-action` |
+| AD-TASK-051 | エディタエラー/警告/保存状態表示UI | `.adlaire-wysiwyg-alert`、`.adlaire-wysiwyg-warning`、`.adlaire-wysiwyg-save-state` |
+| AD-TASK-052 | エディタ設定/表示密度/表示切替UI | `.adlaire-wysiwyg-settings`、`.adlaire-wysiwyg-density-control`、`.adlaire-wysiwyg-view-toggle` |
+| AD-TASK-053 | エディタミニマップ/アウトラインUI | `.adlaire-wysiwyg-minimap`、`.adlaire-wysiwyg-outline`、`.adlaire-wysiwyg-outline-current` |

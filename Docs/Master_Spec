@@ -20,6 +20,8 @@ WYSIWYG Editor UIはAdlaire-Design採用確定とする。WYSIWYG Editor UI仕�
 
 汎用部品の分類、優先度、実装先、実装状態は `Docs/Generic_Component_Catalog` で一覧管理する。仕様正本は本書とし、汎用部品カタログは本書の補助正本として扱う。
 
+管理画面専用UI部品の分類、優先度、実装先、実装状態は `Docs/Admin_UI_Catalog` で一覧管理する。仕様正本は本書とし、Admin UIカタログは本書の補助正本として扱う。
+
 WYSIWYG Editor専用UI部品の分類、優先度、実装先、実装状態は `Docs/WYSIWYG_Editor_UI_Catalog` で一覧管理する。仕様正本は本書とし、WYSIWYG Editor UIカタログは本書の補助正本として扱う。
 
 未策定または未完了のまま残っているタスクは `Docs/Pending_Tasks` に集約する。同ファイルには未完了タスクだけを残し、完了したタスクは削除する。
@@ -52,11 +54,17 @@ Adlaire-Designは、デザインシステムとしてのUI表現、部品、ト�
 
 汎用UI部品とは、公開面、管理面、本文表示、フォーム、ナビゲーション、状態表示で再利用するUI部品である。
 
+Admin UI部品とは、管理画面で反復利用する専用UI部品である。
+
 WYSIWYG Editor UI部品とは、WYSIWYG Editorの表示層を構成する専用UI部品である。
 
 WYSIWYG Editor UI部品には、Editor外枠、Header、Toolbar、Canvas、Block、Inline toolbar、Slash menu、Mobile surface、Preview、JSON panel、Footer、状態表示、補助パネルを含める。
 
 デザイントークンとは、色、面、状態、効果値など、複数UI部品で共有する見た目の値である。
+
+Typographyトークンとは、font family、font size、line height、font weight、heading scale、body text、caption、helper text、code fontを扱う文字設計値である。
+
+Spacingトークンとは、gap、padding、margin、section spacing、inline spacing、stack spacing、grid gapを扱う余白設計値である。
 
 ブランド資産とは、ロゴ、画像、アイコン、OGPなど、ブランド表示に必要な素材である。
 
@@ -284,6 +292,7 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、ブランド
 | --- | --- | --- | --- | --- |
 | 仕様正本 | Adlaire-Design | `Docs/Master_Spec` | CSSマスター仕様、Editor UIマスター仕様、責務境界、読み込み順、禁止事項、変更管理 | 実装コード、プロダクト固有採用計画 |
 | 一般CSS汎用部品カタログ | Adlaire-Design | `Docs/Generic_Component_Catalog` | 一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティ | WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 具体クラス |
+| Admin UIカタログ | Adlaire-Design | `Docs/Admin_UI_Catalog` | 管理画面専用UI部品、分類、優先度、実装先、実装状態 | 公開面汎用部品、WYSIWYG Editor UI専用品 |
 | Editor UIカタログ | Adlaire-Design | `Docs/WYSIWYG_Editor_UI_Catalog` | エディタUIに関する部品、状態表示、モバイルEditor UI、補助パネル | 一般公開面の汎用部品、Editor実装ロジック |
 | 公式アイコンセットカタログ | Adlaire-Design | `Docs/Icon_Set_Catalog` | 公式アイコンの分類、用途、表示サイズ、代替テキスト方針、実装状態 | ブランド資産、アイコン検索や挿入などの利用側処理 |
 | 未タスク管理 | Adlaire-Design | `Docs/Pending_Tasks` | 未策定または未完了タスク | 完了済みタスク、変更履歴 |
@@ -301,6 +310,7 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、ブランド
 | --- | --- | --- |
 | Docs | `Docs/Master_Spec` | 仕様正本 |
 | Docs | `Docs/Generic_Component_Catalog` | 一般CSS汎用部品カタログ |
+| Docs | `Docs/Admin_UI_Catalog` | Admin UIカタログ |
 | Docs | `Docs/WYSIWYG_Editor_UI_Catalog` | Editor UIカタログ |
 | Docs | `Docs/Icon_Set_Catalog` | 公式アイコンセットカタログ |
 | Docs | `Docs/Pending_Tasks` | 未策定または未完了タスクの管理 |
@@ -319,6 +329,7 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、ブランド
 | --- | --- |
 | CSS仕様 | `Docs/Master_Spec`、必要なカタログ、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | 一般CSS汎用部品 | `Docs/Master_Spec`、`Docs/Generic_Component_Catalog`、対象 `UI/*.css`、必要な `UI/*.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| Admin UI部品 | `Docs/Master_Spec`、`Docs/Admin_UI_Catalog`、対象 `UI/*.css`、必要な `UI/*.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | Editor UI部品 | `Docs/Master_Spec`、`Docs/WYSIWYG_Editor_UI_Catalog`、`EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | 公式アイコンセット | `Docs/Master_Spec`、`Docs/Icon_Set_Catalog`、`Icons/`、必要な `UI/*.css`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
 | ブランド資産 | `Docs/Master_Spec`、`Docs/Document_Index`、`Brand/`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
@@ -329,7 +340,7 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、ブランド
 
 公式アイコン初期セットのSVG実体は制作済みとし、追加や変更は公式アイコンセットの変更単位として管理する。
 
-責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、汎用UIで使う公式アイコンを `Docs/Icon_Set_Catalog` と `Icons/`、採用・移行を利用先プロダクト側として扱う。
+責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、管理画面専用UI部品を `Docs/Admin_UI_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、汎用UIで使う公式アイコンを `Docs/Icon_Set_Catalog` と `Icons/`、採用・移行を利用先プロダクト側として扱う。
 
 ### 11.2.2 CSSマスター仕様
 
@@ -340,7 +351,7 @@ CSSマスター仕様で固定する対象は以下とする。
 | 固定対象 | 固定内容 |
 | --- | --- |
 | 正本 | CSS仕様は `Docs/Master_Spec` を正本とする |
-| 補助正本 | 一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog`、公式アイコンセットは `Docs/Icon_Set_Catalog` で一覧管理する |
+| 補助正本 | 一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、管理画面専用UI部品は `Docs/Admin_UI_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog`、公式アイコンセットは `Docs/Icon_Set_Catalog` で一覧管理する |
 | 実装正本 | CSS実装は `Tokens/`、`UI/`、`EditorUI/` 配下のCSSファイル、UI JavaScriptは `UI/`、`EditorUI/` 配下のJSファイルを正本とする |
 | 検査正本 | 構造、必須ファイル、禁止ファイル、必須変数、必須クラス、禁止記述は `Tools/check/check-adlaire-design.sh` で検査する |
 | 変更履歴 | CSS仕様またはCSS実装を変更する場合は `Docs/Change_History` を更新する |
@@ -1156,7 +1167,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 | メディアオブジェクト | `.adlaire-media`、`.adlaire-media-figure`、`.adlaire-media-body`、`.adlaire-media-title` | 図版、アイコン、画像などと本文を横並びで表示する |
 | CTA | `.adlaire-cta`、`.adlaire-cta-title`、`.adlaire-cta-text`、`.adlaire-cta-actions` | 公開面の主要導線を強調表示する |
 | 補助テキスト | `.adlaire-caption`、`.adlaire-helper-text` | 図表キャプション、入力外の補助説明、注釈を表示する |
-| 多言語化UI | `.adlaire-language-switcher`、`.adlaire-language-switcher-label`、`.adlaire-language-switcher-list`、`.adlaire-language-option`、`.adlaire-language-option-current` | 言語切替、現在言語、選択肢を表示する |
+| 多言語化UI | `.adlaire-language-switcher`、`.adlaire-language-switcher-label`、`.adlaire-language-current`、`.adlaire-language-list`、`.adlaire-language-option`、`.adlaire-language-option-current` | 言語切替、現在言語、選択肢を表示する |
 
 汎用部品は、本文固有の意味を持たず、公開面の複数ページで再利用できるものに限定する。見た目の値は既存の `Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` のCSS変数を参照し、新規トークンは追加しない。
 
@@ -1643,6 +1654,8 @@ Adlaire-Design公式アイコンセットは、Adlaire-Designの汎用UI資産�
 
 公式アイコンセットの補助正本は `Docs/Icon_Set_Catalog` とする。同カタログでは、ID、ファイル名、カテゴリ、用途、表示サイズ、装飾アイコンまたは意味アイコン、代替テキスト方針、実装状態を管理する。
 
+`Icons/README.md` は必要に応じて公式アイコン実体フォルダの運用説明として配置できる。
+
 CSSはアイコンSVG本体を埋め込まない。CSSは `.adlaire-icon`、`.adlaire-icon-sm`、`.adlaire-icon-md`、`.adlaire-icon-lg` などの表示枠、サイズ、余白、配置、色、状態だけを定義する。
 
 公式アイコンセット自体はJavaScriptを持たない。アイコン検索、挿入、切替、非同期読み込みは利用側または別UI実装の責務として扱う。
@@ -1652,6 +1665,180 @@ CSSはアイコンSVG本体を埋め込まない。CSSは `.adlaire-icon`、`.ad
 公式アイコンSVGの実体制作は完了済みとし、初期セットのSVG実体は `Icons/` で管理する。
 
 検査では、`Icons/` の存在、許可形式、命名規則、`Docs/Icon_Set_Catalog` との整合性、禁止形式、仕様必須語句を確認する。`Docs/Icon_Set_Catalog` で `実装済み` としたアイコンは、対応するSVGファイルが `Icons/` に存在しなければならない。
+
+### 11.11.7 Group 1 UI策定仕様
+
+Group 1では、Admin UIカタログ、Typography / Spacing Tokens、汎用目次、本文カード、コード表示、関連記事を策定対象とする。
+
+Admin UIカタログは `Docs/Admin_UI_Catalog` を補助正本とする。管理画面専用UIは、管理ダッシュボード、設定画面、データ一覧、一括操作、権限/ロール表示、危険操作、監査/履歴、管理フォームを管理対象とする。管理項目は、部品名、class案、実装先、優先度、状態、CSS責務、JS責務とする。
+
+Typography / Spacing Tokensは、将来の `Tokens/typography.css` と `Tokens/spacing.css` に対応する仕様として管理する。Typographyは、font family、font size、line height、font weight、heading scale、body text、caption/helper text、code fontを対象とする。Spacingは、gap、padding、margin、section spacing、inline spacing、stack spacing、grid gapを対象とする。命名は `--adlaire-font-*`、`--adlaire-font-size-*`、`--adlaire-line-height-*`、`--adlaire-font-weight-*`、`--adlaire-space-*` を基本とする。
+
+汎用目次は `.adlaire-toc` 系で管理する。対象classは `.adlaire-toc`、`.adlaire-toc-title`、`.adlaire-toc-list`、`.adlaire-toc-item`、`.adlaire-toc-link`、`.adlaire-toc-link-current`、`.adlaire-toc-sticky` とする。ページ内目次、セクション目次、ネスト目次、sticky目次、現在位置表示を扱う。既存 `.adlaire-legal-toc` は法務ページ向け既存部品として残す。
+
+本文カード、コード表示、関連記事は本文表示で使う補助部品として管理する。主な管理先は `UI/content.css` とする。本文カードclassは `.adlaire-content-card`、`.adlaire-content-card-header`、`.adlaire-content-card-body`、`.adlaire-content-card-footer` とする。コード表示classは `.adlaire-code-block`、`.adlaire-code-title`、`.adlaire-code-body`、`.adlaire-code-copy` とする。関連記事classは `.adlaire-related-list`、`.adlaire-related-item`、`.adlaire-related-link`、`.adlaire-related-meta` とする。
+
+### 11.11.8 Group 2 UI策定仕様
+
+Group 2では、Knowledge UI、Repository UI、Portal UI、API UI、Multilingual UI、Table UI、Modal UI、Upload UI、Filter UI、Search UI、Pagination UI、Settings UI、Validation UIを策定対象とする。
+
+Knowledge UIは、検索ページ導線、カテゴリナビ、更新情報、ナレッジ一覧、空状態を扱う。対象classは `.adlaire-knowledge-search-nav`、`.adlaire-knowledge-category-nav`、`.adlaire-knowledge-update-list`、`.adlaire-knowledge-list`、`.adlaire-knowledge-empty` とする。主な管理先は `UI/content.css` とする。
+
+Repository UIは、ファイル一覧、ディレクトリ行、コミット一覧、差分表示、変更種別ラベル、設定パネルを扱う。対象classは `.adlaire-repo-file-list`、`.adlaire-repo-file-row`、`.adlaire-repo-directory-row`、`.adlaire-repo-commit-list`、`.adlaire-repo-diff`、`.adlaire-repo-diff-added`、`.adlaire-repo-diff-removed`、`.adlaire-repo-change-badge`、`.adlaire-repo-settings`、`.adlaire-repo-settings-section`、`.adlaire-repo-settings-row`、`.adlaire-repo-save-status` とする。主な管理先は `UI/content.css`、`UI/components.css`、`UI/forms.css` とする。
+
+Portal UIは、メンバー一覧、チーム一覧、ロール表示、招待状態、所属表示を扱う。対象classは `.adlaire-member-list`、`.adlaire-member-item`、`.adlaire-team-list`、`.adlaire-team-item`、`.adlaire-role-badge`、`.adlaire-invite-status`、`.adlaire-affiliation-meta` とする。主な管理先は `UI/components.css` とする。
+
+API UIは、読み込み状態、データカード、更新日時、同期状態、APIエラー表示を扱う。対象classは `.adlaire-loading-state`、`.adlaire-data-card`、`.adlaire-data-card-title`、`.adlaire-data-card-value`、`.adlaire-last-updated`、`.adlaire-sync-status`、`.adlaire-api-error` とする。主な管理先は `UI/components.css` と `UI/content.css` とする。
+
+Multilingual UIは、言語切替、現在言語表示、言語候補リスト、選択状態を扱う。対象classは `.adlaire-language-switcher`、`.adlaire-language-switcher-label`、`.adlaire-language-current`、`.adlaire-language-list`、`.adlaire-language-option`、`.adlaire-language-option-current` とする。主な管理先は `UI/components.css` と必要な `UI/components.js` とする。
+
+Table UIは、データテーブル、比較表、本文表、空状態、横スクロール、行状態、列状態を扱う。対象classは `.adlaire-table`、`.adlaire-data-table`、`.adlaire-comparison-table`、`.adlaire-content-table`、`.adlaire-table-scroll`、`.adlaire-table-empty`、`.adlaire-table-row-selected`、`.adlaire-table-cell-muted` とする。主な管理先は `UI/content.css` と `UI/components.css` とする。
+
+Modal UIは、モーダル、確認ダイアログ、通知ダイアログ、ドロワー、閉じる操作を扱う。対象classは `.adlaire-modal`、`.adlaire-modal-dialog`、`.adlaire-confirm-dialog`、`.adlaire-notice-dialog`、`.adlaire-drawer`、`.adlaire-dialog-close` とする。主な管理先は `UI/components.css` と必要な `UI/components.js` とする。
+
+Upload UIは、ファイル選択、ドロップゾーン、アップロード進捗、添付一覧、エラー表示を扱う。対象classは `.adlaire-file-picker`、`.adlaire-dropzone`、`.adlaire-upload-progress`、`.adlaire-attachment-list`、`.adlaire-attachment-item`、`.adlaire-upload-error` とする。主な管理先は `UI/forms.css` と必要な `UI/forms.js` とする。
+
+Filter UIは、フィルター条件、保存済みフィルター、絞り込みチップ、クリア操作を扱う。対象classは `.adlaire-filter-panel`、`.adlaire-filter-condition`、`.adlaire-saved-filter-list`、`.adlaire-saved-filter-item`、`.adlaire-filter-chip`、`.adlaire-filter-clear` とする。主な管理先は `UI/components.css` と必要な `UI/components.js` とする。
+
+Search UIは、検索ボックス、検索候補、検索結果、検索なし状態を扱う。対象classは `.adlaire-search-box`、`.adlaire-search-input`、`.adlaire-search-suggest`、`.adlaire-search-suggest-item`、`.adlaire-search-results`、`.adlaire-search-result-item`、`.adlaire-search-empty` とする。主な管理先は `UI/components.css`、`UI/content.css`、必要な `UI/components.js` とする。
+
+Pagination UIは、ページネーション、件数表示、前後移動、無効状態、現在ページ表示を扱う。対象classは `.adlaire-pagination`、`.adlaire-pagination-count`、`.adlaire-page-prev`、`.adlaire-page-next`、`.adlaire-page-link`、`.adlaire-page-link-current`、`.adlaire-page-link-disabled` とする。主な管理先は `UI/components.css` とする。
+
+Settings UIは、設定グループ、設定行、トグル、補助説明、危険操作領域を扱う。対象classは `.adlaire-settings-group`、`.adlaire-settings-row`、`.adlaire-settings-label`、`.adlaire-settings-help`、`.adlaire-toggle`、`.adlaire-danger-zone` とする。主な管理先は `UI/components.css`、`UI/forms.css`、必要な `UI/forms.js` とする。
+
+Validation UIは、フィールド別エラー、警告、成功、エラーサマリー、入力ヒントを扱う。対象classは `.adlaire-field-error`、`.adlaire-field-warning`、`.adlaire-field-success`、`.adlaire-error-summary`、`.adlaire-error-summary-item`、`.adlaire-input-hint` とする。主な管理先は `UI/forms.css` と必要な `UI/forms.js` とする。
+
+### 11.11.9 WYSIWYG Editor UI機能追加策定仕様
+
+WYSIWYG Editor UI機能追加では、ブロックベース編集UIに必要な追加部品を `Docs/WYSIWYG_Editor_UI_Catalog` で管理する。実装先は `EditorUI/wysiwyg.css`、必要な表示補助JavaScriptは `EditorUI/wysiwyg.js` とする。
+
+| 部品 | 対象class |
+| --- | --- |
+| ブロック挿入UI | `.adlaire-wysiwyg-insert`、`.adlaire-wysiwyg-insert-menu`、`.adlaire-wysiwyg-insert-item` |
+| ブロック変換UI | `.adlaire-wysiwyg-transform`、`.adlaire-wysiwyg-transform-menu`、`.adlaire-wysiwyg-block-type` |
+| ブロック並び替えUI | `.adlaire-wysiwyg-reorder`、`.adlaire-wysiwyg-drag-target`、`.adlaire-wysiwyg-dragging` |
+| ブロック選択/複数選択UI | `.adlaire-wysiwyg-block-selected`、`.adlaire-wysiwyg-selection-toolbar`、`.adlaire-wysiwyg-selection-count` |
+| インライン装飾ツールバー | `.adlaire-wysiwyg-inline-toolbar`、`.adlaire-wysiwyg-inline-button`、`.adlaire-wysiwyg-inline-active` |
+| リンク編集UI | `.adlaire-wysiwyg-link-editor`、`.adlaire-wysiwyg-link-preview`、`.adlaire-wysiwyg-link-error` |
+| コメント/注釈UI | `.adlaire-wysiwyg-comment`、`.adlaire-wysiwyg-comment-thread`、`.adlaire-wysiwyg-comment-resolved` |
+| 文字数/読了時間/構成情報UI | `.adlaire-wysiwyg-stats`、`.adlaire-wysiwyg-stat-item`、`.adlaire-wysiwyg-outline-meta` |
+| 見出し/本文/引用/リスト系ブロックUI | `.adlaire-wysiwyg-heading-block`、`.adlaire-wysiwyg-text-block`、`.adlaire-wysiwyg-quote-block`、`.adlaire-wysiwyg-list-block` |
+| 画像/動画/ファイル添付ブロックUI | `.adlaire-wysiwyg-media-block`、`.adlaire-wysiwyg-image-block`、`.adlaire-wysiwyg-video-block`、`.adlaire-wysiwyg-file-block` |
+| テーブルブロックUI | `.adlaire-wysiwyg-table-block`、`.adlaire-wysiwyg-table-toolbar`、`.adlaire-wysiwyg-table-cell-selected` |
+| コードブロックUI | `.adlaire-wysiwyg-code-block`、`.adlaire-wysiwyg-code-language`、`.adlaire-wysiwyg-code-copy` |
+| コールアウト/注記/警告ブロックUI | `.adlaire-wysiwyg-callout-block`、`.adlaire-wysiwyg-note-block`、`.adlaire-wysiwyg-warning-block` |
+| 区切り線/スペーサー/埋め込みブロックUI | `.adlaire-wysiwyg-divider-block`、`.adlaire-wysiwyg-spacer-block`、`.adlaire-wysiwyg-embed-block` |
+| ブロックテンプレート/再利用ブロックUI | `.adlaire-wysiwyg-template-panel`、`.adlaire-wysiwyg-template-item`、`.adlaire-wysiwyg-reusable-block` |
+| ドラッグハンドル/ブロックメニューUI | `.adlaire-wysiwyg-drag-handle`、`.adlaire-wysiwyg-block-menu`、`.adlaire-wysiwyg-block-action` |
+| スラッシュコマンド/挿入メニューUI | `.adlaire-wysiwyg-slash-menu`、`.adlaire-wysiwyg-command-item`、`.adlaire-wysiwyg-command-active` |
+| モバイル編集操作UI | `.adlaire-wysiwyg-mobile-toolbar`、`.adlaire-wysiwyg-mobile-sheet`、`.adlaire-wysiwyg-mobile-action` |
+| キーボード操作ヒントUI | `.adlaire-wysiwyg-shortcut-help`、`.adlaire-wysiwyg-kbd`、`.adlaire-wysiwyg-help-panel` |
+| Editor UI状態表示 | `.adlaire-wysiwyg-status`、`.adlaire-wysiwyg-status-saving`、`.adlaire-wysiwyg-status-error` |
+| readonly/disabled/locked表示UI | `.adlaire-wysiwyg-readonly`、`.adlaire-wysiwyg-disabled`、`.adlaire-wysiwyg-locked` |
+| 差分/変更履歴表示UI | `.adlaire-wysiwyg-diff`、`.adlaire-wysiwyg-diff-added`、`.adlaire-wysiwyg-history-panel` |
+| 公開前チェック表示UI | `.adlaire-wysiwyg-publish-check`、`.adlaire-wysiwyg-check-item`、`.adlaire-wysiwyg-check-warning` |
+| AI補助入口UI | `.adlaire-wysiwyg-ai-entry`、`.adlaire-wysiwyg-ai-suggestion`、`.adlaire-wysiwyg-ai-loading` |
+| 共同編集者/カーソル/選択範囲表示UI | `.adlaire-wysiwyg-collaborator`、`.adlaire-wysiwyg-remote-cursor`、`.adlaire-wysiwyg-remote-selection` |
+| アクセシビリティ補助表示UI | `.adlaire-wysiwyg-a11y-panel`、`.adlaire-wysiwyg-a11y-warning`、`.adlaire-wysiwyg-alt-warning` |
+| エディタ空状態/初期案内UI | `.adlaire-wysiwyg-empty`、`.adlaire-wysiwyg-empty-title`、`.adlaire-wysiwyg-empty-action` |
+| エディタエラー/警告/保存状態表示UI | `.adlaire-wysiwyg-alert`、`.adlaire-wysiwyg-warning`、`.adlaire-wysiwyg-save-state` |
+| エディタ設定/表示密度/表示切替UI | `.adlaire-wysiwyg-settings`、`.adlaire-wysiwyg-density-control`、`.adlaire-wysiwyg-view-toggle` |
+| エディタミニマップ/アウトラインUI | `.adlaire-wysiwyg-minimap`、`.adlaire-wysiwyg-outline`、`.adlaire-wysiwyg-outline-current` |
+
+### 11.11.10 Git Provider UI詳細策定仕様
+
+Git Provider UIでは、リポジトリ、コード、差分、PR/Issue、CI/CD、リリース、セキュリティ、組織、モバイル表示に必要な汎用UI部品を `Docs/Generic_Component_Catalog` で管理する。
+
+| 部品 | 対象class | 主な管理先 |
+| --- | --- | --- |
+| リポジトリ一覧UI | `.adlaire-git-repo-list`、`.adlaire-git-repo-card`、`.adlaire-git-repo-meta` | `UI/content.css`、`UI/components.css` |
+| リポジトリ概要/README表示UI | `.adlaire-git-repo-summary`、`.adlaire-git-readme`、`.adlaire-git-readme-meta` | `UI/content.css` |
+| ブランチ/タグ切替UI | `.adlaire-git-ref-switcher`、`.adlaire-git-ref-menu`、`.adlaire-git-ref-current` | `UI/components.css`、必要な `UI/components.js` |
+| ファイルツリー/パスナビUI | `.adlaire-git-file-tree`、`.adlaire-git-file-row`、`.adlaire-git-path-nav` | `UI/content.css`、必要な `UI/content.js` |
+| ファイルビューアUI | `.adlaire-git-file-viewer`、`.adlaire-git-file-header`、`.adlaire-git-file-empty` | `UI/content.css` |
+| コード表示/行番号/行ハイライトUI | `.adlaire-git-code-view`、`.adlaire-git-line-number`、`.adlaire-git-line-highlight` | `UI/content.css`、必要な `UI/content.js` |
+| コミット一覧/コミット詳細UI | `.adlaire-git-commit-list`、`.adlaire-git-commit-item`、`.adlaire-git-commit-detail` | `UI/content.css` |
+| 差分ビューアUI | `.adlaire-git-diff-viewer`、`.adlaire-git-diff-added`、`.adlaire-git-diff-removed` | `UI/content.css`、必要な `UI/content.js` |
+| Pull Request一覧/詳細UI | `.adlaire-git-pr-list`、`.adlaire-git-pr-item`、`.adlaire-git-pr-detail` | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` |
+| Issue一覧/詳細UI | `.adlaire-git-issue-list`、`.adlaire-git-issue-item`、`.adlaire-git-issue-detail` | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` |
+| レビューコメント/スレッドUI | `.adlaire-git-review-thread`、`.adlaire-git-review-comment`、`.adlaire-git-review-resolved` | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` |
+| CI/CDステータス/チェック結果UI | `.adlaire-git-check-list`、`.adlaire-git-check-item`、`.adlaire-git-check-status` | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` |
+| リリース/タグ一覧UI | `.adlaire-git-release-list`、`.adlaire-git-release-item`、`.adlaire-git-tag` | `UI/content.css` |
+| セキュリティアラートUI | `.adlaire-git-security-alert`、`.adlaire-git-severity`、`.adlaire-git-alert-status` | `UI/components.css`、`UI/content.css` |
+| リポジトリ設定/権限/危険操作UI | `.adlaire-git-settings`、`.adlaire-git-permission`、`.adlaire-git-danger-zone` | `UI/components.css`、`UI/forms.css`、必要な `UI/forms.js` |
+| Web IDE入口/編集導線UI | `.adlaire-git-web-ide-entry`、`.adlaire-git-edit-action`、`.adlaire-git-edit-disabled` | `UI/components.css` |
+| 検索/コード検索/絞り込みUI | `.adlaire-git-code-search`、`.adlaire-git-search-filter`、`.adlaire-git-search-result` | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` |
+| Activity/Insights/貢献グラフUI | `.adlaire-git-activity`、`.adlaire-git-insights`、`.adlaire-git-contribution-graph` | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` |
+| Wiki/Docs表示UI | `.adlaire-git-wiki`、`.adlaire-git-docs-page`、`.adlaire-git-docs-nav` | `UI/content.css` |
+| Packages/Artifacts表示UI | `.adlaire-git-package-list`、`.adlaire-git-artifact-list`、`.adlaire-git-download-action` | `UI/content.css`、`UI/components.css` |
+| Projects/カンバン/タスクボードUI | `.adlaire-git-project-board`、`.adlaire-git-board-column`、`.adlaire-git-board-card` | `UI/components.css`、必要な `UI/components.js` |
+| 通知/Watch/Star/Fork操作UI | `.adlaire-git-watch-action`、`.adlaire-git-star-action`、`.adlaire-git-fork-action` | `UI/components.css`、必要な `UI/components.js` |
+| 組織/チーム/メンバー権限UI | `.adlaire-git-org`、`.adlaire-git-team-list`、`.adlaire-git-member-permission` | `UI/components.css`、`UI/forms.css` |
+| 空状態/読み込み/エラー状態UI | `.adlaire-git-empty`、`.adlaire-git-loading`、`.adlaire-git-error` | `UI/components.css`、`UI/content.css` |
+| モバイルGitプロバイダーUI | `.adlaire-git-mobile-nav`、`.adlaire-git-mobile-tab`、`.adlaire-git-mobile-action` | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` |
+
+### 11.11.11 Samples仕様
+
+Samplesは、Adlaire-Designの仕様理解を補助する資料として管理する。Samplesは仕様正本ではなく、仕様正本は `Docs/Master_Spec` と各カタログとする。
+
+| 管理対象 | 役割 |
+| --- | --- |
+| `Samples/README.md` | サンプル全体の説明、分類、参照先、更新方針を記載する |
+| `Samples/design/` | サンプルデザイン用の補助ファイルを配置する |
+| `Samples/*.png` | 理解補助用PNGスクリーンショットを配置する |
+| `Samples/*.webp` | 理解補助用WebPスクリーンショットを配置する |
+
+サンプル分類は、Generic UI、Admin UI、WYSIWYG Editor UI、Git Provider UI、Tokens、Brandを基本とする。サンプル一覧では、サンプル名、対象カタログ、対象class、画像、状態を対応付ける。
+
+サンプル追加時は、関連するカタログ、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh` との整合を確認する。サンプルはUIの意図を示す補助資料であり、CSS/JavaScriptの仕様根拠として単独では扱わない。
+
+### 11.11.12 カタログ責務索引
+
+Adlaire-Designの責務は、正本、補助正本、実装、理解補助に分けて管理する。
+
+| 文書または領域 | 責務 |
+| --- | --- |
+| `Docs/Master_Spec` | Adlaire-Design全体の仕様正本 |
+| `Docs/Generic_Component_Catalog` | 汎用UI部品の分類、優先度、実装先、実装状態 |
+| `Docs/Admin_UI_Catalog` | 管理画面専用UI部品の分類、優先度、実装先、実装状態 |
+| `Docs/WYSIWYG_Editor_UI_Catalog` | WYSIWYG Editor UI部品の分類、優先度、実装先、実装状態 |
+| `Docs/Icon_Set_Catalog` | Adlaire-Design公式アイコンセットの分類、用途、実装状態 |
+| `Docs/Document_Index` | リポジトリ内文書と主要領域の索引 |
+| `Docs/Pending_Tasks` | 未策定タスクと仕様確定済み未実装タスクの管理 |
+| `Tokens/` | デザイントークン実体 |
+| `Brand/` | ブランド資産 |
+| `UI/` | 汎用CSS/JavaScript実装 |
+| `EditorUI/` | WYSIWYG Editor UI CSS/JavaScript実装 |
+| `Samples/` | サンプルと理解補助資料 |
+
+カタログを追加、分割、統合する場合は、`Docs/Master_Spec`、`Docs/Document_Index`、対象カタログ、`Docs/Pending_Tasks`、`Tools/check/check-adlaire-design.sh` の整合を確認する。
+
+### 11.11.13 拡張UI/Tokens策定仕様
+
+Design Tokens拡張では、Motion、Layer、Breakpointを追加策定対象とする。Motionは duration、easing、transition の3系統で管理し、命名は `--adlaire-motion-duration-*`、`--adlaire-motion-easing-*`、`--adlaire-motion-transition-*` を基本とする。Layerは base、sticky、dropdown、popover、modal、toast を基本階層とし、命名は `--adlaire-layer-*` を基本とする。Breakpointは sm、md、lg、xl を基本境界とし、命名は `--adlaire-breakpoint-*` を基本とする。
+
+| 部品または仕様 | 対象classまたはtoken | 主な管理先 |
+| --- | --- | --- |
+| Motion tokens | `--adlaire-motion-duration-*`、`--adlaire-motion-easing-*`、`--adlaire-motion-transition-*` | `Tokens/motion.css` |
+| Z-index / Layer tokens | `--adlaire-layer-base`、`--adlaire-layer-dropdown`、`--adlaire-layer-modal`、`--adlaire-layer-toast` | `Tokens/layer.css` |
+| Breakpoint tokens | `--adlaire-breakpoint-sm`、`--adlaire-breakpoint-md`、`--adlaire-breakpoint-lg`、`--adlaire-breakpoint-xl` | `Tokens/breakpoints.css` |
+| フォーカスリング/キーボード操作表示 | `.adlaire-focus-ring`、`.adlaire-keyboard-focus`、`.adlaire-pressed`、`.adlaire-focus-surface` | `UI/components.css`、`UI/forms.css`、`EditorUI/wysiwyg.css` |
+| スキップリンク/ランドマーク補助UI | `.adlaire-skip-link`、`.adlaire-landmark-label`、`.adlaire-sr-only`、`.adlaire-a11y-helper` | `UI/base.css`、`UI/components.css` |
+| 入力グループ/複合入力UI | `.adlaire-input-group`、`.adlaire-input-prefix`、`.adlaire-input-suffix`、`.adlaire-composite-input` | `UI/forms.css`、必要な `UI/forms.js` |
+| 日付/時刻/期間入力UI | `.adlaire-date-input`、`.adlaire-time-input`、`.adlaire-date-range`、`.adlaire-period-field` | `UI/forms.css`、必要な `UI/forms.js` |
+| チャート枠/凡例/データラベルUI | `.adlaire-chart-frame`、`.adlaire-chart-legend`、`.adlaire-chart-label`、`.adlaire-chart-empty` | `UI/content.css`、`UI/components.css` |
+| KPI/メトリクス比較UI | `.adlaire-kpi-card`、`.adlaire-metric-delta`、`.adlaire-metric-trend`、`.adlaire-metric-comparison` | `UI/components.css`、`UI/content.css` |
+| コマンドパレットUI | `.adlaire-command-palette`、`.adlaire-command-input`、`.adlaire-command-item`、`.adlaire-command-shortcut` | `UI/components.css`、必要な `UI/components.js` |
+| グローバル検索/オムニバーUI | `.adlaire-omnibar`、`.adlaire-omnibar-input`、`.adlaire-omnibar-result`、`.adlaire-omnibar-empty` | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` |
+| App shell / Sidebar layout | `.adlaire-app-shell`、`.adlaire-app-sidebar`、`.adlaire-app-main`、`.adlaire-sidebar-collapsed` | `UI/layout.css`、`UI/components.css`、必要な `UI/components.js` |
+| Split pane / Resizable pane UI | `.adlaire-split-pane`、`.adlaire-pane`、`.adlaire-pane-resize-handle`、`.adlaire-pane-collapsed` | `UI/layout.css`、必要な `UI/components.js` |
+| Toast / Snackbar UI | `.adlaire-toast-stack`、`.adlaire-toast`、`.adlaire-snackbar`、`.adlaire-toast-dismiss` | `UI/components.css`、必要な `UI/components.js` |
+| Empty / Error / Loading state統合 | `.adlaire-state`、`.adlaire-state-empty`、`.adlaire-state-error`、`.adlaire-state-loading` | `UI/components.css`、`UI/content.css`、`UI/forms.css`、`EditorUI/wysiwyg.css` |
+| Markdown/MDX表示用本文部品 | `.adlaire-markdown-body`、`.adlaire-mdx-body`、`.adlaire-md-note`、`.adlaire-md-footnote` | `UI/content.css`、必要な `UI/content.js` |
+| Avatar / User presence UI | `.adlaire-avatar`、`.adlaire-avatar-group`、`.adlaire-presence`、`.adlaire-presence-dot` | `UI/components.css` |
+| Gallery / Lightbox UI | `.adlaire-gallery`、`.adlaire-gallery-item`、`.adlaire-lightbox`、`.adlaire-lightbox-caption` | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` |
+| Audit trail / Activity log UI | `.adlaire-audit-trail`、`.adlaire-activity-log`、`.adlaire-activity-actor`、`.adlaire-activity-time` | `Docs/Admin_UI_Catalog`、`UI/content.css`、`UI/components.css` |
+| Permission / Role / Scope表示UI | `.adlaire-permission`、`.adlaire-role`、`.adlaire-scope`、`.adlaire-restricted` | `Docs/Generic_Component_Catalog`、`Docs/Admin_UI_Catalog`、`UI/components.css`、`UI/forms.css` |
 
 ---
 
