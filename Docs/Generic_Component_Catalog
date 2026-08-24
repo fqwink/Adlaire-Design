@@ -194,69 +194,69 @@ WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `Edit
 | ブランド表示 | ロゴリスト | `UI/components.css` | 実装済み |
 | ブランド表示 | パートナーリスト | `UI/components.css` | 実装済み |
 | ブランド表示 | アイコンタイル | `UI/components.css` | 実装済み |
-| Knowledge UI | Knowledge検索導線 | `UI/content.css` | 仕様確定 |
-| Knowledge UI | Knowledgeカテゴリナビ | `UI/content.css` | 仕様確定 |
-| Knowledge UI | Knowledge更新情報 | `UI/content.css` | 仕様確定 |
-| Repository UI | Repositoryファイル一覧 | `UI/content.css` | 仕様確定 |
-| Repository UI | Repositoryコミット一覧 | `UI/content.css` | 仕様確定 |
-| Repository UI | Repository差分表示 | `UI/content.css` | 仕様確定 |
-| Repository UI | Repository設定パネル | `UI/components.css`、`UI/forms.css` | 仕様確定 |
-| Portal UI | メンバー/チーム表示 | `UI/components.css` | 仕様確定 |
-| API UI | 読み込み状態/データカード | `UI/components.css`、`UI/content.css` | 仕様確定 |
-| ナビ補助 | 多言語化UI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
-| データ表示 | テーブルUI | `UI/content.css`、`UI/components.css` | 仕様確定 |
-| 操作面 | モーダル/ダイアログUI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
-| フォーム | アップロードUI | `UI/forms.css`、必要な `UI/forms.js` | 仕様確定 |
-| 操作面 | フィルターUI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
-| 検索 | 検索UI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 仕様確定 |
-| データ表示 | ページネーションUI | `UI/components.css` | 仕様確定 |
-| 設定 | 設定UI | `UI/components.css`、`UI/forms.css`、必要な `UI/forms.js` | 仕様確定 |
-| フォーム | バリデーションUI | `UI/forms.css`、必要な `UI/forms.js` | 仕様確定 |
-| ナビ補助 | 汎用目次 | `UI/content.css` | 仕様確定 |
-| 本文補助 | 本文カード | `UI/content.css` | 仕様確定 |
-| 本文補助 | コード表示 | `UI/content.css`、必要な `UI/content.js` | 仕様確定 |
-| 本文補助 | 関連記事 | `UI/content.css` | 仕様確定 |
-| Git Provider UI | リポジトリ一覧UI | `UI/content.css`、`UI/components.css` | 仕様確定 |
-| Git Provider UI | リポジトリ概要/README表示UI | `UI/content.css` | 仕様確定 |
-| Git Provider UI | ブランチ/タグ切替UI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
-| Git Provider UI | ファイルツリー/パスナビUI | `UI/content.css`、必要な `UI/content.js` | 仕様確定 |
-| Git Provider UI | ファイルビューアUI | `UI/content.css` | 仕様確定 |
-| Git Provider UI | コード表示/行番号/行ハイライトUI | `UI/content.css`、必要な `UI/content.js` | 仕様確定 |
-| Git Provider UI | コミット一覧/コミット詳細UI | `UI/content.css` | 仕様確定 |
-| Git Provider UI | 差分ビューアUI | `UI/content.css`、必要な `UI/content.js` | 仕様確定 |
-| Git Provider UI | Pull Request一覧/詳細UI | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` | 仕様確定 |
-| Git Provider UI | Issue一覧/詳細UI | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` | 仕様確定 |
-| Git Provider UI | レビューコメント/スレッドUI | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` | 仕様確定 |
-| Git Provider UI | CI/CDステータス/チェック結果UI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 仕様確定 |
-| Git Provider UI | リリース/タグ一覧UI | `UI/content.css` | 仕様確定 |
-| Git Provider UI | セキュリティアラートUI | `UI/components.css`、`UI/content.css` | 仕様確定 |
-| Git Provider UI | リポジトリ設定/権限/危険操作UI | `UI/components.css`、`UI/forms.css`、必要な `UI/forms.js` | 仕様確定 |
-| Git Provider UI | Web IDE入口/編集導線UI | `UI/components.css` | 仕様確定 |
-| Git Provider UI | 検索/コード検索/絞り込みUI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 仕様確定 |
-| Git Provider UI | Activity/Insights/貢献グラフUI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 仕様確定 |
-| Git Provider UI | Wiki/Docs表示UI | `UI/content.css` | 仕様確定 |
-| Git Provider UI | Packages/Artifacts表示UI | `UI/content.css`、`UI/components.css` | 仕様確定 |
-| Git Provider UI | Projects/カンバン/タスクボードUI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
-| Git Provider UI | 通知/Watch/Star/Fork操作UI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
-| Git Provider UI | 組織/チーム/メンバー権限UI | `UI/components.css`、`UI/forms.css` | 仕様確定 |
-| Git Provider UI | 空状態/読み込み/エラー状態UI | `UI/components.css`、`UI/content.css` | 仕様確定 |
-| Git Provider UI | モバイルGitプロバイダーUI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 仕様確定 |
-| Accessibility UI | フォーカスリング/キーボード操作表示 | `UI/components.css`、`UI/forms.css`、`EditorUI/wysiwyg.css` | 仕様確定 |
-| Accessibility UI | スキップリンク/ランドマーク補助UI | `UI/base.css`、`UI/components.css` | 仕様確定 |
-| Form UI | 入力グループ/複合入力UI | `UI/forms.css`、必要な `UI/forms.js` | 仕様確定 |
-| Form UI | 日付/時刻/期間入力UI | `UI/forms.css`、必要な `UI/forms.js` | 仕様確定 |
-| Data Viz UI | チャート枠/凡例/データラベルUI | `UI/content.css`、`UI/components.css` | 仕様確定 |
-| Data Viz UI | KPI/メトリクス比較UI | `UI/components.css`、`UI/content.css` | 仕様確定 |
-| Navigation UI | コマンドパレットUI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
-| Navigation UI | グローバル検索/オムニバーUI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 仕様確定 |
-| Layout UI | App shell / Sidebar layout | `UI/layout.css`、`UI/components.css`、必要な `UI/components.js` | 仕様確定 |
-| Layout UI | Split pane / Resizable pane UI | `UI/layout.css`、必要な `UI/components.js` | 仕様確定 |
-| Feedback UI | Toast / Snackbar UI | `UI/components.css`、必要な `UI/components.js` | 仕様確定 |
-| Feedback UI | Empty / Error / Loading state統合 | `UI/components.css`、`UI/content.css`、`UI/forms.css`、`EditorUI/wysiwyg.css` | 仕様確定 |
-| Content UI | Markdown/MDX表示用本文部品 | `UI/content.css`、必要な `UI/content.js` | 仕様確定 |
-| Media UI | Avatar / User presence UI | `UI/components.css` | 仕様確定 |
-| Media UI | Gallery / Lightbox UI | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` | 仕様確定 |
-| Security UI | Permission / Role / Scope表示UI | `UI/components.css`、`UI/forms.css` | 仕様確定 |
+| Knowledge UI | Knowledge検索導線 | `UI/content.css` | 実装済み |
+| Knowledge UI | Knowledgeカテゴリナビ | `UI/content.css` | 実装済み |
+| Knowledge UI | Knowledge更新情報 | `UI/content.css` | 実装済み |
+| Repository UI | Repositoryファイル一覧 | `UI/content.css` | 実装済み |
+| Repository UI | Repositoryコミット一覧 | `UI/content.css` | 実装済み |
+| Repository UI | Repository差分表示 | `UI/content.css` | 実装済み |
+| Repository UI | Repository設定パネル | `UI/components.css`、`UI/forms.css` | 実装済み |
+| Portal UI | メンバー/チーム表示 | `UI/components.css` | 実装済み |
+| API UI | 読み込み状態/データカード | `UI/components.css`、`UI/content.css` | 実装済み |
+| ナビ補助 | 多言語化UI | `UI/components.css`、必要な `UI/components.js` | 実装済み |
+| データ表示 | テーブルUI | `UI/content.css`、`UI/components.css` | 実装済み |
+| 操作面 | モーダル/ダイアログUI | `UI/components.css`、必要な `UI/components.js` | 実装済み |
+| フォーム | アップロードUI | `UI/forms.css`、必要な `UI/forms.js` | 実装済み |
+| 操作面 | フィルターUI | `UI/components.css`、必要な `UI/components.js` | 実装済み |
+| 検索 | 検索UI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 実装済み |
+| データ表示 | ページネーションUI | `UI/components.css` | 実装済み |
+| 設定 | 設定UI | `UI/components.css`、`UI/forms.css`、必要な `UI/forms.js` | 実装済み |
+| フォーム | バリデーションUI | `UI/forms.css`、必要な `UI/forms.js` | 実装済み |
+| ナビ補助 | 汎用目次 | `UI/content.css` | 実装済み |
+| 本文補助 | 本文カード | `UI/content.css` | 実装済み |
+| 本文補助 | コード表示 | `UI/content.css`、必要な `UI/content.js` | 実装済み |
+| 本文補助 | 関連記事 | `UI/content.css` | 実装済み |
+| Git Provider UI | リポジトリ一覧UI | `UI/content.css`、`UI/components.css` | 実装済み |
+| Git Provider UI | リポジトリ概要/README表示UI | `UI/content.css` | 実装済み |
+| Git Provider UI | ブランチ/タグ切替UI | `UI/components.css`、必要な `UI/components.js` | 実装済み |
+| Git Provider UI | ファイルツリー/パスナビUI | `UI/content.css`、必要な `UI/content.js` | 実装済み |
+| Git Provider UI | ファイルビューアUI | `UI/content.css` | 実装済み |
+| Git Provider UI | コード表示/行番号/行ハイライトUI | `UI/content.css`、必要な `UI/content.js` | 実装済み |
+| Git Provider UI | コミット一覧/コミット詳細UI | `UI/content.css` | 実装済み |
+| Git Provider UI | 差分ビューアUI | `UI/content.css`、必要な `UI/content.js` | 実装済み |
+| Git Provider UI | Pull Request一覧/詳細UI | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` | 実装済み |
+| Git Provider UI | Issue一覧/詳細UI | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` | 実装済み |
+| Git Provider UI | レビューコメント/スレッドUI | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` | 実装済み |
+| Git Provider UI | CI/CDステータス/チェック結果UI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 実装済み |
+| Git Provider UI | リリース/タグ一覧UI | `UI/content.css` | 実装済み |
+| Git Provider UI | セキュリティアラートUI | `UI/components.css`、`UI/content.css` | 実装済み |
+| Git Provider UI | リポジトリ設定/権限/危険操作UI | `UI/components.css`、`UI/forms.css`、必要な `UI/forms.js` | 実装済み |
+| Git Provider UI | Web IDE入口/編集導線UI | `UI/components.css` | 実装済み |
+| Git Provider UI | 検索/コード検索/絞り込みUI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 実装済み |
+| Git Provider UI | Activity/Insights/貢献グラフUI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 実装済み |
+| Git Provider UI | Wiki/Docs表示UI | `UI/content.css` | 実装済み |
+| Git Provider UI | Packages/Artifacts表示UI | `UI/content.css`、`UI/components.css` | 実装済み |
+| Git Provider UI | Projects/カンバン/タスクボードUI | `UI/components.css`、必要な `UI/components.js` | 実装済み |
+| Git Provider UI | 通知/Watch/Star/Fork操作UI | `UI/components.css`、必要な `UI/components.js` | 実装済み |
+| Git Provider UI | 組織/チーム/メンバー権限UI | `UI/components.css`、`UI/forms.css` | 実装済み |
+| Git Provider UI | 空状態/読み込み/エラー状態UI | `UI/components.css`、`UI/content.css` | 実装済み |
+| Git Provider UI | モバイルGitプロバイダーUI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 実装済み |
+| Accessibility UI | フォーカスリング/キーボード操作表示 | `UI/components.css`、`UI/forms.css`、`EditorUI/wysiwyg.css` | 実装済み |
+| Accessibility UI | スキップリンク/ランドマーク補助UI | `UI/base.css`、`UI/components.css` | 実装済み |
+| Form UI | 入力グループ/複合入力UI | `UI/forms.css`、必要な `UI/forms.js` | 実装済み |
+| Form UI | 日付/時刻/期間入力UI | `UI/forms.css`、必要な `UI/forms.js` | 実装済み |
+| Data Viz UI | チャート枠/凡例/データラベルUI | `UI/content.css`、`UI/components.css` | 実装済み |
+| Data Viz UI | KPI/メトリクス比較UI | `UI/components.css`、`UI/content.css` | 実装済み |
+| Navigation UI | コマンドパレットUI | `UI/components.css`、必要な `UI/components.js` | 実装済み |
+| Navigation UI | グローバル検索/オムニバーUI | `UI/components.css`、`UI/content.css`、必要な `UI/components.js` | 実装済み |
+| Layout UI | App shell / Sidebar layout | `UI/layout.css`、`UI/components.css`、必要な `UI/components.js` | 実装済み |
+| Layout UI | Split pane / Resizable pane UI | `UI/layout.css`、必要な `UI/components.js` | 実装済み |
+| Feedback UI | Toast / Snackbar UI | `UI/components.css`、必要な `UI/components.js` | 実装済み |
+| Feedback UI | Empty / Error / Loading state統合 | `UI/components.css`、`UI/content.css`、`UI/forms.css`、`EditorUI/wysiwyg.css` | 実装済み |
+| Content UI | Markdown/MDX表示用本文部品 | `UI/content.css`、必要な `UI/content.js` | 実装済み |
+| Media UI | Avatar / User presence UI | `UI/components.css` | 実装済み |
+| Media UI | Gallery / Lightbox UI | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` | 実装済み |
+| Security UI | Permission / Role / Scope表示UI | `UI/components.css`、`UI/forms.css` | 実装済み |
 | レイアウト複合 | 分割ブロック | `UI/components.css` | 実装済み |
 | レイアウト複合 | 積み上げ特徴表示 | `UI/components.css` | 実装済み |
 | レイアウト複合 | 比較グリッド | `UI/content.css` | 実装済み |
@@ -283,9 +283,9 @@ WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `Edit
 | 積み上げ特徴表示 | `.adlaire-stacked-feature` |
 | 比較グリッド | `.adlaire-comparison-grid`、`.adlaire-comparison-grid-item` |
 
-### 5.2 仕様確定クラス対応表
+### 5.2 実装済みクラス対応表
 
-| 部品 | 仕様確定クラス |
+| 部品 | 実装済みクラス |
 | --- | --- |
 | Knowledge検索導線 | `.adlaire-knowledge-search-nav`、`.adlaire-knowledge-list`、`.adlaire-knowledge-empty` |
 | Knowledgeカテゴリナビ | `.adlaire-knowledge-category-nav` |

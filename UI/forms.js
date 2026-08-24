@@ -60,4 +60,42 @@
     });
     applyFilter(root);
   });
+
+  document.addEventListener("change", function (event) {
+    var fileInput = event.target.closest("[data-adlaire-file-input]");
+    var toggleInput = event.target.closest("[data-adlaire-toggle-input]");
+
+    if (fileInput) {
+      var output = document.querySelector(fileInput.getAttribute("data-adlaire-file-output"));
+      if (output) {
+        output.textContent = Array.prototype.map.call(fileInput.files || [], function (file) {
+          return file.name;
+        }).join(", ");
+      }
+    }
+
+    if (toggleInput) {
+      var toggle = document.querySelector(toggleInput.getAttribute("data-adlaire-toggle-input"));
+      if (toggle) {
+        toggle.setAttribute("aria-checked", toggleInput.checked ? "true" : "false");
+      }
+    }
+  });
+
+  document.addEventListener("input", function (event) {
+    var field = event.target.closest("[data-adlaire-validate]");
+    if (!field) {
+      return;
+    }
+
+    var wrapper = field.closest(".adlaire-field");
+    if (!wrapper) {
+      return;
+    }
+
+    var invalid = field.hasAttribute("required") && normalize(field.value) === "";
+    field.setAttribute("aria-invalid", invalid ? "true" : "false");
+    wrapper.classList.toggle("adlaire-field-error", invalid);
+    wrapper.classList.toggle("adlaire-field-success", !invalid);
+  });
 }());

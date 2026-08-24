@@ -207,3 +207,31 @@
 .align-items-center {
   align-items: center;
 }
+
+.adlaire-text-xs {
+  font-size: var(--adlaire-font-size-xs);
+}
+
+.adlaire-text-sm {
+  font-size: var(--adlaire-font-size-sm);
+}
+
+.adlaire-text-lg {
+  font-size: var(--adlaire-font-size-lg);
+}
+
+.adlaire-font-mono {
+  font-family: var(--adlaire-font-family-mono);
+}
+
+.adlaire-gap-2 {
+  gap: var(--adlaire-space-2);
+}
+
+.adlaire-gap-4 {
+  gap: var(--adlaire-space-4);
+}
+
+.adlaire-gap-6 {
+  gap: var(--adlaire-space-6);
+}

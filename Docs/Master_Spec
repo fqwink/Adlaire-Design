@@ -318,7 +318,7 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、トークン、ブランド
 | Docs | `Docs/Change_History` | 変更履歴 |
 | Brand | `Brand/` | ブランド資産 |
 | Icons | `Icons/` | 公式アイコンSVG |
-| Tokens | `Tokens/colors.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` | CSS変数 |
+| Tokens | `Tokens/colors.css`、`Tokens/typography.css`、`Tokens/spacing.css`、`Tokens/motion.css`、`Tokens/layer.css`、`Tokens/breakpoints.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` | CSS変数 |
 | UI | `UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/components.js`、`UI/site.css`、`UI/forms.css`、`UI/forms.js`、`UI/content.css`、`UI/content.js`、`UI/utilities.css`、`UI/compat-agws.css` | 公開面CSS基盤と汎用UI JavaScript |
 | EditorUI | `EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js` | WYSIWYG Editor UIスキンとEditor UI JavaScript |
 | Tools | `Tools/check/check-adlaire-design.sh` | Adlaire-Design専用検査 |
@@ -362,6 +362,11 @@ CSS層構造は以下に固定する。
 | 層 | ファイル | 役割 |
 | --- | --- | --- |
 | Brand token | `Tokens/colors.css` | ブランド主色と基本色のCSS変数 |
+| Typography token | `Tokens/typography.css` | font family、font size、line height、font weightのCSS変数 |
+| Spacing token | `Tokens/spacing.css` | gap、padding、margin、section spacingのCSS変数 |
+| Motion token | `Tokens/motion.css` | duration、ease、transitionのCSS変数 |
+| Layer token | `Tokens/layer.css` | z-index / layerのCSS変数 |
+| Breakpoint token | `Tokens/breakpoints.css` | responsive breakpointのCSS変数 |
 | Surface token | `Tokens/surface.css` | 公開面の面、本文、境界、notice系CSS変数 |
 | Status token | `Tokens/status.css` | success、warning、danger、neutralなどの状態CSS変数 |
 | Effect token | `Tokens/effects.css` | 影、角丸、transition、animation、z-indexなどの効果CSS変数 |
@@ -381,8 +386,8 @@ CSS/JavaScript読み込み順は用途別に以下へ固定する。
 
 | 用途 | 読み込み順 |
 | --- | --- |
-| 公開面CSS基盤 | `Tokens/colors.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css`、`UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css` |
-| WYSIWYG Editor UI | `Tokens/colors.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css`、`UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js` |
+| 公開面CSS基盤 | `Tokens/colors.css`、`Tokens/typography.css`、`Tokens/spacing.css`、`Tokens/motion.css`、`Tokens/layer.css`、`Tokens/breakpoints.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css`、`UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css` |
+| WYSIWYG Editor UI | `Tokens/colors.css`、`Tokens/typography.css`、`Tokens/spacing.css`、`Tokens/motion.css`、`Tokens/layer.css`、`Tokens/breakpoints.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css`、`UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js` |
 
 CSSファイルの責務境界は以下とする。
 
@@ -1672,7 +1677,7 @@ Group 1では、Admin UIカタログ、Typography / Spacing Tokens、汎用目�
 
 Admin UIカタログは `Docs/Admin_UI_Catalog` を補助正本とする。管理画面専用UIは、管理ダッシュボード、設定画面、データ一覧、一括操作、権限/ロール表示、危険操作、監査/履歴、管理フォームを管理対象とする。管理項目は、部品名、class案、実装先、優先度、状態、CSS責務、JS責務とする。
 
-Typography / Spacing Tokensは、将来の `Tokens/typography.css` と `Tokens/spacing.css` に対応する仕様として管理する。Typographyは、font family、font size、line height、font weight、heading scale、body text、caption/helper text、code fontを対象とする。Spacingは、gap、padding、margin、section spacing、inline spacing、stack spacing、grid gapを対象とする。命名は `--adlaire-font-*`、`--adlaire-font-size-*`、`--adlaire-line-height-*`、`--adlaire-font-weight-*`、`--adlaire-space-*` を基本とする。
+Typography / Spacing Tokensは、`Tokens/typography.css` と `Tokens/spacing.css` で実装済みの仕様として管理する。Typographyは、font family、font size、line height、font weight、heading scale、body text、caption/helper text、code fontを対象とする。Spacingは、gap、padding、margin、section spacing、inline spacing、stack spacing、grid gapを対象とする。命名は `--adlaire-font-*`、`--adlaire-font-size-*`、`--adlaire-line-height-*`、`--adlaire-font-weight-*`、`--adlaire-space-*` を基本とする。
 
 汎用目次は `.adlaire-toc` 系で管理する。対象classは `.adlaire-toc`、`.adlaire-toc-title`、`.adlaire-toc-list`、`.adlaire-toc-item`、`.adlaire-toc-link`、`.adlaire-toc-link-current`、`.adlaire-toc-sticky` とする。ページ内目次、セクション目次、ネスト目次、sticky目次、現在位置表示を扱う。既存 `.adlaire-legal-toc` は法務ページ向け既存部品として残す。
 
@@ -1819,7 +1824,7 @@ Design Tokens拡張では、Motion、Layer、Breakpointを追加策定対象と�
 
 | 部品または仕様 | 対象classまたはtoken | 主な管理先 |
 | --- | --- | --- |
-| Motion tokens | `--adlaire-motion-duration-*`、`--adlaire-motion-easing-*`、`--adlaire-motion-transition-*` | `Tokens/motion.css` |
+| Motion tokens | `--adlaire-motion-duration-*`、`--adlaire-motion-ease-*`、`--adlaire-motion-transition-*` | `Tokens/motion.css` |
 | Z-index / Layer tokens | `--adlaire-layer-base`、`--adlaire-layer-dropdown`、`--adlaire-layer-modal`、`--adlaire-layer-toast` | `Tokens/layer.css` |
 | Breakpoint tokens | `--adlaire-breakpoint-sm`、`--adlaire-breakpoint-md`、`--adlaire-breakpoint-lg`、`--adlaire-breakpoint-xl` | `Tokens/breakpoints.css` |
 | フォーカスリング/キーボード操作表示 | `.adlaire-focus-ring`、`.adlaire-keyboard-focus`、`.adlaire-pressed`、`.adlaire-focus-surface` | `UI/components.css`、`UI/forms.css`、`EditorUI/wysiwyg.css` |

@@ -1,0 +1,18 @@
+/* Adlaire-Design motion tokens */
+:root {
+  --adlaire-motion-duration-fast: 120ms;
+  --adlaire-motion-duration-base: 180ms;
+  --adlaire-motion-duration-slow: 260ms;
+  --adlaire-motion-ease-standard: ease;
+  --adlaire-motion-ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --adlaire-motion-transition-fast: var(--adlaire-motion-duration-fast) var(--adlaire-motion-ease-standard);
+  --adlaire-motion-transition-base: var(--adlaire-motion-duration-base) var(--adlaire-motion-ease-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --adlaire-motion-duration-fast: 1ms;
+    --adlaire-motion-duration-base: 1ms;
+    --adlaire-motion-duration-slow: 1ms;
+  }
+}

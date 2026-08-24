@@ -1335,3 +1335,642 @@
     width: 100%;
   }
 }
+
+/* Catalog completeness aliases */
+.adlaire-affiliation-meta,
+.adlaire-invite-status,
+.adlaire-role-badge,
+.adlaire-member-list,
+.adlaire-team-list,
+.adlaire-git-alert-status,
+.adlaire-git-severity,
+.adlaire-git-tag,
+.adlaire-git-permission,
+.adlaire-git-member-permission,
+.adlaire-language-switcher-label,
+.adlaire-pagination-count,
+.adlaire-settings-label,
+.adlaire-settings-help,
+.adlaire-last-updated {
+  color: var(--adlaire-surface-text-subtle);
+  font-size: 0.875rem;
+}
+
+.adlaire-member-item,
+.adlaire-team-item,
+.adlaire-git-pr-item,
+.adlaire-git-issue-item,
+.adlaire-git-check-item,
+.adlaire-git-board-card,
+.adlaire-git-mobile-action,
+.adlaire-search-suggest-item,
+.adlaire-related-link,
+.adlaire-page-prev,
+.adlaire-page-next,
+.adlaire-filter-clear,
+.adlaire-git-star-action,
+.adlaire-git-watch-action,
+.adlaire-git-fork-action,
+.adlaire-git-download-action,
+.adlaire-git-edit-action {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 12px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-sm);
+}
+
+.adlaire-git-check-list,
+.adlaire-git-board-column,
+.adlaire-git-code-search,
+.adlaire-git-search-filter,
+.adlaire-git-search-result,
+.adlaire-git-activity,
+.adlaire-git-insights,
+.adlaire-git-contribution-graph,
+.adlaire-git-org,
+.adlaire-git-team-list {
+  display: grid;
+  gap: 10px;
+}
+
+.adlaire-git-pr-detail,
+.adlaire-git-issue-detail,
+.adlaire-git-danger-zone,
+.adlaire-git-empty,
+.adlaire-git-error,
+.adlaire-git-loading {
+  padding: 16px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-md);
+}
+
+.adlaire-git-danger-zone,
+.adlaire-git-error {
+  background-color: var(--adlaire-alert-danger-bg);
+  border-color: var(--adlaire-alert-danger-border);
+  color: var(--adlaire-alert-danger-text);
+}
+
+.adlaire-git-loading {
+  background-color: var(--adlaire-surface-soft);
+  color: var(--adlaire-surface-text-subtle);
+}
+
+.adlaire-git-edit-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.adlaire-search-empty,
+.adlaire-table-empty,
+.adlaire-knowledge-empty {
+  padding: 18px;
+  background-color: var(--adlaire-surface-soft);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-sm);
+  color: var(--adlaire-surface-text-subtle);
+  text-align: center;
+}
+
+.adlaire-dialog-close,
+.adlaire-language-option-current,
+.adlaire-git-mobile-tab {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+  border-radius: var(--adlaire-radius-sm);
+}
+
+.adlaire-language-option-current,
+.adlaire-git-mobile-tab[aria-current="true"] {
+  background-color: var(--adlaire-surface-soft);
+  color: var(--adlaire-surface-accent);
+}
+
+.adlaire-git-settings {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-md);
+}
+
+/* Implemented extended UI patterns */
+.adlaire-admin-dashboard,
+.adlaire-admin-settings,
+.adlaire-admin-data-list,
+.adlaire-admin-bulk-action {
+  display: grid;
+  gap: 16px;
+}
+
+.adlaire-admin-dashboard {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.adlaire-admin-settings,
+.adlaire-admin-data-list {
+  padding: 18px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-md);
+}
+
+.adlaire-admin-bulk-action {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  padding: 12px 14px;
+  background-color: var(--adlaire-surface-soft);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-sm);
+}
+
+.adlaire-admin-role,
+.adlaire-permission,
+.adlaire-role,
+.adlaire-scope {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 5px 9px;
+  background-color: var(--adlaire-surface-soft);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-sm);
+  color: var(--adlaire-surface-accent-strong);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.adlaire-language-switcher,
+.adlaire-language-current,
+.adlaire-language-list,
+.adlaire-language-option {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.adlaire-language-switcher {
+  position: relative;
+}
+
+.adlaire-language-list {
+  flex-direction: column;
+  min-width: 180px;
+  padding: 8px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-md);
+  box-shadow: var(--adlaire-shadow-card-hover);
+}
+
+.adlaire-language-option {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: var(--adlaire-radius-sm);
+  color: var(--adlaire-surface-text);
+}
+
+.adlaire-language-option[aria-current="true"],
+.adlaire-language-option:hover {
+  background-color: var(--adlaire-surface-soft);
+  color: var(--adlaire-surface-accent);
+}
+
+.adlaire-table-toolbar,
+.adlaire-table-footer,
+.adlaire-pagination,
+.adlaire-page-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.adlaire-table-toolbar,
+.adlaire-table-footer {
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.adlaire-pagination {
+  justify-content: center;
+}
+
+.adlaire-page-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.adlaire-page-link,
+.adlaire-page-current {
+  display: inline-flex;
+  min-width: 36px;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-sm);
+  color: var(--adlaire-surface-text);
+  font-weight: 600;
+}
+
+.adlaire-page-current,
+.adlaire-page-link[aria-current="page"] {
+  background-color: var(--adlaire-surface-accent);
+  border-color: var(--adlaire-surface-accent);
+  color: var(--adlaire-surface-card);
+}
+
+.adlaire-modal,
+.adlaire-confirm-dialog,
+.adlaire-notice-dialog,
+.adlaire-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--adlaire-layer-modal);
+  display: none;
+  padding: 24px;
+  background-color: var(--adlaire-overlay-black-48);
+}
+
+.adlaire-modal.is-open,
+.adlaire-confirm-dialog.is-open,
+.adlaire-notice-dialog.is-open,
+.adlaire-drawer.is-open {
+  display: grid;
+  place-items: center;
+}
+
+.adlaire-modal-dialog,
+.adlaire-confirm-dialog-panel,
+.adlaire-notice-dialog-panel,
+.adlaire-drawer-panel {
+  width: min(100%, 640px);
+  max-height: min(720px, 90vh);
+  overflow: auto;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-lg);
+  box-shadow: var(--adlaire-shadow-card-hover);
+}
+
+.adlaire-drawer {
+  justify-items: end;
+}
+
+.adlaire-drawer-panel {
+  height: 100%;
+  border-radius: var(--adlaire-radius-lg) 0 0 var(--adlaire-radius-lg);
+}
+
+.adlaire-filter-panel,
+.adlaire-filter-row,
+.adlaire-saved-filter-list {
+  display: grid;
+  gap: 12px;
+}
+
+.adlaire-filter-panel {
+  padding: 16px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-md);
+}
+
+.adlaire-filter-row {
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.adlaire-saved-filter-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background-color: var(--adlaire-surface-soft);
+  border-radius: var(--adlaire-radius-sm);
+}
+
+.adlaire-search-box,
+.adlaire-search-results,
+.adlaire-command-palette,
+.adlaire-omnibar {
+  display: grid;
+  gap: 10px;
+}
+
+.adlaire-search-box,
+.adlaire-command-palette,
+.adlaire-omnibar {
+  padding: 12px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-md);
+}
+
+.adlaire-search-input,
+.adlaire-command-input,
+.adlaire-omnibar-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-sm);
+}
+
+.adlaire-command-item,
+.adlaire-omnibar-result,
+.adlaire-search-result {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: var(--adlaire-radius-sm);
+  color: var(--adlaire-surface-text);
+}
+
+.adlaire-command-item[aria-selected="true"],
+.adlaire-command-item:hover,
+.adlaire-omnibar-result[aria-selected="true"],
+.adlaire-omnibar-result:hover,
+.adlaire-search-result:hover {
+  background-color: var(--adlaire-surface-soft);
+  color: var(--adlaire-surface-accent);
+}
+
+.adlaire-command-shortcut {
+  color: var(--adlaire-surface-text-subtle);
+  font-family: var(--adlaire-font-family-mono);
+  font-size: 0.75rem;
+}
+
+.adlaire-omnibar-empty {
+  padding: 12px;
+  color: var(--adlaire-surface-text-subtle);
+}
+
+.adlaire-loading-state,
+.adlaire-state,
+.adlaire-state-empty,
+.adlaire-state-error,
+.adlaire-state-loading {
+  display: grid;
+  gap: 10px;
+  place-items: center;
+  padding: 28px;
+  background-color: var(--adlaire-surface-soft);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-md);
+  color: var(--adlaire-surface-text-muted);
+  text-align: center;
+}
+
+.adlaire-state-error {
+  background-color: var(--adlaire-alert-danger-bg);
+  border-color: var(--adlaire-alert-danger-border);
+  color: var(--adlaire-alert-danger-text);
+}
+
+.adlaire-state-loading::before,
+.adlaire-loading-state::before {
+  width: 22px;
+  height: 22px;
+  border: 3px solid var(--adlaire-surface-border);
+  border-top-color: var(--adlaire-surface-accent);
+  border-radius: var(--adlaire-radius-round);
+  content: "";
+  animation: adlaire-spin 0.8s linear infinite;
+}
+
+@keyframes adlaire-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.adlaire-data-card,
+.adlaire-sync-status,
+.adlaire-api-error {
+  padding: 16px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-md);
+}
+
+.adlaire-api-error {
+  background-color: var(--adlaire-alert-danger-bg);
+  border-color: var(--adlaire-alert-danger-border);
+  color: var(--adlaire-alert-danger-text);
+}
+
+.adlaire-chart-frame,
+.adlaire-kpi-card,
+.adlaire-metric-comparison {
+  padding: 16px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-md);
+}
+
+.adlaire-chart-legend,
+.adlaire-chart-label,
+.adlaire-metric-delta,
+.adlaire-metric-trend {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--adlaire-surface-text-subtle);
+  font-size: 0.875rem;
+}
+
+.adlaire-chart-empty {
+  padding: 24px;
+  background-color: var(--adlaire-surface-soft);
+  border-radius: var(--adlaire-radius-sm);
+  color: var(--adlaire-surface-text-subtle);
+  text-align: center;
+}
+
+.adlaire-kpi-card {
+  display: grid;
+  gap: 8px;
+}
+
+.adlaire-avatar,
+.adlaire-presence-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--adlaire-radius-round);
+}
+
+.adlaire-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: var(--adlaire-surface-soft);
+  border: 1px solid var(--adlaire-surface-border);
+  color: var(--adlaire-surface-accent-strong);
+  font-weight: 700;
+  overflow: hidden;
+}
+
+.adlaire-avatar-group {
+  display: flex;
+}
+
+.adlaire-avatar-group .adlaire-avatar + .adlaire-avatar {
+  margin-left: -8px;
+}
+
+.adlaire-presence {
+  position: relative;
+  display: inline-flex;
+}
+
+.adlaire-presence-dot {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--adlaire-status-success);
+  border: 2px solid var(--adlaire-surface-card);
+}
+
+.adlaire-gallery,
+.adlaire-lightbox {
+  display: grid;
+  gap: 12px;
+}
+
+.adlaire-gallery {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.adlaire-gallery-item {
+  overflow: hidden;
+  background-color: var(--adlaire-surface-soft);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-md);
+}
+
+.adlaire-lightbox {
+  padding: 16px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-md);
+}
+
+.adlaire-lightbox-caption {
+  color: var(--adlaire-surface-text-subtle);
+  font-size: 0.875rem;
+}
+
+.adlaire-toast-stack {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: var(--adlaire-layer-toast);
+  display: grid;
+  width: min(360px, calc(100vw - 32px));
+  gap: 10px;
+}
+
+.adlaire-toast,
+.adlaire-snackbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background-color: var(--adlaire-status-dark);
+  border-radius: var(--adlaire-radius-sm);
+  box-shadow: var(--adlaire-shadow-nav);
+  color: var(--adlaire-surface-card);
+}
+
+.adlaire-toast-dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+.adlaire-git-repo-list,
+.adlaire-git-repo-card,
+.adlaire-git-branch-switcher,
+.adlaire-git-pr-list,
+.adlaire-git-issue-list,
+.adlaire-git-review-thread,
+.adlaire-git-check-status,
+.adlaire-git-security-alert,
+.adlaire-git-settings-panel,
+.adlaire-git-web-ide-entry,
+.adlaire-git-project-board,
+.adlaire-git-notification-actions,
+.adlaire-git-org-members,
+.adlaire-git-mobile-nav {
+  display: grid;
+  gap: 12px;
+}
+
+.adlaire-git-repo-card,
+.adlaire-git-settings-panel,
+.adlaire-git-review-thread,
+.adlaire-git-security-alert,
+.adlaire-git-project-board {
+  padding: 16px;
+  background-color: var(--adlaire-surface-card);
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-md);
+}
+
+.adlaire-git-branch-switcher,
+.adlaire-git-notification-actions,
+.adlaire-git-mobile-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.adlaire-git-check-status {
+  padding: 12px;
+  background-color: var(--adlaire-surface-soft);
+  border-left: 4px solid var(--adlaire-status-success);
+  border-radius: var(--adlaire-radius-sm);
+}
+
+.adlaire-git-security-alert {
+  background-color: var(--adlaire-alert-warning-bg);
+  border-color: var(--adlaire-alert-warning-border);
+  color: var(--adlaire-alert-warning-text);
+}
+
+@media (max-width: 480px) {
+  .adlaire-admin-bulk-action {
+    grid-template-columns: 1fr;
+  }
+
+  .adlaire-modal,
+  .adlaire-confirm-dialog,
+  .adlaire-notice-dialog,
+  .adlaire-drawer {
+    padding: 12px;
+  }
+}

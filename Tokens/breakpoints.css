@@ -1,0 +1,7 @@
+/* Adlaire-Design breakpoint tokens */
+:root {
+  --adlaire-breakpoint-sm: 480px;
+  --adlaire-breakpoint-md: 768px;
+  --adlaire-breakpoint-lg: 1024px;
+  --adlaire-breakpoint-xl: 1200px;
+}

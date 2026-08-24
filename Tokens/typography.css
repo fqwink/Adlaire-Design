@@ -1,0 +1,18 @@
+/* Adlaire-Design typography tokens */
+:root {
+  --adlaire-font-family-base: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --adlaire-font-family-mono: "Courier New", Courier, monospace;
+  --adlaire-font-size-xs: 0.75rem;
+  --adlaire-font-size-sm: 0.875rem;
+  --adlaire-font-size-md: 1rem;
+  --adlaire-font-size-lg: 1.125rem;
+  --adlaire-font-size-xl: 1.5rem;
+  --adlaire-font-size-2xl: 2rem;
+  --adlaire-line-height-tight: 1.25;
+  --adlaire-line-height-base: 1.6;
+  --adlaire-line-height-relaxed: 1.8;
+  --adlaire-font-weight-normal: 400;
+  --adlaire-font-weight-medium: 500;
+  --adlaire-font-weight-semibold: 600;
+  --adlaire-font-weight-bold: 700;
+}

@@ -1,0 +1,10 @@
+/* Adlaire-Design layer tokens */
+:root {
+  --adlaire-layer-base: 0;
+  --adlaire-layer-raised: 10;
+  --adlaire-layer-sticky: 100;
+  --adlaire-layer-dropdown: 200;
+  --adlaire-layer-overlay: 400;
+  --adlaire-layer-modal: 500;
+  --adlaire-layer-toast: 700;
+}
