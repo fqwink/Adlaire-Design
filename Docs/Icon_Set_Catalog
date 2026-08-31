@@ -40,7 +40,7 @@
 
 ---
 
-## 2. 初期セット
+## 2. 公式セット
 
 | ID | ファイル名 | カテゴリ | 用途 | 表示サイズ | 種別 | 代替テキスト方針 | 実装状態 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -69,3 +69,18 @@
 | AD-ICON-023 | `adlaire-icon-editor-italic.svg` | editor | 斜体 | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
 | AD-ICON-024 | `adlaire-icon-editor-heading.svg` | editor | 見出し | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
 | AD-ICON-025 | `adlaire-icon-form-check.svg` | form | 選択済み | sm / md | 意味 | 状態ラベルを付与する | 実装済み |
+| AD-ICON-026 | `adlaire-icon-navigation-home.svg` | navigation | ホームへ移動 | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-027 | `adlaire-icon-navigation-more-horizontal.svg` | navigation | その他メニュー | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-028 | `adlaire-icon-action-download.svg` | action | ダウンロード | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-029 | `adlaire-icon-action-upload.svg` | action | アップロード | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-030 | `adlaire-icon-action-save.svg` | action | 保存 | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-031 | `adlaire-icon-status-help.svg` | status | ヘルプ | sm / md | 意味 | 状態または補助ラベルを付与する | 実装済み |
+| AD-ICON-032 | `adlaire-icon-content-external-link.svg` | content | 外部リンク | sm / md | 意味 | 文脈ラベルを付与する | 実装済み |
+| AD-ICON-033 | `adlaire-icon-content-list.svg` | content | 一覧 | sm / md | 意味 | 文脈ラベルを付与する | 実装済み |
+| AD-ICON-034 | `adlaire-icon-editor-quote.svg` | editor | 引用 | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-035 | `adlaire-icon-editor-list.svg` | editor | リスト | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-036 | `adlaire-icon-editor-code.svg` | editor | コード | sm / md | 意味 | 操作ラベルを付与する | 実装済み |
+| AD-ICON-037 | `adlaire-icon-media-video.svg` | media | 動画 | sm / md | 意味 | メディア種別ラベルを付与する | 実装済み |
+| AD-ICON-038 | `adlaire-icon-media-audio.svg` | media | 音声 | sm / md | 意味 | メディア種別ラベルを付与する | 実装済み |
+| AD-ICON-039 | `adlaire-icon-media-gallery.svg` | media | ギャラリー | sm / md | 意味 | メディア種別ラベルを付与する | 実装済み |
+| AD-ICON-040 | `adlaire-icon-form-calendar.svg` | form | 日付選択 | sm / md | 意味 | 入力ラベルを付与する | 実装済み |

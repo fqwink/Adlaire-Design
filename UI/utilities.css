@@ -108,32 +108,32 @@
 }
 
 .text-primary {
-  color: var(--adlaire-surface-accent);
+  color: var(--adlaire-semantic-selected-color);
 }
 
 .text-secondary,
 .text-muted {
-  color: var(--adlaire-status-secondary);
+  color: var(--adlaire-semantic-muted-text);
 }
 
 .text-success {
-  color: var(--adlaire-status-success);
+  color: var(--adlaire-semantic-success-color);
 }
 
 .text-danger {
-  color: var(--adlaire-status-danger);
+  color: var(--adlaire-semantic-danger-color);
 }
 
 .text-warning {
-  color: var(--adlaire-status-warning);
+  color: var(--adlaire-semantic-warning-color);
 }
 
 .text-info {
-  color: var(--adlaire-status-info);
+  color: var(--adlaire-semantic-info-color);
 }
 
 .adlaire-muted-text {
-  color: var(--adlaire-surface-text-muted);
+  color: var(--adlaire-semantic-muted-text);
 }
 
 .bg-primary {

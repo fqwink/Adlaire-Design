@@ -130,7 +130,7 @@
 .adlaire-wysiwyg-block:focus-within,
 .adlaire-wysiwyg-block-selected,
 .adlaire-wysiwyg-block[aria-selected="true"] {
-  border-color: var(--adlaire-surface-accent);
+  border-color: var(--adlaire-semantic-selected-border);
   box-shadow: var(--adlaire-shadow-blue-soft);
 }
 
@@ -354,10 +354,10 @@
 }
 
 .adlaire-wysiwyg-block-error {
-  background-color: var(--adlaire-alert-danger-bg);
-  border-color: var(--adlaire-status-danger);
-  box-shadow: var(--adlaire-shadow-focus-ring);
-  color: var(--adlaire-alert-danger-text);
+  background-color: var(--adlaire-semantic-danger-bg);
+  border-color: var(--adlaire-semantic-danger-color);
+  box-shadow: var(--adlaire-semantic-focus-ring);
+  color: var(--adlaire-semantic-danger-text);
 }
 
 .adlaire-wysiwyg-block-collapsed .adlaire-wysiwyg-block-content {

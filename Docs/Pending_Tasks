@@ -33,9 +33,4 @@
 
 | ID | 分類 | 未実装 | 完了条件 | 主な更新対象 |
 | --- | --- | --- | --- | --- |
-| AD-IMPL-031 | Icon Set | 公式アイコン拡張SVG制作 | `Docs/Icon_Set_Catalog` で `策定済み` とした追加アイコンSVGが `Icons/` に配置され、検査を通過している | `Icons/`、`Docs/Icon_Set_Catalog`、`Tools/check/check-adlaire-design.sh` |
-| AD-IMPL-032 | Check | カタログclass照合検査の正式実装 | `Docs/Generic_Component_Catalog`、`Docs/Admin_UI_Catalog`、`Docs/WYSIWYG_Editor_UI_Catalog` の実装済みclass照合が検査に組み込まれている | `Tools/check/check-adlaire-design.sh` |
-| AD-IMPL-033 | Samples | 汎用UI、Admin UI、Icon Setのサンプル拡張制作 | `Samples/README.md` と `Samples/design/` に対象サンプルが追加され、PNG/WebP配置検査を通過している | `Samples/README.md`、`Samples/design/`、`Samples/` |
-| AD-IMPL-034 | Samples | モバイルEditor UIとGit Provider UIの実画面風サンプル制作 | Editor UI mobile系とGit Provider UIのPR、Issue、Diff、Review、Repository、CI/CD、Settingsサンプルが追加されている | `Samples/README.md`、`Samples/design/`、`Samples/` |
-| AD-IMPL-035 | Tokens | semantic token aliasのCSS実装 | danger、success、warning、info、focus、selected、mutedのsemantic aliasが既存token参照として実装されている | `Tokens/`、`UI/`、`EditorUI/`、`Tools/check/check-adlaire-design.sh` |
-| AD-IMPL-036 | Release | リリース前チェックリストの検査支援実装 | 構成検査、class照合、CSS変数参照、JavaScript smoke、Samples配置、PR確認、main同期確認の支援が検査またはREADME手順に反映されている | `README.md`、`Tools/check/check-adlaire-design.sh` |
+| 現時点で該当なし | - | - | - | - |

@@ -1287,30 +1287,30 @@ details.adlaire-faq-item > :not(summary),
 
 .adlaire-alert-info,
 .alert-info {
-  background-color: var(--adlaire-alert-info-bg);
-  border-color: var(--adlaire-alert-info-border);
-  color: var(--adlaire-alert-info-text);
+  background-color: var(--adlaire-semantic-info-bg);
+  border-color: var(--adlaire-semantic-info-border);
+  color: var(--adlaire-semantic-info-text);
 }
 
 .adlaire-alert-success,
 .alert-success {
-  background-color: var(--adlaire-alert-success-bg);
-  border-color: var(--adlaire-alert-success-border);
-  color: var(--adlaire-alert-success-text);
+  background-color: var(--adlaire-semantic-success-bg);
+  border-color: var(--adlaire-semantic-success-border);
+  color: var(--adlaire-semantic-success-text);
 }
 
 .adlaire-alert-warning,
 .alert-warning {
-  background-color: var(--adlaire-alert-warning-bg);
-  border-color: var(--adlaire-alert-warning-border);
-  color: var(--adlaire-alert-warning-text);
+  background-color: var(--adlaire-semantic-warning-bg);
+  border-color: var(--adlaire-semantic-warning-border);
+  color: var(--adlaire-semantic-warning-text);
 }
 
 .adlaire-alert-danger,
 .alert-danger {
-  background-color: var(--adlaire-alert-danger-bg);
-  border-color: var(--adlaire-alert-danger-border);
-  color: var(--adlaire-alert-danger-text);
+  background-color: var(--adlaire-semantic-danger-bg);
+  border-color: var(--adlaire-semantic-danger-border);
+  color: var(--adlaire-semantic-danger-text);
 }
 
 .adlaire-sortable-table {
