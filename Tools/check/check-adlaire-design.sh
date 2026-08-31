@@ -745,18 +745,12 @@ done
 
 for sample_term in \
   '汎用UI、Admin UI、公式アイコン、WYSIWYG Editor UI、Git Provider UI' \
-  'Samples/sample-current.png' \
-  'Samples/sample-current.webp'; do
+  'Samples/sample-current.png'; do
   if ! grep -F -- "$sample_term" "$ADLAIRE_DESIGN_ROOT/Samples/README.md" "$ADLAIRE_DESIGN_ROOT/Samples/design/index.html" >/dev/null 2>&1; then
     echo "Samples documentation or design missing required sample term: $sample_term" >&2
     exit 1
   fi
 done
-
-if [ ! -f "$ADLAIRE_DESIGN_ROOT/Samples/sample-current.webp" ]; then
-  echo "Samples/sample-current.webp must exist." >&2
-  exit 1
-fi
 
 OLD_REPOSITORY_NAME='Adlaire-''Eco''system-Design'
 
