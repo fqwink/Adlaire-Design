@@ -643,7 +643,12 @@ for pending_task_term in \
   '仕様未確定、要否未決定、策定中の項目は未実装リストに含めない。' \
   '## 3. 未実装リスト' \
   '本章は、仕様確定済みで、実装だけが未完了の項目を管理する。' \
-  'AD-TASK-101' \
+  'AD-IMPL-031' \
+  'AD-IMPL-032' \
+  'AD-IMPL-033' \
+  'AD-IMPL-034' \
+  'AD-IMPL-035' \
+  'AD-IMPL-036' \
   '現時点で該当なし'; do
   if ! grep -F -- "$pending_task_term" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" >/dev/null 2>&1; then
     echo "Docs/Pending_Tasks missing required pending task management term: $pending_task_term" >&2

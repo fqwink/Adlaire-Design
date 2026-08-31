@@ -1586,6 +1586,10 @@ Adlaire-Design UIを採用する場合は、本節のCSS/JavaScript読み込み�
 15. トップレベル、`Docs/`、`Tokens/`、`UI/`、`Tools/`、`Brand/` が承認済みのリポジトリ構造から逸脱していないことの確認
 16. `Tools/check/check-adlaire-design.sh` が実行可能であることの確認
 17. `Samples/` が理解補助資料の配置先として許可形式だけを含むことの確認
+18. カタログに記載した主要classが、対応する `UI/*.css` または `EditorUI/*.css` に存在することの確認
+19. `Docs/Icon_Set_Catalog` で `実装済み` とした公式アイコンSVGが `Icons/` に存在することの確認
+20. WCAG 2.2 A参照観点として、focus、keyboard、skip link、landmark、状態表示、エラー表示、色以外の識別補助を確認すること
+21. リリース前に構成検査、class照合、CSS変数参照、JavaScript smoke、Samples配置、PR状態、main同期状態を確認すること
 
 検査はPOSIX shellで記述し、`Tools/check/check-adlaire-design.sh` に集約する。検査のためにNode.js/npm、外部CSSパーサ、外部CLIを追加しない。
 
@@ -1670,6 +1674,10 @@ CSSはアイコンSVG本体を埋め込まない。CSSは `.adlaire-icon`、`.ad
 公式アイコンSVGの実体制作は完了済みとし、初期セットのSVG実体は `Icons/` で管理する。
 
 検査では、`Icons/` の存在、許可形式、命名規則、`Docs/Icon_Set_Catalog` との整合性、禁止形式、仕様必須語句を確認する。`Docs/Icon_Set_Catalog` で `実装済み` としたアイコンは、対応するSVGファイルが `Icons/` に存在しなければならない。
+
+公式アイコンを拡張する場合は、既存カテゴリに追加することを優先する。新カテゴリが必要な場合は、`Docs/Master_Spec` と `Docs/Icon_Set_Catalog` を同じ変更単位で更新し、カテゴリ名、用途、命名規則、代替テキスト方針、実装状態を明記する。
+
+追加アイコンIDは `AD-ICON-` の連番で管理する。制作前のアイコンは `策定済み`、SVG実体を `Icons/` に配置し検査を通過したアイコンは `実装済み` とする。
 
 ### 11.11.7 Group 1 UI策定仕様
 
@@ -1797,6 +1805,10 @@ Samplesは、Adlaire-Designの仕様理解を補助する資料として管理�
 
 サンプル追加時は、関連するカタログ、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh` との整合を確認する。サンプルはUIの意図を示す補助資料であり、CSS/JavaScriptの仕様根拠として単独では扱わない。
 
+サンプル拡張では、汎用UI、Admin UI、WYSIWYG Editor UI、Git Provider UI、Icon Setの5分類を優先する。Editor UIサンプルでは mobile toolbar、bottom sheet、block操作、inline toolbar、readonly/error表示を対象に含める。Git Provider UIサンプルでは PR、Issue、Diff、Review、Repository、CI/CD、Settingsを対象に含める。
+
+サンプル制作は実装工程として扱う。仕様確定済みのサンプルであっても、HTML、CSS、JS、SVG、PNG、WebPを追加または更新する場合は、実装承認を得てから実施する。
+
 ### 11.11.12 カタログ責務索引
 
 Adlaire-Designの責務は、正本、補助正本、実装、理解補助に分けて管理する。
@@ -1817,6 +1829,17 @@ Adlaire-Designの責務は、正本、補助正本、実装、理解補助に分
 | `Samples/` | サンプルと理解補助資料 |
 
 カタログを追加、分割、統合する場合は、`Docs/Master_Spec`、`Docs/Document_Index`、対象カタログ、`Docs/Pending_Tasks`、`Tools/check/check-adlaire-design.sh` の整合を確認する。
+
+カタログ責務境界は以下に固定する。
+
+| カタログ | 対象 | 対象外 |
+| --- | --- | --- |
+| `Docs/Generic_Component_Catalog` | 一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、Git Provider UIを含む再利用UI | WYSIWYG Editor UI専用品、公式アイコンSVG実体、Admin専用分類 |
+| `Docs/Admin_UI_Catalog` | 管理画面専用UI、監査、権限、危険操作、管理フォーム | 一般公開面だけで完結する汎用部品、WYSIWYG Editor UI専用品 |
+| `Docs/WYSIWYG_Editor_UI_Catalog` | WYSIWYG Editor UI部品、Editor UI状態表示、モバイルEditor UI、Editor UI JavaScript | 一般汎用部品、Markdown/MDX parser、Editor本体処理 |
+| `Docs/Icon_Set_Catalog` | 公式アイコンセットのID、ファイル名、カテゴリ、用途、代替テキスト方針、実装状態 | ブランド資産、アイコン表示UI、JavaScript挙動 |
+
+カタログclass照合では、カタログに記載した `実装済み` classを対象CSSに照合する。対象外は、説明用接頭辞、未実装状態のclass、SVGファイル名、JavaScript関数名、ARIA属性、HTML属性とする。失敗時は、未検出class、参照元カタログ、期待実装先を表示する。
 
 ### 11.11.13 拡張UI/Tokens策定仕様
 
@@ -1844,6 +1867,12 @@ Design Tokens拡張では、Motion、Layer、Breakpointを追加策定対象と�
 | Gallery / Lightbox UI | `.adlaire-gallery`、`.adlaire-gallery-item`、`.adlaire-lightbox`、`.adlaire-lightbox-caption` | `UI/content.css`、`UI/components.css`、必要な `UI/components.js` |
 | Audit trail / Activity log UI | `.adlaire-audit-trail`、`.adlaire-activity-log`、`.adlaire-activity-actor`、`.adlaire-activity-time` | `Docs/Admin_UI_Catalog`、`UI/content.css`、`UI/components.css` |
 | Permission / Role / Scope表示UI | `.adlaire-permission`、`.adlaire-role`、`.adlaire-scope`、`.adlaire-restricted` | `Docs/Generic_Component_Catalog`、`Docs/Admin_UI_Catalog`、`UI/components.css`、`UI/forms.css` |
+
+semantic token aliasは、状態や選択をUI部品間で共通化するために策定する。対象は danger、success、warning、info、focus、selected、muted とし、命名は `--adlaire-semantic-<name>-<property>` を基本とする。既存の色、surface、status tokenを正本値とし、semantic token aliasは用途別参照名として扱う。
+
+WCAG 2.2 A参照の確認観点は、focus表示、keyboard操作表示、skip link、landmark補助、状態表示、エラー表示、色以外の識別補助に固定する。数値コントラスト保証は現時点の管理対象外とする。
+
+リリース前チェックリストは、構成検査、必須ファイル、禁止ファイル、class照合、CSS変数参照、JavaScript smoke、Samples配置、PR確認、main同期確認を対象とする。リリース前チェックは仕様と実装の整合確認であり、CSSビルド、minify、bundleを追加する根拠にはしない。
 
 ---
 

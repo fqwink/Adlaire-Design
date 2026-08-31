@@ -11,6 +11,9 @@
 - 管理画面専用UIは、管理者、運用者、編集者が反復操作する画面で使うUI部品として扱う。
 - 管理項目は、部品名、class案、実装先、優先度、状態、CSS責務、JS責務とする。
 - 実装する場合は、`Docs/Master_Spec`、本カタログ、対象CSS、必要なJavaScript、検査、履歴を同じ変更単位で確認する。
+- 一般公開面だけで完結する汎用部品は `Docs/Generic_Component_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog` で管理する。
+- 実装済みclassは、対応する `UI/*.css` と照合できる状態で管理する。
+- サンプルは理解補助として扱い、仕様正本にはしない。
 
 ---
 
