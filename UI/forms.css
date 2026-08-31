@@ -18,7 +18,7 @@
 
 .adlaire-form-label.required::after,
 .form-label.required::after {
-  color: var(--adlaire-status-danger);
+  color: var(--adlaire-semantic-danger-color);
   content: " *";
 }
 
@@ -38,8 +38,8 @@
 
 .adlaire-form-control:focus,
 .form-control:focus {
-  border-color: var(--adlaire-surface-accent);
-  box-shadow: var(--adlaire-shadow-focus-ring);
+  border-color: var(--adlaire-semantic-focus-color);
+  box-shadow: var(--adlaire-semantic-focus-ring);
   outline: 0;
 }
 
@@ -395,19 +395,19 @@ select.form-control {
 
 .adlaire-field-error .adlaire-form-control,
 .adlaire-form-control[aria-invalid="true"] {
-  border-color: var(--adlaire-status-danger);
+  border-color: var(--adlaire-semantic-danger-color);
 }
 
 .adlaire-field-success .adlaire-form-control {
-  border-color: var(--adlaire-status-success);
+  border-color: var(--adlaire-semantic-success-color);
 }
 
 .adlaire-error-summary {
   padding: 14px 16px;
-  background-color: var(--adlaire-alert-danger-bg);
-  border: 1px solid var(--adlaire-alert-danger-border);
+  background-color: var(--adlaire-semantic-danger-bg);
+  border: 1px solid var(--adlaire-semantic-danger-border);
   border-radius: var(--adlaire-radius-sm);
-  color: var(--adlaire-alert-danger-text);
+  color: var(--adlaire-semantic-danger-text);
 }
 
 .adlaire-input-hint {
@@ -423,10 +423,10 @@ select.form-control {
 
 .adlaire-admin-danger-zone {
   padding: 18px;
-  background-color: var(--adlaire-alert-danger-bg);
-  border: 1px solid var(--adlaire-alert-danger-border);
+  background-color: var(--adlaire-semantic-danger-bg);
+  border: 1px solid var(--adlaire-semantic-danger-border);
   border-radius: var(--adlaire-radius-md);
-  color: var(--adlaire-alert-danger-text);
+  color: var(--adlaire-semantic-danger-text);
 }
 
 .adlaire-scope,
@@ -442,9 +442,9 @@ select.form-control {
 }
 
 .adlaire-restricted {
-  background-color: var(--adlaire-alert-danger-bg);
-  border-color: var(--adlaire-alert-danger-border);
-  color: var(--adlaire-alert-danger-text);
+  background-color: var(--adlaire-semantic-danger-bg);
+  border-color: var(--adlaire-semantic-danger-border);
+  color: var(--adlaire-semantic-danger-text);
 }
 
 @media (max-width: 480px) {

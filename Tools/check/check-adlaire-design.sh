@@ -4,9 +4,51 @@ set -eu
 TOOL_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 ADLAIRE_DESIGN_ROOT=$(CDPATH= cd -- "$TOOL_DIR/../.." && pwd)
 TMP_DIR="${TMPDIR:-/tmp}/adlaire-design-check.$$"
+RUN_RELEASE_CHECK=0
+
+case "${1:-}" in
+  "")
+    ;;
+  "--release-check")
+    RUN_RELEASE_CHECK=1
+    ;;
+  *)
+    echo "usage: sh Tools/check/check-adlaire-design.sh [--release-check]" >&2
+    exit 1
+    ;;
+esac
 
 mkdir -p "$TMP_DIR"
 trap 'rm -rf "$TMP_DIR"' EXIT HUP INT TERM
+
+check_catalog_classes() {
+  catalog_label=$1
+  catalog_path=$2
+  ignore_pattern=$3
+  shift 3
+
+  catalog_classes="$TMP_DIR/$catalog_label-catalog-classes"
+  catalog_classes_filtered="$TMP_DIR/$catalog_label-catalog-classes-filtered"
+  css_classes="$TMP_DIR/$catalog_label-css-classes"
+  css_source="$TMP_DIR/$catalog_label-css-source"
+
+  grep -E -o '\.adlaire-[a-z0-9]+(-[a-z0-9]+)*' "$catalog_path" | sort -u >"$catalog_classes" || true
+
+  if [ -n "$ignore_pattern" ]; then
+    grep -E -v "$ignore_pattern" "$catalog_classes" >"$catalog_classes_filtered" || true
+    mv "$catalog_classes_filtered" "$catalog_classes"
+  fi
+
+  cat "$@" >"$css_source"
+  grep -E -o '\.adlaire-[a-z0-9]+(-[a-z0-9]+)*' "$css_source" | sort -u >"$css_classes" || true
+
+  while IFS= read -r class_name; do
+    if [ -n "$class_name" ] && ! grep -F -x -- "$class_name" "$css_classes" >/dev/null 2>&1; then
+      echo "$catalog_path references a class missing from the expected CSS target set ($catalog_label): $class_name" >&2
+      exit 1
+    fi
+  done <"$catalog_classes"
+}
 
 for path in \
   AGENTS.md \
@@ -382,7 +424,7 @@ for css_master_term in \
   '公式アイコンの命名規則は `adlaire-icon-<category>-<name>.svg` とする。' \
   '公式アイコンカテゴリは、`navigation`、`action`、`status`、`content`、`editor`、`media`、`form` に固定する。' \
   '公式アイコンセットの補助正本は `Docs/Icon_Set_Catalog` とする。' \
-  '公式アイコンSVGの実体制作は完了済みとし、初期セットのSVG実体は `Icons/` で管理する。' \
+  '公式アイコンSVGの初期セットと拡張セットの実体制作は完了済みとし、SVG実体は `Icons/` で管理する。' \
   '### 11.11.4.1 サンプルデザインとスクリーンショット' \
   'サンプルデザインおよびスクリーンショットは、Adlaire-Designの理解補助と利用イメージの共有を目的として制作できる。' \
   'サンプルデザインおよびスクリーンショットは仕様正本ではない。' \
@@ -643,18 +685,78 @@ for pending_task_term in \
   '仕様未確定、要否未決定、策定中の項目は未実装リストに含めない。' \
   '## 3. 未実装リスト' \
   '本章は、仕様確定済みで、実装だけが未完了の項目を管理する。' \
-  'AD-IMPL-031' \
-  'AD-IMPL-032' \
-  'AD-IMPL-033' \
-  'AD-IMPL-034' \
-  'AD-IMPL-035' \
-  'AD-IMPL-036' \
   '現時点で該当なし'; do
   if ! grep -F -- "$pending_task_term" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" >/dev/null 2>&1; then
     echo "Docs/Pending_Tasks missing required pending task management term: $pending_task_term" >&2
     exit 1
   fi
 done
+
+check_catalog_classes generic "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" '^\.adlaire-wysiwyg$' \
+  "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/base.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/grid.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/layout.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/components.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/site.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/forms.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/content.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css"
+
+check_catalog_classes admin "$ADLAIRE_DESIGN_ROOT/Docs/Admin_UI_Catalog" '' \
+  "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/base.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/grid.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/layout.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/components.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/site.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/forms.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/content.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/utilities.css" \
+  "$ADLAIRE_DESIGN_ROOT/UI/compat-agws.css"
+
+check_catalog_classes wysiwyg "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_UI_Catalog" '' \
+  "$ADLAIRE_DESIGN_ROOT/EditorUI/wysiwyg.css"
+
+for semantic_token in \
+  '--adlaire-semantic-danger-color' \
+  '--adlaire-semantic-success-color' \
+  '--adlaire-semantic-warning-color' \
+  '--adlaire-semantic-info-color' \
+  '--adlaire-semantic-focus-ring' \
+  '--adlaire-semantic-selected-bg' \
+  '--adlaire-semantic-muted-text'; do
+  if ! grep -F -- "$semantic_token" "$ADLAIRE_DESIGN_ROOT/Tokens/status.css" >/dev/null 2>&1; then
+    echo "Tokens/status.css missing required semantic token alias: $semantic_token" >&2
+    exit 1
+  fi
+done
+
+for semantic_usage in \
+  '--adlaire-semantic-danger-color' \
+  '--adlaire-semantic-focus-ring' \
+  '--adlaire-semantic-selected-border'; do
+  if ! grep -R -F -- "$semantic_usage" "$ADLAIRE_DESIGN_ROOT/UI" "$ADLAIRE_DESIGN_ROOT/EditorUI" >/dev/null 2>&1; then
+    echo "UI or EditorUI CSS missing semantic token usage: $semantic_usage" >&2
+    exit 1
+  fi
+done
+
+for sample_term in \
+  '汎用UI、Admin UI、公式アイコン、WYSIWYG Editor UI、Git Provider UI' \
+  'Samples/sample-current.png' \
+  'Samples/sample-current.webp'; do
+  if ! grep -F -- "$sample_term" "$ADLAIRE_DESIGN_ROOT/Samples/README.md" "$ADLAIRE_DESIGN_ROOT/Samples/design/index.html" >/dev/null 2>&1; then
+    echo "Samples documentation or design missing required sample term: $sample_term" >&2
+    exit 1
+  fi
+done
+
+if [ ! -f "$ADLAIRE_DESIGN_ROOT/Samples/sample-current.webp" ]; then
+  echo "Samples/sample-current.webp must exist." >&2
+  exit 1
+fi
 
 OLD_REPOSITORY_NAME='Adlaire-''Eco''system-Design'
 
@@ -1621,12 +1723,12 @@ if grep -R -n -E 'z-index: [0-9]' "$ADLAIRE_DESIGN_ROOT/UI/adlaire.css" "$ADLAIR
   exit 1
 fi
 
-grep -R -h -E -o 'var\(--adlaire-[^)]+\)' "$ADLAIRE_DESIGN_ROOT/UI" "$ADLAIRE_DESIGN_ROOT/Tokens" 2>/dev/null \
+grep -R -h -E -o 'var\(--adlaire-[^)]+\)' "$ADLAIRE_DESIGN_ROOT/UI" "$ADLAIRE_DESIGN_ROOT/EditorUI" "$ADLAIRE_DESIGN_ROOT/Tokens" 2>/dev/null \
   | sed 's/^var(//' \
   | sed 's/)$//' \
   | sort -u >"$TMP_DIR/css-var-refs"
 
-grep -R -h -E -o -- '--adlaire-[a-z0-9-]+:' "$ADLAIRE_DESIGN_ROOT/UI" "$ADLAIRE_DESIGN_ROOT/Tokens" 2>/dev/null \
+grep -R -h -E -o -- '--adlaire-[a-z0-9-]+:' "$ADLAIRE_DESIGN_ROOT/UI" "$ADLAIRE_DESIGN_ROOT/EditorUI" "$ADLAIRE_DESIGN_ROOT/Tokens" 2>/dev/null \
   | sed 's/:$//' \
   | sort -u >"$TMP_DIR/css-var-defs"
 
@@ -1634,6 +1736,27 @@ if comm -23 "$TMP_DIR/css-var-refs" "$TMP_DIR/css-var-defs" >"$TMP_DIR/css-var-m
   echo "Adlaire-Design CSS must not reference undefined CSS variables:" >&2
   cat "$TMP_DIR/css-var-missing" >&2
   exit 1
+fi
+
+if [ "$RUN_RELEASE_CHECK" -eq 1 ]; then
+  git -C "$ADLAIRE_DESIGN_ROOT" diff --check
+
+  git -C "$ADLAIRE_DESIGN_ROOT" status --short --branch >"$TMP_DIR/git-status"
+  if grep -E '^(M|A|D|R|C|U|\?\?)' "$TMP_DIR/git-status" >/dev/null 2>&1; then
+    echo "release check requires a clean git worktree:" >&2
+    cat "$TMP_DIR/git-status" >&2
+    exit 1
+  fi
+
+  if git -C "$ADLAIRE_DESIGN_ROOT" rev-parse --verify backup/main >/dev/null 2>&1; then
+    if ! git -C "$ADLAIRE_DESIGN_ROOT" merge-base --is-ancestor backup/main HEAD; then
+      echo "release check requires HEAD to include backup/main." >&2
+      exit 1
+    fi
+  fi
+
+  echo "adlaire-design-release-check-ok"
+  exit 0
 fi
 
 

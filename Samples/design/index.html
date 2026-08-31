@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Adlaire-Design sample</title>
   <link rel="stylesheet" href="../../Tokens/colors.css">
+  <link rel="stylesheet" href="../../Tokens/typography.css">
+  <link rel="stylesheet" href="../../Tokens/spacing.css">
+  <link rel="stylesheet" href="../../Tokens/motion.css">
+  <link rel="stylesheet" href="../../Tokens/layer.css">
+  <link rel="stylesheet" href="../../Tokens/breakpoints.css">
   <link rel="stylesheet" href="../../Tokens/surface.css">
   <link rel="stylesheet" href="../../Tokens/status.css">
   <link rel="stylesheet" href="../../Tokens/effects.css">
@@ -18,16 +23,22 @@
   <link rel="stylesheet" href="../../UI/utilities.css">
   <link rel="stylesheet" href="../../EditorUI/wysiwyg.css">
   <link rel="stylesheet" href="./sample.css">
+  <script src="../../UI/components.js" defer></script>
+  <script src="../../UI/content.js" defer></script>
+  <script src="../../UI/forms.js" defer></script>
+  <script src="../../EditorUI/wysiwyg.js" defer></script>
+  <script src="./sample.js" defer></script>
 </head>
 <body>
   <header class="sample-hero">
     <div class="adlaire-container sample-hero-inner">
       <p class="sample-kicker">Adlaire-Design sample</p>
       <h1>デザインシステムの現在形</h1>
-      <p>このサンプルは理解補助資料であり、仕様正本ではない。正本はMaster_Spec、各カタログ、Tokens、UI、EditorUI、Icons、Brandで管理する。</p>
+      <p>汎用UI、Admin UI、公式アイコン、WYSIWYG Editor UI、Git Provider UIを、同じトークンとCSS契約で確認するためのサンプル。</p>
       <div class="sample-actions">
         <a class="adlaire-button adlaire-button-primary" href="../../Docs/Master_Spec">Master_Spec</a>
         <a class="adlaire-button adlaire-button-secondary" href="../../Docs/Generic_Component_Catalog">Generic catalog</a>
+        <a class="adlaire-button adlaire-button-outline" href="../../Docs/WYSIWYG_Editor_UI_Catalog">Editor catalog</a>
       </div>
     </div>
   </header>
@@ -36,7 +47,7 @@
     <section class="sample-section" aria-labelledby="tokens-title">
       <div class="sample-section-heading">
         <p class="sample-kicker">Tokens</p>
-        <h2 id="tokens-title">色と状態</h2>
+        <h2 id="tokens-title">色、状態、semantic alias</h2>
       </div>
       <div class="sample-swatch-grid">
         <div class="sample-swatch sample-swatch-primary"><span>AGWS Blue</span><strong>#0066cc</strong></div>
@@ -44,68 +55,95 @@
         <div class="sample-swatch sample-swatch-accent"><span>Blue Strong</span><strong>#004499</strong></div>
         <div class="sample-swatch sample-swatch-green"><span>AGWS Green</span><strong>#00a968</strong></div>
       </div>
-      <div class="adlaire-chip-list">
-        <span class="adlaire-chip adlaire-chip-primary">design system</span>
-        <span class="adlaire-chip adlaire-chip-muted">CSS contract</span>
-        <span class="adlaire-status-pill"><span class="adlaire-status-dot"></span>ready</span>
+      <div class="sample-status-row">
+        <span class="adlaire-badge adlaire-badge-success">success</span>
+        <span class="adlaire-badge adlaire-badge-warning">warning</span>
+        <span class="adlaire-badge adlaire-badge-danger">danger</span>
+        <span class="adlaire-chip adlaire-chip-muted">muted</span>
+        <span class="adlaire-status-pill"><span class="adlaire-status-dot"></span>selected</span>
       </div>
     </section>
 
-    <section class="sample-section sample-grid-two" aria-labelledby="docs-title">
+    <section class="sample-section sample-grid-two" aria-labelledby="generic-title">
       <article class="adlaire-card">
         <div class="adlaire-card-header">
-          <h2 id="docs-title" class="adlaire-section-title">ブログ・ドキュメント</h2>
+          <h2 id="generic-title" class="adlaire-section-title">汎用UI</h2>
         </div>
         <div class="adlaire-card-body adlaire-content">
-          <p class="adlaire-note adlaire-note-info">本文、注記、コード、関連記事を同じトークンとCSS契約で扱う。</p>
-          <pre class="sample-code-block"><code>.adlaire-card + .adlaire-note</code></pre>
-          <div class="adlaire-related-links">
-            <a href="../../Docs/Generic_Component_Catalog">部品カタログを見る</a>
+          <p class="adlaire-note adlaire-note-info">本文、注記、コード、関連記事、エラー状態を同じCSS契約で扱う。</p>
+          <pre class="sample-code-block"><code>.adlaire-card + .adlaire-note + .adlaire-state</code></pre>
+          <div class="adlaire-state adlaire-state-empty">
+            <strong>Empty state</strong>
+            <span>データがない状態も部品として揃える。</span>
+          </div>
+          <div class="adlaire-pagination" aria-label="サンプルページネーション">
+            <span class="adlaire-pagination-count">1-10 / 42</span>
+            <a class="adlaire-page-link adlaire-page-link-current" href="#generic-title">1</a>
+            <a class="adlaire-page-link" href="#generic-title">2</a>
+            <a class="adlaire-page-next" href="#generic-title">Next</a>
           </div>
         </div>
       </article>
 
       <article class="adlaire-card">
         <div class="adlaire-card-header">
-          <h2 class="adlaire-section-title">GitプロバイダーUI</h2>
+          <h2 class="adlaire-section-title">多言語化UI</h2>
         </div>
         <div class="adlaire-card-body">
-          <div class="adlaire-toolbar">
-            <div class="adlaire-toolbar-section">
-              <button class="adlaire-button adlaire-button-secondary" type="button">Files</button>
-              <button class="adlaire-button adlaire-button-secondary" type="button">Commits</button>
+          <div class="adlaire-language-switcher" aria-label="言語切替">
+            <span class="adlaire-language-switcher-label">Language</span>
+            <button class="adlaire-language-current" type="button">日本語</button>
+            <div class="adlaire-language-list">
+              <a class="adlaire-language-option adlaire-language-option-current" href="#generic-title" aria-current="true">日本語</a>
+              <a class="adlaire-language-option" href="#generic-title">English</a>
+              <a class="adlaire-language-option" href="#generic-title">Deutsch</a>
             </div>
           </div>
-          <dl class="adlaire-key-value">
-            <div class="adlaire-key-value-row"><dt class="adlaire-key-value-key">Branch</dt><dd class="adlaire-key-value-value">main</dd></div>
-            <div class="adlaire-key-value-row"><dt class="adlaire-key-value-key">Status</dt><dd class="adlaire-key-value-value">passing</dd></div>
-          </dl>
+          <form class="adlaire-filter" aria-label="絞り込みサンプル">
+            <div class="adlaire-filter-row">
+              <input class="adlaire-filter-input" type="search" placeholder="Search UI">
+              <span class="adlaire-filter-count" data-adlaire-filter-count>3</span>
+            </div>
+          </form>
         </div>
       </article>
     </section>
 
-    <section class="sample-section sample-grid-two" aria-labelledby="portal-title">
-      <article class="adlaire-panel">
-        <div class="adlaire-panel-header">
-          <h2 id="portal-title">社内ポータル</h2>
-        </div>
-        <div class="adlaire-panel-body">
-          <div class="adlaire-surface-grid">
-            <div class="adlaire-surface-item">お知らせ</div>
-            <div class="adlaire-surface-item">メンバー</div>
-            <div class="adlaire-surface-item">リンク集</div>
+    <section class="sample-section sample-grid-two" aria-labelledby="admin-title">
+      <article class="adlaire-admin-dashboard">
+        <h2 id="admin-title">Admin UI</h2>
+        <div class="adlaire-surface-grid">
+          <div class="adlaire-surface-item">
+            <span class="adlaire-meta-label">Users</span>
+            <strong>248</strong>
           </div>
+          <div class="adlaire-surface-item">
+            <span class="adlaire-meta-label">Roles</span>
+            <strong>12</strong>
+          </div>
+          <div class="adlaire-surface-item">
+            <span class="adlaire-meta-label">Scope</span>
+            <strong>4</strong>
+          </div>
+        </div>
+        <div class="adlaire-admin-bulk-action">
+          <span>3 selected</span>
+          <button class="adlaire-button adlaire-button-secondary" type="button">Archive</button>
         </div>
       </article>
 
-      <article class="adlaire-empty-state">
-        <h2 class="adlaire-empty-state-title">静的サイト</h2>
-        <p class="adlaire-empty-state-text">空状態、エラー、メンテナンス、更新日時表示を共通部品で表現する。</p>
-        <div class="adlaire-error-page adlaire-error-page-404">
-          <div class="adlaire-error-page-inner">
-            <p class="adlaire-error-page-code">404</p>
-            <p class="adlaire-error-page-title">Page not found</p>
+      <article class="adlaire-admin-settings">
+        <h2>Settings / Permission</h2>
+        <div class="adlaire-settings-row">
+          <div>
+            <span class="adlaire-settings-label">Review required</span>
+            <span class="adlaire-settings-help">Danger zoneは別部品で分離。</span>
           </div>
+          <span class="adlaire-permission">maintainer</span>
+        </div>
+        <div class="adlaire-admin-danger-zone">
+          <strong>Danger zone</strong>
+          <span>破壊的操作は警告面と確認操作を必ず分ける。</span>
         </div>
       </article>
     </section>
@@ -115,23 +153,23 @@
         <p class="sample-kicker">Icons</p>
         <h2 id="icon-title">公式アイコンセット</h2>
       </div>
-      <div class="sample-icon-row" aria-label="公式アイコン表示">
-        <span class="sample-icon-slot"><img src="../../Icons/adlaire-icon-navigation-menu.svg" alt="">menu</span>
-        <span class="sample-icon-slot"><img src="../../Icons/adlaire-icon-action-search.svg" alt="">search</span>
-        <span class="sample-icon-slot"><img src="../../Icons/adlaire-icon-status-warning.svg" alt="">warning</span>
-        <span class="sample-icon-slot"><img src="../../Icons/adlaire-icon-editor-bold.svg" alt="">bold</span>
+      <div class="adlaire-icon-tile-list" aria-label="公式アイコン表示">
+        <span class="adlaire-icon-tile"><img src="../../Icons/adlaire-icon-navigation-home.svg" alt="">home</span>
+        <span class="adlaire-icon-tile"><img src="../../Icons/adlaire-icon-action-save.svg" alt="">save</span>
+        <span class="adlaire-icon-tile"><img src="../../Icons/adlaire-icon-content-external-link.svg" alt="">external</span>
+        <span class="adlaire-icon-tile"><img src="../../Icons/adlaire-icon-editor-code.svg" alt="">code</span>
+        <span class="adlaire-icon-tile"><img src="../../Icons/adlaire-icon-media-gallery.svg" alt="">gallery</span>
+        <span class="adlaire-icon-tile"><img src="../../Icons/adlaire-icon-form-calendar.svg" alt="">calendar</span>
       </div>
-      <p class="adlaire-helper-text">公式アイコンSVGはIcons/で管理する。</p>
     </section>
 
-    <section class="sample-section" aria-labelledby="editor-title">
-      <div class="sample-section-heading">
-        <p class="sample-kicker">Editor UI</p>
-        <h2 id="editor-title">WYSIWYG Editor UI</h2>
-      </div>
-      <div class="adlaire-wysiwyg">
+    <section class="sample-section sample-grid-two" aria-labelledby="editor-title">
+      <article class="adlaire-wysiwyg">
         <div class="adlaire-wysiwyg-header">
-          <div class="adlaire-wysiwyg-title">Editor sample</div>
+          <div>
+            <p class="sample-kicker">Editor UI</p>
+            <h2 id="editor-title" class="adlaire-wysiwyg-title">Block editor</h2>
+          </div>
           <div class="adlaire-wysiwyg-status">draft</div>
         </div>
         <div class="adlaire-wysiwyg-toolbar">
@@ -140,15 +178,83 @@
           <button class="adlaire-wysiwyg-tool" type="button">H</button>
         </div>
         <div class="adlaire-wysiwyg-canvas">
+          <div class="adlaire-wysiwyg-inline-toolbar">
+            <button class="adlaire-wysiwyg-inline-button adlaire-wysiwyg-inline-active" type="button">Bold</button>
+            <button class="adlaire-wysiwyg-inline-button" type="button">Link</button>
+          </div>
           <div class="adlaire-wysiwyg-block adlaire-wysiwyg-block-selected">
             <span class="adlaire-wysiwyg-block-label">Heading</span>
             <div class="adlaire-wysiwyg-block-content">Adlaire-Design sample block</div>
           </div>
+          <div class="adlaire-wysiwyg-block adlaire-wysiwyg-block-error">
+            <span class="adlaire-wysiwyg-block-label">Error</span>
+            <div class="adlaire-wysiwyg-block-content">alt確認などの警告表示枠。</div>
+          </div>
         </div>
+      </article>
+
+      <article class="adlaire-wysiwyg adlaire-wysiwyg-readonly">
+        <div class="adlaire-wysiwyg-header">
+          <div class="adlaire-wysiwyg-title">Mobile surface</div>
+          <div class="adlaire-wysiwyg-status">readonly</div>
+        </div>
+        <div class="adlaire-wysiwyg-mobile-toolbar">
+          <button class="adlaire-wysiwyg-mobile-action" type="button">+</button>
+          <button class="adlaire-wysiwyg-mobile-action" type="button">B</button>
+          <button class="adlaire-wysiwyg-mobile-action" type="button">...</button>
+        </div>
+        <div class="adlaire-wysiwyg-mobile-sheet">
+          <button class="adlaire-wysiwyg-command-item adlaire-wysiwyg-command-active" type="button">見出し</button>
+          <button class="adlaire-wysiwyg-command-item" type="button">画像</button>
+          <button class="adlaire-wysiwyg-command-item" type="button">コード</button>
+        </div>
+      </article>
+    </section>
+
+    <section class="sample-section" aria-labelledby="git-title">
+      <div class="sample-section-heading">
+        <p class="sample-kicker">Git Provider UI</p>
+        <h2 id="git-title">Repository / PR / Diff / CI</h2>
+      </div>
+      <div class="sample-git-layout">
+        <article class="adlaire-git-repo-card">
+          <h3>adlaire/design-system</h3>
+          <p class="adlaire-git-repo-meta">main / 128 commits / 4 contributors</p>
+          <div class="adlaire-git-mobile-nav">
+            <a class="adlaire-git-mobile-tab" href="#git-title" aria-current="true">Files</a>
+            <a class="adlaire-git-mobile-tab" href="#git-title">PR</a>
+            <a class="adlaire-git-mobile-tab" href="#git-title">CI</a>
+          </div>
+          <div class="adlaire-git-file-tree">
+            <div class="adlaire-git-file-row">Docs/Master_Spec</div>
+            <div class="adlaire-git-file-row">UI/components.css</div>
+            <div class="adlaire-git-file-row">EditorUI/wysiwyg.css</div>
+          </div>
+        </article>
+
+        <article class="adlaire-git-pr-detail">
+          <div class="adlaire-git-pr-item">#33 Finalize pending improvement specifications</div>
+          <div class="adlaire-git-issue-item">Issue: Samples coverage</div>
+          <div class="adlaire-git-review-thread">
+            <div class="adlaire-git-review-comment">Docsと実装の同期を確認。</div>
+            <div class="adlaire-git-review-resolved">resolved</div>
+          </div>
+          <div class="adlaire-git-check-list">
+            <span class="adlaire-git-check-status">check ok</span>
+            <span class="adlaire-git-alert-status">no unresolved bugs</span>
+          </div>
+        </article>
+
+        <article class="adlaire-git-diff-viewer">
+          <div class="adlaire-git-diff-added">+ --adlaire-semantic-selected-bg</div>
+          <div class="adlaire-git-diff-removed">- direct status reference</div>
+          <div class="adlaire-git-settings-panel">
+            <span class="adlaire-git-permission">admin</span>
+            <span class="adlaire-git-danger-zone">danger zone</span>
+          </div>
+        </article>
       </div>
     </section>
   </main>
-
-  <script src="./sample.js"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@ Adlaire-Designは、CSSフレームワーク、デザイントークン、ブラ
 - `Docs/`: 仕様・設計、リポジトリ索引、変更履歴。
 - `UI/`: CSSフレームワーク本体および汎用UI JavaScript。`UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/components.js`、`UI/site.css`、`UI/forms.css`、`UI/forms.js`、`UI/content.css`、`UI/content.js`、`UI/utilities.css`、`UI/compat-agws.css` を管理する。`UI/compat-agws.css` はAdlaire-Design仕様CSS層として管理する。
 - `EditorUI/`: WYSIWYG Editor UI専用領域。`EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js` を管理する。
-- `Tokens/`: デザイントークン。`Tokens/colors.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` を管理する。
+- `Tokens/`: デザイントークン。`Tokens/colors.css`、`Tokens/typography.css`、`Tokens/spacing.css`、`Tokens/motion.css`、`Tokens/layer.css`、`Tokens/breakpoints.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` を管理する。
 - `Brand/`: ブランド資産。
 - `Tools/check/`: Adlaire-Design専用の検査シェル。
 - `LICENSE`: ライセンス本文。
@@ -32,4 +32,10 @@ Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で�
 
 ```sh
 sh Tools/check/check-adlaire-design.sh
+```
+
+リリース前確認では、通常検査に加えて空白差分、未コミット差分、main同期状態を確認する。
+
+```sh
+sh Tools/check/check-adlaire-design.sh --release-check
 ```
