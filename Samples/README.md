@@ -17,4 +17,3 @@
 - `Samples/design/sample.css`: サンプル表示のための配置補助CSS。
 - `Samples/design/sample.js`: サンプル内の軽い表示補助JavaScript。
 - `Samples/sample-current.png`: 現時点サンプルのPNGスクリーンショット。
-- `Samples/sample-current.webp`: 現時点サンプルのWebPプレビュー。
