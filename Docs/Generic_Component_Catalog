@@ -19,6 +19,8 @@
 - ビルド、minify、bundle、CSSプリプロセッサ、JSONデータ管理は前提にしない。JavaScriptが必要な汎用部品は、対応する `UI/*.js` で管理する。
 - 汎用部品は WCAG 2.2 A を参照し、状態や意味を色だけで伝えない。
 - エラー、警告、成功、情報、フォーカス、選択、入力エラーは、ラベル、文言、境界、アイコン領域、形状などを併用する。
+- 実装済みclassは、対応する `UI/*.css` と照合できる状態で管理する。
+- サンプルは理解補助として扱い、仕様正本にはしない。
 
 ---
 
@@ -388,6 +390,7 @@ WYSIWYG Editor UI専用品の実装先である `EditorUI/wysiwyg.css` と `Edit
 | WYSIWYG Editor UI専用品 | `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する |
 | `.adlaire-wysiwyg-` 接頭辞のクラス | Editor UI専用CSS契約であり、汎用部品ではない |
 | 公式アイコンセット | `Docs/Icon_Set_Catalog` と `Icons/` で分離管理する。アイコンタイル等はアイコン表示UI部品として扱う |
+| Admin UI専用分類 | `Docs/Admin_UI_Catalog` で分離管理する |
 
 ---
 

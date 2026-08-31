@@ -21,6 +21,9 @@
 - `EditorUI/wysiwyg.js` は、表示モード切替、メニュー開閉、パネル開閉を実装確認単位として扱う。
 - 仕様変更時は `Docs/Master_Spec`、本ファイル、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
 - CSS/JavaScriptのビルド、bundle、minify、CSSプリプロセッサは前提にしない。
+- Markdown/MDX parser、Editor本体処理、保存処理、DOMイベント設計は本カタログの管理対象にしない。
+- 実装済みclassは、対応する `EditorUI/wysiwyg.css` と照合できる状態で管理する。
+- サンプルは理解補助として扱い、仕様正本にはしない。
 
 ## 1.1 完全固定対象
 
@@ -49,6 +52,16 @@
 | Preview | 任意 | `.adlaire-wysiwyg-preview` | プレビュー表示領域 |
 | JSON panel | 任意 | `.adlaire-wysiwyg-json-panel` | JSON文字列表現の表示領域 |
 | Footer | 任意 | `.adlaire-wysiwyg-footer` | 状態バー、補助情報 |
+
+## 1.2.1 モバイルサンプル構成
+
+| サンプル対象 | 含めるUI |
+| --- | --- |
+| mobile toolbar | `.adlaire-wysiwyg-mobile-toolbar`、`.adlaire-wysiwyg-mobile-action` |
+| bottom sheet | `.adlaire-wysiwyg-mobile-sheet`、`.adlaire-wysiwyg-command-item` |
+| block操作 | `.adlaire-wysiwyg-block`、`.adlaire-wysiwyg-drag-handle`、`.adlaire-wysiwyg-block-menu` |
+| inline toolbar | `.adlaire-wysiwyg-inline-toolbar`、`.adlaire-wysiwyg-inline-button` |
+| readonly/error表示 | `.adlaire-wysiwyg-readonly`、`.adlaire-wysiwyg-alert`、`.adlaire-wysiwyg-save-state` |
 
 ## 1.3 表示モード
 
