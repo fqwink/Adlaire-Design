@@ -57,6 +57,7 @@ for path in \
   LICENSE \
   Docs/Document_Index \
   Docs/Master_Spec \
+  Docs/Editor_Master_Spec \
   Docs/Generic_Component_Catalog \
   Docs/Admin_UI_Catalog \
   Docs/WYSIWYG_Editor_UI_Catalog \
@@ -165,6 +166,7 @@ fi
 
 find "$ADLAIRE_DESIGN_ROOT/Docs" -type f \
   ! -name 'Master_Spec' \
+  ! -name 'Editor_Master_Spec' \
   ! -name 'Generic_Component_Catalog' \
   ! -name 'Admin_UI_Catalog' \
   ! -name 'WYSIWYG_Editor_UI_Catalog' \
@@ -447,6 +449,7 @@ for css_master_term in \
   'デザインシステムは、単なるCSS集、テーマ集、部品一覧、ブランドガイドではない。' \
   'デザインシステムは、デザイントークン、CSS契約、UI部品、状態表現、ブランド資産、公式アイコン、WYSIWYG Editor UI、Editor部分、検査条件を同じルールで接続し、利用側が一貫した画面を構築できるようにする。' \
   'Adlaire-Designは、UI表現、デザイントークン、CSS契約、汎用部品、公式アイコン、ブランド資産、WYSIWYG Editor UI、Editor部分、TypeScript正本、JavaScript生成物を正本化する。' \
+  'エディタ本体とWYSIWYG Editor UIの詳細正本は `Docs/Editor_Master_Spec` とする。' \
   'アクセシビリティ方針は WCAG 2.2 A を参照し、状態や意味を色だけで伝えない。' \
   'Adlaire-Designのアクセシビリティ方針は WCAG 2.2 A を参照する。' \
   'エラー、警告、成功、情報、フォーカス、選択、入力エラーなどの状態は、色だけで意味を伝えない。' \
@@ -517,7 +520,7 @@ for css_master_term in \
   'Specification layer' \
   'WYSIWYG Editor UI | `EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js`' \
   '### 11.2.3 TypeScript正本とJavaScript生成物' \
-  '### 11.2.4 Editor部分の統合仕様' \
+  '### 11.2.4 Editor部分とWYSIWYG Editor UIの統合仕様' \
   '`TypeScript/Editor/` は責務ベースの少数ファイルに集約し、機能ごとの細分化フォルダを作らない。' \
   '| `TypeScript/Editor/core.ts` | Editor起動、状態保持、command dispatch、Editor全体の接続口 |' \
   '| `TypeScript/Editor/document.ts` | EditorDocument、EditorBlock、block tree、normalize、migration |' \
@@ -568,7 +571,7 @@ for wysiwyg_spec_term in \
   '### 11.11.2.3 WYSIWYG Editor UIマスター仕様' \
   '本節は、Adlaire-DesignにおけるWYSIWYG Editor UIのマスター仕様である。' \
   'WYSIWYG Editor UIマスター仕様' \
-  'WYSIWYG Editor UI仕様、Editor部分、実装境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。' \
+  'WYSIWYG Editor UI仕様、Editor部分、実装境界の詳細正本は `Docs/Editor_Master_Spec` とする。`Docs/WYSIWYG_Editor_UI_Catalog` は、エディタUI部品の分類、優先度、実装状態を管理する。' \
   'Editor UI完全固定対象は以下とする。' \
   'Editor UI階層は以下に固定する。' \
   'Editor UI表示モードは以下に固定する。' \
@@ -694,6 +697,7 @@ for indexed_path in \
   README.md \
   LICENSE \
   Docs/Master_Spec \
+  Docs/Editor_Master_Spec \
   Docs/Generic_Component_Catalog \
   Docs/WYSIWYG_Editor_UI_Catalog \
   Docs/Icon_Set_Catalog \
@@ -735,6 +739,7 @@ done
 
 for document_index_responsibility_term in \
   '`Docs/Master_Spec`(仕様・設計の正本、CSS、Editor UI、Editor部分、TypeScript正本、JavaScript生成物、公式アイコンセット、Samples、カタログ責務索引)' \
+  '`Docs/Editor_Master_Spec`(エディタ本体とWYSIWYG Editor UIの専用マスター仕様)' \
   '`Docs/Generic_Component_Catalog`(一般的なCSS汎用部品の分類、優先度、実装先、実装状態の一覧)' \
   '`Docs/Admin_UI_Catalog`(管理画面専用UI部品の分類、優先度、実装先、実装状態の一覧)' \
   '`Docs/WYSIWYG_Editor_UI_Catalog`(エディタUIに関する部品の分類、優先度、実装先、実装状態の一覧)' \
@@ -757,6 +762,24 @@ for editor_archive_path in \
   './node_modules/typescript/bin/tsc'; do
   if ! tar -tf "$ADLAIRE_DESIGN_ROOT/AdlaireEditor_Integrated_Temporary/adlaire-editor-repository.tar" | grep -F -x -- "$editor_archive_path" >/dev/null 2>&1; then
     echo "AdlaireEditor_Integrated_Temporary/adlaire-editor-repository.tar missing required Adlaire-Editor data: $editor_archive_path" >&2
+    exit 1
+  fi
+done
+
+for editor_master_term in \
+  '# Adlaire-Design Editor Master Spec' \
+  '本書は、Adlaire-Designに統合するエディタ本体とWYSIWYG Editor UIの専用マスター仕様である。' \
+  '`Docs/Master_Spec` はAdlaire-Design全体正本とし、エディタ本体とエディタUIの詳細正本は本書とする。' \
+  'Adlaire-Designのエディタは、安全な構造化コンテンツ編集基盤として管理する。' \
+  '| エディタ本体TypeScript正本 | `TypeScript/Editor/` | 文書構造、編集操作、検証、履歴、イベントの正本 |' \
+  '| エディタ本体JavaScript生成物 | `EditorUI/editor.js` | ブラウザ実行用の生成物 |' \
+  '| WYSIWYG Editor UI CSS | `EditorUI/wysiwyg.css` | エディタ表示層のCSS正本 |' \
+  '| WYSIWYG Editor UI部品カタログ | `Docs/WYSIWYG_Editor_UI_Catalog` | エディタUI部品の分類、優先度、実装状態 |' \
+  'エディタ本体は保存先への書き込み、Git反映、認証認可、静的サイト生成、CMS固有処理を実行しない。これらは要求イベントとして外部へ渡す。' \
+  '標準commandは `insert-block`、`delete-block`、`update-block`、`move-block`、`split-block`、`merge-block`、`set-document-meta`、`set-selection`、`save`、`request-publish` とする。' \
+  '`EditorUI/editor.js` は `window.AdlaireEditor`、`HeadlessEditorController`、`ToolRegistry`、`createEditor`、`applyCommand`、`handlePaste`、`validateDocument`、`sanitizeDocument` を公開すること。'; do
+  if ! grep -F -- "$editor_master_term" "$ADLAIRE_DESIGN_ROOT/Docs/Editor_Master_Spec" >/dev/null 2>&1; then
+    echo "Docs/Editor_Master_Spec missing required term: $editor_master_term" >&2
     exit 1
   fi
 done
@@ -1000,6 +1023,10 @@ fi
 for editor_term in \
   'window.AdlaireEditor' \
   'HeadlessEditorController' \
+  'ToolRegistry' \
+  'EventBus' \
+  'History' \
+  'applyCommand' \
   'createEditor' \
   'createEmptyDocument' \
   'createBlock' \
@@ -1010,6 +1037,10 @@ for editor_term in \
   'getLastBlockPosition' \
   'getNextBlockPosition' \
   'getPreviousBlockPosition' \
+  'handlePaste' \
+  'normalizeBlock' \
+  'validateBlock' \
+  'validateDocumentAsync' \
   'sanitizeDocument' \
   'validateDocument'; do
   if ! grep -F -- "$editor_term" "$ADLAIRE_DESIGN_ROOT/EditorUI/editor.js" >/dev/null 2>&1; then

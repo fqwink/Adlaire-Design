@@ -1,25 +1,26 @@
-import { asRecord, flattenBlocks, type ToolRegistry } from "./document";
+import { asRecord, flattenBlocks, normalizeBlock, type ToolRegistry } from "./document";
 import { editorError } from "./events";
-import type { EditorBlock, EditorDocument, EditorValidationResult } from "./types";
+import type { EditorBlock, EditorDocument, EditorSelection, EditorValidationResult } from "./types";
 
-export function sanitizeDocument(document: EditorDocument): EditorDocument {
+export function sanitizeDocument(document: EditorDocument, registry?: ToolRegistry): EditorDocument {
   return {
     ...document,
-    blocks: document.blocks.map(sanitizeBlock),
+    blocks: document.blocks.map((block) => sanitizeBlock(block, registry)),
   };
 }
 
-export function sanitizeBlock(block: EditorBlock): EditorBlock {
-  const data = JSON.parse(JSON.stringify(block.data ?? {}));
+export function sanitizeBlock(block: EditorBlock, registry?: ToolRegistry): EditorBlock {
+  const normalized = registry ? normalizeBlock(block, registry) : block;
+  const data = JSON.parse(JSON.stringify(normalized.data ?? {}));
   sanitizeValue(data);
   return {
-    ...block,
+    ...normalized,
     data,
-    ...(block.children ? { children: block.children.map(sanitizeBlock) } : {}),
+    ...(normalized.children ? { children: normalized.children.map((child) => sanitizeBlock(child, registry)) } : {}),
   };
 }
 
-export function validateDocument(document: EditorDocument, registry?: ToolRegistry): EditorValidationResult {
+export function validateDocument(document: EditorDocument, registry?: ToolRegistry, selection?: EditorSelection | null): EditorValidationResult {
   const errors = [];
   const warnings = [];
   if (!document || typeof document !== "object") {
@@ -28,6 +29,8 @@ export function validateDocument(document: EditorDocument, registry?: ToolRegist
   if (!Array.isArray(document.blocks)) {
     return { valid: false, errors: [editorError("document.blocks.invalid", "Document blocks must be an array.")], warnings: [] };
   }
+  if (typeof document.id !== "string" || document.id.length === 0) errors.push(editorError("document.id.required", "Document id is required."));
+  if (typeof document.schemaVersion !== "string" || document.schemaVersion.length === 0) errors.push(editorError("document.schemaVersion.required", "Document schemaVersion is required."));
   const ids = new Set<string>();
   for (const block of flattenBlocks(document)) {
     if (ids.has(block.id)) errors.push(editorError("block.id.duplicate", `Duplicate block id '${block.id}'.`, block.id));
@@ -36,27 +39,35 @@ export function validateDocument(document: EditorDocument, registry?: ToolRegist
     errors.push(...result.errors);
     warnings.push(...result.warnings);
   }
+  if (selection) {
+    if (!ids.has(selection.anchor.blockId)) errors.push(editorError("selection.anchor.invalid", "Selection anchor references a missing block.", selection.anchor.blockId));
+    if (!ids.has(selection.focus.blockId)) errors.push(editorError("selection.focus.invalid", "Selection focus references a missing block.", selection.focus.blockId));
+  }
   return { valid: errors.length === 0, errors, warnings };
 }
 
-export async function validateDocumentAsync(document: EditorDocument, registry?: ToolRegistry): Promise<EditorValidationResult> {
-  const base = validateDocument(document, registry);
+export async function validateDocumentAsync(document: EditorDocument, registry?: ToolRegistry, selection?: EditorSelection | null): Promise<EditorValidationResult> {
+  const base = validateDocument(document, registry, selection);
   const errors = [...base.errors];
+  const warnings = [...base.warnings];
   for (const block of Array.isArray(document?.blocks) ? flattenBlocks(document) : []) {
     const tool = registry?.get(block.type);
     if (tool?.validate && await tool.validate(block.data) === false) {
       errors.push(editorError("block.data.invalid", `Block '${block.id}' failed async validation.`, block.id));
     }
   }
-  return { valid: errors.length === 0, errors, warnings: base.warnings };
+  return { valid: errors.length === 0, errors, warnings };
 }
 
 export function validateBlock(block: EditorBlock, registry?: ToolRegistry): EditorValidationResult {
   const errors = [];
   const warnings = [];
-  if (!block?.id) errors.push(editorError("block.id.required", "Block id is required."));
-  if (!block?.type) errors.push(editorError("block.type.required", "Block type is required.", block?.id));
-  if (block?.type === "unsupported") warnings.push(editorError("block.unsupported", "Unsupported block is preserved.", block.id));
+  if (!block || typeof block !== "object") {
+    return { valid: false, errors: [editorError("block.invalid", "Block must be an object.")], warnings: [] };
+  }
+  if (!block.id) errors.push(editorError("block.id.required", "Block id is required."));
+  if (!block.type) errors.push(editorError("block.type.required", "Block type is required.", block.id));
+  if (block.type === "unsupported") warnings.push(editorError("block.unsupported", "Unsupported block is preserved.", block.id));
   const tool = registry?.get(block.type);
   if (tool?.validate) {
     const valid = tool.validate(asRecord(block.data));
@@ -76,7 +87,7 @@ function sanitizeValue(value: unknown): void {
     const marks = record.marks.filter((mark) => {
       if (!mark || typeof mark !== "object") return false;
       const candidate = mark as Record<string, unknown>;
-      return !(candidate.type === "link" && typeof candidate.href === "string" && !/^(https?:|mailto:|\/|#)/i.test(candidate.href));
+      return !(candidate.type === "link" && typeof candidate.href === "string" && !isSafeHref(candidate.href));
     });
     if (marks.length > 0) {
       record.marks = marks;
@@ -84,8 +95,12 @@ function sanitizeValue(value: unknown): void {
       delete record.marks;
     }
   }
-  if (record.type === "link" && typeof record.href === "string" && !/^(https?:|mailto:|\/|#)/i.test(record.href)) {
+  if (record.type === "link" && typeof record.href === "string" && !isSafeHref(record.href)) {
     delete record.href;
   }
   for (const key of Object.keys(record)) sanitizeValue(record[key]);
+}
+
+function isSafeHref(href: string): boolean {
+  return /^(https?:|mailto:|tel:|\/|#)/i.test(href);
 }
