@@ -91,6 +91,12 @@ for path in \
   EditorUI/editor.js \
   EditorUI/wysiwyg.css \
   EditorUI/wysiwyg.js \
+  TypeScript/CSS/tokens.ts \
+  TypeScript/CSS/rules.ts \
+  TypeScript/CSS/targets.ts \
+  TypeScript/CSS/emit.ts \
+  TypeScript/CSS/manifest.ts \
+  TypeScript/CSS/index.ts \
   TypeScript/UI/components.ts \
   TypeScript/UI/content.ts \
   TypeScript/UI/forms.ts \
@@ -118,7 +124,7 @@ for path in \
   fi
 done
 
-for path in UI EditorUI Tokens Brand Icons Samples Samples/design TypeScript TypeScript/UI TypeScript/EditorUI TypeScript/Editor; do
+for path in UI EditorUI Tokens Brand Icons Samples Samples/design TypeScript TypeScript/CSS TypeScript/UI TypeScript/EditorUI TypeScript/Editor; do
   if [ ! -d "$ADLAIRE_DESIGN_ROOT/$path" ]; then
     echo "Adlaire-Design required path must be a directory: $ADLAIRE_DESIGN_ROOT/$path" >&2
     exit 1
@@ -141,6 +147,15 @@ find "$ADLAIRE_DESIGN_ROOT/TypeScript/Editor" -mindepth 1 -type d \
 if [ -s "$TMP_DIR/unexpected-editor-typescript-directories" ]; then
   echo "TypeScript/Editor/ must stay as responsibility-based files without nested directories:" >&2
   cat "$TMP_DIR/unexpected-editor-typescript-directories" >&2
+  exit 1
+fi
+
+find "$ADLAIRE_DESIGN_ROOT/TypeScript/CSS" -mindepth 1 -type d \
+  -print >"$TMP_DIR/unexpected-css-typescript-directories"
+
+if [ -s "$TMP_DIR/unexpected-css-typescript-directories" ]; then
+  echo "TypeScript/CSS/ must stay as responsibility-based files without nested directories:" >&2
+  cat "$TMP_DIR/unexpected-css-typescript-directories" >&2
   exit 1
 fi
 
@@ -799,6 +814,13 @@ for indexed_path in \
   EditorUI/wysiwyg.js \
   EditorUI/editor.js \
   TypeScript/ \
+  TypeScript/CSS/ \
+  TypeScript/CSS/tokens.ts \
+  TypeScript/CSS/rules.ts \
+  TypeScript/CSS/targets.ts \
+  TypeScript/CSS/emit.ts \
+  TypeScript/CSS/manifest.ts \
+  TypeScript/CSS/index.ts \
   TypeScript/UI/components.ts \
   TypeScript/UI/content.ts \
   TypeScript/UI/forms.ts \
@@ -823,7 +845,7 @@ for document_index_responsibility_term in \
   '`Docs/Pending_Tasks`(未策定または未完了タスクだけを集約する管理ファイル)' \
   '`Brand/README.md`(ブランド資産の配置ルール、許可形式、命名規則、公式アイコンセットとの境界)' \
   '`TypeScript/`(CSS生成、UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本。Editor本体は責務ベースの少数ファイルで集約)' \
-  '`TypeScript/CSS/`(Adlaire Frontend CompilerのCSS生成TypeScript正本。実装予定領域)'; do
+  '`TypeScript/CSS/`(Adlaire Frontend CompilerのCSS生成TypeScript正本)'; do
   if ! grep -F -- "$document_index_responsibility_term" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
     echo "Docs/Document_Index missing responsibility description: $document_index_responsibility_term" >&2
     exit 1
@@ -890,8 +912,6 @@ for pending_task_term in \
   '仕様未確定、要否未決定、策定中の項目は未実装リストに含めない。' \
   '## 3. 未実装リスト' \
   '本章は、仕様確定済みで、実装だけが未完了の項目を管理する。' \
-  'AD-TASK-037' \
-  'CSS生成TypeScript正本の実装。`TypeScript/CSS/tokens.ts`、`rules.ts`、`targets.ts`、`emit.ts`、`manifest.ts`、`index.ts` を作成し、Token CSS、UI CSS、Editor UI CSSを生成する正本を構成する。' \
   'AD-TASK-038' \
   'Token CSS生成への移行。`Tokens/*.css` を `TypeScript/CSS/tokens.ts` と `targets.ts` から再現できる生成物へ移行する。' \
   'AD-TASK-039' \
