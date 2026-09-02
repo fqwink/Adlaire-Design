@@ -5,7 +5,9 @@
 - すべての作業開始時に、必ずこの `AGENTS.md` を読むこと。
 - このリポジトリは `Adlaire-Design` の開発正本・仕様正本として扱うこと。
 - 仕様・設計の正本は `Docs/Master_Spec` とする。
-- リポジトリ索引は `Docs/Document_Index`、変更履歴は `Docs/Change_History` とする。
+- リポジトリ索引は `Docs/Document_Index` とする。
+- 作業開始時に `AGENTS.md` を読むと同時に、マージ状況、リモート、ローカル整合性を確認すること。
+- 整合性確認では、`git status --short --branch`、`git remote -v`、必要に応じた `git fetch backup`、`HEAD` と `backup/main` の一致または差分を確認すること。
 - Adlaire-Designは、フロントエンドUI基盤を軸としたフロントエンド基盤として、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、Editor本体、TypeScript正本、JavaScript生成物を扱う独立リポジトリとして管理すること。
 - TypeScriptはDenoランタイム環境を前提とすること。
 - 標準採用ライブラリはDeno標準ライブラリ(`jsr:@std/*`)に限定すること。
@@ -17,7 +19,7 @@
 
 ## リポジトリ構成
 
-- `Docs/`: 仕様・設計、リポジトリ索引、変更履歴
+- `Docs/`: 仕様・設計、リポジトリ索引
 - `UI/`: CSSフレームワーク本体および汎用UI JavaScript
 - `EditorUI/`: WYSIWYG Editor UIスキンおよびEditor UI JavaScript
 - `TypeScript/`: UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本
@@ -53,6 +55,7 @@
 - 承認前に提示する内容は、変更対象ファイル、変更目的、変更概要、完了条件とする。
 - ユーザーが「変更禁止」「提案のみ」「確認のみ」と指示した場合は、ファイル変更を行わないこと。
 - 具体的な変更対象が提示されていない「承認」は、ファイル変更または実装工程の許可として扱わない。
+- PR作成後のmainへのマージはユーザーが行う。ユーザーが明示的にマージを指示しない限り、作業者はPR作成までに留めること。
 
 ## 実装承認ルール
 

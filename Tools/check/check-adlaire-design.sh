@@ -62,8 +62,9 @@ for path in \
   Docs/Admin_UI_Catalog \
   Docs/WYSIWYG_Editor_UI_Catalog \
   Docs/Icon_Set_Catalog \
+  Docs/Brand_Asset_Catalog \
   Docs/Pending_Tasks \
-  Docs/Change_History \
+  Brand/README.md \
   Icons \
   Samples/README.md \
   Samples/design \
@@ -173,9 +174,9 @@ find "$ADLAIRE_DESIGN_ROOT/Docs" -type f \
   ! -name 'Admin_UI_Catalog' \
   ! -name 'WYSIWYG_Editor_UI_Catalog' \
   ! -name 'Icon_Set_Catalog' \
+  ! -name 'Brand_Asset_Catalog' \
   ! -name 'Pending_Tasks' \
   ! -name 'Document_Index' \
-  ! -name 'Change_History' \
   -print >"$TMP_DIR/unexpected-docs-files"
 
 if [ -s "$TMP_DIR/unexpected-docs-files" ]; then
@@ -227,7 +228,7 @@ if [ ! -x "$ADLAIRE_DESIGN_ROOT/Tools/check/check-adlaire-design.sh" ]; then
   exit 1
 fi
 
-find "$ADLAIRE_DESIGN_ROOT/Brand" -type f ! -name '.gitkeep' -print >"$TMP_DIR/brand-files"
+find "$ADLAIRE_DESIGN_ROOT/Brand" -type f ! -name '.gitkeep' ! -name 'README.md' -print >"$TMP_DIR/brand-files"
 grep -E -v '/(adlaire-logo-[a-z0-9]([a-z0-9-]*[a-z0-9])?\.svg|adlaire-image-[a-z0-9]([a-z0-9-]*[a-z0-9])?\.(png|webp)|adlaire-icon-[a-z0-9]([a-z0-9-]*[a-z0-9])?\.svg|adlaire-ogp-[a-z0-9]([a-z0-9-]*[a-z0-9])?\.(png|webp)|adlaire-brand-[a-z0-9]([a-z0-9-]*[a-z0-9])?\.(svg|png|webp))$' "$TMP_DIR/brand-files" >"$TMP_DIR/unexpected-brand-files" || true
 
 if [ -s "$TMP_DIR/unexpected-brand-files" ]; then
@@ -235,6 +236,33 @@ if [ -s "$TMP_DIR/unexpected-brand-files" ]; then
   cat "$TMP_DIR/unexpected-brand-files" >&2
   exit 1
 fi
+
+while IFS= read -r brand_file; do
+  brand_name=$(basename "$brand_file")
+  if ! grep -F -- "\`$brand_name\`" "$ADLAIRE_DESIGN_ROOT/Docs/Brand_Asset_Catalog" >/dev/null 2>&1; then
+    echo "Brand/ file is missing from Docs/Brand_Asset_Catalog: $brand_name" >&2
+    exit 1
+  fi
+done <"$TMP_DIR/brand-files"
+
+awk -F '|' '
+  /^\| AD-BRAND-/ {
+    filename = $3
+    status = $8
+    gsub(/^[ \t`]+|[ \t`]+$/, "", filename)
+    gsub(/^[ \t]+|[ \t]+$/, "", status)
+    if (status == "実装済み") {
+      print filename
+    }
+  }
+' "$ADLAIRE_DESIGN_ROOT/Docs/Brand_Asset_Catalog" >"$TMP_DIR/implemented-brand-assets"
+
+while IFS= read -r brand_name; do
+  if [ ! -f "$ADLAIRE_DESIGN_ROOT/Brand/$brand_name" ]; then
+    echo "Docs/Brand_Asset_Catalog marks a brand asset as implemented but Brand/ is missing it: $brand_name" >&2
+    exit 1
+  fi
+done <"$TMP_DIR/implemented-brand-assets"
 
 find "$ADLAIRE_DESIGN_ROOT/Icons" -type f ! -name '.gitkeep' ! -name 'README.md' -print >"$TMP_DIR/icon-files"
 find "$ADLAIRE_DESIGN_ROOT/Icons" -type f ! -name '.gitkeep' ! -name 'README.md' ! -name '*.svg' -print >"$TMP_DIR/unexpected-icon-format-files"
@@ -386,10 +414,15 @@ if ! grep -F 'WYSIWYG Editor UIはAdlaire-Designの仕様対象として管理�
   exit 1
 fi
 
-if ! grep -F 'Docs/Change_History' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
-  echo "Adlaire-Design README must reference Docs/Change_History." >&2
-  exit 1
-fi
+for agents_operation_term in \
+  '作業開始時に `AGENTS.md` を読むと同時に、マージ状況、リモート、ローカル整合性を確認すること。' \
+  '整合性確認では、`git status --short --branch`、`git remote -v`、必要に応じた `git fetch backup`、`HEAD` と `backup/main` の一致または差分を確認すること。' \
+  'PR作成後のmainへのマージはユーザーが行う。ユーザーが明示的にマージを指示しない限り、作業者はPR作成までに留めること。'; do
+  if ! grep -F -- "$agents_operation_term" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+    echo "Adlaire-Design AGENTS.md missing required operation term: $agents_operation_term" >&2
+    exit 1
+  fi
+done
 
 if ! grep -F 'フロントエンドUI基盤を軸としたフロントエンド基盤として、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、Editor本体、TypeScript正本、JavaScript生成物を管理する独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must define CSS and WYSIWYG Editor UI as managed scope." >&2
@@ -417,7 +450,7 @@ if ! grep -F 'npm互換パッケージ、npm依存、Node.js依存、外部フ�
 fi
 
 for readme_responsibility_term in \
-  'CSS仕様、CSS実装、TypeScript正本、JavaScript生成物、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、Editor本体、未タスク管理、検査、変更履歴、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。' \
+  'CSS仕様、CSS実装、TypeScript正本、JavaScript生成物、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、Editor本体、未タスク管理、検査、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。' \
   '一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、エディタUIに関する部品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。' \
   '未策定または未完了タスクは `Docs/Pending_Tasks` に未完了分だけを集約する。'; do
   if ! grep -F -- "$readme_responsibility_term" "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
@@ -482,6 +515,7 @@ for css_master_term in \
   'CSSとJavaScriptは同一ファイルに混在させない。' \
   '公式アイコンセットとは、`Icons/` で管理する汎用UI用SVGアイコンである。' \
   '### 11.11.5 ブランド資産整理の策定仕様' \
+  'ブランド資産の補助正本は `Docs/Brand_Asset_Catalog` とする。' \
   '許可するファイル形式は、資産種別ごとに上表へ明記したSVG、PNG、WebPに限定する。JPG、JPEG、GIF、PDF、AI、PSD、EPSは対応しない。' \
   '`<name>` は小文字英数字とハイフンで構成し、先頭と末尾にハイフンを置かない。' \
   'ブランド資産の検査は `Tools/check/check-adlaire-design.sh` で行う。' \
@@ -499,17 +533,18 @@ for css_master_term in \
   'Samples全体の説明は `Samples/README.md` に記録する。' \
   'サンプルデザインは `Samples/design/` に配置する。PNG/WebPスクリーンショットは `Samples/` 直下に配置する。' \
   '### 11.2.1 責務別整理' \
-  'Adlaire-Designの責務は、CSS仕様、CSS実装、TypeScript正本、JavaScript生成物、トークン、ブランド資産、公式アイコンセット、汎用部品カタログ、Editor UIカタログ、Editor本体、未タスク管理、検査、変更履歴に分けて管理する。' \
+  'Adlaire-Designの責務は、CSS仕様、CSS実装、TypeScript正本、JavaScript生成物、トークン、ブランド資産、公式アイコンセット、汎用部品カタログ、Editor UIカタログ、Editor本体、未タスク管理、検査に分けて管理する。' \
   '| 公式アイコンセットカタログ | Adlaire-Design | `Docs/Icon_Set_Catalog` | 公式アイコンの分類、用途、表示サイズ、代替テキスト方針、実装状態 | ブランド資産、アイコン検索や挿入などの利用側処理 |' \
+  '| ブランド資産カタログ | Adlaire-Design | `Docs/Brand_Asset_Catalog` | ブランド資産のID、ファイル名、種別、用途、形式、代替テキストまたは説明方針、実装状態 | 汎用UI用の公式アイコンセット |' \
   '| 公式アイコンセット | Adlaire-Design | `Icons/` | 汎用UIで使う公式アイコンSVG | ロゴ、ブランド画像、OGP、PNG/WebP/JPG/JPEG、生成アイコンCSS |' \
   '| CSS実装 | Adlaire-Design | `UI/`、`EditorUI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、WYSIWYG Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク、TypeScript正本、JavaScript生成物 |' \
   '| TypeScript正本 | Adlaire-Design | `TypeScript/` | UI JavaScript、Editor UI JavaScript、Editor本体の実装正本 | CSS正本、生成物JavaScript、外部プロジェクト固有処理 |' \
   '| JavaScript生成物 | Adlaire-Design | `UI/*.js`、`EditorUI/wysiwyg.js`、`EditorUI/editor.js` | TypeScriptから生成するブラウザ実行用JavaScript | 手編集の正本JavaScript、CSS定義の内包 |' \
   '| Editor本体 | Adlaire-Design | `TypeScript/Editor/`、`EditorUI/editor.js` | 安全な構造化コンテンツ編集基盤、EditorDocument、ブロック編集、選択範囲、履歴、検証、サニタイズ、保存要求、公開要求、Editorイベント | 保存先への書き込み、Git反映、認証認可、静的サイト生成、プロダクト固有画面処理 |' \
-  '| 未タスク管理 | Adlaire-Design | `Docs/Pending_Tasks` | 未策定または未完了タスク | 完了済みタスク、変更履歴 |' \
+  '| 未タスク管理 | Adlaire-Design | `Docs/Pending_Tasks` | 未策定または未完了タスク | 完了済みタスク |' \
   '未策定または未完了のまま残っているタスクは `Docs/Pending_Tasks` に集約する。' \
   '| Docs | `Docs/Pending_Tasks` | 未策定または未完了タスクの管理 |' \
-  '| 未タスク管理 | `Docs/Pending_Tasks`、`Docs/Master_Spec`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |' \
+  '| 未タスク管理 | `Docs/Pending_Tasks`、`Docs/Master_Spec`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh` |' \
   '責務別の管理範囲は以下に固定する。' \
   'ファイル責務は以下に整理する。' \
   '責務別の変更単位は以下に固定する。' \
@@ -604,7 +639,7 @@ for wysiwyg_spec_term in \
   'ツールバー選択、ブロック選択、補助表示は色以外の手掛かりを併用する' \
   'プレビュー/JSON表示UIは以下とする。' \
   'Editor UI完全固定後の変更管理は以下とする。' \
-  'Master_Spec、カタログ、CSS、検査シェル、変更履歴のいずれかだけを単独で変更しない。' \
+  'Master_Spec、カタログ、CSS、検査シェルのいずれかだけを単独で変更しない。' \
   'Adlaire-Designで固定する対象は以下とする。' \
   '採用確定対象は以下とする。' \
   'WYSIWYG Editor UIは、表示層、UI部品、状態表示、CSS/JavaScript読み込み順、Editor UI JavaScript、Editor本体との接続点を仕様対象とする。' \
@@ -689,16 +724,8 @@ for wysiwyg_catalog_term in \
   fi
 done
 
-MASTER_SPEC_VERSION=$(sed -n 's/^\*\*Version:\*\* \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec")
-CHANGE_HISTORY_VERSION=$(sed -n 's/^## \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Change_History" | sed -n '1p')
-
-if [ -z "$MASTER_SPEC_VERSION" ]; then
+if ! sed -n 's/^\*\*Version:\*\* \(rev\.[0-9][0-9]*\)$/\1/p' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" | grep . >/dev/null 2>&1; then
   echo "Docs/Master_Spec must include a Version line in the form: **Version:** rev.N" >&2
-  exit 1
-fi
-
-if [ "$MASTER_SPEC_VERSION" != "$CHANGE_HISTORY_VERSION" ]; then
-  echo "Docs/Master_Spec Version must match the latest Docs/Change_History rev: $MASTER_SPEC_VERSION != $CHANGE_HISTORY_VERSION" >&2
   exit 1
 fi
 
@@ -717,9 +744,10 @@ for indexed_path in \
   Docs/Generic_Component_Catalog \
   Docs/WYSIWYG_Editor_UI_Catalog \
   Docs/Icon_Set_Catalog \
+  Docs/Brand_Asset_Catalog \
   Docs/Pending_Tasks \
-  Docs/Change_History \
   Brand/ \
+  Brand/README.md \
   Icons/ \
   Samples/README.md \
   Samples/design/ \
@@ -762,10 +790,38 @@ for document_index_responsibility_term in \
   '`Docs/Admin_UI_Catalog`(管理画面専用UI部品の分類、優先度、実装先、実装状態の一覧)' \
   '`Docs/WYSIWYG_Editor_UI_Catalog`(エディタUIに関する部品の分類、優先度、実装先、実装状態の一覧)' \
   '`Docs/Icon_Set_Catalog`(Adlaire-Design公式アイコンセットの分類、用途、実装状態の一覧)' \
+  '`Docs/Brand_Asset_Catalog`(ブランド資産のID、ファイル名、種別、用途、形式、代替テキストまたは説明方針、実装状態の一覧)' \
   '`Docs/Pending_Tasks`(未策定または未完了タスクだけを集約する管理ファイル)' \
+  '`Brand/README.md`(ブランド資産の配置ルール、許可形式、命名規則、公式アイコンセットとの境界)' \
   '`TypeScript/`(UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本。Editor本体は責務ベースの少数ファイルで集約)'; do
   if ! grep -F -- "$document_index_responsibility_term" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
     echo "Docs/Document_Index missing responsibility description: $document_index_responsibility_term" >&2
+    exit 1
+  fi
+done
+
+for brand_readme_term in \
+  '# Adlaire-Design Brand Assets' \
+  '`Brand/` は、Adlaire-Designで管理するブランド資産の配置領域である。' \
+  'JPG、JPEG、GIF、PDF、AI、PSD、EPSは対応しない。' \
+  '`Brand/` は、CSS、デザイントークン、汎用UI部品、WYSIWYG Editor UI部品、公式アイコンセットの置き場ではない。' \
+  '汎用UIで使う公式アイコンセットは `Icons/` と `Docs/Icon_Set_Catalog` で管理する。' \
+  'ブランド資産を追加する場合は、`Docs/Brand_Asset_Catalog` にID、ファイル名、種別、用途、形式、代替テキストまたは説明方針、実装状態を記録する。'; do
+  if ! grep -F -- "$brand_readme_term" "$ADLAIRE_DESIGN_ROOT/Brand/README.md" >/dev/null 2>&1; then
+    echo "Brand/README.md missing required brand asset operation term: $brand_readme_term" >&2
+    exit 1
+  fi
+done
+
+for brand_asset_catalog_term in \
+  '# Adlaire-Design ブランド資産カタログ' \
+  '本カタログは、`Brand/` 配下で管理するブランド資産の補助正本である。' \
+  'ブランド資産IDは `AD-BRAND-001` から連番で付与する。' \
+  '| ID | ファイル名 | 種別 | 用途 | 形式 | 代替テキスト/説明方針 | 状態 |' \
+  '現時点では、実ブランド資産は未配置であり、`Brand/.gitkeep` のみを空ディレクトリ維持用に許可する。' \
+  'JPG、JPEG、GIF、PDF、AI、PSD、EPSは対応しない。'; do
+  if ! grep -F -- "$brand_asset_catalog_term" "$ADLAIRE_DESIGN_ROOT/Docs/Brand_Asset_Catalog" >/dev/null 2>&1; then
+    echo "Docs/Brand_Asset_Catalog missing required brand asset catalog term: $brand_asset_catalog_term" >&2
     exit 1
   fi
 done
@@ -870,7 +926,7 @@ done
 
 OLD_REPOSITORY_NAME='Adlaire-''Eco''system-Design'
 
-if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_UI_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Icon_Set_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
+if grep -R -n "$OLD_REPOSITORY_NAME" "$ADLAIRE_DESIGN_ROOT/AGENTS.md" "$ADLAIRE_DESIGN_ROOT/README.md" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" "$ADLAIRE_DESIGN_ROOT/Docs/Generic_Component_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/WYSIWYG_Editor_UI_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Icon_Set_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Brand_Asset_Catalog" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/tmp/adlaire-design-old-name-matches 2>/dev/null; then
   echo "current Adlaire-Design documents must not use the old repository name:" >&2
   cat /tmp/adlaire-design-old-name-matches >&2
   exit 1
