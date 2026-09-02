@@ -122,6 +122,76 @@ body {
   border: 1px solid var(--adlaire-surface-border);
 }
 
+.sample-brand-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.7fr repeat(2, 1fr);
+  gap: 14px;
+}
+
+.sample-brand-logo-card,
+.sample-brand-mark-card,
+.sample-brand-image-card {
+  min-width: 0;
+  border: 1px solid var(--adlaire-surface-border);
+  border-radius: var(--adlaire-radius-md);
+  background: var(--adlaire-surface-card);
+  box-shadow: var(--adlaire-shadow-card);
+  overflow: hidden;
+}
+
+.sample-brand-logo-card,
+.sample-brand-mark-card {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 18px;
+  min-height: 180px;
+  padding: 22px;
+}
+
+.sample-brand-mark-card {
+  justify-items: center;
+}
+
+.sample-brand-logo,
+.sample-brand-mark,
+.sample-brand-image-card img {
+  display: block;
+  max-width: 100%;
+}
+
+.sample-brand-logo {
+  width: min(100%, 330px);
+  height: auto;
+}
+
+.sample-brand-mark {
+  width: 82px;
+  height: 82px;
+}
+
+.sample-brand-image-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--adlaire-surface-soft);
+}
+
+.sample-brand-logo-card span,
+.sample-brand-mark-card span,
+.sample-brand-image-card span {
+  display: block;
+  padding: 10px 12px;
+  color: var(--adlaire-surface-text-muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.sample-brand-logo-card span,
+.sample-brand-mark-card span {
+  padding: 0;
+}
+
 .sample-icon-slot {
   width: 86px;
   height: 72px;
@@ -198,6 +268,7 @@ body {
 
   .sample-grid-two,
   .sample-swatch-grid,
+  .sample-brand-grid,
   .sample-git-layout {
     grid-template-columns: 1fr;
   }

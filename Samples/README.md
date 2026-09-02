@@ -13,10 +13,10 @@
 
 ## 現時点のサンプル
 
-- `Samples/design/index.html`: 汎用UI、Admin UI、公式アイコン、WYSIWYG Editor UI、Git Provider UIをまとめた静的サンプル。
+- `Samples/design/index.html`: 汎用UI、Admin UI、公式アイコン、WYSIWYG Editor UI、Git Provider UIをまとめた静的サンプル。ブランド資産の表示確認も含める。
 - `Samples/design/sample.css`: サンプル表示のための配置補助CSS。
 - `Samples/design/sample.js`: サンプル内の軽い表示補助JavaScript。
-- `Samples/sample-current.png`: 現時点サンプルのPNGスクリーンショット。
+- `Samples/sample-current.png`: 参考用のPNGスクリーンショット。
 
 ## ブランドサンプル
 
