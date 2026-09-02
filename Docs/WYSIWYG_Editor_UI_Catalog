@@ -14,7 +14,7 @@
 
 - WYSIWYG Editor UIはAdlaire-Design採用とする。
 - 本カタログはエディタUIに関するカタログとして扱う。
-- WYSIWYG Editor UI仕様は `Docs/Master_Spec` で完全固定する。
+- WYSIWYG Editor UI仕様は `Docs/Editor_Master_Spec` で固定し、UI部品一覧は本カタログで管理する。
 - 本カタログは表示層、UI部品、状態表示、モバイルUI、補助パネル、Editor UI JavaScriptを扱う。
 - CSS実装先は `EditorUI/wysiwyg.css`、JavaScript実装先は `EditorUI/wysiwyg.js` とする。
 - `EditorUI/wysiwyg.css` は、本カタログの優先A/B/C分類を実装確認単位として扱う。

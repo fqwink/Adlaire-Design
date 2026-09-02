@@ -6,17 +6,21 @@
 - このリポジトリは `Adlaire-Design` の開発正本・仕様正本として扱うこと。
 - 仕様・設計の正本は `Docs/Master_Spec` とする。
 - リポジトリ索引は `Docs/Document_Index`、変更履歴は `Docs/Change_History` とする。
-- Adlaire-Designは、フロントエンドUI基盤を軸としたフロントエンド基盤として、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、Editor部分、TypeScript正本、JavaScript生成物を扱う独立リポジトリとして管理すること。
+- Adlaire-Designは、フロントエンドUI基盤を軸としたフロントエンド基盤として、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、Editor本体、TypeScript正本、JavaScript生成物を扱う独立リポジトリとして管理すること。
+- TypeScriptはDenoランタイム環境を前提とすること。
+- 標準採用ライブラリはDeno標準ライブラリ(`jsr:@std/*`)に限定すること。
+- parserなどが必要な場合は、明示的な例外採用ライブラリとして仕様に記録すること。
+- npm互換パッケージ、npm依存、Node.js依存、外部フレームワークは例外なく禁止すること。
 - WYSIWYG Editor UIはAdlaire-Design採用とする。
 - WYSIWYG Editor UIはAdlaire-Designの仕様対象として管理すること。
-- Editor部分は、安全な構造化コンテンツ編集基盤としてAdlaire-Designに統合すること。
+- Editor本体は、安全な構造化コンテンツ編集基盤としてAdlaire-Designに統合すること。
 
 ## リポジトリ構成
 
 - `Docs/`: 仕様・設計、リポジトリ索引、変更履歴
 - `UI/`: CSSフレームワーク本体および汎用UI JavaScript
 - `EditorUI/`: WYSIWYG Editor UIスキンおよびEditor UI JavaScript
-- `TypeScript/`: UI JavaScript、Editor UI JavaScript、Editor部分のTypeScript正本
+- `TypeScript/`: UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本
 - `Tokens/`: デザイントークン
 - `Brand/`: ブランド資産
 - `Tools/check/`: Adlaire-Design専用の検査シェル
@@ -29,7 +33,7 @@
 - 現行文書・現行READMEでは、リポジトリ名を `Adlaire-Design` に統一すること。
 - ドキュメントフォルダ名は `Docs/` とし、`Documents/` は作成しないこと。
 - Adlaire-Design専用の検査シェルは `Tools/check/` で管理すること。
-- Node.js/npm依存物(`package.json`、`package-lock.json`、`node_modules`)を追加しないこと。
+- Node.js依存は完全禁止とし、npm互換パッケージ、npm依存物(`package.json`、`package-lock.json`、`node_modules`)を追加しないこと。
 - 既存トップレベル構造は維持し、追加してよいトップレベルは `TypeScript/` のみとすること。
 - `AdlaireEditor_Integrated_Temporary/` はAdlaire-Editor全体データを後続整備前提で一時格納する例外領域とすること。
 - `AdlaireEditor_Integrated_Temporary/` 配下に限り、Adlaire-Editor由来の `package.json`、`package-lock.json`、`node_modules/`、`dist/`、`dist-test/`、`.git/` を一時保持できること。

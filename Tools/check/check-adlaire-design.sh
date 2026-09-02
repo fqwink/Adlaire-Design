@@ -324,7 +324,17 @@ fi
 if find "$ADLAIRE_DESIGN_ROOT" \
   -path "$ADLAIRE_DESIGN_ROOT/AdlaireEditor_Integrated_Temporary" -prune -o \
   \( -name 'package.json' -o -name 'package-lock.json' -o -name 'node_modules' \) -print | grep . >/dev/null 2>&1; then
-  echo "Adlaire-Design must not use Node.js/npm project files." >&2
+  echo "Adlaire-Design must not use npm or Node.js dependency project files." >&2
+  exit 1
+fi
+
+if grep -R -E '(^|[^a-zA-Z0-9_])(npm:|node:)' "$ADLAIRE_DESIGN_ROOT/TypeScript" >/dev/null 2>&1; then
+  echo "TypeScript/ must not use npm: or node: imports." >&2
+  exit 1
+fi
+
+if grep -R -E 'from ["'\''](react|vue|svelte|solid-js|preact|lit|@angular/)' "$ADLAIRE_DESIGN_ROOT/TypeScript" >/dev/null 2>&1; then
+  echo "TypeScript/ must not import external frontend frameworks." >&2
   exit 1
 fi
 
@@ -366,7 +376,7 @@ if ! grep -F 'CSSのビルド、minify、bundleは現状検討しないこと。
   exit 1
 fi
 
-if ! grep -F 'フロントエンドUI基盤を軸としたフロントエンド基盤として、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、Editor部分、TypeScript正本、JavaScript生成物を扱う独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
+if ! grep -F 'フロントエンドUI基盤を軸としたフロントエンド基盤として、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、Editor本体、TypeScript正本、JavaScript生成物を扱う独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
   echo "Adlaire-Design AGENTS.md must define CSS and WYSIWYG Editor UI as managed scope." >&2
   exit 1
 fi
@@ -386,23 +396,33 @@ if ! grep -F 'Docs/Change_History' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2
   exit 1
 fi
 
-if ! grep -F 'フロントエンドUI基盤を軸としたフロントエンド基盤として、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、Editor部分、TypeScript正本、JavaScript生成物を管理する独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+if ! grep -F 'フロントエンドUI基盤を軸としたフロントエンド基盤として、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、Editor本体、TypeScript正本、JavaScript生成物を管理する独立リポジトリ' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must define CSS and WYSIWYG Editor UI as managed scope." >&2
   exit 1
 fi
 
-if ! grep -F '今後の拡充は、公開面CSS機能、WYSIWYG Editor UI、Editor部分、TypeScript正本化、JavaScript生成物整合、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+if ! grep -F '今後の拡充は、公開面CSS機能、WYSIWYG Editor UI、Editor本体、TypeScript正本化、JavaScript生成物整合、再現性検査、ドキュメント整備、ブランド資産の整理を優先する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
   echo "Adlaire-Design README must document the expansion priority policy." >&2
   exit 1
 fi
 
-if ! grep -F 'WYSIWYG Editor UI仕様、Editor部分、実装境界は `Docs/Master_Spec` に統合する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
-  echo "Adlaire-Design README must identify the WYSIWYG UI implementation boundary." >&2
+if ! grep -F 'Editor本体とWYSIWYG Editor UIの詳細正本は `Docs/Editor_Master_Spec` とする。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must identify the editor master spec." >&2
+  exit 1
+fi
+
+if ! grep -F 'TypeScriptはDenoランタイム環境を前提とし、標準採用ライブラリはDeno標準ライブラリ(`jsr:@std/*`)に限定する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must document the Deno TypeScript policy." >&2
+  exit 1
+fi
+
+if ! grep -F 'npm互換パッケージ、npm依存、Node.js依存、外部フレームワークは例外なく禁止する。' "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
+  echo "Adlaire-Design README must prohibit npm, Node.js, and external frameworks." >&2
   exit 1
 fi
 
 for readme_responsibility_term in \
-  'CSS仕様、CSS実装、TypeScript正本、JavaScript生成物、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、Editor部分、未タスク管理、検査、変更履歴、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。' \
+  'CSS仕様、CSS実装、TypeScript正本、JavaScript生成物、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、Editor本体、未タスク管理、検査、変更履歴、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。' \
   '一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、エディタUIに関する部品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。' \
   '未策定または未完了タスクは `Docs/Pending_Tasks` に未完了分だけを集約する。'; do
   if ! grep -F -- "$readme_responsibility_term" "$ADLAIRE_DESIGN_ROOT/README.md" >/dev/null 2>&1; then
@@ -436,8 +456,8 @@ if ! grep -F 'WYSIWYG Editor UIはAdlaire-Design採用確定とする。' "$ADLA
   exit 1
 fi
 
-if ! grep -F 'WYSIWYG Editor UI仕様、Editor部分、実装境界は本書に統合する。' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
-  echo "Docs/Master_Spec must document that WYSIWYG UI specification is integrated into Master_Spec." >&2
+if ! grep -F 'WYSIWYG Editor UI仕様、Editor本体、実装境界の全体方針は本書で定め、詳細正本は `Docs/Editor_Master_Spec` とする。' "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
+  echo "Docs/Master_Spec must document the editor master spec boundary." >&2
   exit 1
 fi
 
@@ -447,19 +467,22 @@ for css_master_term in \
   'Adlaire-Designにおけるデザインシステムとは、Adlaire GroupのUI表現を一貫させるための正本体系である。' \
   'Adlaire-DesignにおけるフロントエンドUI基盤とは、デザイントークン、CSS契約、UI部品、UI JavaScript、アクセシビリティ表示、状態表示、WYSIWYG Editor UIを接続し、利用側が一貫したフロントエンドを構築できるようにする基盤である。' \
   'デザインシステムは、単なるCSS集、テーマ集、部品一覧、ブランドガイドではない。' \
-  'デザインシステムは、デザイントークン、CSS契約、UI部品、状態表現、ブランド資産、公式アイコン、WYSIWYG Editor UI、Editor部分、検査条件を同じルールで接続し、利用側が一貫した画面を構築できるようにする。' \
-  'Adlaire-Designは、UI表現、デザイントークン、CSS契約、汎用部品、公式アイコン、ブランド資産、WYSIWYG Editor UI、Editor部分、TypeScript正本、JavaScript生成物を正本化する。' \
-  'エディタ本体とWYSIWYG Editor UIの詳細正本は `Docs/Editor_Master_Spec` とする。' \
+  'デザインシステムは、デザイントークン、CSS契約、UI部品、状態表現、ブランド資産、公式アイコン、WYSIWYG Editor UI、Editor本体、検査条件を同じルールで接続し、利用側が一貫した画面を構築できるようにする。' \
+  'Adlaire-Designは、UI表現、デザイントークン、CSS契約、汎用部品、公式アイコン、ブランド資産、WYSIWYG Editor UI、Editor本体、TypeScript正本、JavaScript生成物を正本化する。' \
+  'Editor本体とWYSIWYG Editor UIの詳細正本は `Docs/Editor_Master_Spec` とする。' \
+  'TypeScriptはDenoランタイム環境を前提とし、標準採用ライブラリはDeno標準ライブラリ(`jsr:@std/*`)に限定する。parserなどが必要な場合は、明示的な例外採用ライブラリとして管理する。npm互換パッケージ、npm依存、Node.js依存、外部フレームワークは例外なく禁止する。' \
+  'Markdown / GFM parserの例外採用ライブラリは `jsr:@deno/gfm@0.12.0` とする。' \
+  'MDX parserの例外採用ライブラリは `jsr:@temelj/mdx@0.14.0` とする。' \
   'アクセシビリティ方針は WCAG 2.2 A を参照し、状態や意味を色だけで伝えない。' \
   'Adlaire-Designのアクセシビリティ方針は WCAG 2.2 A を参照する。' \
   'エラー、警告、成功、情報、フォーカス、選択、入力エラーなどの状態は、色だけで意味を伝えない。' \
   'ブログ・ドキュメント、GitプロバイダーUI、社内ポータル、静的サイトなどの画面種別は、Adlaire-Designの共通部品とルールを適用する代表例として扱う。' \
   'Adlaire-Designでは、画面種別ごとの専用テーマや専用設計体系は策定しない。' \
-  'Adlaire-Designは、フロントエンドUI基盤を軸としたフロントエンド基盤として、UI表現、部品、トークン、資産、CSS契約、Editor部分、TypeScript正本、JavaScript生成物、検査条件を管理する。' \
+  'Adlaire-Designは、フロントエンドUI基盤を軸としたフロントエンド基盤として、UI表現、部品、トークン、資産、CSS契約、Editor本体、TypeScript正本、JavaScript生成物、検査条件を管理する。' \
   '汎用UI部品とは、公開面、管理面、本文表示、フォーム、ナビゲーション、状態表示で再利用するUI部品である。' \
   'WYSIWYG Editor UI部品とは、WYSIWYG Editorの表示層を構成する専用UI部品である。' \
-  'Editor部分とは、Adlaire-Designに統合される安全な構造化コンテンツ編集基盤である。' \
-  'Adlaire-DesignのTypeScriptとは、UI JavaScript、Editor UI JavaScript、Editor部分を実装する正本ソースである。' \
+  'Editor本体とは、Adlaire-Designに統合される安全な構造化コンテンツ編集基盤である。' \
+  'Adlaire-DesignのTypeScriptとは、UI JavaScript、Editor UI JavaScript、Editor本体を実装する正本ソースである。' \
   'Adlaire-DesignのJavaScriptとは、TypeScriptから生成するブラウザ実行用の生成物である。' \
   'CSSとJavaScriptは同一ファイルに混在させない。' \
   '`AdlaireEditor_Integrated_Temporary/adlaire-editor-repository.tar` は、Adlaire-Editor全体データをPRへ反映するための搬送用アーカイブとする。' \
@@ -483,13 +506,13 @@ for css_master_term in \
   'Samples全体の説明は `Samples/README.md` に記録する。' \
   'サンプルデザインは `Samples/design/` に配置する。PNG/WebPスクリーンショットは `Samples/` 直下に配置する。' \
   '### 11.2.1 責務別整理' \
-  'Adlaire-Designの責務は、CSS仕様、CSS実装、TypeScript正本、JavaScript生成物、トークン、ブランド資産、公式アイコンセット、汎用部品カタログ、Editor UIカタログ、Editor部分、未タスク管理、検査、変更履歴に分けて管理する。' \
+  'Adlaire-Designの責務は、CSS仕様、CSS実装、TypeScript正本、JavaScript生成物、トークン、ブランド資産、公式アイコンセット、汎用部品カタログ、Editor UIカタログ、Editor本体、未タスク管理、検査、変更履歴に分けて管理する。' \
   '| 公式アイコンセットカタログ | Adlaire-Design | `Docs/Icon_Set_Catalog` | 公式アイコンの分類、用途、表示サイズ、代替テキスト方針、実装状態 | ブランド資産、アイコン検索や挿入などの利用側処理 |' \
   '| 公式アイコンセット | Adlaire-Design | `Icons/` | 汎用UIで使う公式アイコンSVG | ロゴ、ブランド画像、OGP、PNG/WebP/JPG/JPEG、生成アイコンCSS |' \
   '| CSS実装 | Adlaire-Design | `UI/`、`EditorUI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、WYSIWYG Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク、TypeScript正本、JavaScript生成物 |' \
-  '| TypeScript正本 | Adlaire-Design | `TypeScript/` | UI JavaScript、Editor UI JavaScript、Editor部分の実装正本 | CSS正本、生成物JavaScript、外部プロジェクト固有処理 |' \
+  '| TypeScript正本 | Adlaire-Design | `TypeScript/` | UI JavaScript、Editor UI JavaScript、Editor本体の実装正本 | CSS正本、生成物JavaScript、外部プロジェクト固有処理 |' \
   '| JavaScript生成物 | Adlaire-Design | `UI/*.js`、`EditorUI/wysiwyg.js`、`EditorUI/editor.js` | TypeScriptから生成するブラウザ実行用JavaScript | 手編集の正本JavaScript、CSS定義の内包 |' \
-  '| Editor部分 | Adlaire-Design | `TypeScript/Editor/`、`EditorUI/editor.js` | 安全な構造化コンテンツ編集基盤、EditorDocument、ブロック編集、選択範囲、履歴、検証、サニタイズ、保存要求、公開要求、Editorイベント | 保存先への書き込み、Git反映、認証認可、静的サイト生成、プロダクト固有画面処理 |' \
+  '| Editor本体 | Adlaire-Design | `TypeScript/Editor/`、`EditorUI/editor.js` | 安全な構造化コンテンツ編集基盤、EditorDocument、ブロック編集、選択範囲、履歴、検証、サニタイズ、保存要求、公開要求、Editorイベント | 保存先への書き込み、Git反映、認証認可、静的サイト生成、プロダクト固有画面処理 |' \
   '| 未タスク管理 | Adlaire-Design | `Docs/Pending_Tasks` | 未策定または未完了タスク | 完了済みタスク、変更履歴 |' \
   '未策定または未完了のまま残っているタスクは `Docs/Pending_Tasks` に集約する。' \
   '| Docs | `Docs/Pending_Tasks` | 未策定または未完了タスクの管理 |' \
@@ -497,7 +520,7 @@ for css_master_term in \
   '責務別の管理範囲は以下に固定する。' \
   'ファイル責務は以下に整理する。' \
   '責務別の変更単位は以下に固定する。' \
-  '責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、管理画面専用UI部品を `Docs/Admin_UI_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、Editor部分を `TypeScript/Editor/` と `EditorUI/editor.js`、汎用UIで使う公式アイコンを `Docs/Icon_Set_Catalog` と `Icons/`、採用・移行を利用先プロダクト側として扱う。' \
+  '責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、管理画面専用UI部品を `Docs/Admin_UI_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、Editor本体を `TypeScript/Editor/` と `EditorUI/editor.js`、汎用UIで使う公式アイコンを `Docs/Icon_Set_Catalog` と `Icons/`、採用・移行を利用先プロダクト側として扱う。' \
   '### 11.2.2 CSSマスター仕様' \
   'Adlaire-DesignのCSSマスター仕様は、本節を正本とする。' \
   'CSSマスター仕様で固定する対象は以下とする。' \
@@ -520,7 +543,7 @@ for css_master_term in \
   'Specification layer' \
   'WYSIWYG Editor UI | `EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js`' \
   '### 11.2.3 TypeScript正本とJavaScript生成物' \
-  '### 11.2.4 Editor部分とWYSIWYG Editor UIの統合仕様' \
+  '### 11.2.4 Editor本体とWYSIWYG Editor UIの統合仕様' \
   '`TypeScript/Editor/` は責務ベースの少数ファイルに集約し、機能ごとの細分化フォルダを作らない。' \
   '| `TypeScript/Editor/core.ts` | Editor起動、状態保持、command dispatch、Editor全体の接続口 |' \
   '| `TypeScript/Editor/document.ts` | EditorDocument、EditorBlock、block tree、normalize、migration |' \
@@ -571,7 +594,7 @@ for wysiwyg_spec_term in \
   '### 11.11.2.3 WYSIWYG Editor UIマスター仕様' \
   '本節は、Adlaire-DesignにおけるWYSIWYG Editor UIのマスター仕様である。' \
   'WYSIWYG Editor UIマスター仕様' \
-  'WYSIWYG Editor UI仕様、Editor部分、実装境界の詳細正本は `Docs/Editor_Master_Spec` とする。`Docs/WYSIWYG_Editor_UI_Catalog` は、エディタUI部品の分類、優先度、実装状態を管理する。' \
+  'WYSIWYG Editor UI仕様、Editor本体、実装境界の詳細正本は `Docs/Editor_Master_Spec` とする。`Docs/WYSIWYG_Editor_UI_Catalog` は、エディタUI部品の分類、優先度、実装状態を管理する。' \
   'Editor UI完全固定対象は以下とする。' \
   'Editor UI階層は以下に固定する。' \
   'Editor UI表示モードは以下に固定する。' \
@@ -591,7 +614,7 @@ for wysiwyg_spec_term in \
   'Master_Spec、カタログ、CSS、検査シェル、変更履歴のいずれかだけを単独で変更しない。' \
   'Adlaire-Designで固定する対象は以下とする。' \
   '採用確定対象は以下とする。' \
-  'WYSIWYG Editor UIは、表示層、UI部品、状態表示、CSS/JavaScript読み込み順、Editor UI JavaScript、Editor部分との接続点を仕様対象とする。' \
+  'WYSIWYG Editor UIは、表示層、UI部品、状態表示、CSS/JavaScript読み込み順、Editor UI JavaScript、Editor本体との接続点を仕様対象とする。' \
   'WYSIWYG Editor UIでAdlaire-Designを採用する際の読み込み順は以下に固定する。' \
   '`EditorUI/wysiwyg.css` は、以下のクラスを定義する。' \
   '`EditorUI/wysiwyg.js` は以下の規則に従う。' \
@@ -608,7 +631,7 @@ done
 
 for master_wysiwyg_term in \
   'WYSIWYG Editor UIはAdlaire-Design採用確定とする。' \
-  'WYSIWYG Editor UI仕様、Editor部分、実装境界は本書に統合する。'; do
+  'WYSIWYG Editor UI仕様、Editor本体、実装境界の全体方針は本書で定め、詳細正本は `Docs/Editor_Master_Spec` とする。'; do
   if ! grep -F -- "$master_wysiwyg_term" "$ADLAIRE_DESIGN_ROOT/Docs/Master_Spec" >/dev/null 2>&1; then
     echo "Docs/Master_Spec missing required fixed WYSIWYG spec term: $master_wysiwyg_term" >&2
     exit 1
@@ -625,7 +648,7 @@ for wysiwyg_catalog_term in \
   'WYSIWYG Editor専用UI部品の一覧を管理する補助正本' \
   '本ファイルは、Adlaire-DesignにおけるエディタUIに関するカタログである。' \
   '本カタログはエディタUIに関するカタログとして扱う。' \
-  'WYSIWYG Editor UI仕様は `Docs/Master_Spec` で完全固定する。' \
+  'WYSIWYG Editor UI仕様は `Docs/Editor_Master_Spec` で固定し、UI部品一覧は本カタログで管理する。' \
   '## 1.1 完全固定対象' \
   'Editor.jsおよびNotionに代表されるブロックベース編集UI' \
   'UI階層' \
@@ -738,14 +761,14 @@ for indexed_path in \
 done
 
 for document_index_responsibility_term in \
-  '`Docs/Master_Spec`(仕様・設計の正本、CSS、Editor UI、Editor部分、TypeScript正本、JavaScript生成物、公式アイコンセット、Samples、カタログ責務索引)' \
-  '`Docs/Editor_Master_Spec`(エディタ本体とWYSIWYG Editor UIの専用マスター仕様)' \
+  '`Docs/Master_Spec`(仕様・設計の正本、CSS、Editor UI、Editor本体、TypeScript正本、JavaScript生成物、公式アイコンセット、Samples、カタログ責務索引)' \
+  '`Docs/Editor_Master_Spec`(Editor本体とWYSIWYG Editor UIの専用マスター仕様)' \
   '`Docs/Generic_Component_Catalog`(一般的なCSS汎用部品の分類、優先度、実装先、実装状態の一覧)' \
   '`Docs/Admin_UI_Catalog`(管理画面専用UI部品の分類、優先度、実装先、実装状態の一覧)' \
   '`Docs/WYSIWYG_Editor_UI_Catalog`(エディタUIに関する部品の分類、優先度、実装先、実装状態の一覧)' \
   '`Docs/Icon_Set_Catalog`(Adlaire-Design公式アイコンセットの分類、用途、実装状態の一覧)' \
   '`Docs/Pending_Tasks`(未策定または未完了タスクだけを集約する管理ファイル)' \
-  '`TypeScript/`(UI JavaScript、Editor UI JavaScript、Editor部分のTypeScript正本。Editor本体は責務ベースの少数ファイルで集約)' \
+  '`TypeScript/`(UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本。Editor本体は責務ベースの少数ファイルで集約)' \
   '`AdlaireEditor_Integrated_Temporary/adlaire-editor-repository.tar`(Adlaire-Editor全体データのPR搬送用アーカイブ)' \
   '`AdlaireEditor_Integrated_Temporary/`(Adlaire-Editor全体データの一時統合領域)'; do
   if ! grep -F -- "$document_index_responsibility_term" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
@@ -768,15 +791,19 @@ done
 
 for editor_master_term in \
   '# Adlaire-Design Editor Master Spec' \
-  '本書は、Adlaire-Designに統合するエディタ本体とWYSIWYG Editor UIの専用マスター仕様である。' \
-  '`Docs/Master_Spec` はAdlaire-Design全体正本とし、エディタ本体とエディタUIの詳細正本は本書とする。' \
+  '本書は、Adlaire-Designに統合するEditor本体とWYSIWYG Editor UIの専用マスター仕様である。' \
+  '`Docs/Master_Spec` はAdlaire-Design全体正本とし、Editor本体とエディタUIの詳細正本は本書とする。' \
+  'TypeScriptはDenoランタイム環境を前提とし、npm互換パッケージ、npm依存、Node.js依存、外部フレームワークは例外なく禁止する。' \
   'Adlaire-Designのエディタは、安全な構造化コンテンツ編集基盤として管理する。' \
-  '| エディタ本体TypeScript正本 | `TypeScript/Editor/` | 文書構造、編集操作、検証、履歴、イベントの正本 |' \
-  '| エディタ本体JavaScript生成物 | `EditorUI/editor.js` | ブラウザ実行用の生成物 |' \
+  '| Editor本体TypeScript正本 | `TypeScript/Editor/` | 文書構造、編集操作、検証、履歴、イベントの正本 |' \
+  '| Editor本体JavaScript生成物 | `EditorUI/editor.js` | ブラウザ実行用の生成物 |' \
   '| WYSIWYG Editor UI CSS | `EditorUI/wysiwyg.css` | エディタ表示層のCSS正本 |' \
   '| WYSIWYG Editor UI部品カタログ | `Docs/WYSIWYG_Editor_UI_Catalog` | エディタUI部品の分類、優先度、実装状態 |' \
-  'エディタ本体は保存先への書き込み、Git反映、認証認可、静的サイト生成、CMS固有処理を実行しない。これらは要求イベントとして外部へ渡す。' \
+  '標準採用ライブラリはDeno標準ライブラリ(`jsr:@std/*`)に限定する。' \
+  'Markdown / GFM parserは `jsr:@deno/gfm@0.12.0`、MDX parserは `jsr:@temelj/mdx@0.14.0` を明示的な例外採用ライブラリとして管理する。' \
+  'Editor本体は保存先への書き込み、Git反映、認証認可、静的サイト生成、CMS固有処理を実行しない。これらは要求イベントとして外部へ渡す。' \
   '標準commandは `insert-block`、`delete-block`、`update-block`、`move-block`、`split-block`、`merge-block`、`set-document-meta`、`set-selection`、`save`、`request-publish` とする。' \
+  '`TypeScript/` に `npm:` import、`node:` import、npm依存、Node.js依存が存在しないこと。' \
   '`EditorUI/editor.js` は `window.AdlaireEditor`、`HeadlessEditorController`、`ToolRegistry`、`createEditor`、`applyCommand`、`handlePaste`、`validateDocument`、`sanitizeDocument` を公開すること。'; do
   if ! grep -F -- "$editor_master_term" "$ADLAIRE_DESIGN_ROOT/Docs/Editor_Master_Spec" >/dev/null 2>&1; then
     echo "Docs/Editor_Master_Spec missing required term: $editor_master_term" >&2
