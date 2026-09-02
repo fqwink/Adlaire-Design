@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.101
+**Version:** rev.102
 
 ---
 
@@ -90,7 +90,7 @@ Adlaire-Design-SystemのTypeScriptとは、CSS生成、UI JavaScript、Editor UI
 
 Adlaire Frontend Compilerとは、Deno TypeScript正本からCSS/JavaScript生成物を生成し、生成物と仕様の整合を検査するAdlaire-Design-System内の生成基盤である。
 
-Adlaire-Design-SystemのCSSとは、TypeScript正本から生成されるブラウザ表示用CSS生成物である。段階移行中は既存CSSを維持し、移行済み領域から生成物として扱う。
+Adlaire-Design-SystemのCSSとは、TypeScript正本から生成されるブラウザ表示用CSS生成物である。
 
 Adlaire-Design-SystemのJavaScriptとは、TypeScriptから生成するブラウザ実行用の生成物である。
 
@@ -607,9 +607,9 @@ CSS生成は、出力順、改行、コメント、セレクタ順、CSS変数�
 
 CSS生成では、CSS文字列をJavaScript生成物へ埋め込まない。CSSはCSSファイル、JavaScriptはJavaScriptファイルとして生成し、同一ファイルに混在させない。
 
-CSS生成コマンド名は `generate-css` とし、Denoで `TypeScript/CSS/index.ts` を実行する工程として扱う。実行コマンドの実体は実装工程で定義し、仕様上はDeno以外の実行環境を認めない。
+CSS生成コマンド名は `generate-css` とし、Denoで `TypeScript/CSS/index.ts` を実行する工程として扱う。仕様上はDeno以外の実行環境を認めない。
 
-CSS生成物整合検査名は `check-generated-css` とし、生成物とTypeScript正本の差分がないことを確認する工程として扱う。検査コマンドの実体は実装工程で定義し、差分検出時は失敗とする。
+CSS生成物整合検査名は `check-generated-css` とし、生成物とTypeScript正本の差分がないことを確認する工程として扱う。差分検出時は失敗とする。
 
 生成CSSの先頭コメントは、既存CSSの第1行コメントを維持する。追加の生成物注記が必要な場合は第2行以降に置き、既存検査で固定している第1行コメントを壊さない。
 
@@ -638,19 +638,18 @@ CSS生成物の差分ゼロ化条件は以下に固定する。
 | JavaScript分離 | CSS定義をJavaScript生成物に内包しない |
 | 検査通過 | `Tools/check/check-adlaire-design.sh` と生成物整合検査が通過する |
 
-CSS生成への移行は段階制とし、移行済み領域だけを生成物として扱う。未移行領域は既存CSSを維持し、手編集の正本扱いからTypeScript正本へ段階的に移す。
+CSS生成への完全移行後は、`Tokens/*.css`、`UI/*.css`、`EditorUI/wysiwyg.css` をTypeScript正本から再生成できるCSS生成物として扱う。
 
-CSS生成移行は、仕様策定、TypeScript正本作成、生成コマンド整備、生成物更新、検査追加、ドキュメント整合性確認の順に進める。TypeScript正本作成以降は実装工程として扱い、別途実装承認を必要とする。
+CSS生成移行は、仕様策定、TypeScript正本作成、生成コマンド整備、生成物更新、検査追加、ドキュメント整合性確認の順に完了する。
 
-CSS生成移行の順序は以下に固定する。
+CSS生成移行の完了条件は以下に固定する。
 
-1. `TypeScript/CSS/` の正本ファイル構成を実装する。
-2. `Tokens/*.css` を生成物へ移行する。
-3. `UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/utilities.css` を生成物へ移行する。
-4. `UI/components.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` を生成物へ移行する。
-5. `EditorUI/wysiwyg.css` を生成物へ移行する。
-6. `check-generated-css` 相当の差分ゼロ検査を `Tools/check/check-adlaire-design.sh` に接続する。
-7. `Docs/Pending_Tasks` から完了した未実装タスクを削除する。
+1. `TypeScript/CSS/` の正本ファイル構成が存在する。
+2. `Tokens/*.css` を生成物として再生成できる。
+3. `UI/*.css` を生成物として再生成できる。
+4. `EditorUI/wysiwyg.css` を生成物として再生成できる。
+5. `check-generated-css` により差分ゼロを確認できる。
+6. `Docs/Pending_Tasks` から完了した未実装タスクを削除する。
 
 ### 11.2.4 Editor本体とWYSIWYG Editor UIの統合仕様
 

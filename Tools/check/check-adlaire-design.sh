@@ -528,7 +528,7 @@ for css_master_term in \
   'Editor本体とは、Adlaire-Designに統合される安全な構造化コンテンツ編集基盤である。' \
   'Adlaire-Design-SystemのTypeScriptとは、CSS生成、UI JavaScript、Editor UI JavaScript、Editor本体を実装する正本ソースである。' \
   'Adlaire Frontend Compilerとは、Deno TypeScript正本からCSS/JavaScript生成物を生成し、生成物と仕様の整合を検査するAdlaire-Design-System内の生成基盤である。' \
-  'Adlaire-Design-SystemのCSSとは、TypeScript正本から生成されるブラウザ表示用CSS生成物である。段階移行中は既存CSSを維持し、移行済み領域から生成物として扱う。' \
+  'Adlaire-Design-SystemのCSSとは、TypeScript正本から生成されるブラウザ表示用CSS生成物である。' \
   'Adlaire-Design-SystemのJavaScriptとは、TypeScriptから生成するブラウザ実行用の生成物である。' \
   'CSSとJavaScriptは同一ファイルに混在させない。' \
   '公式アイコンセットとは、`Icons/` で管理する汎用UI用SVGアイコンである。' \
@@ -599,15 +599,17 @@ for css_master_term in \
   '`TypeScript/CSS/components/`、`TypeScript/CSS/tokens/`、`TypeScript/CSS/themes/`、`TypeScript/CSS/plugins/`、`TypeScript/CSS/adapters/` は作成しない。' \
   'CSS生成先は `Tokens/*.css`、`UI/*.css`、`EditorUI/wysiwyg.css` に固定する。生成先を `Dist/`、`Build/`、`Styles/`、`EditorStyles/`、トップレベル `CSS/` へ変更しない。' \
   'CSS生成では、CSS文字列をJavaScript生成物へ埋め込まない。CSSはCSSファイル、JavaScriptはJavaScriptファイルとして生成し、同一ファイルに混在させない。' \
-  'CSS生成コマンド名は `generate-css` とし、Denoで `TypeScript/CSS/index.ts` を実行する工程として扱う。' \
-  'CSS生成物整合検査名は `check-generated-css` とし、生成物とTypeScript正本の差分がないことを確認する工程として扱う。' \
+  'CSS生成コマンド名は `generate-css` とし、Denoで `TypeScript/CSS/index.ts` を実行する工程として扱う。仕様上はDeno以外の実行環境を認めない。' \
+  'CSS生成物整合検査名は `check-generated-css` とし、生成物とTypeScript正本の差分がないことを確認する工程として扱う。差分検出時は失敗とする。' \
   '生成CSSの先頭コメントは、既存CSSの第1行コメントを維持する。' \
   'CSS生成の入力は、TypeScript内の型付き定義、定数、配列、生成関数に限定する。JSON、YAML、TOML、Sass、SCSS、Less、Stylus、PostCSS設定をCSS生成の正本として追加しない。' \
   'CSS生成物の差分ゼロ化条件は以下に固定する。' \
   '| 生成再現性 | 同じTypeScript正本から再生成したCSSに差分が出ない |' \
   '| JavaScript分離 | CSS定義をJavaScript生成物に内包しない |' \
-  'CSS生成移行の順序は以下に固定する。' \
-  'TypeScript正本作成以降は実装工程として扱い、別途実装承認を必要とする。' \
+  'CSS生成への完全移行後は、`Tokens/*.css`、`UI/*.css`、`EditorUI/wysiwyg.css` をTypeScript正本から再生成できるCSS生成物として扱う。' \
+  'CSS生成移行は、仕様策定、TypeScript正本作成、生成コマンド整備、生成物更新、検査追加、ドキュメント整合性確認の順に完了する。' \
+  'CSS生成移行の完了条件は以下に固定する。' \
+  '5. `check-generated-css` により差分ゼロを確認できる。' \
   'Specification layer' \
   'WYSIWYG Editor UI | `EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js`' \
   '### 11.2.3 TypeScript正本とCSS/JavaScript生成物' \
@@ -912,14 +914,6 @@ for pending_task_term in \
   '仕様未確定、要否未決定、策定中の項目は未実装リストに含めない。' \
   '## 3. 未実装リスト' \
   '本章は、仕様確定済みで、実装だけが未完了の項目を管理する。' \
-  'AD-TASK-038' \
-  'Token CSS生成への移行。`Tokens/*.css` を `TypeScript/CSS/tokens.ts` と `targets.ts` から再現できる生成物へ移行する。' \
-  'AD-TASK-039' \
-  'UI CSS生成への移行。`UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/utilities.css` をTypeScript正本から再現できる生成物へ移行する。' \
-  'AD-TASK-040' \
-  'UI CSS生成への移行 第2段階。`UI/components.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` をTypeScript正本から再現できる生成物へ移行する。' \
-  'AD-TASK-041' \
-  'Editor UI CSS生成への移行とCSS生成物整合検査の実装。`EditorUI/wysiwyg.css` をTypeScript正本から再現可能にし、`check-generated-css` 相当の差分ゼロ検査を接続する。' \
   '現時点で該当なし'; do
   if ! grep -F -- "$pending_task_term" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" >/dev/null 2>&1; then
     echo "Docs/Pending_Tasks missing required pending task management term: $pending_task_term" >&2
@@ -2031,6 +2025,10 @@ if comm -23 "$TMP_DIR/css-var-refs" "$TMP_DIR/css-var-defs" >"$TMP_DIR/css-var-m
   echo "Adlaire-Design CSS must not reference undefined CSS variables:" >&2
   cat "$TMP_DIR/css-var-missing" >&2
   exit 1
+fi
+
+if command -v deno >/dev/null 2>&1; then
+  (cd "$ADLAIRE_DESIGN_ROOT" && deno run --allow-read TypeScript/CSS/index.ts check-generated-css)
 fi
 
 if [ "$RUN_RELEASE_CHECK" -eq 1 ]; then
