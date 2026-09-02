@@ -48,7 +48,7 @@ JPG、JPEG、GIF、PDF、AI、PSD、EPSは対応しない。
 
 | ID | ファイル名 | 種別 | 用途 | 形式 | 代替テキスト/説明方針 | 状態 |
 | --- | --- | --- | --- | --- | --- | --- |
-| AD-BRAND-001 | `adlaire-logo-primary.svg` | ロゴ | 標準ロゴ | SVG | Adlaire-Designの標準ロゴとして用途を説明する | 策定済み |
-| AD-BRAND-002 | `adlaire-logo-mark.svg` | ロゴ | 小型表示・favicon系の基準 | SVG | Adlaire-Designの小型識別マークとして用途を説明する | 策定済み |
-| AD-BRAND-003 | `adlaire-ogp-default.png` | OGP画像 | 標準OGP | PNG | Adlaire-Designの標準OGP画像としてページまたはブランド説明を記録する | 策定済み |
-| AD-BRAND-004 | `adlaire-image-brand-overview.webp` | ブランド画像 | ブランド説明・紹介用 | WebP | Adlaire-Designのブランド概要を示す画像として内容を説明する | 策定済み |
+| AD-BRAND-001 | `adlaire-logo-primary.svg` | ロゴ | 標準ロゴ | SVG | Adlaire-Designの標準ロゴとして用途を説明する | 実装済み |
+| AD-BRAND-002 | `adlaire-logo-mark.svg` | ロゴ | 小型表示・favicon系の基準 | SVG | Adlaire-Designの小型識別マークとして用途を説明する | 実装済み |
+| AD-BRAND-003 | `adlaire-ogp-default.png` | OGP画像 | 標準OGP | PNG | Adlaire-Designの標準OGP画像としてページまたはブランド説明を記録する | 実装済み |
+| AD-BRAND-004 | `adlaire-image-brand-overview.webp` | ブランド画像 | ブランド説明・紹介用 | WebP | Adlaire-Designのブランド概要を示す画像として内容を説明する | 実装済み |
