@@ -228,7 +228,7 @@ if [ ! -x "$ADLAIRE_DESIGN_ROOT/Tools/check/check-adlaire-design.sh" ]; then
 fi
 
 find "$ADLAIRE_DESIGN_ROOT/Brand" -type f ! -name '.gitkeep' -print >"$TMP_DIR/brand-files"
-grep -E -v '/adlaire-(logo|image|icon|ogp|brand)-[a-z0-9]([a-z0-9-]*[a-z0-9])?\.(svg|png|webp)$' "$TMP_DIR/brand-files" >"$TMP_DIR/unexpected-brand-files" || true
+grep -E -v '/(adlaire-logo-[a-z0-9]([a-z0-9-]*[a-z0-9])?\.svg|adlaire-image-[a-z0-9]([a-z0-9-]*[a-z0-9])?\.(png|webp)|adlaire-icon-[a-z0-9]([a-z0-9-]*[a-z0-9])?\.svg|adlaire-ogp-[a-z0-9]([a-z0-9-]*[a-z0-9])?\.(png|webp)|adlaire-brand-[a-z0-9]([a-z0-9-]*[a-z0-9])?\.(svg|png|webp))$' "$TMP_DIR/brand-files" >"$TMP_DIR/unexpected-brand-files" || true
 
 if [ -s "$TMP_DIR/unexpected-brand-files" ]; then
   echo "Brand/ contains unapproved brand asset names or formats:" >&2
@@ -482,7 +482,7 @@ for css_master_term in \
   'CSSとJavaScriptは同一ファイルに混在させない。' \
   '公式アイコンセットとは、`Icons/` で管理する汎用UI用SVGアイコンである。' \
   '### 11.11.5 ブランド資産整理の策定仕様' \
-  '許可するファイル形式は、SVG、PNG、WebPに限定する。JPG、JPEG、GIF、PDF、AI、PSD、EPSは対応しない。' \
+  '許可するファイル形式は、資産種別ごとに上表へ明記したSVG、PNG、WebPに限定する。JPG、JPEG、GIF、PDF、AI、PSD、EPSは対応しない。' \
   '`<name>` は小文字英数字とハイフンで構成し、先頭と末尾にハイフンを置かない。' \
   'ブランド資産の検査は `Tools/check/check-adlaire-design.sh` で行う。' \
   '### 11.11.6 公式アイコンセット策定仕様' \
