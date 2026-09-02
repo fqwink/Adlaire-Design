@@ -10,6 +10,8 @@
 
 本仕様書は、Adlaire-Designのマスター仕様書として、Adlaire Group(開発元: Adlaire Group DX事業セグメントグループ)が使用するデザインシステム、統一ブランドカラー、公開面・管理面におけるブランドデザイン、CSSフレームワーク、WYSIWYG Editor UI、Editor部分、TypeScript正本、JavaScript生成物の基本方針を定める。
 
+エディタ本体とWYSIWYG Editor UIの詳細正本は `Docs/Editor_Master_Spec` とする。
+
 色だけでなく、背景、境界、余白、ボタン、リンク、セクション構成、情報の見せ方など、ユーザーが受け取る見た目全体を設計対象に含める。
 
 Adlaire Groupが管理するデザイン資産において、色の役割を統一する。
@@ -172,6 +174,7 @@ WYSIWYG Editor UIでは、ツールバー選択、ブロック選択、警告、
 - `UI/`: CSSフレームワーク本体(第5章のユーティリティクラス等)および汎用UI JavaScript。WYSIWYG Editor UI専用品は含めない。
 - `EditorUI/`: WYSIWYG Editor UIスキン、Editor UI JavaScript、Editor本体の生成物JavaScript。
 - `TypeScript/`: UI JavaScript、Editor UI JavaScript、Editor部分のTypeScript正本。
+- `Docs/Editor_Master_Spec`: エディタ本体とWYSIWYG Editor UIの専用マスター仕様。
 - `Tokens/`: デザイントークン(色・余白・タイポグラフィ等の設計値)。第3章のブランドカラーパレット、第4章のCSS変数はこの領域に対応する。
 - `Brand/`: ブランド全般の資産(ロゴなど、色以外も含む将来拡張領域)。
 - `AdlaireEditor_Integrated_Temporary/`: Adlaire-Editor全体データを後続整備前提で一時格納する統合領域。
@@ -563,9 +566,11 @@ Adlaire-Editor全体データの統合吸収が完了するまでの一時領域
 
 `JavaScript/`、`Styles/`、`EditorStyles/`、トップレベル `Editor/` は作成しない。
 
-### 11.2.4 Editor部分の統合仕様
+### 11.2.4 Editor部分とWYSIWYG Editor UIの統合仕様
 
 Editor部分は、Adlaire-Designに統合される安全な構造化コンテンツ編集基盤である。
+
+エディタ本体とWYSIWYG Editor UIの詳細正本は `Docs/Editor_Master_Spec` とする。本節は、Adlaire-Design全体仕様における参照関係と責務境界を定める。
 
 Editor部分は、UI部品だけではなく、構造化文書を安全に編集するための中核機能として管理する。
 
@@ -1341,7 +1346,7 @@ WYSIWYG Editor UIはAdlaire-Design採用確定とし、エディター表示層�
 
 本節は、Adlaire-DesignにおけるWYSIWYG Editor UIのマスター仕様である。WYSIWYG Editor UIの採用範囲、表示層、UI部品、状態表示、CSS契約、読み込み順、変更管理、検査方針は本節で固定する。
 
-WYSIWYG Editor UI仕様、Editor部分、実装境界は、本節を正本とする。独立したWYSIWYG仕様ファイルは作成しない。
+WYSIWYG Editor UI仕様、Editor部分、実装境界の詳細正本は `Docs/Editor_Master_Spec` とする。`Docs/WYSIWYG_Editor_UI_Catalog` は、エディタUI部品の分類、優先度、実装状態を管理する。
 
 Adlaire-Designで管理する範囲は以下とする。
 

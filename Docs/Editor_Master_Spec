@@ -1,0 +1,97 @@
+# Adlaire-Design Editor Master Spec
+
+Version: 1.0.0
+
+本書は、Adlaire-Designに統合するエディタ本体とWYSIWYG Editor UIの専用マスター仕様である。
+
+`Docs/Master_Spec` はAdlaire-Design全体正本とし、エディタ本体とエディタUIの詳細正本は本書とする。
+
+## 1. 目的
+
+Adlaire-Designのエディタは、安全な構造化コンテンツ編集基盤として管理する。
+
+エディタは、ブロックベース編集、構造化文書、モバイルファーストUI、Adlaire-DesignのCSS契約と連動する表示体験を提供する。
+
+## 2. 正本と生成物
+
+| 分類 | 管理先 | 役割 |
+| --- | --- | --- |
+| エディタ本体TypeScript正本 | `TypeScript/Editor/` | 文書構造、編集操作、検証、履歴、イベントの正本 |
+| エディタ本体JavaScript生成物 | `EditorUI/editor.js` | ブラウザ実行用の生成物 |
+| WYSIWYG Editor UI CSS | `EditorUI/wysiwyg.css` | エディタ表示層のCSS正本 |
+| WYSIWYG Editor UI JavaScript生成物 | `EditorUI/wysiwyg.js` | エディタUI操作のJavaScript生成物 |
+| WYSIWYG Editor UI部品カタログ | `Docs/WYSIWYG_Editor_UI_Catalog` | エディタUI部品の分類、優先度、実装状態 |
+| 統合元保全領域 | `AdlaireEditor_Integrated_Temporary/` | Adlaire-Editor由来データの一時保全領域 |
+
+## 3. 責務分離
+
+| 領域 | 管理対象 |
+| --- | --- |
+| エディタ本体 | `EditorDocument`、`EditorBlock`、inline content、selection、command、history、validation、sanitize、paste normalize、unsupported block保持、tool registry、lifecycle controller、event bus、save request、publish request |
+| WYSIWYG Editor UI | block toolbar、inline toolbar、slash menu、block mover、drag handle、inspector、outline、status bar、empty/error/loading、mobile bottom toolbar、CSS/ARIA/data属性接続 |
+
+エディタ本体は保存先への書き込み、Git反映、認証認可、静的サイト生成、CMS固有処理を実行しない。これらは要求イベントとして外部へ渡す。
+
+CSSとJavaScriptは同一ファイルに混在させない。
+
+## 4. データモデル
+
+`EditorDocument` を最上位構造とし、`id`、`schemaVersion`、`blocks`、任意の `meta` を持つ。
+
+`EditorBlock` は `id`、`type`、`data`、任意の `children`、任意の `meta` を持つ。
+
+未対応blockは破棄せず、`unsupported` blockとして `originalType` と `originalData` を保持する。
+
+inline contentは `text` と `hard-break` を基本とし、markは `bold`、`italic`、`code`、`strike`、`link` を標準とする。
+
+## 5. 編集操作
+
+標準commandは `insert-block`、`delete-block`、`update-block`、`move-block`、`split-block`、`merge-block`、`set-document-meta`、`set-selection`、`save`、`request-publish` とする。
+
+batch commandは文書更新とselection更新を一括適用し、途中で失敗した場合は文書状態を変更しない。
+
+readOnly状態では、文書を変更するcommandを実行しない。
+
+## 6. 安全性
+
+入力documentはnormalizeとsanitizeを通す。
+
+不正command、不正payload、重複block id、存在しないselection参照はエラーとして扱い、文書を変更しない。
+
+unsafe linkはsanitizeで除去する。
+
+unsupported blockは保持するが、data更新、split、mergeの対象にしない。
+
+## 7. UI仕様
+
+WYSIWYG Editor UIは、Editor.jsやNotionに代表されるブロックベース編集体験を基準にする。
+
+UIはモバイルファーストとし、狭い画面では主要操作をbottom toolbar、block action、inline actionへ整理する。
+
+デスクトップではtoolbar、inspector、outline、status barを必要に応じて併用する。
+
+UI部品の詳細分類と実装状態は `Docs/WYSIWYG_Editor_UI_Catalog` を正本とする。
+
+## 8. イベント境界
+
+標準イベントは `document:changed`、`selection:changed`、`history:changed`、`validation:changed`、`save:requested`、`publish:requested`、`error` とする。
+
+`save:requested` と `publish:requested` は要求イベントであり、保存先書き込みや公開処理そのものではない。
+
+## 9. TypeScript構成
+
+`TypeScript/Editor/` は責務ベースの少数ファイルに集約する。
+
+`core.ts`、`document.ts`、`commands.ts`、`selection.ts`、`history.ts`、`validation.ts`、`events.ts`、`types.ts`、`index.ts` を固定ファイルとする。
+
+`TypeScript/Editor/blocks/`、`TypeScript/Editor/inline/`、`TypeScript/Editor/tools/`、`TypeScript/Editor/plugins/`、`TypeScript/Editor/utils/` は作成しない。
+
+## 10. 検査条件
+
+`Docs/Editor_Master_Spec` は `Docs/Master_Spec` と `Docs/Document_Index` から参照されていること。
+
+`TypeScript/Editor/` の固定ファイル、`EditorUI/editor.js`、`EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js` が存在すること。
+
+`EditorUI/editor.js` は `window.AdlaireEditor`、`HeadlessEditorController`、`ToolRegistry`、`createEditor`、`applyCommand`、`handlePaste`、`validateDocument`、`sanitizeDocument` を公開すること。
+
+検査は `Tools/check/check-adlaire-design.sh` で行う。

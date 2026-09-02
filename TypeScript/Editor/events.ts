@@ -17,6 +17,6 @@ export class EventBus {
   }
 }
 
-export function editorError(code: string, message: string, blockId?: string): { code: string; message: string; blockId?: string } {
-  return { code, message, ...(blockId ? { blockId } : {}) };
+export function editorError(code: string, message: string, blockId?: string, path?: Array<string | number>): { code: string; message: string; blockId?: string; path?: Array<string | number> } {
+  return { code, message, ...(blockId ? { blockId } : {}), ...(path ? { path } : {}) };
 }
