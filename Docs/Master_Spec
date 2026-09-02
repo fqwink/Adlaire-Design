@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.98
+**Version:** rev.101
 
 ---
 
@@ -388,7 +388,7 @@ Adlaire-Design-Systemの責務は、CSS仕様、CSS生成物、TypeScript正本�
 | 索引 | `Docs/Document_Index`、必要に応じて `Docs/Master_Spec` |
 | 未タスク管理 | `Docs/Pending_Tasks`、`Docs/Master_Spec`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh` |
 
-公式アイコン初期セットと拡張セットのSVG実体は制作済みとし、追加や変更は公式アイコンセットの変更単位として管理する。
+公式アイコン初期セットのSVG実体は制作済みとする。拡張セットは `Docs/Icon_Set_Catalog` で策定済み、`Docs/Pending_Tasks` で未実装タスクとして管理する。
 
 責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、管理画面専用UI部品を `Docs/Admin_UI_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、Editor本体を `TypeScript/Editor/` と `EditorUI/editor.js`、汎用UIで使う公式アイコンを `Docs/Icon_Set_Catalog` と `Icons/`、採用・移行を利用先プロダクト側として扱う。
 
@@ -577,6 +577,80 @@ CSSとJavaScriptの接続は、class、ARIA属性、`data-adlaire-*` 属性を�
 既存トップレベル構造は維持し、追加してよいトップレベルは `TypeScript/` のみとする。
 
 `JavaScript/`、`Styles/`、`EditorStyles/`、トップレベル `Editor/` は作成しない。
+
+#### 11.2.3.1 Adlaire Frontend Compiler CSS生成詳細
+
+Adlaire Frontend CompilerのCSS生成は、Deno TypeScriptで記述した正本データから、既存配置のCSS生成物を再現する工程として扱う。
+
+CSS生成の目的は、デザイントークン、CSS層、標準class、禁止事項、読み込み順、生成物整合を同じTypeScript正本から安定して管理することである。
+
+CSS生成のTypeScript正本は `TypeScript/CSS/` に置く。`TypeScript/CSS/` はCSS生成専用であり、UI JavaScript、Editor UI JavaScript、Editor本体の実装を含めない。
+
+`TypeScript/CSS/` は責務ベースで集約し、必要最小限のファイルに分割する。機能ごとの深いサブディレクトリは作らない。
+
+`TypeScript/CSS/` のファイル構成は以下に固定する。
+
+| ファイル | 責務 |
+| --- | --- |
+| `TypeScript/CSS/tokens.ts` | color、typography、spacing、motion、layer、breakpoint、surface、status、effectsのCSS変数定義 |
+| `TypeScript/CSS/rules.ts` | UI CSS、Editor UI CSSのセレクタ、宣言、状態、media query定義 |
+| `TypeScript/CSS/targets.ts` | 生成先CSSファイル、出力順、読み込み順、生成分類の定義 |
+| `TypeScript/CSS/emit.ts` | CSS文字列の組み立て、インデント、改行、コメント、宣言順の制御 |
+| `TypeScript/CSS/manifest.ts` | 生成物一覧、生成元、検査対象、禁止事項、差分確認対象の定義 |
+| `TypeScript/CSS/index.ts` | CSS生成コマンドの入口 |
+
+`TypeScript/CSS/components/`、`TypeScript/CSS/tokens/`、`TypeScript/CSS/themes/`、`TypeScript/CSS/plugins/`、`TypeScript/CSS/adapters/` は作成しない。
+
+CSS生成先は `Tokens/*.css`、`UI/*.css`、`EditorUI/wysiwyg.css` に固定する。生成先を `Dist/`、`Build/`、`Styles/`、`EditorStyles/`、トップレベル `CSS/` へ変更しない。
+
+CSS生成は、出力順、改行、コメント、セレクタ順、CSS変数順を固定し、同じ入力から同じ出力を得られる再現性を必須条件とする。
+
+CSS生成では、CSS文字列をJavaScript生成物へ埋め込まない。CSSはCSSファイル、JavaScriptはJavaScriptファイルとして生成し、同一ファイルに混在させない。
+
+CSS生成コマンド名は `generate-css` とし、Denoで `TypeScript/CSS/index.ts` を実行する工程として扱う。実行コマンドの実体は実装工程で定義し、仕様上はDeno以外の実行環境を認めない。
+
+CSS生成物整合検査名は `check-generated-css` とし、生成物とTypeScript正本の差分がないことを確認する工程として扱う。検査コマンドの実体は実装工程で定義し、差分検出時は失敗とする。
+
+生成CSSの先頭コメントは、既存CSSの第1行コメントを維持する。追加の生成物注記が必要な場合は第2行以降に置き、既存検査で固定している第1行コメントを壊さない。
+
+CSS生成対象は以下に固定する。
+
+| 生成分類 | TypeScript正本 | 生成先 |
+| --- | --- | --- |
+| Token CSS | `TypeScript/CSS/` | `Tokens/colors.css`、`Tokens/typography.css`、`Tokens/spacing.css`、`Tokens/motion.css`、`Tokens/layer.css`、`Tokens/breakpoints.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` |
+| UI CSS | `TypeScript/CSS/` | `UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/utilities.css`、`UI/compat-agws.css` |
+| Editor UI CSS | `TypeScript/CSS/` | `EditorUI/wysiwyg.css` |
+
+CSS生成の入力は、TypeScript内の型付き定義、定数、配列、生成関数に限定する。JSON、YAML、TOML、Sass、SCSS、Less、Stylus、PostCSS設定をCSS生成の正本として追加しない。
+
+CSS生成の実行環境はDenoに限定する。npm互換パッケージ、Node.js API、Node.js前提のCLI、npm scripts、外部CSS生成器は使用しない。
+
+CSS生成の検査は、生成物が仕様で定めた配置に存在すること、禁止ファイルがないこと、必須語句があること、生成物に禁止記述がないこと、CSS変数参照とカタログclassが整合することを確認する。
+
+CSS生成物の差分ゼロ化条件は以下に固定する。
+
+| 条件 | 内容 |
+| --- | --- |
+| 生成再現性 | 同じTypeScript正本から再生成したCSSに差分が出ない |
+| 配置整合 | 生成先が `Tokens/`、`UI/`、`EditorUI/` の既存CSSに限定される |
+| 禁止依存 | npm、Node.js、外部CSS生成器、CSSプリプロセッサを使用しない |
+| CSS責務 | Token CSS、UI CSS、Editor UI CSSの責務境界を越えない |
+| JavaScript分離 | CSS定義をJavaScript生成物に内包しない |
+| 検査通過 | `Tools/check/check-adlaire-design.sh` と生成物整合検査が通過する |
+
+CSS生成への移行は段階制とし、移行済み領域だけを生成物として扱う。未移行領域は既存CSSを維持し、手編集の正本扱いからTypeScript正本へ段階的に移す。
+
+CSS生成移行は、仕様策定、TypeScript正本作成、生成コマンド整備、生成物更新、検査追加、ドキュメント整合性確認の順に進める。TypeScript正本作成以降は実装工程として扱い、別途実装承認を必要とする。
+
+CSS生成移行の順序は以下に固定する。
+
+1. `TypeScript/CSS/` の正本ファイル構成を実装する。
+2. `Tokens/*.css` を生成物へ移行する。
+3. `UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/utilities.css` を生成物へ移行する。
+4. `UI/components.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` を生成物へ移行する。
+5. `EditorUI/wysiwyg.css` を生成物へ移行する。
+6. `check-generated-css` 相当の差分ゼロ検査を `Tools/check/check-adlaire-design.sh` に接続する。
+7. `Docs/Pending_Tasks` から完了した未実装タスクを削除する。
 
 ### 11.2.4 Editor本体とWYSIWYG Editor UIの統合仕様
 
@@ -1839,7 +1913,7 @@ CSSはアイコンSVG本体を埋め込まない。CSSは `.adlaire-icon`、`.ad
 
 `Docs/Generic_Component_Catalog` のアイコンタイル等は、アイコンを表示する汎用UI部品であり、公式アイコンセットそのものではない。
 
-公式アイコンSVGの初期セットと拡張セットの実体制作は完了済みとし、SVG実体は `Icons/` で管理する。
+公式アイコンSVGの初期セットは実体制作済みとし、SVG実体は `Icons/` で管理する。拡張セットは `Docs/Icon_Set_Catalog` で策定済み、SVG実体制作は `Docs/Pending_Tasks` の未実装リストで管理する。
 
 検査では、`Icons/` の存在、許可形式、命名規則、`Docs/Icon_Set_Catalog` との整合性、禁止形式、仕様必須語句を確認する。`Docs/Icon_Set_Catalog` で `実装済み` としたアイコンは、対応するSVGファイルが `Icons/` に存在しなければならない。
 
