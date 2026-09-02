@@ -1,5 +1,5 @@
-import { cloneDocument } from "./document";
-import type { EditorCommand, EditorDocument, EditorSelection } from "./types";
+import { cloneDocument } from "./document.ts";
+import type { EditorCommand, EditorDocument, EditorSelection } from "./types.ts";
 
 export interface HistorySnapshot {
   before: { document: EditorDocument; selection: EditorSelection | null };

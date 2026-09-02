@@ -7,8 +7,8 @@ import {
   findBlockLocation,
   normalizeBlock,
   type ToolRegistry,
-} from "./document";
-import { editorError } from "./events";
+} from "./document.ts";
+import { editorError } from "./events.ts";
 import type {
   DeleteBlockPayload,
   EditorBlock,
@@ -21,7 +21,7 @@ import type {
   SetDocumentMetaPayload,
   SplitBlockPayload,
   UpdateBlockPayload,
-} from "./types";
+} from "./types.ts";
 
 export interface CommandResult {
   document: EditorDocument;
@@ -106,7 +106,9 @@ export function splitBlock(document: EditorDocument, payload: SplitBlockPayload,
   if (location.block.type === "unsupported") return failed(document, editorError("block.unsupported.split", "Unsupported block cannot be split.", payload.blockId));
   const newId = `${location.block.id}-split`;
   if (collectBlockIds(document.blocks).has(newId)) return failed(document, editorError("block.id.duplicate", `Block id '${newId}' already exists.`, newId));
-  const [left, right] = splitBlockData(location.block, payload);
+  const split = splitBlockData(location.block, payload);
+  if ("error" in split) return failed(document, split.error);
+  const [left, right] = split.blocks;
   const nextSiblings = [
     ...location.siblings.slice(0, location.index),
     registry ? normalizeBlock(left, registry) : left,
@@ -137,17 +139,35 @@ export function setDocumentMeta(document: EditorDocument, payload: SetDocumentMe
   return changed({ ...document, meta: payload.merge === false ? cloneJson(meta) : { ...document.meta, ...meta } });
 }
 
-function splitBlockData(block: EditorBlock, payload: SplitBlockPayload): [EditorBlock, EditorBlock] {
+function splitBlockData(block: EditorBlock, payload: SplitBlockPayload): { blocks: [EditorBlock, EditorBlock] } | { error: EditorError } {
   const position = payload.position;
   const data = asRecord(block.data);
   if (block.type === "code" && position?.path?.[0] === "code" && typeof data.code === "string") {
-    const offset = clampOffset(position.offset, data.code.length);
-    return [
+    const offset = validOffset(position.offset, data.code.length);
+    if (offset === null) return { error: editorError("block.split.unsupported", "Split position is outside editable text.", block.id) };
+    return { blocks: [
       { ...block, data: { ...data, code: data.code.slice(0, offset) } },
       { ...block, id: `${block.id}-split`, data: { ...data, code: data.code.slice(offset) } },
-    ];
+    ] };
   }
-  return [{ ...block, data: cloneJson(block.data) }, { ...block, id: `${block.id}-split`, data: cloneJson(block.data) }];
+  if (position?.path?.[0] === "text" && typeof position.path[1] === "number" && position.path[2] === "text") {
+    const items = Array.isArray(data.text) ? data.text.map((item) => cloneJson(item)) : null;
+    const index = position.path[1];
+    const item = items?.[index];
+    if (!items || !item || typeof item !== "object" || (item as { type?: unknown }).type !== "text" || typeof (item as { text?: unknown }).text !== "string") {
+      return { error: editorError("block.split.unsupported", "Split position must target editable text.", block.id) };
+    }
+    const text = (item as { text: string }).text;
+    const offset = validOffset(position.offset, text.length);
+    if (offset === null) return { error: editorError("block.split.unsupported", "Split position is outside editable text.", block.id) };
+    const leftItem = { ...item, text: text.slice(0, offset) };
+    const rightItem = { ...item, text: text.slice(offset) };
+    const leftData = { ...data, text: [...items.slice(0, index), leftItem] };
+    const rightData = { ...data, text: [rightItem, ...items.slice(index + 1)] };
+    return { blocks: [{ ...block, data: leftData }, { ...block, id: `${block.id}-split`, data: rightData }] };
+  }
+  if (position) return { error: editorError("block.split.unsupported", "Split position is not supported for this block.", block.id) };
+  return { blocks: [{ ...block, data: cloneJson(block.data) }, { ...block, id: `${block.id}-split`, data: cloneJson(block.data) }] };
 }
 
 function insertAt(blocks: EditorBlock[], block: EditorBlock, index = blocks.length): EditorBlock[] {
@@ -187,6 +207,8 @@ function failed(document: EditorDocument, error: EditorError): CommandResult {
   return { document, changed: false, errors: [error] };
 }
 
-function clampOffset(value: unknown, length: number): number {
-  return typeof value === "number" && Number.isInteger(value) ? Math.max(0, Math.min(value, length)) : length;
+function validOffset(value: unknown, length: number): number | null {
+  if (value === undefined) return length;
+  if (typeof value !== "number" || !Number.isInteger(value)) return null;
+  return value >= 0 && value <= length ? value : null;
 }

@@ -10,7 +10,7 @@ import type {
   ParagraphData,
   PasteEvent,
   UnsupportedData,
-} from "./types";
+} from "./types.ts";
 
 export function createEmptyDocument(id = "document", schemaVersion = "1.0.0"): EditorDocument {
   return { id, schemaVersion, blocks: [] };
