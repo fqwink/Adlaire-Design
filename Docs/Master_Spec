@@ -174,8 +174,15 @@ WYSIWYG Editor UIでは、ツールバー選択、ブロック選択、警告、
 - `TypeScript/`: UI JavaScript、Editor UI JavaScript、Editor部分のTypeScript正本。
 - `Tokens/`: デザイントークン(色・余白・タイポグラフィ等の設計値)。第3章のブランドカラーパレット、第4章のCSS変数はこの領域に対応する。
 - `Brand/`: ブランド全般の資産(ロゴなど、色以外も含む将来拡張領域)。
+- `AdlaireEditor_Integrated_Temporary/`: Adlaire-Editor全体データを後続整備前提で一時格納する統合領域。
 
-既存トップレベル構造は維持し、追加してよいトップレベルは `TypeScript/` のみとする。`JavaScript/`、`Styles/`、`EditorStyles/`、トップレベル `Editor/` は作成しない。
+既存トップレベル構造は維持し、追加してよいトップレベルは `TypeScript/` のみとする。ただし、Adlaire-Editor全体データの統合吸収が完了するまでの一時領域として `AdlaireEditor_Integrated_Temporary/` を置く。`JavaScript/`、`Styles/`、`EditorStyles/`、トップレベル `Editor/` は作成しない。
+
+`AdlaireEditor_Integrated_Temporary/` 配下は、Adlaire-Editorリポジトリ全体データをそのまま保持する一時領域とする。同領域に限り、Adlaire-Editor由来の `package.json`、`package-lock.json`、`node_modules/`、`dist/`、`dist-test/`、`.git/` の一時保持を許可する。
+
+`AdlaireEditor_Integrated_Temporary/adlaire-editor-repository.tar` は、Adlaire-Editor全体データをPRへ反映するための搬送用アーカイブとする。
+
+`AdlaireEditor_Integrated_Temporary/` は、ユーザーから明示的な削除指示があるまで削除しない。
 
 領域間の依存関係は、TypeScript正本からJavaScript生成物への出力、CSS正本から表示層への参照、Editor部分からEditor UIへの接続点を区別して管理する。
 
@@ -350,6 +357,7 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、TypeScript正本、JavaScri
 | UI | `UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/components.js`、`UI/site.css`、`UI/forms.css`、`UI/forms.js`、`UI/content.css`、`UI/content.js`、`UI/utilities.css`、`UI/compat-agws.css` | 公開面CSS基盤と汎用UI JavaScript生成物 |
 | EditorUI | `EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js`、`EditorUI/editor.js` | WYSIWYG Editor UIスキン、Editor UI JavaScript生成物、Editor本体JavaScript生成物 |
 | TypeScript | `TypeScript/UI/`、`TypeScript/EditorUI/`、`TypeScript/Editor/` | UI JavaScript、Editor UI JavaScript、Editor部分のTypeScript正本 |
+| AdlaireEditor_Integrated_Temporary | `AdlaireEditor_Integrated_Temporary/` | Adlaire-Editor全体データの一時統合領域 |
 | Tools | `Tools/check/check-adlaire-design.sh` | Adlaire-Design専用検査 |
 
 責務別の変更単位は以下に固定する。
@@ -544,6 +552,14 @@ JavaScriptはCSS文字列の生成、styleタグ注入、CSS定義の内包を�
 CSSとJavaScriptの接続は、class、ARIA属性、`data-adlaire-*` 属性を通じて行う。
 
 既存トップレベル構造は維持し、追加してよいトップレベルは `TypeScript/` のみとする。
+
+Adlaire-Editor全体データの統合吸収が完了するまでの一時領域として、`AdlaireEditor_Integrated_Temporary/` を置く。
+
+`AdlaireEditor_Integrated_Temporary/` は後続整備前提の一時格納先であり、同領域配下に限りAdlaire-Editor由来のデータをそのまま保持する。
+
+`AdlaireEditor_Integrated_Temporary/adlaire-editor-repository.tar` は、Adlaire-Editor全体データをPRへ反映するための搬送用アーカイブとする。
+
+`AdlaireEditor_Integrated_Temporary/` は、ユーザーから明示的な削除指示があるまで削除しない。
 
 `JavaScript/`、`Styles/`、`EditorStyles/`、トップレベル `Editor/` は作成しない。
 

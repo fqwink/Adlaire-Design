@@ -12,6 +12,8 @@
 - `Docs/Pending_Tasks`(未策定または未完了タスクだけを集約する管理ファイル)
 - `Docs/Change_History`(Adlaire-Design専用の変更履歴)
 - `Brand/`(ブランド資産)
+- `AdlaireEditor_Integrated_Temporary/`(Adlaire-Editor全体データの一時統合領域)
+- `AdlaireEditor_Integrated_Temporary/adlaire-editor-repository.tar`(Adlaire-Editor全体データのPR搬送用アーカイブ)
 - `Icons/`(Adlaire-Design公式アイコンセット)
 - `Samples/README.md`(理解補助用サンプル資料の説明)
 - `Samples/design/`(理解補助用サンプルデザイン)
