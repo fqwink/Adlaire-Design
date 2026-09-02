@@ -90,7 +90,6 @@ for path in \
   EditorUI/editor.js \
   EditorUI/wysiwyg.css \
   EditorUI/wysiwyg.js \
-  AdlaireEditor_Integrated_Temporary/adlaire-editor-repository.tar \
   TypeScript/Editor/core.ts \
   TypeScript/Editor/document.ts \
   TypeScript/Editor/commands.ts \
@@ -144,7 +143,6 @@ find "$ADLAIRE_DESIGN_ROOT" -mindepth 1 -maxdepth 1 \
   ! -name '.git' \
   ! -name '.gitignore' \
   ! -name 'AGENTS.md' \
-  ! -name 'AdlaireEditor_Integrated_Temporary' \
   ! -name 'Brand' \
   ! -name 'Docs' \
   ! -name 'EditorUI' \
@@ -322,7 +320,6 @@ if [ -e "$ADLAIRE_DESIGN_ROOT/Documents" ]; then
 fi
 
 if find "$ADLAIRE_DESIGN_ROOT" \
-  -path "$ADLAIRE_DESIGN_ROOT/AdlaireEditor_Integrated_Temporary" -prune -o \
   \( -name 'package.json' -o -name 'package-lock.json' -o -name 'node_modules' \) -print | grep . >/dev/null 2>&1; then
   echo "Adlaire-Design must not use npm or Node.js dependency project files." >&2
   exit 1
@@ -340,7 +337,6 @@ fi
 
 if find "$ADLAIRE_DESIGN_ROOT" \
   -path "$ADLAIRE_DESIGN_ROOT/.git" -prune -o \
-  -path "$ADLAIRE_DESIGN_ROOT/AdlaireEditor_Integrated_Temporary" -prune -o \
   \( -type d \( -name 'Dist' -o -name 'dist' -o -name 'Build' -o -name 'build' \) \) -print | grep . >/dev/null 2>&1; then
   echo "Adlaire-Design must not create Dist/dist/Build/build directories while build, minify, and bundle are out of scope." >&2
   exit 1
@@ -383,11 +379,6 @@ fi
 
 if ! grep -F 'WYSIWYG Editor UIはAdlaire-Designの仕様対象として管理すること。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
   echo "Adlaire-Design AGENTS.md must document WYSIWYG Editor UI scope." >&2
-  exit 1
-fi
-
-if ! grep -F '`AdlaireEditor_Integrated_Temporary/` は、ユーザーから明示的な削除指示があるまで削除しないこと。' "$ADLAIRE_DESIGN_ROOT/AGENTS.md" >/dev/null 2>&1; then
-  echo "Adlaire-Design AGENTS.md must prohibit deleting the temporary integrated editor folder without explicit user instruction." >&2
   exit 1
 fi
 
@@ -485,8 +476,6 @@ for css_master_term in \
   'Adlaire-DesignのTypeScriptとは、UI JavaScript、Editor UI JavaScript、Editor本体を実装する正本ソースである。' \
   'Adlaire-DesignのJavaScriptとは、TypeScriptから生成するブラウザ実行用の生成物である。' \
   'CSSとJavaScriptは同一ファイルに混在させない。' \
-  '`AdlaireEditor_Integrated_Temporary/adlaire-editor-repository.tar` は、Adlaire-Editor全体データをPRへ反映するための搬送用アーカイブとする。' \
-  '`AdlaireEditor_Integrated_Temporary/` は、ユーザーから明示的な削除指示があるまで削除しない。' \
   '公式アイコンセットとは、`Icons/` で管理する汎用UI用SVGアイコンである。' \
   '### 11.11.5 ブランド資産整理の策定仕様' \
   '許可するファイル形式は、SVG、PNG、WebPに限定する。JPG、JPEG、GIF、PDF、AI、PSD、EPSは対応しない。' \
@@ -726,8 +715,6 @@ for indexed_path in \
   Docs/Icon_Set_Catalog \
   Docs/Pending_Tasks \
   Docs/Change_History \
-  AdlaireEditor_Integrated_Temporary/ \
-  AdlaireEditor_Integrated_Temporary/adlaire-editor-repository.tar \
   Brand/ \
   Icons/ \
   Samples/README.md \
@@ -768,23 +755,9 @@ for document_index_responsibility_term in \
   '`Docs/WYSIWYG_Editor_UI_Catalog`(エディタUIに関する部品の分類、優先度、実装先、実装状態の一覧)' \
   '`Docs/Icon_Set_Catalog`(Adlaire-Design公式アイコンセットの分類、用途、実装状態の一覧)' \
   '`Docs/Pending_Tasks`(未策定または未完了タスクだけを集約する管理ファイル)' \
-  '`TypeScript/`(UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本。Editor本体は責務ベースの少数ファイルで集約)' \
-  '`AdlaireEditor_Integrated_Temporary/adlaire-editor-repository.tar`(Adlaire-Editor全体データのPR搬送用アーカイブ)' \
-  '`AdlaireEditor_Integrated_Temporary/`(Adlaire-Editor全体データの一時統合領域)'; do
+  '`TypeScript/`(UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本。Editor本体は責務ベースの少数ファイルで集約)'; do
   if ! grep -F -- "$document_index_responsibility_term" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
     echo "Docs/Document_Index missing responsibility description: $document_index_responsibility_term" >&2
-    exit 1
-  fi
-done
-
-for editor_archive_path in \
-  './.git/HEAD' \
-  './README.md' \
-  './mod.ts' \
-  './package.json' \
-  './node_modules/typescript/bin/tsc'; do
-  if ! tar -tf "$ADLAIRE_DESIGN_ROOT/AdlaireEditor_Integrated_Temporary/adlaire-editor-repository.tar" | grep -F -x -- "$editor_archive_path" >/dev/null 2>&1; then
-    echo "AdlaireEditor_Integrated_Temporary/adlaire-editor-repository.tar missing required Adlaire-Editor data: $editor_archive_path" >&2
     exit 1
   fi
 done

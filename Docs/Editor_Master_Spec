@@ -23,7 +23,6 @@ Adlaire-Designのエディタは、安全な構造化コンテンツ編集基盤
 | WYSIWYG Editor UI CSS | `EditorUI/wysiwyg.css` | エディタ表示層のCSS正本 |
 | WYSIWYG Editor UI JavaScript生成物 | `EditorUI/wysiwyg.js` | エディタUI操作のJavaScript生成物 |
 | WYSIWYG Editor UI部品カタログ | `Docs/WYSIWYG_Editor_UI_Catalog` | エディタUI部品の分類、優先度、実装状態 |
-| 統合元保全領域 | `AdlaireEditor_Integrated_Temporary/` | Adlaire-Editor由来データの一時保全領域 |
 
 標準採用ライブラリはDeno標準ライブラリ(`jsr:@std/*`)に限定する。
 
