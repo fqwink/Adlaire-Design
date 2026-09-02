@@ -515,6 +515,12 @@ npm互換パッケージ、npm依存、Node.js依存、外部フレームワー�
 
 JavaScriptはブラウザ実行用の生成物として扱い、手編集の正本にはしない。
 
+Editor本体の公開APIは `TypeScript/Editor/index.ts` に集約し、ブラウザ実行時は `window.AdlaireEditor` として公開する。
+
+Editor本体の検査はDenoランタイムで行い、`deno check --no-npm TypeScript/Editor/index.ts` を基準とする。
+
+npm registry取得、npm互換パッケージ、Node.js依存を伴うbundle、minify、外部フレームワーク生成は採用しない。
+
 TypeScript正本は `TypeScript/` に集約する。
 
 `TypeScript/` の責務は以下に固定する。

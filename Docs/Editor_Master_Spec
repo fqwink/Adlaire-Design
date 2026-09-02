@@ -99,6 +99,12 @@ UI部品の詳細分類と実装状態は `Docs/WYSIWYG_Editor_UI_Catalog` を�
 
 `TypeScript/` に `npm:` import、`node:` import、npm依存、Node.js依存が存在しないこと。
 
-`EditorUI/editor.js` は `window.AdlaireEditor`、`HeadlessEditorController`、`ToolRegistry`、`createEditor`、`applyCommand`、`handlePaste`、`validateDocument`、`sanitizeDocument` を公開すること。
+`TypeScript/Editor/index.ts` はEditor本体の公開APIを集約し、ブラウザ実行時は `window.AdlaireEditor` として公開できること。
+
+Editor本体のTypeScript検査は `deno check --no-npm TypeScript/Editor/index.ts` を基準とする。
+
+npm registry取得、npm互換パッケージ、Node.js依存を伴うbundle、minify、外部フレームワーク生成は採用しない。
+
+`EditorUI/editor.js` は `window.AdlaireEditor`、`HeadlessEditorController`、`ToolRegistry`、`BlockRegistry`、`createEditor`、`applyCommand`、`handlePaste`、`validateDocument`、`sanitizeDocument` を公開すること。
 
 検査は `Tools/check/check-adlaire-design.sh` で行う。

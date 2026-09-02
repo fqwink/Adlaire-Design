@@ -45,6 +45,12 @@
   };
   ToolRegistry.prototype.values = ToolRegistry.prototype.list;
 
+  function BlockRegistry(tools) {
+    ToolRegistry.call(this, tools, true);
+  }
+  BlockRegistry.prototype = Object.create(ToolRegistry.prototype);
+  BlockRegistry.prototype.constructor = BlockRegistry;
+
   function createDefaultInlineTools() {
     return ["bold", "italic", "link", "code", "strike"].map(function (type) {
       return { type: type, kind: "inline", validate: function (data) { return type !== "link" || typeof asRecord(data).href === "string"; }, sanitize: {} };
@@ -72,7 +78,7 @@
   }
 
   function createDefaultBlockRegistry(tools) {
-    return new ToolRegistry(createDefaultBlockTools().concat((tools || []).filter(function (tool) { return tool.kind === "block"; })), true);
+    return new BlockRegistry(createDefaultBlockTools().concat((tools || []).filter(function (tool) { return tool.kind === "block"; })));
   }
 
   function normalizeDocument(document, registry) {
@@ -789,6 +795,7 @@
   window.AdlaireEditor = {
     HeadlessEditorController: HeadlessEditorController,
     ToolRegistry: ToolRegistry,
+    BlockRegistry: BlockRegistry,
     EventBus: EventBus,
     History: History,
     applyCommand: applyCommand,
