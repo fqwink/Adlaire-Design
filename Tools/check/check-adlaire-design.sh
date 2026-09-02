@@ -147,6 +147,7 @@ fi
 find "$ADLAIRE_DESIGN_ROOT" -mindepth 1 -maxdepth 1 \
   ! -name '.git' \
   ! -name '.gitignore' \
+  ! -name '.DS_Store' \
   ! -name 'AGENTS.md' \
   ! -name 'Brand' \
   ! -name 'Docs' \
