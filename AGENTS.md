@@ -3,26 +3,26 @@
 ## 作業開始時の必須確認
 
 - すべての作業開始時に、必ずこの `AGENTS.md` を読むこと。
-- このリポジトリは `Adlaire-Design` の開発正本・仕様正本として扱うこと。
+- このリポジトリは、当面のリポジトリ名を `Adlaire-Design` とし、正式なシステム名を `Adlaire-Design-System` とする開発正本・仕様正本として扱うこと。
 - 仕様・設計の正本は `Docs/Master_Spec` とする。
 - リポジトリ索引は `Docs/Document_Index` とする。
 - 作業開始時に `AGENTS.md` を読むと同時に、マージ状況、リモート、ローカル整合性を確認すること。
 - 整合性確認では、`git status --short --branch`、`git remote -v`、必要に応じた `git fetch backup`、`HEAD` と `backup/main` の一致または差分を確認すること。
-- Adlaire-Designは、フロントエンドUI基盤を軸としたフロントエンド基盤として、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、Editor本体、TypeScript正本、JavaScript生成物を扱う独立リポジトリとして管理すること。
+- Adlaire-Design-Systemは、デザインシステムを中核に、Deno TypeScript正本からCSS/JavaScript生成物を生成・検査・管理するフロントエンド基盤システムとして扱うこと。
 - TypeScriptはDenoランタイム環境を前提とすること。
 - 標準採用ライブラリはDeno標準ライブラリ(`jsr:@std/*`)に限定すること。
 - parserなどが必要な場合は、明示的な例外採用ライブラリとして仕様に記録すること。
 - npm互換パッケージ、npm依存、Node.js依存、外部フレームワークは例外なく禁止すること。
 - WYSIWYG Editor UIはAdlaire-Design採用とする。
-- WYSIWYG Editor UIはAdlaire-Designの仕様対象として管理すること。
+- WYSIWYG Editor UIはAdlaire-Design-Systemの仕様対象として管理すること。
 - Editor本体は、安全な構造化コンテンツ編集基盤としてAdlaire-Designに統合すること。
 
 ## リポジトリ構成
 
 - `Docs/`: 仕様・設計、リポジトリ索引
-- `UI/`: CSSフレームワーク本体および汎用UI JavaScript
+- `UI/`: CSS生成物および汎用UI JavaScript生成物
 - `EditorUI/`: WYSIWYG Editor UIスキンおよびEditor UI JavaScript
-- `TypeScript/`: UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本
+- `TypeScript/`: CSS生成、UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本
 - `Tokens/`: デザイントークン
 - `Brand/`: ブランド資産
 - `Tools/check/`: Adlaire-Design専用の検査シェル
@@ -31,17 +31,17 @@
 ## 基本方針
 
 - 旧称は履歴上の名称としてのみ扱うこと。
-- 現行文書・現行READMEでは、リポジトリ名を `Adlaire-Design` に統一すること。
+- 現行文書・現行READMEでは、正式なシステム名を `Adlaire-Design-System` とし、当面のリポジトリ名として `Adlaire-Design` を併記すること。
 - ドキュメントフォルダ名は `Docs/` とし、`Documents/` は作成しないこと。
 - Adlaire-Design専用の検査シェルは `Tools/check/` で管理すること。
 - Node.js依存は完全禁止とし、npm互換パッケージ、npm依存物(`package.json`、`package-lock.json`、`node_modules`)を追加しないこと。
 - 既存トップレベル構造は維持し、追加してよいトップレベルは `TypeScript/` のみとすること。
-- Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理すること。
-- `Tokens/`、`UI/`、`EditorUI/` 配下のCSSファイルを正本として直接管理し、Sass/SCSS/Less/Stylus/PostCSS等のCSSプリプロセッサを追加しないこと。
-- CSSのビルド、minify、bundleは現状検討しないこと。`Dist/`、`dist/`、`Build/`、`build/`、`*.min.css`、`*.bundle.css`、CSSまたはnpm/webpack系フロントエンドビルド設定ファイルを追加しないこと。
-- Adlaire-Designでは、WYSIWYG Editor UIスキン、UI必須クラス、CSS/JavaScript読み込み順、表示境界、Editor UI JavaScript、Editor本体生成物を管理すること。
-- JavaScript部分はTypeScriptで実装し、JavaScriptは生成物として扱うこと。
-- TypeScript正本は `TypeScript/` に集約し、生成物JavaScriptは既存の `UI/*.js`、`EditorUI/wysiwyg.js`、`EditorUI/editor.js` に配置すること。
+- Adlaire-Design-Systemの成果物は、本リポジトリ内で完結して管理すること。
+- `Tokens/`、`UI/`、`EditorUI/` 配下のCSSファイルはDeno TypeScript正本から生成するCSS生成物へ段階移行し、Sass/SCSS/Less/Stylus/PostCSS等のCSSプリプロセッサを追加しないこと。
+- CSS/JavaScript生成はDeno TypeScriptで行い、CSS minify、CSS bundle、`Dist/`、`dist/`、`Build/`、`build/`、`*.min.css`、`*.bundle.css`、npm/webpack系フロントエンドビルド設定ファイルを追加しないこと。
+- Adlaire-Design-Systemでは、WYSIWYG Editor UIスキン、UI必須クラス、CSS/JavaScript読み込み順、表示境界、Editor UI JavaScript、Editor本体生成物を管理すること。
+- CSS/JavaScript部分はTypeScriptで実装し、CSS/JavaScriptは生成物として扱うこと。
+- TypeScript正本は `TypeScript/` に集約し、生成物CSSは既存の `Tokens/*.css`、`UI/*.css`、`EditorUI/wysiwyg.css` に、生成物JavaScriptは既存の `UI/*.js`、`EditorUI/wysiwyg.js`、`EditorUI/editor.js` に配置すること。
 - CSSとJavaScriptは同一ファイルに混在させないこと。
 
 ## 変更承認ルール

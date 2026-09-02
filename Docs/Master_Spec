@@ -2,17 +2,19 @@
 
 # マスター仕様書
 
-**Version:** rev.97
+**Version:** rev.98
 
 ---
 
 # 1. 目的
 
-本仕様書は、Adlaire-Designのマスター仕様書として、Adlaire Group(開発元: Adlaire Group DX事業セグメントグループ)が使用するデザインシステム、統一ブランドカラー、公開面・管理面におけるブランドデザイン、CSSフレームワーク、WYSIWYG Editor UI、Editor本体、TypeScript正本、JavaScript生成物の基本方針を定める。
+本仕様書は、Adlaire-Design-Systemのマスター仕様書として、Adlaire Group(開発元: Adlaire Group DX事業セグメントグループ)が使用するデザインシステム、統一ブランドカラー、公開面・管理面におけるブランドデザイン、CSSフレームワーク、WYSIWYG Editor UI、Editor本体、TypeScript正本、CSS生成物、JavaScript生成物の基本方針を定める。
+
+当面のリポジトリ名は `Adlaire-Design` とし、正式なシステム名は `Adlaire-Design-System` とする。リポジトリ改名は後続工程で扱う。
 
 Editor本体とWYSIWYG Editor UIの詳細正本は `Docs/Editor_Master_Spec` とする。
 
-TypeScriptはDenoランタイム環境を前提とし、標準採用ライブラリはDeno標準ライブラリ(`jsr:@std/*`)に限定する。parserなどが必要な場合は、明示的な例外採用ライブラリとして管理する。npm互換パッケージ、npm依存、Node.js依存、外部フレームワークは例外なく禁止する。
+TypeScriptはDenoランタイム環境を前提とし、CSS/JavaScript生成の正本ソースとして管理する。標準採用ライブラリはDeno標準ライブラリ(`jsr:@std/*`)に限定する。parserなどが必要な場合は、明示的な例外採用ライブラリとして管理する。npm互換パッケージ、npm依存、Node.js依存、外部フレームワークは例外なく禁止する。
 
 色だけでなく、背景、境界、余白、ボタン、リンク、セクション構成、情報の見せ方など、ユーザーが受け取る見た目全体を設計対象に含める。
 
@@ -30,33 +32,33 @@ WYSIWYG Editor専用UI部品の分類、優先度、実装先、実装状態は 
 
 未策定または未完了のまま残っているタスクは `Docs/Pending_Tasks` に集約する。同ファイルには未完了タスクだけを残し、完了したタスクは削除する。
 
-本方針は、実装変更より先に本仕様書を正本として定義する。実際のCSS、公開面への反映は、本仕様書の承認後に個別の実装計画として扱う。
+本方針は、実装変更より先に本仕様書を正本として定義する。実際のTypeScript正本化、CSS/JavaScript生成、公開面への反映は、本仕様書の承認後に個別の実装計画として扱う。
 
-開発正本は独立リポジトリ `Adlaire-Design` で管理する(詳細は第6章を参照)。
+開発正本は当面の独立リポジトリ `Adlaire-Design` で管理する(詳細は第6章を参照)。
 
-## 1.1 Adlaire-Designの概念と定義
+## 1.1 Adlaire-Design-Systemの概念と定義
 
-Adlaire-Designは、Adlaire GroupのUI表現を統一するためのデザインシステムを軸にした、フロントエンドUI基盤中心のフロントエンド基盤正本である。
+Adlaire-Design-Systemは、Adlaire Groupのデザインシステムを中核に、Deno TypeScript正本からCSS/JavaScript生成物を生成・検査・管理するフロントエンド基盤システムである。
 
-Adlaire-Designにおけるデザインシステムとは、Adlaire GroupのUI表現を一貫させるための正本体系である。
+Adlaire-Design-Systemにおけるデザインシステムとは、Adlaire GroupのUI表現を一貫させるための正本体系である。
 
-Adlaire-DesignにおけるフロントエンドUI基盤とは、デザイントークン、CSS契約、UI部品、UI JavaScript、アクセシビリティ表示、状態表示、WYSIWYG Editor UIを接続し、利用側が一貫したフロントエンドを構築できるようにする基盤である。
+Adlaire-Design-Systemにおけるフロントエンド基盤とは、デザイントークン、CSS契約、UI部品、UI JavaScript、アクセシビリティ表示、状態表示、WYSIWYG Editor UI、Editor本体、生成・検査を接続し、利用側が一貫したフロントエンドを構築できるようにする基盤である。
 
 デザインシステムは、単なるCSS集、テーマ集、部品一覧、ブランドガイドではない。
 
-デザインシステムは、デザイントークン、CSS契約、UI部品、状態表現、ブランド資産、公式アイコン、WYSIWYG Editor UI、Editor本体、検査条件を同じルールで接続し、利用側が一貫した画面を構築できるようにする。
+デザインシステムは、デザイントークン、CSS契約、UI部品、状態表現、ブランド資産、公式アイコン、WYSIWYG Editor UI、Editor本体、Deno TypeScript正本、CSS/JavaScript生成物、検査条件を同じルールで接続し、利用側が一貫した画面を構築できるようにする。
 
-Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産、公式アイコンセット、汎用UI部品、WYSIWYG Editor UI部品、Editor本体、TypeScript正本、JavaScript生成物を一体で管理する。
+Adlaire-Design-Systemは、CSSフレームワーク、デザイントークン、ブランド資産、公式アイコンセット、汎用UI部品、WYSIWYG Editor UI部品、Editor本体、TypeScript正本、CSS生成物、JavaScript生成物を一体で管理する。
 
-Adlaire-Designは、UI表現、デザイントークン、CSS契約、汎用部品、公式アイコン、ブランド資産、WYSIWYG Editor UI、Editor本体、TypeScript正本、JavaScript生成物を正本化する。
+Adlaire-Design-Systemは、UI表現、デザイントークン、CSS契約、汎用部品、公式アイコン、ブランド資産、WYSIWYG Editor UI、Editor本体、TypeScript正本、CSS生成物、JavaScript生成物を正本化する。
 
 ブログ・ドキュメント、GitプロバイダーUI、社内ポータル、静的サイトなどの画面種別は、Adlaire-Designの共通部品とルールを適用する代表例として扱う。
 
-Adlaire-Designでは、画面種別ごとの専用テーマや専用設計体系は策定しない。
+Adlaire-Design-Systemでは、画面種別ごとの専用テーマや専用設計体系は策定しない。
 
-Adlaire-Designは、特定プロダクトの画面実装ではなく、複数プロダクトで再利用できるUI仕様と部品を定義する。
+Adlaire-Design-Systemは、特定プロダクトの画面実装ではなく、複数プロダクトで再利用できるUI仕様と部品を定義する。
 
-Adlaire-Designは、フロントエンドUI基盤を軸としたフロントエンド基盤として、UI表現、部品、トークン、資産、CSS契約、Editor本体、TypeScript正本、JavaScript生成物、検査条件を管理する。
+Adlaire-Design-Systemは、フロントエンド基盤システムとして、UI表現、部品、トークン、資産、CSS契約、Editor本体、TypeScript正本、CSS/JavaScript生成物、検査条件を管理する。
 
 汎用UI部品とは、公開面、管理面、本文表示、フォーム、ナビゲーション、状態表示で再利用するUI部品である。
 
@@ -84,9 +86,13 @@ Spacingトークンとは、gap、padding、margin、section spacing、inline sp
 
 公式アイコンセットとは、`Icons/` で管理する汎用UI用SVGアイコンである。
 
-Adlaire-DesignのTypeScriptとは、UI JavaScript、Editor UI JavaScript、Editor本体を実装する正本ソースである。
+Adlaire-Design-SystemのTypeScriptとは、CSS生成、UI JavaScript、Editor UI JavaScript、Editor本体を実装する正本ソースである。
 
-Adlaire-DesignのJavaScriptとは、TypeScriptから生成するブラウザ実行用の生成物である。
+Adlaire Frontend Compilerとは、Deno TypeScript正本からCSS/JavaScript生成物を生成し、生成物と仕様の整合を検査するAdlaire-Design-System内の生成基盤である。
+
+Adlaire-Design-SystemのCSSとは、TypeScript正本から生成されるブラウザ表示用CSS生成物である。段階移行中は既存CSSを維持し、移行済み領域から生成物として扱う。
+
+Adlaire-Design-SystemのJavaScriptとは、TypeScriptから生成するブラウザ実行用の生成物である。
 
 CSSとJavaScriptは同一ファイルに混在させない。
 
@@ -97,8 +103,8 @@ CSSとJavaScriptは同一ファイルに混在させない。
 - Adlaire Groupのデフォルトブランドカラーは AGWS Blue とする。
 - Adlaire Groupのセカンドブランドカラーは AGWS Green とする。
 - ブランドカラーは、Adlaire Groupが管理する新規デザイン資産、および既存デザイン資産の大規模改修時に、AGWS Blueを既定、AGWS Greenを明示選択のセカンドとして使用する。
-- 公開面のカラー、背景、余白、導線、ボタン、リンク、セクション表現などは、Adlaire-Designで定義する設計仕様を基準に整理する。
-- 既存公開サイトや既存公開面は、現行構成の完成度、変更負荷、運用影響、ブランド上の優先度を考慮し、Adlaire-Design採用可否を個別に判断する。
+- 公開面のカラー、背景、余白、導線、ボタン、リンク、セクション表現などは、Adlaire-Design-Systemで定義する設計仕様を基準に整理する。
+- 既存公開サイトや既存公開面は、現行構成の完成度、変更負荷、運用影響、ブランド上の優先度を考慮し、Adlaire-Design-System採用可否を個別に判断する。
 - 管理面は、原則として共通パレットを固定で使用する。公開面は新規構築または大規模改修時に共通パレットの採用を検討する。テーマを定義する場合、テーマは共通パレットのCSS変数(第4章)を参照できる。
 - 色は装飾目的だけでなく、操作、状態、情報分類の意味を持つものとして扱う。
 - アクセシビリティ方針は WCAG 2.2 A を参照し、状態や意味を色だけで伝えない。
@@ -153,7 +159,7 @@ CSSとJavaScriptは同一ファイルに混在させない。
 
 ## 5.1 アクセシビリティ方針
 
-Adlaire-Designのアクセシビリティ方針は WCAG 2.2 A を参照する。
+Adlaire-Design-Systemのアクセシビリティ方針は WCAG 2.2 A を参照する。
 
 テキスト、ボタン、リンク、フォーム、状態表示、WYSIWYG Editor UI状態表示は、背景や周辺要素と識別できる表示にする。
 
@@ -162,35 +168,35 @@ Adlaire-Designのアクセシビリティ方針は WCAG 2.2 A を参照する。
 WYSIWYG Editor UIでは、ツールバー選択、ブロック選択、警告、エラー、補助表示を色だけに依存させない。ツールバー選択、ブロック選択、補助表示は色以外の手掛かりを併用する。
 - 内製CSSフレームワークは、画面種別ごとの専用設計体系に分散させず、本仕様書で定める共有スタイルシートとして一元管理する。
 - CSSフレームワークとデザイントークンの実装範囲、ファイル構成、段階は第11章に定める。
-- WYSIWYG Editor UIはAdlaire-Design採用とし、エディター表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSSを本リポジトリで管理する。
-- Editor本体はAdlaire-Designに統合し、安全な構造化コンテンツ編集基盤として本リポジトリで管理する。
-- JavaScript部分はTypeScriptで実装し、JavaScriptは生成物として管理する。
-- 色以外の設計要素(余白、タイポグラフィなど)は、Adlaire-Design内のトークン、UI CSS、汎用部品仕様として管理する。具体的な設計トークンとして管理する必要が生じた場合は、別途定義を新設する。
+- WYSIWYG Editor UIはAdlaire-Design-System採用とし、エディター表示層、UI部品、プレビューHTMLの見た目、ブロック表示のCSSを本リポジトリで管理する。
+- Editor本体はAdlaire-Design-Systemに統合し、安全な構造化コンテンツ編集基盤として本リポジトリで管理する。
+- CSS/JavaScript部分はTypeScriptで実装し、CSS/JavaScriptは生成物として管理する。
+- 色以外の設計要素(余白、タイポグラフィなど)は、Adlaire-Design-System内のトークン、UI CSS、汎用部品仕様として管理する。具体的な設計トークンとして管理する必要が生じた場合は、別途定義を新設する。
 
 ---
 
 # 6. リポジトリ構成
 
-`Adlaire-Design` の開発正本は、以下の領域(フォルダ)を中心に構成する。
+当面のリポジトリ `Adlaire-Design` に置くAdlaire-Design-Systemの開発正本は、以下の領域(フォルダ)を中心に構成する。
 
-- `UI/`: CSSフレームワーク本体(第5章のユーティリティクラス等)および汎用UI JavaScript。WYSIWYG Editor UI専用品は含めない。
+- `UI/`: CSS生成物(第5章のユーティリティクラス等)および汎用UI JavaScript生成物。WYSIWYG Editor UI専用品は含めない。
 - `EditorUI/`: WYSIWYG Editor UIスキン、Editor UI JavaScript、Editor本体の生成物JavaScript。
-- `TypeScript/`: UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本。
+- `TypeScript/`: CSS生成、UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本。
 - `Docs/Editor_Master_Spec`: Editor本体とWYSIWYG Editor UIの専用マスター仕様。
 - `Tokens/`: デザイントークン(色・余白・タイポグラフィ等の設計値)。第3章のブランドカラーパレット、第4章のCSS変数はこの領域に対応する。
 - `Brand/`: ブランド全般の資産(ロゴなど、色以外も含む将来拡張領域)。
 
 既存トップレベル構造は維持し、追加してよいトップレベルは `TypeScript/` のみとする。`JavaScript/`、`Styles/`、`EditorStyles/`、トップレベル `Editor/` は作成しない。
 
-領域間の依存関係は、TypeScript正本からJavaScript生成物への出力、CSS正本から表示層への参照、Editor本体からEditor UIへの接続点を区別して管理する。
+領域間の依存関係は、TypeScript正本からCSS/JavaScript生成物への出力、CSS生成物から表示層への参照、Editor本体からEditor UIへの接続点を区別して管理する。
 
 ---
 
 # 7. 独立管理方針
 
-Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理する方針とする。
+Adlaire-Design-Systemの成果物は、本リポジトリ内で完結して管理する方針とする。
 
-Adlaire-Designは、フロントエンドUI基盤を軸としたフロントエンド基盤として、CSSフレームワーク、デザイントークン、ブランド資産、公式アイコンセット、WYSIWYG Editor UI、Editor本体、TypeScript正本、JavaScript生成物の開発正本として独立して管理する。
+Adlaire-Design-Systemは、デザインシステムを中核にしたフロントエンド基盤システムとして、CSSフレームワーク、デザイントークン、ブランド資産、公式アイコンセット、WYSIWYG Editor UI、Editor本体、TypeScript正本、CSS生成物、JavaScript生成物の開発正本として独立して管理する。
 
 ---
 
@@ -285,14 +291,14 @@ Adlaire-Designは、公開面デザインの参照基準を本リポジトリ内
 
 ## 11.1 目的
 
-本章は、Adlaire-Design内で管理するCSSフレームワーク、デザイントークン、WYSIWYG Editor UI、Editor本体、TypeScript正本、JavaScript生成物の実装範囲、ファイル構成、命名、段階を定める。
+本章は、Adlaire-Design-System内で管理するCSSフレームワーク、デザイントークン、WYSIWYG Editor UI、Editor本体、TypeScript正本、CSS生成物、JavaScript生成物の実装範囲、ファイル構成、命名、段階を定める。
 
 本章は仕様固定と実装整合性の確認を目的とする。実際のCSSファイル作成、公開面反映は、ユーザー承認後に個別作業として行う。
 
 ## 11.2 実装方針
 
-- Adlaire-Designの成果物は、本リポジトリ内で完結して管理する。
-- TypeScriptはDenoランタイム環境を前提とする。
+- Adlaire-Design-Systemの成果物は、本リポジトリ内で完結して管理する。
+- TypeScriptはDenoランタイム環境を前提とし、CSS/JavaScript生成の正本ソースとして管理する。
 - 標準採用ライブラリはDeno標準ライブラリ(`jsr:@std/*`)に限定する。
 - parserなどが必要な場合は、明示的な例外採用ライブラリとして管理する。
 - Markdown / GFM parserの例外採用ライブラリは `jsr:@deno/gfm@0.12.0` とする。
@@ -300,13 +306,14 @@ Adlaire-Designは、公開面デザインの参照基準を本リポジトリ内
 - npm互換パッケージ、npm依存、Node.js依存、外部フレームワークは例外なく禁止する。
 - 外部CSSフレームワークは採用しない。
 - 既存トップレベル構造は維持し、追加してよいトップレベルは `TypeScript/` のみとする。
-- HEX値は原則としてトークン定義に集約し、UI側のCSSはCSS変数を参照する。
-- 既存プロダクト固有CSSはそのまま扱わず、必要な構造・役割・見た目をAdlaire-Design内の標準仕様へ整理する。
-- 実装は、第1段階の色トークンと最小ユーティリティ、第2段階の公開面トークン・レイアウト・コンポーネント、第3段階の公開面CSS基盤、WYSIWYG Editor管理仕様、Editor本体、TypeScript正本化、JavaScript生成物整合に分けて管理する。
+- HEX値は原則としてトークン定義に集約し、UI側のCSS生成物はCSS変数を参照する。
+- 既存プロダクト固有CSSはそのまま扱わず、必要な構造・役割・見た目をAdlaire-Design-System内の標準仕様へ整理する。
+- 実装は、第1段階の色トークンと最小ユーティリティ、第2段階の公開面トークン・レイアウト・コンポーネント、第3段階の公開面CSS基盤、WYSIWYG Editor管理仕様、Editor本体、TypeScript正本化、CSS/JavaScript生成物整合に分けて管理する。
 - `@import` は使用しない。CSSファイルの読み込み順は利用側で明示する。
-- CSSビルド方針は採用しない。`Tokens/`、`UI/`、`EditorUI/` 配下のCSSファイルを正本として直接管理する。
-- JavaScript部分はTypeScriptで実装し、JavaScriptは生成物として管理する。
+- CSS/JavaScript生成はAdlaire Frontend CompilerとしてDeno TypeScriptで行う。
+- CSS/JavaScript部分はTypeScriptで実装し、CSS/JavaScriptは生成物として管理する。
 - TypeScript正本は `TypeScript/` に集約する。
+- CSS生成物は既存の `Tokens/*.css`、`UI/*.css`、`EditorUI/wysiwyg.css` に配置する。
 - UI JavaScript生成物は既存の `UI/*.js` に配置する。
 - Editor UI JavaScript生成物は既存の `EditorUI/wysiwyg.js` に配置する。
 - Editor本体の生成物JavaScriptは `EditorUI/editor.js` に配置する。
@@ -315,17 +322,17 @@ Adlaire-Designは、公開面デザインの参照基準を本リポジトリ内
 - Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、CSS minify生成、CSS bundle生成は採用しない。
 - `Dist/`、`dist/`、`Build/`、`build/` などの生成CSS用ディレクトリは作成しない。
 - WYSIWYG Editor UIとEditor本体は、Denoランタイム環境を前提に管理し、npm、webpack、Node.js前提のビルド設定を使わない。
-- 今後の拡充は、公開面で必要となるCSS機能、WYSIWYG Editor UI、Editor本体、TypeScript正本化、JavaScript生成物整合、再現性検査、ドキュメント整備を優先する。CSSのビルド、minify、bundleは現状検討しない。
+- 今後の拡充は、Deno TypeScriptによるCSS/JavaScript生成基盤、公開面で必要となるCSS機能、WYSIWYG Editor UI、Editor本体、生成物整合、再現性検査、ドキュメント整備を優先する。CSS minify、CSS bundleは採用しない。
 
 ### 11.2.1 責務別整理
 
-Adlaire-Designの責務は、CSS仕様、CSS実装、TypeScript正本、JavaScript生成物、トークン、ブランド資産、公式アイコンセット、汎用部品カタログ、Editor UIカタログ、Editor本体、未タスク管理、検査に分けて管理する。
+Adlaire-Design-Systemの責務は、CSS仕様、CSS生成物、TypeScript正本、JavaScript生成物、トークン、ブランド資産、公式アイコンセット、汎用部品カタログ、Editor UIカタログ、Editor本体、未タスク管理、検査に分けて管理する。
 
 責務別の管理範囲は以下に固定する。
 
 | 責務 | 管理主体 | 管理先 | 対象 | 対象外 |
 | --- | --- | --- | --- | --- |
-| 仕様正本 | Adlaire-Design | `Docs/Master_Spec` | CSSマスター仕様、Editor UIマスター仕様、Editor本体、TypeScript正本、JavaScript生成物、責務境界、読み込み順、禁止事項、変更管理 | プロダクト固有採用計画 |
+| 仕様正本 | Adlaire-Design-System | `Docs/Master_Spec` | CSSマスター仕様、Editor UIマスター仕様、Editor本体、TypeScript正本、CSS/JavaScript生成物、責務境界、読み込み順、禁止事項、変更管理 | プロダクト固有採用計画 |
 | 一般CSS汎用部品カタログ | Adlaire-Design | `Docs/Generic_Component_Catalog` | 一般的なCSS汎用部品、本文固有CSS部品、フォーム部品、ユーティリティ | WYSIWYG Editor UI専用品、`.adlaire-wysiwyg-` 具体クラス |
 | Admin UIカタログ | Adlaire-Design | `Docs/Admin_UI_Catalog` | 管理画面専用UI部品、分類、優先度、実装先、実装状態 | 公開面汎用部品、WYSIWYG Editor UI専用品 |
 | Editor UIカタログ | Adlaire-Design | `Docs/WYSIWYG_Editor_UI_Catalog` | エディタUIに関する部品、状態表示、モバイルEditor UI、補助パネル | 一般公開面の汎用部品、Editor本体ロジック |
@@ -334,10 +341,10 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、TypeScript正本、JavaScri
 | 未タスク管理 | Adlaire-Design | `Docs/Pending_Tasks` | 未策定または未完了タスク | 完了済みタスク |
 | ブランド資産 | Adlaire-Design | `Brand/` | ロゴ、ブランド画像、OGP、ブランド固有アイコン、ブランド説明用素材 | 汎用UI用の公式アイコンセット |
 | 公式アイコンセット | Adlaire-Design | `Icons/` | 汎用UIで使う公式アイコンSVG | ロゴ、ブランド画像、OGP、PNG/WebP/JPG/JPEG、生成アイコンCSS |
-| CSSトークン | Adlaire-Design | `Tokens/` | 色、面、状態、効果のCSS変数 | UI部品セレクタ、JavaScript状態管理 |
-| CSS実装 | Adlaire-Design | `UI/`、`EditorUI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、WYSIWYG Editor UIスキン、Adlaire-Design仕様CSS層 | CSSビルド、minify、bundle、外部CSSフレームワーク、TypeScript正本、JavaScript生成物 |
-| TypeScript正本 | Adlaire-Design | `TypeScript/` | UI JavaScript、Editor UI JavaScript、Editor本体の実装正本 | CSS正本、生成物JavaScript、外部プロジェクト固有処理 |
-| JavaScript生成物 | Adlaire-Design | `UI/*.js`、`EditorUI/wysiwyg.js`、`EditorUI/editor.js` | TypeScriptから生成するブラウザ実行用JavaScript | 手編集の正本JavaScript、CSS定義の内包 |
+| CSSトークン生成物 | Adlaire-Design-System | `Tokens/` | 色、面、状態、効果のCSS変数生成物 | UI部品セレクタ、JavaScript状態管理 |
+| CSS生成物 | Adlaire-Design-System | `UI/`、`EditorUI/` | 公開面CSS、汎用部品、本文部品、フォーム、ユーティリティ、WYSIWYG Editor UIスキン、Adlaire-Design仕様CSS層 | CSS minify、bundle、外部CSSフレームワーク、手編集を正本とするCSS |
+| TypeScript正本 | Adlaire-Design-System | `TypeScript/` | CSS生成、UI JavaScript、Editor UI JavaScript、Editor本体の実装正本 | 生成物CSS、生成物JavaScript、外部プロジェクト固有処理 |
+| JavaScript生成物 | Adlaire-Design-System | `UI/*.js`、`EditorUI/wysiwyg.js`、`EditorUI/editor.js` | TypeScriptから生成するブラウザ実行用JavaScript | 手編集の正本JavaScript、CSS定義の内包 |
 | Editor本体 | Adlaire-Design | `TypeScript/Editor/`、`EditorUI/editor.js` | 安全な構造化コンテンツ編集基盤、EditorDocument、ブロック編集、選択範囲、履歴、検証、サニタイズ、保存要求、公開要求、Editorイベント | 保存先への書き込み、Git反映、認証認可、静的サイト生成、プロダクト固有画面処理 |
 | 検査 | Adlaire-Design | `Tools/check/check-adlaire-design.sh` | 構造、必須ファイル、必須語句、必須変数、必須クラス、禁止記述、未定義変数参照 | 外部CSS parser、Node.js/npm依存検査基盤 |
 | プロダクト採用 | 利用先プロダクト | 利用先プロダクト側 | 採用判断、移行計画、プロダクト固有CSS層、公開面反映、ロールバック | Adlaire-Design正本の直接変更なしの仕様逸脱 |
@@ -357,10 +364,10 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、TypeScript正本、JavaScri
 | Brand | `Brand/` | ブランド資産 |
 | Brand | `Brand/README.md` | ブランド資産の配置ルール、許可形式、命名規則、公式アイコンセットとの境界 |
 | Icons | `Icons/` | 公式アイコンSVG |
-| Tokens | `Tokens/colors.css`、`Tokens/typography.css`、`Tokens/spacing.css`、`Tokens/motion.css`、`Tokens/layer.css`、`Tokens/breakpoints.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` | CSS変数 |
+| Tokens | `Tokens/colors.css`、`Tokens/typography.css`、`Tokens/spacing.css`、`Tokens/motion.css`、`Tokens/layer.css`、`Tokens/breakpoints.css`、`Tokens/surface.css`、`Tokens/status.css`、`Tokens/effects.css` | CSS変数生成物 |
 | UI | `UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/components.js`、`UI/site.css`、`UI/forms.css`、`UI/forms.js`、`UI/content.css`、`UI/content.js`、`UI/utilities.css`、`UI/compat-agws.css` | 公開面CSS基盤と汎用UI JavaScript生成物 |
 | EditorUI | `EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js`、`EditorUI/editor.js` | WYSIWYG Editor UIスキン、Editor UI JavaScript生成物、Editor本体JavaScript生成物 |
-| TypeScript | `TypeScript/UI/`、`TypeScript/EditorUI/`、`TypeScript/Editor/` | UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本 |
+| TypeScript | `TypeScript/CSS/`、`TypeScript/UI/`、`TypeScript/EditorUI/`、`TypeScript/Editor/` | CSS生成、UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本 |
 | Tools | `Tools/check/check-adlaire-design.sh` | Adlaire-Design専用検査 |
 
 責務別の変更単位は以下に固定する。
@@ -373,8 +380,8 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、TypeScript正本、JavaScri
 | Editor UI部品 | `Docs/Master_Spec`、`Docs/WYSIWYG_Editor_UI_Catalog`、`EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh` |
 | 公式アイコンセット | `Docs/Master_Spec`、`Docs/Icon_Set_Catalog`、`Icons/`、必要な `UI/*.css`、`Tools/check/check-adlaire-design.sh` |
 | ブランド資産 | `Docs/Master_Spec`、`Docs/Brand_Asset_Catalog`、`Docs/Document_Index`、`Brand/`、`Tools/check/check-adlaire-design.sh` |
-| CSSトークン | `Docs/Master_Spec`、対象 `Tokens/*.css`、`Tools/check/check-adlaire-design.sh` |
-| TypeScript正本 | `Docs/Master_Spec`、対象 `TypeScript/*.ts`、生成先 `UI/*.js` または `EditorUI/*.js`、`Tools/check/check-adlaire-design.sh` |
+| CSSトークン | `Docs/Master_Spec`、対象 `TypeScript/CSS/`、生成先 `Tokens/*.css`、`Tools/check/check-adlaire-design.sh` |
+| TypeScript正本 | `Docs/Master_Spec`、対象 `TypeScript/*.ts`、生成先 `Tokens/*.css`、`UI/*.css`、`EditorUI/wysiwyg.css`、`UI/*.js` または `EditorUI/*.js`、`Tools/check/check-adlaire-design.sh` |
 | JavaScript生成物 | 対応する `TypeScript/` 正本、生成先 `UI/*.js` または `EditorUI/*.js`、`Docs/Master_Spec`、`Tools/check/check-adlaire-design.sh` |
 | Editor本体 | `Docs/Master_Spec`、`TypeScript/Editor/`、`EditorUI/editor.js`、`EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js`、`Docs/WYSIWYG_Editor_UI_Catalog`、`Tools/check/check-adlaire-design.sh` |
 | 検査仕様 | `Docs/Master_Spec`、`Tools/check/check-adlaire-design.sh` |
@@ -387,7 +394,7 @@ Adlaire-Designの責務は、CSS仕様、CSS実装、TypeScript正本、JavaScri
 
 ### 11.2.2 CSSマスター仕様
 
-Adlaire-DesignのCSSマスター仕様は、本節を正本とする。CSS実装、トークン、読み込み順、禁止事項、変更管理、検査条件は、本節と第11章各節に従う。
+Adlaire-Design-SystemのCSSマスター仕様は、本節を正本とする。CSS生成物、トークン、読み込み順、禁止事項、変更管理、検査条件は、本節と第11章各節に従う。
 
 CSSマスター仕様で固定する対象は以下とする。
 
@@ -395,10 +402,10 @@ CSSマスター仕様で固定する対象は以下とする。
 | --- | --- |
 | 正本 | CSS仕様は `Docs/Master_Spec` を正本とする |
 | 補助正本 | 一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、管理画面専用UI部品は `Docs/Admin_UI_Catalog`、WYSIWYG Editor UI専用品は `Docs/WYSIWYG_Editor_UI_Catalog`、公式アイコンセットは `Docs/Icon_Set_Catalog` で一覧管理する |
-| 実装正本 | CSS実装は `Tokens/`、`UI/`、`EditorUI/` 配下のCSSファイルを正本とし、JavaScript部分は `TypeScript/` 配下のTypeScriptを正本とする |
-| 生成物 | JavaScript生成物は `UI/*.js`、`EditorUI/wysiwyg.js`、`EditorUI/editor.js` とする |
+| 実装正本 | CSS/JavaScript生成の正本は `TypeScript/` 配下のTypeScriptとする |
+| 生成物 | CSS生成物は `Tokens/*.css`、`UI/*.css`、`EditorUI/wysiwyg.css`、JavaScript生成物は `UI/*.js`、`EditorUI/wysiwyg.js`、`EditorUI/editor.js` とする |
 | 検査正本 | 構造、必須ファイル、禁止ファイル、必須変数、必須クラス、禁止記述は `Tools/check/check-adlaire-design.sh` で検査する |
-| 非対象 | CSSビルド、minify、bundle、プリプロセッサ、npm、外部CSSフレームワークは採用しない |
+| 非対象 | CSS minify、bundle、プリプロセッサ、npm、外部CSSフレームワークは採用しない |
 
 CSS層構造は以下に固定する。
 
@@ -448,7 +455,7 @@ CSSファイルの責務境界は以下とする。
 | `UI/content.css` | 本文固有部品 | 汎用レイアウト、WYSIWYG専用部品 |
 | `UI/utilities.css` | 小粒度の汎用ユーティリティ | 意味を持つコンポーネント一式 |
 | `UI/compat-agws.css` | Adlaire-Design仕様CSS層の固定セレクタ | プロダクト固有CSS層、追加移行CSS |
-| `EditorUI/wysiwyg.css` | WYSIWYG Editor UIスキン | CSSビルド成果物 |
+| `EditorUI/wysiwyg.css` | WYSIWYG Editor UIスキンのCSS生成物 | 手編集を正本とするCSS、CSS minify、CSS bundle |
 | `EditorUI/wysiwyg.js` | WYSIWYG Editor UIの表示切替、メニュー開閉、パネル開閉の生成物JavaScript | 手編集の正本JavaScript、CSS定義の内包 |
 | `EditorUI/editor.js` | Editor本体の生成物JavaScript | Editor UIスキン、CSS定義、保存先への書き込み、Git反映、認証認可、静的サイト生成 |
 
@@ -498,14 +505,15 @@ CSS禁止事項は以下に固定する。
 - `transition: all` を使用しない。
 - 負の `letter-spacing` を使用しない。
 - CSSプリプロセッサを追加しない。
-- CSSビルド、minify、bundle、生成CSSファイルを追加しない。
+- Deno TypeScript以外のCSS生成処理を追加しない。
+- CSS minify、CSS bundleを追加しない。
 - npm、webpack、Vite、Rollup、PostCSS、Tailwind CSSなどの設定を追加しない。
 - 外部CSSフレームワークを導入しない。
 - JavaScriptによる状態制御をCSS仕様の前提にしない。
 
-### 11.2.3 TypeScript正本とJavaScript生成物
+### 11.2.3 TypeScript正本とCSS/JavaScript生成物
 
-Adlaire-Designでは、JavaScript部分の正本をTypeScriptとする。
+Adlaire-Design-Systemでは、CSS/JavaScript部分の正本をTypeScriptとする。
 
 TypeScript正本はDenoランタイム環境を前提とする。
 
@@ -513,7 +521,7 @@ TypeScript正本はDenoランタイム環境を前提とする。
 
 npm互換パッケージ、npm依存、Node.js依存、外部フレームワークは例外なく禁止する。
 
-JavaScriptはブラウザ実行用の生成物として扱い、手編集の正本にはしない。
+CSS/JavaScriptはブラウザ実行用の生成物として扱い、手編集の正本にはしない。
 
 TypeScript正本は `TypeScript/` に集約する。
 
@@ -521,6 +529,7 @@ TypeScript正本は `TypeScript/` に集約する。
 
 | 領域 | 役割 | 生成先 |
 | --- | --- | --- |
+| `TypeScript/CSS/` | Adlaire Frontend CompilerのCSS生成正本 | `Tokens/*.css`、`UI/*.css`、`EditorUI/wysiwyg.css` |
 | `TypeScript/UI/` | 汎用UI JavaScriptの正本 | `UI/components.js`、`UI/content.js`、`UI/forms.js` |
 | `TypeScript/EditorUI/` | Editor UI JavaScriptの正本 | `EditorUI/wysiwyg.js` |
 | `TypeScript/Editor/` | Editor本体のTypeScript正本 | `EditorUI/editor.js` |
@@ -602,7 +611,7 @@ Editor本体のTypeScript正本は `TypeScript/Editor/` に置く。
 
 Editor本体の生成物JavaScriptは `EditorUI/editor.js` に置く。
 
-Editor UIのCSS正本は `EditorUI/wysiwyg.css` に置く。
+Editor UIのCSS生成物は `EditorUI/wysiwyg.css` に置く。
 
 Editor UIのJavaScript生成物は `EditorUI/wysiwyg.js` に置く。
 
@@ -1011,7 +1020,7 @@ CSS変数は以下とする。
 - CSS bundle生成
 - minify版生成
 - `Dist/`、`dist/`、`Build/`、`build/` などの生成CSS用ディレクトリ
-- `*.min.css` や `*.bundle.css` などの生成CSSファイル
+- `*.min.css` や `*.bundle.css` などの最適化・結合済みCSSファイル
 - PostCSS、Vite、Webpack、Rollup、Tailwind CSSなどのビルド設定ファイル
 - 外部CSSフレームワークの導入
 - 既存プロダクト固有CSSのそのままの移植
@@ -1200,17 +1209,20 @@ UI側CSSのtransitionは対象プロパティを明示する。`transition: all`
 
 ## 11.11 今後の拡充優先順位
 
-Adlaire-Designの今後の拡充は、CSSのビルド、minify、bundleではなく、公開面で必要になる設計機能、WYSIWYG Editor UI、運用品質を優先する。
+Adlaire-Design-Systemの今後の拡充は、Deno TypeScriptによるCSS/JavaScript生成基盤、公開面で必要になる設計機能、WYSIWYG Editor UI、運用品質を優先する。
 
 拡充優先順位は以下とする。
 
-1. 公開面CSS機能の拡充
-2. WYSIWYG Editor UIの拡充
-3. 再現性検査の拡充
-4. ドキュメント整備
-5. ブランド資産の整理
+1. Deno TypeScriptによるCSS/JavaScript生成基盤
+2. 公開面CSS機能の拡充
+3. WYSIWYG Editor UIの拡充
+4. 再現性検査の拡充
+5. ドキュメント整備
+6. ブランド資産の整理
 
-公開面CSS機能の拡充では、Adlaire-Design利用先の公開面で実際に必要になったレイアウト、コンポーネント、フォーム、ナビゲーション、本文部品、ユーティリティ、状態表現を対象にする。追加する場合は、`Tokens/` と `UI/` 配下の既存責務に沿って直接CSSとして管理する。
+CSS/JavaScript生成基盤では、Adlaire Frontend CompilerをDeno TypeScriptで管理する。CSS生成の正本は `TypeScript/CSS/` に置き、生成先は既存の `Tokens/*.css`、`UI/*.css`、`EditorUI/wysiwyg.css` に固定する。JavaScript生成の正本は既存の `TypeScript/UI/`、`TypeScript/EditorUI/`、`TypeScript/Editor/` に置き、生成先は既存の `UI/*.js`、`EditorUI/wysiwyg.js`、`EditorUI/editor.js` に固定する。
+
+公開面CSS機能の拡充では、Adlaire-Design-System利用先の公開面で実際に必要になったレイアウト、コンポーネント、フォーム、ナビゲーション、本文部品、ユーティリティ、状態表現を対象にする。追加する場合は、`TypeScript/CSS/` の正本と `Tokens/`、`UI/` 配下の生成物責務に沿って管理する。
 
 WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブロック表示、プレビュー、JSON表示、状態表示など、WYSIWYGの表示層で必要になるCSSと仕様を対象にする。
 
@@ -1220,7 +1232,7 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 ブランド資産の整理では、ロゴ、画像、アイコン、OGPなどの必要性が明確になった場合に、`Brand/` 配下で管理する対象、形式、用途、検査方法を先に仕様化する。ブランド資産の追加は、CSS機能および検査の拡充とは別承認単位で扱う。
 
-上記の拡充においても、Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、CSS bundle生成、minify版生成、`Dist/` 作成は現状検討しない。
+上記の拡充においても、Sass、SCSS、Less、Stylus、PostCSS、Lightning CSS、独自プリプロセッサ、CSS bundle生成、minify版生成、`Dist/` 作成は採用しない。
 
 ### 11.11.1 拡充仕様策定の共通条件
 
@@ -1228,15 +1240,15 @@ WYSIWYG Editor UIの拡充では、エディター外枠、ツールバー、ブ
 
 - 目的を、公開面で必要な表示、再現性、運用、保守のいずれかに結びつける。
 - 対象ファイル、追加するCSS変数、追加するクラス、利用側の読み込み順、検査方法を明記する。
-- 既存の `Tokens/`、`UI/`、`EditorUI/`、`Brand/`、`Tools/check/` の責務境界を維持し、TypeScript正本は `TypeScript/` に集約する。
-- Node.js/npm依存、外部CSSフレームワーク、CSSプリプロセッサ、生成CSS、CSS minify、CSS bundleを前提にしない。JavaScriptはTypeScriptからの生成物として扱う。
+- 既存の `Tokens/`、`UI/`、`EditorUI/`、`Brand/`、`Tools/check/` の出力責務境界を維持し、TypeScript正本は `TypeScript/` に集約する。
+- Node.js/npm依存、外部CSSフレームワーク、CSSプリプロセッサ、CSS minify、CSS bundleを前提にしない。CSS/JavaScriptはDeno TypeScriptからの生成物として扱う。
 - 追加前に、既存CSSで代替できない理由を確認する。
 - 追加後に、`Tools/check/check-adlaire-design.sh` を通す。
 
 拡充仕様では、以下を必ず非対象として記録する。
 
 - JSONデータ管理
-- CSSビルド処理
+- Deno TypeScript以外のCSS生成処理
 - minify版
 - bundle版
 - `Dist/`、`dist/`、`Build/`、`build/` 作成
@@ -1729,9 +1741,9 @@ Adlaire-Design UIを採用する場合は、本節のCSS/JavaScript読み込み�
 8. `var(--adlaire-...)` が定義済み変数だけを参照していることの確認
 9. 仕様と実装の整合確認
 10. `Docs/Master_Spec`、`Docs/Document_Index`、`README.md` の整合確認
-11. 拡充優先順位、拡充仕様策定条件、CSSビルド、CSS minify、CSS bundle、CSSプリプロセッサを現状検討しない方針の記録確認
-13. 生成CSS用ディレクトリ、生成CSSファイル、CSSまたはフロントエンドビルド設定ファイルが存在しないことの確認
-14. `AGENTS.md` がCSSプリプロセッサ、CSSビルド、CSS minify、CSS bundle、npm/webpack系設定を追加しない運用方針を記録していることの確認
+11. 拡充優先順位、拡充仕様策定条件、Deno TypeScript生成、CSS minify、CSS bundle、CSSプリプロセッサを採用しない方針の記録確認
+13. 生成CSS用ディレクトリ、minify/bundle CSSファイル、CSSまたはフロントエンドビルド設定ファイルが存在しないことの確認
+14. `AGENTS.md` がCSSプリプロセッサ、CSS minify、CSS bundle、npm/webpack系設定を追加しない運用方針を記録していることの確認
 15. トップレベル、`Docs/`、`Tokens/`、`UI/`、`Tools/`、`Brand/` が承認済みのリポジトリ構造から逸脱していないことの確認
 16. `Tools/check/check-adlaire-design.sh` が実行可能であることの確認
 17. `Samples/` が理解補助資料の配置先として許可形式だけを含むことの確認
@@ -2022,14 +2034,14 @@ semantic token aliasは、状態や選択をUI部品間で共通化するため�
 
 WCAG 2.2 A参照の確認観点は、focus表示、keyboard操作表示、skip link、landmark補助、状態表示、エラー表示、色以外の識別補助に固定する。数値コントラスト保証は現時点の管理対象外とする。
 
-リリース前チェックリストは、構成検査、必須ファイル、禁止ファイル、class照合、CSS変数参照、JavaScript smoke、Samples配置、PR確認、main同期確認を対象とする。リリース前チェックは仕様と実装の整合確認であり、CSSビルド、minify、bundleを追加する根拠にはしない。
+リリース前チェックリストは、構成検査、必須ファイル、禁止ファイル、class照合、CSS変数参照、JavaScript smoke、Samples配置、PR確認、main同期確認を対象とする。リリース前チェックは仕様と実装の整合確認であり、CSS minify、bundleを追加する根拠にはしない。
 
 ---
 
 # 12. 変更ルール
 
-マスター仕様、適用範囲、段階適用方針、CSS実装仕様を変更する場合は、事前にユーザー承認を得る。
+マスター仕様、適用範囲、段階適用方針、CSS/JavaScript生成方針、CSS実装仕様を変更する場合は、事前にユーザー承認を得る。
 
-承認後、必要に応じて `Adlaire-Design/Docs/Master_Spec`(本書) を更新する。
+承認後、必要に応じて当面のリポジトリ `Adlaire-Design` の `Docs/Master_Spec`(本書) を更新する。
 
-仕様変更時は、本書の `Version` を上げ に同じrevの履歴を追加する。`Docs/Document_Index` は主要な管理対象または索引上の説明に変更がある場合のみ更新する。
+仕様変更時は、本書の `Version` を上げる。`Docs/Document_Index` は主要な管理対象または索引上の説明に変更がある場合のみ更新する。

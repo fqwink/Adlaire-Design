@@ -1,18 +1,18 @@
-# Adlaire-Design Editor Master Spec
+# Adlaire-Design-System Editor Master Spec
 
 Version: 1.0.0
 
-本書は、Adlaire-Designに統合するEditor本体とWYSIWYG Editor UIの専用マスター仕様である。
+本書は、Adlaire-Design-Systemに統合するEditor本体とWYSIWYG Editor UIの専用マスター仕様である。
 
-`Docs/Master_Spec` はAdlaire-Design全体正本とし、Editor本体とエディタUIの詳細正本は本書とする。
+`Docs/Master_Spec` はAdlaire-Design-System全体正本とし、Editor本体とエディタUIの詳細正本は本書とする。
 
-TypeScriptはDenoランタイム環境を前提とし、npm互換パッケージ、npm依存、Node.js依存、外部フレームワークは例外なく禁止する。
+TypeScriptはDenoランタイム環境を前提とし、CSS/JavaScript生成の正本ソースとして管理する。npm互換パッケージ、npm依存、Node.js依存、外部フレームワークは例外なく禁止する。
 
 ## 1. 目的
 
-Adlaire-Designのエディタは、安全な構造化コンテンツ編集基盤として管理する。
+Adlaire-Design-Systemのエディタは、安全な構造化コンテンツ編集基盤として管理する。
 
-エディタは、ブロックベース編集、構造化文書、モバイルファーストUI、Adlaire-DesignのCSS契約と連動する表示体験を提供する。
+エディタは、ブロックベース編集、構造化文書、モバイルファーストUI、Adlaire-Design-SystemのCSS契約と連動する表示体験を提供する。
 
 ## 2. 正本と生成物
 
@@ -20,7 +20,7 @@ Adlaire-Designのエディタは、安全な構造化コンテンツ編集基盤
 | --- | --- | --- |
 | Editor本体TypeScript正本 | `TypeScript/Editor/` | 文書構造、編集操作、検証、履歴、イベントの正本 |
 | Editor本体JavaScript生成物 | `EditorUI/editor.js` | ブラウザ実行用の生成物 |
-| WYSIWYG Editor UI CSS | `EditorUI/wysiwyg.css` | エディタ表示層のCSS正本 |
+| WYSIWYG Editor UI CSS生成物 | `EditorUI/wysiwyg.css` | エディタ表示層のCSS生成物 |
 | WYSIWYG Editor UI JavaScript生成物 | `EditorUI/wysiwyg.js` | エディタUI操作のJavaScript生成物 |
 | WYSIWYG Editor UI部品カタログ | `Docs/WYSIWYG_Editor_UI_Catalog` | エディタUI部品の分類、優先度、実装状態 |
 
