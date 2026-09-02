@@ -2,9 +2,11 @@
 
 Version: 1.0.0
 
-本書は、Adlaire-Designに統合するエディタ本体とWYSIWYG Editor UIの専用マスター仕様である。
+本書は、Adlaire-Designに統合するEditor本体とWYSIWYG Editor UIの専用マスター仕様である。
 
-`Docs/Master_Spec` はAdlaire-Design全体正本とし、エディタ本体とエディタUIの詳細正本は本書とする。
+`Docs/Master_Spec` はAdlaire-Design全体正本とし、Editor本体とエディタUIの詳細正本は本書とする。
+
+TypeScriptはDenoランタイム環境を前提とし、npm互換パッケージ、npm依存、Node.js依存、外部フレームワークは例外なく禁止する。
 
 ## 1. 目的
 
@@ -16,21 +18,25 @@ Adlaire-Designのエディタは、安全な構造化コンテンツ編集基盤
 
 | 分類 | 管理先 | 役割 |
 | --- | --- | --- |
-| エディタ本体TypeScript正本 | `TypeScript/Editor/` | 文書構造、編集操作、検証、履歴、イベントの正本 |
-| エディタ本体JavaScript生成物 | `EditorUI/editor.js` | ブラウザ実行用の生成物 |
+| Editor本体TypeScript正本 | `TypeScript/Editor/` | 文書構造、編集操作、検証、履歴、イベントの正本 |
+| Editor本体JavaScript生成物 | `EditorUI/editor.js` | ブラウザ実行用の生成物 |
 | WYSIWYG Editor UI CSS | `EditorUI/wysiwyg.css` | エディタ表示層のCSS正本 |
 | WYSIWYG Editor UI JavaScript生成物 | `EditorUI/wysiwyg.js` | エディタUI操作のJavaScript生成物 |
 | WYSIWYG Editor UI部品カタログ | `Docs/WYSIWYG_Editor_UI_Catalog` | エディタUI部品の分類、優先度、実装状態 |
 | 統合元保全領域 | `AdlaireEditor_Integrated_Temporary/` | Adlaire-Editor由来データの一時保全領域 |
 
+標準採用ライブラリはDeno標準ライブラリ(`jsr:@std/*`)に限定する。
+
+Markdown / GFM parserは `jsr:@deno/gfm@0.12.0`、MDX parserは `jsr:@temelj/mdx@0.14.0` を明示的な例外採用ライブラリとして管理する。
+
 ## 3. 責務分離
 
 | 領域 | 管理対象 |
 | --- | --- |
-| エディタ本体 | `EditorDocument`、`EditorBlock`、inline content、selection、command、history、validation、sanitize、paste normalize、unsupported block保持、tool registry、lifecycle controller、event bus、save request、publish request |
+| Editor本体 | `EditorDocument`、`EditorBlock`、inline content、selection、command、history、validation、sanitize、paste normalize、unsupported block保持、tool registry、lifecycle controller、event bus、save request、publish request |
 | WYSIWYG Editor UI | block toolbar、inline toolbar、slash menu、block mover、drag handle、inspector、outline、status bar、empty/error/loading、mobile bottom toolbar、CSS/ARIA/data属性接続 |
 
-エディタ本体は保存先への書き込み、Git反映、認証認可、静的サイト生成、CMS固有処理を実行しない。これらは要求イベントとして外部へ渡す。
+Editor本体は保存先への書き込み、Git反映、認証認可、静的サイト生成、CMS固有処理を実行しない。これらは要求イベントとして外部へ渡す。
 
 CSSとJavaScriptは同一ファイルに混在させない。
 
@@ -91,6 +97,8 @@ UI部品の詳細分類と実装状態は `Docs/WYSIWYG_Editor_UI_Catalog` を�
 `Docs/Editor_Master_Spec` は `Docs/Master_Spec` と `Docs/Document_Index` から参照されていること。
 
 `TypeScript/Editor/` の固定ファイル、`EditorUI/editor.js`、`EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js` が存在すること。
+
+`TypeScript/` に `npm:` import、`node:` import、npm依存、Node.js依存が存在しないこと。
 
 `EditorUI/editor.js` は `window.AdlaireEditor`、`HeadlessEditorController`、`ToolRegistry`、`createEditor`、`applyCommand`、`handlePaste`、`validateDocument`、`sanitizeDocument` を公開すること。
 
