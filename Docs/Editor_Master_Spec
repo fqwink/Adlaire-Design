@@ -1,10 +1,12 @@
 # Adlaire-Design-System Editor Master Spec
 
-Version: 1.0.0
+Version: 1.1.0
 
 本書は、Adlaire-Design-Systemに統合するEditor本体とWYSIWYG Editor UIの専用マスター仕様である。
 
 `Docs/Master_Spec` はAdlaire-Design-System全体正本とし、Editor本体とエディタUIの詳細正本は本書とする。
+
+本書は `Docs/Master_Spec` の下位に置く専用マスター仕様として、Editor本体とWYSIWYG Editor UIの詳細だけを固定する。Adlaire-Design-System全体の目的、正本階層、CSS/JavaScript生成方針、公式アイコン、ブランド資産、カタログ責務は `Docs/Master_Spec` を優先する。
 
 TypeScriptはDenoランタイム環境を前提とし、CSS/JavaScript生成の正本ソースとして管理する。npm互換パッケージ、npm依存、Node.js依存、外部フレームワークは例外なく禁止する。
 
@@ -27,6 +29,16 @@ Adlaire-Design-Systemのエディタは、安全な構造化コンテンツ編�
 標準採用ライブラリはDeno標準ライブラリ(`jsr:@std/*`)に限定する。
 
 Markdown / GFM parserは `jsr:@deno/gfm@0.12.0`、MDX parserは `jsr:@temelj/mdx@0.14.0` を明示的な例外採用ライブラリとして管理する。
+
+Editor本体とWYSIWYG Editor UIの正本階層は以下に固定する。
+
+| 領域 | 正本 | 補助/実装 | 役割 |
+| --- | --- | --- | --- |
+| 全体方針 | `Docs/Master_Spec` | `Docs/Document_Index` | Adlaire-Design-System全体の目的、定義、正本階層、生成方針を固定する |
+| Editor本体詳細 | `Docs/Editor_Master_Spec` | `TypeScript/Editor/`、`EditorUI/editor.js` | 安全な構造化コンテンツ編集基盤の構造、操作、検証、イベント境界を固定する |
+| WYSIWYG Editor UI詳細 | `Docs/Editor_Master_Spec` | `Docs/WYSIWYG_Editor_UI_Catalog`、`EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js` | エディタ表示層、UI部品、状態表示、操作面の仕様を固定する |
+| 例外採用ライブラリ | `Docs/Editor_Master_Spec` | `TypeScript/Editor/` | Markdown / GFM parser、MDX parserの採用範囲を明示する |
+| 検査 | `Docs/Editor_Master_Spec` | `Tools/check/check-adlaire-design.sh` | 必須ファイル、禁止依存、生成物公開APIの整合を確認する |
 
 ## 3. 責務分離
 
