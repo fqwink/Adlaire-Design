@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.100
+**Version:** rev.101
 
 ---
 
@@ -388,7 +388,7 @@ Adlaire-Design-Systemの責務は、CSS仕様、CSS生成物、TypeScript正本�
 | 索引 | `Docs/Document_Index`、必要に応じて `Docs/Master_Spec` |
 | 未タスク管理 | `Docs/Pending_Tasks`、`Docs/Master_Spec`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh` |
 
-公式アイコン初期セットと拡張セットのSVG実体は制作済みとし、追加や変更は公式アイコンセットの変更単位として管理する。
+公式アイコン初期セットのSVG実体は制作済みとする。拡張セットは `Docs/Icon_Set_Catalog` で策定済み、`Docs/Pending_Tasks` で未実装タスクとして管理する。
 
 責務境界に迷う場合は、一般公開面で再利用するCSS部品を `Docs/Generic_Component_Catalog`、管理画面専用UI部品を `Docs/Admin_UI_Catalog`、エディタUIに関する部品を `Docs/WYSIWYG_Editor_UI_Catalog`、Editor本体を `TypeScript/Editor/` と `EditorUI/editor.js`、汎用UIで使う公式アイコンを `Docs/Icon_Set_Catalog` と `Icons/`、採用・移行を利用先プロダクト側として扱う。
 
@@ -1907,7 +1907,7 @@ CSSはアイコンSVG本体を埋め込まない。CSSは `.adlaire-icon`、`.ad
 
 `Docs/Generic_Component_Catalog` のアイコンタイル等は、アイコンを表示する汎用UI部品であり、公式アイコンセットそのものではない。
 
-公式アイコンSVGの初期セットと拡張セットの実体制作は完了済みとし、SVG実体は `Icons/` で管理する。
+公式アイコンSVGの初期セットは実体制作済みとし、SVG実体は `Icons/` で管理する。拡張セットは `Docs/Icon_Set_Catalog` で策定済み、SVG実体制作は `Docs/Pending_Tasks` の未実装リストで管理する。
 
 検査では、`Icons/` の存在、許可形式、命名規則、`Docs/Icon_Set_Catalog` との整合性、禁止形式、仕様必須語句を確認する。`Docs/Icon_Set_Catalog` で `実装済み` としたアイコンは、対応するSVGファイルが `Icons/` に存在しなければならない。
 

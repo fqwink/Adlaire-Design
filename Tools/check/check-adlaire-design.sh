@@ -529,7 +529,7 @@ for css_master_term in \
   '公式アイコンの命名規則は `adlaire-icon-<category>-<name>.svg` とする。' \
   '公式アイコンカテゴリは、`navigation`、`action`、`status`、`content`、`editor`、`media`、`form` に固定する。' \
   '公式アイコンセットの補助正本は `Docs/Icon_Set_Catalog` とする。' \
-  '公式アイコンSVGの初期セットと拡張セットの実体制作は完了済みとし、SVG実体は `Icons/` で管理する。' \
+  '公式アイコンSVGの初期セットは実体制作済みとし、SVG実体は `Icons/` で管理する。拡張セットは `Docs/Icon_Set_Catalog` で策定済み、SVG実体制作は `Docs/Pending_Tasks` の未実装リストで管理する。' \
   '### 11.11.4.1 サンプルデザインとスクリーンショット' \
   'サンプルデザインおよびスクリーンショットは、Adlaire-Designの理解補助と利用イメージの共有を目的として制作できる。' \
   'サンプルデザインおよびスクリーンショットは仕様正本ではない。' \
@@ -820,7 +820,7 @@ for document_index_responsibility_term in \
   '`Docs/Pending_Tasks`(未策定または未完了タスクだけを集約する管理ファイル)' \
   '`Brand/README.md`(ブランド資産の配置ルール、許可形式、命名規則、公式アイコンセットとの境界)' \
   '`TypeScript/`(CSS生成、UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本。Editor本体は責務ベースの少数ファイルで集約)' \
-  '`TypeScript/CSS/`(Adlaire Frontend CompilerのCSS生成TypeScript正本)'; do
+  '`TypeScript/CSS/`(Adlaire Frontend CompilerのCSS生成TypeScript正本。実装予定領域)'; do
   if ! grep -F -- "$document_index_responsibility_term" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
     echo "Docs/Document_Index missing responsibility description: $document_index_responsibility_term" >&2
     exit 1

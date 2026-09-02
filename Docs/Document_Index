@@ -46,7 +46,7 @@
 - `EditorUI/wysiwyg.js`(WYSIWYG Editor UI JavaScript生成物)
 - `EditorUI/editor.js`(Editor本体のJavaScript生成物)
 - `TypeScript/`(CSS生成、UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本。Editor本体は責務ベースの少数ファイルで集約)
-- `TypeScript/CSS/`(Adlaire Frontend CompilerのCSS生成TypeScript正本)
+- `TypeScript/CSS/`(Adlaire Frontend CompilerのCSS生成TypeScript正本。実装予定領域)
 - `TypeScript/UI/components.ts`(公開面コンポーネントJavaScriptのTypeScript正本)
 - `TypeScript/UI/content.ts`(本文固有コンポーネントJavaScriptのTypeScript正本)
 - `TypeScript/UI/forms.ts`(フォームコンポーネントJavaScriptのTypeScript正本)
