@@ -1,6 +1,6 @@
-import { asRecord, flattenBlocks, normalizeBlock, type ToolRegistry } from "./document";
-import { editorError } from "./events";
-import type { EditorBlock, EditorDocument, EditorSelection, EditorValidationResult } from "./types";
+import { asRecord, flattenBlocks, normalizeBlock, type ToolRegistry } from "./document.ts";
+import { editorError } from "./events.ts";
+import type { EditorBlock, EditorDocument, EditorSelection, EditorValidationResult } from "./types.ts";
 
 export function sanitizeDocument(document: EditorDocument, registry?: ToolRegistry): EditorDocument {
   return {

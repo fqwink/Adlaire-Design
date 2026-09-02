@@ -1,4 +1,4 @@
-import type { EditorEvent, EditorEventListener, Unsubscribe } from "./types";
+import type { EditorEvent, EditorEventListener, Unsubscribe } from "./types.ts";
 
 export class EventBus {
   #listeners = new Set<EditorEventListener>();

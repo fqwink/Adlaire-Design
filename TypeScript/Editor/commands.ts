@@ -7,8 +7,8 @@ import {
   findBlockLocation,
   normalizeBlock,
   type ToolRegistry,
-} from "./document";
-import { editorError } from "./events";
+} from "./document.ts";
+import { editorError } from "./events.ts";
 import type {
   DeleteBlockPayload,
   EditorBlock,
@@ -21,7 +21,7 @@ import type {
   SetDocumentMetaPayload,
   SplitBlockPayload,
   UpdateBlockPayload,
-} from "./types";
+} from "./types.ts";
 
 export interface CommandResult {
   document: EditorDocument;

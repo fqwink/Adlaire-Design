@@ -1,9 +1,9 @@
-import { applyCommand } from "./commands";
-import { cloneDocument, createDefaultBlockRegistry, createEmptyDocument, normalizeDocument, ToolRegistry } from "./document";
-import { EventBus, editorError } from "./events";
-import { History } from "./history";
-import { normalizeSelection, sameSelection } from "./selection";
-import { sanitizeDocument, validateDocument } from "./validation";
+import { applyCommand } from "./commands.ts";
+import { cloneDocument, createDefaultBlockRegistry, createEmptyDocument, normalizeDocument, ToolRegistry } from "./document.ts";
+import { EventBus, editorError } from "./events.ts";
+import { History } from "./history.ts";
+import { normalizeSelection, sameSelection } from "./selection.ts";
+import { sanitizeDocument, validateDocument } from "./validation.ts";
 import type {
   EditorCommand,
   EditorCommandResult,
@@ -20,7 +20,7 @@ import type {
   SaveState,
   SetSelectionPayload,
   Unsubscribe,
-} from "./types";
+} from "./types.ts";
 
 const mutableCommands = new Set(["insert-block", "delete-block", "move-block", "update-block", "split-block", "merge-block", "set-document-meta"]);
 const knownCommands = new Set([...mutableCommands, "set-selection", "save", "request-publish"]);

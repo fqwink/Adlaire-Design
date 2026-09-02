@@ -1,5 +1,5 @@
-import { findBlock, flattenBlocks } from "./document";
-import type { EditorDocument, EditorPosition, EditorSelection } from "./types";
+import { findBlock, flattenBlocks } from "./document.ts";
+import type { EditorDocument, EditorPosition, EditorSelection } from "./types.ts";
 
 export function isValidPosition(document: EditorDocument, position: EditorPosition): boolean {
   if (!position || !findBlock(document, position.blockId)) return false;
