@@ -585,6 +585,9 @@ for css_master_term in \
   '| `TypeScript/Editor/events.ts` | document changed、selection changed、validation changed、save requested等のイベント |' \
   '| `TypeScript/Editor/types.ts` | 共通型、Block種別、Inline種別、Command型、Event型 |' \
   '| `TypeScript/Editor/index.ts` | 公開APIの入口、`EditorUI/editor.js` 生成入口 |' \
+  'Editor本体の公開APIは `TypeScript/Editor/index.ts` に集約し、ブラウザ実行時は `window.AdlaireEditor` として公開する。' \
+  'Editor本体の検査はDenoランタイムで行い、`deno check --no-npm TypeScript/Editor/index.ts` を基準とする。' \
+  'npm registry取得、npm互換パッケージ、Node.js依存を伴うbundle、minify、外部フレームワーク生成は採用しない。' \
   '`TypeScript/Editor/blocks/`、`TypeScript/Editor/inline/`、`TypeScript/Editor/tools/`、`TypeScript/Editor/plugins/`、`TypeScript/Editor/utils/` は作成しない。' \
   'UI側CSSではCSS変数を参照し、HEX値、RGB/RGBA値を直接記述しない' \
   'CSSプリプロセッサを追加しない。' \
@@ -845,7 +848,10 @@ for editor_master_term in \
   'Editor本体は保存先への書き込み、Git反映、認証認可、静的サイト生成、CMS固有処理を実行しない。これらは要求イベントとして外部へ渡す。' \
   '標準commandは `insert-block`、`delete-block`、`update-block`、`move-block`、`split-block`、`merge-block`、`set-document-meta`、`set-selection`、`save`、`request-publish` とする。' \
   '`TypeScript/` に `npm:` import、`node:` import、npm依存、Node.js依存が存在しないこと。' \
-  '`EditorUI/editor.js` は `window.AdlaireEditor`、`HeadlessEditorController`、`ToolRegistry`、`createEditor`、`applyCommand`、`handlePaste`、`validateDocument`、`sanitizeDocument` を公開すること。'; do
+  '`TypeScript/Editor/index.ts` はEditor本体の公開APIを集約し、ブラウザ実行時は `window.AdlaireEditor` として公開できること。' \
+  'Editor本体のTypeScript検査は `deno check --no-npm TypeScript/Editor/index.ts` を基準とする。' \
+  'npm registry取得、npm互換パッケージ、Node.js依存を伴うbundle、minify、外部フレームワーク生成は採用しない。' \
+  '`EditorUI/editor.js` は `window.AdlaireEditor`、`HeadlessEditorController`、`ToolRegistry`、`BlockRegistry`、`createEditor`、`applyCommand`、`handlePaste`、`validateDocument`、`sanitizeDocument` を公開すること。'; do
   if ! grep -F -- "$editor_master_term" "$ADLAIRE_DESIGN_ROOT/Docs/Editor_Master_Spec" >/dev/null 2>&1; then
     echo "Docs/Editor_Master_Spec missing required term: $editor_master_term" >&2
     exit 1
@@ -1092,6 +1098,7 @@ for editor_term in \
   'window.AdlaireEditor' \
   'HeadlessEditorController' \
   'ToolRegistry' \
+  'BlockRegistry' \
   'EventBus' \
   'History' \
   'applyCommand' \
@@ -1113,6 +1120,37 @@ for editor_term in \
   'validateDocument'; do
   if ! grep -F -- "$editor_term" "$ADLAIRE_DESIGN_ROOT/EditorUI/editor.js" >/dev/null 2>&1; then
     echo "EditorUI/editor.js missing required editor API term: $editor_term" >&2
+    exit 1
+  fi
+done
+
+for editor_typescript_entry_term in \
+  'export const AdlaireEditor' \
+  'browserGlobal.window.AdlaireEditor = AdlaireEditor' \
+  'HeadlessEditorController' \
+  'ToolRegistry' \
+  'BlockRegistry' \
+  'EventBus' \
+  'History' \
+  'applyCommand' \
+  'createEditor' \
+  'createEmptyDocument' \
+  'createBlock' \
+  'createDefaultBlockRegistry' \
+  'createDefaultInlineTools' \
+  'createDefaultToolRegistry' \
+  'getFirstBlockPosition' \
+  'getLastBlockPosition' \
+  'getNextBlockPosition' \
+  'getPreviousBlockPosition' \
+  'handlePaste' \
+  'normalizeBlock' \
+  'validateBlock' \
+  'validateDocumentAsync' \
+  'sanitizeDocument' \
+  'validateDocument'; do
+  if ! grep -F -- "$editor_typescript_entry_term" "$ADLAIRE_DESIGN_ROOT/TypeScript/Editor/index.ts" >/dev/null 2>&1; then
+    echo "TypeScript/Editor/index.ts missing required editor API term: $editor_typescript_entry_term" >&2
     exit 1
   fi
 done
