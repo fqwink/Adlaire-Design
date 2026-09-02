@@ -90,6 +90,10 @@ for path in \
   EditorUI/editor.js \
   EditorUI/wysiwyg.css \
   EditorUI/wysiwyg.js \
+  TypeScript/UI/components.ts \
+  TypeScript/UI/content.ts \
+  TypeScript/UI/forms.ts \
+  TypeScript/EditorUI/wysiwyg.ts \
   TypeScript/Editor/core.ts \
   TypeScript/Editor/document.ts \
   TypeScript/Editor/commands.ts \
@@ -113,7 +117,7 @@ for path in \
   fi
 done
 
-for path in UI EditorUI Tokens Brand Icons Samples Samples/design TypeScript TypeScript/Editor; do
+for path in UI EditorUI Tokens Brand Icons Samples Samples/design TypeScript TypeScript/UI TypeScript/EditorUI TypeScript/Editor; do
   if [ ! -d "$ADLAIRE_DESIGN_ROOT/$path" ]; then
     echo "Adlaire-Design required path must be a directory: $ADLAIRE_DESIGN_ROOT/$path" >&2
     exit 1
@@ -738,6 +742,10 @@ for indexed_path in \
   EditorUI/wysiwyg.js \
   EditorUI/editor.js \
   TypeScript/ \
+  TypeScript/UI/components.ts \
+  TypeScript/UI/content.ts \
+  TypeScript/UI/forms.ts \
+  TypeScript/EditorUI/wysiwyg.ts \
   UI/utilities.css \
   UI/compat-agws.css \
   Tools/check/check-adlaire-design.sh; do
