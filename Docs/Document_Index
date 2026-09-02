@@ -43,4 +43,8 @@
 - `EditorUI/wysiwyg.js`(WYSIWYG Editor UI JavaScript生成物)
 - `EditorUI/editor.js`(Editor本体のJavaScript生成物)
 - `TypeScript/`(UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本。Editor本体は責務ベースの少数ファイルで集約)
+- `TypeScript/UI/components.ts`(公開面コンポーネントJavaScriptのTypeScript正本)
+- `TypeScript/UI/content.ts`(本文固有コンポーネントJavaScriptのTypeScript正本)
+- `TypeScript/UI/forms.ts`(フォームコンポーネントJavaScriptのTypeScript正本)
+- `TypeScript/EditorUI/wysiwyg.ts`(WYSIWYG Editor UI JavaScriptのTypeScript正本)
 - `Tools/check/check-adlaire-design.sh`(Adlaire-Design専用の構成・CSS実装検査)
