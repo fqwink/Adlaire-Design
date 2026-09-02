@@ -574,9 +574,24 @@ for css_master_term in \
   '#### 11.2.3.1 Adlaire Frontend Compiler CSS生成詳細' \
   'Adlaire Frontend CompilerのCSS生成は、Deno TypeScriptで記述した正本データから、既存配置のCSS生成物を再現する工程として扱う。' \
   'CSS生成のTypeScript正本は `TypeScript/CSS/` に置く。`TypeScript/CSS/` はCSS生成専用であり、UI JavaScript、Editor UI JavaScript、Editor本体の実装を含めない。' \
+  '`TypeScript/CSS/` は責務ベースで集約し、必要最小限のファイルに分割する。機能ごとの深いサブディレクトリは作らない。' \
+  '| `TypeScript/CSS/tokens.ts` | color、typography、spacing、motion、layer、breakpoint、surface、status、effectsのCSS変数定義 |' \
+  '| `TypeScript/CSS/rules.ts` | UI CSS、Editor UI CSSのセレクタ、宣言、状態、media query定義 |' \
+  '| `TypeScript/CSS/targets.ts` | 生成先CSSファイル、出力順、読み込み順、生成分類の定義 |' \
+  '| `TypeScript/CSS/emit.ts` | CSS文字列の組み立て、インデント、改行、コメント、宣言順の制御 |' \
+  '| `TypeScript/CSS/manifest.ts` | 生成物一覧、生成元、検査対象、禁止事項、差分確認対象の定義 |' \
+  '| `TypeScript/CSS/index.ts` | CSS生成コマンドの入口 |' \
+  '`TypeScript/CSS/components/`、`TypeScript/CSS/tokens/`、`TypeScript/CSS/themes/`、`TypeScript/CSS/plugins/`、`TypeScript/CSS/adapters/` は作成しない。' \
   'CSS生成先は `Tokens/*.css`、`UI/*.css`、`EditorUI/wysiwyg.css` に固定する。生成先を `Dist/`、`Build/`、`Styles/`、`EditorStyles/`、トップレベル `CSS/` へ変更しない。' \
   'CSS生成では、CSS文字列をJavaScript生成物へ埋め込まない。CSSはCSSファイル、JavaScriptはJavaScriptファイルとして生成し、同一ファイルに混在させない。' \
+  'CSS生成コマンド名は `generate-css` とし、Denoで `TypeScript/CSS/index.ts` を実行する工程として扱う。' \
+  'CSS生成物整合検査名は `check-generated-css` とし、生成物とTypeScript正本の差分がないことを確認する工程として扱う。' \
+  '生成CSSの先頭コメントは、既存CSSの第1行コメントを維持する。' \
   'CSS生成の入力は、TypeScript内の型付き定義、定数、配列、生成関数に限定する。JSON、YAML、TOML、Sass、SCSS、Less、Stylus、PostCSS設定をCSS生成の正本として追加しない。' \
+  'CSS生成物の差分ゼロ化条件は以下に固定する。' \
+  '| 生成再現性 | 同じTypeScript正本から再生成したCSSに差分が出ない |' \
+  '| JavaScript分離 | CSS定義をJavaScript生成物に内包しない |' \
+  'CSS生成移行の順序は以下に固定する。' \
   'TypeScript正本作成以降は実装工程として扱い、別途実装承認を必要とする。' \
   'Specification layer' \
   'WYSIWYG Editor UI | `EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js`' \
@@ -870,15 +885,15 @@ for pending_task_term in \
   '## 3. 未実装リスト' \
   '本章は、仕様確定済みで、実装だけが未完了の項目を管理する。' \
   'AD-TASK-037' \
-  'CSS生成TypeScript正本の実装。`TypeScript/CSS/` にToken CSS、UI CSS、Editor UI CSSを生成する正本を作成する。' \
+  'CSS生成TypeScript正本の実装。`TypeScript/CSS/tokens.ts`、`rules.ts`、`targets.ts`、`emit.ts`、`manifest.ts`、`index.ts` を作成し、Token CSS、UI CSS、Editor UI CSSを生成する正本を構成する。' \
   'AD-TASK-038' \
-  'Token CSS生成への移行。`Tokens/*.css` をTypeScript正本から再現できる生成物へ移行する。' \
+  'Token CSS生成への移行。`Tokens/*.css` を `TypeScript/CSS/tokens.ts` と `targets.ts` から再現できる生成物へ移行する。' \
   'AD-TASK-039' \
-  'UI CSS生成への移行。`UI/*.css` をTypeScript正本から再現できる生成物へ移行する。' \
+  'UI CSS生成への移行。`UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/utilities.css` をTypeScript正本から再現できる生成物へ移行する。' \
   'AD-TASK-040' \
-  'Editor UI CSS生成への移行。`EditorUI/wysiwyg.css` をTypeScript正本から再現できる生成物へ移行する。' \
+  'UI CSS生成への移行 第2段階。`UI/components.css`、`UI/site.css`、`UI/forms.css`、`UI/content.css`、`UI/compat-agws.css` をTypeScript正本から再現できる生成物へ移行する。' \
   'AD-TASK-041' \
-  'CSS生成物整合検査の実装。生成物がTypeScript正本から再現可能であることを検査する。' \
+  'Editor UI CSS生成への移行とCSS生成物整合検査の実装。`EditorUI/wysiwyg.css` をTypeScript正本から再現可能にし、`check-generated-css` 相当の差分ゼロ検査を接続する。' \
   '現時点で該当なし'; do
   if ! grep -F -- "$pending_task_term" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" >/dev/null 2>&1; then
     echo "Docs/Pending_Tasks missing required pending task management term: $pending_task_term" >&2
