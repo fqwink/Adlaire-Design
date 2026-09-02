@@ -6,7 +6,7 @@ Adlaire-Designは、フロントエンドUI基盤を軸としたフロントエ�
 
 ## 構成
 
-- `Docs/`: 仕様・設計、リポジトリ索引、変更履歴。
+- `Docs/`: 仕様・設計、リポジトリ索引。
 - `UI/`: CSSフレームワーク本体および汎用UI JavaScript。`UI/adlaire.css`、`UI/base.css`、`UI/grid.css`、`UI/layout.css`、`UI/components.css`、`UI/components.js`、`UI/site.css`、`UI/forms.css`、`UI/forms.js`、`UI/content.css`、`UI/content.js`、`UI/utilities.css`、`UI/compat-agws.css` を管理する。`UI/compat-agws.css` はAdlaire-Design仕様CSS層として管理する。
 - `EditorUI/`: WYSIWYG Editor UI専用領域。`EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js`、`EditorUI/editor.js` を管理する。`EditorUI/editor.js` はEditor本体の生成物JavaScriptとする。
 - `TypeScript/`: UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本。Editor本体は `TypeScript/Editor/` に責務ベースの少数ファイルで集約する。既存トップレベル構造を維持し、追加トップレベルは `TypeScript/` のみとする。
@@ -17,9 +17,9 @@ Adlaire-Designは、フロントエンドUI基盤を軸としたフロントエ�
 
 ## ドキュメント
 
-仕様・設計の全体正本は `Docs/Master_Spec` とする。Editor本体とWYSIWYG Editor UIの詳細正本は `Docs/Editor_Master_Spec` とする。CSS仕様、CSS実装、TypeScript正本、JavaScript生成物、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、Editor本体、未タスク管理、検査、変更履歴、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。
+仕様・設計の全体正本は `Docs/Master_Spec` とする。Editor本体とWYSIWYG Editor UIの詳細正本は `Docs/Editor_Master_Spec` とする。CSS仕様、CSS実装、TypeScript正本、JavaScript生成物、トークン、一般CSS汎用部品カタログ、Editor UIカタログ、Editor本体、未タスク管理、検査、利用先プロダクト採用の責務境界は `Docs/Master_Spec` に整理する。
 
-一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、エディタUIに関する部品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。未策定または未完了タスクは `Docs/Pending_Tasks` に未完了分だけを集約する。リポジトリ内の主要ファイルと管理対象は `Docs/Document_Index`、変更履歴は `Docs/Change_History` を参照する。
+一般的なCSS汎用部品は `Docs/Generic_Component_Catalog`、エディタUIに関する部品は `Docs/WYSIWYG_Editor_UI_Catalog` で分離管理する。未策定または未完了タスクは `Docs/Pending_Tasks` に未完了分だけを集約する。リポジトリ内の主要ファイルと管理対象は `Docs/Document_Index` を参照する。
 
 ## 方針
 

@@ -2,7 +2,7 @@
 
 本ファイルは、Adlaire-Designで未策定または未完了のまま残っているタスクだけを集約する管理ファイルである。
 
-完了済みタスクと履歴は本ファイルに残さない。タスクが完了したら該当行を本ファイルから削除し、必要な変更記録は `Docs/Change_History` に残す。
+完了済みタスクと履歴は本ファイルに残さない。タスクが完了したら該当行を本ファイルから削除する。
 
 ---
 
@@ -13,7 +13,7 @@
 - 完了済みタスクの保管場所として使わない。
 - 未実装リストには、仕様確定済みで実装だけが未完了の項目だけを記載する。
 - 仕様未確定、要否未決定、策定中の項目は未実装リストに含めない。
-- タスクを追加、削除、分割、統合する場合は、必要に応じて `Docs/Master_Spec`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同期更新する。
+- タスクを追加、削除、分割、統合する場合は、必要に応じて `Docs/Master_Spec`、`Docs/Document_Index`、`Tools/check/check-adlaire-design.sh` を同期更新する。
 
 ---
 

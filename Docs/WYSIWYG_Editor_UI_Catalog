@@ -19,7 +19,7 @@
 - CSS実装先は `EditorUI/wysiwyg.css`、JavaScript実装先は `EditorUI/wysiwyg.js` とする。
 - `EditorUI/wysiwyg.css` は、本カタログの優先A/B/C分類を実装確認単位として扱う。
 - `EditorUI/wysiwyg.js` は、表示モード切替、メニュー開閉、パネル開閉を実装確認単位として扱う。
-- 仕様変更時は `Docs/Master_Spec`、本ファイル、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` を同じ承認単位で更新する。
+- 仕様変更時は `Docs/Master_Spec`、本ファイル、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh` を同じ承認単位で更新する。
 - CSS/JavaScriptのビルド、bundle、minify、CSSプリプロセッサは前提にしない。
 - Markdown/MDX parser、Editor本体処理、保存処理、DOMイベント設計は本カタログの管理対象にしない。
 - 実装済みclassは、対応する `EditorUI/wysiwyg.css` と照合できる状態で管理する。
@@ -33,7 +33,7 @@
 | 表示モード | editor、preview、split、readonly、error、mobile |
 | 状態入力 | class、ARIA属性、HTML属性をCSSで受ける |
 | レスポンシブ境界 | default、768px以下、480px以下、touch target、bottom sheet |
-| 変更管理 | Master_Spec、カタログ、CSS、検査、変更履歴を同期更新する |
+| 変更管理 | Master_Spec、カタログ、CSS、検査を同期更新する |
 
 ## 1.2 UI階層
 
@@ -120,11 +120,11 @@
 
 | 変更種別 | 必須更新 |
 | --- | --- |
-| UI部品を追加する | `Docs/Master_Spec`、本カタログ、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
-| UI部品を削除する | `Docs/Master_Spec`、本カタログ、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
-| class名を変更する | `Docs/Master_Spec`、本カタログ、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
-| CSS/JavaScript読み込み順を変更する | `Docs/Master_Spec`、`README.md`、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
-| カタログだけを整理する | 本カタログ、`Tools/check/check-adlaire-design.sh`、`Docs/Change_History` |
+| UI部品を追加する | `Docs/Master_Spec`、本カタログ、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh` |
+| UI部品を削除する | `Docs/Master_Spec`、本カタログ、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh` |
+| class名を変更する | `Docs/Master_Spec`、本カタログ、`EditorUI/wysiwyg.css`、必要な `EditorUI/wysiwyg.js`、`Tools/check/check-adlaire-design.sh` |
+| CSS/JavaScript読み込み順を変更する | `Docs/Master_Spec`、`README.md`、`Tools/check/check-adlaire-design.sh` |
+| カタログだけを整理する | 本カタログ、`Tools/check/check-adlaire-design.sh` |
 
 WYSIWYG Editor UIカタログは、Editor UI部品の状態、優先度、実装先を管理する完成カタログとして扱う。
 
