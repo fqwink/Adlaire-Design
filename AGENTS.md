@@ -6,15 +6,17 @@
 - このリポジトリは `Adlaire-Design` の開発正本・仕様正本として扱うこと。
 - 仕様・設計の正本は `Docs/Master_Spec` とする。
 - リポジトリ索引は `Docs/Document_Index`、変更履歴は `Docs/Change_History` とする。
-- Adlaire-Designは、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UIを扱う独立リポジトリとして管理すること。
+- Adlaire-Designは、フロントエンドUI基盤を軸としたフロントエンド基盤として、CSSフレームワーク、デザイントークン、ブランド資産、WYSIWYG Editor UI、Editor部分、TypeScript正本、JavaScript生成物を扱う独立リポジトリとして管理すること。
 - WYSIWYG Editor UIはAdlaire-Design採用とする。
 - WYSIWYG Editor UIはAdlaire-Designの仕様対象として管理すること。
+- Editor部分は、安全な構造化コンテンツ編集基盤としてAdlaire-Designに統合すること。
 
 ## リポジトリ構成
 
 - `Docs/`: 仕様・設計、リポジトリ索引、変更履歴
 - `UI/`: CSSフレームワーク本体および汎用UI JavaScript
 - `EditorUI/`: WYSIWYG Editor UIスキンおよびEditor UI JavaScript
+- `TypeScript/`: UI JavaScript、Editor UI JavaScript、Editor部分のTypeScript正本
 - `Tokens/`: デザイントークン
 - `Brand/`: ブランド資産
 - `Tools/check/`: Adlaire-Design専用の検査シェル
@@ -27,10 +29,14 @@
 - ドキュメントフォルダ名は `Docs/` とし、`Documents/` は作成しないこと。
 - Adlaire-Design専用の検査シェルは `Tools/check/` で管理すること。
 - Node.js/npm依存物(`package.json`、`package-lock.json`、`node_modules`)を追加しないこと。
+- 既存トップレベル構造は維持し、追加してよいトップレベルは `TypeScript/` のみとすること。
 - Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理すること。
 - `Tokens/`、`UI/`、`EditorUI/` 配下のCSSファイルを正本として直接管理し、Sass/SCSS/Less/Stylus/PostCSS等のCSSプリプロセッサを追加しないこと。
 - CSSのビルド、minify、bundleは現状検討しないこと。`Dist/`、`dist/`、`Build/`、`build/`、`*.min.css`、`*.bundle.css`、CSSまたはnpm/webpack系フロントエンドビルド設定ファイルを追加しないこと。
-- Adlaire-Designでは、WYSIWYG Editor UIスキン、UI必須クラス、CSS/JavaScript読み込み順、表示境界、Editor UI JavaScriptを管理すること。
+- Adlaire-Designでは、WYSIWYG Editor UIスキン、UI必須クラス、CSS/JavaScript読み込み順、表示境界、Editor UI JavaScript、Editor本体生成物を管理すること。
+- JavaScript部分はTypeScriptで実装し、JavaScriptは生成物として扱うこと。
+- TypeScript正本は `TypeScript/` に集約し、生成物JavaScriptは既存の `UI/*.js`、`EditorUI/wysiwyg.js`、`EditorUI/editor.js` に配置すること。
+- CSSとJavaScriptは同一ファイルに混在させないこと。
 
 ## 変更承認ルール
 
