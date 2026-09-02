@@ -571,6 +571,13 @@ for css_master_term in \
   '`Docs/WYSIWYG_Editor_UI_Catalog` は、Adlaire-DesignにおけるエディタUIに関するカタログとして扱う。' \
   'Editor UI専用品は `Docs/Generic_Component_Catalog` に含めない。' \
   '`.adlaire-wysiwyg-` 接頭辞のクラスは `Docs/WYSIWYG_Editor_UI_Catalog` で管理する。' \
+  '#### 11.2.3.1 Adlaire Frontend Compiler CSS生成詳細' \
+  'Adlaire Frontend CompilerのCSS生成は、Deno TypeScriptで記述した正本データから、既存配置のCSS生成物を再現する工程として扱う。' \
+  'CSS生成のTypeScript正本は `TypeScript/CSS/` に置く。`TypeScript/CSS/` はCSS生成専用であり、UI JavaScript、Editor UI JavaScript、Editor本体の実装を含めない。' \
+  'CSS生成先は `Tokens/*.css`、`UI/*.css`、`EditorUI/wysiwyg.css` に固定する。生成先を `Dist/`、`Build/`、`Styles/`、`EditorStyles/`、トップレベル `CSS/` へ変更しない。' \
+  'CSS生成では、CSS文字列をJavaScript生成物へ埋め込まない。CSSはCSSファイル、JavaScriptはJavaScriptファイルとして生成し、同一ファイルに混在させない。' \
+  'CSS生成の入力は、TypeScript内の型付き定義、定数、配列、生成関数に限定する。JSON、YAML、TOML、Sass、SCSS、Less、Stylus、PostCSS設定をCSS生成の正本として追加しない。' \
+  'TypeScript正本作成以降は実装工程として扱い、別途実装承認を必要とする。' \
   'Specification layer' \
   'WYSIWYG Editor UI | `EditorUI/wysiwyg.css`、`EditorUI/wysiwyg.js`' \
   '### 11.2.3 TypeScript正本とCSS/JavaScript生成物' \
@@ -788,7 +795,7 @@ for indexed_path in \
 done
 
 for document_index_responsibility_term in \
-  '`Docs/Master_Spec`(仕様・設計の正本、CSS生成方針、Editor UI、Editor本体、TypeScript正本、CSS/JavaScript生成物、公式アイコンセット、Samples、カタログ責務索引)' \
+  '`Docs/Master_Spec`(仕様・設計の正本、Adlaire Frontend Compiler、CSS生成方針、Editor UI、Editor本体、TypeScript正本、CSS/JavaScript生成物、公式アイコンセット、Samples、カタログ責務索引)' \
   '`Docs/Editor_Master_Spec`(Editor本体とWYSIWYG Editor UIの専用マスター仕様)' \
   '`Docs/Generic_Component_Catalog`(一般的なCSS汎用部品の分類、優先度、実装先、実装状態の一覧)' \
   '`Docs/Admin_UI_Catalog`(管理画面専用UI部品の分類、優先度、実装先、実装状態の一覧)' \
@@ -797,7 +804,8 @@ for document_index_responsibility_term in \
   '`Docs/Brand_Asset_Catalog`(ブランド資産のID、ファイル名、種別、用途、形式、代替テキストまたは説明方針、実装状態の一覧)' \
   '`Docs/Pending_Tasks`(未策定または未完了タスクだけを集約する管理ファイル)' \
   '`Brand/README.md`(ブランド資産の配置ルール、許可形式、命名規則、公式アイコンセットとの境界)' \
-  '`TypeScript/`(CSS生成、UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本。Editor本体は責務ベースの少数ファイルで集約)'; do
+  '`TypeScript/`(CSS生成、UI JavaScript、Editor UI JavaScript、Editor本体のTypeScript正本。Editor本体は責務ベースの少数ファイルで集約)' \
+  '`TypeScript/CSS/`(Adlaire Frontend CompilerのCSS生成TypeScript正本)'; do
   if ! grep -F -- "$document_index_responsibility_term" "$ADLAIRE_DESIGN_ROOT/Docs/Document_Index" >/dev/null 2>&1; then
     echo "Docs/Document_Index missing responsibility description: $document_index_responsibility_term" >&2
     exit 1
@@ -861,6 +869,16 @@ for pending_task_term in \
   '仕様未確定、要否未決定、策定中の項目は未実装リストに含めない。' \
   '## 3. 未実装リスト' \
   '本章は、仕様確定済みで、実装だけが未完了の項目を管理する。' \
+  'AD-TASK-037' \
+  'CSS生成TypeScript正本の実装。`TypeScript/CSS/` にToken CSS、UI CSS、Editor UI CSSを生成する正本を作成する。' \
+  'AD-TASK-038' \
+  'Token CSS生成への移行。`Tokens/*.css` をTypeScript正本から再現できる生成物へ移行する。' \
+  'AD-TASK-039' \
+  'UI CSS生成への移行。`UI/*.css` をTypeScript正本から再現できる生成物へ移行する。' \
+  'AD-TASK-040' \
+  'Editor UI CSS生成への移行。`EditorUI/wysiwyg.css` をTypeScript正本から再現できる生成物へ移行する。' \
+  'AD-TASK-041' \
+  'CSS生成物整合検査の実装。生成物がTypeScript正本から再現可能であることを検査する。' \
   '現時点で該当なし'; do
   if ! grep -F -- "$pending_task_term" "$ADLAIRE_DESIGN_ROOT/Docs/Pending_Tasks" >/dev/null 2>&1; then
     echo "Docs/Pending_Tasks missing required pending task management term: $pending_task_term" >&2
