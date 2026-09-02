@@ -34,6 +34,21 @@ JPG、JPEG、GIF、PDF、AI、PSD、EPSは対応しない。
 
 汎用UIで使う公式アイコンセットは `Icons/` と `Docs/Icon_Set_Catalog` で管理する。
 
+## 実装済みブランド資産
+
+| ファイル | 用途 | 形式 |
+| --- | --- | --- |
+| `adlaire-logo-primary.svg` | 標準ロゴ。README、仕様書、サンプル、導入資料での横長表示に使う。 | SVG |
+| `adlaire-logo-mark.svg` | 小型識別マーク。favicon系、アイコン的表示、狭い領域での識別に使う。 | SVG |
+| `adlaire-ogp-default.png` | 標準OGP画像。SNS共有、リンクプレビュー、リポジトリ紹介画像に使う。 | PNG |
+| `adlaire-image-brand-overview.webp` | ブランド概要画像。Adlaire-Designの構成説明、サンプル、導入資料に使う。 | WebP |
+
+ブランド資産の一覧、ID、説明方針、実装状態は `Docs/Brand_Asset_Catalog` を参照する。
+
+## サンプル確認
+
+ブランド資産の見た目確認は、`Samples/README.md` と `Samples/` 配下のサンプル資料を参照する。
+
 ## 追加時の更新
 
 ブランド資産を追加する場合は、`Docs/Brand_Asset_Catalog` にID、ファイル名、種別、用途、形式、代替テキストまたは説明方針、実装状態を記録する。
