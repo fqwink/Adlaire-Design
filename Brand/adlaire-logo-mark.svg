@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 192 192" role="img" aria-labelledby="title desc">
+  <title id="title">Adlaire Design logo mark</title>
+  <desc id="desc">Compact layered UI foundation mark for Adlaire Design.</desc>
+  <rect width="192" height="192" rx="36" fill="#ffffff"/>
+  <rect x="34" y="76" width="92" height="62" rx="16" fill="#0066cc"/>
+  <rect x="62" y="48" width="92" height="62" rx="16" fill="#00a968"/>
+  <rect x="82" y="34" width="76" height="124" rx="18" fill="#f5f5f5" stroke="#004499" stroke-width="8"/>
+  <path d="M106 122h30M106 96h38M106 70h24" fill="none" stroke="#0066cc" stroke-width="8" stroke-linecap="round"/>
+</svg>
