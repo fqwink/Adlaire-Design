@@ -24,7 +24,6 @@
 - `Tokens/`: デザイントークン
 - `Brand/`: ブランド資産
 - `Tools/check/`: Adlaire-Design専用の検査シェル
-- `AdlaireEditor_Integrated_Temporary/`: Adlaire-Editor全体データの一時統合領域
 - `LICENSE`: ライセンス本文
 
 ## 基本方針
@@ -35,9 +34,6 @@
 - Adlaire-Design専用の検査シェルは `Tools/check/` で管理すること。
 - Node.js依存は完全禁止とし、npm互換パッケージ、npm依存物(`package.json`、`package-lock.json`、`node_modules`)を追加しないこと。
 - 既存トップレベル構造は維持し、追加してよいトップレベルは `TypeScript/` のみとすること。
-- `AdlaireEditor_Integrated_Temporary/` はAdlaire-Editor全体データを後続整備前提で一時格納する例外領域とすること。
-- `AdlaireEditor_Integrated_Temporary/` 配下に限り、Adlaire-Editor由来の `package.json`、`package-lock.json`、`node_modules/`、`dist/`、`dist-test/`、`.git/` を一時保持できること。
-- `AdlaireEditor_Integrated_Temporary/` は、ユーザーから明示的な削除指示があるまで削除しないこと。
 - Adlaire-Designの成果物(ビルド済みCSS等)は、本リポジトリ内で完結して管理すること。
 - `Tokens/`、`UI/`、`EditorUI/` 配下のCSSファイルを正本として直接管理し、Sass/SCSS/Less/Stylus/PostCSS等のCSSプリプロセッサを追加しないこと。
 - CSSのビルド、minify、bundleは現状検討しないこと。`Dist/`、`dist/`、`Build/`、`build/`、`*.min.css`、`*.bundle.css`、CSSまたはnpm/webpack系フロントエンドビルド設定ファイルを追加しないこと。
