@@ -1776,19 +1776,19 @@ Samples全体の説明は `Samples/README.md` に記録する。
 
 ### 11.11.5 ブランド資産整理の策定仕様
 
-ブランド資産は、Adlaire-Designの表示品質とブランド識別に必要な素材として `Brand/` で管理する。
+ブランド資産は、Adlaire-Designの表示品質とブランド識別に必要な素材として `Brand/` で管理する。`Brand/` はCSS、デザイントークン、汎用UI部品、WYSIWYG Editor UI部品、公式アイコンセットの置き場ではない。
 
 ブランド資産の対象は以下に固定する。
 
 | 資産種別 | 用途 | 命名規則 |
 | --- | --- | --- |
-| ロゴ | ブランド名、サービス名、識別表示 | `adlaire-logo-<name>.<ext>` |
-| ブランド画像 | ブランド説明、紹介、背景以外の視覚素材 | `adlaire-image-<name>.<ext>` |
-| アイコン | ブランド固有の意味を持つ小型素材 | `adlaire-icon-<name>.<ext>` |
-| OGP画像 | OGP、SNS共有、リンクプレビュー | `adlaire-ogp-<name>.<ext>` |
-| ブランド説明用素材 | ブランド説明、資料、案内で使う補助素材 | `adlaire-brand-<name>.<ext>` |
+| ロゴ | ブランド名、サービス名、識別表示 | `adlaire-logo-<name>.svg` |
+| ブランド画像 | ブランド説明、紹介、背景以外の視覚素材 | `adlaire-image-<name>.png`、`adlaire-image-<name>.webp` |
+| ブランド固有アイコン | ブランド固有の意味を持つ小型素材 | `adlaire-icon-<name>.svg` |
+| OGP画像 | OGP、SNS共有、リンクプレビュー | `adlaire-ogp-<name>.png`、`adlaire-ogp-<name>.webp` |
+| ブランド説明用素材 | ブランド説明、資料、案内で使う補助素材 | `adlaire-brand-<name>.svg`、`adlaire-brand-<name>.png`、`adlaire-brand-<name>.webp` |
 
-許可するファイル形式は、SVG、PNG、WebPに限定する。JPG、JPEG、GIF、PDF、AI、PSD、EPSは対応しない。
+許可するファイル形式は、資産種別ごとに上表へ明記したSVG、PNG、WebPに限定する。JPG、JPEG、GIF、PDF、AI、PSD、EPSは対応しない。
 
 `<name>` は小文字英数字とハイフンで構成し、先頭と末尾にハイフンを置かない。
 
