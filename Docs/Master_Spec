@@ -2,7 +2,7 @@
 
 # マスター仕様書
 
-**Version:** rev.102
+**Version:** rev.103
 
 ---
 
@@ -32,7 +32,7 @@ WYSIWYG Editor専用UI部品の分類、優先度、実装先、実装状態は 
 
 未策定または未完了のまま残っているタスクは `Docs/Pending_Tasks` に集約する。同ファイルには未完了タスクだけを残し、完了したタスクは削除する。
 
-本方針は、実装変更より先に本仕様書を正本として定義する。実際のTypeScript正本化、CSS/JavaScript生成、公開面への反映は、本仕様書の承認後に個別の実装計画として扱う。
+本仕様書は、仕様変更、TypeScript正本、CSS/JavaScript生成物、カタログ、検査の同期基準として扱う。実装済み領域は、本仕様書、各補助正本、TypeScript正本、生成物、検査結果を同じ変更単位で整合させる。
 
 開発正本は当面の独立リポジトリ `Adlaire-Design` で管理する(詳細は第6章を参照)。
 
@@ -49,6 +49,18 @@ Adlaire-Design-Systemにおけるフロントエンド基盤とは、デザイ�
 デザインシステムは、デザイントークン、CSS契約、UI部品、状態表現、ブランド資産、公式アイコン、WYSIWYG Editor UI、Editor本体、Deno TypeScript正本、CSS/JavaScript生成物、検査条件を同じルールで接続し、利用側が一貫した画面を構築できるようにする。
 
 Adlaire-Design-Systemは、CSSフレームワーク、デザイントークン、ブランド資産、公式アイコンセット、汎用UI部品、WYSIWYG Editor UI部品、Editor本体、TypeScript正本、CSS生成物、JavaScript生成物を一体で管理する。
+
+Adlaire-Design-Systemの正本階層は以下に固定する。
+
+| 階層 | 管理先 | 役割 | 更新条件 |
+| --- | --- | --- | --- |
+| 全体正本 | `Docs/Master_Spec` | 目的、定義、管理範囲、正本階層、生成方針、検査方針を固定する | 仕様変更時に最優先で更新する |
+| 専用マスター仕様 | `Docs/Editor_Master_Spec` | Editor本体とWYSIWYG Editor UIの詳細を固定する | エディタ仕様変更時に更新する |
+| 補助正本 | `Docs/Generic_Component_Catalog`、`Docs/Admin_UI_Catalog`、`Docs/WYSIWYG_Editor_UI_Catalog`、`Docs/Icon_Set_Catalog`、`Docs/Brand_Asset_Catalog` | 部品、資産、実装状態を領域別に管理する | 部品追加、資産追加、実装状態変更時に更新する |
+| TypeScript正本 | `TypeScript/` | CSS生成、UI JavaScript、Editor UI JavaScript、Editor本体の正本ソースを管理する | 生成物変更時に先行して更新する |
+| 生成物 | `Tokens/`、`UI/`、`EditorUI/` | ブラウザで利用するCSS/JavaScript生成物を管理する | TypeScript正本から生成し、検査で整合させる |
+| 実体資産 | `Icons/`、`Brand/` | 公式アイコンセットとブランド資産を管理する | 資産追加、差し替え、廃止時にカタログと同期する |
+| 未タスク管理 | `Docs/Pending_Tasks` | 未策定または未完了タスクだけを管理する | 完了したタスクは削除し、未完了だけを残す |
 
 Adlaire-Design-Systemは、UI表現、デザイントークン、CSS契約、汎用部品、公式アイコン、ブランド資産、WYSIWYG Editor UI、Editor本体、TypeScript正本、CSS生成物、JavaScript生成物を正本化する。
 
