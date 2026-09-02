@@ -426,7 +426,10 @@
     return { document: this.getDocument(), selection: this.getSelection(), changed: true };
   };
   HeadlessEditorController.prototype.save = function (context) {
-    var request = { document: sanitizeDocument(this.document, this.registry), context: context || { reason: "manual" }, state: Object.assign({}, this.saveState, { saving: true, lastRequestedAt: new Date().toISOString() }) };
+    var document = sanitizeDocument(this.document, this.registry);
+    var validation = validateDocument(document, this.registry);
+    validation.errors.forEach(this.emitError.bind(this));
+    var request = { document: document, context: context || { reason: "manual" }, state: Object.assign({}, this.saveState, { saving: true, lastRequestedAt: new Date().toISOString() }) };
     this.saveState = request.state;
     this.events.emit({ type: "save:requested", request: request });
     return request;
@@ -544,7 +547,8 @@
     var newId = location.block.id + "-split";
     if (collectBlockIds(document.blocks)[newId]) return failed(document, "block.id.duplicate", "Split id already exists.", newId);
     var split = splitBlockData(location.block, payload);
-    var nextSiblings = location.siblings.slice(0, location.index).concat([registry ? normalizeBlock(split[0], registry) : split[0], registry ? normalizeBlock(split[1], registry) : split[1]], location.siblings.slice(location.index + 1));
+    if (split.error) return { document: document, changed: false, errors: [split.error] };
+    var nextSiblings = location.siblings.slice(0, location.index).concat([registry ? normalizeBlock(split.blocks[0], registry) : split.blocks[0], registry ? normalizeBlock(split.blocks[1], registry) : split.blocks[1]], location.siblings.slice(location.index + 1));
     if (!location.parent) return changed(Object.assign({}, document, { blocks: nextSiblings }));
     return changed(Object.assign({}, document, { blocks: updateBlockById(document.blocks, location.parent.id, function (parent) { return Object.assign({}, parent, { children: nextSiblings }); }) }));
   }
@@ -604,13 +608,31 @@
 
   function splitBlockData(block, payload) {
     if (block.type === "code" && payload.position && payload.position.path && payload.position.path[0] === "code" && typeof block.data.code === "string") {
-      var offset = clampOffset(payload.position.offset, block.data.code.length);
-      return [
+      var offset = validOffset(payload.position.offset, block.data.code.length);
+      if (offset === null) return { error: editorError("block.split.unsupported", "Split position is outside editable text.", block.id) };
+      return { blocks: [
         Object.assign({}, block, { data: Object.assign({}, block.data, { code: block.data.code.slice(0, offset) }) }),
         Object.assign({}, block, { id: block.id + "-split", data: Object.assign({}, block.data, { code: block.data.code.slice(offset) }) })
-      ];
+      ] };
     }
-    return [Object.assign({}, block, { data: clone(block.data) }), Object.assign({}, block, { id: block.id + "-split", data: clone(block.data) })];
+    if (payload.position && payload.position.path && payload.position.path[0] === "text" && typeof payload.position.path[1] === "number" && payload.position.path[2] === "text") {
+      var items = Array.isArray(block.data.text) ? block.data.text.map(clone) : null;
+      var index = payload.position.path[1];
+      var item = items && items[index];
+      if (!items || !item || typeof item !== "object" || item.type !== "text" || typeof item.text !== "string") {
+        return { error: editorError("block.split.unsupported", "Split position must target editable text.", block.id) };
+      }
+      var text = item.text;
+      var textOffset = validOffset(payload.position.offset, text.length);
+      if (textOffset === null) return { error: editorError("block.split.unsupported", "Split position is outside editable text.", block.id) };
+      var leftItem = Object.assign({}, item, { text: text.slice(0, textOffset) });
+      var rightItem = Object.assign({}, item, { text: text.slice(textOffset) });
+      var leftData = Object.assign({}, block.data, { text: items.slice(0, index).concat([leftItem]) });
+      var rightData = Object.assign({}, block.data, { text: [rightItem].concat(items.slice(index + 1)) });
+      return { blocks: [Object.assign({}, block, { data: leftData }), Object.assign({}, block, { id: block.id + "-split", data: rightData })] };
+    }
+    if (payload.position) return { error: editorError("block.split.unsupported", "Split position is not supported for this block.", block.id) };
+    return { blocks: [Object.assign({}, block, { data: clone(block.data) }), Object.assign({}, block, { id: block.id + "-split", data: clone(block.data) })] };
   }
 
   function handlePaste(event, registry) {
@@ -758,8 +780,10 @@
     return "block-" + Math.abs(hash);
   }
 
-  function clampOffset(value, length) {
-    return typeof value === "number" && Number.isInteger(value) ? Math.max(0, Math.min(value, length)) : length;
+  function validOffset(value, length) {
+    if (value === undefined) return length;
+    if (typeof value !== "number" || !Number.isInteger(value)) return null;
+    return value >= 0 && value <= length ? value : null;
   }
 
   window.AdlaireEditor = {

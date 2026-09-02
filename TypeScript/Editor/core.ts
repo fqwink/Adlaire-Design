@@ -155,6 +155,8 @@ export class HeadlessEditorController implements EditorController {
 
   save(context: SaveContext = { reason: "manual" }): SaveRequest {
     const document = sanitizeDocument(this.#document, this.#registry);
+    const validation = validateDocument(document, this.#registry);
+    for (const error of validation.errors) this.#emitError(error);
     const request = {
       document,
       context,
